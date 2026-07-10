@@ -1,0 +1,203 @@
+---
+title: Reorganizacao da Sidebar
+sidebar_position: 1
+tags: [truck, proposta, ux, sidebar]
+---
+
+import { StatusBadge } from '@site/src/components/StatusBadge';
+
+# Reorganizacao da Sidebar
+
+<StatusBadge status="em-discussao" />
+
+**Data:** 22/06/2026 | **Autor:** Tamir
+
+---
+
+## Contexto
+
+A sidebar atual do Facter Truck cresceu organicamente conforme novas funcionalidades foram adicionadas. Hoje possui 3 grupos e 12 secoes, com problemas de coesao e navegabilidade.
+
+### Problemas identificados
+
+| # | Problema | Impacto |
+|---|----------|---------|
+| 1 | **"Manutencao" abre so pra mostrar 1 item** (OS) | Clique extra desnecessario |
+| 2 | **Inspecoes e Planejamento estao soltos** | Usuario nao percebe o ciclo preventivo |
+| 3 | **"Recursos" mistura cadastros diferentes** | Dificil achar o que precisa |
+| 4 | **Usuarios e Executores apontam para a mesma tela** | Confuso |
+| 5 | **Relatorios espalhados em 3 lugares** | Nao existe lugar unico para analises |
+| 6 | **Socorro Mecanico entre dashboards** | E operacao, nao painel |
+| 7 | **Itens sem tela** (Gerenciamento, Rel. Frotas, Rel. Planejamento) | Frustacao ao clicar |
+| 8 | **Gestao de Pneus nao aparece na sidebar** | Tela existe mas sem acesso |
+
+---
+
+## Proposta
+
+Reorganizar em **6 grupos** baseados no contexto real de uso:
+
+```
+VISAO GERAL        → "Como esta minha operacao?"
+OPERACAO           → "O que preciso fazer agora?"
+PREVENCAO          → "O que faco pra evitar problemas?"
+CADASTROS          → "Onde gerencio meus dados base?"
+ADMINISTRACAO      → "Onde configuro o sistema?"
+RELATORIOS         → "Onde analiso resultados?"
+```
+
+---
+
+## Estrutura proposta
+
+### Visao Geral
+
+| Item | Descricao |
+|------|-----------|
+| Oficina | Dashboard operacional |
+| Saude da Frota | Dashboard analitico |
+| Centro de Custos | Dashboard financeiro |
+
+### Operacao
+
+| Item | Descricao |
+|------|-----------|
+| Ordens de Servico | Gestao das OS — com badge de notificacoes |
+| Socorro Mecanico | Chamados de emergencia em campo |
+| Solicitacoes de Pecas | Pedidos de pecas para OS |
+
+### Prevencao
+
+| Item | Descricao |
+|------|-----------|
+| Checklists | Inspecoes realizadas nos ativos |
+| Modelos de Inspecao | Templates de checklist |
+| Agendamentos | Planos de manutencao preventiva |
+
+### Cadastros
+
+**Ativos** — O que a empresa mantem
+
+| Item | Descricao |
+|------|-----------|
+| Frotas | Agrupamentos de veiculos |
+| Veiculos | Cadastro de veiculos |
+| Reboques | Cadastro de reboques/implementos |
+| Pneus | Gestao do estoque e ciclo de vida |
+
+**Catalogo** — Entidades de apoio
+
+| Item | Descricao |
+|------|-----------|
+| Pecas e Insumos | Cadastro de pecas e materiais |
+| Servicos | Catalogo de servicos |
+| Fornecedores | Cadastro de fornecedores |
+| Transportadoras | Cadastro de transportadoras |
+
+### Administracao
+
+**Equipe**
+
+| Item | Descricao |
+|------|-----------|
+| Colaboradores | Todos os funcionarios |
+| Supervisores | Gestores e supervisores |
+| Permissoes | Controle de acesso e papeis |
+
+**Config**
+
+| Item | Descricao |
+|------|-----------|
+| Parametros | Configuracoes gerais (somente admin) |
+
+### Relatorios
+
+| Item | Descricao |
+|------|-----------|
+| Manutencao | Indicadores e historico |
+| Servicos | Analise de servicos realizados |
+| Custos | Relatorios financeiros |
+| Executores | Performance dos mecanicos |
+
+---
+
+## Antes vs. Depois
+
+```
+        ANTES                              DEPOIS
+──────────────────────          ──────────────────────
+PRINCIPAL                       VISAO GERAL
+  Oficina                         Oficina
+  Saude da Frota                  Saude da Frota
+  Centro de Custos ▸              Centro de Custos
+    Dashboard
+    Relatorios                  OPERACAO
+  Socorro Mecanico                Ordens de Servico
+  Manutencao ▸                    Socorro Mecanico
+    Ordens de Servico             Solicitacoes de Pecas
+  Inspecoes ▸
+    Checklists                  PREVENCAO
+    Modelos de Inspecao           Checklists
+  Planejamento ▸                  Modelos de Inspecao
+    Agendamentos                  Agendamentos
+    Gerenciamento (sem tela)
+                                CADASTROS
+RECURSOS                        Ativos ▸
+  Recursos ▸                      Frotas
+    Pecas e Insumos               Veiculos
+    Solicitacoes                   Reboques
+    Fornecedores                  Pneus            ← NOVO
+    Transportadoras             Catalogo ▸
+    Servicos                      Pecas e Insumos
+  Ativos ▸                        Servicos
+    Frotas                        Fornecedores
+    Veiculos                      Transportadoras
+    Reboques
+                                ADMINISTRACAO
+ADMINISTRACAO                   Equipe ▸
+  Pessoal ▸                       Colaboradores
+    Permissoes                    Supervisores
+    Usuarios                      Permissoes
+    Executores (duplicado)      Parametros
+    Supervisores
+  Parametros                    RELATORIOS
+  Relatorios ▸                    Manutencao
+    Manutencao                    Servicos
+    Servicos                      Custos
+    Frotas (sem tela)             Executores
+    Planejamento (sem tela)
+    Executores
+```
+
+---
+
+## Impacto esperado
+
+| Aspecto | Antes | Depois |
+|---------|-------|--------|
+| Grupos na sidebar | 3 | 6 (mais granulares) |
+| Cliques para chegar em OS | 2 | 1 (direto) |
+| Itens sem tela | 3 | 0 |
+| Itens duplicados | 1 | 0 |
+| Lugares com relatorios | 3 | 1 |
+| Menus com 1 sub-item | 1 | 0 |
+| Telas sem acesso na sidebar | 1 | 0 |
+
+---
+
+## Decisoes em aberto
+
+| Questao | Opcoes | Recomendacao |
+|---------|--------|--------------|
+| Kits de Pecas | Sub-item de Catalogo ou dentro da tela de Pecas | Manter dentro da tela de Pecas |
+| Atalhos de teclado | Manter existentes ou expandir | Manter existentes, expandir sob demanda |
+| Icone de Pneus | Lucide nao tem icone nativo | Usar `CircleDot` ou manter `GiFlatTire` |
+
+---
+
+## Proximos passos
+
+1. **Produto/Design** — Validar agrupamentos e nomenclaturas
+2. **UX** — Avaliar ajuste de icones
+3. **Dev** — Implementacao em `sidebar-navigation.tsx` + `icon.tsx`
+4. **QA** — Validar rotas apos reorganizacao
