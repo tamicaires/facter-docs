@@ -1,0 +1,122 @@
+---
+title: Acoes Contextuais no Checklist
+sidebar_position: 2
+tags: [truck, proposta, ux, checklist]
+---
+
+import { StatusBadge } from '@site/src/components/StatusBadge';
+
+# Acoes Contextuais no Checklist por Reboque
+
+<StatusBadge status="em-discussao" />
+
+**Data:** 2026-07-10
+
+---
+
+## Problema
+
+Ao marcar um item como **Nao Conforme** no checklist, o usuario pode querer criar um servico ou solicitar uma peca. Hoje os botoes de acao aparecem por **linha** (item template), mas uma linha pode ter **multiplos reboques** — nao ha como saber a qual reboque a acao se refere.
+
+### Fluxo atual
+
+```
+[ Verificar Pneus ]  [✗ ✓ …]SR1  [✗ ✓ …]SR2  [✗ ✓ …]SR3   [📦 🔧]
+                                                                  ↑
+                                                          Qual reboque?
+```
+
+- Os botoes "Solicitar Peca" e "Adicionar Servico" aparecem na linha inteira
+- O dialog de "Adicionar Servico" tem um select de Reboque, mas abre sem pre-selecao
+- O usuario precisa lembrar qual reboque estava nao conforme e selecionar manualmente
+
+---
+
+## Opcoes
+
+### Opcao 1 — Estender o menu existente (tres pontos)
+
+Cada celula de conformidade ja possui um menu (tres pontos) por reboque. Quando o item ja foi avaliado, adicionar acoes ao menu:
+
+```
+┌──────────────────────┐
+│ ⊘  Nao se Aplica     │
+│ ⚠  Parcial           │
+│ ○  Limpar status     │
+│──────────────────────│  ← separador
+│ 🔧 Adicionar Servico │
+│ 📦 Solicitar Peca    │
+└──────────────────────┘
+```
+
+- "Adicionar Servico" abre o dialog com o reboque ja pre-selecionado
+- "Solicitar Peca" navega para a tela de criacao ja com o reboque associado
+- As acoes extras so aparecem quando o item ja foi avaliado
+
+**Pros:**
+- Zero mudanca visual — usa o menu que ja existe em cada celula
+- Contexto claro — o menu pertence a um reboque especifico
+- Implementacao simples
+
+**Contras:**
+- Menos descobrivel — acoes escondidas dentro do menu
+- Mistura mudanca de status com acoes de negocio
+
+---
+
+### Opcao 2 — Icone de acao na celula nao conforme
+
+Quando uma celula e marcada como nao conforme, um icone de acao aparece na celula. Clicar abre um mini-popover com as opcoes de servico e peca.
+
+```
+  SR1          SR2          SR3
+[✗  ✓  …]   [✗  ✓  …]   [✗  ✓  …]
+   🔧                        🔧      ← so nas celulas nao conformes
+```
+
+**Pros:**
+- Altamente visivel e descobrivel
+- Contexto explicito — esta dentro da celula do reboque
+- Feedback visual claro de que ha acoes disponiveis
+
+**Contras:**
+- Ruido visual quando muitas celulas sao nao conformes
+- Pode precisar de ajuste na largura da coluna
+
+---
+
+### Opcao 3 — Expandir linha com detalhe por reboque
+
+Clicar na linha expande uma sub-secao mostrando os reboques nao conformes com botoes de acao dedicados.
+
+```
+[ Verificar Pneus ]  [✗ ✓ …]  [✗ ✓ …]  [✗ ✓ …]    ▼
+├── SR1 — Nao Conforme  [🔧 Adicionar Servico] [📦 Solicitar Peca]
+└── SR3 — Nao Conforme  [🔧 Adicionar Servico] [📦 Solicitar Peca]
+```
+
+**Pros:**
+- Visao clara de todos os reboques com problema
+- Espaco para informacoes adicionais (observacoes, fotos)
+- Bom para fluxos futuros mais complexos
+
+**Contras:**
+- Muda o layout da lista (scroll, altura variavel)
+- Implementacao mais complexa
+- Pode ficar pesado se muitas linhas estiverem expandidas
+
+---
+
+## Recomendacao
+
+**Opcao 1** e a mais pragmatica — zero mudanca visual, implementacao leve, e resolve o problema de contexto. O menu ja e o "ponto de acao" natural por celula.
+
+Se a descobribilidade for uma preocupacao, **Opcao 2** e uma boa alternativa, mas precisa de cuidado com o design para nao poluir a grid.
+
+**Opcao 3** faz sentido como evolucao futura se o checklist ganhar mais features por celula (observacoes, fotos, historico).
+
+---
+
+## Decisao
+
+_Aguardando revisao de produto._

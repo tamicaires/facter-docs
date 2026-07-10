@@ -26,11 +26,11 @@ const sections = [
     link: '/docs/design-system/visao-geral',
   },
   {
-    title: 'Decisoes',
+    title: 'Propostas',
     Icon: LuClipboardList,
     iconClass: 'prod',
-    description: 'Proposals de produto, RFCs e decisoes tecnicas por projeto.',
-    link: '/docs/truck/produto/decisoes/sidebar-reorganization',
+    description: 'Propostas de produto para revisao — problema, opcoes e recomendacao.',
+    link: '/docs/truck/produto/propostas/sidebar-reorganization',
   },
   {
     title: 'Onboarding',
