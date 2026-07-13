@@ -5,6 +5,7 @@ tags: [truck, proposta, ux, checklist]
 ---
 
 import { StatusBadge } from '@site/src/components/StatusBadge';
+import { ChecklistMockup } from '@site/src/components/ChecklistMockup';
 
 # Acoes Contextuais no Checklist por Reboque
 
@@ -21,9 +22,9 @@ Ao marcar um item como **Nao Conforme** no checklist, o usuario pode querer cria
 ### Fluxo atual
 
 ```
-[ Verificar Pneus ]  [✗ ✓ …]SR1  [✗ ✓ …]SR2  [✗ ✓ …]SR3   [📦 🔧]
-                                                                  ↑
-                                                          Qual reboque?
+[ Verificar Pneus ]  [X V ...]SR1  [X V ...]SR2  [X V ...]SR3   [Peca Servico]
+                                                                       |
+                                                                 Qual reboque?
 ```
 
 - Os botoes "Solicitar Peca" e "Adicionar Servico" aparecem na linha inteira
@@ -32,21 +33,27 @@ Ao marcar um item como **Nao Conforme** no checklist, o usuario pode querer cria
 
 ---
 
-## Opcoes
+## Prototipo Interativo
+
+<ChecklistMockup />
+
+---
+
+## Detalhamento das Opcoes
 
 ### Opcao 1 — Estender o menu existente (tres pontos)
 
 Cada celula de conformidade ja possui um menu (tres pontos) por reboque. Quando o item ja foi avaliado, adicionar acoes ao menu:
 
 ```
-┌──────────────────────┐
-│ ⊘  Nao se Aplica     │
-│ ⚠  Parcial           │
-│ ○  Limpar status     │
-│──────────────────────│  ← separador
-│ 🔧 Adicionar Servico │
-│ 📦 Solicitar Peca    │
-└──────────────────────┘
++-----------------------+
+|  (x)  Nao se Aplica   |
+|  /!\  Parcial          |
+|  ( )  Limpar status    |
+|------------------------|  <- separador
+|  [>  Adicionar Servico |
+|  []  Solicitar Peca    |
++-----------------------+
 ```
 
 - "Adicionar Servico" abre o dialog com o reboque ja pre-selecionado
@@ -70,8 +77,8 @@ Quando uma celula e marcada como nao conforme, um icone de acao aparece na celul
 
 ```
   SR1          SR2          SR3
-[✗  ✓  …]   [✗  ✓  …]   [✗  ✓  …]
-   🔧                        🔧      ← so nas celulas nao conformes
+[X  V  ...]  [X  V  ...]  [X  V  ...]
+   [>]                        [>]     <- so nas celulas nao conformes
 ```
 
 **Pros:**
@@ -90,9 +97,9 @@ Quando uma celula e marcada como nao conforme, um icone de acao aparece na celul
 Clicar na linha expande uma sub-secao mostrando os reboques nao conformes com botoes de acao dedicados.
 
 ```
-[ Verificar Pneus ]  [✗ ✓ …]  [✗ ✓ …]  [✗ ✓ …]    ▼
-├── SR1 — Nao Conforme  [🔧 Adicionar Servico] [📦 Solicitar Peca]
-└── SR3 — Nao Conforme  [🔧 Adicionar Servico] [📦 Solicitar Peca]
+[ Verificar Pneus ]  [X V ...]  [X V ...]  [X V ...]    v
+|-- SR1 — Nao Conforme  [Adicionar Servico] [Solicitar Peca]
++-- SR3 — Nao Conforme  [Adicionar Servico] [Solicitar Peca]
 ```
 
 **Pros:**
@@ -104,6 +111,19 @@ Clicar na linha expande uma sub-secao mostrando os reboques nao conformes com bo
 - Muda o layout da lista (scroll, altura variavel)
 - Implementacao mais complexa
 - Pode ficar pesado se muitas linhas estiverem expandidas
+
+---
+
+## Comparativo
+
+| Criterio | Opcao 1 (Menu) | Opcao 2 (Icone) | Opcao 3 (Expandir) |
+|----------|:--------------:|:----------------:|:-------------------:|
+| Descobribilidade | Baixa | Alta | Media |
+| Impacto visual | Nenhum | Medio | Alto |
+| Complexidade de implementacao | Baixa | Media | Alta |
+| Contexto do reboque | Claro | Claro | Claro |
+| Escalabilidade futura | Limitada | Limitada | Alta |
+| Espaco para mais acoes | Sim (menu) | Limitado | Sim (inline) |
 
 ---
 
