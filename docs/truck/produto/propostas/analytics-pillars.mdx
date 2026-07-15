@@ -1,0 +1,208 @@
+---
+title: Analytics Hub com Pilares
+sidebar_position: 3
+tags: [truck, proposta, ux, analytics, pilares]
+---
+
+import { ProposalHeader } from '@site/src/components/ProposalHeader';
+import { AnalyticsPillarsMockup } from '@site/src/components/AnalyticsPillarsMockup';
+import { ChipFiltersMockup } from '@site/src/components/ChipFiltersMockup';
+
+# Analytics Hub com Pilares e Filtros Contextuais
+
+<ProposalHeader status="em-discussao" date="2026-07-15" />
+
+---
+
+## Problema
+
+O Analytics Hub atual tem 11 paginas organizadas em 3 agrupamentos genericos (Operacional, Ativos, Prevencao) mais 3 standalone (Visao Geral, Financeiro, Indicadores).
+
+| # | Problema | Impacto |
+|---|----------|---------|
+| 1 | **Agrupamentos nao contam uma historia** — "Operacional" mistura OS e Colaboradores | Usuario nao sabe o que esperar ao clicar |
+| 2 | **Filtros iguais para todas as paginas** — Periodo, Frota, Transportadora em todas | Filtro de Frota em pagina de Colaboradores nao faz sentido |
+| 3 | **Navegacao plana** — tabs genericas nao transmitem "dimensoes de analise" | Parece lista de relatorios, nao painel estrategico |
+| 4 | **Sem hierarquia visual** — todas as paginas parecem iguais na navegacao | Nao fica claro quais sao as grandes areas |
+
+### Navegacao atual
+
+```
+Sidebar principal                    Pagina Analytics
+────────────────                     ─────────────────────────────
+[Analytics]                          [Filtros: Periodo | Frota | Transportadora]
+  Visao Geral ─────────────────────→ Pagina standalone
+  Operacional ─────────────────────→ [Tab: OS] [Tab: Colaboradores]
+  Ativos ──────────────────────────→ [Tab: Frota] [Tab: Pecas] [Tab: Pneus]
+  Financeiro ──────────────────────→ Pagina standalone
+  Prevencao ───────────────────────→ [Tab: Socorro] [Tab: Qualidade] [Tab: Preventiva]
+  Indicadores ─────────────────────→ Pagina standalone
+```
+
+---
+
+## Proposta
+
+### 1. Area separada com sidebar propria
+
+Assim como o painel admin (`/admin`) tem sidebar propria, o Analytics Hub vira uma **area isolada** com:
+- Sidebar dedicada com pilares como secoes expansiveis
+- Botao "Voltar ao Sistema" no topo
+- Navegacao focada em analytics
+
+### 2. Organizacao por 6 Pilares estrategicos
+
+Cada pilar responde uma **pergunta de negocio** e agrupa paginas relacionadas:
+
+| # | Pilar | Pergunta | Paginas |
+|---|-------|----------|---------|
+| 1 | **Operacional** | Como esta a oficina? | Visao Geral, Ordens de Servico, Indicadores |
+| 2 | **Ativos** | Como estao meus veiculos? | Frota, Pneus |
+| 3 | **Financeiro** | Quanto estou gastando? | Custos, Pecas e Estoque |
+| 4 | **Pessoas** | Como esta a equipe? | Desempenho |
+| 5 | **Qualidade** | Mantendo o padrao? | Checklists, Socorro |
+| 6 | **Prevencao** | Prevenindo ou apagando incendio? | Manutencao Preventiva |
+
+### 3. Filtros contextuais (chips) por pilar
+
+Cada pagina mostra **apenas os filtros relevantes** como chips interativos. Sem barra de filtros generica.
+
+---
+
+## Prototipo Interativo
+
+<AnalyticsPillarsMockup />
+
+---
+
+## Filtros Contextuais por Pagina
+
+O filtro de **Periodo** e universal. Os demais sao contextuais:
+
+### Pilar 1 — Operacional
+
+| Pagina | Filtros | Justificativa |
+|--------|---------|---------------|
+| Visao Geral | Periodo, Frota | Overview precisa ser limpo |
+| Ordens de Servico | Periodo, Frota, Transportadora, Tipo de OS, Prioridade | OS tem muitas dimensoes |
+| Indicadores | Periodo, Frota | KPIs industriais sao agregados |
+
+### Pilar 2 — Ativos
+
+| Pagina | Filtros | Justificativa |
+|--------|---------|---------------|
+| Frota | Periodo, Frota, Transportadora | Analise por agrupamento |
+| Pneus | Periodo, Frota, Marca, Status | Dimensoes proprias de pneu |
+
+### Pilar 3 — Financeiro
+
+| Pagina | Filtros | Justificativa |
+|--------|---------|---------------|
+| Custos | Periodo, Frota, Transportadora, Tipo de OS | Custo cruza com tipo de manutencao |
+| Pecas e Estoque | Periodo, Categoria, Classificacao ABC | Filtros de inventario |
+
+### Pilar 4 — Pessoas
+
+| Pagina | Filtros | Justificativa |
+|--------|---------|---------------|
+| Desempenho | Periodo, Turno, Cargo | Filtros de RH, nao de frota |
+
+### Pilar 5 — Qualidade
+
+| Pagina | Filtros | Justificativa |
+|--------|---------|---------------|
+| Checklists | Periodo, Frota, Template | Analise por modelo de inspecao |
+| Socorro | Periodo, Frota, Tipo de Problema | Analise por tipo de emergencia |
+
+### Pilar 6 — Prevencao
+
+| Pagina | Filtros | Justificativa |
+|--------|---------|---------------|
+| Manutencao Prev. | Periodo, Frota, Tipo de Plano, Severidade | Filtros de planejamento |
+
+---
+
+## Comportamento dos Chips
+
+```
+Estado inativo (nenhum filtro aplicado):
+┌──────────────────┐
+│  Todas Frotas  ▾ │   ← Texto default, cor neutra
+└──────────────────┘
+
+Estado ativo (filtro aplicado):
+┌──────────────────┐
+│  Frota A       × │   ← Valor selecionado, cor primary, botao limpar
+└──────────────────┘
+
+Regras:
+- Clicar no chip abre dropdown com opcoes
+- "x" limpa o filtro e volta ao default
+- Mudar de pagina no mesmo pilar MANTEM filtros compartilhados
+- Mudar de pilar RESETA filtros (exceto Periodo)
+```
+
+---
+
+## Prototipo: Filtros Contextuais por Pagina
+
+Cada pagina mostra **apenas os filtros que fazem sentido**. Clique em qualquer pagina para ver seus chips, dropdown e opcoes. Filtros marcados como **Novo** sao exclusivos do pilar e precisam de backend.
+
+<ChipFiltersMockup />
+
+---
+
+## Backend: Cobertura de Dados
+
+Inventario dos **18 endpoints** que ja existem — **100% cobertos, zero trabalho de API na fase 1.**
+
+| Pilar | Endpoints | Status |
+|-------|-----------|--------|
+| Operacional | `overview`, `work-orders/kpis`, `work-orders/trend`, `work-orders/pause-analysis`, `industrial/kpis` | Pronto |
+| Ativos | `fleet/utilization`, `fleet/comparison`, `tires/lifecycle`, `tires/cpk`, `tires/events-trend` | Pronto |
+| Financeiro | `financial/summary`, `financial/trend`, `parts/consumption`, `parts/inventory-health` | Pronto |
+| Pessoas | `employees/performance` | Pronto |
+| Qualidade | `checklist/conformity`, `checklist/trend`, `emergency/kpis` | Pronto |
+| Prevencao | `maintenance/compliance` | Pronto |
+
+### Filtros que precisam de backend (fase posterior)
+
+| Filtro | Pilares | Trabalho |
+|--------|---------|----------|
+| `priority` | Operacional | WHERE clause em queries de WO |
+| `shift` / `jobTitle` | Pessoas | WHERE clause em employee queries |
+| `tireBrand` / `tireStatus` | Ativos | WHERE clause em tire queries |
+| `categoryId` | Financeiro | WHERE clause em parts queries |
+| `templateId` | Qualidade | WHERE clause em checklist queries |
+| `problemType` | Qualidade | WHERE clause em emergency queries |
+| `planType` / `severity` | Prevencao | WHERE clause em preventive queries |
+
+A maioria e adicao simples de WHERE clause nas queries SQL existentes.
+
+---
+
+## Fases de Implementacao
+
+### Fase 1 — Estrutura e navegacao
+- Criar layout, sidebar e rotas (modelo Admin Panel)
+- Mover paginas existentes para nova area
+- Manter filtros atuais por enquanto
+
+### Fase 2 — Filtros contextuais
+- Criar componente de chip filter
+- Mapear filtros por pilar/pagina
+- Evoluir store de filtros
+
+### Fase 3 — Backend de filtros
+- Adicionar WHERE clauses para filtros novos
+- Conectar chips com parametros da API
+
+### Fase 4 — Cleanup
+- Remover rotas e layouts antigos
+- Atualizar sidebar principal
+
+---
+
+## Decisao
+
+_Aguardando revisao de produto._
