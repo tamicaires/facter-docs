@@ -7,6 +7,7 @@ tags: [truck, proposta, ux, analytics, pilares]
 import { ProposalHeader } from '@site/src/components/ProposalHeader';
 import { AnalyticsPillarsMockup } from '@site/src/components/AnalyticsPillarsMockup';
 import { ChipFiltersMockup } from '@site/src/components/ChipFiltersMockup';
+import { ChipTransitionMockup } from '@site/src/components/ChipTransitionMockup';
 
 # Analytics Hub com Pilares e Filtros Contextuais
 
@@ -141,6 +142,19 @@ Regras:
 - Mudar de pagina no mesmo pilar MANTEM filtros compartilhados
 - Mudar de pilar RESETA filtros (exceto Periodo)
 ```
+
+---
+
+## Prototipo: Transicao de Filtros entre Paginas
+
+Ao navegar entre paginas, os filtros seguem uma regra simples: **se o filtro existe na pagina destino, o valor e mantido. Se nao existe, e resetado.** O Periodo e sempre mantido.
+
+Exemplos:
+- **OS -> Indicadores** (mesmo pilar): Periodo e Frota mantidos. Tipo OS e Prioridade resetados (nao existem em Indicadores).
+- **OS -> Custos** (pilar diferente, filtros em comum): Periodo, Frota, Transportadora e Tipo OS mantidos. Prioridade resetado.
+- **OS -> Desempenho** (pilar diferente, poucos em comum): So Periodo mantido. Turno e Cargo aparecem como novos (inativos).
+
+<ChipTransitionMockup />
 
 ---
 
