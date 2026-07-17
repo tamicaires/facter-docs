@@ -101,8 +101,8 @@ Quando o mecanico ou almoxarifado registra uma devolucao (parcial ou total), o s
 ### Regras de negocio
 
 1. **So pecas DELIVERED podem ser devolvidas** — nao e possivel devolver pecas pendentes, aprovadas ou rejeitadas
-2. **Quantidade validada** — `returnedQuantity` deve ser >= 1 e <= `approvedQuantity`
-3. **Estoque restaurado** — `Part.stockQuantity += returnedQuantity` (atomico, dentro de transaction)
+2. **Quantidade validada** — `returnedQuantity` deve ser entre 1 e `approvedQuantity`
+3. **Estoque restaurado** — `Part.stockQuantity` incrementado por `returnedQuantity` (atomico, dentro de transaction)
 4. **Uma devolucao por solicitacao** — nao e possivel devolver a mesma peca duas vezes
 5. **Rastreabilidade** — usuario, data/hora e motivo registrados. Evento emitido para o historico da OS
 
@@ -127,7 +127,7 @@ Resultado:
 
 | Cenario | Comportamento | Seguranca |
 |---------|---------------|-----------|
-| Devolver 3 de 10 entregues | +3 no estoque, RETURNED | Validacao: qty <= approved |
+| Devolver 3 de 10 entregues | +3 no estoque, RETURNED | Validacao: qty nao excede approved |
 | Tentar devolver 11 de 10 | **Bloqueado** | Erro: excede quantidade aprovada |
 | Tentar devolver peca APPROVED (nao entregue) | **Bloqueado** | Erro: status deve ser DELIVERED |
 | Tentar devolver duas vezes | **Bloqueado** | Erro: ja devolvido (returnedQuantity != null) |
@@ -198,7 +198,7 @@ Para pecas com status `DELIVERED`, o menu de acoes exibe:
 │  Acoes                  │
 │─────────────────────────│
 │  [>]  Ver detalhes      │
-│  [<-] Devolver Peca     │  ← nova acao
+│  [↩]  Devolver Peca     │  -- nova acao
 └─────────────────────────┘
 ```
 
