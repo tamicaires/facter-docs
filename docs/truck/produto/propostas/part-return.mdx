@@ -88,7 +88,7 @@ PENDING ──→ APPROVED ──→ DELIVERED ──→ RETURNED
 
 ### Novo status: RETURNED
 
-Quando o mecanico ou almoxarifado registra uma devolucao (parcial ou total), o status muda de `DELIVERED` para `RETURNED`.
+Quando o usuario registra uma devolucao **total** (todas as pecas devolvidas), o status muda de `DELIVERED` para `RETURNED`. Em devolucao **parcial**, o status permanece `DELIVERED` e o frontend exibe um indicador visual com a quantidade devolvida.
 
 ### Campos novos no PartRequest
 
@@ -97,7 +97,8 @@ Quando o mecanico ou almoxarifado registra uma devolucao (parcial ou total), o s
 | `returnedQuantity` | Int | Quantidade devolvida (1 a approvedQuantity) |
 | `returnedAt` | DateTime | Data/hora da devolucao |
 | `returnedById` | String (FK User) | Quem registrou a devolucao |
-| `returnReason` | String | Motivo da devolucao |
+| `returnReason` | String | Motivo predefinido (enum-like) |
+| `returnReasonDetails` | String? | Texto livre quando motivo = OTHER |
 
 ### Regras de negocio
 
@@ -105,7 +106,9 @@ Quando o mecanico ou almoxarifado registra uma devolucao (parcial ou total), o s
 2. **Quantidade validada** — `returnedQuantity` deve ser entre 1 e `approvedQuantity`
 3. **Estoque restaurado** — `Part.stockQuantity` incrementado por `returnedQuantity` (atomico, dentro de transaction)
 4. **Uma devolucao por solicitacao** — nao e possivel devolver a mesma peca duas vezes
-5. **Rastreabilidade** — usuario, data/hora e motivo registrados. Evento emitido para o historico da OS
+5. **Motivo obrigatorio** — campo `returnReason` e NOT NULL, validado no backend e frontend
+6. **Rastreabilidade** — usuario, data/hora e motivo registrados. Evento emitido para o historico da OS
+7. **Permissao especifica** — apenas usuarios com `Action.Return` em `PartRequest` podem devolver
 
 ### Exemplo pratico
 
@@ -114,7 +117,7 @@ Solicitou: 10 cupilhas
 Aprovado:  10 cupilhas     → estoque -10
 Entregue:  10 cupilhas
 Usou:       7 cupilhas
-Devolveu:   3 cupilhas     → estoque +3, status RETURNED
+Devolveu:   3 cupilhas     → estoque +3, status DELIVERED (parcial)
 
 Resultado:
 - quantidadeUsada = approvedQuantity - returnedQuantity = 7
@@ -128,7 +131,7 @@ Resultado:
 
 | Cenario | Comportamento | Seguranca |
 |---------|---------------|-----------|
-| Devolver 3 de 10 entregues | +3 no estoque, RETURNED | Validacao: qty nao excede approved |
+| Devolver 3 de 10 entregues | +3 no estoque, DELIVERED (parcial) | Validacao: qty nao excede approved |
 | Tentar devolver 11 de 10 | **Bloqueado** | Erro: excede quantidade aprovada |
 | Tentar devolver peca APPROVED (nao entregue) | **Bloqueado** | Erro: status deve ser DELIVERED |
 | Tentar devolver duas vezes | **Bloqueado** | Erro: ja devolvido (returnedQuantity != null) |
@@ -145,24 +148,44 @@ Como exibir pecas devolvidas na tabela? Clique nas abas para comparar as 3 opcoe
 
 ---
 
-## Decisoes para Produto
+## Decisoes
 
-### 1. Visualizacao de devolucao parcial
+### 1. Visualizacao de devolucao parcial — **Opcao B aprovada**
 
-| Opcao | Descricao |
-|-------|-----------|
-| **A: Status RETURNED unico** | Qualquer devolucao muda para "Devolvida" (roxo). Detalhe de qtd no card. Simples, 1 badge. |
-| **B: Entregue + indicador** | Parcial mantem "Entregue" + tag de devolucao. So "Devolvida" se devolveu tudo. Mais preciso. |
-| **C: Tres badges** | "Entregue" (azul), "Parcial" (laranja), "Devolvida" (roxo). Mais explicito, 3 estados. |
+Devolucao parcial mantem status "Entregue" com indicador visual `↩ X/Y devolvidas`. So muda para "Devolvida" (roxo) quando TODAS as pecas sao devolvidas.
 
-### 2. Motivo da devolucao
+| Devolucao | Status | Visual |
+|-----------|--------|--------|
+| Parcial (3 de 10) | DELIVERED | Badge "Entregue" (azul) + tag `↩ 3/10 devolvidas` |
+| Total (10 de 10) | RETURNED | Badge "Devolvida" (roxo) |
+| Nenhuma | DELIVERED | Badge "Entregue" (azul) |
 
-| Opcao | Descricao |
-|-------|-----------|
-| **Obrigatorio** | Forca rastreabilidade. Ex: "Diagnostico mudou", "Quantidade excedente". Bom para auditoria e analise de causas. |
-| **Opcional** | Menos atrito para o usuario. O mecanico pode devolver sem justificar. Perde-se a rastreabilidade do motivo. |
+**Implicacao tecnica:** o status `RETURNED` so e atribuido quando `returnedQuantity === approvedQuantity`. Para devolucao parcial, o status permanece `DELIVERED` e o frontend checa `returnedQuantity > 0` para exibir o indicador.
 
-### 3. OS cancelada com pecas aprovadas (nao entregues)
+### 2. Motivo da devolucao — **Obrigatorio com opcoes predefinidas**
+
+Campo `returnReason` e obrigatorio (NOT NULL). O usuario seleciona de uma lista predefinida de motivos, com opcao "Outro" que habilita campo de texto livre.
+
+**Opcoes predefinidas:**
+
+| Valor | Label |
+|-------|-------|
+| `DIAGNOSIS_CHANGED` | Diagnostico alterado durante reparo |
+| `EXCESS_QUANTITY` | Quantidade solicitada maior que necessaria |
+| `WRONG_PART` | Peca incorreta para o servico |
+| `STRATEGY_CHANGED` | Estrategia de manutencao alterada |
+| `OTHER` | Outro (campo de texto livre) |
+
+**Campos no modelo:**
+
+| Campo | Tipo | Descricao |
+|-------|------|-----------|
+| `returnReason` | String (enum-like) | Motivo predefinido selecionado |
+| `returnReasonDetails` | String? | Texto livre quando motivo = `OTHER` (obrigatorio neste caso) |
+
+Isso permite analise agregada dos motivos (ex: "40% das devolucoes sao por diagnostico alterado") sem perder a flexibilidade de motivos nao previstos.
+
+### 3. OS cancelada com pecas aprovadas (nao entregues) — **Em analise**
 
 Hoje, quando uma OS e cancelada, as pecas que estao no status APPROVED continuam com o estoque reservado (decrementado). Nao existe mecanismo de "liberar" essa reserva.
 
@@ -174,14 +197,15 @@ Hoje, quando uma OS e cancelada, as pecas que estao no status APPROVED continuam
 
 **Dados para decisao:** Cada peca APPROVED nao entregue e nao rejeitada representa estoque "preso". Se isso acontece com frequencia, o saldo do almoxarifado vai divergindo da realidade ao longo do tempo.
 
-### 4. Quem pode devolver
+_Aguardando decisao de produto._
 
-O requisito original diz "mecanico ou almoxarifado". Manter essa regra ou restringir?
+### 4. Quem pode devolver — **Permissao especifica `Action.Return`**
 
-| Opcao | Descricao |
-|-------|-----------|
-| **Qualquer usuario com acesso a OS** | Usa a mesma permissao de Update em PartRequest (ja existe) |
-| **Criar permissao especifica** | Nova permission `Action.Return` no SubjectEnum.PartRequest |
+Nova action `Return` no sistema de permissoes, aplicada ao subject `PartRequest`. Implementada no codigo (hardcoded nos arquivos de ability, mesmo padrao das demais actions).
+
+**Por que no codigo e nao no banco:** o sistema de permissoes atual e inteiramente hardcoded em TypeScript (40 arquivos de subjects, 13 roles). Mover para banco de dados tem custo de engenharia significativo sem beneficio imediato — a tabela de permissoes seria ~500 rows (por role, nao por user), custo de banco desprezivel, mas a migracao envolve schema novo, cache invalidation e reescrita dos guards. Migrar permissoes para banco e um projeto separado, futuro.
+
+**Custo de adicionar `Action.Return`:** ~12 linhas de codigo, zero migrations de banco. A action fica disponivel na tela de configuracao de roles existente.
 
 ---
 
@@ -189,23 +213,24 @@ O requisito original diz "mecanico ou almoxarifado". Manter essa regra ou restri
 
 ### Badge de status
 
-| Status | Cor | Label |
-|--------|-----|-------|
-| PENDING | Amarelo | Pendente |
-| APPROVED | Verde | Aprovado |
-| REJECTED | Vermelho | Rejeitada |
-| DELIVERED | Azul | Entregue |
-| **RETURNED** | **Roxo** | **Devolvida** |
+| Status | Cor | Label | Quando |
+|--------|-----|-------|--------|
+| PENDING | Amarelo | Pendente | Aguardando aprovacao |
+| APPROVED | Verde | Aprovado | Aprovado, estoque reservado |
+| REJECTED | Vermelho | Rejeitada | Rejeitado pelo supervisor |
+| DELIVERED | Azul | Entregue | Entregue ao mecanico |
+| DELIVERED + devolucao parcial | Azul + tag `↩` | Entregue + `↩ 3/10 devolvidas` | Parte devolvida |
+| **RETURNED** | **Roxo** | **Devolvida** | **Todas devolvidas** |
 
 ### Informacao exibida no card de detalhes
 
-Quando uma peca tem status RETURNED:
+Quando uma peca tem devolucao registrada (`returnedQuantity > 0`):
 - Quantidade aprovada: 10
 - Quantidade devolvida: 3
 - **Quantidade utilizada: 7**
 - Devolvido por: [nome do usuario]
 - Data da devolucao: [data/hora]
-- Motivo: [texto]
+- Motivo: [opcao selecionada ou texto livre se "Outro"]
 
 ### Acao no dropdown da tabela
 
@@ -221,8 +246,11 @@ Para pecas com status `DELIVERED`, o menu de acoes exibe:
 
 Clicar em "Devolver Peca" abre um dialog com:
 - Input numerico: quantidade a devolver (max: approvedQuantity)
-- Textarea: motivo da devolucao
+- Select: motivo da devolucao (opcoes predefinidas + "Outro")
+- Textarea: detalhes (visivel e obrigatorio apenas quando motivo = "Outro")
 - Botao: "Confirmar Devolucao"
+
+A acao so aparece para usuarios com permissao `Action.Return` no subject `PartRequest`.
 
 ---
 
@@ -232,10 +260,19 @@ Clicar em "Devolver Peca" abre um dialog com:
 
 | Area | Mudancas |
 |------|----------|
-| **Database** | 1 migration (4 campos novos + 1 enum value) |
-| **Backend** | ~15 arquivos (use case, repo, controller, errors, events, testes) |
+| **Database** | 1 migration (5 campos novos + 1 enum value) |
+| **Backend** | ~16 arquivos (use case, repo, controller, errors, events, ability, testes) |
 | **Frontend** | ~9 arquivos (enum, types, api, hook, dialog, table item, card) |
 | **Correcao approve** | 2 arquivos (use case + repository — transaction + atomic) |
+| **Permissao** | 1 action nova (`Return`) nos arquivos de ability (~12 linhas) |
+
+### Logica de status (Opcao B)
+
+```
+if returnedQuantity == null        → status = DELIVERED (sem devolucao)
+if returnedQuantity < approved     → status = DELIVERED (parcial, indicador visual)
+if returnedQuantity == approved    → status = RETURNED  (total)
+```
 
 ### O que NAO muda
 
@@ -244,9 +281,110 @@ Clicar em "Devolver Peca" abre um dialog com:
 - Fluxo de rejeicao
 - Queries de analytics
 - Endpoints existentes
+- Schema de permissoes (sem migration, action adicionada no codigo)
 
 ---
 
 ## Decisao
 
-_Aguardando revisao de produto._
+| Item | Decisao | Status |
+|------|---------|--------|
+| Visualizacao parcial | Opcao B — Entregue + indicador | Aprovado |
+| Motivo da devolucao | Obrigatorio, select com opcoes + "Outro" | Aprovado |
+| OS cancelada com pecas APPROVED | Em analise (3 opcoes acima) | Pendente |
+| Permissao de devolucao | `Action.Return` no codigo (hardcoded) | Aprovado |
+
+---
+
+## ADRs (Architecture Decision Records)
+
+### ADR-1: Status RETURNED vs campos no modelo existente
+
+**Contexto:** Precisamos registrar devolucoes de pecas. Tres opcoes avaliadas: (A) apenas campos no PartRequest sem novo status, (B) novo status RETURNED, (C) entidade separada PartReturn.
+
+**Decisao:** Opcao B — novo status `RETURNED` para devolucao total, campos de devolucao no PartRequest.
+
+**Justificativa:**
+- O produto precisa de badge "Devolvida" na tabela — status proprio permite filtragem direta por `countByStatus`
+- A Opcao A (sem status) exigiria logica extra em toda query que lista/filtra pecas por status
+- A Opcao C (entidade separada) e over-engineering: o requisito e uma unica devolucao por request, nao multiplas
+- A Opcao B permite que devolucao parcial fique como `DELIVERED` com `returnedQuantity > 0` (indicador visual), e total vire `RETURNED`
+
+**Consequencias:**
+- Todo switch/case de `RequestStatus` precisa tratar `RETURNED`
+- Queries de contagem (`countByStatus`) incluem RETURNED automaticamente
+- Devolucao parcial exige checagem de `returnedQuantity` alem do status
+
+---
+
+### ADR-2: Estoque decrementado na aprovacao (reserva)
+
+**Contexto:** O estoque poderia ser decrementado na aprovacao (reserva) ou na entrega (confirmacao fisica). Precisamos garantir consistencia quando multiplos supervisores aprovam pecas simultaneamente.
+
+**Decisao:** Manter decremento na aprovacao (padrao atual).
+
+**Justificativa:**
+- Decrementar na entrega permitiria que dois supervisores aprovem a mesma peca simultaneamente — ambos veriam estoque disponivel, mas so existiria quantidade para um
+- Aprovacao como reserva impede over-allocation: se estoque tem 10, o segundo supervisor ja ve estoque reduzido
+- Na devolucao, o incremento ocorre no ato do registro (`Part.stockQuantity += returnedQuantity`)
+
+**Consequencias:**
+- Pecas APPROVED nao entregues representam estoque "preso" (reservado)
+- Cancelamento de OS com pecas APPROVED precisa liberar reserva (decisao pendente)
+- Transaction + atomic increment obrigatorio na devolucao (mesmo padrao do batch approve)
+
+---
+
+### ADR-3: Correcao de race condition no approve individual
+
+**Contexto:** A aprovacao individual de pecas usa read-then-write sem transaction. A aprovacao em lote (batch) usa transaction + atomic decrement corretamente. As duas devem ter o mesmo nivel de seguranca.
+
+**Decisao:** Alinhar approve individual com o padrao do batch — transaction + atomic decrement.
+
+**Justificativa:**
+- O padrao atual le `part.stockQuantity`, calcula em JS e grava — se duas aprovacoes ocorrem ao mesmo tempo, ambas leem o mesmo valor e uma sobrescreve a outra
+- O batch approve ja resolve isso com `$transaction` + `{ stockQuantity: { decrement: qty } }`
+- Nao ha motivo para os dois caminhos terem niveis de seguranca diferentes
+
+**Consequencias:**
+- Approve individual e batch ficam com mesmo padrao de seguranca
+- Eliminado risco de estoque negativo por race condition
+- Mudanca em 2 arquivos (use case + repository)
+
+---
+
+### ADR-4: Permissao `Action.Return` no codigo (hardcoded)
+
+**Contexto:** A devolucao precisa de permissao granular. O sistema de permissoes atual e inteiramente hardcoded em TypeScript (40 subjects, 13 roles, 7 actions). Avaliamos mover permissoes para banco de dados.
+
+**Decisao:** Adicionar `Action.Return` no codigo, manter sistema hardcoded.
+
+**Justificativa:**
+- Custo de DB para permissoes seria desprezivel (~500 rows, por role e nao por user)
+- Porem, a migracao para banco envolve: schema novo (3-4 tabelas), cache invalidation, reescrita dos guards, seed de dados — projeto separado
+- Adicionar uma action no codigo custa ~12 linhas e zero migrations
+- A tela de configuracao de roles no frontend ja existe e continuara funcionando
+
+**Consequencias:**
+- Nova action disponivel para atribuicao por role
+- Alteracao futura de permissoes continua exigindo deploy
+- Migracao de permissoes para banco fica como projeto separado, quando houver necessidade de customizacao por empresa
+
+---
+
+### ADR-5: Motivo de devolucao com opcoes predefinidas
+
+**Contexto:** O motivo da devolucao precisa ser obrigatorio para rastreabilidade. Campo de texto livre permite qualquer coisa, dificultando analise agregada. Select fechado perde flexibilidade.
+
+**Decisao:** Select com opcoes predefinidas + opcao "Outro" com campo de texto livre.
+
+**Justificativa:**
+- Opcoes predefinidas permitem analise agregada (ex: "40% das devolucoes sao por diagnostico alterado")
+- A opcao "Outro" garante flexibilidade para cenarios nao previstos
+- Dois campos no modelo: `returnReason` (enum-like, obrigatorio) + `returnReasonDetails` (texto livre, obrigatorio apenas quando reason = OTHER)
+- Novas opcoes podem ser adicionadas sem migration (enum no codigo)
+
+**Consequencias:**
+- Dashboard de analytics pode agrupar devolucoes por motivo
+- 5 opcoes iniciais cobrem os cenarios mais comuns do dia-a-dia
+- Campo `returnReasonDetails` pode ser usado para feedback qualitativo
