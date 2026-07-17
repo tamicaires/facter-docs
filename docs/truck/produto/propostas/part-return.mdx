@@ -1,0 +1,235 @@
+---
+title: Devolucao de Pecas
+sidebar_position: 4
+tags: [truck, proposta, pecas, estoque, os]
+---
+
+import { ProposalHeader } from '@site/src/components/ProposalHeader';
+
+# Devolucao de Pecas Nao Utilizadas
+
+<ProposalHeader status="em-discussao" date="2026-07-15" />
+
+---
+
+## Problema
+
+Apos uma peca ser aprovada e entregue, o sistema considera o processo concluido. Nao ha como registrar a devolucao de materiais que nao foram utilizados.
+
+Na pratica, e comum que o mecanico solicite pecas que acabam nao sendo utilizadas:
+- Alteracao no diagnostico durante o reparo
+- Troca de estrategia de manutencao
+- Solicitacao em quantidade superior a necessaria
+
+**Resultado:** o estoque no sistema nao reflete a realidade fisica. Pecas devolvidas ao almoxarifado nao voltam ao saldo.
+
+---
+
+## Fluxo Atual
+
+```
+PENDING ──→ APPROVED ──→ DELIVERED    (terminal, sem volta)
+    │          -qty
+    └──→ REJECTED                      (terminal)
+```
+
+**Como o estoque funciona hoje:**
+
+| Etapa | Estoque | O que acontece |
+|-------|---------|----------------|
+| Mecanico solicita 10 (PENDING) | Sem mudanca | Aguardando aprovacao |
+| Supervisor aprova 10 (APPROVED) | **-10** | Reserva de estoque |
+| Almoxarifado entrega 10 (DELIVERED) | Sem mudanca | Confirmacao fisica |
+| Mecanico usa 7, sobram 3 | Sem mudanca | **3 pecas perdidas no sistema** |
+
+O estoque e decrementado na **aprovacao** (reserva), nao na entrega. Esse padrao e correto — impede que dois supervisores aprovem a mesma peca simultaneamente. Porem, nao existe caminho de volta.
+
+---
+
+## Bug Existente: Inconsistencia na Aprovacao Individual
+
+Durante a analise, identificamos um problema de seguranca na aprovacao individual de pecas.
+
+**Aprovacao em lote (batch)** — segura:
+```
+$transaction {
+  update partRequest → APPROVED
+  update part → stockQuantity { decrement: qty }   ← atomico
+}
+```
+
+**Aprovacao individual** — insegura:
+```
+1. Le part.stockQuantity = 100                      ← leitura
+2. Calcula 100 - 10 = 90                            ← no codigo JS
+3. Grava partRequest.status = APPROVED              ← query 1 (sem transaction)
+4. Grava part.stockQuantity = 90                    ← query 2 (sem transaction)
+```
+
+**Riscos:**
+- Se duas aprovacoes acontecem ao mesmo tempo, ambas leem 100 e gravam 90. O estoque deveria ser 80.
+- Se a query 4 falha, a peca fica APPROVED mas o estoque nao decrementou.
+
+**Correcao proposta:** alinhar a aprovacao individual com o mesmo padrao seguro do batch (transaction + atomic decrement). Sera feito junto com a feature de devolucao.
+
+---
+
+## Proposta: Novo Status RETURNED
+
+### Fluxo proposto
+
+```
+                    ┌──→ REJECTED (estoque: sem mudanca)
+                    │
+PENDING ──→ APPROVED ──→ DELIVERED ──→ RETURNED
+              -qty                      +returnedQty
+```
+
+### Novo status: RETURNED
+
+Quando o mecanico ou almoxarifado registra uma devolucao (parcial ou total), o status muda de `DELIVERED` para `RETURNED`.
+
+### Campos novos no PartRequest
+
+| Campo | Tipo | Descricao |
+|-------|------|-----------|
+| `returnedQuantity` | Int | Quantidade devolvida (1 a approvedQuantity) |
+| `returnedAt` | DateTime | Data/hora da devolucao |
+| `returnedById` | String (FK User) | Quem registrou a devolucao |
+| `returnReason` | String | Motivo da devolucao |
+
+### Regras de negocio
+
+1. **So pecas DELIVERED podem ser devolvidas** — nao e possivel devolver pecas pendentes, aprovadas ou rejeitadas
+2. **Quantidade validada** — `returnedQuantity` deve ser >= 1 e <= `approvedQuantity`
+3. **Estoque restaurado** — `Part.stockQuantity += returnedQuantity` (atomico, dentro de transaction)
+4. **Uma devolucao por solicitacao** — nao e possivel devolver a mesma peca duas vezes
+5. **Rastreabilidade** — usuario, data/hora e motivo registrados. Evento emitido para o historico da OS
+
+### Exemplo pratico
+
+```
+Solicitou: 10 cupilhas
+Aprovado:  10 cupilhas     → estoque -10
+Entregue:  10 cupilhas
+Usou:       7 cupilhas
+Devolveu:   3 cupilhas     → estoque +3, status RETURNED
+
+Resultado:
+- quantidadeUsada = approvedQuantity - returnedQuantity = 7
+- estoque restaurou 3 unidades
+- historico registra a devolucao
+```
+
+---
+
+## Cenarios e Garantias
+
+| Cenario | Comportamento | Seguranca |
+|---------|---------------|-----------|
+| Devolver 3 de 10 entregues | +3 no estoque, RETURNED | Validacao: qty <= approved |
+| Tentar devolver 11 de 10 | **Bloqueado** | Erro: excede quantidade aprovada |
+| Tentar devolver peca APPROVED (nao entregue) | **Bloqueado** | Erro: status deve ser DELIVERED |
+| Tentar devolver duas vezes | **Bloqueado** | Erro: ja devolvido (returnedQuantity != null) |
+| Duas devolucoes simultaneas (race condition) | **Seguro** | Transaction + atomic increment |
+| Devolver todas as 10 | +10 no estoque, RETURNED | quantidadeUsada = 0 |
+
+---
+
+## Decisoes para Produto
+
+### 1. Motivo da devolucao
+
+| Opcao | Descricao |
+|-------|-----------|
+| **Obrigatorio** | Forca rastreabilidade. Ex: "Diagnostico mudou", "Quantidade excedente". Bom para auditoria e analise de causas. |
+| **Opcional** | Menos atrito para o usuario. O mecanico pode devolver sem justificar. Perde-se a rastreabilidade do motivo. |
+
+### 2. OS cancelada com pecas aprovadas (nao entregues)
+
+Hoje, quando uma OS e cancelada, as pecas que estao no status APPROVED continuam com o estoque reservado (decrementado). Nao existe mecanismo de "liberar" essa reserva.
+
+| Opcao | O que acontece | Impacto |
+|-------|---------------|---------|
+| **A: Reverter automaticamente** | Ao cancelar OS, pecas APPROVED tem estoque devolvido e status muda para REJECTED com motivo "OS cancelada" | Estoque sempre consistente. Mais complexo de implementar. |
+| **B: Reverter manualmente** | Supervisor precisa rejeitar as pecas antes de cancelar a OS | Processo manual, risco de esquecimento. Estoque pode ficar inconsistente. |
+| **C: Nao tratar agora** | Manter como esta. Corrigir em momento futuro. | Risco de estoque fantasma continua existindo. |
+
+**Dados para decisao:** Cada peca APPROVED nao entregue e nao rejeitada representa estoque "preso". Se isso acontece com frequencia, o saldo do almoxarifado vai divergindo da realidade ao longo do tempo.
+
+### 3. Quem pode devolver
+
+O requisito original diz "mecanico ou almoxarifado". Manter essa regra ou restringir?
+
+| Opcao | Descricao |
+|-------|-----------|
+| **Qualquer usuario com acesso a OS** | Usa a mesma permissao de Update em PartRequest (ja existe) |
+| **Criar permissao especifica** | Nova permission `Action.Return` no SubjectEnum.PartRequest |
+
+---
+
+## Visualizacao na Interface
+
+### Badge de status
+
+| Status | Cor | Label |
+|--------|-----|-------|
+| PENDING | Amarelo | Pendente |
+| APPROVED | Verde | Aprovado |
+| REJECTED | Vermelho | Rejeitada |
+| DELIVERED | Azul | Entregue |
+| **RETURNED** | **Roxo** | **Devolvida** |
+
+### Informacao exibida no card de detalhes
+
+Quando uma peca tem status RETURNED:
+- Quantidade aprovada: 10
+- Quantidade devolvida: 3
+- **Quantidade utilizada: 7**
+- Devolvido por: [nome do usuario]
+- Data da devolucao: [data/hora]
+- Motivo: [texto]
+
+### Acao no dropdown da tabela
+
+Para pecas com status `DELIVERED`, o menu de acoes exibe:
+```
+┌─────────────────────────┐
+│  Acoes                  │
+│─────────────────────────│
+│  [>]  Ver detalhes      │
+│  [<-] Devolver Peca     │  ← nova acao
+└─────────────────────────┘
+```
+
+Clicar em "Devolver Peca" abre um dialog com:
+- Input numerico: quantidade a devolver (max: approvedQuantity)
+- Textarea: motivo da devolucao
+- Botao: "Confirmar Devolucao"
+
+---
+
+## Impacto Tecnico
+
+### Resumo
+
+| Area | Mudancas |
+|------|----------|
+| **Database** | 1 migration (4 campos novos + 1 enum value) |
+| **Backend** | ~15 arquivos (use case, repo, controller, errors, events, testes) |
+| **Frontend** | ~9 arquivos (enum, types, api, hook, dialog, table item, card) |
+| **Correcao approve** | 2 arquivos (use case + repository — transaction + atomic) |
+
+### O que NAO muda
+
+- Fluxo de aprovacao (exceto correcao de seguranca)
+- Fluxo de entrega
+- Fluxo de rejeicao
+- Queries de analytics
+- Endpoints existentes
+
+---
+
+## Decisao
+
+_Aguardando revisao de produto._
