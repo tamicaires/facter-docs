@@ -5,6 +5,7 @@ tags: [truck, proposta, pecas, estoque, os]
 ---
 
 import { ProposalHeader } from '@site/src/components/ProposalHeader';
+import { PartReturnMockup } from '@site/src/components/PartReturnMockup';
 
 # Devolucao de Pecas Nao Utilizadas
 
@@ -136,16 +137,32 @@ Resultado:
 
 ---
 
+## Prototipo: Devolucao Parcial vs Total
+
+Como exibir pecas devolvidas na tabela? Clique nas abas para comparar as 3 opcoes visuais.
+
+<PartReturnMockup />
+
+---
+
 ## Decisoes para Produto
 
-### 1. Motivo da devolucao
+### 1. Visualizacao de devolucao parcial
+
+| Opcao | Descricao |
+|-------|-----------|
+| **A: Status RETURNED unico** | Qualquer devolucao muda para "Devolvida" (roxo). Detalhe de qtd no card. Simples, 1 badge. |
+| **B: Entregue + indicador** | Parcial mantem "Entregue" + tag de devolucao. So "Devolvida" se devolveu tudo. Mais preciso. |
+| **C: Tres badges** | "Entregue" (azul), "Parcial" (laranja), "Devolvida" (roxo). Mais explicito, 3 estados. |
+
+### 2. Motivo da devolucao
 
 | Opcao | Descricao |
 |-------|-----------|
 | **Obrigatorio** | Forca rastreabilidade. Ex: "Diagnostico mudou", "Quantidade excedente". Bom para auditoria e analise de causas. |
 | **Opcional** | Menos atrito para o usuario. O mecanico pode devolver sem justificar. Perde-se a rastreabilidade do motivo. |
 
-### 2. OS cancelada com pecas aprovadas (nao entregues)
+### 3. OS cancelada com pecas aprovadas (nao entregues)
 
 Hoje, quando uma OS e cancelada, as pecas que estao no status APPROVED continuam com o estoque reservado (decrementado). Nao existe mecanismo de "liberar" essa reserva.
 
@@ -157,7 +174,7 @@ Hoje, quando uma OS e cancelada, as pecas que estao no status APPROVED continuam
 
 **Dados para decisao:** Cada peca APPROVED nao entregue e nao rejeitada representa estoque "preso". Se isso acontece com frequencia, o saldo do almoxarifado vai divergindo da realidade ao longo do tempo.
 
-### 3. Quem pode devolver
+### 4. Quem pode devolver
 
 O requisito original diz "mecanico ou almoxarifado". Manter essa regra ou restringir?
 
