@@ -195,12 +195,88 @@ Os campos sao opcionais e preenchidos apenas quando a integracao for implementad
 
 ## Decisoes Pendentes
 
-| Item | Opcoes | Status |
-|------|--------|--------|
-| Exibicao de estoque fracionario | "2.85 rolos" vs "2 rolos + 85m" | Pendente |
-| Obrigatoriedade das unidades | Obrigatorio para todas as pecas vs opcional (assume "Unidade") | Pendente |
-| Unidades personalizadas | Gestor cria livremente vs lista fixa com solicitacao | Pendente |
-| Step do input de quantidade | Fixo (0.5) vs dinamico por tipo de unidade | Pendente |
+Precisamos de uma definicao de produto para cada item abaixo antes de iniciar o desenvolvimento.
+
+---
+
+### Decisao 1: Como exibir estoque fracionario?
+
+**Situacao:** Quando o mecanico usa 15 metros de um rolo de 100m, sobram 0.85 rolos no estoque. Como mostrar isso para o almoxarifado?
+
+| Opcao | O que o almoxarifado ve na tela | Exemplo |
+|-------|--------------------------------|---------|
+| **A — Decimal simples** | `2.85 rolos` | Direto, mas "0.85 rolos" nao e intuitivo |
+| **B — Desdobrado** | `2 rolos + 85 m` | Natural, almoxarifado entende na hora |
+
+**Cenario real:** O almoxarifado precisa contar o estoque fisico. Com a opcao A, ele ve "2.85 rolos" e precisa calcular mentalmente que isso significa 2 rolos inteiros + 85 metros avulsos. Com a opcao B, ele ve "2 rolos + 85 m" e ja sabe exatamente o que tem na prateleira.
+
+**Impacto tecnico:** Opcao B exige mais logica de formatacao no frontend, mas nao muda nada no backend.
+
+:::tip Pergunta para produto
+O almoxarifado consegue interpretar "2.85 rolos" facilmente, ou precisa ver a equivalencia em metros?
+:::
+
+---
+
+### Decisao 2: Configurar unidades e obrigatorio ou opcional?
+
+**Situacao:** Ao cadastrar uma peca, o gestor precisa escolher unidade de estoque e unidade de consumo. Isso deve ser obrigatorio para todas as pecas ou opcional?
+
+| Opcao | Comportamento no cadastro | Consequencia |
+|-------|--------------------------|--------------|
+| **A — Obrigatorio** | Gestor sempre escolhe unidades ao cadastrar | Dados sempre completos, mas burocratico: ~90% das pecas sao "Unidade/Unidade" (parafuso, filtro, lampada) |
+| **B — Opcional** | Se nao configurar, assume "Unidade/Unidade" automaticamente | Zero atrito no cadastro, mas o gestor pode esquecer de configurar pecas que realmente precisam (oleo, fio) |
+
+**Cenario real com opcao A:** O gestor cadastra 200 parafusos diferentes. Em cada um, precisa selecionar "Unidade" / "Unidade" — mesmo campo, mesmo valor, 200 vezes. Cansativo e sem valor.
+
+**Cenario real com opcao B:** O gestor cadastra "Oleo Motor 15W40" e esquece de configurar a unidade. O mecanico solicita "3" (sem saber se sao litros ou baldes). O problema que estamos resolvendo continua existindo para essa peca.
+
+**Meio-termo possivel:** Opcional com aviso. Se a peca nao tem unidade configurada, exibir um badge "Sem unidade" na listagem para o gestor lembrar de configurar quando necessario.
+
+:::tip Pergunta para produto
+Vale forcar o gestor a configurar unidades para cada parafuso so para garantir que ele nao esqueca do oleo? Ou o aviso visual resolve?
+:::
+
+---
+
+### Decisao 3: Quem pode criar unidades de medida?
+
+**Situacao:** "Rolo de 100m" e "Balde de 20L" nao sao unidades padrao — sao embalagens especificas do fornecedor de cada empresa. Como lidar com isso?
+
+| Opcao | Quem cria | O que acontece |
+|-------|-----------|----------------|
+| **A — Livre** | O gestor cria qualquer unidade na tela de configuracoes | Maximo de flexibilidade, mas risco de bagunca: "Rolo", "rolo", "RL", "Rolo 100m" podem coexistir |
+| **B — Lista fixa** | So unidades pre-cadastradas pelo sistema. Para adicionar, solicita ao suporte | Consistencia garantida, mas trava o usuario e gera ticket |
+| **C — Livre com sugestoes** | Ao criar, o sistema mostra unidades parecidas que ja existem ("Voce quis dizer Rolo?") | Flexivel + organizado, mas mais complexo de implementar |
+
+**Cenario real com opcao A:** Empresa com 3 gestores. Um cadastra "Rolo", outro cadastra "Rolo 100m", outro cadastra "RL". Mesma coisa, 3 nomes diferentes. Relatorios ficam fragmentados.
+
+**Cenario real com opcao B:** Gestor da Suzano precisa de "Tambor 200L" (embalagem especifica do fornecedor deles). Nao existe na lista. Abre ticket, espera 2 dias, so entao consegue cadastrar a peca.
+
+**Cenario real com opcao C:** Gestor digita "Rol" e o sistema sugere "Rolo (ja cadastrado)". Se ele realmente quer algo novo, confirma a criacao. Previne duplicatas sem travar.
+
+:::tip Pergunta para produto
+O gestor da Suzano (ou de qualquer empresa grande) consegue manter unidades organizadas sozinho, ou precisa de guardrails para evitar duplicatas?
+:::
+
+---
+
+### Decisao 4: Incremento do campo de quantidade
+
+**Situacao:** Quando o mecanico solicita uma peca, o campo de quantidade tem botoes + e -. De quanto em quanto eles incrementam?
+
+| Opcao | Comportamento dos botoes +/- | Exemplo |
+|-------|------------------------------|---------|
+| **A — Sempre 0.5** | Todos os campos incrementam de 0.5 em 0.5 | Parafuso: 1 → 1.5 → 2 (estranho pedir 1.5 parafuso) |
+| **B — Depende da unidade** | Unidade inteira (Un, Jogo) → step 1. Unidade fracionaria (Metro, Litro, Kg) → step 0.5 | Parafuso: 1 → 2 → 3. Oleo: 0.5 → 1 → 1.5 |
+
+**Cenario real com opcao A:** Mecanico pede parafusos. Clica + uma vez, aparece "1.5 parafusos". Nao faz sentido — ninguem usa meio parafuso. Ele precisa clicar + de novo para chegar em 2.
+
+**Cenario real com opcao B:** Mecanico pede parafusos, clica + e vai de 1 em 1 (intuitivo). Quando pede oleo, clica + e vai de 0.5 em 0.5 litros (faz sentido, pode precisar de 1.5L).
+
+:::tip Pergunta para produto
+Faz sentido solicitar meio parafuso? Se nao, o incremento deve ser inteligente baseado no tipo de unidade.
+:::
 
 ---
 
