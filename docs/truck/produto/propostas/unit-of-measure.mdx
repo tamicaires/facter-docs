@@ -1,0 +1,231 @@
+---
+title: Unidade de Medida e Conversao
+sidebar_position: 5
+tags: [truck, proposta, pecas, estoque, unidade-medida, conversao]
+---
+
+import { ProposalHeader } from '@site/src/components/ProposalHeader';
+import { UnitOfMeasureMockup } from '@site/src/components/UnitOfMeasureMockup';
+
+# Unidade de Medida e Conversao de Consumo
+
+<ProposalHeader status="em-discussao" date="2026-07-19" />
+
+---
+
+## Problema
+
+Todas as pecas no sistema sao controladas por uma quantidade generica — sem unidade de medida. O mecanico solicita "15" e o gestor aprova "15", mas ninguem sabe se sao 15 unidades, 15 metros ou 15 litros.
+
+Na pratica, muitos materiais possuem **unidades de consumo diferentes da unidade de estoque**:
+
+| Material | Como e estocado | Como e consumido | Situacao atual |
+|----------|----------------|-----------------|----------------|
+| Fio eletrico | Rolo (100m) | Metro | Mecanico calcula mentalmente quantos metros tem 1 rolo |
+| Oleo motor | Balde (20L) | Litro | Almoxarifado anota em papel a conversao |
+| Graxa | Balde (5kg) | Quilograma | Ninguem converte, estoque fica impreciso |
+| Lona de freio | Jogo (4 rodas) | Roda | Mecanico pede "2" sem especificar se sao 2 jogos ou 2 rodas |
+| Chapa | Chapa (1.2m2) | Metro quadrado | Calculo manual a cada solicitacao |
+
+**Resultado:** calculos manuais, erros frequentes, estoque impreciso e retrabalho na aprovacao.
+
+---
+
+## Fluxo Atual
+
+```
+Mecanico solicita → "15"   (15 o que?)
+Gestor aprova     → "15"   (15 o que?)
+Estoque desconta  → -15    (15 o que?)
+```
+
+Nao existe informacao de unidade em nenhuma etapa. O campo `quantity` e um numero inteiro generico.
+
+---
+
+## Proposta: Unidades de Medida com Conversao Automatica
+
+### Conceito
+
+Cada peca passa a ter duas unidades e um fator de conversao:
+
+| Campo | O que e | Exemplo |
+|-------|---------|---------|
+| **Unidade de estoque** | Como a peca e controlada no almoxarifado | Rolo, Balde 20L, Jogo |
+| **Unidade de consumo** | Como o mecanico solicita | Metro, Litro, Roda |
+| **Fator de conversao** | Quantas unidades de consumo cabem em 1 unidade de estoque | 1 Rolo = 100 Metros |
+
+O sistema faz a conversao automaticamente. O mecanico pede em metros, o gestor ve em metros e em rolos, o estoque desconta em rolos.
+
+### Formula
+
+```
+impacto_estoque = quantidade_solicitada / fator_de_conversao
+```
+
+### Exemplos
+
+| Peca | Solicitacao | Calculo | Impacto no Estoque |
+|------|-------------|---------|-------------------|
+| Fio eletrico | 15 metros | 15 / 100 | **0.15 rolos** |
+| Oleo motor | 3 litros | 3 / 20 | **0.15 baldes** |
+| Graxa | 2 kg | 2 / 5 | **0.4 baldes** |
+| Lona de freio | 2 rodas | 2 / 4 | **0.5 jogos** |
+| Parafuso | 4 unidades | 4 / 1 | **4 unidades** |
+
+:::info Pecas simples nao mudam
+Quando a unidade de estoque e a de consumo sao iguais (ex: Unidade/Unidade), o fator e 1 e o comportamento e identico ao atual. **90% das pecas continuam funcionando exatamente como hoje**, sem nenhuma configuracao extra.
+:::
+
+---
+
+## Fluxo Proposto
+
+### Cadastro da Peca
+
+O gestor configura as unidades ao cadastrar ou editar a peca:
+
+```
+1. Seleciona unidade de estoque    → "Rolo"
+2. Seleciona unidade de consumo    → "Metro"
+3. Define o fator                  → "1 Rolo = 100 Metros"
+```
+
+O campo de fator so aparece quando as unidades sao diferentes.
+
+### Solicitacao
+
+```
+Mecanico solicita → "15 metros de fio eletrico"
+Sistema calcula   → Impacto: 0.15 rolos
+Sistema valida    → Estoque: 3 rolos (300m disponiveis) ✓
+```
+
+O mecanico ve a quantidade em metros. A validacao de estoque acontece automaticamente.
+
+### Aprovacao
+
+```
+Gestor ve         → "15 metros solicitados (0.15 rolos)"
+Gestor ve         → "Estoque atual: 3.00 rolos (300m)"
+Gestor ve         → "Apos aprovacao: 2.85 rolos (285m)"
+Gestor aprova     → Estoque atualiza automaticamente
+```
+
+O gestor tem visibilidade completa do impacto antes de aprovar.
+
+### Visualizacao de Estoque
+
+A tabela de pecas passa a exibir a unidade e a equivalencia:
+
+```
+Fio Eletrico    │ 3 rolos (300 m)     │ Controle: Rolo  │ Consumo: Metro
+Oleo Motor      │ 5 baldes (100 L)    │ Controle: Balde │ Consumo: Litro
+Parafuso M10    │ 150 un              │ Controle: Un    │ Consumo: Un
+```
+
+---
+
+## Prototipo Interativo
+
+Navegue pelas abas para ver como cada tela ficaria. Os campos sao interativos — altere valores para simular o comportamento.
+
+<UnitOfMeasureMockup />
+
+---
+
+## Unidades Disponiveis
+
+O sistema vem com unidades pre-cadastradas organizadas por familia. O gestor pode criar unidades personalizadas (ex: "Balde 20L", "Rolo 100m").
+
+| Familia | Unidades iniciais | Uso tipico |
+|---------|-------------------|-----------|
+| **Quantidade** | Unidade, Par, Jogo, Caixa | Pecas discretas (parafusos, filtros, lonas) |
+| **Volume** | Litro, Mililitro, Galao | Fluidos (oleo, graxa liquida, combustivel) |
+| **Peso** | Quilograma, Grama, Tonelada | Materiais a granel (graxa, solda) |
+| **Comprimento** | Metro, Centimetro | Materiais lineares (fio, mangueira, correia) |
+| **Area** | Metro quadrado | Chapas, lonas |
+
+As familias servem para organizar os dropdowns. Unidades personalizadas (como "Rolo" ou "Balde 20L") sao criadas pelo gestor dentro da familia correspondente.
+
+---
+
+## Cenarios e Garantias
+
+| Cenario | Comportamento |
+|---------|---------------|
+| Peca com unidades iguais (Un/Un) | Fator = 1, sem conversao, identico ao atual |
+| Peca com unidades diferentes (Rolo/Metro) | Fator obrigatorio, conversao automatica |
+| Solicitar mais que o estoque | Bloqueado com aviso: "Estoque insuficiente. Disponivel: X metros" |
+| Estoque fracionario (2.85 rolos) | Permitido — quantidades passam a aceitar decimais |
+| Peca existente sem unidade configurada | Assume "Unidade" com fator 1 (migracao automatica) |
+| Aprovar quantidade diferente da solicitada | Recalculo automatico do impacto |
+| Devolucao de peca com conversao | Estoque restaurado na unidade de estoque |
+
+---
+
+## Migracao de Pecas Existentes
+
+Todas as pecas atuais serao migradas automaticamente:
+
+- **Unidade de estoque:** "Unidade"
+- **Unidade de consumo:** "Unidade"
+- **Fator de conversao:** 1
+
+O comportamento permanece identico ao atual. O gestor configura unidades diferentes apenas nas pecas que precisam.
+
+**Quantidades passam a aceitar decimais.** O campo `stockQuantity` muda de inteiro para decimal. Valores existentes (5 → 5.0) nao sao afetados.
+
+---
+
+## Integracao SAP (futuro)
+
+Cada unidade no sistema tera um campo opcional para codigo ISO (padrao internacional UN/ECE) e codigo SAP. Isso permite mapeamento direto na integracao futura:
+
+| Unidade Facter | Codigo ISO | Codigo SAP |
+|----------------|-----------|-----------|
+| Quilograma | KGM | KG |
+| Litro | LTR | L |
+| Metro | MTR | M |
+| Unidade | C62 | PC |
+
+Os campos sao opcionais e preenchidos apenas quando a integracao for implementada. Zero impacto no uso atual.
+
+---
+
+## Decisoes Pendentes
+
+| Item | Opcoes | Status |
+|------|--------|--------|
+| Exibicao de estoque fracionario | "2.85 rolos" vs "2 rolos + 85m" | Pendente |
+| Obrigatoriedade das unidades | Obrigatorio para todas as pecas vs opcional (assume "Unidade") | Pendente |
+| Unidades personalizadas | Gestor cria livremente vs lista fixa com solicitacao | Pendente |
+| Step do input de quantidade | Fixo (0.5) vs dinamico por tipo de unidade | Pendente |
+
+---
+
+## Impacto Tecnico
+
+### Resumo
+
+| Area | Mudancas |
+|------|----------|
+| **Database** | 2 tabelas novas (UnitCategory, Unit) + campos novos em Part e PartRequest |
+| **Backend** | 4 use cases novos (CRUD unidades) + 4 modificados (part, part-request) |
+| **Frontend** | Forms de cadastro e solicitacao + listagens + hooks |
+| **Migracao** | 6 passos, zero downtime, dados existentes intactos |
+
+### Estimativa
+
+~2 semanas de desenvolvimento.
+
+- **Semana 1:** Schema, migracao, backend (entities, repositories, use cases, servico de conversao)
+- **Semana 2:** Frontend (forms, listagens, conversao visual) + testes
+
+### O que NAO muda
+
+- Fluxo de aprovacao (apenas exibe informacao adicional)
+- Fluxo de entrega
+- Fluxo de rejeicao
+- Permissoes existentes
+- Endpoints existentes (apenas campos adicionais)
