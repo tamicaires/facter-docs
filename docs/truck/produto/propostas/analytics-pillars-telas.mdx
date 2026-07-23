@@ -5,6 +5,7 @@ tags: [truck, proposta, ux, analytics, pilares, dataviz]
 ---
 
 import { ProposalHeader } from '@site/src/components/ProposalHeader';
+import { AnalyticsScreensPrototype } from '@site/src/components/AnalyticsScreensPrototype';
 
 # Analytics Hub — Design das Telas por Pilar
 
@@ -31,6 +32,14 @@ Hoje as páginas são listas de widgets. A proposta é que **toda tela responda 
 - **No máximo uma técnica nova por tela** — evita sobrecarga cognitiva
 - **Zero dado mock** — a Visão Geral atual usa `SAMPLE_*` como fallback; numa tela que conta história, dado falso é mentira
 - **Refetch segura o render anterior** com opacidade reduzida — nunca skeleton flash
+
+---
+
+## Protótipo Navegável das Telas
+
+Todas as 11 telas com a gramática aplicada. Os selos numerados marcam as camadas; na Visão Geral, alertas e cartões de pilar navegam para a tela correspondente. Dados ilustrativos.
+
+<AnalyticsScreensPrototype />
 
 ---
 
