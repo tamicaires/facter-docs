@@ -1,0 +1,217 @@
+---
+title: Analytics Hub — Design das Telas
+sidebar_position: 6
+tags: [truck, proposta, ux, analytics, pilares, dataviz]
+---
+
+import { ProposalHeader } from '@site/src/components/ProposalHeader';
+
+# Analytics Hub — Design das Telas por Pilar
+
+<ProposalHeader status="em-discussao" date="2026-07-23" />
+
+Detalhamento da proposta [Analytics Hub com Pilares](./analytics-pillars): como cada tela conta sua história, com hierarquia visual e técnicas de visualização adequadas. Inclui a camada de produto — funcionalidades novas que cada pilar pede e o custo de backend de cada uma.
+
+---
+
+## A gramática comum: toda tela conta a história em 4 camadas
+
+Hoje as páginas são listas de widgets. A proposta é que **toda tela responda a pergunta do pilar em camadas de leitura**, sempre na mesma ordem:
+
+| Camada | Tempo de leitura | O que é | Componente |
+|--------|------------------|---------|------------|
+| **1. Veredito** | 5s | 3–5 stat tiles que respondem a pergunta do pilar (valor + delta + sparkline + meta) | `BigNumberCard` + `Sparkline` + `StatusIndicator` |
+| **2. História central** | 30s | UMA visualização dominante (largura total) que explica o veredito | Chart principal |
+| **3. Diagnóstico** | 2min | 2 colunas de composição/causa ("por quê?") | Charts secundários |
+| **4. Ação** | quando precisar | Tabela ordenável com os itens acionáveis, sempre por último | `DataTable` |
+
+### Regras transversais
+
+- **Meta sempre visível** — ReferenceLine/banda em todo chart que tem meta
+- **No máximo uma técnica nova por tela** — evita sobrecarga cognitiva
+- **Zero dado mock** — a Visão Geral atual usa `SAMPLE_*` como fallback; numa tela que conta história, dado falso é mentira
+- **Refetch segura o render anterior** com opacidade reduzida — nunca skeleton flash
+
+---
+
+## Correções obrigatórias (anti-padrões presentes hoje)
+
+| # | Problema | Onde | Correção |
+|---|----------|------|----------|
+| 1 | **Dual-axis** (dois eixos Y inventam correlação) | `quality.tsx` (conformidade % + contagem), Pareto ABC em `parts.tsx` | Qualidade: 2 charts empilhados com eixo alinhado. Pareto: barras em % do total, eixo único 0–100% com marcadores nas fronteiras A/B/C |
+| 2 | **5 gauges RadialBar redundantes** (repetem número que já está no KPI row) | work-orders, quality, emergency, 2x preventive | Viram *meter* (barra de progresso contra meta) dentro do próprio stat tile |
+| 3 | **Donuts comparando valores próximos** | prioridade de OS, templates, categorias de peças, cargos | Viram barras horizontais. Donut só onde é parte-de-todo com até 5 fatias e leitura de relance (status de pneus, disponibilidade) |
+| 4 | **Duas barras de filtro coexistindo** | `AnalyticsFilterBar` antiga vs `FilterChipGroup` | Padronizar todas as telas no `FilterChipGroup` (já é o modelo dos chips da fase 2) |
+| 5 | **Dados mock em produção** | `index.tsx` (Visão Geral), blocos de `fleet.tsx` | Remover `SAMPLE_*`; mostrar estado vazio honesto ou remover o bloco |
+
+---
+
+## Pilar 1 — Operacional: "Como está a oficina?"
+
+### Visão Geral → vira a capa executiva do hub
+
+Hoje ela tenta ser todas as telas ao mesmo tempo. Com pilares na sidebar, o papel muda: **é o sumário que roteia para os pilares**.
+
+1. **Pulso** — Disponibilidade da frota, OS abertas, Custo do período, % Preventivas (`kpis` do overview)
+2. **"Atenção agora"** — faixa de alertas com os 4 campos de `alerts` (veículos parados +48h, preventivas vencidas, estoque zerado, pneus com sulco baixo), cada um clicável levando ao pilar correspondente. Única tela com senso de urgência em tempo real
+3. **Um cartão por pilar** (6 cartões) — sinal-chave + micro-trend + link "Ver pilar →". A sidebar diz onde ir; a capa diz **por que ir**
+
+Sai: pódio de frotas, painel lateral de OS, tudo que é mock.
+
+### Ordens de Serviço → a história do fluxo
+
+Quantas entram, onde empacam, por que param.
+
+- **Veredito**: Total, MTTR, Tempo em fila, First-time fix, Retrabalho (KPIs atuais + sparkline via `trend`)
+- **História central**: `statusPipeline` vira **funil horizontal com tempo médio por etapa** — barra mostra volume, rótulo mostra `avg_hours_in_status`. É a visualização que diz "as OS passam 40h paradas em fila de peça"
+- **Diagnóstico**: volume por tipo (stacked bar temporal, mantém) + **Pareto de pausas** (motivo x tempo total, ordenado — 2 motivos causam 80% da parada)
+- **Ação**: tabela OS por frota (mantém). Gauge de conclusão sai (redundante)
+
+### Indicadores → de parede de números para scorecard industrial
+
+Hoje: 22 KPI cards em sequência, sem hierarquia. O dado secreto é o `trend[]` com 8 métricas por período.
+
+- **Técnica avançada: small multiples.** Grade de mini-charts (MTBF, MTTR, Disponibilidade, CPK, CPH, PMP, Conformidade, Eficiência), cada um com linha própria + **banda de meta** + valor atual grande. 8 tendências comparáveis num olhar, cada uma com seu próprio eixo (nunca sobrepostas)
+- Os demais KPIs (estoque, pneus...) ficam como stat tiles pequenos agrupados por seção abaixo — são contexto, não protagonistas
+
+---
+
+## Pilar 2 — Ativos: "Como estão meus veículos?"
+
+### Frota → a história dos outliers
+
+Frota é onde o gestor procura vilões. Os dados por veículo (`FleetVehicle`: custo, km, cpk, disponibilidade) permitem a técnica mais valiosa do hub:
+
+- **História central — quadrante CPK x Disponibilidade** (scatter): cada ponto é um veículo. Quadrante caro E indisponível = os vilões, destacados com emphasis (acento + rótulo direto; o resto em cinza)
+- **Veredito**: Disponibilidade, CPK médio, Custo total, Veículos em manutenção
+- **Diagnóstico**: Top 10 veículos por custo (stacked horizontal, mantém) + comparação entre frotas
+- **Ação**: ranking de veículos (tabela atual, mantém)
+
+Sai: blocos com mock e a duplicação com Fleet Health — real-time é dashboard operacional, não analytics; no máximo um link.
+
+### Pneus → a história do ciclo de vida
+
+Pneu tem narrativa natural: compra → uso → recapagem → sucata. A tela segue essa ordem.
+
+- **Veredito**: Ativos, CPK, Sulco médio, % Recapagem, % Sucata (mantém)
+- **História central**: `statusDistribution` deixa de ser donut e vira **barra de ciclo de vida** (stacked horizontal única, na ordem do ciclo) — lê-se como linha do tempo do parque
+- **Diagnóstico**: CPK por marca (bar horizontal com emphasis na melhor e pior) + eventos por mês (mantém)
+- **Ação**: tabela ROI de recapagem (mantém — o ouro da tela)
+
+:::warning Nota de dado
+`tires/lifecycle` e `tires/cpk` não aceitam período hoje — a tela deve deixar claro que é foto atual, não recorte temporal.
+:::
+
+---
+
+## Pilar 3 — Financeiro: "Quanto estou gastando?"
+
+### Custos → a história do dinheiro evitável
+
+- **Veredito**: Custo total, Custo/OS, CPK, CPH — e um tile-insight calculado de `preventiveVsCorrective`: **"corretiva custa Nx a preventiva por OS"**. É o argumento econômico do sistema inteiro, hoje enterrado em dois StatsCards
+- **História central**: evolução de custos empilhada por categoria (mantém) com rótulo direto só no total do último período
+- **Diagnóstico**: custo por frota (top 10 + "outras" agrupadas, nunca 15 barras) + composição preventiva vs corretiva
+- **Ação**: Top 10 OS mais caras, adicionando coluna **"% do custo total"** — dá escala ("essas 10 OS = 22% do gasto")
+
+### Peças e Estoque → duas histórias, duas seções explícitas
+
+Hoje mistura consumo (período) com saúde do estoque (agora). Separar visualmente:
+
+- **Seção "Consumo do período"**: Pareto ABC corrigido (eixo único) + top peças + categorias em barra
+- **Seção "Saúde do estoque (hoje)"**: KPIs de estoque + tabela de alertas ordenada por `coverage_days` ascendente com status colorido — cobertura em dias é a métrica acionável ("essa peça acaba em 4 dias")
+
+---
+
+## Pilar 4 — Pessoas: "Como está a equipe?"
+
+### Desempenho → capacidade antes de indivíduos
+
+Tela sensível: é sobre pessoas. A narrativa certa começa no coletivo e só depois individualiza.
+
+- **Veredito**: Wrench time, Eficiência média, Utilização, Técnicos ativos
+- **História central**: **histograma de eficiência** (já existe, promover a protagonista) — mostra a distribuição da equipe, não um ranking; a pergunta é "a curva está deslocando para a direita?"
+- **Diagnóstico**: **Pareto de pausas** (motivo x minutos — onde a capacidade vaza) + composição por cargo (barra, não donut). O dado já traz `shift_name` e `job_title` por pessoa — dá para agrupar por turno client-side e antecipar valor da fase 3
+- **Ação**: tabela da equipe (mantém)
+
+:::info Decisão de produto pendente
+O "pódio top 6" vira lista discreta ou sai — ranking público de pessoas é decisão de produto.
+:::
+
+---
+
+## Pilar 5 — Qualidade: "Mantendo o padrão?"
+
+### Checklists
+
+- **Veredito**: Conformidade (meta como meter no tile — gauge sai), Não conformidades, Recorrência, Tempo médio
+- **História central**: o dual-axis vira **dois charts empilhados de eixo alinhado**: em cima conformidade % com banda de meta (90%), embaixo colunas de não conformidades
+- **Diagnóstico**: **Pareto de itens não conformes** com recorrência destacada — reincidência é sinal de problema estrutural — + conformidade por frota (bar com ReferenceLines 90/70, mantém)
+- Templates: donut → barra horizontal
+
+### Socorro → a história da resposta
+
+- **Veredito**: Total, Tempo de resposta, Tempo de resolução, SLA % (com meta; gauge sai)
+- **História central**: **histograma de tempo de resposta** (já existe, promover) — a distribuição diz mais que a média: "80% em menos de 1h, mas há uma cauda de 4h+"
+- **Diagnóstico**: tipos de problema (bar, mantém) + tendência de volume (empilhar resolvido/cancelado/pendente em vez de 3 linhas)
+- **Ação**: frotas com mais socorros — bar com emphasis nas 3 piores
+
+---
+
+## Pilar 6 — Prevenção: "Prevenindo ou apagando incêndio?"
+
+### Manutenção Preventiva → o vencido é o protagonista
+
+A informação mais acionável da tela — `overdueDetails` — hoje está no fim. Inverter:
+
+- **Veredito**: Aderência % (meter vs meta 90), PMP % (meter vs meta 40), **Alertas vencidos** (tile em estado de alerta quando maior que 0), MTBF
+- **História central**: **tabela de planos vencidos promovida ao topo** (ordenada por dias de atraso x severidade, com status colorido). Única tabela do hub que sobe na hierarquia — porque aqui ela É a chamada para ação
+- **Diagnóstico**: tendência de aderência + tendência PMP lado a lado, ambas com banda de meta (gauges saem)
+- **Fecho**: cards de economia preventiva vs corretiva (mantém — conecta com o pilar Financeiro)
+
+---
+
+## Camada de Produto — funcionalidades que cada pilar pede
+
+O plano acima usa apenas os 18 endpoints existentes. As funcionalidades abaixo são o que cada pilar *pede* para responder sua pergunta de verdade — o backend vira consequência da decisão de produto.
+
+### Transversal (afeta todas as telas)
+
+| Funcionalidade | Necessidade | Backend |
+|----------------|-------------|---------|
+| **Comparação com período anterior** em todos os KPIs | Um número sozinho não conta história — "MTTR 6,2h" só vira insight como "6,2h, -12% vs mês anterior". Hoje os deltas na UI são mock | Cada query de KPI roda também para a janela anterior (mesmo tamanho, deslocada) |
+| **Metas configuráveis por empresa** | Metas hoje são hardcoded no frontend (90% disponibilidade, 40% PMP...). Se a tela promete "veredito contra meta", a meta precisa ser da empresa | Tabela `metric_goals` (companyId, métrica, valor) + CRUD simples + meta nos responses |
+
+### Por pilar
+
+| Pilar | Funcionalidade | Necessidade | Backend |
+|-------|----------------|-------------|---------|
+| Operacional | **Aging de backlog** (OS abertas por faixa: menos de 2d, 2–7d, 7–15d, +15d) | Média de fila esconde a cauda; "quantas OS estão apodrecendo?" | Novo endpoint, query simples |
+| Operacional | **Heatmap de demanda** (entrada de OS por dia da semana x hora) | Dimensionar equipe e turnos | Novo endpoint, GROUP BY simples |
+| Ativos | **Curva de custo por veículo x km/idade** | A decisão mais cara do cliente: quando renovar um veículo | Novo endpoint (custo mensal por veículo + km/ano) |
+| Ativos | **Downtime real por veículo** (dias parados, não só %) | "% disponibilidade" abstrai; "ficou 11 dias parado" dói | Campo extra na query existente |
+| Ativos | **Curva de desgaste de pneu** (sulco x km por marca) | Projeção de vida restante; comparação real entre marcas | Novo endpoint (histórico de medições de sulco) |
+| Financeiro | **Orçamento vs realizado** | Transforma "quanto gastei" em "estou dentro do planejado" | Feature nova: cadastro de orçamento + comparação nas queries |
+| Financeiro | **Drill-down categoria → peça** | "Peças subiu 30%" → clicar → ver quais peças puxaram | Endpoint parametrizado por categoria |
+| Pessoas | **Capacidade planejada vs realizada** (horas da escala vs apontadas) | Wrench time sem denominador honesto é chute | Depende de existir jornada/escala no cadastro |
+| Pessoas | **Evolução individual** (trend de eficiência por colaborador) | Conversa de desenvolvimento com dado, não impressão | Novo endpoint (mesma query agrupada por período) |
+| Qualidade | **Conversão checklist → OS** (% de NC que virou OS, em quanto tempo) | Prova de que inspeção funciona; fecha o ciclo Qualidade → Prevenção | Depende de existir vínculo NC↔OS no modelo |
+| Prevenção | **Calendário de carga futura** (preventivas que vencem em 30/60 dias, por semana) | Hoje a tela só olha para trás. "Semana que vem vencem 14 planos — a oficina dá conta?" | Novo endpoint (projetar datas dos planos existentes) |
+| Prevenção | **Economia real da prevenção** (modelo explícito) | O número que justifica o investimento em preventiva para a diretoria | Query nova + decidir o modelo de cálculo (decisão de produto) |
+
+### Priorização sugerida
+
+| Tier | O que | Característica |
+|------|-------|----------------|
+| **1** | Comparação com período anterior + metas configuráveis + WHERE clauses da fase 3 (filtros) | Barato, sem decisão de produto difícil, multiplica o valor de todas as telas |
+| **2** | Aging de backlog, heatmap de demanda, calendário de preventivas, downtime por veículo, drill-down de categoria, evolução individual | Novos endpoints sobre dados que já existem — query nova, sem modelo novo |
+| **3** | Orçamento vs realizado, capacidade da equipe (escala), vínculo checklist→OS, modelo de economia da prevenção | Criam modelo/cadastro novo — maior valor estratégico, exigem decisão de produto primeiro |
+
+---
+
+## Decisões pendentes
+
+1. Quais itens dos Tiers 2 e 3 entram no produto
+2. Ranking público de pessoas na tela de Desempenho: mantém, discretiza ou sai
+3. Modelo de cálculo da economia da prevenção (Tier 3)
+
+Com as decisões tomadas, fecha-se o blueprint final de cada tela (este plano + funcionalidades aprovadas posicionadas na hierarquia) e dele sai a lista exata de endpoints/modelos para o backend.
