@@ -1,0 +1,329 @@
+---
+title: Rateio de Materiais Compartilhados
+sidebar_position: 8
+tags: [truck, proposta, pecas, insumos, custo, rateio, frota]
+---
+
+import { ProposalHeader } from '@site/src/components/ProposalHeader';
+import { SharedMaterialAllocationMockup } from '@site/src/components/SharedMaterialAllocationMockup';
+
+# Rateio de Materiais de Consumo Compartilhado
+
+<ProposalHeader status="em-discussao" date="2026-07-26" />
+
+---
+
+## Problema
+
+Toda peca ou insumo solicitado em uma ordem de servico (OS) e apropriado diretamente ao custo da frota daquela OS. Isso funciona bem para pecas especificas — um filtro trocado no PN-0007 e custo do PN-0007.
+
+Mas existem materiais de **uso compartilhado** que nao servem a um unico ativo:
+
+| Material | Como e consumido | Por que nao e de um ativo so |
+|----------|------------------|------------------------------|
+| Graxa | Aplicada em varios veiculos ao longo do mes | Um balde lubrifica a frota inteira |
+| Disco de corte | Gasto em multiplos reparos | Serve a oficina, nao a uma OS |
+| Arame MIG (solda) | Consumido em qualquer solda | Nao ha como medir por veiculo |
+| Estopa, lixa, produtos de limpeza | Consumo difuso | Uso geral da oficina |
+
+Hoje esse consumo cai **100% na frota da OS onde o material foi solicitado**. Um balde de graxa pedido numa OS do Veiculo A e debitado integralmente no Veiculo A, mesmo tendo lubrificado outros dez veiculos.
+
+**Resultado:** o custo por ativo e o CPK (custo por km) ficam distorcidos. Um veiculo aparece artificialmente caro, outros aparecem baratos demais, e decisoes gerenciais — renovacao de frota, priorizacao de manutencao, negociacao com transportadora — partem de um numero errado.
+
+---
+
+## Fluxo Atual
+
+### Como o custo de peca deveria fluir
+
+O modelo de dados ja rastreia a cadeia completa peca -> OS -> frota/veiculo:
+
+```
+Part.costPrice
+   └─ PartRequest (quantity / approvedQuantity)   ← baixa de estoque na aprovacao
+        └─ WorkOrder.fleetId                        ← OS amarrada a uma frota
+             └─ WorkOrderAsset.vehicleId            ← e a um veiculo especifico
+```
+
+Os dashboards de custo por frota, custo por veiculo, CPK e centro de custo leem os campos denormalizados da OS: `partsCost`, `labourCost`, `tireCost`, `externalCost`, `totalCost`.
+
+### Como o consumivel e tratado hoje
+
+Consumiveis ja tem um comportamento distinto no sistema, controlado pela flag `isConsumable` na **categoria da peca**:
+
+- A `PartRequest` de um consumivel fica **sem** `serviceExecutionId` — ou seja, **sem localizacao de veiculo/eixo**. Ela e auto-atribuida a um servico de sistema chamado *"Consumiveis Diversos"*.
+- Pecas nao-consumiveis, ao contrario, exigem um `serviceExecutionId` e herdam dele o veiculo/eixo.
+
+Ou seja, o consumivel ja *nao* aponta para um veiculo especifico. Mas ele continua preso a **uma unica OS**, que por sua vez esta amarrada a **uma unica frota**. O custo, portanto, ainda cai integralmente naquela frota.
+
+:::warning Descoberta importante durante a analise
+A materializacao do custo de peca na OS **ainda nao existe em producao**. Hoje os campos `partsCost` / `totalCost` da `WorkOrder` sao preenchidos por um **seed com valores aleatorios** (`prisma/seed-work-order-costs.ts`) — nenhum use case recalcula `partsCost` a partir das `PartRequest` reais. O custo real das pecas (`approvedQuantity × costPrice`) so e computado em relatorios de consumo/curva ABC, que **nao sao segmentados por frota nem por veiculo**.
+
+**Consequencia para esta proposta:** o rateio nao deve ser construido sobre um mecanismo que ainda nao existe. A decisao de rateio precisa ser tomada **agora** e embutida no momento em que a apropriacao real de custo (`PartRequest` -> `WorkOrder.partsCost`) for implementada — que e um passo natural e proximo. Sao duas faces do mesmo trabalho.
+:::
+
+---
+
+## Proposta
+
+### Conceito em uma frase
+
+Classificar cada material como **Direto** ou **Compartilhado**. Material direto continua sendo apropriado ao ativo/frota da OS. Material compartilhado nao vai para uma frota unica: seu custo entra num **pool de manutencao** e e **rateado** entre os ativos por um criterio justo.
+
+### As tres pecas da solucao
+
+| Peca | O que e | Decisao envolvida |
+|------|---------|-------------------|
+| **1. Classificacao** | Marcar o material como Direto ou Compartilhado | Reusar `isConsumable` ou criar campo proprio? |
+| **2. Acumulo** | Onde o custo compartilhado se junta antes de distribuir | Pool por periodo vs. rateio dentro da propria OS |
+| **3. Distribuicao** | Por qual criterio o pool e dividido entre os ativos | Base de rateio (custo direto, nº de OS, km, igualitario) |
+
+### Fluxo proposto
+
+```
+Consumivel compartilhado solicitado
+        │
+        ▼
+Custo NAO debita a frota da OS
+        │
+        ▼
+Entra no POOL de material compartilhado   (por periodo + centro de custo de oficina)
+        │
+        ▼
+No fechamento do periodo / geracao de relatorio
+        │
+        ▼
+RATEIO entre os ativos ativos no periodo   (base configuravel)
+        │
+        ▼
+Custo por ativo = custo DIRETO + parcela RATEADA   (as duas parcelas visiveis)
+```
+
+O ponto inegociavel: o custo por ativo passa a ter **duas parcelas explicitas e auditaveis** — "direto" e "rateio de compartilhados". Nunca um numero opaco que o gestor nao consegue rastrear.
+
+---
+
+## Prototipo Interativo
+
+O cenario abaixo simula uma oficina que consumiu **R$ 1.100** em materiais compartilhados no mes (graxa, disco de corte, arame MIG). Troque as abas para comparar como o mesmo pool muda o custo por ativo — e veja a distorcao do modelo atual.
+
+<SharedMaterialAllocationMockup />
+
+---
+
+## Decisoes
+
+### 1. O que define "compartilhado"? — **Campo proprio na categoria (Opcao B) · APROVADO**
+
+Duas opcoes:
+
+| Opcao | Como funciona | Trade-off |
+|-------|---------------|-----------|
+| **A. Reusar `isConsumable`** | Todo consumivel e tratado como compartilhado (rateio); o resto e direto | Zero campo novo. Mas acopla dois conceitos: `isConsumable` hoje governa "pula selecao de servico", nao "como o custo e apropriado" |
+| **B. Campo proprio `costAllocation` (DIRETO \| RATEIO)** na categoria | Classificacao explicita de custo, independente do `isConsumable` | Um campo novo, mas desacopla as responsabilidades e permite excecoes (um consumivel direto, um material caro compartilhado) |
+
+**Recomendacao: Opcao B**, com a migracao definindo o default de forma inteligente — categorias com `isConsumable = true` nascem como `RATEIO`, as demais como `DIRETO`. Assim ninguem precisa reclassificar o catalogo na mao, e os casos de excecao ficam possiveis.
+
+#### Um interruptor, nao dois campos para o usuario
+
+As duas flags parecem redundantes, mas respondem **perguntas diferentes**:
+
+| Flag | Pergunta que responde | Momento |
+|------|-----------------------|---------|
+| `isConsumable` | O mecanico precisa dizer em qual servico/veiculo ao **PEDIR**? | Solicitacao |
+| `costAllocation` | O custo vai para um ativo ou para o pool ao **CUSTEAR**? | Calculo de custo |
+
+Hoje elas coincidem (todo material compartilhado e consumivel), mas sao conceitos distintos — por isso ficam separadas no banco. Se o `isConsumable` fosse removido, pedir graxa passaria a exigir a escolha de um servico/veiculo especifico, que e justamente o atrito que nao queremos.
+
+**Na tela, o gestor ve um unico interruptor** — "Material compartilhado" — que aciona as duas flags por baixo: pede sem exigir veiculo (`isConsumable = true`) e manda o custo para o pool (`costAllocation = RATEIO`). A separacao interna existe apenas para permitir a excecao rara (um material que precisa de servico, mas cujo custo se rateia).
+
+#### A configuracao e por categoria, nao por peca
+
+O interruptor vive na **`PartCategory`** (uma duzia de categorias, no maximo), nao na peca. Cada `Part` apenas aponta para uma categoria e herda o comportamento.
+
+| Nivel | Campos novos para o usuario |
+|-------|------------------------------|
+| Cada peca (graxa, filtro, parafuso) | **Zero** — so escolhe a categoria, como hoje |
+| Categoria (Consumiveis, Filtros, Lonas...) | **Um** interruptor "Material compartilhado" |
+
+Marca-se "Consumiveis" como compartilhada **uma vez**, e toda graxa/disco/arame daquela categoria ja entra no rateio — sem tocar em peca nenhuma. O mecanico que cadastra ou solicita peca nunca ve essas flags.
+
+**Nota de implementacao:** hoje **nenhum formulario grava `isConsumable`** — ele so existe no backend/seed. A tela de categoria (`create-category-form`, `update-category-form`) passa a expor o interruptor unico, que grava as duas flags de uma vez.
+
+### 2. Onde acumula e quando distribui — **Pool por periodo · APROVADO (configuravel)**
+
+| Opcao | Como funciona | Trade-off |
+|-------|---------------|-----------|
+| **A. Rateio dentro da OS** | Se a OS toca varios ativos, divide o consumivel so entre eles | Simples e imediato. Mas nao resolve o caso real: um balde de graxa pedido numa OS de um unico veiculo continua 100% naquele veiculo |
+| **B. Pool por periodo** | Todo consumo compartilhado do mes vai a um pool e e rateado entre os ativos ativos no periodo | Remove a distorcao de verdade. Exige um "fechamento" de periodo (mensal) |
+
+**Recomendacao: Opcao B.** O problema descrito e cross-OS por natureza — a graxa serve a frota inteira ao longo do mes, nao a uma OS. Rateio intra-OS so mascara o sintoma.
+
+**Decisao (produto, 26/07/2026):** adotado o **pool por periodo como padrao**, porem **configuravel** por empresa/centro de custo — quem preferir pode acionar tambem o rateio intra-OS quando fizer sentido. O modelo nasce flexivel para os dois modos.
+
+### 3. Base de rateio — **Custo direto de manutencao · APROVADO (configuravel)**
+
+O pool precisa de um criterio para ser dividido. Opcoes, da mais justa a mais simples:
+
+| Base | Logica | Dado disponivel hoje? |
+|------|--------|----------------------|
+| **Custo direto (pecas + MO)** | Quem gerou mais manutencao consome mais insumo. Melhor proxy | Depende da materializacao de custo (ver aviso acima) |
+| **Nº de OS / servicos** | Quantas OS tocaram o ativo | Sim — rastreavel direto por `WorkOrderAsset` |
+| **Km rodado** | Proporcional a `Vehicle.km` | Sim — mas km e proxy fraco para consumivel de oficina |
+| **Igualitario** | Partes iguais entre ativos ativos | Sempre disponivel, porem ignora o esforco real |
+
+**Recomendacao: custo direto como default, com a base selecionavel** por empresa/centro de custo. Enquanto a materializacao de custo nao estiver pronta, **nº de OS** e o fallback mais honesto (dado ja existe e nao depende de custo). A base escolhida deve ficar registrada no relatorio — rateio nunca pode ser uma caixa-preta.
+
+### 4. Visibilidade do rateio — **Sempre desdobrado**
+
+O custo por ativo nas telas de analytics e centro de custo passa a mostrar as duas parcelas:
+
+```
+Veiculo PN-0007
+  Custo direto ............. R$ 800
+  Rateio compartilhado ..... R$ 220   (base: custo direto)
+  ─────────────────────────────────
+  Total .................... R$ 1.020
+```
+
+O gestor sempre consegue responder "de onde veio esse numero?". Sem isso, o rateio vira desconfianca.
+
+---
+
+## Cenarios e Garantias
+
+| Cenario | Comportamento |
+|---------|---------------|
+| Peca direta (filtro, lona) | Apropriada ao ativo da OS, como hoje. Zero mudanca |
+| Consumivel compartilhado (graxa) | Vai ao pool, rateado no fechamento. Nao cai numa frota so |
+| Ativo sem nenhuma OS no periodo | Nao entra no rateio (base zero) |
+| Periodo sem consumo compartilhado | Pool vazio, rateio nao roda, custo = so direto |
+| Empresa quer manter tudo direto | Base "nenhuma" / classificar tudo como DIRETO — comportamento atual preservado |
+| Material caro usado em varios ativos (ex: fluido especial) | Pode ser marcado RATEIO mesmo nao sendo consumivel (excecao da Opcao B) |
+| Reprocessar um mes ja fechado | Rateio e deterministico a partir dos dados do periodo — recalcula igual |
+
+---
+
+## Migracao
+
+- **Classificacao:** categorias com `isConsumable = true` -> `costAllocation = RATEIO`; demais -> `DIRETO`. Sem reclassificacao manual.
+- **Comportamento preservado:** enquanto ninguem marcar materiais como RATEIO (ou enquanto a base for "nenhuma"), o custo continua sendo apropriado como hoje. **Adocao opcional e incremental.**
+- **Historico:** o rateio e calculado a partir dos dados do periodo. Meses passados podem ser recalculados sob demanda, mas nao ha reescrita retroativa automatica.
+
+---
+
+## Impacto Tecnico
+
+### Dependencia critica (sequenciamento)
+
+Esta proposta **depende** da materializacao do custo real de peca na OS (o "elo faltante" identificado na analise). Recomendacao: tratar como **um unico trabalho em duas camadas**:
+
+1. **Camada base** — listener de `PART_APPROVED` / `PART_DELIVERED` / `PART_RETURNED` que recalcula e persiste `WorkOrder.partsCost` a partir de `PartRequest.approvedQuantity × Part.costPrice`. A infraestrutura de eventos ja existe.
+2. **Camada de rateio** — no mesmo listener, decidir se o custo vai para o ativo/frota (direto) ou para o pool (compartilhado), e materializar a distribuicao.
+
+Construir o rateio antes da camada base seria construir sobre o seed aleatorio.
+
+### Resumo das mudancas
+
+| Area | Mudancas |
+|------|----------|
+| **Database** | Campo `costAllocation` em `PartCategory`; estrutura de pool/rateio por periodo + centro de custo; (pre-requisito) materializacao de `partsCost` |
+| **Backend** | Listener de custo (base + rateio); use case de fechamento/calculo de rateio; queries de analytics desdobrando direto vs. rateado |
+| **Frontend** | Form de categoria expondo classificacao (+ `isConsumable`); analytics e centro de custo mostrando as duas parcelas; selecao da base de rateio |
+| **Migracao** | Default de `costAllocation` derivado de `isConsumable`, zero reclassificacao manual |
+
+### O que NAO muda
+
+- Fluxo de solicitacao, aprovacao, entrega e devolucao de pecas
+- Baixa de estoque (continua na aprovacao)
+- Conversao de unidade de medida (proposta [Unidade de Medida](./unit-of-measure))
+- Pecas diretas — apropriacao identica a de hoje
+
+---
+
+## Relacao com outras propostas
+
+| Proposta | Relacao |
+|----------|---------|
+| **[Unidade de Medida e Conversao](./unit-of-measure)** (aprovada) | Define quanto de um consumivel foi realmente consumido (`stockImpact`). O rateio distribui o **custo** desse consumo. Complementares |
+| **[Devolucao de Pecas](./part-return)** | Devolucao de compartilhado retorna ao pool, nao a um ativo. A ser tratado quando o rateio for detalhado |
+
+---
+
+## ADRs (Architecture Decision Records)
+
+### ADR-1: Classificacao de custo em campo proprio, nao reuso de `isConsumable`
+
+**Contexto:** precisamos distinguir material direto de compartilhado. A flag `isConsumable` na categoria ja separa consumiveis (que pulam a selecao de servico) do resto, e na pratica os materiais compartilhados sao justamente consumiveis.
+
+**Decisao:** criar `costAllocation` (DIRETO | RATEIO) na `PartCategory`, com default derivado de `isConsumable` na migracao.
+
+**Justificativa:**
+- `isConsumable` governa *fluxo de solicitacao* ("precisa de servico/localizacao?"), nao *apropriacao de custo*. Sao conceitos distintos que hoje coincidem por acaso.
+- Reusar acoplaria os dois — mudar um quebraria o outro no futuro.
+- O campo proprio permite excecoes reais: um consumivel barato apropriado direto, ou um material caro compartilhado que nao e consumivel.
+- Custo de implementar: um campo + migracao com default inteligente. Baixo.
+
+**Consequencias:**
+- A tela de categoria passa a expor classificacao de custo (e, junto, o `isConsumable` que hoje nao tem UI).
+- Toda query de custo por ativo precisa ramificar direto vs. rateio.
+
+### ADR-2: Pool por periodo, nao rateio intra-OS
+
+**Contexto:** o custo compartilhado precisa se acumular em algum lugar antes de ser distribuido. Pode ser dentro da propria OS (entre os ativos que ela toca) ou num pool por periodo.
+
+**Decisao:** pool por periodo (mensal), por centro de custo de oficina.
+
+**Justificativa:**
+- O consumo compartilhado e cross-OS: um balde de graxa serve varias OS e varios veiculos ao longo do mes.
+- Rateio intra-OS nao resolve o caso mais comum (consumivel pedido numa OS de um unico veiculo).
+- O pool por periodo espelha a pratica contabil de rateio de custos indiretos.
+
+**Consequencias:**
+- Introduz o conceito de "fechamento de periodo" para consolidar o rateio.
+- O rateio e recalculavel de forma deterministica a partir dos dados do periodo.
+
+### ADR-3: Base de rateio configuravel, default por custo direto
+
+**Contexto:** o pool precisa de um criterio de divisao. Nenhum criterio unico e perfeito para toda empresa.
+
+**Decisao:** base selecionavel (custo direto, nº de OS, km, igualitario), default = custo direto, fallback = nº de OS enquanto a materializacao de custo nao existir.
+
+**Justificativa:**
+- Custo direto e o melhor proxy de "quanto de manutencao cada ativo gerou".
+- Mas ele depende da materializacao de custo (ainda inexistente), entao nº de OS e um fallback honesto e sempre disponivel.
+- A base escolhida fica registrada no relatorio — rateio auditavel, nunca caixa-preta.
+
+**Consequencias:**
+- A configuracao vive por empresa/centro de custo.
+- Trocar a base muda numeros historicos se o periodo for reprocessado — precisa ser explicito na UI.
+
+### ADR-4: Rateio depende da materializacao de custo real
+
+**Contexto:** hoje `WorkOrder.partsCost` vem de seed aleatorio; nenhum codigo de producao calcula custo de peca a partir das requisicoes reais.
+
+**Decisao:** implementar rateio como segunda camada do mesmo trabalho que materializa o custo real via listener de eventos de peca.
+
+**Justificativa:**
+- Construir rateio sobre custo de seed produziria numeros sem sentido.
+- A infraestrutura de eventos (`PART_APPROVED` / `PART_DELIVERED` / `PART_RETURNED`) ja existe e e o ponto natural para recalcular custo.
+- Unir os dois evita retrabalho e garante que a distincao direto/rateio nasca junto com o custo real.
+
+**Consequencias:**
+- O escopo desta proposta engloba a materializacao de custo, que hoje e uma lacuna independente.
+- Beneficio colateral: os dashboards de custo por frota deixam de depender de seed e passam a refletir dados reais.
+
+---
+
+## Decisao
+
+| Item | Decisao | Status |
+|------|---------|--------|
+| Classificacao de material | Campo proprio `costAllocation` na categoria (Opcao B, ADR-1) | **Aprovado** (26/07/2026) |
+| Acumulo | Pool por periodo, configuravel para rateio intra-OS (ADR-2) | **Aprovado** (26/07/2026) |
+| Base de rateio | Custo direto de manutencao, configuravel (ADR-3) | **Aprovado** (26/07/2026) |
+| Visibilidade | Sempre desdobrado (direto + rateio) | Aguardando produto |
+| Sequenciamento | Materializar custo real + rateio no mesmo trabalho (ADR-4) | Aguardando produto |
+| Periodo/fechamento | Definir se havera fechamento de competencia (congela o rateio do mes) ou calculo on-the-fly por range de data. Hoje o conceito de periodo/fechamento **nao existe** (periodo e so filtro de data). Pre-requisito do pool por periodo | Aguardando produto (decisao/spike) |
+
+_Proposta em discussao. Nenhuma implementacao antes da aprovacao de todas as decisoes acima._
