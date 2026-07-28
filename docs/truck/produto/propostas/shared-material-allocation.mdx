@@ -188,34 +188,59 @@ Veículo PN-0007
 
 O gestor sempre consegue responder "de onde veio esse número?". Sem isso, o rateio vira desconfiança.
 
-### 5. Fechamento de período — congela ou recalcula? (Aguardando produto)
+### 5. Fechamento de período — como o mês "fecha"? (Aguardando produto)
 
-O rateio divide o **pool** do mês (ex: R$ 1.100 de graxa, disco e arame) entre os veículos, olhando os dados **daquele mês** (quantas OS, quanto cada veículo custou). A pergunta desta decisão é simples de enunciar:
+O rateio divide o **pool** do mês (ex: R$ 1.100 de graxa, disco e arame) entre os veículos, olhando os dados **daquele mês**. A pergunta:
 
-> **Depois que o mês passa, o rateio calculado vira uma foto fixa, ou é refeito toda vez que alguém abre o relatório?**
+> **Depois que o mês passa, o rateio vira uma foto fixa (oficial) ou é sempre recalculado com o dado mais recente?**
 
-Essa escolha existe porque hoje **o conceito de "fechar o mês" não existe no sistema** — "período" é apenas um filtro de data. O pool por período obriga a decidir isso.
+Isso importa porque hoje **o conceito de "fechar o mês" não existe** — "período" é só filtro de data.
 
-#### Exemplo concreto
+#### As opções
 
-Fecha julho. O rateio calculou: **Veículo A = R$ 220**, Veículo B = R$ 180.
+| Opção | Como funciona | Trade-off |
+|-------|---------------|-----------|
+| **A. Só congela** | O mês vira foto oficial e nunca mais muda | Rígido — o mês corrente também ficaria travado |
+| **B. Só on-the-fly** | Recalcula sempre com o dado atual | Flexível, mas sem foto oficial; número de mês passado pode mudar |
+| **C. Híbrido — RECOMENDADO** | Mês **aberto** recalcula ao vivo; mês **fechado** vira snapshot oficial; **reprocessar** gera nova foto com auditoria | O melhor dos dois. Padrão de ERP (competência aberta vs. fechada) |
 
-Já em **agosto**, alguém percebe que faltou lançar uma OS de julho e cadastra ela atrasada. Isso muda a base de julho. O que acontece com o rateio de julho já calculado?
+#### Como o híbrido (C) funciona
 
-| Opção | O que acontece com julho | Vantagem | Custo |
-|-------|--------------------------|----------|-------|
-| **A. Congela** (fechamento de competência) | Julho virou **foto oficial** no dia do fechamento. A OS atrasada **não mexe** no rateio de julho (entra em agosto ou fica de fora). O relatório de julho é sempre o mesmo. | Número **estável e auditável** — ninguém altera um mês fechado | Precisa **construir** o conceito de fechamento (trava de mês + guardar os valores congelados). Não existe hoje |
-| **B. Recalcula sempre** (on-the-fly) | Não existe "fechar mês". Toda vez que o relatório de julho abre, ele **refaz a conta** com os dados atuais. A OS atrasada **entra** e o rateio de julho muda (A vira ~R$ 210). | **Simples** — nada novo a construir, é só uma query que soma e divide | O número de um mês passado **pode mudar** se alguém mexer em dado antigo (na prática, raro) |
+- **Mês aberto** (o corrente) → rateio calculado **ao vivo**, valores **provisórios**, refletem o dado mais recente. Flexível.
+- **Fechar mês** (ação do admin) → o sistema tira uma **foto** dos valores e **congela**. A partir daí o mês mostra a foto oficial, com carimbo de quem e quando fechou. Auditável.
+- **Reprocessar** → se entrar lançamento atrasado num mês já fechado, o admin refecha, gerando **nova foto** com registro de auditoria. Rastro preservado.
 
-#### Recomendação técnica: **B — Recalcula sempre (on-the-fly)**
+Ou seja: **flexível no presente, oficial no passado.**
 
-- Muito **menos trabalho**: não cria máquina de fechamento, é uma query determinística.
-- Na realidade da operação, mês passado quase nunca recebe lançamento retroativo — o número praticamente não muda.
-- Se um dia a auditoria exigir "foto oficial", dá para adicionar o congelamento **depois**, sem refazer o que já existe.
+#### Como mostrar ao usuário
 
-> **Princípio:** começa simples (recalcula), congela só se e quando precisar.
+```
+┌─────────────────────────────────────────────┐
+│  Rateio · Julho 2026        ● Fechado         │
+│  Fechado em 02/08 por Tamires · base: custo   │
+│  Veículo A ....... R$ 220   (oficial)          │
+│  Veículo B ....... R$ 180                       │
+│  ⚠ Há 1 lançamento posterior ao fechamento    │  ← fase 2
+│     [ Reprocessar mês ]                         │
+└─────────────────────────────────────────────┘
+┌─────────────────────────────────────────────┐
+│  Rateio · Agosto 2026       ○ Aberto          │
+│  Valores provisórios · recalculados ao vivo    │
+│  Veículo A ....... R$ 190   (provisório)       │
+│                    [ Fechar mês ]  (admin)     │
+└─────────────────────────────────────────────┘
+```
 
-**O que produto precisa decidir:** aceitar o recálculo on-the-fly (simples, número de mês passado pode variar em caso raro de lançamento retroativo) **ou** exigir fechamento de competência desde o início (número congelado, porém mais engenharia). Essa decisão define o esforço das tasks de pool/rateio (#17 e #19).
+Três sinais garantem a confiança do gestor:
+1. **Selo de status** — Aberto/provisório (○) vs. Fechado/oficial (●). Nunca se confunde um número provisório com um oficial.
+2. **Carimbo de fechamento** — "Fechado em DD/MM por [usuário], base: X".
+3. **Alerta de divergência** (fase 2) — se entrou lançamento depois do fechamento, aparece "há lançamentos posteriores → Reprocessar?". O sistema é honesto sobre a foto estar desatualizada.
+
+#### Esforço
+
+C **reaproveita todo o motor de cálculo** do rateio (que é construído de qualquer forma — é a base). O incremental é moderado: **1 tabela de período/snapshot** + os use cases de **fechar/reprocessar** + a **UI de status**. O **detector de divergência** (sinal 3) é opcional e fica para **fase 2** — o admin pode reprocessar manualmente sem ele.
+
+**O que produto precisa decidir:** confirmar o modelo híbrido (C) como desenhado. Ele define o escopo das tasks #17 (motor), #18 (exibição com status) e da nova task de **fechamento de período**.
 
 ---
 
@@ -353,6 +378,6 @@ Construir o rateio antes da camada base seria construir sobre o seed aleatório.
 | Base de rateio | Custo direto de manutenção, configurável (ADR-3) | **Aprovado** (26/07/2026) |
 | Visibilidade | Sempre desdobrado (direto + rateio) | Aguardando produto |
 | Sequenciamento | Materializar custo real + rateio no mesmo trabalho (ADR-4) | Aguardando produto |
-| Período/fechamento | Congelar o rateio do mês (fechamento de competência) ou recalcular on-the-fly. Ver **Seção 5 (Decisões)** — recomendação: recalcular (mais simples), congelar só se preciso | Aguardando produto |
+| Período/fechamento | Modelo híbrido (Opção C): mês aberto recalcula ao vivo, mês fechado vira snapshot oficial, com reprocessar. Detector de divergência = fase 2. Ver **Seção 5 (Decisões)** | **Recomendado: C** — aguardando produto |
 
 _Proposta em discussão. Nenhuma implementação antes da aprovação de todas as decisões acima._
