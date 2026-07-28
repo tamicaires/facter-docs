@@ -164,6 +164,18 @@ Implementado com base na documentacao oficial do SAP Business Accelerator Hub. S
 
 ---
 
+## Parte 5: Infra / Deploy
+
+### Medio: Build/deploy do Render sem IaC (registrado 2026-07-28)
+
+Os comandos de build/start dos serviços no Render (facter-api, facter-app) vivem apenas no **dashboard**, nao versionados. Sem `render.yaml` (Blueprint), o build de deploy nao e reproduzivel localmente nem revisavel por PR (foi preciso adivinhar o build ao validar a FACTRK-8/16).
+
+- **Proposta:** adicionar `render.yaml` versionando `buildCommand`/`startCommand` e env vars. Draft para a API: build `pnpm install && pnpm prisma generate && pnpm build`; start `pnpm prisma migrate deploy && pnpm start:prod`.
+- **Cuidado:** os serviços ja existem configurados via dashboard; adotar Blueprint exige religar como Blueprint sem duplicar/desconfigurar.
+- **Status:** adiado a pedido em 2026-07-28 (durante a frente de custo real + rateio).
+
+---
+
 ## Plano de Correcao
 
 ### Sprint A: Criticos
