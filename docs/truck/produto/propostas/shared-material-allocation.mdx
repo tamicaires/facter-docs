@@ -9,7 +9,7 @@ import { SharedMaterialAllocationMockup } from '@site/src/components/SharedMater
 
 # Rateio de Materiais de Consumo Compartilhado
 
-<ProposalHeader status="em-discussao" date="2026-07-26" />
+<ProposalHeader status="aprovado" date="2026-07-28" />
 
 ---
 
@@ -188,7 +188,7 @@ Veículo PN-0007
 
 O gestor sempre consegue responder "de onde veio esse número?". Sem isso, o rateio vira desconfiança.
 
-### 5. Fechamento de período — como o mês "fecha"? (Aguardando produto)
+### 5. Fechamento de período — como o mês "fecha"? (Aprovado · Opção C)
 
 O rateio divide o **pool** do mês (ex: R$ 1.100 de graxa, disco e arame) entre os veículos, olhando os dados **daquele mês**. A pergunta:
 
@@ -240,7 +240,7 @@ Três sinais garantem a confiança do gestor:
 
 C **reaproveita todo o motor de cálculo** do rateio (que é construído de qualquer forma — é a base). O incremental é moderado: **1 tabela de período/snapshot** + os use cases de **fechar/reprocessar** + a **UI de status**. O **detector de divergência** (sinal 3) é opcional e fica para **fase 2** — o admin pode reprocessar manualmente sem ele.
 
-**O que produto precisa decidir:** confirmar o modelo híbrido (C) como desenhado. Ele define o escopo das tasks #17 (motor), #18 (exibição com status) e da nova task de **fechamento de período**.
+**Decisão (produto, 28/07/2026):** adotado o **modelo híbrido (Opção C)**. Escopo distribuído nas tasks #17 (motor), #21 (fechamento de período + snapshot + reprocessar), #18 (exibição com selo de status) e #22 (detector de divergência — fase 2).
 
 ---
 
@@ -376,8 +376,8 @@ Construir o rateio antes da camada base seria construir sobre o seed aleatório.
 | Classificação de material | Campo próprio `costAllocation` na categoria (Opção B, ADR-1) | **Aprovado** (26/07/2026) |
 | Acúmulo | Pool por período, configurável para rateio intra-OS (ADR-2) | **Aprovado** (26/07/2026) |
 | Base de rateio | Custo direto de manutenção, configurável (ADR-3) | **Aprovado** (26/07/2026) |
-| Visibilidade | Sempre desdobrado (direto + rateio) | Aguardando produto |
-| Sequenciamento | Materializar custo real + rateio no mesmo trabalho (ADR-4) | Aguardando produto |
-| Período/fechamento | Modelo híbrido (Opção C): mês aberto recalcula ao vivo, mês fechado vira snapshot oficial, com reprocessar. Detector de divergência = fase 2. Ver **Seção 5 (Decisões)** | **Recomendado: C** — aguardando produto |
+| Visibilidade | Sempre desdobrado (direto + rateio) | **Aprovado** (28/07/2026) |
+| Sequenciamento | Materializar custo real + rateio no mesmo trabalho (ADR-4) | **Aprovado** (28/07/2026) |
+| Período/fechamento | Modelo híbrido (Opção C): mês aberto recalcula ao vivo, mês fechado vira snapshot oficial, com reprocessar. Detector de divergência = fase 2. Ver **Seção 5 (Decisões)** | **Aprovado** (28/07/2026) |
 
-_Proposta em discussão. Nenhuma implementação antes da aprovação de todas as decisões acima._
+_Proposta **aprovada** (28/07/2026). Implementação sequenciada: Custo real (#8 → #9/#10 → #15), depois Rateio (#16 → #17 → #21 → #18/#19 → #22)._
