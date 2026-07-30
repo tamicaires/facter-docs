@@ -1,0 +1,146 @@
+---
+title: Convenção de Custo por Unidade (Estoque × Consumo)
+sidebar_position: 9
+tags: [truck, proposta, pecas, custo, unidade, estoque, consumo]
+---
+
+import { ProposalHeader } from '@site/src/components/ProposalHeader';
+
+# Convenção de Custo por Unidade (Estoque × Consumo)
+
+<ProposalHeader status="em-discussao" date="2026-07-30" />
+
+---
+
+## Problema
+
+Uma peça pode ser **estocada em uma unidade e consumida em outra** — o sistema já suporta isso (balde no estoque, litro no consumo, com um fator de conversão). Mas existe **um único campo de custo** (`costPrice`), e hoje ele é aplicado a **quantidades em unidades diferentes** sem passar pelo fator de conversão. O resultado é uma inconsistência silenciosa:
+
+| Onde | Fórmula usada hoje | Unidade da quantidade | Unidade que o `costPrice` assume |
+|------|--------------------|-----------------------|----------------------------------|
+| Valor de estoque | `stockQuantity × costPrice` | Estoque (balde) | Por balde |
+| Custo de consumo (analytics, custo real, rateio) | `approvedQuantity × costPrice` | Consumo (litro) | Por litro |
+
+As duas **não podem estar certas ao mesmo tempo** quando o fator de conversão é diferente de 1. Se `costPrice` é o custo do balde, o custo de consumo está **superfaturado pelo fator** (ex.: 20×). Se `costPrice` é o custo do litro, é o valor de estoque que está errado.
+
+:::warning Não é só uma feature nova — é a correção de um cálculo já no ar
+Peças com fator de conversão diferente de 1 já estão sendo custeadas de forma inconsistente nos indicadores de peças e no rateio de material compartilhado. Definir a convenção **conserta** esses números.
+:::
+
+---
+
+## Contexto do nosso sistema
+
+O modelo de peça já tem as três peças certas:
+
+- `stockUnit` — unidade de **estoque** (ex.: balde)
+- `consumptionUnit` — unidade de **consumo** (ex.: litro)
+- `conversionFactor` — quantos consumos cabem num estoque (ex.: `20` → 1 balde = 20 L)
+
+E na solicitação de peça:
+
+- `quantity` / `approvedQuantity` estão em **unidade de consumo** (litros)
+- `stockImpact = quantity / conversionFactor` está em **unidade de estoque** (baldes) — é por ele que o estoque é baixado
+
+Ou seja: falta apenas **decidir em qual unidade o `costPrice` vive** e aplicar o fator na outra ponta.
+
+:::note Nomenclatura invertida em relação ao mercado
+Na convenção de mercado (Limble, QuickBooks, NetSuite), a "unidade-base" do custo é a **menor** unidade — a de consumo. No nosso schema, o campo chamado `stockUnit` é a unidade **maior** (o "purchasable" do Limble) e o `consumptionUnit` é a menor. É só uma questão de nome; o importante é fixar a base do custo.
+:::
+
+---
+
+## Como o mercado faz
+
+O padrão dominante é **normalizar o custo para uma única unidade-base** (tipicamente a menor unidade, que costuma ser a de consumo) e converter todas as outras unidades por um fator. **Ninguém mantém dois preços de custo independentes** — isso é considerado fonte de erro (é exatamente o nosso bug).
+
+| Ferramenta / ERP | Como trata custo com unidade dupla |
+|------------------|-------------------------------------|
+| **Limble CMMS** | Separa "purchasable" (volume comprado) da "stock unit" (menor, consumida). O preço é **exibido por stock unit** (a menor): caixa de 24 a $96 → **$4 por unidade**. |
+| **QuickBooks** | "Cost, sales price e quantity são todos na **base unit**" (a primeira/menor do conjunto). Unidades de compra/venda são só exibição. |
+| **NetSuite** | Custos são **armazenados na base unit** (fator 1, a menor); trocar a unidade de compra **reconverte o custo** automaticamente. |
+| **SAP** | Base Unit + Price Unit (múltiplo da base) + fatores de conversão na tabela MARM; preço médio móvel recalcula na base. |
+| **Odoo** | UoM de estoque + Purchase UoM na mesma categoria, com fator; custo mantido em relação à unidade de referência. |
+| **Fleetio** | Um único "unit cost" por peça + método de valoração (custo médio, FIFO, LIFO). |
+
+Fontes ao final.
+
+---
+
+## Opções
+
+### Opção A — `costPrice` por unidade de **consumo** (litro) — padrão de mercado
+
+O custo vive na menor unidade. O custo de consumo (número mais usado) fica **direto**, e o valor de estoque passa a converter:
+
+```
+custoConsumo = approvedQuantity × costPrice            (já correto hoje ✔)
+valorEstoque = stockQuantity × conversionFactor × costPrice   (falta o × fator)
+```
+
+### Opção B — `costPrice` por unidade de **estoque** (balde)
+
+O custo vive na unidade grande. O valor de estoque fica direto, e o custo de consumo passa a usar o `stockImpact` (que já calculamos):
+
+```
+valorEstoque = stockQuantity × costPrice               (já correto hoje ✔)
+custoConsumo = stockImpact × costPrice                 (= approvedQuantity / conversionFactor × costPrice)
+```
+
+### Opção C — dois custos independentes (compra e consumo) — **rejeitada**
+
+Praticamente ninguém usa como fonte de verdade: os dois divergem no primeiro reajuste de preço. É o nosso bug atual, promovido a "feature". Só faz sentido como **exibição derivada** de uma única base.
+
+---
+
+## Tradeoffs
+
+| Opção | Precisão | Esforço de cadastro | Risco de erro | Alinhamento com mercado |
+|-------|----------|---------------------|---------------|--------------------------|
+| **A — custo por consumo** | Alta; custo por OS exato e direto | Baixo (1 custo + 1 fator) | Baixo (fonte única; fórmula de consumo já certa) | **Alto** (QuickBooks, NetSuite, SAP, Odoo, Limble) |
+| **B — custo por estoque** | Alta se o fator for aplicado no consumo | Baixo (1 custo + 1 fator) | Médio (fácil esquecer de dividir pelo fator) | Médio (válido, mas contraria "base = menor unidade") |
+| **C — dois custos** | Ilusória | Alto (sincronizar 2 preços) | **Alto** (divergem sempre) | Nenhum |
+
+---
+
+## Recomendação
+
+**Opção A** — definir `costPrice` como custo por **unidade de consumo**. Motivos:
+
+1. É a convenção de mercado (custo na menor unidade/base).
+2. O custo de consumo — o número mais usado (custo da OS, rateio, indicadores) — fica **direto e sem divisão**; a fórmula que já temos passa a estar correta.
+3. Exige só uma correção pontual e barata: adicionar `× conversionFactor` no cálculo do **valor de estoque**.
+
+Recomendações de implementação para não reintroduzir o bug:
+
+- **Uma única função de custo** (ex.: `custoNaUnidadeDeConsumo(quantidade, unidade)`) usada por estoque **e** consumo — nunca duas fórmulas soltas.
+- **Comentário no domínio** deixando explícito: "`costPrice` = custo por `consumptionUnit`".
+- Se um dia a compra ocorrer numa **terceira** unidade (tambor de 200 L), basta o fator compra→consumo e recalcular `costPrice` no recebimento (padrão NetSuite/SAP/Odoo).
+- **Média móvel** (opcional, futuro) para atualizar `costPrice` a cada compra, sempre na unidade de consumo.
+
+:::info Se produto preferir raciocinar "preço do balde"
+Aí a Opção B é legítima e até elegante (reaproveita o `stockImpact` que já calculamos). O trade-off é contrariar a convenção de mercado e deixar o número mais consultado (custo da OS) com uma divisão. A escolha é essencialmente **como vocês pensam o preço ao cadastrar a peça**.
+:::
+
+---
+
+## Decisão pendente (produto)
+
+> **Quando vocês cadastram o custo de uma peça, estão pensando no preço da unidade de estoque (o balde) ou da unidade de consumo (o litro)?**
+>
+> - "Penso no litro" → **Opção A** (recomendada): corrigimos o valor de estoque.
+> - "Penso no balde" → **Opção B**: corrigimos o custo de consumo.
+>
+> Em ambos os casos o resultado é o mesmo objetivo: **um único custo, aplicado de forma consistente**, e o fim do superfaturamento em peças com conversão.
+
+---
+
+## Referências
+
+- Limble — [How to Use Unit of Measure](https://help.limblecmms.com/en/articles/9943894-how-to-use-unit-of-measure)
+- QuickBooks — [Single/multiple units of measure](https://quickbooks.intuit.com/learn-support/en-us/help-article/product-preferences/use-single-multiple-units-measure-items/L5eHnWuOR_US_en_US)
+- NetSuite — [Setting Up Units of Measure](https://docs.oracle.com/en/cloud/saas/netsuite/ns-online-help/section_N2212143.html)
+- SAP — [Units of Measure in Purchase Orders](https://help.sap.com/docs/SAP_S4HANA_ON-PREMISE/af9ef57f504840d2b81be8667206d485/af7eb65334e6b54ce10000000a174cb4.html)
+- Odoo — [Units of measure](https://www.odoo.com/documentation/18.0/applications/inventory_and_mrp/inventory/product_management/configure/uom.html)
+- Fleetio — [Parts Overview](https://help.fleetio.com/en_US/parts-inventory/parts-overview) · [FIFO/LIFO valuation](https://help.fleetio.com/en_US/advanced-inventory-valuation-fifo-or-lifo-method)
+- AccountingTools — [Weighted average costing](https://www.accountingtools.com/articles/weighted-average-method-weighted-average-costing)

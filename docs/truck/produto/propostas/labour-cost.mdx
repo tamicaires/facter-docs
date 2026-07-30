@@ -1,0 +1,108 @@
+---
+title: Custeio de Mão de Obra na OS
+sidebar_position: 10
+tags: [truck, proposta, mao-de-obra, custo, os, colaborador, cargo]
+---
+
+import { ProposalHeader } from '@site/src/components/ProposalHeader';
+
+# Custeio de Mão de Obra na OS
+
+<ProposalHeader status="em-discussao" date="2026-07-30" />
+
+---
+
+## Problema
+
+O custo de mão de obra (MO) de uma ordem de serviço hoje é um **valor de seed** (fixo, não real). Para virar custo real, `custo de MO = Σ(horas reais × valor/hora)`. Já temos as **horas reais**; falta definir **de onde vem o valor/hora**.
+
+---
+
+## Contexto do nosso sistema
+
+- **Horas reais já existem:** `ServiceExecutionLog.actualDurationHours` dá a duração real **por colaborador, por execução de serviço**, ligada a `workOrderId`, `employeeId` e `serviceId`. Há ainda registro de **pausa** nas transições de estado. Ou seja, dá para custear MO **sem criar apontamento novo**.
+- **Cargo por colaborador:** cada colaborador tem cargo (`job.jobTitle`).
+- **Frota própria:** interessa **custo** (o que gastamos), não preço de venda (billing) — não faturamos MO para terceiros.
+
+:::tip O que falta é só o valor/hora
+A dimensão "horas" está resolvida. Esta proposta é só sobre **a origem e a forma do valor/hora**.
+:::
+
+---
+
+## Como o mercado faz
+
+| Ferramenta | Origem do valor/hora |
+|------------|----------------------|
+| **UpKeep** | Rate **por usuário** (admin define); aplicado **automático** quando o técnico usa o timer. Explicitamente **não** por equipe. Só admin vê. |
+| **Fiix** | Rate **por usuário** (Settings → Users → Hourly Rate); custo = horas × rate do usuário. |
+| **Fleetio** | Rate **na linha de labor** (técnico + horas + rate), editável; custo + **markup** para gerar valor faturado. |
+| **Samsara** | Horas + rate por task; **rate/custo só visível para admin** (técnico lança hora, não vê custo). |
+| **MaintainX** | Módulos de Time e Cost; rate adicionado/editado **na OS**; relatório Time vs Cost. |
+| **Limble** | **Labor Categories** com rate configurável em 3 modos: rate fixo da categoria, **usar o salário do usuário**, ou categoria de hora extra com multiplicador. |
+
+**Distinção crucial — custo × billing:** "the labor rate is **not** the same as the mechanic's hourly wage". Existe o **cost rate** (o que a empresa gasta) e o **billing/shop rate** (o que se cobra do cliente, com lucro). Frota própria usa **cost rate**.
+
+**Custo carregado (loaded rate):** o custo real por hora não é só o salário — inclui encargos, benefícios e overhead, divididos pelas **horas produtivas** (não pelas horas pagas). Na prática, o rate carregado fica **20–40% acima do salário/hora**. Nas ferramentas isso aparece como o próprio rate já carregado + markup opcional.
+
+---
+
+## Opções (origem do valor/hora)
+
+| Modelo | Como funciona |
+|--------|----------------|
+| **Por colaborador** | Cada colaborador tem um valor/hora no cadastro. Mais preciso; expõe salário. |
+| **Por cargo/função** | Rate atrelado ao cargo (mecânico, mecânico sênior, ajudante). Menos cadastro; preserva privacidade. |
+| **Taxa única da oficina (shop rate)** | Um rate padrão para toda a oficina. Simples; some a variação por cargo. |
+| **Por tipo de serviço** | Rate varia pelo serviço (diagnóstico vs troca de óleo). Sobreposto aos anteriores; mais para pricing. |
+
+---
+
+## Tradeoffs
+
+| Modelo | Precisão | Esforço de cadastro | Privacidade salarial | Relatórios |
+|--------|----------|---------------------|----------------------|------------|
+| **Por colaborador** | Alta | Alto (N rates, atualizar a cada reajuste) | **Baixa** — custo por OS quase revela salário (por isso UpKeep/Samsara gateiam a admin) | Ótimo custo real, cuidado com exposição |
+| **Por cargo** | Média-alta (bom proxy) | Baixo (poucos rates, atualização em lote) | **Alta** (rate é do cargo) | Bom para benchmark por categoria |
+| **Shop rate único** | Baixa | Mínimo | Alta | Simples, mas esconde onde o custo está |
+| **Por tipo de serviço** | Alta para pricing | Médio | Alta | Ótimo para precificar, não custeia a pessoa |
+
+---
+
+## Recomendação
+
+**Valor/hora por CARGO como base, com override opcional por colaborador.** É o que melhor equilibra precisão × manutenção de cadastro × privacidade (modelo Limble de categoria por função), e o cargo já existe no domínio.
+
+**Onde armazenar:**
+
+- **Primário — no cargo:** um campo de valor/hora por cargo (ex.: `hourlyLaborRate`, escopado por empresa). Resolve a maioria dos casos com pouquíssimo cadastro.
+- **Override opcional — no colaborador:** campo de valor/hora no colaborador; quando preenchido, prevalece sobre o do cargo. Cobre o técnico fora da curva sem forçar rate individual para todos.
+- **Resolução no cálculo:** `colaborador.hourlyLaborRate ?? cargo.hourlyLaborRate`.
+- **Snapshot na linha da OS:** congelar o rate aplicado no momento do lançamento, para que reajustes futuros não reescrevam o custo de OS já fechadas (é o que o mercado faz ao gravar o rate na work order). Casa com o nosso fechamento de competência.
+- **RBAC:** gatear a visualização de valor/hora e de custo de MO por permissão de custo (padrão Samsara/UpKeep), coerente com o multi-tenant e a cadeia de guards.
+
+**Custo carregado — sim, mas pragmático:** armazenar diretamente um rate **já carregado** (salário + encargos), em vez de modelar encargos dinamicamente. Documentar que o rate é carregado (não salário bruto) para não subestimar 20–40%. Expor fator de burden e horas produtivas é over-engineering para agora.
+
+**O que NÃO fazer:** billing rate / markup (só se um dia faturarmos terceiros); shop rate único (perde a variação por cargo que já conseguimos de graça).
+
+---
+
+## Decisão pendente (produto)
+
+> 1. **Valor/hora por cargo (recomendado) ou por colaborador?** (a recomendação é por cargo com override opcional por colaborador)
+> 2. **O rate cadastrado será o custo já carregado** (salário + encargos)? (recomendado sim)
+>
+> Definido isso, a implementação é análoga à materialização de custo de peças (evento que grava `labour_cost` na OS a partir de `actualDurationHours × valor/hora`), com o rate snapshotado na linha.
+
+---
+
+## Referências
+
+- Fleetio — [Work Order Line Items](https://help.fleetio.com/ordres-de-travail/work-order-line-items-service-tasks-labor-parts) · [Maintenance Settings / Markup](https://help.fleetio.com/manage-account-settings-permissions/maintenance-settings)
+- Samsara — [Work Orders for Maintenance Management](https://kb.samsara.com/hc/en-us/articles/32504504318989-Work-Orders-for-Maintenance-Management)
+- UpKeep — [Technician Hourly Rates](https://upkeep.com/blog/technician-hourly-rates/) · [Calculate Time & Cost](https://help.onupkeep.com/en/articles/4925963-how-to-calculate-time-cost-to-a-work-order)
+- Fiix — [Track costs for labor and parts](https://helpdesk.fiixsoftware.com/hc/en-us/articles/15488104858516-Track-costs-for-labor-and-parts-on-a-work-order)
+- MaintainX — [Adding Hourly Rate](https://help.getmaintainx.com/en/articles/4950482-adding-hourly-rate-to-work-order) · [Time vs Cost Report](https://help.getmaintainx.com/time-vs-cost-report)
+- Limble — [Labor Categories and Billable Hours](https://help.limblecmms.com/en/articles/3677087-creating-labor-categories-and-billable-hours)
+- Loaded/burden rate — [Calculator Academy](https://calculator.academy/loaded-labor-rate-calculator/) · [SmartBarrel](https://smartbarrel.io/blog/fully-burdened-labor-rate/) · [QuickBooks](https://quickbooks.intuit.com/time-tracking/resources/determine-the-true-cost-of-an-employee/)
+- Shop/effective rate — [Fullbay (diesel)](https://www.fullbay.com/blog/diesel-repair-shop-labor-rates/) · [RepairMath](https://repairmath.com/labor-rates/)
