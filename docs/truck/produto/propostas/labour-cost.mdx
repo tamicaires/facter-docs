@@ -87,12 +87,43 @@ A dimensão "horas" está resolvida. Esta proposta é só sobre **a origem e a f
 
 ---
 
+## Dados & modelagem (backend)
+
+O tempo já existe, mas há uma **semântica que afeta diretamente o custo** — descoberta na
+análise do `ServiceExecution`:
+
+:::warning `actualDurationHours` é BRUTO (inclui pausas)
+`ServiceExecutionLog.actualDurationHours` hoje é calculado como `endAt − startAt` (em dois
+lugares: `change-assigments-status.ts` e `service-execution-logger.listener.ts`). Ou seja,
+**inclui almoço, espera de peça e fim de turno**. Usar esse número no custo de MO
+**superfatura** (ex.: 9h de relógio para 7h de trabalho → +28%).
+:::
+
+- O **tempo líquido (produtivo)** é derivável das transições
+  (`ServiceExecutionEmployeeTransition.previousStateDurationMinutes` + `pauseReason`): somar
+  os intervalos em `IN_PROGRESS`, descontar `PAUSED`. **O custo deve usar o líquido.**
+- Já existe `ServiceExecutionLog.cost (Float?)` reservado — é onde o custo snapshot deve ser
+  gravado (`horas líquidas × valor/hora`). Não é preciso criar estrutura nova.
+
+**Dívida técnica adjacente** (registrar; não bloqueia o custo):
+
+1. Duas tabelas de transição quase idênticas (`ServiceExecutionTransition` no nível execução
+   + `ServiceExecutionEmployeeTransition` no nível colaborador) — o status da execução parece
+   derivável do dos colaboradores.
+2. `status` duplicado (na execução e no colaborador) — definir a fonte da verdade.
+3. Cálculo de duração duplicado em 2 use cases (ambos brutos) — unificar numa função só.
+4. Colunas legadas `service_assignment_id` (do rename `ServiceAssignment → ServiceExecution`).
+
+---
+
 ## Decisão pendente (produto)
 
 > 1. **Valor/hora por cargo (recomendado) ou por colaborador?** (a recomendação é por cargo com override opcional por colaborador)
 > 2. **O rate cadastrado será o custo já carregado** (salário + encargos)? (recomendado sim)
 >
-> Definido isso, a implementação é análoga à materialização de custo de peças (evento que grava `labour_cost` na OS a partir de `actualDurationHours × valor/hora`), com o rate snapshotado na linha.
+> Definido isso, a implementação é análoga à materialização de custo de peças: um evento grava
+> `labour_cost` na OS a partir de **horas líquidas × valor/hora** (ver *Dados & modelagem*),
+> com o rate snapshotado na linha.
 
 ---
 
