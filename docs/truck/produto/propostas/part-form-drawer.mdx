@@ -1,0 +1,270 @@
+---
+title: Formulario de Peca - Drawer
+sidebar_position: 7
+tags: [truck, proposta, ux, pecas, formulario, drawer]
+---
+
+import { ProposalHeader } from '@site/src/components/ProposalHeader';
+import PartFormDrawerPrototype from '@site/src/components/PartFormDrawerPrototype';
+
+# Formulario de Cadastro de Peca — Drawer
+
+<ProposalHeader status="em-discussao" date="2026-07-19" />
+
+---
+
+## Problema
+
+O formulario de cadastro de peca possui **14 campos** em um unico dialog sem divisao visual. O usuario ve uma parede de inputs, o que causa:
+
+- **Sobrecarga cognitiva** — muitos campos visiveis ao mesmo tempo
+- **Scroll obrigatorio** — o formulario nao cabe na viewport
+- **Secao de UoM quebrada** — fator de conversao ocupa linha inteira desnecessariamente
+- **Falta de hierarquia** — todos os campos parecem ter a mesma importancia
+
+### Campos atuais (14)
+
+| Grupo | Campos |
+|-------|--------|
+| Identificacao | Nome, N Serie, N Peca, Marca, Modelo, Fornecedor |
+| Financeiro/Estoque | Preco Custo, Preco Venda, Qtd Estoque, Localizacao, Status, Categoria |
+| Unidade de Medida | Un. Estoque, Un. Consumo, Fator de Conversao |
+
+---
+
+## Decisao Estrutural: Dialog → Drawer
+
+Todas as propostas usam **Drawer lateral** (Sheet) em vez de Dialog. Motivos:
+
+| Aspecto | Dialog | Drawer |
+|---------|--------|--------|
+| Largura | ~600px fixo | Flexivel, pode ser largo |
+| Contexto | Bloqueia a tela | Usuario ve a pagina atras |
+| Espaco | Limitado | Espaço vertical total |
+| UoM Preview | Nao cabe | Cabe painel lateral |
+
+---
+
+## Proposta A: Drawer + Stepper ⭐
+
+**Recomendada.** Divide os campos em 3 etapas progressivas.
+
+### Fluxo
+
+```
+Step 1: Identificacao    →    Step 2: Estoque    →    Step 3: Unidade de Medida
+(6 campos)                    (5 campos)               (3 campos, opcional)
+```
+
+### Wireframe
+
+```
+┌─────────────────────────────────────────────┐
+│  📦 Cadastrar Peca              ✕           │
+├─────────────────────────────────────────────┤
+│  ● Identificacao ──── ○ Estoque ──── ○ UoM  │
+├─────────────────────────────────────────────┤
+│                                             │
+│  Nome da Peca *                             │
+│  ┌─────────────────────────────────────┐    │
+│  │ ex: Lona de Freio                   │    │
+│  └─────────────────────────────────────┘    │
+│                                             │
+│  N Serie *              N Peca *            │
+│  ┌────────────────┐    ┌────────────────┐   │
+│  │ ex: 123456     │    │ ex: 789012     │   │
+│  └────────────────┘    └────────────────┘   │
+│                                             │
+│  Marca *                Modelo *            │
+│  ┌────────────────┐    ┌────────────────┐   │
+│  │ ex: Fras-le    │    │ ex: FX-200     │   │
+│  └────────────────┘    └────────────────┘   │
+│                                             │
+│  Fornecedor             Categoria *         │
+│  ┌────────────────┐    ┌────────────────┐   │
+│  │ ex: ABC        │    │ Selecione    ▼ │   │
+│  └────────────────┘    └────────────────┘   │
+│                                             │
+│                          ┌─────────────┐    │
+│                          │ Continuar → │    │
+│                          └─────────────┘    │
+└─────────────────────────────────────────────┘
+```
+
+### Step 3 — UoM (Opcional)
+
+```
+┌─────────────────────────────────────────────┐
+│  ✓ Identificacao ──── ✓ Estoque ──── ● UoM  │
+├─────────────────────────────────────────────┤
+│                                             │
+│  ┌─ Configurar Conversao ─────────────────┐ │
+│  │                                         │ │
+│  │  Un. Estoque    Un. Consumo    Fator *  │ │
+│  │  ┌──────────┐  ┌──────────┐  ┌──────┐  │ │
+│  │  │ Rolo  ▼  │  │ Metro ▼  │  │ 100  │  │ │
+│  │  └──────────┘  └──────────┘  └──────┘  │ │
+│  │                                         │ │
+│  │  → 1 rolo = 100 metros                 │ │
+│  └─────────────────────────────────────────┘ │
+│                                             │
+│  Opcional. Se nao configurar, a peca        │
+│  usara "Unidade (un)" como padrao.          │
+│                                             │
+│  ┌──────────┐        ┌─────────────────┐    │
+│  │ ← Voltar │        │ Cadastrar Peca  │    │
+│  └──────────┘        └─────────────────┘    │
+└─────────────────────────────────────────────┘
+```
+
+### Analise
+
+| Metrica | Valor |
+|---------|-------|
+| Campos por tela | ~5-6 |
+| Scroll | Zero |
+| Cliques para concluir | 3 |
+| Esforco de implementacao | Medio (~2h) |
+
+**Pros:**
+- Zero scroll, foco total por etapa
+- UoM como step opcional (skip facil)
+- Stepper da senso de progresso
+- Navegacao livre entre steps
+
+**Contras:**
+- Mais cliques para completar
+- Nao ve todos os campos de uma vez
+
+---
+
+## Proposta B: Drawer + Accordion
+
+Todas as secoes visiveis como headers colapsaveis. Identificacao aberta por padrao.
+
+### Wireframe
+
+```
+┌─────────────────────────────────────────────┐
+│  📦 Cadastrar Peca              ✕           │
+├─────────────────────────────────────────────┤
+│                                             │
+│  ┌─────────────────────────────────────┐    │
+│  │ 🏷 Identificacao        6 campos  ▼ │    │
+│  ├─────────────────────────────────────┤    │
+│  │  Nome, Serie, Peca, Marca...        │    │
+│  │  (campos expandidos)                │    │
+│  └─────────────────────────────────────┘    │
+│                                             │
+│  ┌─────────────────────────────────────┐    │
+│  │ 📊 Estoque & Financeiro  6 campos ▶ │    │
+│  └─────────────────────────────────────┘    │
+│                                             │
+│  ┌─────────────────────────────────────┐    │
+│  │ 📐 Unidade de Medida     Opcional ▶ │    │
+│  └─────────────────────────────────────┘    │
+│                                             │
+│  ┌─────────────────────────────────────┐    │
+│  │          Cadastrar Peca             │    │
+│  └─────────────────────────────────────┘    │
+└─────────────────────────────────────────────┘
+```
+
+### Analise
+
+| Metrica | Valor |
+|---------|-------|
+| Campos por tela | 6 (aberto) / 0 (fechado) |
+| Scroll | Minimo |
+| Cliques para concluir | 1-3 |
+| Esforco de implementacao | Baixo (~1.5h) |
+
+**Pros:**
+- Visao geral sempre disponivel
+- Pode abrir multiplas secoes ao mesmo tempo
+- Formulario parece menor do que e
+- UoM fechado por default com label "Opcional"
+
+**Contras:**
+- Padrao menos comum em drawers
+- Pode confundir se todas as secoes estao fechadas
+
+---
+
+## Proposta C: Drawer + Live Preview
+
+Drawer largo com painel lateral mostrando preview da peca em tempo real.
+
+### Wireframe
+
+```
+┌──────────────────────────────┬──────────────┐
+│  📦 Cadastrar Peca       ✕   │  PREVIEW     │
+├──────────────────────────────┤              │
+│                              │  Lona Freio  │
+│  · IDENTIFICACAO             │  LF-001      │
+│  Nome, Serie, Peca...        │              │
+│                              │  Marca Frasle│
+│  ─────────────               │  Cat.  Freios│
+│  · ESTOQUE                   │  Custo R$ 85 │
+│  Custo, Venda, Qtd...        │  Venda R$120 │
+│                              │              │
+│  ─────────────               │  ┌──────────┐│
+│  · UNIDADE DE MEDIDA         │  │ CONVERSAO ││
+│  Estoque  Consumo  Fator     │  │1 rl→100 m││
+│  [Rolo▼] [Metro▼] [100]     │  │           ││
+│                              │  │ 5rl=500m  ││
+│  ┌──────────────────────┐    │  │disponivel ││
+│  │    Cadastrar Peca    │    │  └──────────┘│
+│  └──────────────────────┘    │              │
+└──────────────────────────────┴──────────────┘
+```
+
+### Analise
+
+| Metrica | Valor |
+|---------|-------|
+| Campos por tela | Todos |
+| Scroll | Minimo |
+| Cliques para concluir | 1 |
+| Esforco de implementacao | Medio-alto (~3h) |
+
+**Pros:**
+- Feedback instantaneo do que esta criando
+- Conversao UoM visualizada em contexto real ("5 rl = 500 m")
+- Erros percebidos antes do submit
+- Experiencia diferenciada / premium
+
+**Contras:**
+- Drawer precisa ser mais largo (~860px)
+- Preview some em mobile (fallback para form simples)
+- Maior esforco de implementacao
+
+---
+
+## Prototipo Interativo
+
+Explore as 3 propostas de forma interativa abaixo:
+
+<PartFormDrawerPrototype />
+
+---
+
+## Comparativo
+
+| Criterio | A: Stepper ⭐ | B: Accordion | C: Live Preview |
+|----------|:---:|:---:|:---:|
+| Carga cognitiva | Baixa | Media | Media |
+| Scroll | Zero | Minimo | Minimo |
+| Velocidade (power user) | Media | Alta | Alta |
+| Discoverability UoM | Alta | Media | Alta |
+| Esforco dev | ~2h | ~1.5h | ~3h |
+| Mobile | Bom | Bom | Perde preview |
+
+---
+
+## Decisao
+
+**Status:** Em discussao
+
+Aguardando escolha entre as propostas. Recomendacao: **Proposta A (Stepper)** por equilibrar simplicidade, foco e discoverability da feature de UoM.
