@@ -1,0 +1,82 @@
+---
+title: Busca do Balcão
+sidebar_position: 2
+tags: [techcare, proposta, busca, balcao, ux]
+---
+
+import { ProposalHeader } from '@site/src/components/ProposalHeader';
+import CounterSearchMockup from '@site/src/components/CounterSearchMockup';
+
+# Busca do Balcão
+
+<ProposalHeader status="aprovado" date="2026-09-17" />
+
+> O gesto mais repetido do dia. O cliente chega, fala um nome, um telefone ou "aquele notebook que deixei semana passada" — e hoje a pessoa do balcão precisa decidir **em qual lista procurar** antes de poder procurar.
+
+---
+
+## Problema
+
+Existem sete buscas no produto, uma por tela: clientes, ordens, aparelhos, peças, orçamentos, usuários e serviços. Todas funcionam. Nenhuma responde à pergunta do balcão, porque a pergunta não vem classificada por entidade.
+
+O cliente não diz "quero consultar a entidade ordem de serviço". Ele diz **"é a Neusa"**, ou estende o comprovante amassado, ou fala o número que anotou no WhatsApp.
+
+Três atritos concretos:
+
+1. **Escolher a tela antes de buscar.** Nome pode ser cliente ou pode estar dentro de uma ordem. Quem atende erra a aposta e busca duas vezes.
+2. **A forma exata.** Telefone com máscara não acha telefone salvo sem máscara. "Arco-Íris" com acento não acha "arco-iris".
+3. **O número da OS por extenso.** Ninguém decora `OS-202609-00014`; a pessoa lembra do 14.
+
+---
+
+## Protótipo
+
+<CounterSearchMockup />
+
+---
+
+## Decisões da proposta
+
+**Ordens primeiro.** Quem chega ao balcão quase sempre pergunta sobre um aparelho que já deixou. Cliente e aparelho existem para quando a busca é sobre cadastro, não sobre atendimento.
+
+**A normalização é metade do valor.** Telefone vira só dígitos, acento é removido, o prefixo `OS-` é opcional e o número casa pelo final. Uma busca que exige a forma exata falha justamente quando há pressa.
+
+**Nada encontrado vira cadastro.** Quem não está no sistema costuma ser cliente novo, não erro de digitação — a saída natural do vazio é "cadastrar", não "tente de novo".
+
+**Atalho de teclado.** Quem atende passa o dia nessa caixa.
+
+---
+
+## O que já existe
+
+As sete buscas por entidade já aceitam termo livre no servidor, com os campos certos — inclusive a de ordens, que já procura em número, problema relatado, diagnóstico, nome do cliente e número de série.
+
+Falta um endpoint que pergunte às três de uma vez e devolva agrupado, mais a caixa única no web.
+
+---
+
+## Ressalva de desempenho
+
+As buscas usam `ILIKE '%termo%'`, que **não aproveita nenhum índice existente** — hoje é varredura sequencial dentro da empresa. Com o volume de uma oficina de bairro isso é irrelevante e não deve ser otimizado agora.
+
+Quando incomodar, a saída é `pg_trgm` com índice GIN, o que exige uma migration SQL escrita à mão. Fica registrado para não virar surpresa.
+
+---
+
+## Fora de escopo
+
+- Busca por peça e por orçamento nesta caixa. São perguntas de quem está na tela de estoque ou de orçamento, não de quem está no balcão.
+- Correção de digitação e busca fonética.
+
+---
+
+## Custo estimado
+
+**M · 2 a 3 dias.** Endpoint que consulta as três entidades e agrupa, mais a caixa com atalho e navegação por resultado.
+
+---
+
+## Documentos relacionados
+
+- [Pendências e "O Dia"](../regras-negocio/pendencias)
+- [Abertura e triagem](../fluxos/abertura-e-triagem)

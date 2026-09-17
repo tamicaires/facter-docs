@@ -1,0 +1,70 @@
+---
+title: Conciliação do Dinheiro
+sidebar_position: 3
+tags: [techcare, proposta, pagamento, financeiro, conciliacao]
+---
+
+import { ProposalHeader } from '@site/src/components/ProposalHeader';
+import ReconciliationMockup from '@site/src/components/ReconciliationMockup';
+
+# Conciliação do Dinheiro
+
+<ProposalHeader status="aprovado" date="2026-09-17" />
+
+> Dá para entregar o aparelho sem receber, e o sistema não reclama. Depois não existe pergunta que responda **quem está devendo** — o saldo some junto com a ordem fechada.
+
+---
+
+## Problema
+
+O TechCare guarda o orçamento aprovado e guarda os pagamentos. O que ele não faz é **comparar os dois**, e por isso não existe a noção de valor em aberto.
+
+| Situação | O que o sistema faz hoje |
+|---|---|
+| Entregar sem nenhum pagamento | Aceita, sem aviso |
+| Receber menos que o aprovado | Aceita, sem aviso |
+| Receber mais que o aprovado | Aceita, sem aviso |
+| Perguntar quanto a oficina tem a receber | **Não tem resposta** |
+
+A conta de "falta receber" até existe, mas mora **dentro da tela de uma ordem, calculada no navegador**. O endpoint de total do servidor só devolve a soma do que foi pago; ele não conhece o orçamento.
+
+Isso significa que a pergunta mais direta do negócio — *quanto está na rua?* — só pode ser respondida abrindo uma OS de cada vez.
+
+---
+
+## Protótipo
+
+<ReconciliationMockup />
+
+---
+
+## Decisões da proposta
+
+**A conta sobe para o servidor.** Aprovado, pago, saldo e situação passam a ser calculados uma vez, onde os dados estão. Hoje cada tela que quisesse esse número teria que refazer a conta, e já houve divergência exatamente assim entre duas telas.
+
+**Serviço de balcão não inventa dívida.** Sem orçamento aprovado não há valor combinado, então não há saldo — o painel mostra o que entrou e para aí. O mesmo princípio da garantia: não prometer o que ninguém combinou.
+
+**Entregue com saldo é o alarme.** É o caso que não dói na hora e dói no fim do mês. Enquanto o aparelho está na oficina, o saldo é só informação.
+
+**A lista de devedores é o coração da proposta.** O bloco por ordem é melhoria; a visão agregada é capacidade nova. É ela que transforma um dado que existe em dinheiro recuperado.
+
+---
+
+## Fora de escopo
+
+- Cobrança automática. O sistema não manda mensagem nenhuma — o botão "Cobrar" abre a conversa, quem cobra é a pessoa.
+- Parcelamento com vencimentos, juros, nota fiscal, conciliação bancária.
+- Múltiplos orçamentos aprovados na mesma ordem: hoje vale o mais recente, e vale registrar que é uma escolha.
+
+---
+
+## Custo estimado
+
+**M · 2 a 3 dias.** Nenhuma migration: tudo é derivado do orçamento aprovado e dos pagamentos. O grosso é o use-case de conciliação e a listagem agregada.
+
+---
+
+## Documentos relacionados
+
+- [Estoque e pagamento](../regras-negocio/estoque-e-pagamento)
+- [Execução e entrega](../fluxos/execucao-e-entrega)

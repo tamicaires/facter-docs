@@ -89,6 +89,71 @@ Campo novo precisa ser adicionado em **três lugares** — entidade, repositóri
 
 ---
 
+## Alto · O design system não chega no app por link
+
+O `pnpm-workspace.yaml` do `web` declara `@facter/ds-core` como link para a pasta irmã `facter-design-system`. **Esse link não funciona.** Quando o `pnpm install` o materializa como atalho, o Next deixa de resolver o pacote e o app não sobe — `Module not found: Can't resolve '@facter/ds-core'`.
+
+O que existe hoje em `node_modules/@facter/ds-core` é uma **cópia** do pacote, não um atalho. Não é descuido: é contorno.
+
+Consequências:
+
+- **Mudança no design system não chega sozinha.** É preciso `pnpm build` em `packages/core` e copiar o `dist` para dentro do `node_modules` do web, à mão. Entre 11/09 e 17/09 nenhuma alteração do DS chegou a este app.
+- **Nenhum CI builda o `web`** do jeito que está. É o obstáculo direto para subir homologação.
+
+Saídas possíveis: publicar o pacote no registro e versionar a dependência; transformar os dois repositórios num workspace de verdade; ou configurar o Next para resolver fora da raiz. A primeira é a que destrava CI.
+
+---
+
+## Alto · O cache não sabe de que empresa é
+
+Nenhuma chave de consulta do React Query carrega o `companyId`. `['service-orders']` é literalmente a mesma chave nas quatro empresas, e o cache de uma vale para a outra.
+
+Apareceu como bug na troca de empresa: a tela continuava mostrando ordens, valores e clientes da empresa anterior sob o nome da nova. A correção aplicada descarta o cache inteiro ao trocar (`removeQueries`), que resolve o sintoma — as telas voltam para "carregando", que é a verdade.
+
+A causa continua: **duas empresas compartilham chave**. Enquanto for assim, qualquer caminho que reaproveite cache entre tenants mostra dado de quem não devia. O certo é o `companyId` entrar na chave de toda consulta, como já entra em todo `where` do servidor.
+
+---
+
+## Alto · A tela de perfil está quebrada
+
+`useUpdateProfile` chama `PATCH /users/me` e `userService.uploadAvatar` chama `/users/me/avatar`. **Nenhum dos dois existe na API** — as duas rotas estão declaradas em `web/src/config/api-routes.ts` e nunca foram implementadas. Salvar o perfil dá 404.
+
+No mesmo formulário, o botão "Alterar foto" não tem `onClick` — não faz nada, nem o 404.
+
+É a única tela do produto que falha em silêncio para o usuário final. Correção de horas, não de dias.
+
+---
+
+## Médio · O dashboard responde número errado
+
+Dois defeitos no `GetDashboardMetricsUseCase`, os dois de leitura:
+
+| Campo | O que devolve | O que deveria |
+|-------|---------------|---------------|
+| `pendingAmount` | **Sempre 0** — o `getSummary` filtra `status: PAID` antes de agrupar, então `byStatus.PENDING` nunca tem nada | O que está pendente de fato |
+| `completedToday` | `byStatus[COMPLETED]` — o **total histórico** de concluídas, sem filtro de data nenhum | As concluídas hoje |
+
+Há um terceiro, mais amplo: **`startDate`/`endDate` só chegam ao repositório de pagamentos.** As métricas de ordens, clientes e equipamentos ignoram o período por completo e devolvem sempre o total histórico, mesmo quando a chamada pede um intervalo.
+
+Nenhum desses campos tem consumidor hoje (ver abaixo), então o erro não está visível. Mas ele passa a valer no dia em que a tela de relatórios for ligada — e aí seria um número errado numa tela de números.
+
+---
+
+## Médio · Código morto
+
+| O que | Tamanho | Situação |
+|-------|---------|----------|
+| `features/dashboard`: `metric-card`, `payment-summary-card`, `recent-orders-card`, `status-bar-chart` | ~1.100 linhas | Zero consumidores |
+| `useDashboardMetrics` / `useDashboardSummary` | — | Nunca chamados |
+| `stats-card` | — | Só em `/demo-stats`, com dados fixos |
+| `features/service-order/components/service-order-form.tsx` | — | Nenhuma rota usa; a página `/service-orders/new` tem o seu próprio formulário |
+
+Não é desperdício puro: os componentes de gráfico são a metade adiantada da tela de relatórios, e vale mantê-los **se** essa tela estiver no plano. O que não dá é deixá-los sem marcação — quem lê o código hoje não distingue "pronto para ligar" de "esquecido".
+
+O `service-order-form.tsx` é caso diferente: é uma segunda versão do mesmo formulário, e nele o `PhotoUpload` está montado mas nunca entra no envio. Duplicata que confunde.
+
+---
+
 ## Baixo · Infraestrutura sem consumidor
 
 | O que | Situação |
