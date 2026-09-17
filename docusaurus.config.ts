@@ -30,6 +30,20 @@ const config: Config = {
     locales: ['pt-BR'],
   },
 
+  // Cor primaria por produto: marca o `<html>` antes da primeira pintura, para
+  // que abrir /docs/techcare direto pela URL nao pisque azul antes de virar
+  // verde. A navegacao client-side e tratada em src/clientModules/project-theme.
+  headTags: [
+    {
+      tagName: 'script',
+      attributes: {},
+      innerHTML:
+        "(function(){try{var m=/^\\/docs\\/([^/]+)/.exec(location.pathname);if(m){document.documentElement.setAttribute('data-project',m[1]);}}catch(e){}})();",
+    },
+  ],
+
+  clientModules: ['./src/clientModules/project-theme.ts'],
+
   presets: [
     [
       'classic',
@@ -99,6 +113,7 @@ const config: Config = {
           items: [
             {label: 'Truck', to: '/docs/truck/engenharia/arquitetura/visao-geral'},
             {label: 'Hub', to: '/docs/hub/engenharia/arquitetura/visao-geral'},
+            {label: 'TechCare', to: '/docs/techcare/produto/visao-geral'},
             {label: 'Design System', to: '/docs/design-system/visao-geral'},
           ],
         },

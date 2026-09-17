@@ -532,3 +532,57 @@
 .alert {
   border-radius: 0.5rem;
 }
+
+/* ═══════════════════════════════════════════════════════════════
+ * Cor primária por produto
+ *
+ * O `data-project` vem da URL (/docs/<produto>/...), posto no <html> pelo
+ * script de headTags e mantido em src/clientModules/project-theme.ts.
+ * Produto sem bloco aqui continua com o azul padrão do Truck.
+ * ═══════════════════════════════════════════════════════════════ */
+
+/* ── TechCare: verde (assistência técnica) ─────────── */
+[data-project='techcare'] {
+  --ifm-color-primary: hsl(142, 76%, 32%);
+  --ifm-color-primary-dark: hsl(142, 76%, 28%);
+  --ifm-color-primary-darker: hsl(142, 76%, 25%);
+  --ifm-color-primary-darkest: hsl(142, 76%, 20%);
+  --ifm-color-primary-light: hsl(142, 66%, 38%);
+  --ifm-color-primary-lighter: hsl(142, 60%, 44%);
+  --ifm-color-primary-lightest: hsl(142, 50%, 58%);
+  --docusaurus-highlighted-code-line-bg: hsla(142, 76%, 32%, 0.1);
+}
+
+[data-theme='dark'][data-project='techcare'] {
+  --ifm-color-primary: hsl(142, 62%, 45%);
+  --ifm-color-primary-dark: hsl(142, 62%, 39%);
+  --ifm-color-primary-darker: hsl(142, 62%, 35%);
+  --ifm-color-primary-darkest: hsl(142, 62%, 28%);
+  --ifm-color-primary-light: hsl(142, 58%, 52%);
+  --ifm-color-primary-lighter: hsl(142, 54%, 58%);
+  --ifm-color-primary-lightest: hsl(142, 46%, 68%);
+  --docusaurus-highlighted-code-line-bg: hsla(142, 62%, 45%, 0.12);
+}
+
+/* ── Logo acompanha a cor do produto ───────────────────────────
+ * O <img> do navbar não aceita recolorir o fill por CSS, então o próprio
+ * SVG vira máscara e a cor vem do fundo. Uma máscara serve para claro e
+ * escuro: a cor deixa de estar no arquivo.
+ */
+.navbar__brand .navbar__logo {
+  position: relative;
+}
+
+.navbar__brand .navbar__logo img {
+  opacity: 0;
+}
+
+.navbar__brand .navbar__logo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: var(--ifm-color-primary);
+  -webkit-mask: url('/img/logo.svg') center / contain no-repeat;
+  mask: url('/img/logo.svg') center / contain no-repeat;
+  transition: background-color 150ms ease;
+}
