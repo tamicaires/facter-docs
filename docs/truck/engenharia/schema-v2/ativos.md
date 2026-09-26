@@ -239,7 +239,7 @@ A oficina cadastra o que atende; quando existe concessão ou solicitação, os d
 
 AST-1, AST-2, AST-5 a AST-12, ECO-1, ECO-7.
 
-## Pontos para decidir
+## Decidido em 26/09/2026
 
-- `fleet_code` também na unidade tratora (cavalo 812) ou só nos conjuntos: a proposta mantém nos dois, porque a oficina chama ambos por número.
-- Tipos de conjunto do sistema cobrem os casos conhecidos; a organização pode criar os seus (ex.: hexatrem com dolly).
+- `fleet_code` na unidade tratora e nos conjuntos: a oficina chama os dois por número.
+- A organização pode criar tipos de conjunto próprios, além dos do sistema.

@@ -120,7 +120,7 @@ create table recurring_failures (              -- indicador 6, recalculado quand
 - **Resumo semanal por e-mail** lê destas tabelas.
 - **Ponto de vista:** consultas do dono de um ativo atendido por oficina terceira leem da visão compartilhada, com `billed_amount`; consultas da oficina, com custo interno.
 
-## Pontos para decidir
+## Decidido em 26/09/2026
 
-- Granularidade diária basta para os 13 indicadores; por hora só se aparecer um indicador de turno.
-- Janela de falhas recorrentes vem de `organizations` (padrão 90 dias ou 20 mil km), configurável.
+- **Granularidade diária** nas agregações; por hora só se aparecer um indicador de turno.
+- **Janela de falhas recorrentes** de 90 dias ou 20 mil km por padrão, configurável pela organização.

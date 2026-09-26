@@ -295,7 +295,7 @@ Regras: a integração sai pelo outbox para um worker com retentativa e idempot�
 
 PLT-1 a PLT-7, ECO-2 a ECO-5, WO-5 (via `sequences`).
 
-## Pontos para decidir
+## Decidido em 26/09/2026
 
-- `actors` por organização ou global: por organização simplifica o RLS e a projeção para o Hub, mas um usuário em 3 organizações vira 3 atores.
-- `price_tiers` em `jsonb` ou tabela própria: `jsonb` basta enquanto os planos forem poucos e mudarem por contrato.
+- `actors` por organização: simplifica o RLS, e a auditoria é sempre dentro de uma organização.
+- `price_tiers` em `jsonb`, enquanto os planos forem poucos e fechados por contrato.

@@ -251,7 +251,8 @@ O status inicial não vem do cliente (STK-5): o DTO de criação não tem o camp
 
 STK-1 a STK-13, PLT-5, AST-3, TIR-1, TIR-2.
 
-## Pontos para decidir
+## Decidido em 26/09/2026
 
-- **Método de custo:** a proposta usa **custo médio móvel por depósito**, que é o mais comum no Brasil e simples de auditar. Fecha a [proposta de convenção de custo por unidade](../../produto/propostas/part-cost-convention.mdx), que está em discussão.
-- **Transferência entre depósitos de organizações diferentes** (da Suzano para outra oficina parceira) é permitida só dentro do mesmo grupo ou com concessão explícita.
+- **Custo médio móvel por depósito.** Em qual unidade o custo é guardado (a de estoque, como balde, ou a de consumo, como litro) é outra decisão, da [proposta de convenção de custo por unidade](../../produto/propostas/part-cost-convention.mdx), e fica para antes da fase 2.
+- **Fornecedores** num cadastro por organização, compartilhado por peças, pneus, recapagem e serviços externos.
+- **Transferência entre depósitos de organizações diferentes** só dentro do mesmo grupo ou com concessão explícita.

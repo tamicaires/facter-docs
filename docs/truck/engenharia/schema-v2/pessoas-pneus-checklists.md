@@ -193,7 +193,7 @@ Não conformidade com `suggested_service_type_id` cria o serviço na OS com um t
 
 A foto de um item vai em `attachments.checklist_result_id` ([manutenção](./manutencao.md#serviços-externos-custos-e-fotos)). Item com `requires_photo` não fecha sem foto (CHK-2). A execução aponta a versão usada, e os itens daquela versão nunca mudam: o histórico mostra exatamente o que foi perguntado (CHK-1).
 
-## Pontos para decidir
+## Decidido em 26/09/2026
 
-- **Checklist sem OS** (inspeção de pátio, saída de viagem) é permitido? A proposta permite: a OS é criada só se houver não conformidade.
-- **Foto obrigatória por item** fica a critério do modelo; itens de segurança podem exigir foto por padrão.
+- **Checklist sem OS** é permitido (inspeção de pátio, saída de viagem); a OS nasce só se houver não conformidade.
+- **Foto obrigatória** é definida pelo modelo; itens de segurança exigem foto por padrão.

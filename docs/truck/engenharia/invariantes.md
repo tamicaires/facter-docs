@@ -9,7 +9,7 @@ tags: [invariantes, dominio, regras-negocio, v2, testes]
 Um invariante é uma regra que nunca pode estar violada no banco, em nenhum momento, por nenhum caminho. Cada invariante tem um id estável: o commit que o cria ou muda cita o id, e o teste que tenta quebrá-lo leva o id no nome. Id não se reaproveita nem se renumera; invariante que deixa de valer fica riscado com o motivo.
 
 :::info[Revisado em 26/09/2026 (task 0.7)]
-Conferido contra o [schema v2](./schema-v2/visao-geral.md), as decisões de 26/09/2026 e o código do `facter-truck`. Ampliado no mesmo dia com os 19 pontos da revisão crítica do schema e os intervalos de turno. A decisão que ainda falta está no fim da página, com recomendação.
+Conferido contra o [schema v2](./schema-v2/visao-geral.md), as decisões de 26/09/2026 e o código do `facter-truck`. Ampliado no mesmo dia com os 19 pontos da revisão crítica do schema e os intervalos de turno. Todas as decisões pendentes foram tomadas em 26/09/2026.
 :::
 
 **Garantia**
@@ -76,7 +76,7 @@ Todo invariante tem teste de integração. Onde duas pessoas podem agir ao mesmo
 | --- | --- | --- | --- |
 | WO-1 | O status só muda pela máquina de estados, e toda mudança gera exatamente uma transição | Domínio (único caminho de escrita) | ⬜ 2.3 |
 | WO-2 | Uma ordem nasce em `queued` (Fila) | Domínio (sem status no DTO de criação) | ⬜ 2.3 |
-| WO-3 | Em cada organização executora, no máximo uma ordem aberta (`queued`, `in_maintenance`, `paused`) por veículo ou conjunto | Banco (trava com chave `(org_id, target_id)`) | ⬜ 2.3 · ver decisão abaixo |
+| WO-3 | Em cada organização executora, no máximo uma ordem aberta (`queued`, `in_maintenance`, `paused`) por veículo ou conjunto; a OS no conjunto trava os implementos dele e vice-versa (decidido em 26/09/2026) | Banco (trava com chave `(org_id, target_id)`, uma linha por alvo travado) | ⬜ 2.3 |
 | WO-4 | Um box tem no máximo uma ordem em manutenção | Banco (unique parcial) | ⬜ 2.3 |
 | WO-5 | O número da ordem é único e sequencial por organização e prefixo | Banco (tabela `sequences` + unique) | ⬜ 2.3 |
 | WO-6 | Ordem finalizada ou cancelada não tem serviço aberto nem sessão de trabalho aberta | Domínio + verificação | ⬜ 2.4 |
@@ -100,6 +100,7 @@ Todo invariante tem teste de integração. Onde duas pessoas podem agir ao mesmo
 | SVC-9 | Um serviço concluído atribui tempo a cada executor pelas suas próprias sessões | Modelo | ⬜ 2.4 |
 | SVC-10 | O custo de mão de obra de uma sessão aplica os adicionais vigentes (hora extra fora do turno, noturno, domingo e feriado) e é congelado ao fechar a sessão | Domínio + teste com números conhecidos | ⬜ 2.4 |
 | SVC-11 | Pausa de OS e de sessão usam a mesma lista de motivos; almoço, jantar e intervalo são pausas planejadas e nunca contam como tempo perdido | Banco (FK para `pause_reasons`) | ⬜ 2.4 |
+| SVC-12 | Uma pessoa tem no máximo uma sessão de trabalho aberta; iniciar outro serviço pausa o anterior com o motivo `other_service` | Banco (exclusion constraint) + domínio | ⬜ 2.4 |
 
 ## Estoque e requisições (`STK`)
 
@@ -144,8 +145,3 @@ Pneus entram no lançamento (decidido em 26/09/2026). Os invariantes do ciclo de
 | KPI-1 | Todo indicador tem definição escrita (fórmula, unidade, fuso, fonte) e teste com números conhecidos | Processo | ⬜ 4.1 |
 | KPI-2 | Indicador nunca mistura dados de organizações | Banco (RLS) + teste | ⬜ 4.1 |
 | KPI-3 | Períodos são cortados no fuso da organização | Domínio + teste | ⬜ 4.1 |
-
-## Decisão que falta
-
-**OS no conjunto e OS num implemento do mesmo conjunto ao mesmo tempo (WO-3)** — trava a task 2.3.
-Recomendação: **não permitir.** A OS aberta no conjunto trava também os implementos dele, e a OS aberta num implemento trava o conjunto. Duas ordens sobre as mesmas carretas, na mesma oficina, dividem custo e tempo de um jeito que ninguém consegue conferir depois. Outra oficina da rede continua podendo ter a sua (a trava é por organização).

@@ -180,7 +180,7 @@ create table service_executions (
 ```sql
 create table pause_reasons (                   -- uma lista só para OS e sessão; fixa, para comparar oficinas
   code          text primary key,              -- waiting_part, external_service, no_box, no_staff,
-                                               -- shift_end, meal_break, rest_break, other
+                                               -- shift_end, meal_break, rest_break, other_service, other
   planned       boolean not null               -- intervalo e fim de turno são planejados; não são tempo perdido
 );
 
@@ -209,6 +209,7 @@ create table work_sessions (                   -- intervalo em que a pessoa trab
   adjustment_note   text,
   started_by        uuid not null references actors(id),
   exclude using gist (assignment_id with =, during with &&),   -- SVC-5
+  exclude using gist (employee_id with =, during with &&),     -- SVC-12: uma frente de trabalho por pessoa
   check (not isempty(during))                                   -- SVC-6
 );
 ```
@@ -281,8 +282,9 @@ create table work_order_notes (
 
 WO-1 a WO-10, SVC-1 a SVC-10, ECO-6.
 
-## Pontos para decidir
+## Decidido em 26/09/2026
 
-- **Um mecânico em dois serviços ao mesmo tempo?** A proposta bloqueia sobreposição só dentro do mesmo serviço. Se a oficina nunca permite duas frentes simultâneas por pessoa, adicionar `exclude using gist (employee_id with =, during with &&)`: o dado fica mais confiável, mas a oficina que trabalha em paralelo passa a ser impedida.
-- **Motivos de pausa:** a lista (aguardando peça, serviço externo, sem box, sem equipe, fim de turno, almoço/jantar, intervalo, outro) fica fixa em `pause_reasons`, ou vira configurável por organização? Fixa facilita comparar oficinas no ecossistema.
-- **`work_order_cost_lines` gravado ou calculado:** a proposta grava (com o custo/hora e o preço congelados), para que o custo de uma OS fechada nunca mude.
+- **Mecânico em um serviço por vez:** no máximo uma sessão aberta por pessoa (SVC-12). Iniciar outro serviço pausa o anterior sozinho, com o motivo `other_service`: o tempo por pessoa fica confiável e ninguém é impedido de trabalhar.
+- **Motivos de pausa fixos** em `pause_reasons`, iguais para todas as organizações, para comparar oficinas no ecossistema.
+- **`work_order_cost_lines` gravado,** com custo/hora e preço congelados: o custo de uma OS fechada nunca muda.
+- **WO-3:** a OS aberta num conjunto trava os implementos dele, e a OS aberta num implemento trava o conjunto, dentro da mesma organização executora.

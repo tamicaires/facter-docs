@@ -21,8 +21,8 @@ Saída: CI verde com teste de integração; schema do núcleo aprovado.
 | 0.3 | Web Vite + React + ds-core, contrato OpenAPI tipado | Tela lê a API pelo cliente tipado | ✅ |
 | 0.4 | CI: lint, typecheck, testes com Postgres, drift do OpenAPI, build | Verde no GitHub | ✅ |
 | 0.5 | ds-core: um arquivo por componente e vocabulário de tons | Merge e versão minor publicada no npm | 🟡 merge feito; falta publicar |
-| 0.6 | Schema do núcleo aprovado | As 8 páginas do [schema v2](../engenharia/schema-v2/visao-geral.md) revisadas e os "pontos para decidir" fechados | 🟡 revisão da arquiteta |
-| 0.7 | Invariantes revisados | [Invariantes](../engenharia/invariantes.md) com id estável e dono, sem pendência | 🟡 revisados; falta a decisão do WO-3 |
+| 0.6 | Schema do núcleo aprovado | As 8 páginas do [schema v2](../engenharia/schema-v2/visao-geral.md) revisadas e os "pontos para decidir" fechados | ✅ aprovado em 26/09/2026, com as correções da revisão crítica |
+| 0.7 | Invariantes revisados | [Invariantes](../engenharia/invariantes.md) com id estável e dono, sem pendência | ✅ 78 invariantes, todos decididos |
 | 0.8 | Padrão de módulo no código | Um módulo exemplo com a estrutura do CLAUDE.md: erro com código, paginação, `Idempotency-Key`, teste de rota gerado | ✅ `assets/vehicles`, 38 testes |
 | 0.9 | Congelar o escopo | Decisão registrada no roadmap | 🟡 decisão |
 
@@ -107,8 +107,7 @@ Saída: metas de performance atingidas e nenhum achado crítico aberto.
 
 | Decisão | Trava | Prazo |
 | --- | --- | --- |
-| Schema do núcleo e pontos para decidir | 0.6 e toda a fase 1 | Semana 2 |
-| OS no conjunto e num implemento dele ao mesmo tempo (WO-3) | 2.3 | Semana 6 |
 | Hospedagem (ADR-012) | 1.5 | Fim da fase 1 |
 | Doc de pneus (resposta aos comentários) | 3.1 | Semana 11 |
 | Preço por módulo | 3.4 | Semana 12 |
+| Unidade em que o custo da peça é guardado ([proposta](../produto/propostas/part-cost-convention.mdx)) | 2.5 | Semana 6 |
