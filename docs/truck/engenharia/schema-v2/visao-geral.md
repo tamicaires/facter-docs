@@ -81,9 +81,7 @@ create policy tenant_isolation on example
 
 ## ORM
 
-O schema usa recursos que o Prisma não expressa no próprio schema: `check`, índice único parcial, `exclude using gist` e políticas de RLS. No Prisma, tudo isso iria para migrations em SQL escritas à mão e ficaria invisível no modelo.
-
-**Proposta:** Drizzle ORM, que declara `check`, índices parciais e políticas de RLS junto da tabela. O que não tiver suporte (o `exclude`) vai em migration SQL, comentada. A decisão vira **ADR-013** depois de uma prova de conceito na fase 0: uma tabela com RLS, `check`, índice parcial e `exclude`, testada contra Postgres real.
+**Prisma 7**, decidido no [ADR-013](../adrs/adr-013-orm-prisma.md) depois de uma prova com Prisma e Drizzle contra 100 mil OS. Regras: `relationJoins` sempre ligado, consultas quentes em SQL tipado (TypedSQL), constraints e RLS em migrations SQL com teste de integração cada uma, e lint de `@map`/`@@map` em snake_case. Os blocos SQL desta seção são a forma final no banco; no `schema.prisma` ficam os modelos, e o que ele não expressa vai nas migrations.
 
 ## Ordem de construção
 

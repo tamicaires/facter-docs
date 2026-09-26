@@ -21,6 +21,8 @@ Toda decisão de arquitetura do Truck tem um ADR com número sequencial. Um ADR 
 | 009 | [Custeio de mão de obra na OS](./adr-009-labor-cost.md) | Aprovado; implementação em `feat/factrk-9-labor-rate`, fora da `homolog` | Aqui |
 | 010 | [v2 do núcleo com corte de escopo](./adr-010-v2-do-nucleo.md) | Aprovado (26/09/2026) | Aqui |
 | 011 | [Ecossistema de organizações e compartilhamento de dados](./adr-011-ecossistema-e-compartilhamento.md) | Aprovado com ajustes (26/09/2026) | Aqui |
+| 012 | Hospedagem da API (região no Brasil) | A decidir até o fim da fase 1 | — |
+| 013 | [Prisma 7 como ORM da v2](./adr-013-orm-prisma.md) | Aprovado (26/09/2026) | Aqui |
 
 Os ADRs 001–008 são decisões do v1. Os que o código cita como justificativa (003, 006, 007) importam para quem for portar comportamento. A lista acima veio de uma tabela no arquivo antigo da documentação; os arquivos 005, 007 e 008 não foram encontrados em nenhum repositório.
 
