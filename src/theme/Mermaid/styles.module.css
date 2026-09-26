@@ -58,8 +58,9 @@
 }
 
 .canvas :global(svg) {
+  width: var(--diagram-width, auto) !important;
+  height: var(--diagram-height, auto) !important;
   max-width: none !important;
-  height: auto;
 }
 
 @media (max-width: 600px) {

@@ -3,7 +3,7 @@ import MermaidOriginal from '@theme-original/Mermaid';
 import type {Props} from '@theme/Mermaid';
 import styles from './styles.module.css';
 
-const MIN_SCALE = 0.2;
+const MIN_SCALE = 0.05;
 const MAX_SCALE = 6;
 const ZOOM_STEP = 1.2;
 
@@ -23,6 +23,35 @@ function ExpandedDiagram({value, onClose}: {value: string; onClose: () => void})
   const [view, setView] = useState<View>(INITIAL_VIEW);
   const drag = useRef<{pointerId: number; startX: number; startY: number; originX: number; originY: number} | null>(null);
   const stageRef = useRef<HTMLDivElement>(null);
+  const canvasRef = useRef<HTMLDivElement>(null);
+  const fitView = useRef<View>(INITIAL_VIEW);
+
+  // Mermaid renders the SVG asynchronously and with a relative width, which shrinks it
+  // inside the overlay. Once it exists, pin it to its natural size and fit it to the screen.
+  useEffect(() => {
+    let frame = 0;
+    let attempts = 0;
+    const fit = () => {
+      const svg = canvasRef.current?.querySelector('svg');
+      const stage = stageRef.current;
+      if (!svg || !stage) {
+        if (attempts++ < 120) frame = requestAnimationFrame(fit);
+        return;
+      }
+      const box = svg.viewBox.baseVal;
+      const width = box && box.width ? box.width : svg.getBoundingClientRect().width;
+      const height = box && box.height ? box.height : svg.getBoundingClientRect().height;
+      // Sized through CSS variables on our own container: Mermaid may re-render the SVG
+      // element and would wipe inline styles set on it directly.
+      canvasRef.current?.style.setProperty('--diagram-width', `${width}px`);
+      canvasRef.current?.style.setProperty('--diagram-height', `${height}px`);
+      const scale = clampScale(Math.min(stage.clientWidth / width, stage.clientHeight / height) * 0.95);
+      fitView.current = {scale, x: 0, y: 0};
+      setView(fitView.current);
+    };
+    frame = requestAnimationFrame(fit);
+    return () => cancelAnimationFrame(frame);
+  }, [value]);
 
   const zoomAt = useCallback((factor: number, clientX?: number, clientY?: number) => {
     setView((current) => {
@@ -47,7 +76,7 @@ function ExpandedDiagram({value, onClose}: {value: string; onClose: () => void})
       if (event.key === 'Escape') onClose();
       if (event.key === '+' || event.key === '=') zoomAt(ZOOM_STEP);
       if (event.key === '-') zoomAt(1 / ZOOM_STEP);
-      if (event.key === '0') setView(INITIAL_VIEW);
+      if (event.key === '0') setView(fitView.current);
     };
     window.addEventListener('keydown', onKey);
     return () => {
@@ -73,7 +102,7 @@ function ExpandedDiagram({value, onClose}: {value: string; onClose: () => void})
       <div className={styles.toolbar}>
         <button type="button" className="button button--sm button--secondary" onClick={() => zoomAt(ZOOM_STEP)} aria-label="Aproximar">+</button>
         <button type="button" className="button button--sm button--secondary" onClick={() => zoomAt(1 / ZOOM_STEP)} aria-label="Afastar">−</button>
-        <button type="button" className="button button--sm button--secondary" onClick={() => setView(INITIAL_VIEW)}>Ajustar</button>
+        <button type="button" className="button button--sm button--secondary" onClick={() => setView(fitView.current)}>Ajustar</button>
         <span className={styles.hint}>Arraste para mover · role para zoom · Esc para fechar</span>
         <button type="button" className="button button--sm button--primary" onClick={onClose}>Fechar</button>
       </div>
@@ -92,7 +121,7 @@ function ExpandedDiagram({value, onClose}: {value: string; onClose: () => void})
         onPointerUp={() => { drag.current = null; }}
         onPointerCancel={() => { drag.current = null; }}
       >
-        <div className={styles.canvas} style={{transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`}}>
+        <div ref={canvasRef} className={styles.canvas} style={{transform: `translate(${view.x}px, ${view.y}px) scale(${view.scale})`}}>
           <MermaidOriginal value={value} />
         </div>
       </div>
