@@ -107,7 +107,7 @@ create table work_order_vehicles (             -- o que está na OS: veículo av
 );
 ```
 
-**WO-3 (uma OS aberta por conjunto ou veículo)** fica numa tabela auxiliar `open_work_order_locks (org_id, target_id primary key, work_order_id)`, inserida ao abrir e apagada ao finalizar ou cancelar, na mesma transação. É a forma de ter unicidade entre tabelas sem trigger complexo.
+**WO-3 (uma OS aberta por conjunto ou veículo, em cada organização executora)** fica numa tabela auxiliar `open_work_order_locks (org_id, target_id, work_order_id, primary key (org_id, target_id))`, inserida ao abrir e apagada ao finalizar ou cancelar, na mesma transação. É a forma de ter unicidade entre tabelas sem trigger complexo. A chave inclui `org_id` de propósito: duas oficinas podem manter o mesmo conjunto (ADR-011), e uma chave só em `target_id` barraria a segunda e revelaria que a outra tem OS aberta.
 
 ## Serviços
 
