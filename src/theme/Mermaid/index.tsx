@@ -1,5 +1,4 @@
 import {useCallback, useEffect, useRef, useState, type ReactNode} from 'react';
-import {createPortal} from 'react-dom';
 import MermaidOriginal from '@theme-original/Mermaid';
 import type {Props} from '@theme/Mermaid';
 import styles from './styles.module.css';
@@ -69,7 +68,7 @@ function ExpandedDiagram({value, onClose}: {value: string; onClose: () => void})
     return () => stage.removeEventListener('wheel', onWheel);
   }, [zoomAt]);
 
-  return createPortal(
+  return (
     <div className={styles.overlay} role="dialog" aria-modal="true" aria-label="Diagrama expandido">
       <div className={styles.toolbar}>
         <button type="button" className="button button--sm button--secondary" onClick={() => zoomAt(ZOOM_STEP)} aria-label="Aproximar">+</button>
@@ -97,8 +96,7 @@ function ExpandedDiagram({value, onClose}: {value: string; onClose: () => void})
           <MermaidOriginal value={value} />
         </div>
       </div>
-    </div>,
-    document.body,
+    </div>
   );
 }
 
