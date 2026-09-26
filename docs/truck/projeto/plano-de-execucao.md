@@ -34,15 +34,15 @@ Saída: **fatia 1 em homologação**. Empresa B não lê nem altera nada da empr
 | --- | --- | --- | --- |
 | 1.1 | Identidade: login, sessão em cookie httpOnly ([ADR-015](../engenharia/adrs/adr-015-sessao-opaca-em-cookie.md)), convite, primeiro acesso, redefinir senha | Fluxos com teste de integração; senha nunca volta na resposta | 🟡 login, sessão, troca de empresa e saída feitos; convite e senha esperam o e-mail (1.8) |
 | 1.2 | Organização, grupo econômico, membros e bases | Troca de empresa sem vazar cache; RLS em toda tabela nova (teste de cobertura) | ⬜ |
-| 1.3 | Permissões v2: 12 papéis padrão, escopos E/B/P, negar por padrão | Teste gerado por rota e papel conforme a [matriz](../produto/papeis-e-permissoes.md) | ⬜ |
+| 1.3 | Permissões v2: 12 papéis padrão, escopos E/B/P, negar por padrão | Teste gerado por rota e papel conforme a [matriz](../produto/papeis-e-permissoes.md) | ✅ papéis e escopos na sessão; teste rota × papel; menu e botões pela permissão |
 | 1.4 | Matrícula + PIN no tablet compartilhado | Troca de pessoa em segundos; toda ação com autor | ⬜ |
 | 1.5 | Hospedagem (ADR-012) e deploy automatizado em homologação | Push na `main` publica em homologação, em região no Brasil | ⬜ prazo: fim da fase |
 | 1.6 | Outbox, fila e jobs com lock | Evento gravado na mesma transação; reenvio não duplica | ⬜ |
 | 1.7 | Observabilidade | Log estruturado com id da requisição, p95 por rota, alerta de erro | ⬜ |
 | 1.8 | E-mail transacional e notificação no app (mínimo) | Convite e redefinição chegam por e-mail | ⬜ |
 | 1.9 | Revisão curta do DS para as telas do lançamento | Lista priorizada de melhorias (API, acessibilidade, tablet) | ⬜ |
-| 1.10 | Casca da web: auth, layout, troca de empresa, permissões na tela, i18n | Menu e ações seguem o papel; nenhum texto fora do arquivo de tradução | ⬜ |
-| 1.11 | Ativos: veículos por tipo do CTB, eixos e posições, conjuntos, engate (CVC) com histórico, operador, hodômetro | Cadastro e engate pela tela; km do implemento calculado pelo engate | ⬜ |
+| 1.10 | Casca da web: auth, layout, troca de empresa, permissões na tela, i18n | Menu e ações seguem o papel; nenhum texto fora do arquivo de tradução | 🟡 login, escolha de empresa, casca, logo e ícones feitos; falta medir o bundle inicial no CI |
+| 1.11 | Ativos: veículos por tipo do CTB, eixos e posições, conjuntos, engate (CVC) com histórico, operador, hodômetro | Cadastro e engate pela tela; km do implemento calculado pelo engate | 🟡 veículos (cadastro, lista, desativação) feitos; faltam eixos, conjuntos, engate, operador e hodômetro |
 | 1.12 | Importação de planilha de veículos e conjuntos | Frota real do piloto importada, com relatório de linhas recusadas | ⬜ |
 | 1.13 | Linha de base de performance: base com 100 mil OS e veículos, p95 por rota medido a cada push na `main` | Metas de p95 do CLAUDE.md verificadas desde a fatia 1, não só na fase 4 | ⬜ |
 

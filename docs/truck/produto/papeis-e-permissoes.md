@@ -47,6 +47,10 @@ Fora das empresas existe o **Suporte Facter** (ver [acesso de suporte](#acesso-d
 
 **Legenda da matriz:** E = empresa · B = base · P = próprio · — = sem acesso.
 
+:::info[Esta matriz é o código]
+As permissões e os papéis padrão do `facter-truck` foram gerados desta página (`apps/api/src/platform/auth/permissions.ts` e `system-roles.ts`). Mudou uma célula aqui, muda lá no mesmo ciclo, e vice-versa. O teste `role-matrix.spec.ts` confere cada rota contra a permissão esperada e cada papel contra a sua coluna.
+:::
+
 ## Plataforma e administração
 
 | Permissão | O que permite | Adm | Ges | Sup | Pla | Mec | Alm | CtP | Bor | Ins | Fin | Mot | Lei |
