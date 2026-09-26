@@ -1,7 +1,7 @@
 import type {ReactNode} from 'react';
 import Link from '@docusaurus/Link';
 import Layout from '@theme/Layout';
-import {LuCode, LuClipboardList, LuPaintbrush, LuFolderOpen, LuRocket} from 'react-icons/lu';
+import {LuCode, LuClipboardList, LuPaintbrush, LuFolderOpen, LuRocket, LuWrench} from 'react-icons/lu';
 
 const sections = [
   {
@@ -9,7 +9,7 @@ const sections = [
     Icon: LuCode,
     iconClass: 'eng',
     description: 'Gestao de frotas e manutencao. Engenharia, produto, ADRs e decisoes.',
-    link: '/docs/truck/engenharia/arquitetura/visao-geral',
+    link: '/docs/truck/visao-geral',
   },
   {
     title: 'Hub',
@@ -17,6 +17,13 @@ const sections = [
     iconClass: 'proj',
     description: 'SSO, billing e assinaturas. Engenharia, produto e roadmap.',
     link: '/docs/hub/engenharia/arquitetura/visao-geral',
+  },
+  {
+    title: 'TechCare',
+    Icon: LuWrench,
+    iconClass: 'eng',
+    description: 'Gestao de assistencia tecnica. Fluxos, regras de negocio e guia de teste.',
+    link: '/docs/techcare/produto/visao-geral',
   },
   {
     title: 'Design System',

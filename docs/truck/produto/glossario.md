@@ -251,3 +251,37 @@ Termos e conceitos do dominio do Facter Truck.
 | **TPMS** | Tire Pressure Monitoring System |
 | **DOT** | Department of Transportation (codigo de fabricacao do pneu) |
 | **NF** | Nota Fiscal |
+
+## Termos da v2
+
+| Termo | Definição |
+| --- | --- |
+| **Organização** | Cliente do Truck identificado por CNPJ; é o tenant. Embarcador, transportadora, oficina ou socorro |
+| **Grupo econômico** | Organizações do mesmo grupo (ex.: Suzano e a oficina própria, com outro CNPJ), com acesso completo entre si |
+| **Organização executora** | Quem faz a manutenção; dona da OS |
+| **Organização proprietária** | Dona do ativo |
+| **Operador** | Transportadora que roda com o ativo num período; muda ao longo do tempo |
+| **Concessão de compartilhamento** | Acordo em que o dono do dado libera outra organização a ver um escopo, num nível, com validade e revogação |
+| **Solicitação de manutenção** | Pedido do dono do ativo a uma oficina prestadora, que vira OS na oficina |
+| **Custo interno / valor cobrado** | O que a OS custou à oficina / o que a oficina cobrou do dono |
+| **Base** | Local físico de uma organização, com boxes e depósitos |
+| **Depósito** | Onde fica o estoque; tem organização dona e base (local), que podem ser de organizações diferentes |
+| **Consignado** | Estoque de uma organização guardado na base de outra (ex.: almoxarifado da Suzano dentro da Vale) |
+| **Livro de movimentações** | Registro de toda entrada, saída, transferência e ajuste de estoque; o saldo é a soma dele |
+| **Item serializado** | Unidade rastreada por número de série (bateria, compressor, pneu) |
+| **Veículo** | Unidade física identificada por placa, chassi e Renavam, com um tipo formal (abaixo) |
+| **Caminhão-trator** | Veículo automotor feito para tracionar outro; no dia a dia, "cavalo" ([CTB, Anexo I](https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm)) |
+| **Caminhão** | Veículo de carga com carroceria própria, que pode puxar reboque ("truck", "toco") |
+| **Semirreboque** | Apoia-se na unidade tratora pela quinta roda, sem eixo dianteiro próprio; no dia a dia, "carreta" ([CTB, Anexo I](https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm)) |
+| **Reboque** | Tem eixo dianteiro próprio e é engatado atrás de outro veículo (ex.: a "Julieta") ([CTB, Anexo I](https://www.planalto.gov.br/ccivil_03/leis/l9503compilado.htm)) |
+| **Dolly** | Equipamento que acopla um semirreboque como reboque, usado no rodotrem |
+| **Implemento rodoviário** | Termo do setor para semirreboque, reboque e dolly |
+| **Conjunto de implementos** | Implementos que andam juntos, em ordem, sob um número de frota. Tipos: bitrem, tritrem, rodotrem, hexatrem, vanderleia, Romeu e Julieta |
+| **Frota (número de frota)** | Código que identifica um conjunto de implementos no dia a dia; é por ele que o mecânico procura |
+| **Posição no conjunto** | Ordem do implemento dentro do conjunto (1, 2, 3…) |
+| **Combinação (CVC)** | Combinação de veículos de carga: caminhão-trator (ou caminhão) mais o conjunto de implementos, num período. Substitui "composição" |
+| **Engate** | Período em que um conjunto de implementos está acoplado a uma unidade tratora; base do cálculo de km dos implementos |
+| **Nome na tela × tipo formal** | A tela usa o nome do dia a dia ("Frota 1234 · carreta 2/2 · QRT4B22"); cadastro e relatórios usam o tipo formal. No código: `power_unit`, `rigid_truck`, `semi_trailer`, `full_trailer`, `dolly`, `trailer_set`, `combination` |
+| **Sessão de trabalho** | Intervalo em que um mecânico trabalhou de fato num serviço; o tempo trabalhado é a soma delas |
+| **Retrabalho** | Serviço marcado como retorno de um serviço anterior no mesmo componente |
+| **Invariante** | Regra que nunca pode estar violada no banco (ver [invariantes](../engenharia/invariantes.md)) |

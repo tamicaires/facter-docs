@@ -99,4 +99,4 @@ Adotar **Zustand store como SSOT** (Single Source of Truth) com **optimistic upd
 
 ## Referencias
 
-- [Checklist Module](../modulos/checklist) -- Documentacao tecnica do modulo
+- [Checklist Module](/docs/truck/engenharia/legado-v1/modulos/checklist) -- Documentacao tecnica do modulo

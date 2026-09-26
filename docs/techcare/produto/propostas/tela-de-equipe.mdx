@@ -1,0 +1,86 @@
+---
+title: Tela de Equipe
+sidebar_position: 1
+tags: [techcare, proposta, equipe, permissoes, cadastro]
+---
+
+import { ProposalHeader } from '@site/src/components/ProposalHeader';
+import TeamScreenMockup from '@site/src/components/TeamScreenMockup';
+
+# Tela de Equipe
+
+<ProposalHeader status="aprovado" date="2026-09-17" />
+
+> **O único bloqueante real do produto.** Hoje não existe jeito de cadastrar um técnico pela interface — só rodando o seed. Qualquer oficina com mais de uma pessoa está impedida de usar o TechCare.
+
+---
+
+## Problema
+
+O item "Equipe" chegou a existir no menu e foi **retirado**, porque levava a uma página que não existe. O comentário que explica isso continua no código, junto com a rota `/settings/team` já declarada e sem destino.
+
+Consequências hoje:
+
+| O que a oficina precisa | O que acontece |
+|---|---|
+| Contratar um técnico e dar acesso | Impossível pela interface |
+| Promover a atendente a gerente | Impossível |
+| Tirar o acesso de quem saiu | Impossível |
+| Corrigir o próprio perfil | **Quebrado** — `PATCH /users/me` não existe e dá 404 |
+
+---
+
+## Protótipo
+
+<TeamScreenMockup />
+
+---
+
+## O que já existe
+
+Metade do caminho está pronto, e é o que faz esta ser a proposta mais barata da lista:
+
+| Camada | Situação |
+|---|---|
+| `GET /users` com filtro de cargo, status e busca | **Pronto** — já usado para escolher o técnico na OS |
+| `POST /auth/users` (cria pessoa + vínculo) | **Pronto** |
+| Hooks e tipos no web (`useUsers`, rótulos dos 5 cargos) | **Prontos** |
+| Tabela genérica com busca, filtro e paginação | **Pronta** no design system, com quatro telas para copiar |
+| Diálogo de formulário genérico | **Pronto** |
+| Migration no banco | **Nenhuma** — `User` e `Membership` já têm `role`, `isOwner` e `isActive` |
+
+Falta: atualizar pessoa, trocar cargo, desativar, trocar senha — e a tela.
+
+---
+
+## Decisões da proposta
+
+**OWNER não aparece na lista de cargos.** Propriedade se transfere, não se concede. Dar a alguém o cargo de dono por um `select` é como entregar a chave da loja num menu suspenso.
+
+**A oficina nunca fica sem dona.** Desativar a última proprietária é recusado com a saída escrita na mensagem: transfira antes. A regra vale no servidor, não só na tela.
+
+**Cada cargo vem com uma frase.** "Técnico" não diz nada a quem está contratando; "conserta e julga garantia, não vê dinheiro" diz. A escolha é de responsabilidade, e o nome do cargo é só o rótulo dela.
+
+**Não há convite por e-mail.** O sistema não manda mensagem nenhuma — ver [Limites conhecidos](../limites-conhecidos). Quem cadastra define uma senha provisória e passa pessoalmente, que é como funciona numa loja de duas pessoas.
+
+---
+
+## Fora de escopo
+
+- Permissões customizadas por empresa. Os 5 cargos fixos resolvem, e essa mudança é grande — ver [Débito técnico](../../projeto/debito-tecnico).
+- Convite por link, recuperação de senha, foto de perfil com upload real.
+
+---
+
+## Custo estimado
+
+**M · 3 a 4 dias.** A maior parte é API (atualizar pessoa e vínculo); a tela reaproveita componentes existentes.
+
+Junto vai a correção do `PATCH /users/me`, que é de horas e conserta a tela de perfil.
+
+---
+
+## Documentos relacionados
+
+- [Papéis e permissões](../papeis-e-permissoes)
+- [Limites conhecidos](../limites-conhecidos)
