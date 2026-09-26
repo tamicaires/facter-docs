@@ -6,11 +6,11 @@ tags: [adr, multiempresa, compartilhamento, ecossistema, rls, v2]
 
 # ADR-011: Ecossistema de organizações e compartilhamento de dados
 
-**Status:** Em discussão (proposto em 26/09/2026)
+**Status:** Aprovado com ajustes (26/09/2026): o Truck atende também clientes isolados; lançamento único
 
 ## Contexto
 
-O Truck não atende empresas isoladas, e sim um ecossistema de partes com donos e interesses diferentes:
+O Truck atende tanto empresas isoladas (uma transportadora que usa o sistema só para a própria oficina) quanto ecossistemas de partes com donos e interesses diferentes:
 
 | Parte | Exemplo | Papel |
 | --- | --- | --- |
@@ -26,7 +26,7 @@ O v1 trata tudo como uma "empresa" com "transportadoras" dentro, sem distinguir 
 
 ## Decisão
 
-1. **Tenant é a organização (CNPJ).** Cada organização é dona dos dados que produz. O RLS continua estrito: ninguém lê dado de outra organização por padrão.
+1. **Tenant é a organização (CNPJ).** Cada organização é dona dos dados que produz. O RLS continua estrito: ninguém lê dado de outra organização por padrão. Um cliente isolado é só uma organização sem concessões; o ecossistema não pesa para quem não o usa.
 2. **Organização executora ≠ organização proprietária.** A OS pertence a quem executa (a oficina). O ativo pertence ao dono (transportadora ou embarcador). O vínculo entre os dois é explícito.
 3. **Compartilhamento é um acordo concedido por quem é dono do dado**, com escopo (quais ativos ou frotas), nível, validade e revogação, e todo acesso é auditado. Níveis propostos:
    - **Status:** na oficina ou liberado, previsão de saída.
@@ -56,12 +56,9 @@ O v1 trata tudo como uma "empresa" com "transportadoras" dentro, sem distinguir 
 - **Negativas:** o modelo de dados e a publicação por evento ficam mais complexos. O mesmo caminhão pode existir em mais de uma organização, e a identidade dele (placa, chassi) precisa ser reconciliada.
 - **Riscos:** vazamento pela visão compartilhada se um evento publicar campo além do nível; mitigado por testes de isolamento por nível, gerados a partir do catálogo de níveis.
 
-## Sequência proposta
+## Lançamento
 
-- **Piloto (fevereiro):** oficina e frota própria da Suzano, com grupo econômico.
-- **Abertura (março–abril):** convite a oficinas e transportadoras parceiras, compartilhamento por nível, solicitação de manutenção entre organizações e estoque consignado (cerca de 2–3 semanas).
-
-Tudo acima nasce no schema desde a fase 0; o que se escalona são as telas.
+Lançamento único (decidido em 26/09/2026): compartilhamento por nível, solicitação de manutenção entre organizações, estoque consignado e grupo econômico entram juntos no lançamento, sem etapa de piloto separada.
 
 ## Pendências
 

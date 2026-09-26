@@ -6,7 +6,7 @@ tags: [adr, v2, arquitetura, schema, lancamento]
 
 # ADR-010: v2 do núcleo com corte de escopo
 
-**Status:** Em discussão (proposto em 26/09/2026)
+**Status:** Aprovado (26/09/2026)
 
 ## Contexto
 
@@ -30,7 +30,11 @@ O frontend também é refeito: um app novo usando só o `@facter/ds-core`, porta
 
 API, web e contrato vivem num monorepo `facter-truck` (`apps/api`, `apps/web`, `packages/contracts`). A web roda na Vercel; a API e o worker da fila rodam no Render.
 
-Os módulos fora do núcleo entram depois do lançamento: preventiva, analytics completo, rateio, socorro mecânico e integrações. O escopo do núcleo está no [plano da auditoria](../auditoria-2026-09.md#plano-de-execução).
+O escopo do lançamento está no [roadmap](../../projeto/roadmap.md#escopo-do-lançamento): além do núcleo (ativos, ordem de serviço, serviços e executores, estoque e requisições, pessoas), entram pneus, checklists, rateio completo, indicadores de decisão com resumo semanal por e-mail, "Aprender com o cliente" e OS em PDF. Ficam para depois: preventiva (logo após o lançamento), analytics completo, centros de custo, socorro mecânico e integrações. O lançamento é único, sem etapa de piloto separada.
+
+O modelo de organizações segue o [ADR-011](./adr-011-ecossistema-e-compartilhamento.md): cada organização é dona dos dados que produz, e o compartilhamento entre organizações é concedido por nível. Um cliente isolado é só uma organização sem concessões.
+
+A decisão assume os princípios do [roadmap](../../projeto/roadmap.md): dados primeiro (fatos gravados desde o primeiro dia), registrar sem atrito, operação no tablet e gestão no notebook, PWA instalável com fila local e login por matrícula e PIN, e design system evoluindo puxado pela demanda da web v2.
 
 O que é comum aos produtos Facter (identidade e login, empresas, usuários e membros, permissões e papéis, "Quero isso", notificações e novidades) nasce num módulo `plataforma` destacável, porque o Hub da Facter vai centralizar essa parte no futuro e hoje ainda não existe. Os módulos de domínio só conhecem um `CurrentActor` e a interface da plataforma; a auditoria aponta para uma tabela local de atores, não para a de usuários; ids são UUID globais e o token é validado por chave pública configurável. Trocar a plataforma local pelo Hub é trocar a implementação da interface e a configuração do token.
 
@@ -41,7 +45,7 @@ A API atual fica congelada: sem funcionalidade nova e com correção só quando 
 | Alternativa | Por que não |
 | --- | --- |
 | A. Refatorar tudo no lugar | Cabe no prazo (8–10 semanas), mas leva para produção o ativo polimórfico, o eixo só em reboque e os conceitos duplicados. Toda correção futura vira migração de dado de cliente. |
-| C. v2 de tudo, incluindo os módulos fora do núcleo | Não cabe antes de 2027. Preventiva, analytics, rateio, socorro e integrações entram depois do lançamento. |
+| C. v2 de tudo, incluindo os módulos fora do núcleo | Não cabe no prazo. Preventiva, analytics completo, centros de custo, socorro e integrações entram depois do lançamento. |
 
 ## Consequências
 

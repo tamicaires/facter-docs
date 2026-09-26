@@ -6,7 +6,7 @@ tags: [roadmap, v2, lancamento, planejamento]
 
 # Roadmap
 
-A meta é lançar o Facter Truck no começo de 2027 sobre a v2 do núcleo, em cerca de 17 a 19 semanas a partir da aprovação do [ADR-010](../engenharia/adrs/adr-010-v2-do-nucleo.md). O plano anterior (1º trimestre de 2026) está em [legado](../engenharia/legado-v1/roadmap-2026-q1.md).
+A meta é lançar o Facter Truck no começo de 2027 sobre a v2 do núcleo, em cerca de 20 a 23 semanas a partir da aprovação (com o ecossistema completo e os itens de confiança para empresa grande no lançamento), o que leva a data para meados a fim de março de 2027, contando o recesso de fim de ano do [ADR-010](../engenharia/adrs/adr-010-v2-do-nucleo.md). O plano anterior (1º trimestre de 2026) está em [legado](../engenharia/legado-v1/roadmap-2026-q1.md).
 
 ## Fases
 
@@ -26,8 +26,7 @@ Prazos em ordem de grandeza, supondo a arquiteta trabalhando em par com o Claude
 
 A primeira meta é a Suzano, que traz os parceiros. O Truck atende um ecossistema: embarcador, transportadoras, oficinas e socorro terceirizados, cada organização dona dos próprios dados, com compartilhamento concedido por nível ([ADR-011](../engenharia/adrs/adr-011-ecossistema-e-compartilhamento.md)).
 
-- **Piloto (fevereiro):** oficina e frota própria da Suzano, com grupo econômico.
-- **Abertura (março–abril):** convite a oficinas e transportadoras parceiras (ex.: Vale das Carretas), compartilhamento por nível, solicitação de manutenção entre organizações e estoque consignado; cerca de 2–3 semanas.
+- **Lançamento único (decidido em 26/09/2026):** Suzano e parceiros (ex.: Vale das Carretas) juntos, com grupo econômico, compartilhamento por nível, solicitação de manutenção entre organizações e estoque consignado. Clientes isolados, sem ecossistema, usam o mesmo sistema sem concessões.
 
 **Decisões de modelo tomadas em 26/09/2026**, todas no schema desde a fase 0: várias bases por organização (cada uma com boxes e depósitos, com transferência entre depósitos); histórico de engate carreta–cavalo, com custo seguindo o ativo e OS aceitando ativo avulso; histórico de operador (a frota muda de transportadora); peças serializadas opcionais (bateria, compressor…), com o pneu como caso especial; depósito com dono e local separados (consignado); oficina declara os tipos de ativo que atende (só carretas, só cavalos ou ambos), e a mesma composição pode ser mantida por duas oficinas, com custo consolidado para o dono.
 
@@ -98,6 +97,7 @@ O `@facter/ds-core` evolui puxado pela web v2, não como um projeto v2 separado.
 | Peças, estoque, requisições | Sim | O custo da ordem depende disso |
 | Funcionários, cargos, turnos, boxes | Sim | Necessário para executar ordens |
 | Notas e anexos da ordem | Sim | Baixo custo, uso diário |
+| Itens de confiança para empresa grande (dados no Brasil, SSO via OIDC, revisão de acessos, exportação CSV, organização de demonstração, SLA e status, continuidade, pentest) | Sim (decidido em 26/09/2026) | Mais baratos agora do que depois; ~1,5 semana |
 | Indicadores de decisão | Sim | 13 indicadores, ver [definições](../produto/indicadores-de-decisao.md); determinam os fatos que o schema grava |
 | Resumo semanal por e-mail para donos e chefias | Sim (decidido em 26/09/2026) | Recorte semanal dos indicadores de decisão; no piloto, é a prova de valor que chega sem o dono entrar no sistema; soma cerca de 2 dias |
 | Rateio de materiais compartilhados (completo) | Sim (decidido em 26/09/2026) | Sem ele o custo por veículo sai subestimado; soma 1–1,5 semana |
@@ -112,14 +112,18 @@ O `@facter/ds-core` evolui puxado pela web v2, não como um projeto v2 separado.
 
 ## Decisões em aberto
 
-- [ ] Aprovar o ADR-010 (v2 do núcleo) ou escolher outro caminho
+- [x] ADR-010 aprovado (26/09/2026)
 - [x] Pneus e checklists entram no lançamento: sim
 - [x] Time até o lançamento: a arquiteta com o Claude
-- [ ] Data de lançamento: com o escopo atual, início a meio de fevereiro de 2027 se a fase 0 começar em 1º/10
-- [ ] Camada SaaS do lançamento (planos, importação, configurações, LGPD, backoffice, anexos): ver [Plataforma SaaS](./plataforma-saas.md); soma 2–3 semanas e sugere lançamento em duas etapas
+- [x] Lançamento único, sem etapa de piloto separada
+- [ ] Data de lançamento: com o escopo atual, meados a fim de março de 2027 se a fase 0 começar em 1º/10
+- [x] Itens de confiança para empresa grande no lançamento (26/09/2026): dados no Brasil, SSO via OIDC (Entra ID e Google), relatório de revisão de acessos, exportação CSV de fatos e indicadores, organização de demonstração para o cliente, SLA com página de status e processo de incidente, plano de continuidade, pentest por terceiro antes do lançamento. Depois: SCIM, conector de Power BI, indicadores de ESG, seguro quando um contrato exigir. Soma ~1,5 semana ([mercado e clientes](./mercado-e-clientes.md#o-que-mais-pesa-para-empresas-desse-porte))
+- [ ] Camada SaaS do lançamento (planos, importação, configurações, LGPD, backoffice, anexos): ver [Plataforma SaaS](./plataforma-saas.md); soma 2–3 semanas
 - [ ] Congelar o escopo: o que vier depois de 26/09/2026 entra como primeira entrega pós-lançamento
 - [x] Indicadores de decisão: 13 no lançamento, definidos em [Indicadores de decisão](../produto/indicadores-de-decisao.md)
-- [ ] Tablets das oficinas: Android ou iPad (antes da fase 3; o PWA no iPad tem limitações de push e de armazenamento local)
+- [ ] **Reabrir a hospedagem da API** (vira ADR-012) — **prazo: antes do fim da fase 1** (deploy automatizado em homologação). Não trava o schema nem o código, desde que o código nasça portável: imagem Docker, configuração só por variáveis de ambiente, worker como processo separado, nenhum recurso exclusivo de provedor. Motivo: o Render não tem região no Brasil ([render.com/docs/regions](https://render.com/docs/regions)), e o Neon tem São Paulo ([neon.com/docs/introduction/regions](https://neon.com/docs/introduction/regions)). API e banco precisam ficar na mesma região, e dados no Brasil pesam na homologação. Avaliar Fly.io (GRU), Google Cloud Run (southamerica-east1) e AWS (sa-east-1), com Neon em São Paulo; a web pode seguir na Vercel
+- [x] Pronto para outro idioma desde o primeiro dia (26/09/2026): textos em arquivos de tradução, API devolve códigos, formatação por localidade, idioma e moeda por organização, valor monetário guarda a moeda. Lançamento em pt-BR ([padrões](../engenharia/padroes/padroes-de-engenharia.md#idiomas-e-localização))
+- [x] Tablets: Android e iPad; o PWA é desenhado para o caso mais restritivo (iPad: push só a partir do iOS 16.4, armazenamento local que o sistema pode apagar, então a fila local confirma o envio e avisa o que ficou pendente)
 - [x] Repositório novo: monorepo `facter-truck` com `apps/api`, `apps/web` e `packages/contracts` (pnpm + turbo)
 - [x] Frontend também na v2: app novo usando só o `@facter/ds-core`, portando o código bom do app atual
 - [x] Hospedagem: web na Vercel (`apps/web`); API e worker da fila no Render (`apps/api`); Redis no Render Key Value; Postgres no Neon ou Render (com Neon, contexto de RLS via `SET LOCAL` por transação)

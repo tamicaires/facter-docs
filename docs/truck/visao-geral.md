@@ -8,7 +8,7 @@ tags: [truck, visao-geral]
 
 O Facter Truck é um sistema de gestão de manutenção para transportadoras: organiza a oficina (fila, boxes, ordens de serviço, mecânicos), o estoque de peças e pneus, e mostra quanto custa manter cada veículo e carreta.
 
-**Estado em setembro de 2026:** o v1 roda em homologação e ainda não tem cliente real. A [auditoria de 2026-09](./engenharia/auditoria-2026-09.md) concluiu que o v1 não está pronto para lançar, e a proposta é construir a v2 do núcleo ([ADR-010](./engenharia/adrs/adr-010-v2-do-nucleo.md), em discussão). O lançamento está previsto para o começo de 2027.
+**Estado em setembro de 2026:** o v1 roda em homologação e ainda não tem cliente real. A [auditoria de 2026-09](./engenharia/auditoria-2026-09.md) concluiu que o v1 não está pronto para lançar, e a decisão é construir a v2 do núcleo ([ADR-010](./engenharia/adrs/adr-010-v2-do-nucleo.md), aprovado). O lançamento está previsto para o fim de fevereiro a meados de março de 2027.
 
 ## O que o Truck vende
 
@@ -16,7 +16,7 @@ Informação para decisão. Hoje o cliente controla a manutenção em vários si
 
 ## Ecossistema
 
-O Truck atende várias partes que se relacionam: embarcadores (ex.: Suzano), transportadoras com manutenção própria (ex.: JSL) ou terceirizada, oficinas terceirizadas (ex.: Vale das Carretas) e socorro terceirizado. Cada organização é dona dos dados que produz e decide o que compartilha com as outras ([ADR-011](./engenharia/adrs/adr-011-ecossistema-e-compartilhamento.md)). A oficina precisa ganhar com o sistema para ela mesma: é isso que evita registro ruim.
+O Truck atende empresas isoladas e também várias partes que se relacionam: embarcadores (ex.: Suzano), transportadoras com manutenção própria (ex.: JSL) ou terceirizada, oficinas terceirizadas (ex.: Vale das Carretas) e socorro terceirizado. Cada organização é dona dos dados que produz e decide o que compartilha com as outras ([ADR-011](./engenharia/adrs/adr-011-ecossistema-e-compartilhamento.md)). A oficina precisa ganhar com o sistema para ela mesma: é isso que evita registro ruim.
 
 ## Para quem
 

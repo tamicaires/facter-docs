@@ -84,6 +84,15 @@ Estas regras valem para todo código novo, sem exceção silenciosa. Uma exceç�
 7. **Um design system, uma biblioteca de ícones, um sistema de toast.** Tela nova não cria variação v2 ao lado da v1: substitui.
 8. **Mobile-first, mas desktop projetado.** Listas grandes são virtualizadas; cronômetros compartilham um único timer.
 
+### Idiomas e localização
+
+1. **Nenhum texto fixo no código.** Todo texto de tela, e-mail, PDF e mensagem sai de arquivos de tradução. Lançamento em pt-BR; espanhol e inglês entram só com tradução.
+2. **A API devolve códigos, não frases:** erros, status e motivos (`WORK_ORDER_NOT_IN_MAINTENANCE`, `WAITING_PART`). A interface traduz.
+3. **Datas, números e moeda formatados pela localidade** (`Intl`), nunca concatenados à mão; período e fuso pela empresa.
+4. **Organização define idioma e moeda padrão; usuário pode trocar o idioma.** Todo valor monetário guarda a moeda junto.
+5. **Conteúdo digitado pelo usuário não é traduzido** (notas, descrições, nomes de peça); só o que o sistema escreve.
+6. **Teste de chave faltando:** o build falha se uma chave de tradução usada não existir no pt-BR.
+
 ### Segurança
 
 1. **Token em cookie httpOnly, `SameSite=Lax`, com refresh rotativo** e revogação no logout, na troca de senha e na mudança de papel.
