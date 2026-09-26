@@ -56,7 +56,7 @@ Consumíveis já têm um comportamento distinto no sistema, controlado pela flag
 
 Ou seja, o consumível já *não* aponta para um veículo específico. Mas ele continua preso a **uma única OS**, que por sua vez está amarrada a **uma única frota**. O custo, portanto, ainda cai integralmente naquela frota.
 
-:::warning Descoberta importante durante a análise
+:::warning[Descoberta importante durante a análise]
 A materialização do custo de peça na OS **ainda não existe em produção**. Hoje os campos `partsCost` / `totalCost` da `WorkOrder` são preenchidos por um **seed com valores aleatórios** (`prisma/seed-work-order-costs.ts`) — nenhum use case recalcula `partsCost` a partir das `PartRequest` reais. O custo real das peças (`approvedQuantity × costPrice`) só é computado em relatórios de consumo/curva ABC, que **não são segmentados por frota nem por veículo**.
 
 **Consequência para esta proposta:** o rateio não deve ser construído sobre um mecanismo que ainda não existe. A decisão de rateio precisa ser tomada **agora** e embutida no momento em que a apropriação real de custo (`PartRequest` -> `WorkOrder.partsCost`) for implementada — que é um passo natural e próximo. São duas faces do mesmo trabalho.

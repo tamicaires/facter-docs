@@ -6,7 +6,7 @@ tags: [projeto, roadmap, planejamento]
 
 # Roadmap Q1 2026
 
-:::caution Legado v1 — referência, não padrão
+:::caution[Legado v1 — referência, não padrão]
 Descreve o sistema atual (v1), que será substituído pela v2. Serve para entender e portar comportamento, não como modelo para código novo. Veja a [auditoria de 2026-09](../auditoria-2026-09.md) e os [padrões de engenharia](../padroes/padroes-de-engenharia.md).
 :::
 
@@ -162,6 +162,6 @@ CC-1 --> CC-2 --> SUP --> TF-1 --> TF-2 --> TF-3 --> TF-4 --> CC-3
 | Documento | Descricao |
 |-----------|-----------|
 | ADR-007 | Especificacao completa de Cost Center |
-| [ADR-006](../engenharia/adrs/adr-006-dialog-architecture) | Contexto de integracao e manutencao |
+| [ADR-006](/docs/truck/engenharia/adrs/adr-006-planejamento-de-manutencao) | Contexto de integracao e manutencao |
 | Tire Management Evolution | Especificacao tecnica de Tire |
 | Sprint Wireframes | Wireframes das telas de Tire |

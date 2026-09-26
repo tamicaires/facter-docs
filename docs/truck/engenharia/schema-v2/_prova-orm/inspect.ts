@@ -1,0 +1,20 @@
+import 'dotenv/config';
+import { Pool } from 'pg';
+import { PrismaPg } from '@prisma/adapter-pg';
+import { PrismaClient } from './generated/prisma/client';
+import { drizzle } from 'drizzle-orm/node-postgres';
+import { eq, desc, sql } from 'drizzle-orm';
+import * as schema from './drizzle/schema';
+import * as relations from './drizzle/relations';
+const url = process.env.DATABASE_URL!;
+const COMPANY = '3d2abcec-ea59-413e-acd3-e2e43ee7e844', WO = '05b7750f-3322-43ed-acab-30e30bfafb82';
+const prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString: url }), log: [{ emit: 'event', level: 'query' }] });
+(prisma as any).$on('query', (e: any) => console.log('PRISMA SQL:', e.query, '\n'));
+const pool = new Pool({ connectionString: url });
+const db = drizzle(pool, { schema: { ...schema, ...relations }, logger: { logQuery: (q) => console.log('DRIZZLE SQL:', q, '\n') } });
+(async () => {
+  console.log('==== Q2 prisma'); await prisma.work_orders.findMany({ where: { company_id: COMPANY }, orderBy: { created_at: 'desc' }, take: 20, include: { fleets: { select: { fleet_number: true } }, _count: { select: { service_executions: true } } } });
+  console.log('==== Q1 prisma'); await prisma.work_orders.findUnique({ where: { id: WO }, include: { fleets: { select: { fleet_number: true } }, service_executions: { include: { services: { select: { service_name: true } }, service_execution_employee: { include: { employees: { select: { name: true } } } } } }, part_requests: true } });
+  console.log('==== Q1 drizzle'); await db.query.workOrders.findFirst({ where: eq(schema.workOrders.id, WO), with: { fleet: { columns: { fleetNumber: true } }, serviceExecutions: { with: { service: { columns: { serviceName: true } }, serviceExecutionEmployees: { with: { employee: { columns: { name: true } } } } } }, partRequests: true } });
+  await prisma.$disconnect(); await pool.end();
+})();

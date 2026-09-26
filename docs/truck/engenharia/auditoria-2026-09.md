@@ -6,7 +6,7 @@ tags: [auditoria, arquitetura, v2, padroes, testes, seguranca, performance]
 
 # Auditoria técnica e plano de engenharia — setembro/2026
 
-:::info Fonte
+:::info[Fonte]
 Cópia em Markdown do documento de 26/09/2026. O original, com comentários do time, é o [Claude Doc da auditoria](https://claude.ai/code/artifact/238ba063-feab-4b6e-ac9d-b124c7e59940). Se os dois divergirem, esta cópia é a versionada no repositório e prevalece.
 :::
 

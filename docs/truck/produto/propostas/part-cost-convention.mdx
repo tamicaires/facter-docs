@@ -23,7 +23,7 @@ Uma peça pode ser **estocada em uma unidade e consumida em outra** — o sistem
 
 As duas **não podem estar certas ao mesmo tempo** quando o fator de conversão é diferente de 1. Se `costPrice` é o custo do balde, o custo de consumo está **superfaturado pelo fator** (ex.: 20×). Se `costPrice` é o custo do litro, é o valor de estoque que está errado.
 
-:::warning Não é só uma feature nova — é a correção de um cálculo já no ar
+:::warning[Não é só uma feature nova — é a correção de um cálculo já no ar]
 Peças com fator de conversão diferente de 1 já estão sendo custeadas de forma inconsistente nos indicadores de peças e no rateio de material compartilhado. Definir a convenção **conserta** esses números.
 :::
 
@@ -44,7 +44,7 @@ E na solicitação de peça:
 
 Ou seja: falta apenas **decidir em qual unidade o `costPrice` vive** e aplicar o fator na outra ponta.
 
-:::note Nomenclatura invertida em relação ao mercado
+:::note[Nomenclatura invertida em relação ao mercado]
 Na convenção de mercado (Limble, QuickBooks, NetSuite), a "unidade-base" do custo é a **menor** unidade — a de consumo. No nosso schema, o campo chamado `stockUnit` é a unidade **maior** (o "purchasable" do Limble) e o `consumptionUnit` é a menor. É só uma questão de nome; o importante é fixar a base do custo.
 :::
 
@@ -118,7 +118,7 @@ Recomendações de implementação para não reintroduzir o bug:
 - Se um dia a compra ocorrer numa **terceira** unidade (tambor de 200 L), basta o fator compra→consumo e recalcular `costPrice` no recebimento (padrão NetSuite/SAP/Odoo).
 - **Média móvel** (opcional, futuro) para atualizar `costPrice` a cada compra, sempre na unidade de consumo.
 
-:::info Se produto preferir raciocinar "preço do balde"
+:::info[Se produto preferir raciocinar "preço do balde"]
 Aí a Opção B é legítima e até elegante (reaproveita o `stockImpact` que já calculamos). O trade-off é contrariar a convenção de mercado e deixar o número mais consultado (custo da OS) com uma divisão. A escolha é essencialmente **como vocês pensam o preço ao cadastrar a peça**.
 :::
 
