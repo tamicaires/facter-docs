@@ -244,6 +244,48 @@ create table terms_acceptances (
 );
 ```
 
+## Integração com ERP (SAP e outros)
+
+A integração em si fica para depois do lançamento, mas o modelo nasce pronto: a Suzano integra quase tudo com o SAP, e mapear depois de um schema fechado custa caro.
+
+```sql
+create table external_refs (                  -- substitui externalId/externalSource repetidos em cada tabela do v1
+  id            uuid primary key,
+  org_id        uuid not null references organizations(id),
+  entity        text not null,                 -- vehicle, work_order, work_session, stock_movement, part…
+  entity_id     uuid not null,
+  system        text not null,                 -- sap, totvs, telematics…
+  external_id   text not null,                 -- nº do equipamento, ordem, confirmação, documento de material
+  synced_at     timestamptz,
+  sync_status   text not null default 'pending' check (sync_status in ('pending','synced','failed')),
+  unique (org_id, system, entity, external_id),
+  unique (org_id, system, entity, entity_id)
+);
+
+create table data_ownership (                 -- quem é dono de cada cadastro, por organização
+  org_id        uuid not null references organizations(id),
+  entity        text not null,                 -- part, cost_center, vehicle…
+  owner_system  text not null,                 -- truck ou sap: se sap, o Truck importa e bloqueia a edição
+  primary key (org_id, entity)
+);
+```
+
+| SAP PM / MM | v2 |
+| --- | --- |
+| Equipamento (EQUI) | `vehicles` |
+| Centro / depósito | `bases` / `depots` (com código SAP) |
+| Nota de manutenção (QMEL) | `maintenance_requests` |
+| Ordem de manutenção (AUFK/AFIH) | `work_orders` |
+| Operação (AFVC) | `service_executions` |
+| Confirmação de horas (AFRU) | `work_sessions` |
+| Reserva (RESB) | `part_requests` |
+| Movimento de material (MSEG 261/262) | `stock_movements` |
+| Mestre de material (MARA) | `parts` |
+| Documento de medição (IMRG) | `meter_readings` |
+| Centro de custo (CSKS) | centros de custo (depois) |
+
+Regras: a integração sai pelo outbox para um worker com retentativa e idempotência, nunca da requisição; se o ERP estiver fora do ar, a oficina segue trabalhando. Códigos no formato do ERP (centro, depósito, unidade ISO, material) ficam guardados junto das entidades correspondentes.
+
 ## Invariantes garantidos aqui
 
 PLT-1 a PLT-7, ECO-2 a ECO-5, WO-5 (via `sequences`).
