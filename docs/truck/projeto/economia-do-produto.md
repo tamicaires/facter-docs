@@ -158,8 +158,8 @@ Preços do Claude em [claude.com/pricing](https://claude.com/pricing) (26/09/202
 | − Variável (fotos, analytics, cobrança) | R$ 3 | R$ 3 | R$ 3 | R$ 4 | R$ 115 |
 | − Imposto (6%, alíquota atual) | R$ 117 | R$ 234 | R$ 450 | R$ 666 | R$ 1.050 |
 | **= O que sobra do sistema** | R$ 1.245 | R$ 3.078 | R$ 5.777 | R$ 9.160 | R$ 15.065 |
-| **Lucro com Max 5x** (− R$ 1.005) | +R$ 240 | +R$ 2.073 | +R$ 4.772 | +R$ 8.155 | +R$ 14.060 |
-| **Lucro com Max 20x, garantia** (− R$ 1.590) | **−R$ 345** | **+R$ 1.488** | **+R$ 4.187** | **+R$ 7.570** | **+R$ 13.475** |
+| **Lucro se o seu Claude for o Max 5x** (custo da empresa R$ 1.005) | +R$ 240 | +R$ 2.073 | +R$ 4.772 | +R$ 8.155 | +R$ 14.060 |
+| **Lucro se o seu Claude for o Max 20x** (custo da empresa R$ 1.590; cenário de garantia, o mais caro) | **−R$ 345** | **+R$ 1.488** | **+R$ 4.187** | **+R$ 7.570** | **+R$ 13.475** |
 
 **Alíquota atual: 6%** (primeira faixa do Simples, informada em 26/09/2026), além do INSS já pago. Os 6% valem enquanto o faturamento total do CNPJ nos últimos 12 meses ficar até R$ 180 mil; acima disso, a alíquota efetiva sobe aos poucos (ex.: ~8% com R$ 300 mil no Anexo III), porque a lei desconta uma parcela fixa. O contador projeta com o faturamento real.
 
