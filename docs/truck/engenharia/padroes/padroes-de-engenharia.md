@@ -30,7 +30,7 @@ Estas regras valem para todo código novo, sem exceção silenciosa. Uma exceç�
 5. **História não se apaga.** `ON DELETE RESTRICT` por padrão; soft delete (`deleted_at`) em cadastros; tabelas de fato (transições, movimentações, sessões) são append-only. `CASCADE` só em composição pura, justificado no ADR.
 6. **O banco garante invariantes:** CHECK para XOR, quantidade ≥ 0, fim ≥ início; índice único parcial para "no máximo um aberto"; FK em toda referência. Nada de `assetId` string sem FK.
 7. **Um conceito, um lugar.** Nenhum campo duplicado com outro nome ("legado" e "novo"). Mudou o modelo? Migra e remove o antigo na mesma entrega.
-8. **Nomes:** tabelas e colunas em `snake_case` inglês, tabelas no plural; enums em inglês `UPPER_SNAKE`. Texto em português só na camada de apresentação.
+8. **Nomes:** tabelas e colunas em `snake_case` inglês, tabelas no plural; códigos de status e tipos em inglês, `snake_case` minúsculo (`in_progress`, `in_stock`), iguais no banco, na API e nas chaves de tradução. Texto em português (ou outro idioma) só na camada de apresentação.
 9. **Cadastro configurável é tabela, não enum** (categorias de serviço, tipos de problema). Enum só para conjuntos que o código interpreta (status).
 10. **Migrations:** uma por mudança, com nome descritivo, revisadas no PR, sempre para frente. Nenhuma migration destrutiva sem ADR.
 
@@ -87,7 +87,7 @@ Estas regras valem para todo código novo, sem exceção silenciosa. Uma exceç�
 ### Idiomas e localização
 
 1. **Nenhum texto fixo no código.** Todo texto de tela, e-mail, PDF e mensagem sai de arquivos de tradução. Lançamento em pt-BR; espanhol e inglês entram só com tradução.
-2. **A API devolve códigos, não frases:** erros, status e motivos (`WORK_ORDER_NOT_IN_MAINTENANCE`, `WAITING_PART`). A interface traduz.
+2. **A API devolve códigos, não frases:** códigos de erro em `UPPER_SNAKE` (`WORK_ORDER_NOT_IN_MAINTENANCE`); status, tipos e motivos em `snake_case` minúsculo (`waiting_part`, `in_stock`). A interface traduz.
 3. **Datas, números e moeda formatados pela localidade** (`Intl`), nunca concatenados à mão; período e fuso pela empresa.
 4. **Organização define idioma e moeda padrão; usuário pode trocar o idioma.** Todo valor monetário guarda a moeda junto.
 5. **Conteúdo digitado pelo usuário não é traduzido** (notas, descrições, nomes de peça); só o que o sistema escreve.
