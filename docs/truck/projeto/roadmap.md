@@ -119,6 +119,7 @@ O `@facter/ds-core` evolui puxado pela web v2, não como um projeto v2 separado.
 - [ ] Camada SaaS do lançamento (planos, importação, configurações, LGPD, backoffice, anexos): ver [Plataforma SaaS](./plataforma-saas.md); soma 2–3 semanas
 - [ ] Congelar o escopo: o que vier depois de 26/09/2026 entra como primeira entrega pós-lançamento
 - [x] Indicadores de decisão: 13 no lançamento, definidos em [Indicadores de decisão](../produto/indicadores-de-decisao.md)
+- [ ] **Reabrir a hospedagem da API** (vira ADR-012): o Render não tem região no Brasil ([render.com/docs/regions](https://render.com/docs/regions)), e o Neon tem São Paulo ([neon.com/docs/introduction/regions](https://neon.com/docs/introduction/regions)). API e banco precisam ficar na mesma região, e dados no Brasil pesam na homologação. Avaliar Fly.io (GRU), Google Cloud Run (southamerica-east1) e AWS (sa-east-1), com Neon em São Paulo; a web pode seguir na Vercel
 - [x] Tablets: Android e iPad; o PWA é desenhado para o caso mais restritivo (iPad: push só a partir do iOS 16.4, armazenamento local que o sistema pode apagar, então a fila local confirma o envio e avisa o que ficou pendente)
 - [x] Repositório novo: monorepo `facter-truck` com `apps/api`, `apps/web` e `packages/contracts` (pnpm + turbo)
 - [x] Frontend também na v2: app novo usando só o `@facter/ds-core`, portando o código bom do app atual
