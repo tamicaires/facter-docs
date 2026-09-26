@@ -19,8 +19,8 @@ Toda decisão de arquitetura do Truck tem um ADR com número sequencial. Um ADR 
 | 007 | Centro de custo + consolidação do histórico por transições | Implementado (v1) | Arquivo perdido; o schema cita "ADR-007" nas tabelas de transição |
 | 008 | Refactoring do sistema de autenticação | Planejado, não executado | Arquivo perdido |
 | 009 | [Custeio de mão de obra na OS](./adr-009-labor-cost.md) | Aprovado; implementação em `feat/factrk-9-labor-rate`, fora da `homolog` | Aqui |
-| 010 | [v2 do núcleo com corte de escopo](./adr-010-v2-do-nucleo.md) | Em discussão | Aqui |
-| 011 | [Ecossistema de organizações e compartilhamento de dados](./adr-011-ecossistema-e-compartilhamento.md) | Em discussão | Aqui |
+| 010 | [v2 do núcleo com corte de escopo](./adr-010-v2-do-nucleo.md) | Aprovado (26/09/2026) | Aqui |
+| 011 | [Ecossistema de organizações e compartilhamento de dados](./adr-011-ecossistema-e-compartilhamento.md) | Aprovado com ajustes (26/09/2026) | Aqui |
 
 Os ADRs 001–008 são decisões do v1. Os que o código cita como justificativa (003, 006, 007) importam para quem for portar comportamento. A lista acima veio de uma tabela no arquivo antigo da documentação; os arquivos 005, 007 e 008 não foram encontrados em nenhum repositório.
 

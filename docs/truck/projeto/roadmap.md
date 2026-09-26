@@ -6,7 +6,7 @@ tags: [roadmap, v2, lancamento, planejamento]
 
 # Roadmap
 
-A meta é lançar o Facter Truck no começo de 2027 sobre a v2 do núcleo, em cerca de 17 a 19 semanas a partir da aprovação do [ADR-010](../engenharia/adrs/adr-010-v2-do-nucleo.md). O plano anterior (1º trimestre de 2026) está em [legado](../engenharia/legado-v1/roadmap-2026-q1.md).
+A meta é lançar o Facter Truck no começo de 2027 sobre a v2 do núcleo, em cerca de 19 a 22 semanas a partir da aprovação (com o ecossistema completo no lançamento), o que leva a data para o fim de fevereiro a meados de março de 2027, contando o recesso de fim de ano do [ADR-010](../engenharia/adrs/adr-010-v2-do-nucleo.md). O plano anterior (1º trimestre de 2026) está em [legado](../engenharia/legado-v1/roadmap-2026-q1.md).
 
 ## Fases
 
@@ -26,8 +26,7 @@ Prazos em ordem de grandeza, supondo a arquiteta trabalhando em par com o Claude
 
 A primeira meta é a Suzano, que traz os parceiros. O Truck atende um ecossistema: embarcador, transportadoras, oficinas e socorro terceirizados, cada organização dona dos próprios dados, com compartilhamento concedido por nível ([ADR-011](../engenharia/adrs/adr-011-ecossistema-e-compartilhamento.md)).
 
-- **Piloto (fevereiro):** oficina e frota própria da Suzano, com grupo econômico.
-- **Abertura (março–abril):** convite a oficinas e transportadoras parceiras (ex.: Vale das Carretas), compartilhamento por nível, solicitação de manutenção entre organizações e estoque consignado; cerca de 2–3 semanas.
+- **Lançamento único (decidido em 26/09/2026):** Suzano e parceiros (ex.: Vale das Carretas) juntos, com grupo econômico, compartilhamento por nível, solicitação de manutenção entre organizações e estoque consignado. Clientes isolados, sem ecossistema, usam o mesmo sistema sem concessões.
 
 **Decisões de modelo tomadas em 26/09/2026**, todas no schema desde a fase 0: várias bases por organização (cada uma com boxes e depósitos, com transferência entre depósitos); histórico de engate carreta–cavalo, com custo seguindo o ativo e OS aceitando ativo avulso; histórico de operador (a frota muda de transportadora); peças serializadas opcionais (bateria, compressor…), com o pneu como caso especial; depósito com dono e local separados (consignado); oficina declara os tipos de ativo que atende (só carretas, só cavalos ou ambos), e a mesma composição pode ser mantida por duas oficinas, com custo consolidado para o dono.
 
@@ -112,14 +111,15 @@ O `@facter/ds-core` evolui puxado pela web v2, não como um projeto v2 separado.
 
 ## Decisões em aberto
 
-- [ ] Aprovar o ADR-010 (v2 do núcleo) ou escolher outro caminho
+- [x] ADR-010 aprovado (26/09/2026)
 - [x] Pneus e checklists entram no lançamento: sim
 - [x] Time até o lançamento: a arquiteta com o Claude
-- [ ] Data de lançamento: com o escopo atual, início a meio de fevereiro de 2027 se a fase 0 começar em 1º/10
-- [ ] Camada SaaS do lançamento (planos, importação, configurações, LGPD, backoffice, anexos): ver [Plataforma SaaS](./plataforma-saas.md); soma 2–3 semanas e sugere lançamento em duas etapas
+- [x] Lançamento único, sem etapa de piloto separada
+- [ ] Data de lançamento: com o escopo atual, fim de fevereiro a meados de março de 2027 se a fase 0 começar em 1º/10
+- [ ] Camada SaaS do lançamento (planos, importação, configurações, LGPD, backoffice, anexos): ver [Plataforma SaaS](./plataforma-saas.md); soma 2–3 semanas
 - [ ] Congelar o escopo: o que vier depois de 26/09/2026 entra como primeira entrega pós-lançamento
 - [x] Indicadores de decisão: 13 no lançamento, definidos em [Indicadores de decisão](../produto/indicadores-de-decisao.md)
-- [ ] Tablets das oficinas: Android ou iPad (antes da fase 3; o PWA no iPad tem limitações de push e de armazenamento local)
+- [x] Tablets: Android e iPad; o PWA é desenhado para o caso mais restritivo (iPad: push só a partir do iOS 16.4, armazenamento local que o sistema pode apagar, então a fila local confirma o envio e avisa o que ficou pendente)
 - [x] Repositório novo: monorepo `facter-truck` com `apps/api`, `apps/web` e `packages/contracts` (pnpm + turbo)
 - [x] Frontend também na v2: app novo usando só o `@facter/ds-core`, portando o código bom do app atual
 - [x] Hospedagem: web na Vercel (`apps/web`); API e worker da fila no Render (`apps/api`); Redis no Render Key Value; Postgres no Neon ou Render (com Neon, contexto de RLS via `SET LOCAL` por transação)

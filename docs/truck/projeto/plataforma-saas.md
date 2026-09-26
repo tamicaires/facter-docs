@@ -42,12 +42,10 @@ Além das funcionalidades, um SaaS com cliente pagante precisa de uma camada com
 
 Os itens do lançamento, na versão para o piloto, somam cerca de 2 a 3 semanas.
 
-## Lançamento em duas etapas (proposta)
+## Lançamento
 
-1. **Piloto (fevereiro):** um cliente, com importação, cobrança e configuração feitas pelo time.
-2. **Abertura (março):** mais clientes, com o que o piloto mostrou ser necessário automatizado primeiro.
+Lançamento único (decidido em 26/09/2026). As versões para o piloto da tabela acima valem para os primeiros clientes: importação, cobrança e configuração feitas pelo time até serem automatizadas.
 
 ## Decisões pendentes
 
-- [ ] Lançamento em duas etapas (piloto em fevereiro, abertura em março)
 - [ ] Planos: quais existem e o que cada um libera
