@@ -6,6 +6,10 @@ tags: [activity-system, domain-events, modulos, backend]
 
 # Activity System
 
+:::caution Legado v1 — referência, não padrão
+Descreve o sistema atual (v1), que será substituído pela v2. Serve para entender e portar comportamento, não como modelo para código novo. Veja a [auditoria de 2026-09](../../auditoria-2026-09.md) e os [padrões de engenharia](../../padroes/padroes-de-engenharia.md).
+:::
+
 Sistema de logging de atividades baseado em Domain Events. Substitui o antigo `EventService` por um sistema desacoplado e testavel.
 
 ---
@@ -219,7 +223,7 @@ it('should emit WORK_ORDER_MAINTENANCE_STARTED event', async () => {
 
 ## Referencias
 
-- [Domain Errors](../padroes/domain-errors) -- Erros usados nos eventos
-- [Testes](../padroes/testes) -- Padrao de testes
+- [Domain Errors](/docs/truck/engenharia/legado-v1/padroes/domain-errors) -- Erros usados nos eventos
+- [Testes](/docs/truck/engenharia/legado-v1/padroes/testes) -- Padrao de testes
 - [Work Order](./work-order) -- Modulo principal com eventos
 - [Checklist](./checklist) -- Integracao com checklist

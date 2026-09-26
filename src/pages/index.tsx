@@ -9,7 +9,7 @@ const sections = [
     Icon: LuCode,
     iconClass: 'eng',
     description: 'Gestao de frotas e manutencao. Engenharia, produto, ADRs e decisoes.',
-    link: '/docs/truck/engenharia/arquitetura/visao-geral',
+    link: '/docs/truck/visao-geral',
   },
   {
     title: 'Hub',

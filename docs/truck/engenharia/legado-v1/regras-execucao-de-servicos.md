@@ -6,6 +6,10 @@ tags: [regras-negocio, servicos, manutencao, produto]
 
 # Regras de Negocio: Execucao de Servicos
 
+:::caution Legado v1 — referência, não padrão
+Descreve o sistema atual (v1), que será substituído pela v2. Serve para entender e portar comportamento, não como modelo para código novo. Veja a [auditoria de 2026-09](../auditoria-2026-09.md) e os [padrões de engenharia](../padroes/padroes-de-engenharia.md).
+:::
+
 Regras que governam a execucao de servicos dentro de uma Ordem de Servico (OS).
 
 ---
@@ -200,5 +204,5 @@ Cada transicao de status registra:
 
 ## Referencias
 
-- [Work Order](../../engenharia/modulos/work-order) -- Modulo tecnico de OS
-- [Glossario](../glossario) -- Termos do dominio
+- [Work Order](/docs/truck/engenharia/legado-v1/modulos/work-order) -- Modulo tecnico de OS
+- [Glossario](/docs/truck/produto/glossario) -- Termos do dominio

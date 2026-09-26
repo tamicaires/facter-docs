@@ -6,6 +6,10 @@ tags: [fleet, modulos, ativos, backend]
 
 # Fleet (Frota)
 
+:::caution Legado v1 — referência, não padrão
+Descreve o sistema atual (v1), que será substituído pela v2. Serve para entender e portar comportamento, não como modelo para código novo. Veja a [auditoria de 2026-09](../../auditoria-2026-09.md) e os [padrões de engenharia](../../padroes/padroes-de-engenharia.md).
+:::
+
 Modulo de gestao de ativos do Facter Truck. Gerencia frotas, veiculos, carretas, eixos e posicoes de roda.
 
 ---
@@ -181,6 +185,6 @@ WheelPosition:
 
 ## Referencias
 
-- [Visao Geral da Arquitetura](../arquitetura/visao-geral) -- Diagrama de modulos
+- [Visao Geral da Arquitetura](/docs/truck/engenharia/legado-v1/arquitetura) -- Diagrama de modulos
 - [Work Order](./work-order) -- OS vinculadas a ativos
-- [Glossario](../../produto/glossario) -- Termos do dominio de frota
+- [Glossario](/docs/truck/produto/glossario) -- Termos do dominio de frota

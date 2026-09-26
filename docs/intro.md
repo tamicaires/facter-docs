@@ -26,7 +26,7 @@ Documentacao centralizada do ecossistema Facter — SaaS multi-tenant para gesta
 
 ## Navegacao
 
-- **[Truck](/docs/truck/engenharia/arquitetura/visao-geral)** — Engenharia, produto, decisoes, ADRs
+- **[Truck](/docs/truck/visao-geral)** — Engenharia, produto, decisoes, ADRs
 - **[Hub](/docs/hub/engenharia/arquitetura/visao-geral)** — Engenharia, produto, roadmap
 - **[Vagas](/docs/vagas/produto/visao-geral)** — Portal de vagas: visao geral, roadmap, arquitetura
 - **[TechCare](/docs/techcare/produto/visao-geral)** — Assistencia tecnica: fluxos, regras de negocio, como testar

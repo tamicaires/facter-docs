@@ -6,6 +6,10 @@ tags: [arquitetura, backend, frontend, clean-architecture]
 
 # Facter Truck - Arquitetura
 
+:::caution Legado v1 — referência, não padrão
+Descreve o sistema atual (v1), que será substituído pela v2. Serve para entender e portar comportamento, não como modelo para código novo. Veja a [auditoria de 2026-09](../auditoria-2026-09.md) e os [padrões de engenharia](../padroes/padroes-de-engenharia.md).
+:::
+
 Documentacao tecnica da arquitetura do sistema Facter Truck.
 
 ---
@@ -41,7 +45,7 @@ Cada camada tem uma responsabilidade bem definida:
 - **Core**: Camada de dominio puro. Entities com validacao Zod, repositories abstratos, excecoes de negocio e enums. Zero dependencias externas.
 - **Infra**: Implementacoes concretas. Prisma para banco, Redis para cache, Winston para logging, Prometheus para metricas.
 
-Para mais detalhes sobre os principios de Clean Architecture aplicados, veja [Clean Architecture](../padroes/clean-architecture).
+Para mais detalhes sobre os principios de Clean Architecture aplicados, veja [Clean Architecture](/docs/truck/engenharia/legado-v1/padroes/clean-architecture).
 
 ---
 
@@ -319,7 +323,7 @@ Esse fluxo garante que:
 
 ## Padroes de Codigo
 
-Os padroes abaixo ilustram a implementacao concreta da Clean Architecture. Para diretrizes completas, veja [Clean Architecture](../padroes/clean-architecture).
+Os padroes abaixo ilustram a implementacao concreta da Clean Architecture. Para diretrizes completas, veja [Clean Architecture](/docs/truck/engenharia/legado-v1/padroes/clean-architecture).
 
 ### Entity (Domain)
 
@@ -476,7 +480,7 @@ export class WorkOrderController {
          └──────┘
 ```
 
-Para detalhes de modulos especificos, veja [Work Order](../modulos/work-order), [Fleet](../modulos/fleet), [Checklist](../modulos/checklist) e [Activity System](../modulos/activity-system).
+Para detalhes de modulos especificos, veja [Work Order](/docs/truck/engenharia/legado-v1/modulos/work-order), [Fleet](/docs/truck/engenharia/legado-v1/modulos/fleet), [Checklist](/docs/truck/engenharia/legado-v1/modulos/checklist) e [Activity System](/docs/truck/engenharia/legado-v1/modulos/activity-system).
 
 ---
 
@@ -520,7 +524,7 @@ EventEmitter2.emit(DomainEvent)
 | **Work Order** | start/finish maintenance, waiting parts, cancel | Activity log |
 | **Part Request** | create, approve, reject, deliver, batch approve/reject | Activity log + SSE notifications |
 
-Para mais detalhes, veja [Activity System](../modulos/activity-system).
+Para mais detalhes, veja [Activity System](/docs/truck/engenharia/legado-v1/modulos/activity-system).
 
 ---
 
@@ -535,7 +539,7 @@ Para mais detalhes, veja [Activity System](../modulos/activity-system).
 
 A invalidacao do cache e feita manualmente nos use cases que alteram os dados cacheados.
 
-Para detalhes sobre performance e raw queries vs ORM, veja [Performance](../padroes/performance).
+Para detalhes sobre performance e raw queries vs ORM, veja [Performance](/docs/truck/engenharia/legado-v1/padroes/performance).
 
 ---
 
@@ -605,11 +609,11 @@ GET /health
 
 ## Referencias
 
-- [Clean Architecture](../padroes/clean-architecture) -- Principios e regras
-- [Padroes de Teste](../padroes/testes) -- Testes com jest.fn() mocks
-- [Domain Errors](../padroes/domain-errors) -- Sistema de erros de dominio
-- [Paginacao](../padroes/paginacao) -- Padrao de paginacao para listas
-- [Performance](../padroes/performance) -- Raw queries, cache e otimizacoes
-- [Activity System](../modulos/activity-system) -- Domain Events e atividades
-- [Work Order](../modulos/work-order) -- Modulo de ordens de servico
-- [Fleet](../modulos/fleet) -- Modulo de frota
+- [Clean Architecture](/docs/truck/engenharia/legado-v1/padroes/clean-architecture) -- Principios e regras
+- [Padroes de Teste](/docs/truck/engenharia/legado-v1/padroes/testes) -- Testes com jest.fn() mocks
+- [Domain Errors](/docs/truck/engenharia/legado-v1/padroes/domain-errors) -- Sistema de erros de dominio
+- [Paginacao](/docs/truck/engenharia/legado-v1/padroes/paginacao) -- Padrao de paginacao para listas
+- [Performance](/docs/truck/engenharia/legado-v1/padroes/performance) -- Raw queries, cache e otimizacoes
+- [Activity System](/docs/truck/engenharia/legado-v1/modulos/activity-system) -- Domain Events e atividades
+- [Work Order](/docs/truck/engenharia/legado-v1/modulos/work-order) -- Modulo de ordens de servico
+- [Fleet](/docs/truck/engenharia/legado-v1/modulos/fleet) -- Modulo de frota

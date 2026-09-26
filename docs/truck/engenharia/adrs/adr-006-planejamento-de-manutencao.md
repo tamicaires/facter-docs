@@ -130,4 +130,4 @@ Dashboard de saude da frota com:
 ## Referencias
 
 - [Saude da Frota](../../produto/features/fleet-health) -- Feature de dashboard
-- [Tech Debt](../../projeto/tech-debt) -- Status dos templates de integracao
+- [Tech Debt](/docs/truck/engenharia/legado-v1/tech-debt-2026-02) -- Status dos templates de integracao

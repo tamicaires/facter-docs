@@ -1,10 +1,15 @@
 ---
 title: Clean Architecture
-sidebar_position: 1
+sidebar_position: 10
 tags: [arquitetura, clean-architecture, backend, padroes]
 ---
 
 # Clean Architecture
+
+:::caution Legado v1 — referência, não padrão
+Descreve o sistema atual (v1), que será substituído pela v2. Serve para entender e portar comportamento, não como modelo para código novo. Veja a [auditoria de 2026-09](../../auditoria-2026-09.md) e os [padrões de engenharia](../../padroes/padroes-de-engenharia.md).
+:::
+
 
 Principios e regras da arquitetura limpa aplicados no Facter Truck.
 
@@ -316,7 +321,7 @@ export class WorkOrderModule {}
 
 ## Referencias
 
-- [Visao Geral da Arquitetura](../arquitetura/visao-geral) -- Estrutura completa do sistema
+- [Visao Geral da Arquitetura](/docs/truck/engenharia/legado-v1/arquitetura) -- Estrutura completa do sistema
 - [Testes](./testes) -- Padrao de testes com jest.fn() mocks
 - [Domain Errors](./domain-errors) -- Sistema de erros de dominio
 - [Performance](./performance) -- Quando usar raw queries vs ORM

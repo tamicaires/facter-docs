@@ -20,6 +20,7 @@ const config: Config = {
   onBrokenLinks: 'warn',
 
   markdown: {
+    mermaid: true,
     hooks: {
       onBrokenMarkdownLinks: 'warn',
     },
@@ -70,6 +71,7 @@ const config: Config = {
   ],
 
   themes: [
+    '@docusaurus/theme-mermaid',
     [
       '@easyops-cn/docusaurus-search-local',
       {
@@ -111,7 +113,7 @@ const config: Config = {
         {
           title: 'Projetos',
           items: [
-            {label: 'Truck', to: '/docs/truck/engenharia/arquitetura/visao-geral'},
+            {label: 'Truck', to: '/docs/truck/visao-geral'},
             {label: 'Hub', to: '/docs/hub/engenharia/arquitetura/visao-geral'},
             {label: 'TechCare', to: '/docs/techcare/produto/visao-geral'},
             {label: 'Design System', to: '/docs/design-system/visao-geral'},

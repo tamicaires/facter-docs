@@ -1,10 +1,15 @@
 ---
 title: Performance
-sidebar_position: 5
+sidebar_position: 13
 tags: [performance, backend, frontend, padroes]
 ---
 
 # Performance
+
+:::caution Legado v1 — referência, não padrão
+Descreve o sistema atual (v1), que será substituído pela v2. Serve para entender e portar comportamento, não como modelo para código novo. Veja a [auditoria de 2026-09](../../auditoria-2026-09.md) e os [padrões de engenharia](../../padroes/padroes-de-engenharia.md).
+:::
+
 
 Diretrizes de performance para backend e frontend do Facter Truck.
 
@@ -174,4 +179,4 @@ useQuery({
 ## Referencias
 
 - [Paginacao](./paginacao) -- Padrao de paginacao
-- [Visao Geral da Arquitetura](../arquitetura/visao-geral) -- Cache strategy
+- [Visao Geral da Arquitetura](/docs/truck/engenharia/legado-v1/arquitetura) -- Cache strategy

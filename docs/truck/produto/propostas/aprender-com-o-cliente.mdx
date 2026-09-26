@@ -1,0 +1,77 @@
+---
+title: Aprender com o cliente
+sidebar_position: 20
+tags: [truck, proposta, produto, feedback, analytics, quero-isso, em-breve]
+---
+
+import { ProposalHeader } from '@site/src/components/ProposalHeader';
+
+# Aprender com o cliente
+
+<ProposalHeader status="em-discussao" date="2026-09-26" />
+
+Junto com o lançamento, entra uma camada de produto em volta do sistema: saber o que o cliente usa, onde ele trava, o que ele pede e avisá-lo quando o pedido chegar. Custa cerca de uma semana e troca "achamos que o cliente quer" por "sabemos".
+
+## Problema
+
+O Truck foi pensado como software, mas não como produto em uso. Hoje não existe como saber:
+
+- quais funcionalidades cada cliente usa e quais ignora;
+- onde o usuário desiste no meio de um fluxo;
+- quanto tempo abrir uma ordem leva de verdade;
+- o que o cliente quer a seguir, e por quê;
+- qual cliente está engajado e qual está em risco de ir embora.
+
+Sem isso, o roadmap depois do lançamento é decidido por intuição.
+
+## Proposta
+
+| Peça | O que responde | Lançamento | Custo |
+| --- | --- | --- | --- |
+| **Quero isso** | O que o cliente quer a seguir e por quê | Sim | 2–3 dias |
+| **Te avisamos quando sair** | Fecha o ciclo com quem pediu | Sim | Incluso acima |
+| **Analytics de uso** | Uso por tela e funcionalidade, desistência em fluxos, tempo real das tarefas | Sim | 1–2 dias (base) |
+| **Feedback no contexto** | Onde dói, no momento em que dói | Sim | 1 dia |
+| **Novidades e Em breve** | O que saiu e o que vem, sem datas | Sim | 1 dia |
+| **Saúde do cliente** (painel interno) | Engajamento por empresa e sinais de abandono | Depois | Sobre os dados acima |
+
+### Quero isso
+
+Aparece no lugar onde a funcionalidade vai morar, junto com o que já está sendo coletado ("Preventiva: em breve. O histórico de km deste veículo já está sendo registrado"), e na tela de Novidades e Em breve.
+
+1. Um toque registra o interesse do usuário e da empresa.
+2. Uma pergunta opcional: **"O que você faria com isso?"**. A resposta diz o problema real, não só a funcionalidade, e vale mais que o clique.
+3. Opção "Te avisamos quando sair", marcada por padrão. No lançamento da funcionalidade, quem pediu recebe o aviso no app e por e-mail.
+
+**Regras**
+
+- A prioridade é pesada **por empresa**: três transportadoras pedindo pesam mais que dez usuários da mesma.
+- Cada funcionalidade tem uma chave com namespace (`truck.preventiva`, `truck.telemetria`). O recurso nasce no módulo `plataforma` do Truck v2, que é destacável: quando o Hub da Facter centralizar o que é comum aos produtos, ele migra sem refazer e passa a servir os outros produtos também.
+- Nunca mostra data prevista.
+- Visão interna ranqueada: funcionalidade, número de empresas, número de usuários e as respostas de "o que você faria com isso", para leitura uma a uma.
+
+### Analytics de uso
+
+- Eventos de comportamento nas jornadas principais (abrir ordem, iniciar e concluir serviço, pedir peça, ver indicador), com empresa e papel. Nunca conteúdo digitado nem dado pessoal.
+- Mede as [metas de uso](../../engenharia/padroes/metricas-e-definicao-de-pronto.md): toques por ação, tempo para abrir uma ordem, desistência em fluxos.
+- Ferramenta sugerida: PostHog (tem plano gratuito, funis, gravação de sessão opcional e hospedagem na UE). Decisão final no ADR da fase 1.
+
+### Feedback no contexto
+
+Um "Algo errado aqui?" discreto nas telas principais: texto livre, com a tela e a versão anexadas automaticamente. Vai para uma caixa interna, não para o e-mail de ninguém.
+
+### Novidades e Em breve
+
+Uma tela com o que saiu (changelog escrito para o cliente, não para dev) e o que vem (com o "Quero isso"). Sem datas, sem item de menu desabilitado espalhado pelo app.
+
+## LGPD
+
+- Os termos de uso dizem que o uso do sistema é medido para melhorar o produto.
+- Os eventos não carregam nome, e-mail, placa nem texto digitado.
+- Gravação de sessão, se usada, mascara todos os campos por padrão.
+
+## Decisões pendentes
+
+- [ ] Aprovar a proposta e as quatro peças do lançamento
+- [ ] Ferramenta de analytics (PostHog ou outra)
+- [ ] Quem lê as respostas de "o que você faria com isso" e com que frequência

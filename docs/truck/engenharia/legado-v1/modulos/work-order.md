@@ -6,6 +6,10 @@ tags: [work-order, modulos, manutencao, backend, frontend]
 
 # Work Order (Ordem de Servico)
 
+:::caution Legado v1 — referência, não padrão
+Descreve o sistema atual (v1), que será substituído pela v2. Serve para entender e portar comportamento, não como modelo para código novo. Veja a [auditoria de 2026-09](../../auditoria-2026-09.md) e os [padrões de engenharia](../../padroes/padroes-de-engenharia.md).
+:::
+
 Modulo central de gestao de manutencao do Facter Truck. Gerencia o ciclo de vida completo de ordens de servico, desde a entrada na fila ate a finalizacao.
 
 ---
@@ -158,4 +162,4 @@ Zustand stores para gerenciamento de dialogs e estado local da feature. TanStack
 - [Activity System](./activity-system) -- Eventos de dominio
 - [Fleet](./fleet) -- Gestao de ativos
 - [Checklist](./checklist) -- Integracao com checklists
-- [Execucao de Servicos](../../produto/regras-negocio/service-execution) -- Regras de negocio detalhadas
+- [Execucao de Servicos](/docs/truck/engenharia/legado-v1/regras-execucao-de-servicos) -- Regras de negocio detalhadas

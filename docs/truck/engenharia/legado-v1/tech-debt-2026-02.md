@@ -6,6 +6,10 @@ tags: [projeto, tech-debt, qualidade]
 
 # Tech Debt
 
+:::caution Legado v1 — referência, não padrão
+Descreve o sistema atual (v1), que será substituído pela v2. Serve para entender e portar comportamento, não como modelo para código novo. Veja a [auditoria de 2026-09](../auditoria-2026-09.md) e os [padrões de engenharia](../padroes/padroes-de-engenharia.md).
+:::
+
 Analise e priorizacao de debito tecnico do Facter Truck. Auditado em 2026-02-11.
 
 ---
@@ -92,7 +96,7 @@ Use cases de part-request nao emitem domain events. 5 use cases afetados (approv
 
 ### Alto: Exceptions Legadas
 
-32 arquivos ainda usam `ExceptionHandler` ou `AppException` em vez de `DomainError`. Veja [Domain Errors](../engenharia/padroes/domain-errors) para o padrao correto.
+32 arquivos ainda usam `ExceptionHandler` ou `AppException` em vez de `DomainError`. Veja [Domain Errors](/docs/truck/engenharia/legado-v1/padroes/domain-errors) para o padrao correto.
 
 ### Alto: Codigo Duplicado
 

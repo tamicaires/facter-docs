@@ -1,10 +1,15 @@
 ---
 title: Domain Errors
-sidebar_position: 3
+sidebar_position: 11
 tags: [domain-errors, error-handling, backend, padroes]
 ---
 
 # Domain Errors
+
+:::caution Legado v1 — referência, não padrão
+Descreve o sistema atual (v1), que será substituído pela v2. Serve para entender e portar comportamento, não como modelo para código novo. Veja a [auditoria de 2026-09](../../auditoria-2026-09.md) e os [padrões de engenharia](../../padroes/padroes-de-engenharia.md).
+:::
+
 
 Sistema de erros de dominio do Facter Truck. Substitui o antigo `AppException`/`ExceptionHandler` por erros tipados e estruturados.
 
@@ -178,7 +183,7 @@ switch (error.response?.data?.errorCode) {
 
 ## Regra de Migracao
 
-Ao tocar em um use case que ainda usa `AppException` ou `ExceptionHandler`, **migrar para DomainError**. Status atual: 32 arquivos ainda usam o padrao antigo. Veja [Tech Debt](../../projeto/tech-debt) para detalhes.
+Ao tocar em um use case que ainda usa `AppException` ou `ExceptionHandler`, **migrar para DomainError**. Status atual: 32 arquivos ainda usam o padrao antigo. Veja [Tech Debt](/docs/truck/engenharia/legado-v1/tech-debt-2026-02) para detalhes.
 
 ---
 
@@ -186,4 +191,4 @@ Ao tocar em um use case que ainda usa `AppException` ou `ExceptionHandler`, **mi
 
 - [Clean Architecture](./clean-architecture) -- Separacao de camadas
 - [Testes](./testes) -- Como testar erros de dominio
-- [Tech Debt](../../projeto/tech-debt) -- Status da migracao
+- [Tech Debt](/docs/truck/engenharia/legado-v1/tech-debt-2026-02) -- Status da migracao
