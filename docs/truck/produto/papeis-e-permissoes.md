@@ -70,8 +70,9 @@ As permissões e os papéis padrão do `facter-truck` foram gerados desta págin
 
 | Permissão | O que permite | Adm | Ges | Sup | Pla | Mec | Alm | CtP | Bor | Ins | Fin | Mot | Lei |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| `vehicle.view` | Ver veículos, conjuntos, engates, posições | E | E | E | E | E | E | E | E | E | E | P | E |
-| `vehicle.manage` | Cadastrar e editar veículos e tipos de conjunto | E | E | — | E | — | — | — | — | — | — | — | — |
+| `vehicle.view` | Ver veículos, conjuntos, engates, posições e transportadoras | E | E | E | E | E | E | E | E | E | E | P | E |
+| `vehicle.manage` | Cadastrar e editar veículos, tipos de conjunto e transportadoras; definir a transportadora de um veículo | E | E | — | E | — | — | — | — | — | — | — | — |
+| `carrier_history.correct` | Corrigir um período passado da transportadora de um veículo (com motivo) | E | E | — | — | — | — | — | — | — | — | — | — |
 | `trailer_set.recompose` | Montar ou alterar conjunto de implementos | E | E | E | E | — | — | — | — | — | — | — | — |
 | `coupling.record` | Registrar engate e desengate | E | E | E | E | E | — | — | — | E | — | — | — |
 | `meter.record` | Registrar leitura de km ou horas | E | E | E | E | E | — | — | E | E | — | P | — |
