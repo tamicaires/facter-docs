@@ -136,27 +136,32 @@ Dois grupos de custo:
 
 **O que sobra do sistema** = receita − custo para o sistema funcionar. **Lucro** = o que sobra do sistema − custo para a empresa existir. O custo para a empresa existir abaixo é **exemplo**; trocar pelos valores reais.
 
-| Custo para a empresa existir, por mês (**real, set/2026**) | Valor |
-| --- | --- |
-| Contador | R$ 270 |
-| Claude | R$ 397 |
-| Domínio e extras (folga) | ~R$ 30 |
-| Pró-labore | R$ 0 por enquanto (a arquiteta mantém outra renda; equipe: ela e o marido, sem escritório fixo) |
-| **Total** | **~R$ 700** |
+| Custo para a empresa existir, por mês (cenário de garantia) | Max 5x próprio | Max 20x próprio |
+| --- | --- | --- |
+| Contador | R$ 270 | R$ 270 |
+| Claude da arquiteta, sem dividir (US$ 100 / US$ 200\*) | ~R$ 585 | ~R$ 1.170 |
+| Claude Pro do marido (US$ 20) | ~R$ 120 | ~R$ 120 |
+| Domínio e extras | ~R$ 30 | ~R$ 30 |
+| Pró-labore | R$ 0 por enquanto | R$ 0 por enquanto |
+| **Total** | **~R$ 1.005** | **~R$ 1.590** |
+
+Preços do Claude em [claude.com/pricing](https://claude.com/pricing) (26/09/2026): Pro US$ 20; Max a partir de US$ 100 (5x ou 20x o uso do Pro). \*US$ 200 para o Max 20x é **premissa**, porque a página não mostra o valor separado. Conversão: R$ 5,50 por dólar mais ~6% de IOF e spread. Equipe: a arquiteta e o marido, sem escritório fixo; a arquiteta mantém outra renda.
 
 | | 50 veículos | 100 | 200 | 300 | 500 |
 | --- | --- | --- | --- | --- | --- |
 | Receita (faixa progressiva) | R$ 1.950 | R$ 3.900 | R$ 7.500 | R$ 11.100 | R$ 17.500 |
 | − Infra | R$ 585 (enxuta) | R$ 585 (enxuta) | R$ 1.270 | R$ 1.270 | R$ 1.270 |
 | − Variável (fotos, analytics, cobrança) | R$ 3 | R$ 3 | R$ 3 | R$ 4 | R$ 115 |
-| − Imposto (6% a 15,5%) | 117 a 302 | 234 a 605 | 450 a 1.163 | 666 a 1.721 | 1.050 a 2.713 |
-| **= O que sobra do sistema** | 1.060 a 1.245 | 2.707 a 3.078 | 5.064 a 5.777 | 8.105 a 9.160 | 13.402 a 15.065 |
-| − Custo para a empresa existir | R$ 700 | R$ 700 | R$ 700 | R$ 700 | R$ 700 |
-| **= Lucro por mês** | **+360 a 545** | **+2.007 a 2.378** | **+4.364 a 5.077** | **+7.405 a 8.460** | **+12.702 a 14.365** |
+| − Imposto (6%, alíquota atual) | R$ 117 | R$ 234 | R$ 450 | R$ 666 | R$ 1.050 |
+| **= O que sobra do sistema** | R$ 1.245 | R$ 3.078 | R$ 5.777 | R$ 9.160 | R$ 15.065 |
+| **Lucro com Max 5x** (− R$ 1.005) | +R$ 240 | +R$ 2.073 | +R$ 4.772 | +R$ 8.155 | +R$ 14.060 |
+| **Lucro com Max 20x, garantia** (− R$ 1.590) | **−R$ 345** | **+R$ 1.488** | **+R$ 4.187** | **+R$ 7.570** | **+R$ 13.475** |
 
-**Alíquota atual: 6%** (primeira faixa do Simples, informada em 26/09/2026), além do INSS já pago. Vale o lado melhor de cada faixa da tabela: lucro de +R$ 545 (50 veículos), +R$ 2.378 (100), +R$ 5.077 (200), +R$ 8.460 (300) e +R$ 14.365 (500) por mês. Os 6% valem enquanto o faturamento total do CNPJ nos últimos 12 meses ficar até R$ 180 mil; acima disso, a alíquota efetiva sobe aos poucos (ex.: ~8% com R$ 300 mil no Anexo III), porque a lei desconta uma parcela fixa. O contador projeta com o faturamento real.
+**Alíquota atual: 6%** (primeira faixa do Simples, informada em 26/09/2026), além do INSS já pago. Os 6% valem enquanto o faturamento total do CNPJ nos últimos 12 meses ficar até R$ 180 mil; acima disso, a alíquota efetiva sobe aos poucos (ex.: ~8% com R$ 300 mil no Anexo III), porque a lei desconta uma parcela fixa. O contador projeta com o faturamento real.
 
-Empate por volta de 35 a 40 veículos. **O preço não deve depender do pró-labore zero:** defina um pró-labore-alvo e confira que o preço o paga quando os clientes crescerem; senão o preço fica fixado baixo demais nos contratos.
+Empate: ~45 veículos (Max 5x) e ~60 (Max 20x). A partir de 100 veículos, positivo em qualquer cenário; o pequeno negativo com 50 é coberto pela taxa de implantação. Com imposto acima de 6% (faixa maior ou Anexo V), usar a faixa da tabela de hipótese de preço.
+
+**O preço não deve depender do pró-labore zero:** defina um pró-labore-alvo e confira que o preço o paga quando os clientes crescerem; senão o preço fica fixado baixo demais nos contratos.
 
 ### Para levar ao contador
 
