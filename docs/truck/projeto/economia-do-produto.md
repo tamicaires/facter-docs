@@ -105,6 +105,9 @@ No Brasil, software de manutenção sem hardware está publicado a partir de R$ 
 
 ## Hipótese de preço (a validar)
 
+Estrutura por módulos: base da Oficina mais adicional por módulo contratado ([módulos e planos](../produto/modulos-e-planos.md)). As tabelas abaixo usam só a base; os adicionais ainda não têm valor.
+
+
 **Métrica: veículo ativo por mês.** Acompanha o valor entregue (custo por veículo), cresce com o porte e é o padrão do mercado. Quatro regras:
 
 1. **Planos por módulo e profundidade dos indicadores**, com a oficina sempre inclusa, porque ela gera o dado.
