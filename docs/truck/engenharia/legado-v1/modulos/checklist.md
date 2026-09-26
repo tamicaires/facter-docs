@@ -159,6 +159,6 @@ ChecklistDetailsPage
 
 ## Referencias
 
-- [ADR-004: Checklist Refactoring](../adrs/adr-004-checklist-refactoring) -- Decisao de refactoring
+- [ADR-004: Checklist Refactoring](/docs/truck/engenharia/adrs/adr-004-checklist-refactoring) -- Decisao de refactoring
 - [Activity System](./activity-system) -- Eventos de dominio
 - [Work Order](./work-order) -- Integracao com OS

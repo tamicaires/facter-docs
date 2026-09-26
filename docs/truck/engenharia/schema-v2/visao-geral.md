@@ -45,7 +45,8 @@ flowchart LR
 | Ativos | [Ativos](./ativos.md) | Veículos por tipo formal, eixos e posições, conjuntos de implementos, engates, operador ao longo do tempo, bases e boxes, contadores |
 | Manutenção | [Manutenção](./manutencao.md) | OS, serviços, executores, sessões de trabalho, retrabalho, serviços externos, custo interno e valor cobrado |
 | Estoque | [Estoque](./estoque.md) | Catálogo de peças, unidades, depósitos com dono e local, livro de movimentações, itens serializados, requisições |
-| Pneus, checklists, pessoas, rateio, leitura | A seguir | — |
+| Pessoas, pneus e checklists | [Pessoas, pneus e checklists](./pessoas-pneus-checklists.md) | Funcionários, cargos com custo/hora histórico, turnos; pneus como itens serializados; checklists que geram serviço |
+| Rateio e leitura | [Rateio e leitura](./rateio-e-leitura.md) | Períodos de rateio, agregações diárias que alimentam os 13 indicadores, exportação e resumo semanal |
 
 ## Convenções
 

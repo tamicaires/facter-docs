@@ -168,5 +168,5 @@ O veiculo aparece como "vencido" no dashboard. Opcionalmente, o sistema pode cri
 
 ## Referencias
 
-- [ADR-006: Evolucao do Planejamento](../../engenharia/adrs/adr-006-dialog-architecture) -- Decisao arquitetural
+- [ADR-006: Evolucao do Planejamento](/docs/truck/engenharia/adrs/adr-006-planejamento-de-manutencao) -- Decisao arquitetural
 - [Glossario](../glossario) -- Termos do dominio

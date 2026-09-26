@@ -162,6 +162,6 @@ CC-1 --> CC-2 --> SUP --> TF-1 --> TF-2 --> TF-3 --> TF-4 --> CC-3
 | Documento | Descricao |
 |-----------|-----------|
 | ADR-007 | Especificacao completa de Cost Center |
-| [ADR-006](../engenharia/adrs/adr-006-dialog-architecture) | Contexto de integracao e manutencao |
+| [ADR-006](/docs/truck/engenharia/adrs/adr-006-planejamento-de-manutencao) | Contexto de integracao e manutencao |
 | Tire Management Evolution | Especificacao tecnica de Tire |
 | Sprint Wireframes | Wireframes das telas de Tire |
