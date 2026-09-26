@@ -236,6 +236,10 @@ export function EconomicsSimulator(): ReactNode {
             </button>
           </div>
         ))}
+        <p style={{margin: '4px 0 12px', fontSize: 13, color: 'var(--ifm-color-emphasis-700)'}}>
+          <strong>Por veículo:</strong> para o dono da frota; paga todo mês por cada veículo ativo, com preço caindo por faixa.{' '}
+          <strong>Por frota atendida:</strong> para a oficina terceira; paga só pelas frotas que passaram pela oficina no mês.
+        </p>
         <button type="button" className="button button--sm button--primary" onClick={addClient}>Adicionar cliente</button>
       </div>
 
