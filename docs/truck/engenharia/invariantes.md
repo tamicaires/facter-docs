@@ -9,7 +9,7 @@ tags: [invariantes, dominio, regras-negocio, v2, testes]
 Um invariante é uma regra que nunca pode estar violada no banco, em nenhum momento, por nenhum caminho. Cada invariante tem um id estável: o commit que o cria ou muda cita o id, e o teste que tenta quebrá-lo leva o id no nome. Id não se reaproveita nem se renumera; invariante que deixa de valer fica riscado com o motivo.
 
 :::info[Revisado em 26/09/2026 (task 0.7)]
-Conferido contra o [schema v2](./schema-v2/visao-geral.md), as decisões de 26/09/2026 e o código do `facter-truck`. As três decisões que ainda faltam estão no fim da página, com recomendação.
+Conferido contra o [schema v2](./schema-v2/visao-geral.md), as decisões de 26/09/2026 e o código do `facter-truck`. A decisão que ainda falta está no fim da página, com recomendação.
 :::
 
 **Garantia**
@@ -52,7 +52,7 @@ Todo invariante tem teste de integração. Onde duas pessoas podem agir ao mesmo
 
 | Id | Invariante | Garantia | Situação |
 | --- | --- | --- | --- |
-| AST-1 | Placa é única por organização entre os veículos não excluídos, depois de normalizada (`QRT-4b22` = `QRT4B22`) | Banco (unique parcial) + domínio | ✅ `vehicles.http.spec.ts`; `deleted_at` entra na 1.11 |
+| AST-1 | Placa é única por organização entre os veículos não excluídos, depois de normalizada (`QRT-4b22` = `QRT4B22`). Vendido ou sucateado continua com a placa reservada; o veículo que volta é o mesmo cadastro reativado (decidido em 26/09/2026) | Banco (unique parcial) + domínio | ✅ `vehicles.http.spec.ts`; `deleted_at` entra na 1.11 |
 | AST-2 | Um eixo pertence a exatamente um veículo, de qualquer tipo | Banco (FK) | ⬜ 1.11 |
 | AST-3 | Uma posição de roda tem no máximo um pneu montado | Banco (unique) | ⬜ 3.1 |
 | AST-4 | Um pneu está montado em no máximo uma posição | Banco (unique) | ⬜ 3.1 |
@@ -73,7 +73,7 @@ Todo invariante tem teste de integração. Onde duas pessoas podem agir ao mesmo
 | --- | --- | --- | --- |
 | WO-1 | O status só muda pela máquina de estados, e toda mudança gera exatamente uma transição | Domínio (único caminho de escrita) | ⬜ 2.3 |
 | WO-2 | Uma ordem nasce em `queued` (Fila) | Domínio (sem status no DTO de criação) | ⬜ 2.3 |
-| WO-3 | Em cada organização executora, no máximo uma ordem aberta (`queued`, `in_maintenance`, `paused`) por veículo ou conjunto | Banco (trava com chave `(org_id, target_id)`) | ⬜ 2.3 · ver decisão 2 |
+| WO-3 | Em cada organização executora, no máximo uma ordem aberta (`queued`, `in_maintenance`, `paused`) por veículo ou conjunto | Banco (trava com chave `(org_id, target_id)`) | ⬜ 2.3 · ver decisão abaixo |
 | WO-4 | Um box tem no máximo uma ordem em manutenção | Banco (unique parcial) | ⬜ 2.3 |
 | WO-5 | O número da ordem é único e sequencial por organização e prefixo | Banco (tabela `sequences` + unique) | ⬜ 2.3 |
 | WO-6 | Ordem finalizada ou cancelada não tem serviço aberto nem sessão de trabalho aberta | Domínio + verificação | ⬜ 2.4 |
@@ -91,7 +91,7 @@ Todo invariante tem teste de integração. Onde duas pessoas podem agir ao mesmo
 | SVC-4 | Serviço só inicia ou conclui com a ordem em manutenção | Domínio | ⬜ 2.4 |
 | SVC-5 | Um executor tem no máximo uma sessão de trabalho aberta por serviço | Banco (unique parcial) | ⬜ 2.4 |
 | SVC-6 | Uma sessão tem `ended_at >= started_at` | Banco (CHECK) | ⬜ 2.4 |
-| SVC-7 | Tempo trabalhado = soma das sessões de trabalho | Modelo | ⬜ 2.4 · ver decisão 1 |
+| SVC-7 | Tempo trabalhado = soma das sessões de trabalho; nenhuma pausa conta como trabalho (decidido em 26/09/2026). O tempo parado é registrado por motivo e alimenta o indicador de tempo parado | Modelo | ⬜ 2.4 |
 | SVC-8 | Horário informado pelo usuário só entra como ajuste explícito, dentro do limite da organização, com permissão própria e registro de quem ajustou | Domínio | ⬜ 2.4 |
 | SVC-9 | Um serviço concluído atribui tempo a cada executor pelas suas próprias sessões | Modelo | ⬜ 2.4 |
 
@@ -130,13 +130,7 @@ Pneus entram no lançamento (decidido em 26/09/2026). Os invariantes do ciclo de
 | KPI-2 | Indicador nunca mistura dados de organizações | Banco (RLS) + teste | ⬜ 4.1 |
 | KPI-3 | Períodos são cortados no fuso da organização | Domínio + teste | ⬜ 4.1 |
 
-## Decisões que faltam
+## Decisão que falta
 
-**1. O que conta como tempo trabalhado (SVC-7)** — trava a task 2.4.
-Recomendação: **nenhuma pausa conta como trabalho.** O tempo parado continua registrado, por motivo (aguardando peça, sem box, fim de turno), e vira o indicador de tempo parado. Misturar os dois esconde exatamente o que o dono quer ver: onde a oficina perde tempo.
-
-**2. OS no conjunto e OS num implemento do mesmo conjunto ao mesmo tempo (WO-3)** — trava a task 2.3.
+**OS no conjunto e OS num implemento do mesmo conjunto ao mesmo tempo (WO-3)** — trava a task 2.3.
 Recomendação: **não permitir.** A OS aberta no conjunto trava também os implementos dele, e a OS aberta num implemento trava o conjunto. Duas ordens sobre as mesmas carretas, na mesma oficina, dividem custo e tempo de um jeito que ninguém consegue conferir depois. Outra oficina da rede continua podendo ter a sua (a trava é por organização).
-
-**3. Placa de veículo vendido ou sucateado (AST-1)** — trava a task 1.11.
-Recomendação: **a placa continua reservada enquanto o cadastro não for excluído.** Veículo vendido que volta é o mesmo cadastro reativado, com o histórico junto. Só a exclusão (cadastro errado) libera a placa.

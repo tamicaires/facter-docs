@@ -22,7 +22,7 @@ Saída: CI verde com teste de integração; schema do núcleo aprovado.
 | 0.4 | CI: lint, typecheck, testes com Postgres, drift do OpenAPI, build | Verde no GitHub | ✅ |
 | 0.5 | ds-core: um arquivo por componente e vocabulário de tons | Merge e versão minor publicada no npm | 🟡 merge feito; falta publicar |
 | 0.6 | Schema do núcleo aprovado | As 8 páginas do [schema v2](../engenharia/schema-v2/visao-geral.md) revisadas e os "pontos para decidir" fechados | 🟡 revisão da arquiteta |
-| 0.7 | Invariantes revisados | [Invariantes](../engenharia/invariantes.md) com id estável e dono, sem pendência | 🟡 revisados; 3 decisões com recomendação |
+| 0.7 | Invariantes revisados | [Invariantes](../engenharia/invariantes.md) com id estável e dono, sem pendência | 🟡 revisados; falta a decisão do WO-3 |
 | 0.8 | Padrão de módulo no código | Um módulo exemplo com a estrutura do CLAUDE.md: erro com código, paginação, `Idempotency-Key`, teste de rota gerado | ✅ `assets/vehicles`, 38 testes |
 | 0.9 | Congelar o escopo | Decisão registrada no roadmap | 🟡 decisão |
 
@@ -57,7 +57,7 @@ Saída: **fatia 2 em homologação**. Uma OS real feita do começo ao fim no tab
 | 2.1 | Catálogos: tipos de serviço, componentes, causas, motivos de parada | Sugestão de componente e causa pelo tipo de serviço | ⬜ |
 | 2.2 | Pessoas: funcionários, cargos, turnos, boxes | Executor escolhido por cargo e turno | ⬜ |
 | 2.3 | Ordem de serviço: abertura no conjunto, implemento ou posição; km na entrada; kanban | Invariantes da OS com teste, incluindo concorrência | ⬜ |
-| 2.4 | Serviços, executores e sessões de trabalho (iniciar, pausar com motivo, concluir) | Tempo trabalhado conforme SVC-7; horário vem do servidor | ⬜ depende da decisão SVC-7 |
+| 2.4 | Serviços, executores e sessões de trabalho (iniciar, pausar com motivo, concluir) | Tempo trabalhado conforme SVC-7 (pausa nunca conta); horário vem do servidor | ⬜ |
 | 2.5 | Estoque: catálogo, depósitos (dono e local, consignado), livro de movimentações, saldo | Saldo sempre igual à soma do livro (teste) | ⬜ |
 | 2.6 | Requisição com aprovação segregada e consumo na OS com preço congelado | Quem pede não aprova; custo da OS não muda quando o preço muda | ⬜ |
 | 2.7 | Itens serializados e transferência entre depósitos | Um serializado nunca está em dois lugares | ⬜ |
@@ -108,9 +108,7 @@ Saída: metas de performance atingidas e nenhum achado crítico aberto.
 | Decisão | Trava | Prazo |
 | --- | --- | --- |
 | Schema do núcleo e pontos para decidir | 0.6 e toda a fase 1 | Semana 2 |
-| O que conta como tempo trabalhado (SVC-7) | 2.4 | Semana 6 |
 | OS no conjunto e num implemento dele ao mesmo tempo (WO-3) | 2.3 | Semana 6 |
-| Placa de veículo vendido ou sucateado (AST-1) | 1.11 | Semana 4 |
 | Hospedagem (ADR-012) | 1.5 | Fim da fase 1 |
 | Doc de pneus (resposta aos comentários) | 3.1 | Semana 11 |
 | Preço por módulo | 3.4 | Semana 12 |

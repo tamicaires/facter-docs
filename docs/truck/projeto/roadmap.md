@@ -133,7 +133,7 @@ O `@facter/ds-core` evolui puxado pela web v2, não como um projeto v2 separado.
 - [x] Frontend também na v2: app novo usando só o `@facter/ds-core`, portando o código bom do app atual
 - [x] Hospedagem: web na Vercel (`apps/web`); API e worker da fila no Render (`apps/api`); Redis no Render Key Value; Postgres no Neon ou Render (com Neon, contexto de RLS via `SET LOCAL` por transação)
 - [ ] Papéis padrão do produto e o que cada um pode fazer
-- [ ] O que conta como tempo trabalhado ([SVC-7](../engenharia/invariantes.md))
+- [x] O que conta como tempo trabalhado ([SVC-7](../engenharia/invariantes.md)): nenhuma pausa conta como trabalho; o tempo parado é registrado por motivo (26/09/2026)
 
 ## Enquanto a v2 não sai
 
