@@ -6,19 +6,20 @@ tags: [roadmap, v2, lancamento, planejamento]
 
 # Roadmap
 
-A meta é lançar o Facter Truck no começo de 2027 sobre a v2 do núcleo, em cerca de 20 a 23 semanas a partir da aprovação (com o ecossistema completo e os itens de confiança para empresa grande no lançamento), o que leva a data para meados a fim de março de 2027, contando o recesso de fim de ano do [ADR-010](../engenharia/adrs/adr-010-v2-do-nucleo.md). O plano anterior (1º trimestre de 2026) está em [legado](../engenharia/legado-v1/roadmap-2026-q1.md).
+A meta é lançar o Facter Truck no começo de 2027 sobre a v2 do núcleo, em cerca de 24 semanas a partir de 1º/10/2026 (com o ecossistema completo e os itens de confiança para empresa grande no lançamento), o que leva a data para meados a fim de março de 2027, contando o recesso de fim de ano do [ADR-010](../engenharia/adrs/adr-010-v2-do-nucleo.md). O plano anterior (1º trimestre de 2026) está em [legado](../engenharia/legado-v1/roadmap-2026-q1.md).
 
 ## Fases
 
-Cada fase tem um critério de saída verificável. Nenhuma fase começa sem a anterior cumprir o critério.
+Cada fase fecha uma fatia vertical (API, tela e teste juntos, em homologação) e tem um critério de saída verificável. Nenhuma fase começa sem a anterior cumprir o critério. As tasks de cada fase, com status, estão no [plano de execução](./plano-de-execucao.md).
 
-| Fase | Semanas | Entregas | Critério de saída | Status |
-| --- | --- | --- | --- | --- |
-| 0. Decisões e alicerce | 1–2 | Escopo congelado, [invariantes](../engenharia/invariantes.md) revisados, ADRs fundacionais, schema v2 do núcleo aprovado, projeto novo com CI, TS strict, testes de integração com Postgres real e OpenAPI | CI verde com um teste de integração; schema aprovado | Planejamento |
-| 1. Plataforma | 3–5 | Módulo `plataforma` destacável para o futuro Hub (identidade, empresas, membros, permissões, "Quero isso", notificações), multiempresa com RLS, permissões v2, auth com cookie httpOnly e refresh, outbox + fila, jobs com lock, observabilidade, deploy automatizado | Suíte de isolamento: empresa B não lê nem altera nada da A em nenhuma rota | — |
-| 2. Núcleo de domínio | 5–12 | Ativos unificados, ordem de serviço, serviços com executores e sessões de trabalho, estoque com livro de movimentações e aprovação segregada, custos em `numeric`. Pneus com ciclo de vida e recapagem sobre eventos idempotentes. Checklists com vínculo a serviço e ordem | Todos os invariantes do núcleo com teste de integração, incluindo concorrência | — |
-| 3. Frontend v2 | 8–15 | App novo em `apps/web` só com `@facter/ds-core`, casca portada do app atual (HTTP, auth, permissões, mutations), tipos de `packages/contracts`, cache por empresa, telas de todos os módulos do lançamento | Jornadas críticas passando no Playwright contra a v2 | — |
-| 4. Indicadores de decisão e endurecimento | 15–19 | Indicadores de decisão (custo por veículo, frota e km; disponibilidade; tempo parado por motivo; retrabalho; falhas recorrentes por componente; consumo de peças) sobre tabelas de agregação, rateio completo com fechamento de período, teste de carga, revisão de segurança, piloto com um cliente | Metas de performance atingidas; zero achado crítico aberto | — |
+| Fase | Semanas | Entregas | Critério de saída |
+| --- | --- | --- | --- |
+| 0. Alicerce | 1–2 | Monorepo, API com RLS, web com contrato tipado, CI, schema do núcleo aprovado, invariantes revisados, padrão de módulo | CI verde com teste de integração; schema aprovado |
+| 1. Plataforma e ativos | 3–6 | Identidade, organizações, permissões v2, matrícula + PIN, deploy em homologação, outbox e fila, observabilidade, casca da web, ativos com engate | **Fatia 1 em homologação**; empresa B não lê nem altera nada da A em nenhuma rota |
+| 2. Oficina | 7–11 | Catálogos, pessoas, OS, serviços e sessões de trabalho, estoque com livro e aprovação segregada, anexos e PDF, PWA com fila local | **Fatia 2**: uma OS real do começo ao fim no tablet, com custo |
+| 3. Pneus, checklists e ecossistema | 12–17 | Pneus, checklists, compartilhamento entre organizações, planos e módulos, configurações, importação, itens de confiança, backoffice | **Fatia 3**: Suzano e um parceiro operando juntos |
+| 4. Indicadores e endurecimento | 18–22 | 13 indicadores, telas de gestão, rateio com fechamento, resumo semanal, Playwright, carga, pentest, continuidade | Metas de performance; nenhum achado crítico |
+| Lançamento | 23–24 | Migração final, treinamento, virada | Aprovado em homologação |
 
 Prazos em ordem de grandeza, supondo a arquiteta trabalhando em par com o Claude.
 
