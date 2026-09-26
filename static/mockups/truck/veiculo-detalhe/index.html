@@ -1,0 +1,1080 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detalhe do veículo · mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --background:0 0% 98%;
+  --foreground:240 10% 3.9%;
+  --card:0 0% 100%;
+  --primary:233 65% 50%;
+  --primary-foreground:0 0% 100%;
+  --muted:240 4.8% 94%;
+  --muted-foreground:240 3.8% 40%;
+  --border:240 5.9% 90%;
+  --success:160 60% 38%;
+  --warning:38 92% 45%;
+  --danger:0 84.2% 60.2%;
+  --success-text:160 70% 24%;
+  --danger-text:0 72% 38%;
+  --warning-text:28 85% 28%;
+  --primary-soft:233 85% 96.5%;
+  --success-soft:160 55% 94%;
+  --warning-soft:40 95% 93%;
+  --danger-soft:0 90% 96%;
+  --canvas:225 14% 92%;
+  --ring:233 65% 50%;
+  --note:285 55% 38%;
+  --note-soft:285 60% 96%;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:hsl(var(--canvas));color:hsl(var(--foreground));font:14px/1.5 Sora,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,p{margin:0}
+button,input{font:inherit;color:inherit}
+a{color:hsl(var(--primary))}
+:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:2px;border-radius:6px}
+.num{font-variant-numeric:tabular-nums}
+.ic{display:inline-block;width:20px;height:20px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;flex:none}
+.ic.s12{width:12px;height:12px}.ic.s14{width:14px;height:14px}.ic.s16{width:16px;height:16px}.ic.s18{width:18px;height:18px}.ic.s24{width:24px;height:24px}.ic.s28{width:28px;height:28px}
+
+/* ---------- presentation ---------- */
+.doc{max-width:1328px;margin:0 auto;padding:48px 24px 96px}
+.doc-head{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between}
+.doc-head h1{font:800 30px/1.15 Sora,sans-serif;letter-spacing:-.02em}
+.doc-head p{color:hsl(240 6% 25%);max-width:720px;margin-top:10px;font-size:14.5px}
+.sec{margin-top:72px}
+.sec-label{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-num{font:800 14px Sora,sans-serif;color:hsl(var(--primary));background:hsl(var(--card));border-radius:999px;width:28px;height:28px;display:inline-grid;place-items:center;flex:none}
+.sec h2{font:700 21px/1.3 Sora,sans-serif;letter-spacing:-.01em}
+.sec-sub{color:hsl(240 6% 25%);margin:0 0 20px 40px;max-width:820px}
+.view-cap{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:600;margin:0 0 10px 40px}
+.notes{font-size:13.5px;color:hsl(240 6% 22%)}
+.notes h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));margin:0 0 6px}
+.notes ul{margin:0 0 18px;padding-left:18px}
+.notes li{margin-bottom:6px}
+.scrollx{overflow-x:auto;padding-bottom:4px}
+.frame{width:1280px;background:hsl(var(--background));border-radius:14px;box-shadow:0 1px 2px hsl(230 20% 20%/.06),0 12px 40px -12px hsl(230 30% 20%/.18);overflow:hidden;border:1px solid hsl(var(--border))}
+.below{display:flex;gap:48px;align-items:flex-start;margin:36px 0 0 40px;flex-wrap:wrap}
+.below .notes{flex:1 1 320px;max-width:560px;padding-top:4px}
+
+/* legend */
+.legend{margin-top:32px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:14px;padding:18px 20px;display:grid;grid-template-columns:220px 1fr;gap:18px}
+.legend h3{font-size:14px;font-weight:600}
+.legend p{font-size:13px;color:hsl(var(--muted-foreground));margin-top:4px}
+.legend ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:8px 24px;font-size:13px}
+.legend li{display:flex;gap:10px;align-items:flex-start}
+.dep{display:inline-flex;align-items:center;height:20px;padding:0 6px;border:1px dashed hsl(var(--note));border-radius:5px;background:hsl(var(--note-soft));color:hsl(var(--note));font:600 11px/1 Sora,sans-serif;letter-spacing:.02em;white-space:nowrap;flex:none}
+.dep.ready{border-style:solid;border-color:hsl(160 40% 60%);background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+
+/* ---------- app shell ---------- */
+.lockup{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.lockup svg{color:hsl(var(--primary));flex:none}
+.lockup .rule{width:1px;align-self:stretch;background:hsl(var(--border));margin:2px 0}
+.wordmark{font:400 18px/1.1 Sora,sans-serif;letter-spacing:-.01em;white-space:nowrap}
+.wordmark b{font-weight:800}
+.tagline{font-size:11px;color:hsl(var(--muted-foreground));margin-top:3px;white-space:nowrap}
+.app{display:grid;grid-template-columns:72px 1fr;grid-template-rows:64px 1fr}
+.topbar{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:0 20px 0 18px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
+.topbar .spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;width:300px;height:38px;padding:0 12px;border:1px solid hsl(var(--border));border-radius:8px;color:hsl(var(--muted-foreground));font-size:13px;background:hsl(var(--background))}
+.org{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:6px 10px;border-radius:8px;border:0;background:none}
+.avatar{width:34px;height:34px;border-radius:999px;background:hsl(233 45% 88%);color:hsl(233 60% 30%);display:grid;place-items:center;font-weight:600;font-size:12px;flex:none}
+.sidenav{background:hsl(var(--card));border-right:1px solid hsl(var(--border));padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.navitem{position:relative;width:48px;height:48px;border-radius:10px;display:grid;place-items:center;color:hsl(240 5% 34%)}
+.navitem[aria-current="page"]{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.navitem[aria-current="page"]::before{content:"";position:absolute;left:-12px;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:hsl(var(--primary))}
+.navsep{flex:1}
+.main{padding:22px 40px 40px;min-width:0}
+
+/* ---------- primitives ---------- */
+.card{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:8px;border:1px solid transparent;font-weight:600;font-size:13.5px;text-decoration:none;white-space:nowrap;cursor:pointer}
+.btn-primary{background:hsl(var(--primary));color:#fff}
+.btn-outline{background:hsl(var(--card));border-color:hsl(240 6% 82%);color:hsl(var(--foreground))}
+.btn-ghost{background:none;color:hsl(var(--primary));padding:0 8px;height:32px}
+.btn-sm{height:34px;padding:0 12px;font-size:13px}
+.iconbtn{width:40px;height:40px;border-radius:8px;border:1px solid hsl(240 6% 82%);background:hsl(var(--card));display:grid;place-items:center;color:hsl(var(--foreground));flex:none}
+.iconbtn.bare{border-color:transparent;background:none}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:999px;background:hsl(var(--muted));color:hsl(240 6% 24%);font-size:12px;font-weight:500;white-space:nowrap}
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;height:24px;padding:0 9px 0 7px;border-radius:6px;white-space:nowrap}
+.b-ok{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.b-stop{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.b-wait{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.b-mute{background:hsl(var(--muted));color:hsl(240 6% 28%)}
+.b-info{background:hsl(var(--primary-soft));color:hsl(233 65% 40%)}
+.dotl::before{content:"";width:7px;height:7px;border-radius:99px;background:currentColor}
+.meta{font-size:12.5px;color:hsl(var(--muted-foreground))}
+.crumb{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:hsl(var(--muted-foreground));text-decoration:none;margin-bottom:8px}
+.link{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:hsl(var(--primary));text-decoration:none;white-space:nowrap}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px}
+.hd h2,.hd h3{font-size:14.5px;font-weight:600;display:flex;align-items:center;gap:8px;min-width:0}
+.hd .r{display:flex;align-items:center;gap:8px}
+.pad{padding:18px 20px}
+
+/* vehicle identity */
+.vid{display:flex;align-items:flex-start;justify-content:space-between;gap:16px}
+.vid h1{font:700 28px/1.15 Sora,sans-serif;letter-spacing:.01em}
+.vid .line{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.vid .sub{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:8px;font-size:13px;color:hsl(240 6% 30%)}
+.vid .sub .sep{width:3px;height:3px;border-radius:9px;background:hsl(240 5% 65%)}
+.acts{display:flex;gap:8px;align-items:center;position:relative}
+
+/* dropdown menu */
+.menu{position:absolute;right:0;top:46px;z-index:5;width:250px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:10px;box-shadow:0 12px 32px -8px hsl(230 30% 20%/.25);padding:6px}
+.menu a{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:7px;font-size:13.5px;color:hsl(var(--foreground));text-decoration:none}
+.menu a:first-child{background:hsl(var(--muted))}
+.menu hr{border:0;border-top:1px solid hsl(var(--border));margin:6px 0}
+.menu .danger{color:hsl(var(--danger-text))}
+
+/* stopped strip */
+.stopbar{display:flex;align-items:center;gap:14px;padding:12px 16px;border:1px solid hsl(0 70% 88%);background:hsl(var(--danger-soft));border-radius:12px;margin-top:18px}
+.stopbar .ico{width:34px;height:34px;border-radius:9px;background:hsl(var(--danger-text));color:#fff;display:grid;place-items:center;flex:none}
+.stopbar .t{flex:1;min-width:0;font-size:13.5px;color:hsl(240 8% 18%)}
+.stopbar .t b{font-weight:650;color:hsl(var(--danger-text))}
+
+/* tabs */
+.tabs{display:flex;gap:2px;margin:18px 0 20px;border-bottom:1px solid hsl(var(--border))}
+.tabs a{display:inline-flex;align-items:center;gap:6px;padding:10px 12px;font-size:13.5px;font-weight:500;color:hsl(240 5% 34%);text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.tabs a[aria-current="page"]{color:hsl(var(--primary));border-bottom-color:hsl(var(--primary));font-weight:600}
+.tabs .n{font-size:11.5px;font-weight:600;background:hsl(var(--muted));color:hsl(240 6% 30%);border-radius:99px;padding:1px 7px}
+.tabs a[aria-current="page"] .n{background:hsl(var(--primary-soft));color:hsl(233 65% 40%)}
+
+/* kpis */
+.kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.kpi{padding:14px 16px;position:relative}
+.kpi .k{font-size:12.5px;color:hsl(var(--muted-foreground));display:flex;align-items:center;justify-content:space-between;gap:8px}
+.kpi .v{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-top:4px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.kpi .v small{font-size:14px;font-weight:600;color:hsl(240 6% 30%);letter-spacing:0}
+.kpi .s{font-size:12.5px;color:hsl(240 6% 30%);margin-top:2px}
+.up{color:hsl(var(--danger-text));font-weight:600}
+.good{color:hsl(var(--success-text));font-weight:600}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;font-weight:500;font-size:12px;color:hsl(var(--muted-foreground));padding:0 10px 8px;border-bottom:1px solid hsl(var(--border));white-space:nowrap}
+.tbl td{padding:10px;border-bottom:1px solid hsl(var(--border));vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl th:first-child,.tbl td:first-child{padding-left:0}
+.tbl th:last-child,.tbl td:last-child{padding-right:0}
+.tbl .r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl .osn{font-weight:600;white-space:nowrap}
+.tbl .svc{min-width:170px}
+.tbl .svc span{display:block;font-size:12px;color:hsl(var(--muted-foreground))}
+
+/* set / coupling list */
+.setlist{list-style:none;margin:0;padding:0;position:relative}
+.setlist::before{content:"";position:absolute;left:17px;top:22px;bottom:22px;border-left:2px dotted hsl(233 30% 78%)}
+.setlist li{position:relative;display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:center;padding:7px 0}
+.setlist .u{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;background:hsl(var(--primary-soft));color:hsl(var(--primary));border:1px solid hsl(233 60% 88%)}
+.setlist .me .u{background:hsl(var(--primary));color:#fff;border-color:transparent}
+.setlist .p{font-weight:600;font-size:13.5px}
+.setlist .t{font-size:12px;color:hsl(var(--muted-foreground))}
+
+/* horizontal rig diagram */
+.rig{display:flex;align-items:flex-end;gap:0}
+.rig .unit{display:flex;flex-direction:column;align-items:center;gap:6px}
+.rig .box{height:54px;border-radius:9px;display:grid;place-items:center;border:1.5px solid hsl(233 50% 80%);background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.rig .me .box{background:hsl(var(--primary));border-color:hsl(var(--primary));color:#fff}
+.rig .pl{font-weight:600;font-size:12.5px;letter-spacing:.02em;white-space:nowrap}
+.rig .ty{font-size:11.5px;color:hsl(var(--muted-foreground));white-space:nowrap;margin-top:-4px}
+.rig .hitch{width:22px;height:2px;background:hsl(233 40% 72%);margin-bottom:52px;flex:none}
+
+/* charts */
+.chart{display:block;overflow:visible}
+.chart .grid{stroke:hsl(240 6% 90%);stroke-width:1}
+.chart .ax{font:500 10.5px Sora,sans-serif;fill:hsl(240 4% 42%)}
+.chart .bar{fill:hsl(var(--primary))}
+.chart .bar.partial{fill:hsl(233 55% 78%)}
+.chart .hit:hover .bar{fill:hsl(233 65% 40%)}
+.chart .ln{fill:none;stroke:hsl(var(--primary));stroke-width:2;stroke-linejoin:round}
+.chart .ln-ref{fill:none;stroke:hsl(240 5% 62%);stroke-width:2;stroke-dasharray:4 4}
+.chart .pt{fill:hsl(var(--primary));stroke:hsl(var(--card));stroke-width:2}
+.chart .hit:hover .pt{r:6}
+.chart .dl{font:600 11px Sora,sans-serif;fill:hsl(var(--foreground))}
+.chart .dl.mute{fill:hsl(240 4% 38%);font-weight:500}
+.spark{display:block}
+.spark polyline{fill:none;stroke:hsl(var(--primary));stroke-width:2;stroke-linejoin:round}
+.spark circle{fill:hsl(var(--primary))}
+.chart-foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:8px}
+.kv{display:flex;flex-wrap:wrap;gap:6px 20px;margin-bottom:10px}
+.kv div{font-size:12px;color:hsl(var(--muted-foreground))}
+.kv b{display:block;font-size:15px;color:hsl(var(--foreground));font-weight:650;font-variant-numeric:tabular-nums}
+
+/* empty state */
+.empty{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:18px;border:1.5px dashed hsl(240 6% 84%);border-radius:10px;background:hsl(var(--background))}
+.empty .ei{width:36px;height:36px;border-radius:10px;background:hsl(var(--muted));color:hsl(240 5% 34%);display:grid;place-items:center;margin-bottom:4px}
+.empty h4{font-size:14px;font-weight:600}
+.empty p{font-size:13px;color:hsl(240 6% 28%);max-width:52ch}
+.empty .btn{margin-top:8px}
+
+/* bars list (cost composition) */
+.hbars{display:flex;flex-direction:column;gap:9px}
+.hb{display:grid;grid-template-columns:88px minmax(40px,1fr) auto;gap:10px;align-items:center;font-size:13px}
+.hb .track{height:10px;background:hsl(var(--muted));border-radius:99px;overflow:hidden}
+.hb .fill{height:100%;background:hsl(var(--primary));border-radius:99px}
+.hb .val{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.hb .val span{color:hsl(var(--muted-foreground));font-size:12px;margin-left:4px}
+
+/* recurring alert */
+.recur{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:9px;background:hsl(var(--warning-soft));color:hsl(var(--warning-text));font-size:13px}
+.recur b{font-weight:650}
+.recur .ic{margin-top:1px}
+
+/* ---------- option A ---------- */
+.a-grid{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:14px;margin-top:14px;align-items:start}
+.a-col{display:flex;flex-direction:column;gap:14px}
+
+/* ---------- option B ---------- */
+.b-head{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.b-head .idline{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.b-head h1{font:700 24px/1.2 Sora,sans-serif}
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-top:18px;overflow:hidden}
+.strip .cell{padding:14px 18px;border-left:1px solid hsl(var(--border));min-width:0}
+.strip .cell:first-child{border-left:0}
+.strip .k{font-size:12px;color:hsl(var(--muted-foreground));display:flex;align-items:center;justify-content:space-between;gap:6px}
+.strip .v{font-size:22px;font-weight:700;letter-spacing:-.02em;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.strip .row{display:flex;align-items:flex-end;justify-content:space-between;gap:8px}
+.strip .s{font-size:12px;color:hsl(240 6% 30%);margin-top:2px}
+.b-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;margin-top:16px;align-items:start}
+.b-col{display:flex;flex-direction:column;gap:16px;min-width:0}
+.b-2{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,1fr);gap:16px}
+.now{border-color:hsl(0 70% 86%)}
+.now .top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.now .big{font-size:20px;font-weight:700;letter-spacing:-.01em;margin-top:8px}
+.now dl{display:grid;grid-template-columns:auto 1fr;gap:6px 12px;margin:12px 0 0;font-size:13px}
+.now dt{color:hsl(var(--muted-foreground))}
+.now dd{margin:0;font-weight:500}
+.tl{list-style:none;margin:0;padding:0}
+.tl li{position:relative;display:grid;grid-template-columns:28px 1fr;gap:10px;padding-bottom:14px}
+.tl li::before{content:"";position:absolute;left:13px;top:28px;bottom:0;border-left:1.5px solid hsl(var(--border))}
+.tl li:last-child::before{display:none}
+.tl .d{width:28px;height:28px;border-radius:99px;display:grid;place-items:center;background:hsl(var(--muted));color:hsl(240 5% 30%)}
+.tl .d.red{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.tl .d.amb{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.tl .d.blu{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.tl .d.grn{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.tl .w{font-size:13px;font-weight:500;line-height:1.4}
+.tl .w span{display:block;font-weight:400;color:hsl(240 6% 30%);font-size:12.5px}
+.tl .when{font-size:11.5px;color:hsl(var(--muted-foreground));margin-top:2px}
+.tl-day{font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));margin:2px 0 10px}
+
+/* ---------- option C ---------- */
+.c-top{display:flex;align-items:center;justify-content:space-between;gap:16px}
+.c-top .idl{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.c-top h1{font:700 22px/1.2 Sora,sans-serif}
+.hero{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);margin-top:16px;overflow:hidden;border-color:hsl(0 60% 86%)}
+.hero .left{padding:22px 24px;background:linear-gradient(180deg,hsl(0 90% 98%),hsl(var(--card)) 70%)}
+.hero .right{padding:22px 24px;border-left:1px solid hsl(var(--border))}
+.state{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:600;color:hsl(var(--danger-text));text-transform:uppercase;letter-spacing:.05em}
+.state .pulse{width:10px;height:10px;border-radius:99px;background:hsl(var(--danger-text));box-shadow:0 0 0 4px hsl(0 80% 92%)}
+.dur{font:700 40px/1.1 Sora,sans-serif;letter-spacing:-.03em;margin-top:8px}
+.why{font-size:14.5px;margin-top:6px;color:hsl(240 8% 18%)}
+.steps{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0}
+.steps li{position:relative;padding:22px 8px 0 0;font-size:12px;line-height:1.35}
+.steps li::before{content:"";position:absolute;top:6px;left:0;right:0;height:2px;background:hsl(0 50% 80%)}
+.steps li::after{content:"";position:absolute;top:1px;left:0;width:12px;height:12px;border-radius:99px;background:hsl(var(--danger-text));box-shadow:0 0 0 3px hsl(var(--card))}
+.steps li.cur::after{background:hsl(var(--warning));box-shadow:0 0 0 3px hsl(var(--card)),0 0 0 6px hsl(40 95% 85%)}
+.steps li.next::before{background:repeating-linear-gradient(90deg,hsl(240 5% 78%) 0 4px,transparent 4px 8px)}
+.steps li.next::after{background:hsl(var(--card));border:2px solid hsl(240 5% 65%)}
+.steps li:last-child::before{right:auto;width:0}
+.steps b{display:block;font-size:12.5px;font-weight:600}
+.steps span{color:hsl(240 6% 30%)}
+.hero-acts{display:flex;gap:8px;flex-wrap:wrap;margin-top:20px}
+.hero .right h3{font-size:13px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));display:flex;align-items:center;justify-content:space-between}
+.tip{margin-top:16px;padding:12px 14px;border-radius:10px;background:hsl(var(--primary-soft));font-size:13px;color:hsl(240 8% 18%)}
+.tip b{font-weight:650}
+.c-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px;margin-top:14px}
+.c-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:0;margin-top:14px}
+.c-nums .cell{padding:12px 16px;border-left:1px solid hsl(var(--border))}
+.c-nums .cell:first-child{border-left:0}
+.c-nums .k{font-size:12px;color:hsl(var(--muted-foreground));display:flex;justify-content:space-between;gap:6px}
+.c-nums .v{font-size:18px;font-weight:700;font-variant-numeric:tabular-nums;margin-top:2px}
+.c-nums .s{font-size:12px;color:hsl(240 6% 30%)}
+.c-2{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px;margin-top:14px}
+.nexts{display:flex;flex-direction:column;gap:0}
+.nx{display:grid;grid-template-columns:36px 1fr auto;gap:12px;align-items:center;padding:11px 0;border-top:1px solid hsl(var(--border))}
+.nx:first-child{border-top:0;padding-top:0}
+.nx .ni{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;background:hsl(var(--muted));color:hsl(240 5% 30%)}
+.nx .t{font-size:13.5px;font-weight:600}
+.nx .t span{display:block;font-weight:400;font-size:12.5px;color:hsl(240 6% 30%)}
+
+/* ---------- phone ---------- */
+.phone{width:410px;border-radius:52px;background:hsl(240 8% 12%);padding:10px;box-shadow:0 20px 50px -20px hsl(230 30% 15%/.45);flex:none}
+.screen{position:relative;width:390px;border-radius:42px;overflow:hidden;background:hsl(var(--background));display:flex;flex-direction:column}
+.status{height:46px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 30px 0 34px;font:600 14px Sora,sans-serif;background:hsl(var(--card))}
+.status .isl{width:110px;height:30px;border-radius:20px;background:hsl(240 8% 12%)}
+.fold{position:absolute;left:0;right:0;top:824px;border-top:2px dashed hsl(var(--note));z-index:3;pointer-events:none}
+.fold span{position:absolute;right:10px;top:-22px;font:600 10.5px Sora,sans-serif;color:hsl(var(--note));background:hsl(var(--note-soft));padding:2px 6px;border-radius:4px}
+.m-top{display:flex;align-items:center;justify-content:space-between;padding:4px 8px 8px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
+.m-top .back{display:inline-flex;align-items:center;gap:4px;font-size:14px;font-weight:500;color:hsl(var(--primary));text-decoration:none;padding:8px}
+.m-body{padding:16px;display:flex;flex-direction:column;gap:12px}
+.m-id h1{font:700 26px/1.15 Sora,sans-serif;letter-spacing:.01em}
+.m-id .line{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.m-id .sub{font-size:13px;color:hsl(240 6% 30%);margin-top:6px}
+.m-acts{display:grid;grid-template-columns:1fr auto;gap:8px}
+.m-acts .btn{height:48px;font-size:15px}
+.m-acts .iconbtn{width:48px;height:48px}
+.m-stop{display:flex;flex-direction:column;gap:6px;padding:14px;border:1px solid hsl(0 70% 88%);background:hsl(var(--danger-soft));border-radius:12px;font-size:13.5px}
+.m-stop .t1{display:flex;align-items:center;gap:8px;font-weight:650;color:hsl(var(--danger-text))}
+.m-stop .btn{height:44px;margin-top:6px;width:100%}
+.m-tabs{display:flex;gap:2px;overflow-x:auto;margin:0 -16px;padding:0 16px;border-bottom:1px solid hsl(var(--border));scrollbar-width:none;-webkit-mask:linear-gradient(90deg,#000 85%,transparent);mask:linear-gradient(90deg,#000 85%,transparent)}
+.m-tabs a{flex:none;display:inline-flex;align-items:center;gap:6px;padding:12px 10px;font-size:13.5px;font-weight:500;color:hsl(240 5% 34%);text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
+.m-tabs a[aria-current="page"]{color:hsl(var(--primary));border-bottom-color:hsl(var(--primary));font-weight:600}
+.m-kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.m-kpis .kpi{padding:12px 14px}
+.m-kpis .kpi .v{font-size:20px}
+.m-card{padding:14px 16px}
+.m-os{display:flex;flex-direction:column}
+.m-os a{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:12px 0;border-top:1px solid hsl(var(--border));text-decoration:none;color:inherit}
+.m-os a:first-child{border-top:0;padding-top:0}
+.m-os .l1{font-size:13.5px;font-weight:600}
+.m-os .l2{font-size:12.5px;color:hsl(240 6% 30%);grid-column:1/-1}
+.m-strip{display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.m-strip .cell{padding:12px 14px;border-left:1px solid hsl(var(--border));border-top:1px solid hsl(var(--border))}
+.m-strip .cell:nth-child(odd){border-left:0}
+.m-strip .cell:nth-child(-n+2){border-top:0}
+.m-strip .k{font-size:11.5px;color:hsl(var(--muted-foreground));display:flex;justify-content:space-between;gap:4px}
+.m-strip .v{font-size:19px;font-weight:700;font-variant-numeric:tabular-nums}
+.m-strip .s{font-size:11.5px;color:hsl(240 6% 30%)}
+.m-hero{padding:18px 16px;border-color:hsl(0 60% 86%);background:linear-gradient(180deg,hsl(0 90% 98%),hsl(var(--card)) 70%)}
+.m-hero .dur{font-size:34px}
+.vsteps{list-style:none;margin:16px 0 0;padding:0}
+.vsteps li{position:relative;padding:0 0 12px 24px;font-size:12.5px;line-height:1.35}
+.vsteps li::before{content:"";position:absolute;left:5px;top:12px;bottom:-2px;border-left:2px solid hsl(0 50% 80%)}
+.vsteps li::after{content:"";position:absolute;left:0;top:2px;width:12px;height:12px;border-radius:99px;background:hsl(var(--danger-text))}
+.vsteps li.cur::after{background:hsl(var(--warning));box-shadow:0 0 0 4px hsl(40 95% 88%)}
+.vsteps li.next::after{background:hsl(var(--card));border:2px solid hsl(240 5% 65%);box-sizing:border-box}
+.vsteps li.cur::before{border-left:2px dashed hsl(240 5% 78%)}
+.vsteps li:last-child::before{display:none}
+.vsteps b{font-weight:600}
+.vsteps span{color:hsl(240 6% 30%)}
+.m-rig .rig .box{width:62px!important;height:44px}
+.m-rig .rig .hitch{width:10px;margin-bottom:44px}
+.m-rig .rig .pl{font-size:11px}
+.m-rig .rig .ty{font-size:10.5px}
+.m-rig .rig .hitch{margin-bottom:46px}
+
+/* empty states section */
+.empties{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-left:40px}
+.empties .card{padding:16px}
+.ecap{font-size:12px;font-weight:600;color:hsl(var(--muted-foreground));margin-bottom:10px;display:flex;justify-content:space-between;gap:8px;align-items:center}
+
+/* comparison */
+.cmp{margin-left:40px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:14px;overflow:hidden}
+.cmp table{width:100%;border-collapse:collapse;font-size:13.5px}
+.cmp th,.cmp td{padding:12px 16px;border-bottom:1px solid hsl(var(--border));text-align:left;vertical-align:top}
+.cmp thead th{background:hsl(var(--background));font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground))}
+.cmp tbody th{font-weight:600;width:200px}
+.cmp tr:last-child td,.cmp tr:last-child th{border-bottom:0}
+.reco{margin:20px 0 0 40px;padding:18px 20px;border-radius:14px;background:hsl(var(--primary-soft));border:1px solid hsl(233 60% 86%);font-size:14px;max-width:1000px}
+.reco h3{font-size:15px;font-weight:650;margin-bottom:6px}
+.reco ul{margin:8px 0 0;padding-left:18px}
+.reco li{margin-bottom:4px}
+.qs{margin:20px 0 0 40px;max-width:1000px;font-size:14px}
+.qs ol{padding-left:20px;margin:0}
+.qs li{margin-bottom:8px}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (max-width:1100px){
+  .empties{grid-template-columns:1fr 1fr}
+  .legend{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .doc{padding:28px 16px 64px}
+  .sec-sub,.view-cap,.below,.empties,.cmp,.reco,.qs{margin-left:0}
+  .empties{grid-template-columns:1fr}
+  .cmp{overflow-x:auto}
+  .cmp table{min-width:640px}
+  .phone{width:100%;max-width:410px;padding:6px;border-radius:44px}
+  .screen{width:100%}
+}
+
+/* phones-only view for the phone screenshot */
+body.phones-only .doc > *:not(.sec){display:none}
+body.phones-only .sec{margin-top:0}
+body.phones-only .sec:not([data-option]){display:none}
+body.phones-only .sec-sub,body.phones-only .view-cap,body.phones-only .scrollx,body.phones-only .below .notes{display:none}
+body.phones-only .doc{max-width:none;display:flex;gap:40px;padding:32px}
+body.phones-only .below{margin:14px 0 0}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="facter" viewBox="0 0 207 304"><path fill="currentColor" d="M25.8384 196.911L15.4739 183.729C-10.7189 150.411 0.44781 101.422 38.4895 82.7344L206.266 0.307297V34.2396C206.266 60.1875 191.448 83.8698 168.12 95.2396L56.578 149.594C48.4634 153.547 41.3489 159.344 35.9791 166.609C30.5936 173.901 25.9582 183.906 26.3176 196.526C29.9947 193.609 34.0624 191.026 38.4843 188.854L206.26 106.432V140.359C206.26 166.313 191.437 189.995 168.109 201.365L56.578 255.708C48.4634 259.667 41.3489 265.464 35.9791 272.724C30.4426 280.224 25.6978 290.578 26.3593 303.693L15.4739 289.854C-7.54698 260.568 -1.72407 219.193 25.8384 196.911ZM134.818 266.526L206.208 303.724L206.187 210.802L134.953 246.661C126.828 250.755 126.755 262.323 134.818 266.526Z"/></symbol>
+</svg>
+
+<div class="doc">
+  <header class="doc-head">
+    <div>
+      <h1>Detalhe do veículo · 3 opções</h1>
+      <p>Mesmo veículo nas três: cavalo QRT4B22, frota 812, parado desde quinta na OS 1042. Cada opção aparece no notebook (1.280 px) e no celular (390 px, tela inteira rolada, com a dobra marcada). Números de exemplo, formatados como o <code>Intl</code> pt-BR formataria. Momento do exemplo: sáb., 26/09/2026 às 10:30.</p>
+    </div>
+    <div class="lockup" aria-label="Facter Truck">
+      <svg width="27" height="40" aria-hidden="true"><use href="#facter"/></svg>
+      <span class="rule"></span>
+      <div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div>
+    </div>
+  </header>
+
+  <div class="legend">
+    <div>
+      <h3>De onde vem cada bloco</h3>
+      <p>Etiqueta tracejada = anotação do mockup, não vai para a tela. Fases do plano de execução.</p>
+    </div>
+    <ul>
+      <li><span class="dep ready">Pronto</span><span>Cadastro, situação Ativo/Inativo, desativar (1.11 feito em parte)</span></li>
+      <li><span class="dep">F1</span><span>Ativos em construção: marca/modelo/eixos, conjunto, engate, leituras de km (1.11)</span></li>
+      <li><span class="dep">F2</span><span>Oficina: OS, box, parada e previsão de liberação, custo de peça e mão de obra (2.3 a 2.6)</span></li>
+      <li><span class="dep">F3</span><span>Pneus por posição (3.1)</span></li>
+      <li><span class="dep">F4</span><span>Indicadores: custo por km, disponibilidade, falha recorrente, comparação com a frota, rateio (4.1, 4.3)</span></li>
+      <li><span class="dep">Pós</span><span>Depois do lançamento: motor de preventiva (próxima revisão pelo km)</span></li>
+    </ul>
+  </div>
+
+  <!-- =============== OPTION A =============== -->
+  <section class="sec" data-option="a" id="a">
+    <div class="sec-label"><span class="sec-num">A</span><h2>Ficha com abas</h2></div>
+    <p class="sec-sub">O padrão de cadastro que todo sistema de frota tem: identidade no topo, abas por assunto e um Resumo com os 4 números de decisão, OS recentes, conjunto e km. Cada aba vira uma tela própria, densa, com a DataTable do DS.</p>
+    <p class="view-cap">Notebook · 1.280 px · menu ⋮ aberto</p>
+    <div class="scrollx"><div class="frame">
+      <div class="app">
+        <header class="topbar">
+          <a class="lockup" href="#" aria-label="Facter Truck, início"><svg width="24" height="35" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></a>
+          <span class="spacer"></span>
+          <div class="search"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i>Buscar placa, frota ou OS</div>
+          <button class="org" type="button">Transportadora Rota Sul <i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-down.svg)"></i></button>
+          <span class="avatar">MD</span>
+        </header>
+        <nav class="sidenav" aria-label="Menu principal">
+          <a class="navitem" href="#" aria-label="Início"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/house.svg)"></i></a>
+          <a class="navitem" href="#" aria-current="page" aria-label="Veículos"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck-fill.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Ordens de serviço"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Pneus"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Custos"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/chart-line-up.svg)"></i></a>
+          <span class="navsep"></span>
+          <a class="navitem" href="#" aria-label="Configurações"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/gear.svg)"></i></a>
+        </nav>
+        <main class="main">
+          <a class="crumb" href="#"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-left.svg)"></i>Veículos</a>
+          <div class="vid">
+            <div>
+              <div class="line"><h1>QRT4B22</h1><span class="badge b-ok dotl">Ativo</span><span class="badge b-stop"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/pause-circle-fill.svg)"></i>Parado</span><span class="dep">F2</span></div>
+              <div class="sub"><span>Cavalo · frota 812</span><span class="sep"></span><span>Volvo FH 540 6x4 · 2021</span><span class="sep"></span><span>Base Araucária</span><span class="dep">F1</span></div>
+            </div>
+            <div class="acts">
+              <button class="btn btn-outline" type="button"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/pencil-simple.svg)"></i>Editar</button>
+              <button class="btn btn-primary" type="button"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/plus.svg)"></i>Abrir OS</button>
+              <button class="iconbtn" type="button" aria-label="Mais ações do veículo QRT4B22" aria-expanded="true"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical.svg)"></i></button>
+              <div class="menu" role="menu">
+                <a href="#" role="menuitem"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/gauge.svg)"></i>Registrar leitura de km</a>
+                <a href="#" role="menuitem"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/link-simple.svg)"></i>Desengatar conjunto</a>
+                <a href="#" role="menuitem"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/download-simple.svg)"></i>Exportar histórico</a>
+                <hr>
+                <a href="#" role="menuitem" class="danger"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/prohibit.svg)"></i>Desativar</a>
+              </div>
+            </div>
+          </div>
+          <div class="stopbar">
+            <span class="ico"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/wrench.svg)"></i></span>
+            <div class="t"><b>Parado há 2 dias e 4 h</b> · OS 1042 no box 3, aguardando peça · Previsão de liberação: seg., 28/09 às 14:00</div>
+            <a class="link" href="#">Ver OS 1042 <i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/arrow-right.svg)"></i></a>
+          </div>
+          <nav class="tabs" aria-label="Seções do veículo">
+            <a href="#" aria-current="page">Resumo</a>
+            <a href="#">OS <span class="n">12</span></a>
+            <a href="#">Conjunto e engates</a>
+            <a href="#">Eixos e pneus</a>
+            <a href="#">Leituras de km <span class="n">38</span></a>
+            <a href="#">Custos</a>
+            <a href="#">Histórico</a>
+          </nav>
+          <div class="kpis">
+            <div class="card kpi"><div class="k">Custo por km · 90 dias <span class="dep">F4</span></div><div class="v">R$ 0,71<small>/km</small></div><div class="s"><span class="up">22% acima</span> da frota (R$ 0,58)</div></div>
+            <div class="card kpi"><div class="k">Disponibilidade · 90 dias <span class="dep">F4</span></div><div class="v">93,4%</div><div class="s">142 h parado · frota 95,1%</div></div>
+            <div class="card kpi"><div class="k">OS abertas <span class="dep">F2</span></div><div class="v">1</div><div class="s">OS 1042 · aguardando peça</div></div>
+            <div class="card kpi"><div class="k">Próxima preventiva <span class="dep">Pós</span></div><div class="v">7.620<small> km</small></div><div class="s">Revisão de 420.000 km · cerca de 22 dias</div></div>
+          </div>
+          <div class="a-grid">
+            <div class="a-col">
+              <div class="card pad">
+                <div class="hd"><h2><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i>OS recentes <span class="dep">F2</span></h2><a class="link" href="#">Ver todas as 12</a></div>
+                <table class="tbl">
+                  <thead><tr><th>OS</th><th>Serviço</th><th>Tipo</th><th>Aberta em</th><th>Situação</th><th class="r">Custo</th></tr></thead>
+                  <tbody>
+                    <tr><td class="osn">1042</td><td class="svc">Vazamento de ar na válvula relé<span>Freio · eixo 2</span></td><td>Corretiva</td><td class="num">24/09</td><td><span class="badge b-wait">Aguardando peça</span></td><td class="r">R$ 1.846,30</td></tr>
+                    <tr><td class="osn">1017</td><td class="svc">Revisão de 400.000 km<span>Óleo, filtros e lubrificação</span></td><td>Preventiva</td><td class="num">14/08</td><td><span class="badge b-mute">Liberada</span></td><td class="r">R$ 4.286,90</td></tr>
+                    <tr><td class="osn">0988</td><td class="svc">Troca da válvula relé<span>Freio · eixo 2</span></td><td>Corretiva</td><td class="num">28/07</td><td><span class="badge b-mute">Liberada</span></td><td class="r">R$ 3.412,80</td></tr>
+                    <tr><td class="osn">0951</td><td class="svc">Reparo no chicote do farol<span>Elétrica</span></td><td>Corretiva</td><td class="num">02/07</td><td><span class="badge b-mute">Liberada</span></td><td class="r">R$ 640,00</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card pad">
+                <div class="hd"><h2><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/gauge.svg)"></i>Km rodado por semana <span class="dep">F1</span></h2><div class="r"><button class="btn btn-outline btn-sm" type="button">Registrar leitura</button></div></div>
+                <div class="kv"><div>Km atual<b>412.380 km</b></div><div>Últimos 90 dias<b>31.240 km</b></div><div>Média por dia<b>347 km</b></div></div>
+                <svg class="chart" viewBox="0 0 640 150" width="100%" role="img" aria-label="Km rodado por semana nas últimas 13 semanas"><line class="grid" x1="44" x2="640" y1="128.0" y2="128.0"/><text class="ax" x="36" y="132.0" text-anchor="end">0</text><line class="grid" x1="44" x2="640" y1="68.0" y2="68.0"/><text class="ax" x="36" y="72.0" text-anchor="end">1.500</text><line class="grid" x1="44" x2="640" y1="8.0" y2="8.0"/><text class="ax" x="36" y="12.0" text-anchor="end">3.000</text><g class="hit"><rect x="44.0" y="8" width="40.3" height="120" fill="transparent"/><path class="bar" d="M44.0,128.0 V34.6 Q44.0,31.6 47.0,31.6 H81.3 Q84.3,31.6 84.3,34.6 V128.0 Z"/><title>Semana de 29/06: 2.410 km</title></g><text class="ax" x="64.2" y="145" text-anchor="middle">29/06</text><g class="hit"><rect x="90.3" y="8" width="40.3" height="120" fill="transparent"/><path class="bar" d="M90.3,128.0 V23.8 Q90.3,20.8 93.3,20.8 H127.6 Q130.6,20.8 130.6,23.8 V128.0 Z"/><title>Semana de 06/07: 2.680 km</title></g><g class="hit"><rect x="136.6" y="8" width="40.3" height="120" fill="transparent"/><path class="bar" d="M136.6,128.0 V35.4 Q136.6,32.4 139.6,32.4 H173.9 Q176.9,32.4 176.9,35.4 V128.0 Z"/><title>Semana de 13/07: 2.390 km</title></g><g class="hit"><rect x="182.9" y="8" width="40.3" height="120" fill="transparent"/><path class="bar" d="M182.9,128.0 V21.0 Q182.9,18.0 185.9,18.0 H220.2 Q223.2,18.0 223.2,21.0 V128.0 Z"/><title>Semana de 20/07: 2.750 km</title></g><text class="ax" x="203.1" y="145" text-anchor="middle">20/07</text><g class="hit"><rect x="229.2" y="8" width="40.3" height="120" fill="transparent"/><path class="bar" d="M229.2,128.0 V42.2 Q229.2,39.2 232.2,39.2 H266.5 Q269.5,39.2 269.5,42.2 V128.0 Z"/><title>Semana de 27/07: 2.220 km</title></g><g class="hit"><rect x="275.5" y="8" width="40.3" height="120" fill="transparent"/><path class="bar" d="M275.5,128.0 V51.8 Q275.5,48.8 278.5,48.8 H312.8 Q315.8,48.8 315.8,51.8 V128.0 Z"/><title>Semana de 03/08: 1.980 km</title></g><g class="hit"><rect x="321.8" y="8" width="40.3" height="120" fill="transparent"/><path class="bar" d="M321.8,128.0 V26.6 Q321.8,23.6 324.8,23.6 H359.2 Q362.2,23.6 362.2,26.6 V128.0 Z"/><title>Semana de 10/08: 2.610 km</title></g><text class="ax" x="342.0" y="145" text-anchor="middle">10/08</text><g class="hit"><rect x="368.2" y="8" width="40.3" height="120" fill="transparent"/><path class="bar" d="M368.2,128.0 V29.8 Q368.2,26.8 371.2,26.8 H405.5 Q408.5,26.8 408.5,29.8 V128.0 Z"/><title>Semana de 17/08: 2.530 km</title></g><g class="hit"><rect x="414.5" y="8" width="40.3" height="120" fill="transparent"/><path class="bar" d="M414.5,128.0 V15.4 Q414.5,12.4 417.5,12.4 H451.8 Q454.8,12.4 454.8,15.4 V128.0 Z"/><title>Semana de 24/08: 2.890 km</title></g><g class="hit"><rect x="460.8" y="8" width="40.3" height="120" fill="transparent"/><path class="bar" d="M460.8,128.0 V32.2 Q460.8,29.2 463.8,29.2 H498.1 Q501.1,29.2 501.1,32.2 V128.0 Z"/><title>Semana de 31/08: 2.470 km</title></g><text class="ax" x="480.9" y="145" text-anchor="middle">31/08</text><g class="hit"><rect x="507.1" y="8" width="40.3" height="120" fill="transparent"/><path class="bar" d="M507.1,128.0 V37.4 Q507.1,34.4 510.1,34.4 H544.4 Q547.4,34.4 547.4,37.4 V128.0 Z"/><title>Semana de 07/09: 2.340 km</title></g><g class="hit"><rect x="553.4" y="8" width="40.3" height="120" fill="transparent"/><path class="bar" d="M553.4,128.0 V20.6 Q553.4,17.6 556.4,17.6 H590.7 Q593.7,17.6 593.7,20.6 V128.0 Z"/><title>Semana de 14/09: 2.760 km</title></g><g class="hit"><rect x="599.7" y="8" width="40.3" height="120" fill="transparent"/><path class="bar partial" d="M599.7,128.0 V82.6 Q599.7,79.6 602.7,79.6 H637.0 Q640.0,79.6 640.0,82.6 V128.0 Z"/><title>Semana de 21/09: 1.210 km</title></g><text class="ax" x="619.8" y="145" text-anchor="middle">21/09</text></svg>
+                <div class="chart-foot"><span class="meta">Última leitura: 24/09 às 06:52, na abertura da OS 1042</span><span class="meta">Semana atual parcial</span></div>
+              </div>
+            </div>
+            <div class="a-col">
+              <div class="card pad">
+                <div class="hd"><h2><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/link-simple.svg)"></i>Conjunto engatado <span class="dep">F1</span></h2><a class="link" href="#">Histórico de engates</a></div>
+                <ul class="setlist">
+                  <li class="me"><span class="u"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck-fill.svg)"></i></span><div><div class="p">QRT4B22 · frota 812</div><div class="t">Cavalo · este veículo</div></div><span></span></li>
+                  <li><span class="u"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck-trailer.svg)"></i></span><div><div class="p">RTA2C45</div><div class="t">Carreta · 3 eixos · posição 1</div></div><a class="link" href="#">Abrir</a></li>
+                  <li><span class="u"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/circles-three.svg)"></i></span><div><div class="p">RTD1A08</div><div class="t">Dolly · 2 eixos · posição 2</div></div><a class="link" href="#">Abrir</a></li>
+                  <li><span class="u"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck-trailer.svg)"></i></span><div><div class="p">RTB7F19</div><div class="t">Carreta · 3 eixos · posição 3</div></div><a class="link" href="#">Abrir</a></li>
+                </ul>
+                <p class="meta" style="margin-top:8px">Rodotrem · conjunto C-318 · engatado desde 02/09 · 8.070 km neste engate</p>
+              </div>
+              <div class="card pad">
+                <div class="hd"><h2><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i>Eixos e pneus <span class="dep">F3</span></h2></div>
+                <div class="empty">
+                  <span class="ei"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i></span>
+                  <h4>Pneus ainda não montados</h4>
+                  <p>Monte os pneus por posição para saber o custo por km de cada um e quando rodiziar. Os 3 eixos deste cavalo já estão cadastrados</p>
+                  <button class="btn btn-outline btn-sm" type="button">Montar pneus</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div></div>
+
+    <div class="below">
+      <div class="phone"><div class="screen">
+        <div class="fold"><span>Dobra da tela · 844 px</span></div>
+        <div class="status"><span>10:30</span><span class="isl"></span><span><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/cell-signal-high.svg)"></i></span></div>
+        <div class="m-top"><a class="back" href="#"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-left.svg)"></i>Veículos</a><button class="iconbtn bare" type="button" aria-label="Mais ações do veículo QRT4B22"><i class="ic s22" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical.svg)"></i></button></div>
+        <div class="m-body">
+          <div class="m-id">
+            <h1>QRT4B22</h1>
+            <div class="line"><span class="badge b-ok dotl">Ativo</span><span class="badge b-stop"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/pause-circle-fill.svg)"></i>Parado</span></div>
+            <p class="sub">Cavalo · frota 812 · Volvo FH 540 6x4</p>
+          </div>
+          <div class="m-acts"><button class="btn btn-primary" type="button"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/plus.svg)"></i>Abrir OS</button><button class="iconbtn" type="button" aria-label="Editar QRT4B22"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/pencil-simple.svg)"></i></button></div>
+          <div class="m-stop">
+            <div class="t1"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/wrench.svg)"></i>Parado há 2 dias e 4 h</div>
+            <div>OS 1042 no box 3, aguardando peça. Previsão: seg., 28/09 às 14:00</div>
+            <a class="btn btn-outline" href="#">Ver OS 1042</a>
+          </div>
+          <nav class="m-tabs" aria-label="Seções do veículo">
+            <a href="#" aria-current="page">Resumo</a><a href="#">OS</a><a href="#">Conjunto e engates</a><a href="#">Eixos e pneus</a><a href="#">Leituras de km</a><a href="#">Custos</a><a href="#">Histórico</a>
+          </nav>
+          <p class="meta">Custo e disponibilidade dos últimos 90 dias</p>
+          <div class="m-kpis">
+            <div class="card kpi"><div class="k">Custo por km</div><div class="v">R$ 0,71</div><div class="s"><span class="up">22% acima</span> da frota</div></div>
+            <div class="card kpi"><div class="k">Disponibilidade</div><div class="v">93,4%</div><div class="s">Frota 95,1%</div></div>
+            <div class="card kpi"><div class="k">OS abertas</div><div class="v">1</div><div class="s">Aguardando peça</div></div>
+            <div class="card kpi"><div class="k">Próxima preventiva</div><div class="v">7.620 km</div><div class="s">Cerca de 22 dias</div></div>
+          </div>
+          <div class="card m-card">
+            <div class="hd"><h3>OS recentes</h3><a class="link" href="#">Ver todas</a></div>
+            <div class="m-os">
+              <a href="#"><span class="l1">OS 1042 · Válvula relé</span><span class="badge b-wait">Aguardando peça</span><span class="l2">Corretiva · 24/09 · R$ 1.846,30</span></a>
+              <a href="#"><span class="l1">OS 1017 · Revisão de 400.000 km</span><span class="badge b-mute">Liberada</span><span class="l2">Preventiva · 14/08 · R$ 4.286,90</span></a>
+              <a href="#"><span class="l1">OS 0988 · Troca da válvula relé</span><span class="badge b-mute">Liberada</span><span class="l2">Corretiva · 28/07 · R$ 3.412,80</span></a>
+            </div>
+          </div>
+          <div class="card m-card">
+            <div class="hd"><h3>Conjunto engatado</h3><a class="link" href="#">Engates</a></div>
+            <ul class="setlist">
+              <li><span class="u"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck-trailer.svg)"></i></span><div><div class="p">RTA2C45</div><div class="t">Carreta · posição 1</div></div><span></span></li>
+              <li><span class="u"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/circles-three.svg)"></i></span><div><div class="p">RTD1A08</div><div class="t">Dolly · posição 2</div></div><span></span></li>
+              <li><span class="u"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck-trailer.svg)"></i></span><div><div class="p">RTB7F19</div><div class="t">Carreta · posição 3</div></div><span></span></li>
+            </ul>
+            <p class="meta" style="margin-top:6px">Rodotrem C-318 · desde 02/09</p>
+          </div>
+          <div class="card m-card">
+            <div class="hd"><h3>Km rodado por semana</h3></div>
+            <div class="kv"><div>Km atual<b>412.380 km</b></div><div>90 dias<b>31.240 km</b></div></div>
+            <svg class="chart" viewBox="0 0 356 130" width="100%" role="img" aria-label="Km rodado por semana nas últimas 13 semanas"><line class="grid" x1="44" x2="356" y1="108.0" y2="108.0"/><text class="ax" x="36" y="112.0" text-anchor="end">0</text><line class="grid" x1="44" x2="356" y1="58.0" y2="58.0"/><text class="ax" x="36" y="62.0" text-anchor="end">1.500</text><line class="grid" x1="44" x2="356" y1="8.0" y2="8.0"/><text class="ax" x="36" y="12.0" text-anchor="end">3.000</text><g class="hit"><rect x="44.0" y="8" width="18.5" height="100" fill="transparent"/><path class="bar" d="M44.0,108.0 V30.7 Q44.0,27.7 47.0,27.7 H59.5 Q62.5,27.7 62.5,30.7 V108.0 Z"/><title>Semana de 29/06: 2.410 km</title></g><text class="ax" x="53.2" y="125" text-anchor="middle">29/06</text><g class="hit"><rect x="68.5" y="8" width="18.5" height="100" fill="transparent"/><path class="bar" d="M68.5,108.0 V21.7 Q68.5,18.7 71.5,18.7 H83.9 Q86.9,18.7 86.9,21.7 V108.0 Z"/><title>Semana de 06/07: 2.680 km</title></g><g class="hit"><rect x="92.9" y="8" width="18.5" height="100" fill="transparent"/><path class="bar" d="M92.9,108.0 V31.3 Q92.9,28.3 95.9,28.3 H108.4 Q111.4,28.3 111.4,31.3 V108.0 Z"/><title>Semana de 13/07: 2.390 km</title></g><g class="hit"><rect x="117.4" y="8" width="18.5" height="100" fill="transparent"/><path class="bar" d="M117.4,108.0 V19.3 Q117.4,16.3 120.4,16.3 H132.8 Q135.8,16.3 135.8,19.3 V108.0 Z"/><title>Semana de 20/07: 2.750 km</title></g><g class="hit"><rect x="141.8" y="8" width="18.5" height="100" fill="transparent"/><path class="bar" d="M141.8,108.0 V37.0 Q141.8,34.0 144.8,34.0 H157.3 Q160.3,34.0 160.3,37.0 V108.0 Z"/><title>Semana de 27/07: 2.220 km</title></g><text class="ax" x="151.1" y="125" text-anchor="middle">27/07</text><g class="hit"><rect x="166.3" y="8" width="18.5" height="100" fill="transparent"/><path class="bar" d="M166.3,108.0 V45.0 Q166.3,42.0 169.3,42.0 H181.8 Q184.8,42.0 184.8,45.0 V108.0 Z"/><title>Semana de 03/08: 1.980 km</title></g><g class="hit"><rect x="190.8" y="8" width="18.5" height="100" fill="transparent"/><path class="bar" d="M190.8,108.0 V24.0 Q190.8,21.0 193.8,21.0 H206.2 Q209.2,21.0 209.2,24.0 V108.0 Z"/><title>Semana de 10/08: 2.610 km</title></g><g class="hit"><rect x="215.2" y="8" width="18.5" height="100" fill="transparent"/><path class="bar" d="M215.2,108.0 V26.7 Q215.2,23.7 218.2,23.7 H230.7 Q233.7,23.7 233.7,26.7 V108.0 Z"/><title>Semana de 17/08: 2.530 km</title></g><g class="hit"><rect x="239.7" y="8" width="18.5" height="100" fill="transparent"/><path class="bar" d="M239.7,108.0 V14.7 Q239.7,11.7 242.7,11.7 H255.2 Q258.2,11.7 258.2,14.7 V108.0 Z"/><title>Semana de 24/08: 2.890 km</title></g><text class="ax" x="248.9" y="125" text-anchor="middle">24/08</text><g class="hit"><rect x="264.2" y="8" width="18.5" height="100" fill="transparent"/><path class="bar" d="M264.2,108.0 V28.7 Q264.2,25.7 267.2,25.7 H279.6 Q282.6,25.7 282.6,28.7 V108.0 Z"/><title>Semana de 31/08: 2.470 km</title></g><g class="hit"><rect x="288.6" y="8" width="18.5" height="100" fill="transparent"/><path class="bar" d="M288.6,108.0 V33.0 Q288.6,30.0 291.6,30.0 H304.1 Q307.1,30.0 307.1,33.0 V108.0 Z"/><title>Semana de 07/09: 2.340 km</title></g><g class="hit"><rect x="313.1" y="8" width="18.5" height="100" fill="transparent"/><path class="bar" d="M313.1,108.0 V19.0 Q313.1,16.0 316.1,16.0 H328.5 Q331.5,16.0 331.5,19.0 V108.0 Z"/><title>Semana de 14/09: 2.760 km</title></g><g class="hit"><rect x="337.5" y="8" width="18.5" height="100" fill="transparent"/><path class="bar partial" d="M337.5,108.0 V70.7 Q337.5,67.7 340.5,67.7 H353.0 Q356.0,67.7 356.0,70.7 V108.0 Z"/><title>Semana de 21/09: 1.210 km</title></g><text class="ax" x="346.8" y="125" text-anchor="middle">21/09</text></svg>
+            <button class="btn btn-outline" type="button" style="width:100%;margin-top:12px;height:44px">Registrar leitura</button>
+          </div>
+        </div>
+      </div></div>
+      <div class="notes">
+        <h4>Prioriza</h4>
+        <ul>
+          <li>Encontrar qualquer dado do veículo num lugar previsível. Cada aba cresce sozinha (OS com filtro, custos com período) sem mexer no Resumo.</li>
+          <li>Casa com o que já existe: PageHeader, abas com contagem, DataTable.</li>
+        </ul>
+        <h4>Custa</h4>
+        <ul>
+          <li>No Resumo os números ficam soltos: o custo por km 22% acima aparece, mas o porquê (a válvula relé que voltou) fica escondido em outra aba.</li>
+          <li>7 abas; no celular viram rolagem horizontal e metade some da vista.</li>
+          <li>Abas de módulos não contratados (Pneus) precisam de regra: esconder ou mostrar o aviso no lugar.</li>
+        </ul>
+        <h4>Celular</h4>
+        <ul>
+          <li>Ação principal em botão de 48 px; Editar vira ícone; Desativar fica só no ⋮.</li>
+          <li>Números em 2×2; o período (90 dias) vai numa linha só, em vez de repetir em cada card.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== OPTION B =============== -->
+  <section class="sec" data-option="b" id="b">
+    <div class="sec-label"><span class="sec-num">B</span><h2>Painel de gestão com linha do tempo</h2></div>
+    <p class="sec-sub">Feita para quem decide no notebook: faixa de números com tendência, o custo explicado (mês a mês e por composição) à esquerda, e à direita o que está acontecendo agora e tudo o que aconteceu, numa linha do tempo só (OS, paradas, engates, leituras).</p>
+    <p class="view-cap">Notebook · 1.280 px</p>
+    <div class="scrollx"><div class="frame">
+      <div class="app">
+        <header class="topbar">
+          <a class="lockup" href="#" aria-label="Facter Truck, início"><svg width="24" height="35" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></a>
+          <span class="spacer"></span>
+          <div class="search"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i>Buscar placa, frota ou OS</div>
+          <button class="org" type="button">Transportadora Rota Sul <i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-down.svg)"></i></button>
+          <span class="avatar">MD</span>
+        </header>
+        <nav class="sidenav" aria-label="Menu principal">
+          <a class="navitem" href="#" aria-label="Início"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/house.svg)"></i></a>
+          <a class="navitem" href="#" aria-current="page" aria-label="Veículos"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck-fill.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Ordens de serviço"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Pneus"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Custos"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/chart-line-up.svg)"></i></a>
+          <span class="navsep"></span>
+          <a class="navitem" href="#" aria-label="Configurações"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/gear.svg)"></i></a>
+        </nav>
+        <main class="main">
+          <a class="crumb" href="#"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-left.svg)"></i>Veículos</a>
+          <div class="b-head">
+            <div class="idline"><h1>QRT4B22</h1><span class="chip">Cavalo · frota 812</span><span class="chip">Volvo FH 540 6x4 · 2021</span><span class="badge b-ok dotl">Ativo</span><span class="badge b-stop"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/pause-circle-fill.svg)"></i>Parado</span></div>
+            <div class="acts">
+              <div class="chip" style="height:40px;border-radius:8px;padding:0 12px;background:hsl(var(--card));border:1px solid hsl(240 6% 82%)"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/calendar-blank.svg)"></i>Últimos 90 dias<i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-down.svg)"></i></div>
+              <button class="btn btn-outline" type="button"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/pencil-simple.svg)"></i>Editar</button>
+              <button class="btn btn-primary" type="button"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/plus.svg)"></i>Abrir OS</button>
+              <button class="iconbtn" type="button" aria-label="Mais ações do veículo QRT4B22"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical.svg)"></i></button>
+            </div>
+          </div>
+          <div class="card strip">
+            <div class="cell"><div class="k">Custo por km <span class="dep">F4</span></div><div class="row"><div class="v">R$ 0,71</div><svg class="spark" viewBox="0 0 72 28" width="72" height="28" aria-hidden="true"><polyline points="3.0,25.0 16.2,20.9 29.4,23.3 42.6,19.2 55.8,12.8 69.0,3.0"/><circle cx="69.0" cy="3.0" r="3"/></svg></div><div class="s"><span class="up">22% acima</span> da frota</div></div>
+            <div class="cell"><div class="k">Custo de manutenção <span class="dep">F4</span></div><div class="v">R$ 22.180,40</div><div class="s">7 OS · rateio incluído</div></div>
+            <div class="cell"><div class="k">Disponibilidade <span class="dep">F4</span></div><div class="v">93,4%</div><div class="s">142 h parado · frota 95,1%</div></div>
+            <div class="cell"><div class="k">Km rodado <span class="dep">F1</span></div><div class="v">31.240 km</div><div class="s">347 km por dia</div></div>
+            <div class="cell"><div class="k">Próxima preventiva <span class="dep">Pós</span></div><div class="v">7.620 km</div><div class="s">420.000 km · cerca de 22 dias</div></div>
+          </div>
+          <div class="b-grid">
+            <div class="b-col">
+              <div class="b-2">
+                <div class="card pad">
+                  <div class="hd"><h2>Custo por km, mês a mês <span class="dep">F4</span></h2></div>
+                  <p style="font-size:13.5px;margin:-4px 0 10px"><span class="up">Subiu 25% em setembro</span>, puxado pela OS 1042</p>
+                  <svg class="chart" viewBox="0 0 400 170" width="100%" role="img" aria-label="Custo por km mês a mês, este veículo e a mediana da frota"><line class="grid" x1="44" x2="316" y1="148.0" y2="148.0"/><text class="ax" x="36" y="152.0" text-anchor="end">0,40</text><line class="grid" x1="44" x2="316" y1="79.0" y2="79.0"/><text class="ax" x="36" y="83.0" text-anchor="end">0,70</text><line class="grid" x1="44" x2="316" y1="10.0" y2="10.0"/><text class="ax" x="36" y="14.0" text-anchor="end">1,00</text><text class="ax" x="44.0" y="165" text-anchor="middle">abr.</text><text class="ax" x="96.8" y="165" text-anchor="middle">mai.</text><text class="ax" x="149.6" y="165" text-anchor="middle">jun.</text><text class="ax" x="202.4" y="165" text-anchor="middle">jul.</text><text class="ax" x="255.2" y="165" text-anchor="middle">ago.</text><text class="ax" x="308.0" y="165" text-anchor="middle">set.</text><polyline class="ln-ref" points="44.0,108.9 96.8,111.2 149.6,106.6 202.4,108.9 255.2,104.3 308.0,102.0"/><polyline class="ln" points="44.0,129.6 96.8,113.5 149.6,122.7 202.4,106.6 255.2,81.3 308.0,42.2"/><g class="hit"><circle cx="44.0" cy="129.6" r="12" fill="transparent"/><circle class="pt" cx="44.0" cy="129.6" r="4"/><title>abr.: R$ 0,48/km · frota R$ 0,57/km</title></g><g class="hit"><circle cx="96.8" cy="113.5" r="12" fill="transparent"/><circle class="pt" cx="96.8" cy="113.5" r="4"/><title>mai.: R$ 0,55/km · frota R$ 0,56/km</title></g><g class="hit"><circle cx="149.6" cy="122.7" r="12" fill="transparent"/><circle class="pt" cx="149.6" cy="122.7" r="4"/><title>jun.: R$ 0,51/km · frota R$ 0,58/km</title></g><g class="hit"><circle cx="202.4" cy="106.6" r="12" fill="transparent"/><circle class="pt" cx="202.4" cy="106.6" r="4"/><title>jul.: R$ 0,58/km · frota R$ 0,57/km</title></g><g class="hit"><circle cx="255.2" cy="81.3" r="12" fill="transparent"/><circle class="pt" cx="255.2" cy="81.3" r="4"/><title>ago.: R$ 0,69/km · frota R$ 0,59/km</title></g><g class="hit"><circle cx="308.0" cy="42.2" r="12" fill="transparent"/><circle class="pt" cx="308.0" cy="42.2" r="4"/><title>set.: R$ 0,86/km · frota R$ 0,60/km</title></g><text class="dl" x="318.0" y="46.2">QRT4B22 R$ 0,86</text><text class="dl mute" x="318.0" y="106.0">Frota R$ 0,60</text></svg>
+                  <div class="chart-foot"><span class="meta">— QRT4B22 &nbsp; ┄ mediana da frota (48 cavalos)</span><a class="link" href="#">Ver como tabela</a></div>
+                </div>
+                <div class="card pad">
+                  <div class="hd"><h2>Para onde foi o custo <span class="dep">F4</span></h2></div>
+                  <div class="hbars">
+                    <div class="hb"><span>Peças</span><span class="track"><span class="fill" style="width:58%;display:block"></span></span><span class="val">R$ 12.940,20<span>58%</span></span></div>
+                    <div class="hb"><span>Mão de obra</span><span class="track"><span class="fill" style="width:24%;display:block"></span></span><span class="val">R$ 5.310,00<span>24%</span></span></div>
+                    <div class="hb"><span>Externo</span><span class="track"><span class="fill" style="width:11%;display:block"></span></span><span class="val">R$ 2.480,00<span>11%</span></span></div>
+                    <div class="hb"><span>Rateio</span><span class="track"><span class="fill" style="width:7%;display:block"></span></span><span class="val">R$ 1.450,20<span>7%</span></span></div>
+                  </div>
+                  <div class="recur" style="margin-top:16px"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/arrows-clockwise.svg)"></i><span><b>Válvula relé do freio: 2ª falha em 58 dias.</b> OS 0988 em 28/07 e OS 1042 agora</span></div>
+                </div>
+              </div>
+              <div class="card pad">
+                <div class="hd"><h2><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i>Ordens de serviço <span class="dep">F2</span></h2><a class="link" href="#">Ver todas as 12</a></div>
+                <table class="tbl">
+                  <thead><tr><th>OS</th><th>Serviço</th><th>Aberta em</th><th class="r">Km</th><th class="r">Parado</th><th>Situação</th><th class="r">Custo</th></tr></thead>
+                  <tbody>
+                    <tr><td class="osn">1042</td><td class="svc">Vazamento de ar na válvula relé</td><td class="num">24/09</td><td class="r">412.380</td><td class="r">52 h</td><td><span class="badge b-wait">Aguardando peça</span></td><td class="r">R$ 1.846,30</td></tr>
+                    <tr><td class="osn">1017</td><td class="svc">Revisão de 400.000 km</td><td class="num">14/08</td><td class="r">400.110</td><td class="r">20 h</td><td><span class="badge b-mute">Liberada</span></td><td class="r">R$ 4.286,90</td></tr>
+                    <tr><td class="osn">0988</td><td class="svc">Troca da válvula relé</td><td class="num">28/07</td><td class="r">393.460</td><td class="r">31 h</td><td><span class="badge b-mute">Liberada</span></td><td class="r">R$ 3.412,80</td></tr>
+                    <tr><td class="osn">0951</td><td class="svc">Reparo no chicote do farol</td><td class="num">02/07</td><td class="r">384.920</td><td class="r">6 h</td><td><span class="badge b-mute">Liberada</span></td><td class="r">R$ 640,00</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div class="card pad">
+                <div class="hd"><h2><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/gauge.svg)"></i>Km rodado por semana <span class="dep">F1</span></h2><button class="btn btn-outline btn-sm" type="button">Registrar leitura</button></div>
+                <svg class="chart" viewBox="0 0 760 130" width="100%" role="img" aria-label="Km rodado por semana nas últimas 13 semanas"><line class="grid" x1="44" x2="760" y1="108.0" y2="108.0"/><text class="ax" x="36" y="112.0" text-anchor="end">0</text><line class="grid" x1="44" x2="760" y1="58.0" y2="58.0"/><text class="ax" x="36" y="62.0" text-anchor="end">1.500</text><line class="grid" x1="44" x2="760" y1="8.0" y2="8.0"/><text class="ax" x="36" y="12.0" text-anchor="end">3.000</text><g class="hit"><rect x="44.0" y="8" width="49.5" height="100" fill="transparent"/><path class="bar" d="M44.0,108.0 V30.7 Q44.0,27.7 47.0,27.7 H90.5 Q93.5,27.7 93.5,30.7 V108.0 Z"/><title>Semana de 29/06: 2.410 km</title></g><text class="ax" x="68.8" y="125" text-anchor="middle">29/06</text><g class="hit"><rect x="99.5" y="8" width="49.5" height="100" fill="transparent"/><path class="bar" d="M99.5,108.0 V21.7 Q99.5,18.7 102.5,18.7 H146.1 Q149.1,18.7 149.1,21.7 V108.0 Z"/><title>Semana de 06/07: 2.680 km</title></g><g class="hit"><rect x="155.1" y="8" width="49.5" height="100" fill="transparent"/><path class="bar" d="M155.1,108.0 V31.3 Q155.1,28.3 158.1,28.3 H201.6 Q204.6,28.3 204.6,31.3 V108.0 Z"/><title>Semana de 13/07: 2.390 km</title></g><text class="ax" x="179.8" y="125" text-anchor="middle">13/07</text><g class="hit"><rect x="210.6" y="8" width="49.5" height="100" fill="transparent"/><path class="bar" d="M210.6,108.0 V19.3 Q210.6,16.3 213.6,16.3 H257.2 Q260.2,16.3 260.2,19.3 V108.0 Z"/><title>Semana de 20/07: 2.750 km</title></g><g class="hit"><rect x="266.2" y="8" width="49.5" height="100" fill="transparent"/><path class="bar" d="M266.2,108.0 V37.0 Q266.2,34.0 269.2,34.0 H312.7 Q315.7,34.0 315.7,37.0 V108.0 Z"/><title>Semana de 27/07: 2.220 km</title></g><text class="ax" x="290.9" y="125" text-anchor="middle">27/07</text><g class="hit"><rect x="321.7" y="8" width="49.5" height="100" fill="transparent"/><path class="bar" d="M321.7,108.0 V45.0 Q321.7,42.0 324.7,42.0 H368.2 Q371.2,42.0 371.2,45.0 V108.0 Z"/><title>Semana de 03/08: 1.980 km</title></g><g class="hit"><rect x="377.2" y="8" width="49.5" height="100" fill="transparent"/><path class="bar" d="M377.2,108.0 V24.0 Q377.2,21.0 380.2,21.0 H423.8 Q426.8,21.0 426.8,24.0 V108.0 Z"/><title>Semana de 10/08: 2.610 km</title></g><text class="ax" x="402.0" y="125" text-anchor="middle">10/08</text><g class="hit"><rect x="432.8" y="8" width="49.5" height="100" fill="transparent"/><path class="bar" d="M432.8,108.0 V26.7 Q432.8,23.7 435.8,23.7 H479.3 Q482.3,23.7 482.3,26.7 V108.0 Z"/><title>Semana de 17/08: 2.530 km</title></g><g class="hit"><rect x="488.3" y="8" width="49.5" height="100" fill="transparent"/><path class="bar" d="M488.3,108.0 V14.7 Q488.3,11.7 491.3,11.7 H534.8 Q537.8,11.7 537.8,14.7 V108.0 Z"/><title>Semana de 24/08: 2.890 km</title></g><text class="ax" x="513.1" y="125" text-anchor="middle">24/08</text><g class="hit"><rect x="543.8" y="8" width="49.5" height="100" fill="transparent"/><path class="bar" d="M543.8,108.0 V28.7 Q543.8,25.7 546.8,25.7 H590.4 Q593.4,25.7 593.4,28.7 V108.0 Z"/><title>Semana de 31/08: 2.470 km</title></g><g class="hit"><rect x="599.4" y="8" width="49.5" height="100" fill="transparent"/><path class="bar" d="M599.4,108.0 V33.0 Q599.4,30.0 602.4,30.0 H645.9 Q648.9,30.0 648.9,33.0 V108.0 Z"/><title>Semana de 07/09: 2.340 km</title></g><text class="ax" x="624.2" y="125" text-anchor="middle">07/09</text><g class="hit"><rect x="654.9" y="8" width="49.5" height="100" fill="transparent"/><path class="bar" d="M654.9,108.0 V19.0 Q654.9,16.0 657.9,16.0 H701.5 Q704.5,16.0 704.5,19.0 V108.0 Z"/><title>Semana de 14/09: 2.760 km</title></g><g class="hit"><rect x="710.5" y="8" width="49.5" height="100" fill="transparent"/><path class="bar partial" d="M710.5,108.0 V70.7 Q710.5,67.7 713.5,67.7 H757.0 Q760.0,67.7 760.0,70.7 V108.0 Z"/><title>Semana de 21/09: 1.210 km</title></g><text class="ax" x="735.2" y="125" text-anchor="middle">21/09</text></svg>
+                <div class="chart-foot"><span class="meta">Última leitura: 412.380 km em 24/09 às 06:52, na abertura da OS 1042 · 38 leituras</span></div>
+              </div>
+            </div>
+            <aside class="b-col">
+              <div class="card pad now">
+                <div class="top"><span class="badge b-stop"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/pause-circle-fill.svg)"></i>Parado agora</span><span class="dep">F2</span></div>
+                <div class="big">Há 2 dias e 4 h</div>
+                <dl>
+                  <dt>Motivo</dt><dd>Quebra na estrada</dd>
+                  <dt>Onde</dt><dd>OS 1042 · box 3</dd>
+                  <dt>Esperando</dt><dd>Válvula relé · pedido 311</dd>
+                  <dt>Previsão</dt><dd>seg., 28/09 às 14:00 <span class="meta">(mudou 1 vez)</span></dd>
+                </dl>
+                <a class="btn btn-outline btn-sm" href="#" style="margin-top:14px;width:100%">Ver OS 1042</a>
+              </div>
+              <div class="card pad">
+                <div class="hd"><h3><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/link-simple.svg)"></i>Conjunto <span class="dep">F1</span></h3><a class="link" href="#">Engates</a></div>
+                <p style="font-size:13.5px;font-weight:600">Rodotrem C-318</p>
+                <p class="meta">RTA2C45 · dolly RTD1A08 · RTB7F19 · desde 02/09</p>
+              </div>
+              <div class="card pad">
+                <div class="hd"><h3><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/clock-counter-clockwise.svg)"></i>Linha do tempo</h3><span class="dep">F1 F2</span></div>
+                <p class="tl-day">Esta semana</p>
+                <ul class="tl">
+                  <li><span class="d amb"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/calendar-x.svg)"></i></span><div><div class="w">Previsão mudou para seg., 28/09<span>Peça atrasou no fornecedor</span></div><div class="when">sex., 25/09 às 16:05 · Carlos Mendes</div></div></li>
+                  <li><span class="d amb"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/package.svg)"></i></span><div><div class="w">OS 1042 aguardando peça<span>Pedido 311 · válvula relé</span></div><div class="when">sex., 25/09 às 09:15</div></div></li>
+                  <li><span class="d blu"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/wrench.svg)"></i></span><div><div class="w">Entrou no box 3</div><div class="when">qui., 24/09 às 11:20</div></div></li>
+                  <li><span class="d blu"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i></span><div><div class="w">OS 1042 aberta<span>Km 412.380 informado</span></div><div class="when">qui., 24/09 às 06:52 · Ana Souza</div></div></li>
+                  <li><span class="d red"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/warning.svg)"></i></span><div><div class="w">Parou: quebra na estrada<span>BR-277 km 118 · relato do motorista</span></div><div class="when">qui., 24/09 às 06:30</div></div></li>
+                </ul>
+                <p class="tl-day">Antes</p>
+                <ul class="tl">
+                  <li><span class="d"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/link-simple.svg)"></i></span><div><div class="w">Engatado ao conjunto C-318</div><div class="when">02/09 às 18:40</div></div></li>
+                  <li><span class="d grn"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/check.svg)"></i></span><div><div class="w">OS 1017 liberada<span>Revisão de 400.000 km</span></div><div class="when">18/08 às 17:10</div></div></li>
+                </ul>
+                <a class="link" href="#">Ver histórico completo</a>
+              </div>
+            </aside>
+          </div>
+        </main>
+      </div>
+    </div></div>
+
+    <div class="below">
+      <div class="phone"><div class="screen">
+        <div class="fold"><span>Dobra da tela · 844 px</span></div>
+        <div class="status"><span>10:30</span><span class="isl"></span><span><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/cell-signal-high.svg)"></i></span></div>
+        <div class="m-top"><a class="back" href="#"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-left.svg)"></i>Veículos</a><button class="iconbtn bare" type="button" aria-label="Mais ações do veículo QRT4B22"><i class="ic s22" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical.svg)"></i></button></div>
+        <div class="m-body">
+          <div class="m-id">
+            <h1>QRT4B22</h1>
+            <div class="line"><span class="badge b-ok dotl">Ativo</span><span class="badge b-stop"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/pause-circle-fill.svg)"></i>Parado</span></div>
+            <p class="sub">Cavalo · frota 812 · Volvo FH 540 6x4</p>
+          </div>
+          <div class="m-acts"><button class="btn btn-primary" type="button"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/plus.svg)"></i>Abrir OS</button><button class="iconbtn" type="button" aria-label="Editar QRT4B22"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/pencil-simple.svg)"></i></button></div>
+          <div class="chip" style="align-self:flex-start;height:32px"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/calendar-blank.svg)"></i>Últimos 90 dias<i class="ic s12" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-down.svg)"></i></div>
+          <div class="card m-strip">
+            <div class="cell"><div class="k">Custo por km</div><div class="v">R$ 0,71</div><div class="s"><span class="up">22% acima</span> da frota</div></div>
+            <div class="cell"><div class="k">Custo</div><div class="v">R$ 22,2 mil</div><div class="s">7 OS</div></div>
+            <div class="cell"><div class="k">Disponibilidade</div><div class="v">93,4%</div><div class="s">142 h parado</div></div>
+            <div class="cell"><div class="k">Km rodado</div><div class="v">31.240 km</div><div class="s">347 km por dia</div></div>
+          </div>
+          <div class="recur"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/arrows-clockwise.svg)"></i><span><b>Válvula relé: 2ª falha em 58 dias</b></span></div>
+          <div class="card m-card now">
+            <div class="top"><span class="badge b-stop"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/pause-circle-fill.svg)"></i>Parado há 2 dias e 4 h</span></div>
+            <dl>
+              <dt>Onde</dt><dd>OS 1042 · box 3</dd>
+              <dt>Esperando</dt><dd>Válvula relé</dd>
+              <dt>Previsão</dt><dd>seg., 28/09 às 14:00</dd>
+            </dl>
+          </div>
+          <div class="card m-card">
+            <div class="hd"><h3>Linha do tempo</h3></div>
+            <ul class="tl">
+              <li><span class="d amb"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/calendar-x.svg)"></i></span><div><div class="w">Previsão mudou para seg., 28/09<span>Peça atrasou no fornecedor</span></div><div class="when">ontem às 16:05</div></div></li>
+              <li><span class="d amb"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/package.svg)"></i></span><div><div class="w">OS 1042 aguardando peça</div><div class="when">ontem às 09:15</div></div></li>
+              <li><span class="d blu"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/wrench.svg)"></i></span><div><div class="w">Entrou no box 3</div><div class="when">qui., 24/09 às 11:20</div></div></li>
+              <li><span class="d red"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/warning.svg)"></i></span><div><div class="w">Parou: quebra na estrada<span>BR-277 km 118</span></div><div class="when">qui., 24/09 às 06:30</div></div></li>
+            </ul>
+            <a class="link" href="#">Ver histórico completo</a>
+          </div>
+          <div class="card m-card">
+            <div class="hd"><h3>Custo por km, mês a mês</h3></div>
+            <svg class="chart" viewBox="0 0 356 150" width="100%" role="img" aria-label="Custo por km mês a mês, este veículo e a mediana da frota"><line class="grid" x1="44" x2="272" y1="128.0" y2="128.0"/><text class="ax" x="36" y="132.0" text-anchor="end">0,40</text><line class="grid" x1="44" x2="272" y1="69.0" y2="69.0"/><text class="ax" x="36" y="73.0" text-anchor="end">0,70</text><line class="grid" x1="44" x2="272" y1="10.0" y2="10.0"/><text class="ax" x="36" y="14.0" text-anchor="end">1,00</text><text class="ax" x="44.0" y="145" text-anchor="middle">abr.</text><text class="ax" x="88.0" y="145" text-anchor="middle">mai.</text><text class="ax" x="132.0" y="145" text-anchor="middle">jun.</text><text class="ax" x="176.0" y="145" text-anchor="middle">jul.</text><text class="ax" x="220.0" y="145" text-anchor="middle">ago.</text><text class="ax" x="264.0" y="145" text-anchor="middle">set.</text><polyline class="ln-ref" points="44.0,94.6 88.0,96.5 132.0,92.6 176.0,94.6 220.0,90.6 264.0,88.7"/><polyline class="ln" points="44.0,112.3 88.0,98.5 132.0,106.4 176.0,92.6 220.0,71.0 264.0,37.5"/><g class="hit"><circle cx="44.0" cy="112.3" r="12" fill="transparent"/><circle class="pt" cx="44.0" cy="112.3" r="4"/><title>abr.: R$ 0,48/km · frota R$ 0,57/km</title></g><g class="hit"><circle cx="88.0" cy="98.5" r="12" fill="transparent"/><circle class="pt" cx="88.0" cy="98.5" r="4"/><title>mai.: R$ 0,55/km · frota R$ 0,56/km</title></g><g class="hit"><circle cx="132.0" cy="106.4" r="12" fill="transparent"/><circle class="pt" cx="132.0" cy="106.4" r="4"/><title>jun.: R$ 0,51/km · frota R$ 0,58/km</title></g><g class="hit"><circle cx="176.0" cy="92.6" r="12" fill="transparent"/><circle class="pt" cx="176.0" cy="92.6" r="4"/><title>jul.: R$ 0,58/km · frota R$ 0,57/km</title></g><g class="hit"><circle cx="220.0" cy="71.0" r="12" fill="transparent"/><circle class="pt" cx="220.0" cy="71.0" r="4"/><title>ago.: R$ 0,69/km · frota R$ 0,59/km</title></g><g class="hit"><circle cx="264.0" cy="37.5" r="12" fill="transparent"/><circle class="pt" cx="264.0" cy="37.5" r="4"/><title>set.: R$ 0,86/km · frota R$ 0,60/km</title></g><text class="dl" x="274.0" y="41.5">QRT4B22 R$ 0,86</text><text class="dl mute" x="274.0" y="92.7">Frota R$ 0,60</text></svg>
+          </div>
+        </div>
+      </div></div>
+      <div class="notes">
+        <h4>Prioriza</h4>
+        <ul>
+          <li>A pergunta do dono: este veículo compensa? Custo por km com tendência e contra a frota, e o porquê ao lado (composição e falha recorrente).</li>
+          <li>Um filtro de período só, no topo, vale para todos os números.</li>
+          <li>Linha do tempo única junta fatos de módulos diferentes; é o que o v1 não tem.</li>
+        </ul>
+        <h4>Custa</h4>
+        <ul>
+          <li>Depende quase inteira da fase 4 (agregações). Até lá, metade da tela é estado vazio: dá para lançar só com a linha do tempo e as OS.</li>
+          <li>Densa demais para a oficina; o mecânico não precisa de custo por km.</li>
+          <li>Linha do tempo pede um evento por fato em todos os módulos (outbox já prevê, mas é trabalho).</li>
+        </ul>
+        <h4>Celular</h4>
+        <ul>
+          <li>Faixa vira 2×2; o gráfico de custo cai para o fim. É consulta, não operação.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== OPTION C =============== -->
+  <section class="sec" data-option="c" id="c">
+    <div class="sec-label"><span class="sec-num">C</span><h2>Situação agora primeiro</h2></div>
+    <p class="sec-sub">A primeira pergunta de quem abre um veículo é "ele está rodando?". O topo responde com a parada em curso contada do momento em que parou (não da abertura da OS), cada etapa com hora, e o que está engatado junto. Números de 90 dias ficam numa faixa compacta logo abaixo.</p>
+    <p class="view-cap">Notebook · 1.280 px</p>
+    <div class="scrollx"><div class="frame">
+      <div class="app">
+        <header class="topbar">
+          <a class="lockup" href="#" aria-label="Facter Truck, início"><svg width="24" height="35" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></a>
+          <span class="spacer"></span>
+          <div class="search"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i>Buscar placa, frota ou OS</div>
+          <button class="org" type="button">Transportadora Rota Sul <i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-down.svg)"></i></button>
+          <span class="avatar">MD</span>
+        </header>
+        <nav class="sidenav" aria-label="Menu principal">
+          <a class="navitem" href="#" aria-label="Início"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/house.svg)"></i></a>
+          <a class="navitem" href="#" aria-current="page" aria-label="Veículos"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck-fill.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Ordens de serviço"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Pneus"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Custos"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/chart-line-up.svg)"></i></a>
+          <span class="navsep"></span>
+          <a class="navitem" href="#" aria-label="Configurações"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/gear.svg)"></i></a>
+        </nav>
+        <main class="main">
+          <a class="crumb" href="#"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-left.svg)"></i>Veículos</a>
+          <div class="c-top">
+            <div class="idl"><h1>QRT4B22</h1><span style="font-size:14px;color:hsl(240 6% 30%)">Cavalo · frota 812 · Volvo FH 540 6x4 · 2021</span><span class="badge b-ok dotl">Ativo</span></div>
+            <div class="acts">
+              <button class="btn btn-outline" type="button"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/pencil-simple.svg)"></i>Editar</button>
+              <button class="btn btn-primary" type="button"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/plus.svg)"></i>Abrir OS</button>
+              <button class="iconbtn" type="button" aria-label="Mais ações do veículo QRT4B22"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical.svg)"></i></button>
+            </div>
+          </div>
+          <div class="card hero">
+            <div class="left">
+              <div class="state"><span class="pulse"></span>Parado <span class="dep" style="text-transform:none;letter-spacing:0">F2</span></div>
+              <div class="dur">2 dias e 4 h</div>
+              <p class="why">Quebra na estrada · vazamento de ar na válvula relé do freio</p>
+              <ol class="steps">
+                <li><b>Parou</b><span>qui. 06:30<br>BR-277 km 118</span></li>
+                <li><b>OS 1042 aberta</b><span>qui. 06:52<br>412.380 km</span></li>
+                <li><b>Box 3</b><span>qui. 11:20<br>chegou de guincho</span></li>
+                <li class="cur"><b>Aguardando peça</b><span>desde sex. 09:15<br>pedido 311</span></li>
+                <li class="next"><b>Liberar</b><span>previsto seg. 14:00<br>mudou 1 vez</span></li>
+              </ol>
+              <div class="hero-acts"><a class="btn btn-outline btn-sm" href="#">Ver OS 1042</a><a class="btn btn-outline btn-sm" href="#">Ver pedido 311</a></div>
+            </div>
+            <div class="right">
+              <h3>Engatado agora <span class="dep" style="text-transform:none;letter-spacing:0">F1</span></h3>
+              <div class="rig" style="margin-top:14px">
+                <div class="unit me"><div class="box" style="width:78px"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck-fill.svg)"></i></div><span class="pl">QRT4B22</span><span class="ty">Cavalo</span></div>
+                <span class="hitch"></span>
+                <div class="unit"><div class="box" style="width:78px"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck-trailer.svg)"></i></div><span class="pl">RTA2C45</span><span class="ty">Carreta</span></div>
+                <span class="hitch"></span>
+                <div class="unit"><div class="box" style="width:48px"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/circles-three.svg)"></i></div><span class="pl">RTD1A08</span><span class="ty">Dolly</span></div>
+                <span class="hitch"></span>
+                <div class="unit"><div class="box" style="width:78px"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck-trailer.svg)"></i></div><span class="pl">RTB7F19</span><span class="ty">Carreta</span></div>
+              </div>
+              <p class="meta" style="margin-top:10px">Rodotrem C-318 · desde 02/09 · 8.070 km neste engate</p>
+              <div class="tip"><b>O conjunto C-318 está parado junto.</b> Desengate para rodar com outro cavalo enquanto a OS 1042 não libera.</div>
+              <div class="hero-acts" style="margin-top:12px"><button class="btn btn-outline btn-sm" type="button"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/link-break.svg)"></i>Desengatar</button></div>
+            </div>
+          </div>
+          <div class="card c-nums">
+            <div class="cell"><div class="k">Custo por km · 90 dias <span class="dep">F4</span></div><div class="v">R$ 0,71</div><div class="s"><span class="up">22% acima</span> da frota</div></div>
+            <div class="cell"><div class="k">Disponibilidade · 90 dias <span class="dep">F4</span></div><div class="v">93,4%</div><div class="s">142 h parado · frota 95,1%</div></div>
+            <div class="cell"><div class="k">OS abertas <span class="dep">F2</span></div><div class="v">1</div><div class="s">Esta parada</div></div>
+            <div class="cell"><div class="k">Km atual <span class="dep">F1</span></div><div class="v">412.380 km</div><div class="s">347 km por dia</div></div>
+          </div>
+          <div class="c-2">
+            <div class="card pad">
+              <div class="hd"><h2><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i>OS recentes <span class="dep">F2</span></h2><a class="link" href="#">Ver todas as 12</a></div>
+              <div class="recur" style="margin-bottom:12px"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/arrows-clockwise.svg)"></i><span><b>Válvula relé do freio: 2ª falha em 58 dias.</b> Veja se a OS 1042 é retorno da OS 0988</span><span class="dep" style="margin-left:auto">F4</span></div>
+              <table class="tbl">
+                <thead><tr><th>OS</th><th>Serviço</th><th>Aberta em</th><th>Situação</th><th class="r">Custo</th></tr></thead>
+                <tbody>
+                  <tr><td class="osn">1042</td><td class="svc">Vazamento de ar na válvula relé</td><td class="num">24/09</td><td><span class="badge b-wait">Aguardando peça</span></td><td class="r">R$ 1.846,30</td></tr>
+                  <tr><td class="osn">1017</td><td class="svc">Revisão de 400.000 km</td><td class="num">14/08</td><td><span class="badge b-mute">Liberada</span></td><td class="r">R$ 4.286,90</td></tr>
+                  <tr><td class="osn">0988</td><td class="svc">Troca da válvula relé</td><td class="num">28/07</td><td><span class="badge b-mute">Liberada</span></td><td class="r">R$ 3.412,80</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="card pad">
+              <div class="hd"><h2>O que vem</h2></div>
+              <div class="nexts">
+                <div class="nx"><span class="ni"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/calendar-check.svg)"></i></span><div class="t">Revisão de 420.000 km<span>Faltam 7.620 km · cerca de 22 dias</span></div><span class="dep">Pós</span></div>
+                <div class="nx"><span class="ni"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i></span><div class="t">Pneus<span>Monte os pneus por posição para ver sulco e rodízio</span></div><span class="dep">F3</span></div>
+                <div class="nx"><span class="ni"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/gauge.svg)"></i></span><div class="t">Leitura de km<span>Última há 2 dias, na OS 1042</span></div><button class="btn btn-ghost" type="button">Registrar</button></div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div></div>
+
+    <div class="below">
+      <div class="phone"><div class="screen">
+        <div class="fold"><span>Dobra da tela · 844 px</span></div>
+        <div class="status"><span>10:30</span><span class="isl"></span><span><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/cell-signal-high.svg)"></i></span></div>
+        <div class="m-top"><a class="back" href="#"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-left.svg)"></i>Veículos</a><button class="iconbtn bare" type="button" aria-label="Mais ações do veículo QRT4B22"><i class="ic s22" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical.svg)"></i></button></div>
+        <div class="m-body">
+          <div class="m-id">
+            <h1>QRT4B22</h1>
+            <p class="sub">Cavalo · frota 812 · Volvo FH 540 6x4 · <span style="color:hsl(var(--success-text));font-weight:600">Ativo</span></p>
+          </div>
+          <div class="card m-hero">
+            <div class="state"><span class="pulse"></span>Parado</div>
+            <div class="dur">2 dias e 4 h</div>
+            <p class="why" style="font-size:13.5px">Quebra na estrada · válvula relé do freio</p>
+            <ol class="vsteps">
+              <li><b>Parou</b> <span>· qui. 06:30 · BR-277 km 118</span></li>
+              <li><b>OS 1042 aberta</b> <span>· qui. 06:52 · 412.380 km</span></li>
+              <li><b>Box 3</b> <span>· qui. 11:20</span></li>
+              <li class="cur"><b>Aguardando peça</b> <span>· desde sex. 09:15</span></li>
+              <li class="next"><b>Liberar</b> <span>· previsto seg. 14:00</span></li>
+            </ol>
+            <a class="btn btn-primary" href="#" style="width:100%;height:48px;margin-top:4px">Ver OS 1042</a>
+          </div>
+          <div class="card m-card m-rig">
+            <div class="hd"><h3>Engatado agora</h3><a class="link" href="#">Desengatar</a></div>
+            <div class="rig">
+              <div class="unit me"><div class="box"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck-fill.svg)"></i></div><span class="pl">QRT4B22</span><span class="ty">Cavalo</span></div>
+              <span class="hitch"></span>
+              <div class="unit"><div class="box"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck-trailer.svg)"></i></div><span class="pl">RTA2C45</span><span class="ty">Carreta</span></div>
+              <span class="hitch"></span>
+              <div class="unit"><div class="box" style="width:44px!important"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/circles-three.svg)"></i></div><span class="pl">RTD1A08</span><span class="ty">Dolly</span></div>
+              <span class="hitch"></span>
+              <div class="unit"><div class="box"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck-trailer.svg)"></i></div><span class="pl">RTB7F19</span><span class="ty">Carreta</span></div>
+            </div>
+            <p class="meta" style="margin-top:8px">Rodotrem C-318 · parado junto desde qui.</p>
+          </div>
+          <button class="btn btn-outline" type="button" style="height:48px"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/plus.svg)"></i>Abrir outra OS</button>
+          <div class="card m-strip">
+            <div class="cell"><div class="k">Custo por km</div><div class="v">R$ 0,71</div><div class="s"><span class="up">22% acima</span> da frota</div></div>
+            <div class="cell"><div class="k">Disponibilidade</div><div class="v">93,4%</div><div class="s">Frota 95,1%</div></div>
+            <div class="cell"><div class="k">Km atual</div><div class="v">412.380 km</div><div class="s">347 km por dia</div></div>
+            <div class="cell"><div class="k">Próxima revisão</div><div class="v">7.620 km</div><div class="s">Cerca de 22 dias</div></div>
+          </div>
+          <div class="card m-card">
+            <div class="hd"><h3>OS recentes</h3><a class="link" href="#">Ver todas</a></div>
+            <div class="m-os">
+              <a href="#"><span class="l1">OS 1017 · Revisão de 400.000 km</span><span class="badge b-mute">Liberada</span><span class="l2">Preventiva · 14/08 · R$ 4.286,90</span></a>
+              <a href="#"><span class="l1">OS 0988 · Troca da válvula relé</span><span class="badge b-mute">Liberada</span><span class="l2">Corretiva · 28/07 · R$ 3.412,80</span></a>
+            </div>
+          </div>
+        </div>
+      </div></div>
+      <div class="notes">
+        <h4>Prioriza</h4>
+        <ul>
+          <li>Disponibilidade, o indicador que a fase 2 já consegue medir: a parada conta de quando o veículo parou (WO-10), com guincho e espera, e a previsão mostra quantas vezes mudou.</li>
+          <li>Transforma dado em ação: o conjunto parado junto vira "Desengatar"; a falha repetida vira "veja se é retorno".</li>
+          <li>Mesma tela serve pátio e escritório; no celular o topo já é a resposta.</li>
+        </ul>
+        <h4>Custa</h4>
+        <ul>
+          <li>Quando o veículo está rodando, o topo perde força (ver o estado "Em operação" em Estados vazios). Precisa de um bom conteúdo para esse caso.</li>
+          <li>Os números de gestão ficam em segundo plano; quem quer comparar custo vai para uma tela de Custos.</li>
+          <li>Não mostra histórico completo; pede uma aba ou página de Histórico à parte.</li>
+        </ul>
+        <h4>Celular</h4>
+        <ul>
+          <li>Etapas da parada em vertical; "Ver OS 1042" é a ação principal enquanto está parado; "Abrir OS" vira "Abrir outra OS".</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== EMPTY STATES =============== -->
+  <section class="sec" id="vazios">
+    <div class="sec-label"><span class="sec-num">+</span><h2>Estados vazios e o veículo rodando</h2></div>
+    <p class="sec-sub">Valem para as 3 opções. Cada vazio diz o que falta, por que importa e a ação. Número que ainda não pode ser calculado diz do que precisa, sem traço nem zero.</p>
+    <div class="empties">
+      <div class="card">
+        <div class="ecap">Sem leituras de km <span class="dep">F1</span></div>
+        <div class="empty">
+          <span class="ei"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/gauge.svg)"></i></span>
+          <h4>Nenhuma leitura de km ainda</h4>
+          <p>O custo por km e a próxima revisão dependem do km. A leitura entra sozinha quando uma OS é aberta; registre a atual para começar a contar hoje</p>
+          <button class="btn btn-primary btn-sm" type="button">Registrar leitura</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ecap">Cavalo sem conjunto <span class="dep">F1</span></div>
+        <div class="empty">
+          <span class="ei"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/link-simple.svg)"></i></span>
+          <h4>Nenhum conjunto engatado</h4>
+          <p>Engate o conjunto que este cavalo puxa para o km dele contar também nas carretas e no dolly</p>
+          <button class="btn btn-outline btn-sm" type="button">Engatar conjunto</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ecap">Sem OS <span class="dep">F2</span></div>
+        <div class="empty">
+          <span class="ei"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i></span>
+          <h4>Nenhuma OS para QRT4B22</h4>
+          <p>As ordens de serviço deste veículo aparecem aqui, com custo e tempo parado</p>
+          <button class="btn btn-outline btn-sm" type="button">Abrir OS</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ecap">Indicador sem dados suficientes <span class="dep">F4</span></div>
+        <div class="kpi card" style="border-style:dashed">
+          <div class="k">Custo por km · 90 dias</div>
+          <div class="v" style="font-size:16px;margin-top:6px">Ainda sem km no período</div>
+          <div class="s">Aparece com 2 leituras de km e 1 OS nos últimos 90 dias. Falta 1 leitura</div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ecap">Módulo não contratado <span class="dep">F3</span></div>
+        <div class="empty">
+          <span class="ei"><i class="ic s20" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i></span>
+          <h4>Pneus por posição</h4>
+          <p>Custo por km de cada pneu, recapagem e rodízio. Não faz parte do plano da empresa</p>
+          <button class="btn btn-outline btn-sm" type="button"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/thumbs-up.svg)"></i>Quero isso</button>
+        </div>
+      </div>
+      <div class="card">
+        <div class="ecap">Opção C com o veículo rodando <span class="dep">F2</span></div>
+        <div style="padding:16px;border:1px solid hsl(160 40% 82%);border-radius:10px;background:linear-gradient(180deg,hsl(160 55% 97%),hsl(var(--card)))">
+          <div class="state" style="color:hsl(var(--success-text))"><span class="pulse" style="background:hsl(var(--success));box-shadow:0 0 0 4px hsl(160 55% 88%)"></span>Em operação</div>
+          <div class="dur" style="font-size:28px">Há 38 dias</div>
+          <p class="why" style="font-size:13px">Desde a liberação da OS 1017 · 12.270 km rodados</p>
+          <p class="meta" style="margin-top:8px">Última parada: 20 h, revisão de 400.000 km</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== COMPARISON =============== -->
+  <section class="sec" id="comparar">
+    <div class="sec-label"><span class="sec-num">=</span><h2>Comparação e recomendação</h2></div>
+    <div class="cmp" style="margin-top:16px">
+      <table>
+        <thead><tr><th></th><th>A · Ficha com abas</th><th>B · Painel com linha do tempo</th><th>C · Situação agora</th></tr></thead>
+        <tbody>
+          <tr><th>Responde primeiro</th><td>Onde está cada dado</td><td>Este veículo compensa?</td><td>Está rodando? Quando volta?</td></tr>
+          <tr><th>Para quem</th><td>Cadastro e consulta, qualquer papel</td><td>Dono, gestor, financeiro</td><td>Chefe de oficina, planejador e operação; gestão por baixo</td></tr>
+          <tr><th>Útil na fatia 1 (só ativos)</th><td>Sim: identidade, conjunto, km</td><td>Pouco: quase tudo vazio</td><td>Médio: engate e km; o topo espera a fase 2</td></tr>
+          <tr><th>Útil na fase 2</th><td>Sim</td><td>Médio: OS e linha do tempo</td><td>Muito: parada, previsão, box</td></tr>
+          <tr><th>Notebook × celular</th><td>Mesma estrutura nos dois</td><td>Projetada para notebook; celular é resumo</td><td>Projetada nos dois; celular é o caso forte</td></tr>
+          <tr><th>Custo de construir</th><td>Baixo, peças do DS</td><td>Alto: agregações, gráficos, eventos de todos os módulos</td><td>Médio: parada e etapas vêm das transições da OS</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="reco">
+      <h3>Recomendação: C em cima da estrutura de A; B vira a aba Custos</h3>
+      <ul>
+        <li>Esqueleto de A (identidade + abas), porque cresce com os módulos sem redesenho e já serve a fatia 1.</li>
+        <li>O Resumo começa pelo bloco "Situação agora" de C (parado com etapas, ou em operação há X dias) e pelo engate, porque é o fato que a fase 2 grava e o que mais gente vem procurar.</li>
+        <li>O gráfico de custo por km contra a frota, a composição e a falha recorrente de B moram na aba Custos (fase 4); a linha do tempo de B é a aba Histórico.</li>
+        <li>No celular, a ordem de C: situação, engate, ação principal, números.</li>
+      </ul>
+    </div>
+    <div class="qs">
+      <h3 style="font-size:15px;font-weight:650;margin-bottom:8px">Perguntas para decidir</h3>
+      <ol>
+        <li>O detalhe mostra números de custo para quem não tem <code>cost.view</code>? Proposta: o card some inteiro, sem cadeado.</li>
+        <li>Comparar com "a frota" é contra quê: todos os cavalos da empresa, o mesmo modelo, a mesma base? Muda o cálculo da agregação.</li>
+        <li>Período padrão dos números: 90 dias, mês corrente ou os dois?</li>
+        <li>Quando o cavalo para, o sistema deve sugerir desengatar o conjunto? É ação de quem: oficina ou operação?</li>
+        <li>Aba de módulo não contratado (Pneus): esconder ou mostrar com "Quero isso"?</li>
+        <li>A mesma tela vale para carreta e dolly? O km vem do engate e o bloco de engate mostra o cavalo; precisa de uma variação desenhada.</li>
+        <li>Veículo de outra organização visto por concessão (oficina terceira): quais blocos aparecem?</li>
+      </ol>
+    </div>
+  </section>
+</div>
+<script>
+if (location.hash === '#phones') document.body.classList.add('phones-only');
+</script>
+</body>
+</html>

@@ -1,0 +1,977 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Novidades · mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --background:0 0% 98%;
+  --foreground:240 10% 3.9%;
+  --card:0 0% 100%;
+  --primary:233 65% 50%;
+  --primary-foreground:0 0% 100%;
+  --muted:240 4.8% 93.9%;
+  --muted-foreground:240 3.8% 42%;
+  --border:240 5.9% 90%;
+  --success:160 60% 38%;
+  --warning:38 92% 45%;
+  --danger:0 84.2% 60.2%;
+  --info:233 65% 50%;
+  --radius:.5rem;
+
+  /* text-safe variants: the theme's success/danger/warning fail 4.5:1 as text on white */
+  --success-text:160 70% 24%;
+  --danger-text:0 72% 38%;
+  --warning-text:28 85% 28%;
+  --primary-soft:233 85% 96.5%;
+  --success-soft:160 55% 94%;
+  --warning-soft:40 95% 93%;
+
+  --canvas:225 14% 92%;
+  --ring:233 65% 50%;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:hsl(var(--canvas));color:hsl(var(--foreground));font:15px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,p{margin:0}
+button,input,textarea,select{font:inherit;color:inherit}
+a{color:hsl(var(--primary))}
+:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:2px;border-radius:6px}
+
+.ic{display:inline-block;width:20px;height:20px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;flex:none}
+.ic.s16{width:16px;height:16px}.ic.s18{width:18px;height:18px}.ic.s24{width:24px;height:24px}.ic.s14{width:14px;height:14px}
+
+/* ---------- presentation page ---------- */
+.doc{max-width:1328px;margin:0 auto;padding:48px 24px 96px}
+.doc-head{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between;margin-bottom:48px}
+.doc-head h1{font:800 32px/1.15 Sora,Inter,sans-serif;letter-spacing:-.02em}
+.doc-head p{color:hsl(var(--muted-foreground));max-width:640px;margin-top:8px}
+.sec{margin-top:72px}
+.sec-label{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-num{font:800 14px Sora,sans-serif;color:hsl(var(--primary));background:hsl(var(--card));border-radius:999px;width:28px;height:28px;display:inline-grid;place-items:center;flex:none}
+.sec h2{font:700 22px/1.3 Inter,sans-serif;letter-spacing:-.01em}
+.sec-sub{color:hsl(var(--muted-foreground));margin:0 0 20px 40px;max-width:760px}
+.notes{margin:20px 0 0 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 32px;font-size:14px;color:hsl(240 6% 25%)}
+.notes li{margin-bottom:6px}
+.notes ul{margin:0;padding-left:18px}
+.notes h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));margin-bottom:6px}
+
+.frame{background:hsl(var(--background));border-radius:14px;box-shadow:0 1px 2px hsl(230 20% 20%/.06),0 12px 40px -12px hsl(230 30% 20%/.18);overflow:hidden;border:1px solid hsl(var(--border));max-width:1280px}
+
+/* ---------- brand ---------- */
+.lockup{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.lockup svg{color:hsl(var(--primary));flex:none}
+.lockup .rule{width:1px;align-self:stretch;background:hsl(var(--border));margin:2px 0}
+.wordmark{font:400 18px/1.1 Sora,sans-serif;letter-spacing:-.01em;white-space:nowrap}
+.wordmark b{font-weight:800}
+.tagline{font-size:11px;color:hsl(var(--muted-foreground));margin-top:3px;white-space:nowrap}
+
+/* ---------- app shell (desktop) ---------- */
+.app{display:grid;grid-template-columns:72px 1fr;grid-template-rows:64px 1fr;min-height:100%}
+.topbar{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:0 20px 0 18px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
+.topbar .spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;width:300px;max-width:30vw;height:38px;padding:0 12px;border:1px solid hsl(var(--border));border-radius:8px;color:hsl(var(--muted-foreground));font-size:14px;background:hsl(var(--background))}
+.org{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:6px 10px;border-radius:8px;border:0;background:none;cursor:pointer}
+.avatar{width:34px;height:34px;border-radius:999px;background:hsl(233 45% 88%);color:hsl(233 60% 30%);display:grid;place-items:center;font-weight:600;font-size:13px;flex:none}
+.iconbtn{width:38px;height:38px;border-radius:8px;border:0;background:none;display:grid;place-items:center;color:hsl(var(--muted-foreground));cursor:pointer}
+.iconbtn:hover{background:hsl(var(--muted))}
+
+.sidenav{background:hsl(var(--card));border-right:1px solid hsl(var(--border));padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.navitem{position:relative;width:48px;height:48px;border-radius:10px;display:grid;place-items:center;color:hsl(240 5% 34%);text-decoration:none}
+.navitem:hover{background:hsl(var(--muted))}
+.navitem[aria-current="page"]{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.navitem[aria-current="page"]::before{content:"";position:absolute;left:-12px;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:hsl(var(--primary))}
+.navitem .tip{position:absolute;left:58px;top:50%;transform:translateY(-50%);background:hsl(240 10% 12%);color:#fff;font-size:12px;padding:4px 8px;border-radius:6px;white-space:nowrap;pointer-events:none}
+.navsep{flex:1}
+.dot{position:absolute;top:9px;right:9px;width:10px;height:10px;border-radius:999px;background:hsl(var(--primary));box-shadow:0 0 0 2px hsl(var(--card))}
+
+.main{padding:32px 40px 48px;min-width:0}
+.pagehead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.pagehead h1{font:700 26px/1.2 Inter,sans-serif;letter-spacing:-.015em}
+.pagehead p{color:hsl(var(--muted-foreground));margin-top:4px}
+
+/* ---------- buttons, chips, badges ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:8px;border:1px solid transparent;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn-primary{background:hsl(var(--primary));color:hsl(var(--primary-foreground))}
+.btn-primary:hover{background:hsl(233 65% 44%)}
+.btn-outline{background:hsl(var(--card));border-color:hsl(240 6% 82%);color:hsl(var(--foreground))}
+.btn-outline:hover{background:hsl(var(--muted))}
+.btn-want{background:hsl(var(--card));border-color:hsl(233 60% 78%);color:hsl(var(--primary))}
+.btn-want:hover{background:hsl(var(--primary-soft))}
+.btn-ghost{background:none;color:hsl(var(--primary));padding:0 8px}
+.btn-ghost:hover{background:hsl(var(--primary-soft))}
+.btn-sm{height:34px;padding:0 12px;font-size:13px}
+.linkbtn{background:none;border:0;padding:0;color:hsl(var(--muted-foreground));font-size:13px;text-decoration:underline;text-underline-offset:2px;cursor:pointer}
+
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:999px;background:hsl(var(--muted));color:hsl(240 6% 26%);font-size:12px;font-weight:500}
+
+.badge{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;letter-spacing:.01em;height:24px;padding:0 9px 0 7px;border-radius:6px}
+.b-new{background:hsl(var(--primary-soft));color:hsl(233 65% 42%)}
+.b-imp{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.b-fix{background:hsl(var(--muted));color:hsl(240 6% 30%)}
+.b-soon{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.meta{font-size:13px;color:hsl(var(--muted-foreground))}
+.unread{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;color:hsl(var(--primary))}
+.unread::before{content:"";width:7px;height:7px;border-radius:99px;background:currentColor}
+
+/* segmented filter */
+.seg{display:inline-flex;gap:4px;padding:4px;background:hsl(var(--muted));border-radius:10px;flex-wrap:wrap}
+.seg button{border:0;background:none;height:32px;padding:0 12px;border-radius:7px;font-size:14px;font-weight:500;color:hsl(240 6% 30%);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.seg button .n{font-size:12px;color:hsl(var(--muted-foreground));font-weight:500}
+.seg button[aria-pressed="true"]{background:hsl(var(--card));color:hsl(var(--foreground));box-shadow:0 1px 2px hsl(240 10% 10%/.12)}
+
+/* ---------- novidades layout ---------- */
+.nov{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:40px;align-items:start}
+.feedbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:8px}
+.month{display:flex;align-items:center;gap:12px;margin:28px 0 14px;font-size:13px;font-weight:600;color:hsl(240 6% 30%)}
+.month::after{content:"";flex:1;height:1px;background:hsl(var(--border))}
+.entries{display:flex;flex-direction:column;gap:14px}
+
+.card{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px}
+.e-feature{overflow:hidden}
+.e-feature .shot{height:200px;background:
+  linear-gradient(hsl(233 40% 97%),hsl(233 40% 97%)) padding-box;
+  border-bottom:1px solid hsl(var(--border));position:relative;display:grid;place-items:center;
+  background-image:radial-gradient(hsl(233 30% 88%) 1px,transparent 1px);background-size:16px 16px}
+.e-body{padding:20px 24px 22px}
+.e-top{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:10px}
+.e-feature h3{font-size:19px;line-height:1.3;font-weight:650;letter-spacing:-.01em}
+.e-body p{margin-top:6px;color:hsl(240 6% 22%);max-width:62ch}
+.e-foot{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:18px;padding-top:16px;border-top:1px solid hsl(var(--border))}
+.forwho{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.forwho .lbl{font-size:12px;color:hsl(var(--muted-foreground))}
+
+.e-imp{display:grid;grid-template-columns:36px 1fr;gap:14px;padding:18px 22px}
+.e-imp .ico{width:36px;height:36px;border-radius:10px;background:hsl(var(--success-soft));color:hsl(var(--success-text));display:grid;place-items:center}
+.e-imp h3{font-size:16px;font-weight:600;line-height:1.35}
+.e-imp p{margin-top:4px;color:hsl(240 6% 22%);font-size:14.5px;max-width:62ch}
+.where{display:inline-flex;align-items:center;gap:6px;margin-top:10px;font-size:13.5px;font-weight:500;color:hsl(var(--primary));text-decoration:none}
+.where:hover{text-decoration:underline}
+
+.e-fixes{padding:6px 22px}
+.e-fixes .hd{display:flex;align-items:center;gap:10px;padding:12px 0 6px}
+.fix{display:grid;grid-template-columns:20px 1fr auto;gap:12px;padding:10px 0;border-top:1px solid hsl(var(--border));font-size:14.5px;align-items:start}
+.fix:first-of-type{border-top:0}
+.fix .ok{color:hsl(var(--success-text));margin-top:2px}
+.fix .meta{white-space:nowrap}
+
+/* em breve */
+.soon-col{position:sticky;top:24px}
+.soon-head h2{font-size:17px;font-weight:650;display:flex;align-items:center;gap:8px}
+.soon-head p{font-size:13.5px;color:hsl(var(--muted-foreground));margin-top:4px}
+.soon-list{display:flex;flex-direction:column;gap:12px;margin-top:16px}
+.soon{padding:18px 18px 16px}
+.soon h3{font-size:15.5px;font-weight:600;line-height:1.35;margin-top:10px}
+.soon p{font-size:14px;color:hsl(240 6% 22%);margin-top:4px}
+.collect{display:flex;gap:8px;align-items:flex-start;margin-top:12px;padding:10px 12px;background:hsl(var(--background));border:1px solid hsl(var(--border));border-radius:8px;font-size:13px;color:hsl(240 6% 25%)}
+.collect .ic{color:hsl(var(--success-text));margin-top:1px}
+.soon .actions{margin-top:14px;display:flex;gap:8px;align-items:center}
+.done{margin-top:14px;border-radius:10px;background:hsl(var(--success-soft));padding:12px 14px}
+.done .msg{display:flex;align-items:flex-start;line-height:1.35;gap:8px;font-weight:600;font-size:14px;color:hsl(var(--success-text))}
+.field{display:block;margin-top:12px}
+.field .l{display:block;font-size:13px;font-weight:500;margin-bottom:6px}
+.field .l .opt{font-weight:400;color:hsl(var(--muted-foreground))}
+textarea,.input,select{width:100%;border:1px solid hsl(240 6% 82%);border-radius:8px;background:hsl(var(--card));padding:9px 12px;font-size:14px;line-height:1.45}
+textarea{resize:vertical;min-height:72px}
+textarea::placeholder,.input::placeholder{color:hsl(240 4% 46%)}
+textarea:focus-visible,.input:focus-visible,select:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:0;border-color:transparent}
+.check{display:flex;gap:8px;align-items:flex-start;margin-top:10px;font-size:13.5px}
+.check input{width:16px;height:16px;margin:2px 0 0;accent-color:hsl(var(--primary))}
+.done .row{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:10px;flex-wrap:wrap}
+
+/* screenshot placeholder art */
+.conj{display:flex;align-items:center;gap:0;padding:18px 22px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px;box-shadow:0 8px 24px -10px hsl(233 40% 30%/.25)}
+.unit{display:flex;flex-direction:column;align-items:center;gap:6px;min-width:96px}
+.unit .box{width:88px;height:48px;border-radius:8px;display:grid;place-items:center;border:1.5px solid hsl(233 50% 80%);background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.unit .pl{font:600 12px/1 Inter;letter-spacing:.03em}
+.unit .ty{font-size:11px;color:hsl(var(--muted-foreground))}
+.hitch{display:flex;flex-direction:column;align-items:center;color:hsl(var(--success-text));margin:0 -4px 22px}
+.hitch .ln{width:40px;height:2px;background:hsl(160 50% 60%)}
+.shot-cap{position:absolute;left:16px;bottom:12px;font-size:11px;color:hsl(var(--muted-foreground))}
+
+/* ---------- banner ---------- */
+.banner{display:flex;align-items:center;gap:14px;padding:12px 14px 12px 18px;background:hsl(var(--primary-soft));border:1px solid hsl(233 60% 86%);border-radius:12px}
+.banner .bi{width:34px;height:34px;border-radius:9px;background:hsl(var(--primary));color:#fff;display:grid;place-items:center;flex:none}
+.banner .bt{flex:1;min-width:0;font-size:14.5px}
+.banner .bt strong{font-weight:650}
+.banner .bt span{color:hsl(240 6% 25%)}
+
+/* ---------- phone ---------- */
+.phones{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start;margin-left:40px}
+.phones .notes{margin:0;flex:1 1 260px;grid-template-columns:1fr;align-self:center}
+.notif{display:grid;grid-template-columns:34px 1fr;gap:12px;padding:14px;border-radius:10px;background:hsl(var(--card));border:1px solid hsl(var(--border));box-shadow:0 8px 24px -12px hsl(230 30% 20%/.25)}
+.notif .bi{width:34px;height:34px;border-radius:9px;background:hsl(var(--success-soft));color:hsl(var(--success-text));display:grid;place-items:center}
+.notif p{font-size:14px}
+.notif .meta{margin-top:2px}
+.phone-wrap{display:flex;flex-direction:column;gap:12px;align-items:center}
+.phone-cap{font-size:13px;color:hsl(var(--muted-foreground));max-width:360px;text-align:center}
+.phone{width:390px;max-width:calc(100vw - 48px);height:844px;border-radius:48px;background:hsl(240 8% 12%);padding:10px;box-shadow:0 20px 50px -20px hsl(230 30% 15%/.45)}
+.screen{position:relative;height:100%;border-radius:39px;overflow:hidden;background:hsl(var(--background));display:flex;flex-direction:column}
+.status{height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 28px 0 32px;font:600 14px Inter;background:hsl(var(--card))}
+.status .isl{width:110px;height:30px;border-radius:20px;background:hsl(240 8% 12%)}
+.m-top{display:flex;align-items:center;justify-content:space-between;padding:8px 16px 10px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border));flex:none}
+.m-top .wordmark{font-size:16px}
+.m-body{flex:1;overflow:hidden;padding:16px}
+.m-body h1{font-size:22px;font-weight:700;letter-spacing:-.015em}
+.tabs{display:grid;grid-template-columns:1fr 1fr;margin:14px 0 12px;border-bottom:1px solid hsl(var(--border))}
+.tabs button{border:0;background:none;height:40px;font-size:14.5px;font-weight:500;color:hsl(240 5% 38%);border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:hsl(var(--primary));border-bottom-color:hsl(var(--primary));font-weight:600}
+.m-body .seg{display:flex;width:100%}
+.m-body .seg button{flex:1 1 auto;padding:0 8px;font-size:13px;justify-content:center}
+.m-body .month{margin:16px 0 10px}
+.m-body .e-body{padding:14px 16px 16px}
+.m-body .e-feature .shot{height:120px}
+.m-body .e-feature h3{font-size:17px}
+.m-body .e-body p{font-size:14px}
+.m-body .e-foot{margin-top:14px;padding-top:12px}
+.m-body .e-foot .btn{width:100%}
+.m-body .e-imp{padding:14px 16px;grid-template-columns:32px 1fr;gap:12px}
+.m-body .e-imp .ico{width:32px;height:32px}
+.m-body .soon{padding:16px}
+.botnav{flex:none;display:grid;grid-template-columns:repeat(5,1fr);background:hsl(var(--card));border-top:1px solid hsl(var(--border));padding:6px 4px 26px}
+.bn{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:500;color:hsl(240 5% 36%);text-decoration:none;padding:6px 0;border-radius:10px}
+.bn[aria-current="page"]{color:hsl(var(--primary));font-weight:600}
+.bn .dot{top:4px;right:calc(50% - 16px)}
+.fade{position:absolute;left:0;right:0;bottom:84px;height:40px;background:linear-gradient(transparent,hsl(var(--background)));pointer-events:none}
+
+/* ---------- indicators section ---------- */
+.ind{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px;margin-left:40px}
+.panel{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:14px;padding:20px;display:flex;flex-direction:column;gap:14px}
+.panel h3{font-size:14px;font-weight:600}
+.panel .cap{font-size:13.5px;color:hsl(240 6% 28%)}
+.crop{border:1px solid hsl(var(--border));border-radius:10px;overflow:hidden;background:hsl(var(--background))}
+.ind .wide{grid-column:1/-1}
+
+/* ---------- vehicle detail ---------- */
+.vd .main{padding-top:24px}
+.crumb{display:inline-flex;align-items:center;gap:6px;font-size:13.5px;color:hsl(var(--muted-foreground));text-decoration:none;margin-bottom:10px}
+.vhead{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.vhead h1{font:700 26px/1.2 Inter;letter-spacing:.01em}
+.status-ok{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:hsl(var(--success-text))}
+.status-ok::before{content:"";width:8px;height:8px;border-radius:99px;background:hsl(var(--success))}
+.vtabs{display:flex;gap:4px;margin:20px 0 24px;border-bottom:1px solid hsl(var(--border));flex-wrap:wrap}
+.vtabs a{padding:10px 14px;font-size:14px;font-weight:500;color:hsl(240 5% 36%);text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px}
+.vtabs a[aria-current="page"]{color:hsl(var(--primary));border-bottom-color:hsl(var(--primary));font-weight:600}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:14px}
+.kpi{padding:16px 18px}
+.kpi .k{font-size:13px;color:hsl(var(--muted-foreground))}
+.kpi .v{font-size:24px;font-weight:700;letter-spacing:-.015em;margin-top:4px;font-variant-numeric:tabular-nums}
+.kpi .s{font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:2px}
+.vgrid{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:14px;margin-top:14px}
+.vcard{padding:18px 20px}
+.vcard h2{font-size:15px;font-weight:600;display:flex;align-items:center;gap:8px}
+.inplace{border-color:hsl(40 70% 80%);background:linear-gradient(hsl(var(--card)),hsl(var(--card))) padding-box}
+.inplace .top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.kmbars{display:flex;align-items:flex-end;gap:3px;height:40px;margin-top:12px}
+.kmbars i{flex:1;background:hsl(233 50% 86%);border-radius:2px 2px 0 0}
+.kmbars i:last-child{background:hsl(var(--primary))}
+.oslist{margin-top:10px}
+.osrow{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;padding:10px 0;border-top:1px solid hsl(var(--border));font-size:14px}
+.osrow:first-child{border-top:0}
+.osn{font-weight:600;font-variant-numeric:tabular-nums}
+.pill{font-size:12px;font-weight:600;padding:2px 8px;border-radius:99px}
+.p-run{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.p-done{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+
+.side-state{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin:24px 0 0 40px}
+.state-card{max-width:440px}
+.state-cap{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));margin-bottom:8px;font-weight:600}
+
+/* ---------- authoring ---------- */
+.author .main{max-width:1120px}
+.frow{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:32px;padding:20px 0;border-top:1px solid hsl(var(--border))}
+.frow:first-of-type{border-top:0}
+.flabel{font-size:14px;font-weight:600;margin-bottom:8px;display:block}
+.flabel .req{color:hsl(var(--danger-text))}
+.hint{font-size:13px;color:hsl(var(--muted-foreground));margin-top:6px}
+.tipbox{font-size:13.5px;color:hsl(240 6% 25%);background:hsl(var(--primary-soft));border-radius:10px;padding:12px 14px;align-self:start}
+.tipbox b{display:flex;align-items:center;gap:6px;font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:hsl(233 65% 42%);margin-bottom:6px}
+.tipbox ul{margin:0;padding-left:16px}
+.tipbox li{margin:2px 0}
+.tipbox .ex{margin-top:8px;font-size:13px}
+.tipbox .ex s{color:hsl(var(--danger-text))}
+.tipbox .ex em{font-style:normal;color:hsl(var(--success-text));font-weight:600}
+.types{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.type{position:relative;border:1px solid hsl(240 6% 84%);border-radius:10px;padding:12px;display:flex;flex-direction:column;gap:6px;cursor:pointer;background:hsl(var(--card))}
+.type input{position:absolute;opacity:0}
+.type .t{font-size:14px;font-weight:600}
+.type .d{font-size:12.5px;color:hsl(var(--muted-foreground));line-height:1.35}
+.type:has(input:checked){border-color:hsl(var(--primary));box-shadow:0 0 0 1px hsl(var(--primary));background:hsl(var(--primary-soft))}
+.type:has(input:focus-visible){outline:2px solid hsl(var(--ring));outline-offset:2px}
+.counter{display:flex;justify-content:space-between;font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:6px}
+.rolepick{display:flex;flex-wrap:wrap;gap:8px}
+.rolepick label{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid hsl(240 6% 84%);border-radius:999px;font-size:14px;cursor:pointer;background:hsl(var(--card))}
+.rolepick input{accent-color:hsl(var(--primary));width:16px;height:16px;margin:0}
+.rolepick label:has(input:checked){border-color:hsl(233 60% 70%);background:hsl(var(--primary-soft))}
+.drop{border:1.5px dashed hsl(240 6% 78%);border-radius:10px;padding:22px;display:flex;align-items:center;gap:14px;color:hsl(240 6% 30%);font-size:14px;background:hsl(var(--card))}
+.drop .ic{color:hsl(var(--muted-foreground))}
+.formfoot{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;padding-top:20px;border-top:1px solid hsl(var(--border))}
+.formfoot .r{display:flex;gap:8px;flex-wrap:wrap}
+.twocol{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.errtext{font-size:13px;color:hsl(var(--danger-text));margin-top:6px;display:flex;gap:6px;align-items:center}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+@media (max-width:1100px){
+  .nov{grid-template-columns:1fr}
+  .soon-col{position:static}
+  .frow{grid-template-columns:1fr}
+  .vgrid{grid-template-columns:1fr}
+  .ind{grid-template-columns:1fr}
+  .types{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media (max-width:720px){
+  .doc{padding:32px 16px 64px}
+  .app{grid-template-columns:1fr}
+  .sidenav{display:none}
+  .main{padding:20px 16px}
+  .search{display:none}
+  .sec-sub,.notes,.phones,.ind,.side-state{margin-left:0}
+  .tagline{display:none}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="facter" viewBox="0 0 207 304"><path fill="currentColor" d="M25.8384 196.911L15.4739 183.729C-10.7189 150.411 0.44781 101.422 38.4895 82.7344L206.266 0.307297V34.2396C206.266 60.1875 191.448 83.8698 168.12 95.2396L56.578 149.594C48.4634 153.547 41.3489 159.344 35.9791 166.609C30.5936 173.901 25.9582 183.906 26.3176 196.526C29.9947 193.609 34.0624 191.026 38.4843 188.854L206.26 106.432V140.359C206.26 166.313 191.437 189.995 168.109 201.365L56.578 255.708C48.4634 259.667 41.3489 265.464 35.9791 272.724C30.4426 280.224 25.6978 290.578 26.3593 303.693L15.4739 289.854C-7.54698 260.568 -1.72407 219.193 25.8384 196.911ZM134.818 266.526L206.208 303.724L206.187 210.802L134.953 246.661C126.828 250.755 126.755 262.323 134.818 266.526Z"/></symbol>
+</svg>
+
+<div class="doc">
+  <header class="doc-head">
+    <div>
+      <h1>Novidades e Em breve</h1>
+      <p>Mockups da área de novidades do Facter Truck: o que saiu, o que vem sem data, o aviso no lugar onde a funcionalidade vai morar e o formulário que o time usa para escrever cada entrada.</p>
+    </div>
+    <div class="lockup" aria-label="Facter Truck">
+      <svg width="27" height="40" aria-hidden="true"><use href="#facter"/></svg>
+      <span class="rule"></span>
+      <div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div>
+    </div>
+  </header>
+
+  <!-- =============== 1. DESKTOP =============== -->
+  <section class="sec" id="s1">
+    <div class="sec-label"><span class="sec-num">1</span><h2>Tela de Novidades · notebook 1280</h2></div>
+    <p class="sec-sub">O que saiu fica à esquerda, em ordem do mais novo, agrupado por mês. O que vem fica numa coluna própria: sem data, então não entra na linha do tempo. Os botões de filtro e de "Quero isso" funcionam.</p>
+
+    <div class="frame" id="desk">
+      <div class="app">
+        <header class="topbar">
+          <a class="lockup" href="#" aria-label="Facter Truck, início">
+            <svg width="24" height="35" aria-hidden="true"><use href="#facter"/></svg>
+            <span class="rule"></span>
+            <div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div>
+          </a>
+          <span class="spacer"></span>
+          <div class="search"><i class="ic s18" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i>Buscar placa, frota ou OS</div>
+          <button class="org" type="button">Transportadora Rota Sul <i class="ic s16" style="--i:url(https://api.iconify.design/ph/caret-down.svg)"></i></button>
+          <span class="avatar" aria-label="Marina Duarte">MD</span>
+        </header>
+        <nav class="sidenav" aria-label="Menu principal">
+          <a class="navitem" href="#" aria-label="Início"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/house.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Veículos"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/truck.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Ordens de serviço"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Pneus"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Custos"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/chart-line-up.svg)"></i></a>
+          <span class="navsep"></span>
+          <a class="navitem" href="#" aria-current="page" aria-label="Novidades"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/megaphone-simple-fill.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Configurações"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/gear.svg)"></i></a>
+        </nav>
+
+        <main class="main">
+          <div class="pagehead">
+            <div>
+              <h1>Novidades</h1>
+              <p>O que mudou no Truck e o que vem a seguir</p>
+            </div>
+          </div>
+
+          <div class="nov">
+            <div>
+              <div class="feedbar">
+                <div class="seg" role="group" aria-label="Filtrar por tipo" data-filter="desk">
+                  <button type="button" aria-pressed="true" data-f="all">Tudo <span class="n">7</span></button>
+                  <button type="button" aria-pressed="false" data-f="new">Novas funções <span class="n">2</span></button>
+                  <button type="button" aria-pressed="false" data-f="imp">Melhorias <span class="n">2</span></button>
+                  <button type="button" aria-pressed="false" data-f="fix">Correções <span class="n">3</span></button>
+                </div>
+              </div>
+
+              <div class="feed" data-feed="desk">
+                <div class="month">Setembro de 2026</div>
+                <div class="entries">
+                  <article class="card e-feature" data-t="new">
+                    <div class="shot" role="img" aria-label="Captura da tela de conjunto: cavalo QRT4B22 engatado na carreta RTA2C45 e no dolly">
+                      <div class="conj" aria-hidden="true">
+                        <div class="unit"><div class="box"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/truck.svg)"></i></div><span class="pl">QRT4B22</span><span class="ty">Cavalo</span></div>
+                        <div class="hitch"><i class="ic s16" style="--i:url(https://api.iconify.design/ph/link.svg)"></i><span class="ln"></span></div>
+                        <div class="unit"><div class="box" style="width:120px"></div><span class="pl">RTA2C45</span><span class="ty">Carreta</span></div>
+                        <div class="hitch"><i class="ic s16" style="--i:url(https://api.iconify.design/ph/link.svg)"></i><span class="ln"></span></div>
+                        <div class="unit"><div class="box" style="width:56px"></div><span class="pl">DLY0318</span><span class="ty">Dolly</span></div>
+                      </div>
+                      <span class="shot-cap">Conjunto frota 812 · engatado há 5 min</span>
+                    </div>
+                    <div class="e-body">
+                      <div class="e-top">
+                        <span class="badge b-new"><i class="ic s14" style="--i:url(https://api.iconify.design/ph/sparkle-fill.svg)"></i>Nova função</span>
+                        <span class="meta">23 set</span>
+                        <span class="unread">Nova para você</span>
+                      </div>
+                      <h3>Engate e desengate de conjuntos pelo pátio</h3>
+                      <p>Registre a troca de carreta na hora em que o conjunto sai. O custo de cada OS vai para o veículo certo, mesmo quando a carreta muda de cavalo no meio do mês.</p>
+                      <div class="e-foot">
+                        <div class="forwho"><span class="lbl">Para</span><div class="chips"><span class="chip">Gestão de frota</span><span class="chip">Pátio</span></div></div>
+                        <a class="btn btn-primary" href="#">Experimentar <i class="ic s16" style="--i:url(https://api.iconify.design/ph/arrow-right.svg)"></i></a>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="card e-imp" data-t="imp">
+                    <span class="ico"><i class="ic" style="--i:url(https://api.iconify.design/ph/arrow-circle-up.svg)"></i></span>
+                    <div>
+                      <div class="e-top" style="margin-bottom:6px"><span class="badge b-imp">Melhoria</span><span class="meta">18 set</span><span class="unread">Nova para você</span></div>
+                      <h3>Previsão de liberação calculada pelos serviços que faltam</h3>
+                      <p>A OS mostra quando o veículo deve ser liberado e atualiza sozinha conforme cada serviço é concluído.</p>
+                      <a class="where" href="#">Ver em Ordens de serviço <i class="ic s16" style="--i:url(https://api.iconify.design/ph/arrow-right.svg)"></i></a>
+                    </div>
+                  </article>
+
+                  <section class="card e-fixes" data-t="fix" aria-label="Correções de setembro">
+                    <div class="hd"><span class="badge b-fix"><i class="ic s14" style="--i:url(https://api.iconify.design/ph/check-circle.svg)"></i>Correções</span></div>
+                    <div class="fix"><i class="ic s18 ok" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i><span>Placas no padrão Mercosul (ABC1D23) apareciam com erro no cadastro de veículo. Corrigido</span><span class="meta">20 set</span></div>
+                    <div class="fix"><i class="ic s18 ok" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i><span>O total da OS arredondava centavos de peças com quantidade fracionada. Corrigido</span><span class="meta">9 set</span></div>
+                  </section>
+                </div>
+
+                <div class="month">Agosto de 2026</div>
+                <div class="entries">
+                  <article class="card e-feature" data-t="new">
+                    <div class="e-body">
+                      <div class="e-top">
+                        <span class="badge b-new"><i class="ic s14" style="--i:url(https://api.iconify.design/ph/sparkle-fill.svg)"></i>Nova função</span>
+                        <span class="meta">27 ago</span>
+                      </div>
+                      <h3>Custo por km de cada veículo</h3>
+                      <p>Veja quais veículos puxam o custo da frota para cima e decida onde vale revisar contrato, rota ou troca, com o número do mês ao lado do anterior.</p>
+                      <div class="e-foot">
+                        <div class="forwho"><span class="lbl">Para</span><div class="chips"><span class="chip">Dono</span><span class="chip">Gestão de frota</span><span class="chip">Financeiro</span></div></div>
+                        <a class="btn btn-primary" href="#">Experimentar <i class="ic s16" style="--i:url(https://api.iconify.design/ph/arrow-right.svg)"></i></a>
+                      </div>
+                    </div>
+                  </article>
+
+                  <article class="card e-imp" data-t="imp">
+                    <span class="ico"><i class="ic" style="--i:url(https://api.iconify.design/ph/arrow-circle-up.svg)"></i></span>
+                    <div>
+                      <div class="e-top" style="margin-bottom:6px"><span class="badge b-imp">Melhoria</span><span class="meta">14 ago</span></div>
+                      <h3>Pneu mostra por quais posições e veículos passou</h3>
+                      <p>Cada troca de posição fica no histórico do pneu, com o km do veículo no momento da troca.</p>
+                      <a class="where" href="#">Ver em Pneus <i class="ic s16" style="--i:url(https://api.iconify.design/ph/arrow-right.svg)"></i></a>
+                    </div>
+                  </article>
+
+                  <section class="card e-fixes" data-t="fix" aria-label="Correções de agosto">
+                    <div class="hd"><span class="badge b-fix"><i class="ic s14" style="--i:url(https://api.iconify.design/ph/check-circle.svg)"></i>Correções</span></div>
+                    <div class="fix"><i class="ic s18 ok" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i><span>A lista de veículos às vezes não mostrava o conjunto atual depois de um desengate. Corrigido</span><span class="meta">5 ago</span></div>
+                  </section>
+                </div>
+              </div>
+            </div>
+
+            <aside class="soon-col" aria-labelledby="soon-d">
+              <div class="soon-head">
+                <h2 id="soon-d"><i class="ic s18" style="--i:url(https://api.iconify.design/ph/hourglass-medium.svg);color:hsl(var(--warning-text))"></i>Em breve</h2>
+                <p>Sem data prevista. Os pedidos das empresas definem o que vem primeiro.</p>
+              </div>
+              <div class="soon-list">
+                <article class="card soon" data-soon>
+                  <span class="badge b-soon">Em breve</span>
+                  <h3>Preventiva pelo km rodado</h3>
+                  <p>Aviso de revisão quando o veículo chega no km do plano, antes de virar parada na estrada.</p>
+                  <div class="collect"><i class="ic s16" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i><span>O histórico de km dos seus veículos já está sendo registrado</span></div>
+                  <div class="actions"><button class="btn btn-want btn-sm" type="button" data-want><i class="ic s16" style="--i:url(https://api.iconify.design/ph/thumbs-up.svg)"></i>Quero isso</button></div>
+                </article>
+
+                <article class="card soon" data-soon>
+                  <span class="badge b-soon">Em breve</span>
+                  <h3>Recapagem e vidas do pneu</h3>
+                  <p>Quantas vezes cada pneu foi recapado, com qual fornecedor, e quanto custou cada vida por km.</p>
+                  <div class="collect"><i class="ic s16" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i><span>As trocas de posição e o km de cada pneu já estão sendo registrados</span></div>
+                  <div class="done" role="status">
+                    <div class="msg"><i class="ic s18" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i>Registrado. Avisamos quando chegar</div>
+                    <label class="field"><span class="l">O que você faria com isso? <span class="opt">(opcional)</span></span>
+                      <textarea rows="3" placeholder="Ex.: decidir se compensa recapar a 2ª vez ou comprar pneu novo">Queria saber se vale recapar a terceira vez nos pneus da carreta</textarea></label>
+                    <label class="check"><input type="checkbox" checked> Avisar no app e por e-mail quando chegar</label>
+                    <div class="row"><button class="btn btn-outline btn-sm" type="button">Salvar resposta</button><button class="linkbtn" type="button">Desfazer pedido</button></div>
+                  </div>
+                </article>
+
+                <article class="card soon" data-soon>
+                  <span class="badge b-soon">Em breve</span>
+                  <h3>Resumo da semana por e-mail</h3>
+                  <p>Custo da semana, veículos que mais pararam e retrabalho, toda segunda no seu e-mail, sem precisar entrar no sistema.</p>
+                  <div class="collect"><i class="ic s16" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i><span>O custo e o tempo parado de cada OS já estão sendo registrados</span></div>
+                  <div class="actions"><button class="btn btn-want btn-sm" type="button" data-want><i class="ic s16" style="--i:url(https://api.iconify.design/ph/thumbs-up.svg)"></i>Quero isso</button></div>
+                </article>
+              </div>
+            </aside>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div><h4>Quatro modelos</h4><ul>
+        <li><b>Nova função</b>: card grande, imagem opcional, benefício no trabalho, papéis e "Experimentar".</li>
+        <li><b>Melhoria</b>: card compacto com ícone, o que ficou melhor e onde ("Ver em Pneus").</li>
+        <li><b>Correção</b>: uma linha por item, agrupada por mês num card só; sem link, sem culpa.</li>
+        <li><b>Em breve</b>: o que vem, o que já é coletado hoje e "Quero isso". Nunca data.</li>
+      </ul></div>
+      <div><h4>Decisões</h4><ul>
+        <li>Em breve fora da linha do tempo: item sem data não cabe num feed agrupado por mês.</li>
+        <li>"Nova para você" marca só o que saiu desde a última visita, não "novo" para sempre.</li>
+        <li>Cor por tipo sempre com rótulo e ícone; verde e vermelho usam variantes escuras (≥ 4,5:1).</li>
+        <li>Novidades fica no rodapé do menu, longe dos módulos de trabalho.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- =============== 2. PHONE =============== -->
+  <section class="sec" id="s2">
+    <div class="sec-label"><span class="sec-num">2</span><h2>No celular · 390 px</h2></div>
+    <p class="sec-sub">As duas colunas viram duas abas. O filtro quebra em linhas em vez de rolar para o lado, e o botão principal ocupa a largura toda para o dedo com luva.</p>
+
+    <div class="phones">
+      <div class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="status"><span>9:41</span><span class="isl"></span><span>5G</span></div>
+          <div class="m-top">
+            <div class="lockup"><svg width="18" height="27" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div class="wordmark">Facter <b>Truck</b></div></div>
+            <span class="avatar" style="width:30px;height:30px;font-size:12px">MD</span>
+          </div>
+          <div class="m-body">
+            <h1>Novidades</h1>
+            <div class="tabs" role="tablist"><button role="tab" aria-selected="true" type="button">O que saiu</button><button role="tab" aria-selected="false" type="button">Em breve</button></div>
+            <div class="seg" role="group" aria-label="Filtrar por tipo" data-filter="m">
+              <button type="button" aria-pressed="true" data-f="all">Tudo</button>
+              <button type="button" aria-pressed="false" data-f="new">Novas funções</button>
+              <button type="button" aria-pressed="false" data-f="imp">Melhorias</button>
+              <button type="button" aria-pressed="false" data-f="fix">Correções</button>
+            </div>
+            <div class="feed" data-feed="m">
+              <div class="month">Setembro de 2026</div>
+              <div class="entries" style="gap:10px">
+                <article class="card e-feature" data-t="new">
+                  <div class="shot" aria-hidden="true">
+                    <div class="conj" style="transform:scale(.62)">
+                      <div class="unit"><div class="box"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/truck.svg)"></i></div><span class="pl">QRT4B22</span><span class="ty">Cavalo</span></div>
+                      <div class="hitch"><i class="ic s16" style="--i:url(https://api.iconify.design/ph/link.svg)"></i><span class="ln"></span></div>
+                      <div class="unit"><div class="box" style="width:120px"></div><span class="pl">RTA2C45</span><span class="ty">Carreta</span></div>
+                    </div>
+                  </div>
+                  <div class="e-body">
+                    <div class="e-top" style="margin-bottom:6px">
+                      <span class="badge b-new"><i class="ic s14" style="--i:url(https://api.iconify.design/ph/sparkle-fill.svg)"></i>Nova função</span>
+                      <span class="meta">23 set</span>
+                      <span class="unread">Nova</span>
+                    </div>
+                    <h3>Engate e desengate de conjuntos pelo pátio</h3>
+                    <p>Registre a troca de carreta na hora em que o conjunto sai. O custo de cada OS vai para o veículo certo.</p>
+                    <div class="chips" style="margin-top:10px"><span class="chip">Gestão de frota</span><span class="chip">Pátio</span></div>
+                    <div class="e-foot"><a class="btn btn-primary" href="#">Experimentar <i class="ic s16" style="--i:url(https://api.iconify.design/ph/arrow-right.svg)"></i></a></div>
+                  </div>
+                </article>
+                <article class="card e-imp" data-t="imp">
+                  <span class="ico"><i class="ic s18" style="--i:url(https://api.iconify.design/ph/arrow-circle-up.svg)"></i></span>
+                  <div>
+                    <div class="e-top" style="margin-bottom:4px"><span class="badge b-imp">Melhoria</span><span class="meta">18 set</span></div>
+                    <h3 style="font-size:15px">Previsão de liberação calculada pelos serviços que faltam</h3>
+                    <a class="where" href="#" style="margin-top:6px">Ver em Ordens de serviço <i class="ic s16" style="--i:url(https://api.iconify.design/ph/arrow-right.svg)"></i></a>
+                  </div>
+                </article>
+                <section class="card e-fixes" data-t="fix" aria-label="Correções de setembro" style="padding:4px 16px">
+                  <div class="fix" style="grid-template-columns:20px 1fr;font-size:14px"><i class="ic s18 ok" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i><span>Placas no padrão Mercosul (ABC1D23) apareciam com erro no cadastro de veículo. Corrigido</span></div>
+                </section>
+              </div>
+            </div>
+          </div>
+          <div class="fade"></div>
+          <nav class="botnav" aria-label="Menu principal">
+            <a class="bn" href="#"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/house.svg)"></i>Início</a>
+            <a class="bn" href="#"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/truck.svg)"></i>Veículos</a>
+            <a class="bn" href="#"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i>OS</a>
+            <a class="bn" href="#"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i>Pneus</a>
+            <a class="bn" href="#" aria-current="page"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/megaphone-simple-fill.svg)"></i>Novidades</a>
+          </nav>
+        </div></div>
+        <p class="phone-cap">Aba "O que saiu", com filtro</p>
+      </div>
+
+      <div class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="status"><span>9:41</span><span class="isl"></span><span>5G</span></div>
+          <div class="m-top">
+            <div class="lockup"><svg width="18" height="27" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div class="wordmark">Facter <b>Truck</b></div></div>
+            <span class="avatar" style="width:30px;height:30px;font-size:12px">MD</span>
+          </div>
+          <div class="m-body">
+            <h1>Novidades</h1>
+            <div class="tabs" role="tablist"><button role="tab" aria-selected="false" type="button">O que saiu</button><button role="tab" aria-selected="true" type="button">Em breve</button></div>
+            <p class="meta" style="margin-bottom:12px">Sem data prevista. Os pedidos das empresas definem o que vem primeiro.</p>
+            <div class="soon-list" style="margin-top:0;gap:10px">
+              <article class="card soon">
+                <h3 style="margin-top:0">Recapagem e vidas do pneu</h3>
+                <p>Quantas vezes cada pneu foi recapado, com qual fornecedor, e quanto custou cada vida por km.</p>
+                <div class="collect"><i class="ic s16" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i><span>As trocas de posição e o km de cada pneu já estão sendo registrados</span></div>
+                <div class="done" role="status">
+                  <div class="msg"><i class="ic s18" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i>Registrado. Avisamos quando chegar</div>
+                  <label class="field"><span class="l">O que você faria com isso? <span class="opt">(opcional)</span></span>
+                    <textarea rows="2" placeholder="Ex.: decidir se compensa recapar a 2ª vez"></textarea></label>
+                  <label class="check"><input type="checkbox" checked> Avisar no app e por e-mail</label>
+                  <div class="row"><button class="btn btn-outline btn-sm" type="button" style="flex:1">Salvar resposta</button></div>
+                </div>
+              </article>
+              <article class="card soon" data-soon>
+                <h3 style="margin-top:0">Preventiva pelo km rodado</h3>
+                <p>Aviso de revisão quando o veículo chega no km do plano.</p>
+                <div class="collect"><i class="ic s16" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i><span>O histórico de km dos seus veículos já está sendo registrado</span></div>
+                <div class="actions"><button class="btn btn-want" type="button" data-want style="width:100%"><i class="ic s16" style="--i:url(https://api.iconify.design/ph/thumbs-up.svg)"></i>Quero isso</button></div>
+              </article>
+            </div>
+          </div>
+          <div class="fade"></div>
+          <nav class="botnav" aria-label="Menu principal">
+            <a class="bn" href="#"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/house.svg)"></i>Início</a>
+            <a class="bn" href="#"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/truck.svg)"></i>Veículos</a>
+            <a class="bn" href="#"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i>OS</a>
+            <a class="bn" href="#"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i>Pneus</a>
+            <a class="bn" href="#" aria-current="page"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/megaphone-simple-fill.svg)"></i>Novidades</a>
+          </nav>
+        </div></div>
+        <p class="phone-cap">Aba "Em breve", depois do "Quero isso"</p>
+      </div>
+      <div class="notes">
+        <div><h4>No celular</h4><ul>
+          <li>Abas "O que saiu" e "Em breve" no lugar das duas colunas; a aba lembra a última escolha.</li>
+          <li>Filtro sem contagem e sem rolagem lateral: os 4 rótulos cabem em 358 px.</li>
+          <li>Papéis vão acima do botão, e "Experimentar" e "Quero isso" ocupam a largura toda.</li>
+          <li>Imagem mais baixa (120 px): o texto aparece sem rolar.</li>
+          <li>Novidades entra como 5º item do menu de baixo só se couber sem tirar um módulo de trabalho; senão vai para o menu do avatar, com o mesmo ponto.</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== 3. INDICATORS =============== -->
+  <section class="sec" id="s3">
+    <div class="sec-label"><span class="sec-num">3</span><h2>Indicador de novidade</h2></div>
+    <p class="sec-sub">Dois níveis. O ponto é o padrão e não interrompe ninguém. O banner é exceção: só para a entrada marcada como importante pelo time, uma por vez.</p>
+
+    <div class="ind">
+      <div class="panel wide">
+        <h3>Banner no topo do Início</h3>
+        <div class="crop" style="padding:20px">
+          <div class="banner" role="region" aria-label="Novidade importante" id="banner">
+            <span class="bi"><i class="ic s18" style="--i:url(https://api.iconify.design/ph/sparkle-fill.svg)"></i></span>
+            <p class="bt"><strong>Engate de conjuntos pelo pátio.</strong> <span>O custo de cada OS vai para o veículo certo, mesmo depois da troca de carreta.</span></p>
+            <a class="btn btn-primary btn-sm" href="#">Experimentar</a>
+            <button class="iconbtn" type="button" aria-label="Fechar aviso" data-close><i class="ic s18" style="--i:url(https://api.iconify.design/ph/x.svg)"></i></button>
+          </div>
+        </div>
+        <p class="cap">Fechar some para essa pessoa e não volta. Aparece só para os papéis da entrada (quem é da oficina não vê o banner de custo por km).</p>
+      </div>
+
+      <div class="panel">
+        <h3>Ponto no menu lateral</h3>
+        <div class="crop" style="display:flex;gap:20px;align-items:center;padding:16px;min-height:200px">
+          <nav class="sidenav" style="border:1px solid hsl(var(--border));border-radius:10px;padding:10px 0" aria-label="Menu (recorte)">
+            <a class="navitem" href="#" aria-current="page" aria-label="Veículos"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/truck-fill.svg)"></i></a>
+            <a class="navitem" href="#" aria-label="Ordens de serviço"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i></a>
+            <a class="navitem" href="#" aria-label="Novidades, 2 não vistas"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/megaphone-simple.svg)"></i><span class="dot" aria-hidden="true"></span><span class="tip">Novidades · 2 não vistas</span></a>
+          </nav>
+        </div>
+        <p class="cap">Ponto sem número: contador vira dívida. A quantidade vai no rótulo de acessibilidade e na dica ao passar o mouse. Some ao abrir Novidades.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Ponto no menu do celular</h3>
+        <div class="crop">
+          <nav class="botnav" style="padding-bottom:10px" aria-label="Menu (recorte)">
+            <a class="bn" href="#" aria-current="page"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/house-fill.svg)"></i>Início</a>
+            <a class="bn" href="#"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/truck.svg)"></i>Veículos</a>
+            <a class="bn" href="#"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i>OS</a>
+            <a class="bn" href="#"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i>Pneus</a>
+            <a class="bn" href="#" aria-label="Novidades, 2 não vistas"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/megaphone-simple.svg)"></i><span class="dot" aria-hidden="true"></span>Novidades</a>
+          </nav>
+        </div>
+        <p class="cap">Correção nunca acende o ponto. Só nova função e melhoria para o papel da pessoa.</p>
+      </div>
+
+      <div class="panel">
+        <h3>Aviso de que o pedido chegou</h3>
+        <div class="crop" style="padding:16px">
+          <div class="notif" role="status">
+            <span class="bi"><i class="ic s18" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i></span>
+            <div><p><strong>Preventiva pelo km rodado já está no Truck.</strong> Você pediu em agosto.</p>
+              <a class="where" href="#" style="margin-top:6px">Ver em Veículos <i class="ic s16" style="--i:url(https://api.iconify.design/ph/arrow-right.svg)"></i></a></div>
+          </div>
+        </div>
+        <p class="cap">Fecha o ciclo do "Quero isso": vai no app e por e-mail só para quem pediu e deixou "Avisar" marcado. Assunto do e-mail começa pelo fato.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== 4. IN PLACE =============== -->
+  <section class="sec" id="s4">
+    <div class="sec-label"><span class="sec-num">4</span><h2>Em breve no lugar onde vai morar</h2></div>
+    <p class="sec-sub">No detalhe do veículo, a preventiva aparece como um card entre os outros, com o dado que já existe: o cliente vê que o histórico está crescendo, não uma tela vazia.</p>
+
+    <div class="frame vd">
+      <div class="app">
+        <header class="topbar">
+          <a class="lockup" href="#" aria-label="Facter Truck, início">
+            <svg width="24" height="35" aria-hidden="true"><use href="#facter"/></svg>
+            <span class="rule"></span>
+            <div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div>
+          </a>
+          <span class="spacer"></span>
+          <div class="search"><i class="ic s18" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i>Buscar placa, frota ou OS</div>
+          <button class="org" type="button">Transportadora Rota Sul <i class="ic s16" style="--i:url(https://api.iconify.design/ph/caret-down.svg)"></i></button>
+          <span class="avatar">MD</span>
+        </header>
+        <nav class="sidenav" aria-label="Menu principal">
+          <a class="navitem" href="#" aria-label="Início"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/house.svg)"></i></a>
+          <a class="navitem" href="#" aria-current="page" aria-label="Veículos"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/truck-fill.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Ordens de serviço"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Pneus"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Custos"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/chart-line-up.svg)"></i></a>
+          <span class="navsep"></span>
+          <a class="navitem" href="#" aria-label="Novidades"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/megaphone-simple.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Configurações"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/gear.svg)"></i></a>
+        </nav>
+        <main class="main">
+          <a class="crumb" href="#"><i class="ic s16" style="--i:url(https://api.iconify.design/ph/caret-left.svg)"></i>Veículos</a>
+          <div class="vhead">
+            <h1>QRT4B22</h1>
+            <span class="chip">Cavalo · frota 812</span>
+            <span class="status-ok">Em operação</span>
+          </div>
+          <nav class="vtabs" aria-label="Seções do veículo">
+            <a href="#" aria-current="page">Resumo</a><a href="#">Ordens de serviço</a><a href="#">Pneus</a><a href="#">Custos</a><a href="#">Histórico de km</a>
+          </nav>
+          <div class="kpis">
+            <div class="card kpi"><div class="k">Km atual</div><div class="v">412.380 km</div><div class="s">Leitura de ontem às 18:12</div></div>
+            <div class="card kpi"><div class="k">Custo por km · setembro</div><div class="v">R$ 1,84</div><div class="s">R$ 0,12 abaixo de agosto</div></div>
+            <div class="card kpi"><div class="k">Parado no mês</div><div class="v">1,5 dia</div><div class="s">1 OS aberta</div></div>
+          </div>
+          <div class="vgrid">
+            <div class="card vcard">
+              <h2><i class="ic s18" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i>Últimas OS</h2>
+              <div class="oslist">
+                <div class="osrow"><span class="osn">OS 1042</span><span>Troca de lona de freio · eixo 2</span><span class="pill p-run">Em execução</span></div>
+                <div class="osrow"><span class="osn">OS 1017</span><span>Alinhamento e rodízio de pneus</span><span class="pill p-done">Liberado</span></div>
+                <div class="osrow"><span class="osn">OS 0988</span><span>Troca de óleo e filtros</span><span class="pill p-done">Liberado</span></div>
+                <div class="osrow"><span class="osn">OS 0951</span><span>Engate: troca do pino-rei da quinta roda</span><span class="pill p-done">Liberado</span></div>
+              </div>
+            </div>
+            <div class="card vcard inplace" data-soon>
+              <div class="top">
+                <h2><i class="ic s18" style="--i:url(https://api.iconify.design/ph/gauge.svg)"></i>Preventiva</h2>
+                <span class="badge b-soon">Em breve</span>
+              </div>
+              <p style="font-size:14px;margin-top:8px;color:hsl(240 6% 22%)">Aviso de revisão quando este veículo chegar no km do plano.</p>
+              <div class="kmbars" aria-hidden="true"><i style="height:30%"></i><i style="height:38%"></i><i style="height:44%"></i><i style="height:50%"></i><i style="height:57%"></i><i style="height:62%"></i><i style="height:70%"></i><i style="height:76%"></i><i style="height:83%"></i><i style="height:90%"></i><i style="height:100%"></i></div>
+              <div class="collect" style="margin-top:10px"><i class="ic s16" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i><span>O histórico de km deste veículo já está sendo registrado: 38 leituras desde julho</span></div>
+              <div class="actions" style="margin-top:14px"><button class="btn btn-want btn-sm" type="button" data-want><i class="ic s16" style="--i:url(https://api.iconify.design/ph/thumbs-up.svg)"></i>Quero isso</button></div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <div class="side-state">
+      <div class="state-card">
+        <div class="state-cap">Depois do "Quero isso"</div>
+        <div class="card vcard inplace">
+          <div class="top"><h2><i class="ic s18" style="--i:url(https://api.iconify.design/ph/gauge.svg)"></i>Preventiva</h2><span class="badge b-soon">Em breve</span></div>
+          <div class="collect"><i class="ic s16" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i><span>O histórico de km deste veículo já está sendo registrado: 38 leituras desde julho</span></div>
+          <div class="done" role="status">
+            <div class="msg"><i class="ic s18" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i>Registrado. Avisamos quando chegar</div>
+            <label class="field"><span class="l">O que você faria com isso? <span class="opt">(opcional)</span></span><textarea rows="2" placeholder="Ex.: parar de controlar troca de óleo na planilha"></textarea></label>
+            <div class="row"><button class="btn btn-outline btn-sm" type="button">Salvar resposta</button><button class="linkbtn" type="button">Desfazer pedido</button></div>
+          </div>
+        </div>
+      </div>
+      <div class="notes" style="margin:26px 0 0">
+        <div><h4>Regras do aviso no lugar</h4><ul>
+          <li>Entra como card do Resumo, não como aba nem item de menu: nada desabilitado para clicar e cair em tela vazia.</li>
+          <li>Mostra o número real que já está sendo coletado ("38 leituras"). Prova que o dado existe e dá motivo para pedir.</li>
+          <li>O pedido é da empresa e da pessoa. Pedir aqui ou em Novidades conta como o mesmo pedido.</li>
+          <li>Selo "Em breve" em âmbar, sempre com texto; âmbar escuro para passar 4,5:1.</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== 5. AUTHORING =============== -->
+  <section class="sec" id="s5">
+    <div class="sec-label"><span class="sec-num">5</span><h2>Escrever uma entrada · uso interno do time Facter</h2></div>
+    <p class="sec-sub">Cada campo tem ao lado a regra do COPY.md que mais se erra nele. Os campos mudam com o tipo: correção não tem papéis, link nem imagem; em breve pede o que já é coletado e a chave do "Quero isso".</p>
+
+    <div class="frame author">
+      <div class="app" style="grid-template-columns:1fr">
+        <header class="topbar">
+          <a class="lockup" href="#" aria-label="Facter Truck, painel interno">
+            <svg width="24" height="35" aria-hidden="true"><use href="#facter"/></svg>
+            <span class="rule"></span>
+            <div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Painel interno</div></div>
+          </a>
+          <span class="spacer"></span>
+          <span class="avatar">TF</span>
+        </header>
+        <main class="main">
+          <a class="crumb" href="#"><i class="ic s16" style="--i:url(https://api.iconify.design/ph/caret-left.svg)"></i>Novidades publicadas</a>
+          <div class="pagehead" style="margin-bottom:8px"><div><h1>Nova entrada</h1><p>O cliente lê isto dentro do Truck, em Novidades</p></div></div>
+
+          <form onsubmit="return false">
+            <div class="frow">
+              <fieldset style="border:0;padding:0;margin:0">
+                <legend class="flabel">Tipo <span class="req">*</span></legend>
+                <div class="types">
+                  <label class="type"><input type="radio" name="tipo" checked><span class="badge b-new" style="align-self:flex-start"><i class="ic s14" style="--i:url(https://api.iconify.design/ph/sparkle-fill.svg)"></i>Nova função</span><span class="d">Algo que a pessoa não conseguia fazer antes</span></label>
+                  <label class="type"><input type="radio" name="tipo"><span class="badge b-imp" style="align-self:flex-start">Melhoria</span><span class="d">Algo que já existia e ficou melhor</span></label>
+                  <label class="type"><input type="radio" name="tipo"><span class="badge b-fix" style="align-self:flex-start">Correção</span><span class="d">Algo que estava errado e foi corrigido</span></label>
+                  <label class="type"><input type="radio" name="tipo"><span class="badge b-soon" style="align-self:flex-start">Em breve</span><span class="d">O que vem, sem data, com "Quero isso"</span></label>
+                </div>
+              </fieldset>
+              <div class="tipbox"><b><i class="ic s14" style="--i:url(https://api.iconify.design/ph/lightbulb.svg)"></i>Dica</b>Na dúvida entre nova função e melhoria: se a pessoa precisa aprender algo novo, é nova função. Correção nunca vira melhoria para parecer maior.</div>
+            </div>
+
+            <div class="frow">
+              <div>
+                <label class="flabel" for="t">Título <span class="req">*</span></label>
+                <input class="input" id="t" value="Engate e desengate de conjuntos pelo pátio">
+                <div class="counter"><span>Maiúscula só no início, sem ponto final</span><span>42/70</span></div>
+              </div>
+              <div class="tipbox"><b><i class="ic s14" style="--i:url(https://api.iconify.design/ph/lightbulb.svg)"></i>COPY.md</b>
+                <ul><li>As duas primeiras palavras carregam o sentido.</li><li>Palavra do pátio: engate, conjunto, OS, liberar.</li></ul>
+                <div class="ex"><s>Novo Módulo de Acoplamento!</s><br><em>Engate e desengate de conjuntos pelo pátio</em></div>
+              </div>
+            </div>
+
+            <div class="frow">
+              <div>
+                <label class="flabel" for="x">Texto <span class="req">*</span></label>
+                <textarea class="input" id="x" rows="3" aria-describedby="xerr">Agora é possível utilizar a nova funcionalidade de acoplamento de implementos!</textarea>
+                <div class="errtext" id="xerr"><i class="ic s16" style="--i:url(https://api.iconify.design/ph/x.svg)"></i>Diga o que muda no trabalho, sem exclamação</div>
+                <div class="hint">1 ou 2 frases. Correção: uma frase que termina em "Corrigido".</div>
+              </div>
+              <div class="tipbox"><b><i class="ic s14" style="--i:url(https://api.iconify.design/ph/lightbulb.svg)"></i>COPY.md</b>
+                <ul><li>Benefício no trabalho, não descrição da função.</li><li>Nada de ponto de exclamação nem "agora é possível".</li><li>Correção sem culpa: o que estava errado, e que está corrigido.</li></ul>
+                <div class="ex"><em>O custo de cada OS vai para o veículo certo, mesmo quando a carreta muda de cavalo.</em></div>
+              </div>
+            </div>
+
+            <div class="frow">
+              <fieldset style="border:0;padding:0;margin:0">
+                <legend class="flabel">Para quem</legend>
+                <div class="rolepick">
+                  <label><input type="checkbox"> Dono</label>
+                  <label><input type="checkbox" checked> Gestão de frota</label>
+                  <label><input type="checkbox"> Financeiro</label>
+                  <label><input type="checkbox" checked> Pátio</label>
+                  <label><input type="checkbox"> Oficina</label>
+                  <label><input type="checkbox"> Almoxarifado</label>
+                </div>
+                <div class="hint">Nenhum marcado: todos veem. O ponto no menu e o banner só aparecem para quem está marcado.</div>
+              </fieldset>
+              <div class="tipbox"><b><i class="ic s14" style="--i:url(https://api.iconify.design/ph/lightbulb.svg)"></i>Dica</b>Marque quem muda o jeito de trabalhar por causa disso, não quem pode abrir a tela.</div>
+            </div>
+
+            <div class="frow">
+              <div>
+                <div class="twocol">
+                  <label><span class="flabel">Tela do botão "Experimentar"</span>
+                    <select><option>Veículos › Conjuntos</option><option>Ordens de serviço</option><option>Pneus</option><option>Custos</option></select></label>
+                  <label><span class="flabel">Importância</span>
+                    <select><option>Normal · ponto no menu</option><option selected>Importante · banner no Início</option></select></label>
+                </div>
+                <div class="hint">Só uma entrada importante por vez. Publicar outra tira o banner desta.</div>
+              </div>
+              <div class="tipbox"><b><i class="ic s14" style="--i:url(https://api.iconify.design/ph/lightbulb.svg)"></i>COPY.md</b>O link diz para onde vai: na melhoria, o botão vira "Ver em Pneus", nunca "clique aqui".</div>
+            </div>
+
+            <div class="frow">
+              <div>
+                <span class="flabel">Imagem</span>
+                <div class="drop"><i class="ic s24" style="--i:url(https://api.iconify.design/ph/image-square.svg)"></i><div><b style="font-weight:600">Arraste uma captura da tela</b> ou <a href="#">escolha um arquivo</a><div class="hint" style="margin-top:2px">PNG ou JPG, 1600 × 900 px</div></div></div>
+                <label style="display:block;margin-top:12px"><span class="flabel">Descrição da imagem</span><input class="input" placeholder="Ex.: Cavalo QRT4B22 engatado na carreta RTA2C45"></label>
+              </div>
+              <div class="tipbox"><b><i class="ic s14" style="--i:url(https://api.iconify.design/ph/lightbulb.svg)"></i>Dica</b>
+                <ul><li>Dados de exemplo, nunca de cliente real.</li><li>Sem texto escrito por cima da imagem: não traduz.</li><li>Só em nova função, e só se a imagem mostra onde clicar.</li></ul></div>
+            </div>
+
+            <div class="formfoot">
+              <button class="btn btn-outline" type="button">Cancelar</button>
+              <div class="r"><button class="btn btn-outline" type="button">Pré-visualizar</button><button class="btn btn-primary" type="button">Publicar entrada</button></div>
+            </div>
+          </form>
+        </main>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div><h4>Quando o tipo é Em breve</h4><ul>
+        <li>Somem a imagem e o botão "Experimentar"; nunca existe campo de data.</li>
+        <li>Entra "O que já está sendo registrado" (obrigatório): sem dado coletado hoje, ainda não é Em breve.</li>
+        <li>Entra a chave do pedido (<code>truck.preventiva</code>) e onde o aviso aparece no app.</li>
+        <li>Ao virar nova função, quem pediu recebe o aviso no app e por e-mail.</li>
+      </ul></div>
+      <div><h4>Revisão antes de publicar (COPY.md §9)</h4><ul>
+        <li>Li como o mecânico com pressa e como o dono decidindo?</li>
+        <li>Maiúscula só no início, sem exclamação?</li>
+        <li>A palavra está no vocabulário do Truck?</li>
+        <li>O texto existe em espanhol e inglês?</li>
+        <li>O formulário já acusa exclamação, "agora é possível" e maiúscula no meio do título, como no campo Texto acima.</li>
+      </ul></div>
+    </div>
+  </section>
+</div>
+
+<script>
+document.querySelectorAll('[data-filter]').forEach(function (group) {
+  var feed = document.querySelector('[data-feed="' + group.dataset.filter + '"]');
+  group.addEventListener('click', function (e) {
+    var b = e.target.closest('button'); if (!b) return;
+    group.querySelectorAll('button').forEach(function (x) { x.setAttribute('aria-pressed', x === b); });
+    var f = b.dataset.f;
+    feed.querySelectorAll('[data-t]').forEach(function (el) { el.hidden = f !== 'all' && el.dataset.t !== f; });
+    feed.querySelectorAll('.month').forEach(function (m) {
+      var list = m.nextElementSibling;
+      m.hidden = !list.querySelector('[data-t]:not([hidden])');
+    });
+  });
+});
+document.addEventListener('click', function (e) {
+  var w = e.target.closest('[data-want]');
+  if (w) {
+    var box = document.createElement('div');
+    box.className = 'done'; box.setAttribute('role', 'status');
+    box.innerHTML = '<div class="msg"><i class="ic s18" style="--i:url(https://api.iconify.design/ph/check-circle-fill.svg)"></i>Registrado. Avisamos quando chegar</div>' +
+      '<label class="field"><span class="l">O que você faria com isso? <span class="opt">(opcional)</span></span><textarea rows="2"></textarea></label>' +
+      '<label class="check"><input type="checkbox" checked> Avisar no app e por e-mail quando chegar</label>' +
+      '<div class="row"><button class="btn btn-outline btn-sm" type="button">Salvar resposta</button></div>';
+    w.closest('.actions').replaceWith(box);
+    box.querySelector('textarea').focus();
+  }
+  var c = e.target.closest('[data-close]');
+  if (c) c.closest('.banner').hidden = true;
+});
+</script>
+</body>
+</html>
