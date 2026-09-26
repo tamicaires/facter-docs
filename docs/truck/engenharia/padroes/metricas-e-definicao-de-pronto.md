@@ -6,7 +6,7 @@ tags: [metricas, definicao-de-pronto, pr, padroes]
 
 # Métricas e definição de pronto
 
-:::note Documento vivo
+:::note[Documento vivo]
 Origem: [auditoria de 2026-09](../auditoria-2026-09.md). Esta página evolui com o projeto; mudança de padrão exige ADR. Vale para todo código novo da v2.
 :::
 

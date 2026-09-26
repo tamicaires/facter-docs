@@ -6,7 +6,7 @@ tags: [schema, v2, banco, postgres, convencoes]
 
 # Visão geral do schema v2
 
-:::info Proposta em discussão
+:::info[Proposta em discussão]
 Esboço para revisão da arquiteta antes de qualquer código. Aplica os [padrões de engenharia](../padroes/padroes-de-engenharia.md), garante os [invariantes](../invariantes.md), grava os fatos dos [indicadores de decisão](../../produto/indicadores-de-decisao.md) e segue o [ADR-011](../adrs/adr-011-ecossistema-e-compartilhamento.md).
 :::
 
@@ -37,6 +37,97 @@ flowchart LR
   MNT --> LEI
   STK --> LEI
   ECO --> LEI
+```
+
+## Diagrama completo
+
+Todas as tabelas do schema v2 e como se ligam. Clique em **Expandir** para ver em tela cheia, arrastar e dar zoom. As colunas estão nas páginas de cada módulo.
+
+```mermaid
+erDiagram
+  org_groups ||--o{ organizations : agrupa
+  organizations ||--o{ memberships : tem
+  users ||--o{ memberships : participa
+  users ||--o{ user_identities : "entra por"
+  organizations ||--o{ actors : projeta
+  users ||--o| actors : "é"
+  memberships ||--o{ membership_roles : recebe
+  roles ||--o{ membership_roles : "atribuído"
+  roles ||--o{ role_permissions : concede
+  permissions ||--o{ role_permissions : "em"
+  plans ||--o{ organizations : assina
+  organizations ||--o{ org_features : libera
+  organizations ||--o{ feature_interests : "quero isso"
+  organizations ||--o{ sharing_grants : "concede e recebe"
+  organizations ||--o{ maintenance_requests : "pede e executa"
+
+  organizations ||--o{ vehicles : "é dona"
+  axle_layouts ||--o{ vehicles : "layout"
+  vehicles ||--o{ axles : tem
+  axles ||--o{ wheel_positions : tem
+  trailer_set_types ||--o{ trailer_sets : tipifica
+  trailer_sets ||--o{ trailer_set_slots : posições
+  vehicles ||--o{ trailer_set_slots : ocupa
+  vehicles ||--o{ couplings : traciona
+  trailer_sets ||--o{ couplings : engatado
+  vehicles ||--o{ vehicle_operators : "operado por"
+  vehicles ||--o{ meter_readings : leituras
+  vehicles ||--o{ vehicle_links : "vínculo"
+  organizations ||--o{ bases : tem
+  bases ||--o{ boxes : tem
+
+  job_titles ||--o{ job_title_rates : "custo/hora"
+  job_titles ||--o{ employees : cargo
+  shifts ||--o{ employees : turno
+  bases ||--o{ employees : lotação
+
+  bases ||--o{ work_orders : executa
+  boxes ||--o{ work_orders : ocupa
+  maintenance_requests ||--o| work_orders : gera
+  work_orders ||--o{ work_order_vehicles : atende
+  vehicles ||--o{ work_order_vehicles : "na OS"
+  work_orders ||--o{ work_order_transitions : histórico
+  work_orders ||--o{ service_executions : contém
+  service_categories ||--o{ service_types : agrupa
+  service_types ||--o{ service_executions : tipifica
+  components ||--o{ service_executions : componente
+  service_executions ||--o| service_executions : "retorno de"
+  service_executions ||--o{ execution_assignments : executores
+  employees ||--o{ execution_assignments : executa
+  execution_assignments ||--o{ work_sessions : sessões
+  work_orders ||--o{ external_services : externo
+  work_orders ||--o{ work_order_cost_lines : custos
+  work_orders ||--o{ attachments : fotos
+  work_orders ||--o{ work_order_notes : notas
+
+  part_categories ||--o{ parts : agrupa
+  units ||--o{ parts : unidade
+  suppliers ||--o{ parts : fornece
+  depots ||--o{ depot_operators : "operado por"
+  depots ||--o{ stock_balances : guarda
+  parts ||--o{ stock_balances : saldo
+  depots ||--o{ stock_movements : registra
+  parts ||--o{ stock_movements : move
+  part_requests ||--o{ stock_movements : gera
+  work_orders ||--o{ part_requests : pede
+  part_requests ||--o{ part_request_transitions : histórico
+  parts ||--o{ serialized_items : "unidades"
+  serialized_items ||--o{ serialized_item_events : eventos
+  wheel_positions ||--o| serialized_items : "montado em"
+  serialized_items ||--o| tires : "é pneu"
+  tires ||--o{ tire_inspections : inspeções
+
+  checklist_templates ||--o{ checklist_template_items : itens
+  checklist_templates ||--o{ checklists : execuções
+  checklists ||--o{ checklist_results : resultados
+  checklist_results ||--o| service_executions : "gera serviço"
+
+  organizations ||--o{ allocation_periods : rateio
+  allocation_periods ||--o{ allocation_shares : parcelas
+  vehicles ||--o{ allocation_shares : recebe
+  vehicles ||--o{ daily_vehicle_facts : "fatos diários"
+  employees ||--o{ daily_employee_facts : "fatos diários"
+  vehicles ||--o{ recurring_failures : "falhas recorrentes"
 ```
 
 | Módulo | Página | Responsável por |

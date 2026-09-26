@@ -6,7 +6,7 @@ tags: [permissoes, papeis, rbac, v2]
 
 # Papéis e permissões
 
-:::caution Em definição
+:::caution[Em definição]
 Os papéis da v2 ainda não foram decididos. Esta página registra os papéis do v1, os problemas encontrados e o modelo da v2. A tabela de "quem pode o quê" é preenchida quando o time decidir os papéis padrão.
 :::
 

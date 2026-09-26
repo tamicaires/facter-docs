@@ -6,7 +6,7 @@ tags: [projeto, roadmap, planejamento]
 
 # Roadmap Q1 2026
 
-:::caution Legado v1 — referência, não padrão
+:::caution[Legado v1 — referência, não padrão]
 Descreve o sistema atual (v1), que será substituído pela v2. Serve para entender e portar comportamento, não como modelo para código novo. Veja a [auditoria de 2026-09](../auditoria-2026-09.md) e os [padrões de engenharia](../padroes/padroes-de-engenharia.md).
 :::
 

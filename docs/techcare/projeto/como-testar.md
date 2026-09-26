@@ -8,7 +8,7 @@ tags: [techcare, projeto, teste, homologacao, contas]
 
 > Ambiente de homologação, contas prontas e uma semana de oficina já simulada. Nada precisa ser instalado.
 
-:::note Endereço
+:::note[Endereço]
 
 **Homologação:** `<URL a definir>` — este endereço será preenchido quando o ambiente subir.
 

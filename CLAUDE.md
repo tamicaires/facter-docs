@@ -27,3 +27,7 @@ A documentação do Truck acompanha o código. Cada módulo entregue na v2 atual
 Arquivos `.md` são processados como MDX: escapar `<` e `{` fora de código (`&lt;`, `\{`). Pastas começando com `_` não entram no site.
 
 Antes de instalar ou atualizar pacote (`pnpm add`), pare o servidor de desenvolvimento: a reinstalação troca os caminhos do `node_modules` e o servidor em execução quebra. Depois, `npx docusaurus clear` e suba de novo.
+
+Avisos (admonitions) com título usam colchetes: `:::info[Título]`. O formato com espaço (`:::info Título`) sai como texto cru nesta versão do Docusaurus.
+
+Todo diagrama mermaid ganha automaticamente o botão Expandir (tela cheia, arrastar, zoom): `src/theme/Mermaid` envolve o componente original.

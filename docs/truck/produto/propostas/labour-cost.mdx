@@ -10,7 +10,7 @@ import { ProposalHeader } from '@site/src/components/ProposalHeader';
 
 <ProposalHeader status="aprovado" date="2026-08-04" />
 
-:::info Decisão tomada (04/08/2026) — ver [ADR-009](../../engenharia/adrs/adr-009-labor-cost)
+:::info[Decisão tomada (04/08/2026) — ver [ADR-009](../../engenharia/adrs/adr-009-labor-cost)]
 Valor/hora **default no cargo** + **override opcional por colaborador**; rate **carregado**;
 cadastro gateado por **`CostCenter`** (endpoint dedicado). **Fase 1 = cadastro** (em
 implementação); **Fase 2 = materialização** (`horas líquidas × rate`); **terceirizada** fica no
@@ -64,7 +64,7 @@ Só há duas opções que fazem sentido pra nós:
 | **Por colaborador** | Cada pessoa tem o seu R$/hora | Mais exato | Trabalhoso (um por pessoa); o custo por OS quase **revela o salário** de cada um |
 | **Por cargo** | Um R$/hora por função (mecânico, mecânico sênior, ajudante…) | Pouco cadastro; **não expõe** salário individual | Menos exato (todos do mesmo cargo custam igual) |
 
-:::note Por que só essas duas
+:::note[Por que só essas duas]
 Existem outros modelos no mercado (taxa única da oficina; valor por tipo de serviço), mas eles
 servem pra **cobrar cliente**, não pra medir custo de frota própria. Ficam de fora. Detalhe nas
 referências.
@@ -124,7 +124,7 @@ terceirizadas** (a contratante usa oficinas de fora). A **peça é igual** (é d
 lançar a fatura da terceirizada como número manual, **sem estrutura nova**. Quando um cliente
 real pedir, a Fase 2 acrescenta o ramo externo **sem reescrever** o custo próprio.
 
-:::tip O "valor por serviço" tem lugar aqui
+:::tip[O "valor por serviço" tem lugar aqui]
 A ideia de uma **tabela de preço por serviço** (tempário) faz sentido pra terceirizada — é como
 se orça e se confere a fatura dela. Fica registrada pra Fase 2 (ver [Backlog & Ideias](../backlog)).
 :::
@@ -133,7 +133,7 @@ se orça e se confere a fatura dela. Fica registrada pra Fase 2 (ver [Backlog & 
 
 ## Nota técnica (pro backend)
 
-:::warning As horas de hoje são BRUTAS (incluem pausas)
+:::warning[As horas de hoje são BRUTAS (incluem pausas)]
 `actualDurationHours` é calculado como `fim − início` (em `change-assigments-status.ts` e
 `service-execution-logger.listener.ts`). Isso **inclui almoço, espera de peça e fim de turno**.
 Usar esse número no custo **superfatura** (ex.: 9h de relógio pra 7h trabalhadas → +28%).

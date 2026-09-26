@@ -8,7 +8,7 @@ tags: [invariantes, dominio, regras-negocio, v2, testes]
 
 Um invariante é uma regra que nunca pode estar violada no banco, em nenhum momento, por nenhum caminho. Cada invariante tem um id estável: o PR que o cria ou muda cita o id, e o teste que tenta quebrá-lo leva o id no nome.
 
-:::caution Rascunho
+:::caution[Rascunho]
 Primeira versão, montada a partir dos bugs da [auditoria de 2026-09](./auditoria-2026-09.md). Os itens marcados **(confirmar)** dependem de decisão de produto. Os demais são obrigatórios na v2.
 :::
 
