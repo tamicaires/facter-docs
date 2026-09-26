@@ -6,7 +6,7 @@ tags: [roadmap, v2, lancamento, planejamento]
 
 # Roadmap
 
-A meta é lançar o Facter Truck no começo de 2027 sobre a v2 do núcleo, em cerca de 19 a 22 semanas a partir da aprovação (com o ecossistema completo no lançamento), o que leva a data para o fim de fevereiro a meados de março de 2027, contando o recesso de fim de ano do [ADR-010](../engenharia/adrs/adr-010-v2-do-nucleo.md). O plano anterior (1º trimestre de 2026) está em [legado](../engenharia/legado-v1/roadmap-2026-q1.md).
+A meta é lançar o Facter Truck no começo de 2027 sobre a v2 do núcleo, em cerca de 20 a 23 semanas a partir da aprovação (com o ecossistema completo e os itens de confiança para empresa grande no lançamento), o que leva a data para meados a fim de março de 2027, contando o recesso de fim de ano do [ADR-010](../engenharia/adrs/adr-010-v2-do-nucleo.md). O plano anterior (1º trimestre de 2026) está em [legado](../engenharia/legado-v1/roadmap-2026-q1.md).
 
 ## Fases
 
@@ -97,6 +97,7 @@ O `@facter/ds-core` evolui puxado pela web v2, não como um projeto v2 separado.
 | Peças, estoque, requisições | Sim | O custo da ordem depende disso |
 | Funcionários, cargos, turnos, boxes | Sim | Necessário para executar ordens |
 | Notas e anexos da ordem | Sim | Baixo custo, uso diário |
+| Itens de confiança para empresa grande (dados no Brasil, SSO via OIDC, revisão de acessos, exportação CSV, organização de demonstração, SLA e status, continuidade, pentest) | Sim (decidido em 26/09/2026) | Mais baratos agora do que depois; ~1,5 semana |
 | Indicadores de decisão | Sim | 13 indicadores, ver [definições](../produto/indicadores-de-decisao.md); determinam os fatos que o schema grava |
 | Resumo semanal por e-mail para donos e chefias | Sim (decidido em 26/09/2026) | Recorte semanal dos indicadores de decisão; no piloto, é a prova de valor que chega sem o dono entrar no sistema; soma cerca de 2 dias |
 | Rateio de materiais compartilhados (completo) | Sim (decidido em 26/09/2026) | Sem ele o custo por veículo sai subestimado; soma 1–1,5 semana |
@@ -115,7 +116,8 @@ O `@facter/ds-core` evolui puxado pela web v2, não como um projeto v2 separado.
 - [x] Pneus e checklists entram no lançamento: sim
 - [x] Time até o lançamento: a arquiteta com o Claude
 - [x] Lançamento único, sem etapa de piloto separada
-- [ ] Data de lançamento: com o escopo atual, fim de fevereiro a meados de março de 2027 se a fase 0 começar em 1º/10
+- [ ] Data de lançamento: com o escopo atual, meados a fim de março de 2027 se a fase 0 começar em 1º/10
+- [x] Itens de confiança para empresa grande no lançamento (26/09/2026): dados no Brasil, SSO via OIDC (Entra ID e Google), relatório de revisão de acessos, exportação CSV de fatos e indicadores, organização de demonstração para o cliente, SLA com página de status e processo de incidente, plano de continuidade, pentest por terceiro antes do lançamento. Depois: SCIM, conector de Power BI, indicadores de ESG, seguro quando um contrato exigir. Soma ~1,5 semana ([mercado e clientes](./mercado-e-clientes.md#o-que-mais-pesa-para-empresas-desse-porte))
 - [ ] Camada SaaS do lançamento (planos, importação, configurações, LGPD, backoffice, anexos): ver [Plataforma SaaS](./plataforma-saas.md); soma 2–3 semanas
 - [ ] Congelar o escopo: o que vier depois de 26/09/2026 entra como primeira entrega pós-lançamento
 - [x] Indicadores de decisão: 13 no lançamento, definidos em [Indicadores de decisão](../produto/indicadores-de-decisao.md)

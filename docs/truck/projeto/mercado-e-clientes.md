@@ -50,17 +50,17 @@ Não pesquisados ainda: Gerdau, Votorantim Cimentos, CSN, Usiminas, Bunge, Cargi
 
 Além dos oito fatores acima (levantados em 26/09/2026):
 
-| # | Item | Por que pesa | Custo |
+| # | Item | Por que pesa | Decisão (26/09/2026) |
 | --- | --- | --- | --- |
-| 1 | **Dados no Brasil** | Jurídico e compras perguntam na homologação; também reduz a latência | Decisão de hospedagem (ver roadmap) |
-| 2 | **Login corporativo (SSO via OIDC/SAML: Microsoft Entra ID, Google) e desligamento automático** | TI de empresa grande não aceita login próprio | Alto; no lançamento, pelo menos SSO via OIDC |
-| 3 | **Controles de auditoria financeira** | A Suzano é listada na bolsa de Nova York; custo de manutenção vira dado contábil. Auditoria olha segregação de funções, trilha de alterações e revisão periódica de acessos | Parte já existe; falta relatório de acessos |
-| 4 | **Dados no BI deles** (Power BI, data lake) | Querem cruzar manutenção com os próprios dados | Médio: exportação agendada e conector |
-| 5 | **Dados de ESG** | Relatórios de sustentabilidade; frota bem mantida polui e acidenta menos | Baixo, se os fatos certos são gravados |
-| 6 | **Ambiente de homologação para o cliente** | A TI testa versões antes da operação | Médio |
-| 7 | **Suporte com SLA por gravidade, página de status, comunicação de incidente** | Fornecedor pequeno com processo de verdade | Baixo em processo |
-| 8 | **Seguro de responsabilidade profissional e cibernético** | Alguns contratos exigem | Apólice |
-| 9 | **Pentest por terceiro e plano de continuidade** | O questionário pede evidência | Pentest anual |
+| 1 | **Dados no Brasil** | Jurídico e compras perguntam na homologação; também reduz a latência | **Lançamento** (ADR-012 de hospedagem) |
+| 2 | **Login corporativo (SSO via OIDC/SAML: Microsoft Entra ID, Google) e desligamento automático** | TI de empresa grande não aceita login próprio | **Lançamento:** modelo de identidade externa e login via OIDC; SCIM depois |
+| 3 | **Controles de auditoria financeira** | A Suzano é listada na bolsa de Nova York; custo de manutenção vira dado contábil. Auditoria olha segregação de funções, trilha de alterações e revisão periódica de acessos | **Lançamento:** relatório de revisão de acessos |
+| 4 | **Dados no BI deles** (Power BI, data lake) | Querem cruzar manutenção com os próprios dados | **Lançamento:** exportação CSV; conector de Power BI depois |
+| 5 | **Dados de ESG** | Relatórios de sustentabilidade; frota bem mantida polui e acidenta menos | **Depois:** fatos de segurança já gravados |
+| 6 | **Ambiente de homologação para o cliente** | A TI testa versões antes da operação | **Lançamento:** organização de demonstração no mesmo ambiente |
+| 7 | **Suporte com SLA por gravidade, página de status, comunicação de incidente** | Fornecedor pequeno com processo de verdade | **Lançamento:** processo escrito e página de status |
+| 8 | **Seguro de responsabilidade profissional e cibernético** | Alguns contratos exigem | **Quando um contrato exigir** |
+| 9 | **Pentest por terceiro e plano de continuidade** | O questionário pede evidência | **Lançamento:** plano de continuidade; pentest antes do lançamento |
 | 10 | **Pronto para outro idioma** (textos fora do código) | CMPC e Bracell têm controle estrangeiro | **Decidido (26/09/2026):** vale desde o primeiro dia |
 
 A arquiteta já presta serviço à Ambev via NTT e conhece por dentro como empresa grande homologa fornecedor: isso ajuda a montar o pacote de confiança. Antes de qualquer conversa comercial com a Ambev, conferir cláusulas de exclusividade e conflito de interesse do contrato.
