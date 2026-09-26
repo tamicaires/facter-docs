@@ -6,7 +6,7 @@ tags: [schema, v2, estoque, pecas, livro-de-movimentacoes, consignado, serializa
 
 # Estoque
 
-O saldo é a soma do **livro de movimentações** (STK-1) e nunca fica negativo (STK-2): toda saída é um insert no livro mais um update condicional do saldo, na mesma transação. O preço de cada movimentação é congelado (STK-6). O depósito tem dono e local separados, o que permite o consignado (STK-9, STK-10).
+O saldo é a soma do **livro de movimentações** (STK-1) e nunca fica negativo (STK-2). A aprovação de uma requisição **reserva** a quantidade, para que outra retirada não leve a peça antes da entrega (STK-13): toda saída é um insert no livro mais um update condicional do saldo, na mesma transação. O preço de cada movimentação é congelado (STK-6). O depósito tem dono e local separados, o que permite o consignado (STK-9, STK-10).
 
 ```mermaid
 erDiagram
@@ -19,7 +19,9 @@ erDiagram
   parts ||--o{ serialized_items : "unidades rastreadas"
   serialized_items ||--o{ serialized_item_events : histórico
   part_requests ||--o{ part_request_transitions : histórico
-  part_requests ||--o{ stock_movements : gera
+  part_requests ||--o{ part_request_items : itens
+  part_request_items ||--o{ stock_movements : gera
+  suppliers ||--o{ stock_receipts : "nota de entrada"
   depots ||--o{ depot_operators : "operado por (consignado)"
 ```
 
@@ -39,6 +41,15 @@ create table units (
   org_id        uuid references organizations(id),   -- null = unidade do sistema (un, L, kg, m…)
   code          text not null,
   fractional    boolean not null default false
+);
+
+create table suppliers (                       -- peças, pneus, recapagem e serviços externos
+  id            uuid primary key,
+  org_id        uuid not null references organizations(id),
+  name          text not null,
+  tax_id        text,
+  kinds         text[] not null check (kinds <@ array['parts','tires','retread','services']),
+  unique (org_id, tax_id)
 );
 
 create table parts (                           -- o SKU: catálogo, sem quantidade
@@ -85,9 +96,28 @@ create table stock_balances (
   depot_id      uuid not null references depots(id),
   part_id       uuid not null references parts(id),
   quantity      numeric(14,4) not null default 0 check (quantity >= 0),   -- STK-2
+  reserved_qty  numeric(14,4) not null default 0 check (reserved_qty >= 0 and reserved_qty <= quantity),  -- STK-13
+  minimum_qty   numeric(14,4) check (minimum_qty >= 0),                  -- abaixo disto, alerta de reposição
+  reorder_qty   numeric(14,4) check (reorder_qty > 0),                   -- quanto sugerir comprar
   average_cost  numeric(14,4) not null default 0,
   version       int not null default 0,
   primary key (depot_id, part_id)
+);
+```
+
+**Disponível** = `quantity - reserved_qty`. Quando o disponível fica abaixo de `minimum_qty`, um evento do outbox avisa o responsável pelo depósito e entra no resumo semanal: é a previsão de falta de peça, antes de a OS parar esperando por ela.
+
+```sql
+create table stock_receipts (                  -- entrada de compra, com a nota fiscal
+  id              uuid primary key,
+  org_id          uuid not null references organizations(id),
+  depot_id        uuid not null references depots(id),
+  supplier_id     uuid not null references suppliers(id),
+  invoice_number  text not null,
+  invoice_date    date not null,
+  received_by     uuid not null references actors(id),
+  received_at     timestamptz not null default now(),
+  unique (org_id, supplier_id, invoice_number)   -- a mesma nota não entra duas vezes
 );
 ```
 
@@ -104,26 +134,34 @@ create table stock_movements (                 -- só insert
   unit_cost       numeric(14,4) not null check (unit_cost >= 0), -- congelado: custo médio no momento (STK-6)
   currency        char(3) not null,
   consumed_at     timestamptz not null,       -- data do consumo, não da requisição (base do rateio)
-  part_request_id uuid references part_requests(id),
+  part_request_item_id uuid references part_request_items(id),
+  receipt_id      uuid references stock_receipts(id),   -- purchase_in sempre tem nota
   transfer_id     uuid,                       -- liga transfer_out e transfer_in (STK-11)
   reason          text,
   actor_id        uuid not null references actors(id),  -- pode ser ator da organização operadora
   actor_org_id    uuid not null references organizations(id),
-  created_at      timestamptz not null default now()
+  created_at      timestamptz not null default now(),
+  check ((kind = 'purchase_in') = (receipt_id is not null))
 );
 create index on stock_movements (org_id, consumed_at);
 ```
 
-**Saída sem saldo negativo e sem dupla aprovação:**
+**Aprovar reserva, entregar baixa, e nada acontece duas vezes:**
 
 ```sql
--- dentro de uma transação, depois de marcar a requisição como entregue com
--- update part_requests set status = 'delivered' where id = $id and status = 'approved'  (1 linha ou 409)
+-- aprovar um item: reserva, sem deixar o disponível negativo
 update stock_balances
-   set quantity = quantity - $qty, version = version + 1
- where depot_id = $depot and part_id = $part and quantity >= $qty;   -- 0 linhas = saldo insuficiente (409)
+   set reserved_qty = reserved_qty + $qty, version = version + 1
+ where depot_id = $depot and part_id = $part and quantity - reserved_qty >= $qty;   -- 0 linhas = sem disponível (409)
+
+-- entregar: baixa o saldo e a reserva juntos, na mesma transação da mudança de status
+update stock_balances
+   set quantity = quantity - $qty, reserved_qty = reserved_qty - $qty, version = version + 1
+ where depot_id = $depot and part_id = $part and reserved_qty >= $qty;
 insert into stock_movements (...) values (...);
 ```
+
+Rejeitar ou cancelar um item aprovado devolve a reserva na mesma transação.
 
 **Consignado e RLS:** o saldo e o livro pertencem ao dono do estoque (Suzano), mas quem movimenta é a oficina (Vale). A movimentação não passa por exceção no RLS: é feita por uma função `security definer` (`issue_from_depot`), que confere em `depot_operators` se a organização do contexto pode operar aquele depósito, grava com `org_id` do dono e `actor_org_id` da oficina, e recusa qualquer outro caso. A oficina vê os saldos desses depósitos pela visão compartilhada, não pelas tabelas do dono.
 
@@ -166,17 +204,13 @@ create table serialized_item_events (          -- só insert: compra, instalaç�
 ## Requisições
 
 ```sql
-create table part_requests (
+create table part_requests (                   -- um pedido com vários itens: um serviço, uma aprovação
   id                uuid primary key,
   org_id            uuid not null references organizations(id),   -- quem pede (oficina executora)
   work_order_id     uuid not null references work_orders(id),
   service_execution_id uuid references service_executions(id),
-  part_id           uuid not null references parts(id),
   depot_id          uuid not null references depots(id),
-  requested_qty     numeric(14,4) not null check (requested_qty > 0),
-  approved_qty      numeric(14,4) check (approved_qty > 0 and approved_qty <= requested_qty),   -- STK-4
-  returned_qty      numeric(14,4) not null default 0 check (returned_qty >= 0),
-  status            text not null default 'pending' check (status in ('pending','approved','rejected','delivered','returned','canceled')),
+  status            text not null default 'pending' check (status in ('pending','approved','partially_approved','rejected','delivered','canceled')),
   requested_by      uuid not null references actors(id),
   approved_by       uuid references actors(id),
   version           int not null default 0,
@@ -184,10 +218,24 @@ create table part_requests (
   check (approved_by is null or approved_by <> requested_by)       -- PLT-5: quem pede não aprova
 );
 
+create table part_request_items (
+  id                uuid primary key,
+  org_id            uuid not null references organizations(id),
+  part_request_id   uuid not null references part_requests(id),
+  part_id           uuid not null references parts(id),
+  requested_qty     numeric(14,4) not null check (requested_qty > 0),
+  approved_qty      numeric(14,4) check (approved_qty >= 0 and approved_qty <= requested_qty),   -- STK-4; 0 = recusado
+  delivered_qty     numeric(14,4) not null default 0 check (delivered_qty >= 0),
+  returned_qty      numeric(14,4) not null default 0 check (returned_qty >= 0 and returned_qty <= delivered_qty),
+  check (approved_qty is null or delivered_qty <= approved_qty),
+  unique (part_request_id, part_id)
+);
+
 create table part_request_transitions (
   id              uuid primary key,
   org_id          uuid not null references organizations(id),
   part_request_id uuid not null references part_requests(id),
+  part_request_item_id uuid references part_request_items(id),   -- quando a mudança é de um item
   from_status     text,
   to_status       text not null,
   quantity        numeric(14,4),
@@ -201,10 +249,9 @@ O status inicial não vem do cliente (STK-5): o DTO de criação não tem o camp
 
 ## Invariantes garantidos aqui
 
-STK-1 a STK-12, PLT-5, AST-3, TIR-1, TIR-2.
+STK-1 a STK-13, PLT-5, AST-3, TIR-1, TIR-2.
 
 ## Pontos para decidir
 
 - **Método de custo:** a proposta usa **custo médio móvel por depósito**, que é o mais comum no Brasil e simples de auditar. Fecha a [proposta de convenção de custo por unidade](../../produto/propostas/part-cost-convention.mdx), que está em discussão.
-- **Fornecedores** (`suppliers`) ficam num cadastro simples por organização, compartilhado por peças, pneus e serviços externos.
 - **Transferência entre depósitos de organizações diferentes** (da Suzano para outra oficina parceira) é permitida só dentro do mesmo grupo ou com concessão explícita.

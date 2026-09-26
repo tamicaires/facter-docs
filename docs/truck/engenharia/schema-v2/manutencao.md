@@ -67,7 +67,8 @@ create table work_orders (
   priority          text not null check (priority in ('low','medium','high','critical')),   -- uma prioridade só
   origin            text not null check (origin in ('manual','maintenance_request','checklist','preventive')),
   maintenance_request_id uuid references maintenance_requests(id),
-  customer_org_id   uuid references organizations(id),   -- dono do ativo, quando a oficina é terceira
+  customer_id       uuid references workshop_customers(id),  -- dono do ativo, quando a oficina é terceira
+  stoppage_id       uuid references vehicle_stoppages(id),   -- a parada que trouxe o veículo (disponibilidade)
   reported_problem  text,
   diagnosis         text,
   opened_by         uuid not null references actors(id),
@@ -80,6 +81,46 @@ create table work_orders (
 create unique index on work_orders (box_id) where status = 'in_maintenance';
 ```
 
+```sql
+create table workshop_customers (              -- clientes da oficina, usem o Facter ou não
+  id              uuid primary key,
+  org_id          uuid not null references organizations(id),   -- a oficina
+  name            text not null,
+  tax_id          text,
+  customer_org_id uuid references organizations(id),            -- quando o cliente também usa o Facter
+  unique (org_id, tax_id)
+);
+
+create table vehicle_stoppages (               -- quando o veículo parou de operar, antes de existir OS
+  id              uuid primary key,
+  org_id          uuid not null references organizations(id),
+  vehicle_id      uuid references vehicles(id),
+  trailer_set_id  uuid references trailer_sets(id),
+  stopped_at      timestamptz not null,        -- informado por quem relatou; pode ser anterior ao registro
+  reason          text not null check (reason in ('breakdown','accident','checklist_fail','scheduled','tire','other')),
+  location_note   text,                        -- "BR-116 km 230", pátio, cliente
+  reported_by     uuid not null references actors(id),
+  recorded_at     timestamptz not null default now(),
+  released_at     timestamptz,                 -- volta a operar: liberação da última OS da parada
+  check (num_nonnulls(vehicle_id, trailer_set_id) = 1),
+  check (released_at is null or released_at >= stopped_at)
+);
+
+create table work_order_forecasts (            -- previsão de liberação; cada mudança fica registrada
+  id              uuid primary key,
+  org_id          uuid not null references organizations(id),
+  work_order_id   uuid not null references work_orders(id),
+  promised_release_at timestamptz not null,
+  reason          text,                        -- por que a previsão mudou (peça atrasou…)
+  set_by          uuid not null references actors(id),
+  set_at          timestamptz not null default now()
+);
+create index on work_order_forecasts (work_order_id, set_at desc);
+```
+
+- **Tempo parado do veículo** vai de `stopped_at` da parada até `released_at`, e não da abertura da OS: o guincho e a espera na estrada contam (WO-10). OS aberta sem parada registrada usa a própria abertura como início.
+- **Previsão × realizado:** a previsão vigente é a última de `work_order_forecasts`; comparar com a liberação mede a previsibilidade da oficina, e o número de mudanças mostra onde ela se perde.
+
 O status só muda por comando (WO-1). Toda mudança grava uma linha em `work_order_transitions` na mesma transação. Não existe coluna de "início da pausa" ou "fim da pausa": as durações saem das transições.
 
 ```sql
@@ -89,7 +130,7 @@ create table work_order_transitions (
   work_order_id   uuid not null references work_orders(id),
   from_status     text,
   to_status       text not null,
-  pause_reason    text check (pause_reason in ('waiting_part','external_service','no_box','no_staff','shift_end','other')),
+  pause_reason    text references pause_reasons(code),
   note            text,
   occurred_at     timestamptz not null default now(),   -- relógio do servidor
   actor_id        uuid not null references actors(id)
@@ -137,6 +178,12 @@ create table service_executions (
 ## Executores e sessões de trabalho
 
 ```sql
+create table pause_reasons (                   -- uma lista só para OS e sessão; fixa, para comparar oficinas
+  code          text primary key,              -- waiting_part, external_service, no_box, no_staff,
+                                               -- shift_end, meal_break, rest_break, other
+  planned       boolean not null               -- intervalo e fim de turno são planejados; não são tempo perdido
+);
+
 create table execution_assignments (
   id                  uuid primary key,
   org_id              uuid not null references organizations(id),
@@ -154,9 +201,10 @@ create table work_sessions (                   -- intervalo em que a pessoa trab
   assignment_id     uuid not null references execution_assignments(id),
   employee_id       uuid not null references employees(id),   -- desnormalizado para o exclude abaixo
   during            tstzrange not null,          -- aberto à direita enquanto a sessão corre
-  end_reason        text check (end_reason in ('paused','completed','canceled','shift_end','service_paused','work_order_paused')),
-  pause_reason      text,                        -- código do motivo, quando end_reason = paused
+  end_reason        text check (end_reason in ('paused','completed','canceled','shift_end','break','service_paused','work_order_paused')),
+  pause_reason      text references pause_reasons(code),   -- quando end_reason = paused
   hourly_cost       numeric(14,2),               -- custo/hora do cargo congelado ao fechar (ADR-009)
+  labor_cost        numeric(14,2),               -- com hora extra, noturno e feriado, congelado ao fechar (SVC-10)
   adjusted_by       uuid references actors(id),  -- SVC-8: horário ajustado à mão, com autor
   adjustment_note   text,
   started_by        uuid not null references actors(id),
@@ -167,6 +215,7 @@ create table work_sessions (                   -- intervalo em que a pessoa trab
 
 - **Tempo trabalhado** do executor no serviço = soma de `upper(during) - lower(during)` das sessões.
 - **Pausar o serviço** fecha as sessões abertas com `end_reason = 'service_paused'`; **pausar a OS**, com `work_order_paused`. Cascata explícita, uma sessão por pessoa, nada de `updateMany` sem rastro.
+- **Intervalo:** com `shifts.auto_pause_breaks`, o início de um trecho `meal_break` ou `rest_break` fecha as sessões abertas com `end_reason = 'break'`; o "Voltar" do mecânico reabre as que o intervalo fechou, numa ação só.
 - **Cancelar o serviço ou a OS** fecha todas as sessões abertas (SVC-3, WO-6), que era o bug que deixava executor "rodando para sempre" no v1.
 
 ## Serviços externos, custos e fotos
@@ -177,10 +226,12 @@ create table external_services (
   org_id          uuid not null references organizations(id),
   work_order_id   uuid not null references work_orders(id),
   service_execution_id uuid references service_executions(id),
-  supplier_name   text not null,
+  supplier_id     uuid not null references suppliers(id),
   description     text not null,
   cost            numeric(14,2) not null check (cost >= 0),
   currency        char(3) not null,
+  invoice_number  text,                        -- nota fiscal: auditoria e integração com o ERP
+  invoice_date    date,
   recorded_by     uuid not null references actors(id),
   created_at      timestamptz not null default now()
 );
@@ -204,6 +255,7 @@ create table attachments (
   work_order_id   uuid references work_orders(id),
   service_execution_id uuid references service_executions(id),
   vehicle_id      uuid references vehicles(id),
+  checklist_result_id uuid references checklist_results(id),   -- foto de um item de checklist (CHK-2)
   storage_key     text not null,               -- objeto no R2, já comprimido no aparelho
   thumbnail_key   text,
   mime_type       text not null,
@@ -227,10 +279,10 @@ create table work_order_notes (
 
 ## Invariantes garantidos aqui
 
-WO-1 a WO-9, SVC-1 a SVC-9, ECO-6.
+WO-1 a WO-10, SVC-1 a SVC-10, ECO-6.
 
 ## Pontos para decidir
 
 - **Um mecânico em dois serviços ao mesmo tempo?** A proposta bloqueia sobreposição só dentro do mesmo serviço. Se a oficina nunca permite duas frentes simultâneas por pessoa, adicionar `exclude using gist (employee_id with =, during with &&)`: o dado fica mais confiável, mas a oficina que trabalha em paralelo passa a ser impedida.
-- **Motivos de pausa:** a lista inicial (aguardando peça, serviço externo, sem box, sem equipe, fim de turno, outro) vira configurável por organização ou fica fixa? Fixa facilita comparar oficinas no ecossistema.
+- **Motivos de pausa:** a lista (aguardando peça, serviço externo, sem box, sem equipe, fim de turno, almoço/jantar, intervalo, outro) fica fixa em `pause_reasons`, ou vira configurável por organização? Fixa facilita comparar oficinas no ecossistema.
 - **`work_order_cost_lines` gravado ou calculado:** a proposta grava (com o custo/hora e o preço congelados), para que o custo de uma OS fechada nunca mude.

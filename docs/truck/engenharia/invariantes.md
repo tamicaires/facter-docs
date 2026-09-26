@@ -9,7 +9,7 @@ tags: [invariantes, dominio, regras-negocio, v2, testes]
 Um invariante é uma regra que nunca pode estar violada no banco, em nenhum momento, por nenhum caminho. Cada invariante tem um id estável: o commit que o cria ou muda cita o id, e o teste que tenta quebrá-lo leva o id no nome. Id não se reaproveita nem se renumera; invariante que deixa de valer fica riscado com o motivo.
 
 :::info[Revisado em 26/09/2026 (task 0.7)]
-Conferido contra o [schema v2](./schema-v2/visao-geral.md), as decisões de 26/09/2026 e o código do `facter-truck`. A decisão que ainda falta está no fim da página, com recomendação.
+Conferido contra o [schema v2](./schema-v2/visao-geral.md), as decisões de 26/09/2026 e o código do `facter-truck`. Ampliado no mesmo dia com os 19 pontos da revisão crítica do schema e os intervalos de turno. A decisão que ainda falta está no fim da página, com recomendação.
 :::
 
 **Garantia**
@@ -47,6 +47,7 @@ Todo invariante tem teste de integração. Onde duas pessoas podem agir ao mesmo
 | ECO-5 | O nível completo só existe entre organizações do mesmo grupo econômico | Domínio | ⬜ 3.3 |
 | ECO-6 | A OS de oficina terceira registra custo interno e valor cobrado separados | Modelo | ⬜ 3.3 |
 | ECO-7 | Um ativo tem no máximo um operador (transportadora) por vez; o histórico de operador não tem sobreposição | Banco (exclusion constraint) | ⬜ 1.11 |
+| ECO-8 | Uma solicitação de manutenção mira exatamente um veículo avulso ou um conjunto inteiro | Banco (CHECK) | ⬜ 3.3 |
 
 ## Ativos (`AST`)
 
@@ -56,16 +57,18 @@ Todo invariante tem teste de integração. Onde duas pessoas podem agir ao mesmo
 | AST-2 | Um eixo pertence a exatamente um veículo, de qualquer tipo | Banco (FK) | ⬜ 1.11 |
 | AST-3 | Uma posição de roda tem no máximo um pneu montado | Banco (unique) | ⬜ 3.1 |
 | AST-4 | Um pneu está montado em no máximo uma posição | Banco (unique) | ⬜ 3.1 |
-| AST-5 | A leitura de hodômetro/horímetro de um ativo nunca diminui, salvo correção explícita registrada | Domínio + verificação | ⬜ 1.11 |
+| AST-5 | Dentro de um mesmo medidor instalado, a leitura nunca diminui, salvo correção explícita registrada; troca de painel é um medidor novo, não uma correção | Domínio + verificação | ⬜ 1.11 |
 | AST-6 | Há uma única fonte de hodômetro por ativo | Modelo | ⬜ 1.11 |
 | AST-7 | Um conjunto de implementos está engatado em no máximo uma unidade tratora por vez; o histórico de engate não tem sobreposição | Banco (exclusion constraint) | ⬜ 1.11 |
 | AST-8 | O custo de um período pertence ao veículo físico, não ao conjunto nem à combinação | Modelo | ⬜ 2.3 |
 | AST-9 | Todo box pertence a uma base, e uma OS em manutenção ocupa um box da base que a executa | Banco (FK) + domínio | ⬜ 2.3 |
 | AST-10 | Um implemento ocupa no máximo uma posição de um conjunto por vez, e cada posição tem no máximo um implemento; histórico sem sobreposição | Banco (exclusion constraint) | ⬜ 1.11 |
 | AST-11 | O número de posições de um conjunto respeita o tipo de conjunto (bitrem = 2, tritrem = 3…) | Domínio + CHECK | ⬜ 1.11 |
-| AST-12 | O km de um implemento é derivado do histórico de engate e das leituras das unidades tratoras; nunca é digitado | Modelo | ⬜ 1.11 |
-| AST-13 | Só unidade tratora e caminhão têm hodômetro | Banco (CHECK `kind` × `has_odometer`) | ⬜ 1.11 |
+| AST-12 | O km de um implemento vem do hodômetro de cubo dele, ou dos engates com tratora cadastrada, ou do km informado no engate e desengate com tratora de fora; nunca é digitado solto | Modelo | ⬜ 1.11 |
+| AST-13 | Unidade tratora e caminhão sempre têm hodômetro; implemento só quando tem hodômetro de cubo | Banco (CHECK) | ⬜ 1.11 |
 | AST-14 | Todo veículo tem placa, exceto o dolly; placa só no formato antigo ou Mercosul | Domínio | ✅ `vehicle.spec.ts`, `vehicles.http.spec.ts` |
+| AST-15 | Todo engate tem exatamente uma tratora: cadastrada na organização ou de fora (placa) | Banco (CHECK) | ⬜ 1.11 |
+| AST-16 | Toda mudança de status do veículo (inativo, vendido, sucateado, reativado) fica registrada com quando e quem | Domínio (único caminho de escrita) | ⬜ 1.11 |
 
 ## Ordem de serviço (`WO`)
 
@@ -80,6 +83,7 @@ Todo invariante tem teste de integração. Onde duas pessoas podem agir ao mesmo
 | WO-7 | Ordem finalizada ou cancelada é imutável, salvo reabertura explícita com permissão e transição | Domínio | ⬜ 2.3 |
 | WO-8 | Duas mudanças concorrentes na mesma ordem: uma vence, a outra recebe 409 | Banco (versão), caso de PLT-9 | ⬜ 2.3 |
 | WO-9 | O custo da ordem é a soma dos seus lançamentos de custo; nunca é editado direto | Modelo (derivado) | ⬜ 2.6 |
+| WO-10 | O tempo parado do veículo começa quando ele parou (`vehicle_stoppages.stopped_at`), não quando a OS foi aberta, e termina na liberação | Modelo | ⬜ 2.3 |
 
 ## Serviço e executores (`SVC`)
 
@@ -94,6 +98,8 @@ Todo invariante tem teste de integração. Onde duas pessoas podem agir ao mesmo
 | SVC-7 | Tempo trabalhado = soma das sessões de trabalho; nenhuma pausa conta como trabalho (decidido em 26/09/2026). O tempo parado é registrado por motivo e alimenta o indicador de tempo parado | Modelo | ⬜ 2.4 |
 | SVC-8 | Horário informado pelo usuário só entra como ajuste explícito, dentro do limite da organização, com permissão própria e registro de quem ajustou | Domínio | ⬜ 2.4 |
 | SVC-9 | Um serviço concluído atribui tempo a cada executor pelas suas próprias sessões | Modelo | ⬜ 2.4 |
+| SVC-10 | O custo de mão de obra de uma sessão aplica os adicionais vigentes (hora extra fora do turno, noturno, domingo e feriado) e é congelado ao fechar a sessão | Domínio + teste com números conhecidos | ⬜ 2.4 |
+| SVC-11 | Pausa de OS e de sessão usam a mesma lista de motivos; almoço, jantar e intervalo são pausas planejadas e nunca contam como tempo perdido | Banco (FK para `pause_reasons`) | ⬜ 2.4 |
 
 ## Estoque e requisições (`STK`)
 
@@ -102,7 +108,7 @@ Todo invariante tem teste de integração. Onde duas pessoas podem agir ao mesmo
 | STK-1 | O saldo de uma peça é a soma das suas movimentações | Modelo (livro só com insert) | ⬜ 2.5 |
 | STK-2 | O saldo nunca fica negativo | Banco (update condicional + CHECK) | ⬜ 2.5 |
 | STK-3 | Uma requisição muda de status uma vez por transição: aprovar duas vezes é impossível | Banco (`where status = ...`) | ⬜ 2.6 |
-| STK-4 | Quantidade solicitada, aprovada e devolvida é sempre positiva; aprovada ≤ solicitada; devolvida ≤ entregue | Banco (CHECK) + DTO | ⬜ 2.6 |
+| STK-4 | Em cada item da requisição: solicitada > 0; aprovada ≤ solicitada; entregue ≤ aprovada; devolvida ≤ entregue | Banco (CHECK) + DTO | ⬜ 2.6 |
 | STK-5 | Uma requisição nasce `pending` | Domínio (sem status no DTO) | ⬜ 2.6 |
 | STK-6 | O custo de uma requisição usa o preço congelado no momento da entrega, não o preço atual | Modelo | ⬜ 2.6 |
 | STK-7 | Dinheiro e quantidade são `numeric`, nunca ponto flutuante | Banco (tipo) | ⬜ 2.5 |
@@ -111,6 +117,8 @@ Todo invariante tem teste de integração. Onde duas pessoas podem agir ao mesmo
 | STK-10 | Consumo de depósito consignado é custo do dono do estoque, não da oficina que aplicou | Modelo | ⬜ 2.6 |
 | STK-11 | Transferência entre depósitos é uma saída e uma entrada na mesma transação | Domínio | ⬜ 2.7 |
 | STK-12 | Item serializado está em exatamente um lugar por vez (depósito ou posição num ativo) e nunca some: sai só por baixa registrada | Banco + domínio | ⬜ 2.7 |
+| STK-13 | Aprovar reserva a quantidade; a reserva nunca passa do saldo, e entregar baixa saldo e reserva juntos | Banco (CHECK + update condicional) | ⬜ 2.6 |
+| STK-14 | Toda entrada de compra tem nota fiscal, e a mesma nota do mesmo fornecedor não entra duas vezes | Banco (FK + unique) | ⬜ 2.5 |
 
 ## Pneus (`TIR`)
 
@@ -121,6 +129,13 @@ Pneus entram no lançamento (decidido em 26/09/2026). Os invariantes do ciclo de
 | TIR-1 | Número de série e número de fogo são únicos por organização | Banco | ⬜ 3.1 |
 | TIR-2 | O ciclo de vida muda só pelos eventos do pneu, e cada evento é registrado uma vez | Domínio + idempotência | ⬜ 3.1 |
 | TIR-3 | O status e a localização do pneu são um campo cada, sem versão legada paralela | Modelo | ⬜ 3.1 |
+
+## Checklists (`CHK`)
+
+| Id | Invariante | Garantia | Situação |
+| --- | --- | --- | --- |
+| CHK-1 | Publicar uma mudança no modelo cria versão nova; a execução aponta a versão usada, e os itens de uma versão nunca mudam | Modelo | ⬜ 3.2 |
+| CHK-2 | Item que exige foto não fecha sem foto vinculada ao resultado | Domínio | ⬜ 3.2 |
 
 ## Indicadores (`KPI`)
 

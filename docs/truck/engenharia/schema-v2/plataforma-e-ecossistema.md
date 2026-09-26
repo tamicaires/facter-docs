@@ -37,7 +37,8 @@ create table organizations (
   group_id         uuid references org_groups(id),      -- mesmo grupo = nível "completo" possível (ECO-5)
   legal_name       text not null,
   trade_name       text,
-  tax_id           text not null unique,                -- CNPJ
+  country          char(2) not null default 'BR',       -- ISO 3166; as empresas do ecossistema são globais
+  tax_id           text not null,                       -- CNPJ no Brasil; o documento fiscal do país nos outros
   kinds            text[] not null,                     -- shipper, carrier, workshop, roadside
   asset_kinds_serviced text[] not null default '{}',    -- oficina: power_unit, semi_trailer…
   locale           text not null default 'pt-BR',
@@ -46,7 +47,8 @@ create table organizations (
   plan_id          uuid references plans(id),
   is_demo          boolean not null default false,       -- organização de demonstração para o cliente
   created_at       timestamptz not null default now(),
-  check (kinds <@ array['shipper','carrier','workshop','roadside'])
+  check (kinds <@ array['shipper','carrier','workshop','roadside']),
+  unique (country, tax_id)
 );
 ```
 
@@ -122,10 +124,11 @@ create table role_permissions (
 );
 
 create table membership_roles (
+  id            uuid primary key,
   membership_id uuid not null references memberships(id),
   role_id       uuid not null references roles(id),
-  base_id       uuid,                          -- papel limitado a uma base, se preenchido
-  primary key (membership_id, role_id)
+  base_id       uuid references bases(id),     -- papel limitado a uma base; o mesmo papel pode valer em várias
+  unique nulls not distinct (membership_id, role_id, base_id)
 );
 ```
 
@@ -183,14 +186,16 @@ create table maintenance_requests (            -- dono do ativo pede manutençã
   id                uuid primary key,
   requester_org_id  uuid not null references organizations(id),
   provider_org_id   uuid not null references organizations(id),
-  vehicle_id        uuid not null,             -- ativo do solicitante
+  vehicle_id        uuid,                      -- veículo avulso do solicitante
+  trailer_set_id    uuid,                      -- ou o conjunto inteiro (a Vale pede por frota)
   description       text not null,
   status            text not null check (status in ('open','accepted','rejected','done','canceled')),
   work_order_id     uuid,                      -- OS criada na oficina ao aceitar
   share_level       text not null check (share_level in ('status','services','billed')),
   created_by        uuid not null references actors(id),
   created_at        timestamptz not null default now(),
-  version           int not null default 0
+  version           int not null default 0,
+  check (num_nonnulls(vehicle_id, trailer_set_id) = 1)
 );
 ```
 

@@ -65,6 +65,8 @@ erDiagram
   axle_layouts ||--o{ vehicles : "layout"
   vehicles ||--o{ axles : tem
   axles ||--o{ wheel_positions : tem
+  vehicles ||--o{ wheel_positions : "estepe"
+  vehicles ||--o{ vehicle_status_transitions : "status no tempo"
   trailer_set_types ||--o{ trailer_sets : tipifica
   trailer_sets ||--o{ trailer_set_slots : posições
   vehicles ||--o{ trailer_set_slots : ocupa
@@ -72,6 +74,8 @@ erDiagram
   trailer_sets ||--o{ couplings : engatado
   vehicles ||--o{ vehicle_operators : "operado por"
   vehicles ||--o{ meter_readings : leituras
+  vehicles ||--o{ meter_installs : "medidor instalado"
+  meter_installs ||--o{ meter_readings : "lido em"
   vehicles ||--o{ vehicle_links : "vínculo"
   organizations ||--o{ bases : tem
   bases ||--o{ boxes : tem
@@ -79,11 +83,19 @@ erDiagram
   job_titles ||--o{ job_title_rates : "custo/hora"
   job_titles ||--o{ employees : cargo
   shifts ||--o{ employees : turno
+  shifts ||--o{ shift_segments : "trabalho e intervalos"
+  organizations ||--o{ org_holidays : feriados
+  organizations ||--o{ labor_premiums : adicionais
   bases ||--o{ employees : lotação
 
   bases ||--o{ work_orders : executa
   boxes ||--o{ work_orders : ocupa
   maintenance_requests ||--o| work_orders : gera
+  vehicle_stoppages ||--o{ work_orders : "parada que trouxe"
+  vehicles ||--o{ vehicle_stoppages : parou
+  workshop_customers ||--o{ work_orders : cliente
+  work_orders ||--o{ work_order_forecasts : "previsão de liberação"
+  pause_reasons ||--o{ work_sessions : motivo
   work_orders ||--o{ work_order_vehicles : atende
   vehicles ||--o{ work_order_vehicles : "na OS"
   work_orders ||--o{ work_order_transitions : histórico
@@ -108,7 +120,11 @@ erDiagram
   parts ||--o{ stock_balances : saldo
   depots ||--o{ stock_movements : registra
   parts ||--o{ stock_movements : move
-  part_requests ||--o{ stock_movements : gera
+  part_requests ||--o{ part_request_items : itens
+  part_request_items ||--o{ stock_movements : gera
+  suppliers ||--o{ stock_receipts : "nota fiscal"
+  stock_receipts ||--o{ stock_movements : entrada
+  suppliers ||--o{ external_services : presta
   work_orders ||--o{ part_requests : pede
   part_requests ||--o{ part_request_transitions : histórico
   parts ||--o{ serialized_items : "unidades"
@@ -117,8 +133,10 @@ erDiagram
   serialized_items ||--o| tires : "é pneu"
   tires ||--o{ tire_inspections : inspeções
 
-  checklist_templates ||--o{ checklist_template_items : itens
-  checklist_templates ||--o{ checklists : execuções
+  checklist_templates ||--o{ checklist_template_versions : versões
+  checklist_template_versions ||--o{ checklist_template_items : itens
+  checklist_template_versions ||--o{ checklists : execuções
+  checklist_results ||--o{ attachments : foto
   checklists ||--o{ checklist_results : resultados
   checklist_results ||--o| service_executions : "gera serviço"
 
@@ -126,6 +144,7 @@ erDiagram
   allocation_periods ||--o{ allocation_shares : parcelas
   vehicles ||--o{ allocation_shares : recebe
   vehicles ||--o{ daily_vehicle_facts : "fatos diários"
+  trailer_sets ||--o{ daily_trailer_set_facts : "fatos por frota"
   employees ||--o{ daily_employee_facts : "fatos diários"
   vehicles ||--o{ recurring_failures : "falhas recorrentes"
 ```
@@ -133,10 +152,10 @@ erDiagram
 | Módulo | Página | Responsável por |
 | --- | --- | --- |
 | Plataforma e ecossistema | [Plataforma e ecossistema](./plataforma-e-ecossistema.md) | Organizações, grupos, identidade, permissões, planos, concessões de compartilhamento, solicitações entre organizações, "Quero isso", auditoria, outbox |
-| Ativos | [Ativos](./ativos.md) | Veículos por tipo formal, eixos e posições, conjuntos de implementos, engates, operador ao longo do tempo, bases e boxes, contadores |
-| Manutenção | [Manutenção](./manutencao.md) | OS, serviços, executores, sessões de trabalho, retrabalho, serviços externos, custo interno e valor cobrado |
-| Estoque | [Estoque](./estoque.md) | Catálogo de peças, unidades, depósitos com dono e local, livro de movimentações, itens serializados, requisições |
-| Pessoas, pneus e checklists | [Pessoas, pneus e checklists](./pessoas-pneus-checklists.md) | Funcionários, cargos com custo/hora histórico, turnos; pneus como itens serializados; checklists que geram serviço |
+| Ativos | [Ativos](./ativos.md) | Veículos por tipo formal e histórico de status, eixos, posições e estepe, conjuntos de implementos, engates (inclusive com tratora de fora), operador ao longo do tempo, bases e boxes, medidores com troca de painel |
+| Manutenção | [Manutenção](./manutencao.md) | Paradas do veículo, OS com previsão de liberação, clientes da oficina, serviços, executores, sessões de trabalho com intervalos, retrabalho, serviços externos com nota, custo interno e valor cobrado |
+| Estoque | [Estoque](./estoque.md) | Catálogo de peças, fornecedores, notas de entrada, depósitos com dono e local, saldo com reserva e mínimo, livro de movimentações, itens serializados, requisições com itens |
+| Pessoas, pneus e checklists | [Pessoas, pneus e checklists](./pessoas-pneus-checklists.md) | Funcionários, cargos com custo/hora histórico e adicionais, turnos com intervalos e feriados; pneus como itens serializados, com inspeção por posição e km; checklists versionados que geram serviço |
 | Rateio e leitura | [Rateio e leitura](./rateio-e-leitura.md) | Períodos de rateio, agregações diárias que alimentam os 13 indicadores, exportação e resumo semanal |
 
 ## Convenções

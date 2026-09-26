@@ -39,12 +39,23 @@ create table vehicles (
   model           text,
   model_year      smallint,
   axle_layout_id  uuid references axle_layouts(id),
-  has_odometer    boolean not null,            -- true para unidade tratora e caminhão
+  has_odometer    boolean not null,            -- tratora e caminhão sempre; implemento só com hodômetro de cubo
   status          text not null default 'active' check (status in ('active','inactive','sold','scrapped')),
   deleted_at      timestamptz,
   created_at      timestamptz not null default now(),
   version         int not null default 0,
-  check ((kind in ('power_unit','rigid_truck')) = has_odometer)
+  check (kind not in ('power_unit','rigid_truck') or has_odometer)   -- AST-13
+);
+
+create table vehicle_status_transitions (      -- quando e por quem o veículo foi inativado, vendido, sucateado, reativado
+  id            uuid primary key,
+  org_id        uuid not null references organizations(id),
+  vehicle_id    uuid not null references vehicles(id),
+  from_status   text not null,
+  to_status     text not null,
+  reason        text,
+  occurred_at   timestamptz not null default now(),
+  actor_id      uuid not null references actors(id)
 );
 create unique index on vehicles (org_id, plate) where plate is not null and deleted_at is null;   -- AST-1
 create unique index on vehicles (org_id, chassis) where chassis is not null and deleted_at is null;
@@ -52,7 +63,7 @@ create unique index on vehicles (org_id, chassis) where chassis is not null and 
 
 ## Eixos e posições de roda
 
-Vale para qualquer tipo de veículo, inclusive caminhão-trator (AST-2).
+Vale para qualquer tipo de veículo, inclusive caminhão-trator (AST-2). O estepe é uma posição do veículo sem eixo, para que o pneu nele continue rastreado.
 
 ```sql
 create table axle_layouts (                    -- modelo reutilizável: "semirreboque 3 eixos rodagem dupla"
@@ -74,11 +85,17 @@ create table axles (
 create table wheel_positions (
   id            uuid primary key,
   org_id        uuid not null references organizations(id),
-  axle_id       uuid not null references axles(id),
-  side          text not null check (side in ('left','right')),
-  slot          text not null check (slot in ('single','inner','outer')),
-  unique (axle_id, side, slot)                 -- sem NULL: corrige a duplicata possível do v1
+  vehicle_id    uuid not null references vehicles(id),
+  axle_id       uuid references axles(id),     -- null só no estepe
+  side          text check (side in ('left','right')),
+  slot          text not null check (slot in ('single','inner','outer','spare')),
+  spare_number  smallint check (spare_number >= 1),
+  check ((slot = 'spare') = (axle_id is null)),
+  check ((slot = 'spare') = (spare_number is not null)),
+  check ((slot = 'spare') or side is not null)
 );
+create unique index on wheel_positions (axle_id, side, slot) where axle_id is not null;   -- corrige a duplicata do v1
+create unique index on wheel_positions (vehicle_id, spare_number) where slot = 'spare';
 ```
 
 ## Conjuntos de implementos
@@ -121,11 +138,17 @@ create table trailer_set_slots (               -- qual implemento ocupa qual pos
 ```sql
 create table couplings (                       -- combinação: unidade tratora + conjunto, num período
   id            uuid primary key,
-  org_id        uuid not null references organizations(id),
-  power_vehicle_id uuid not null references vehicles(id),
+  org_id        uuid not null references organizations(id),   -- dono do conjunto
+  power_vehicle_id uuid references vehicles(id),               -- tratora cadastrada na organização
+  external_power_plate text,                                   -- tratora de fora (ex.: da transportadora, caso Vale)
+  external_power_org_id uuid references organizations(id),    -- quando a dona da tratora também usa o Facter
+  start_meter   numeric(12,1),                                 -- km da tratora de fora no engate
+  end_meter     numeric(12,1),                                 -- km da tratora de fora no desengate
   trailer_set_id uuid not null references trailer_sets(id),
   during        tstzrange not null,
   recorded_by   uuid not null references actors(id),
+  check (num_nonnulls(power_vehicle_id, external_power_plate) = 1),               -- AST-15
+  check (end_meter is null or start_meter is null or end_meter >= start_meter),
   exclude using gist (trailer_set_id with =, during with &&),    -- AST-7
   exclude using gist (power_vehicle_id with =, during with &&)
 );
@@ -144,23 +167,37 @@ create table vehicle_operators (               -- transportadora que roda com o 
 
 ## Hodômetro e horímetro
 
-Uma fonte só (AST-6). Implemento não tem leitura própria: o km dele é derivado dos engates (AST-12).
+Uma fonte só por medidor (AST-6). O km de um implemento vem, nesta ordem: do hodômetro de cubo dele, quando tem; do hodômetro da tratora cadastrada, nos períodos de engate; do km informado no engate e no desengate, quando a tratora é de fora (AST-12). É o que dá km e CPK às carretas de quem não tem os cavalos, como a Vale.
 
 ```sql
 create table meter_readings (
   id            uuid primary key,
   org_id        uuid not null references organizations(id),
   vehicle_id    uuid not null references vehicles(id),
-  kind          text not null check (kind in ('odometer','hourmeter')),
+  kind          text not null check (kind in ('odometer','hourmeter','hubodometer')),
   value         numeric(12,1) not null check (value >= 0),
   read_at       timestamptz not null,
   source        text not null check (source in ('work_order','manual','telematics','import')),
   source_ref    uuid,                          -- ex.: a OS em que foi lida
   recorded_by   uuid not null references actors(id),
-  correction_of uuid references meter_readings(id)   -- AST-5: leitura menor só como correção explícita
+  correction_of uuid references meter_readings(id),  -- AST-5: leitura menor só como correção explícita
+  meter_install_id uuid not null references meter_installs(id)   -- a qual medidor físico a leitura pertence
 );
 create index on meter_readings (vehicle_id, kind, read_at desc);
+
+create table meter_installs (                  -- troca de painel ou de hodômetro: a leitura cai sem ser erro
+  id              uuid primary key,
+  org_id          uuid not null references organizations(id),
+  vehicle_id      uuid not null references vehicles(id),
+  kind            text not null check (kind in ('odometer','hourmeter','hubodometer')),
+  installed_at    timestamptz not null,
+  initial_value   numeric(12,1) not null check (initial_value >= 0),
+  previous_final_value numeric(12,1),          -- última leitura do medidor retirado
+  recorded_by     uuid not null references actors(id)
+);
 ```
+
+O km rodado num período soma os trechos de cada medidor instalado; a troca não gera km negativo nem km fantasma (AST-5 vale dentro de cada medidor).
 
 **Km de um implemento num período:** soma, para cada engate que se sobrepõe ao período, da diferença de hodômetro da unidade tratora dentro do trecho sobreposto. Calculado na camada de leitura e materializado por dia.
 

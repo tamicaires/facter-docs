@@ -48,11 +48,11 @@ create table daily_vehicle_facts (             -- uma linha por veículo por dia
   org_id              uuid not null references organizations(id),
   vehicle_id          uuid not null references vehicles(id),
   day                 date not null,
-  km                  numeric(12,1) not null default 0,     -- derivado dos engates para implementos
-  downtime_minutes    int not null default 0,               -- da entrada na fila à saída (indicador 4)
+  km                  numeric(12,1) not null default 0,     -- implemento: hodômetro de cubo ou engates (AST-12)
+  downtime_minutes    int not null default 0,               -- da parada à liberação, guincho incluído (WO-10, indicador 4)
   queue_minutes       int not null default 0,
   maintenance_minutes int not null default 0,
-  paused_minutes      jsonb not null default '{}',          -- por motivo (indicador 7)
+  paused_minutes      jsonb not null default '{}',          -- por motivo (indicador 7); planejado e perdido separados por pause_reasons.planned
   cost_parts          numeric(14,2) not null default 0,
   cost_labor          numeric(14,2) not null default 0,
   cost_external       numeric(14,2) not null default 0,
@@ -63,12 +63,27 @@ create table daily_vehicle_facts (             -- uma linha por veículo por dia
   primary key (org_id, vehicle_id, day)
 );
 
+create table daily_trailer_set_facts (         -- a frota como o cliente enxerga (ex.: Vale, 150 conjuntos)
+  org_id              uuid not null references organizations(id),
+  trailer_set_id      uuid not null references trailer_sets(id),
+  day                 date not null,
+  km                  numeric(12,1) not null default 0,
+  downtime_minutes    int not null default 0,
+  cost_parts          numeric(14,2) not null default 0,
+  cost_labor          numeric(14,2) not null default 0,
+  cost_external       numeric(14,2) not null default 0,
+  cost_allocation     numeric(14,2) not null default 0,
+  billed_amount       numeric(14,2) not null default 0,
+  primary key (org_id, trailer_set_id, day)
+);
+
 create table daily_employee_facts (
   org_id            uuid not null references organizations(id),
   employee_id       uuid not null references employees(id),
   day               date not null,
   worked_minutes    int not null default 0,
-  available_minutes int not null default 0,                -- do turno (indicador 11)
+  available_minutes int not null default 0,                -- trechos de trabalho do turno, sem intervalos; 0 em feriado (indicador 11)
+  overtime_minutes  int not null default 0,                -- trabalho fora dos trechos do turno
   primary key (org_id, employee_id, day)
 );
 
@@ -88,17 +103,18 @@ create table recurring_failures (              -- indicador 6, recalculado quand
 | 1 Custo por veículo e frota | `daily_vehicle_facts.cost_*` (ou `billed_amount` para o dono) |
 | 2 CPK | custo ÷ `km` no período |
 | 3 Composição do custo | `cost_*` por tipo |
-| 4 Disponibilidade | `downtime_minutes` ÷ minutos do período |
+| 4 Disponibilidade | 1 − `downtime_minutes` ÷ minutos do período, com a parada desde `vehicle_stoppages.stopped_at` |
 | 5 Veículos que mais pararam | ranking de `downtime_minutes` |
 | 6 Falhas recorrentes | `recurring_failures` com a janela da organização |
 | 7 Tempo na oficina por motivo | `queue_minutes`, `maintenance_minutes`, `paused_minutes` |
 | 8 Fila agora | `work_orders` abertas (consulta direta, poucas linhas) |
-| 9 Lead time | transições da OS, agregadas por OS fechada |
+| 9 Lead time | transições da OS, agregadas por OS fechada; previsão × realizado por `work_order_forecasts` |
 | 10 Retrabalho | `services_rework` ÷ `services_completed` |
-| 11 Horas trabalhadas × disponíveis | `daily_employee_facts` |
+| 11 Horas trabalhadas × disponíveis | `daily_employee_facts` (disponível sem intervalos e feriados; hora extra à parte) |
 | 12 Corretiva × preventiva | `work_orders.kind` por período |
 | 13 Não conformidades | `checklist_results` agregados |
 
+- **Por conjunto:** o custo e o km de um conjunto num dia são os dos implementos que estavam nele naquele dia (`trailer_set_slots`), e o custo de uma OS aberta no conjunto inteiro entra direto. Relatório por número de frota lê desta tabela.
 - **Idempotência:** cada evento do outbox atualiza as agregações uma vez; reprocessar um dia inteiro a partir dos fatos é um comando, e o resultado tem de bater (é o teste de cada indicador).
 - **Exportação CSV** (item de confiança) sai destas tabelas, filtrada pelo período e pela organização.
 - **Resumo semanal por e-mail** lê destas tabelas.
