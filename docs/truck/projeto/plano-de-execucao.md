@@ -23,7 +23,7 @@ Saída: CI verde com teste de integração; schema do núcleo aprovado.
 | 0.5 | ds-core: um arquivo por componente e vocabulário de tons | Merge e versão minor publicada no npm | 🟡 merge feito; falta publicar |
 | 0.6 | Schema do núcleo aprovado | As 8 páginas do [schema v2](../engenharia/schema-v2/visao-geral.md) revisadas e os "pontos para decidir" fechados | 🟡 revisão da arquiteta |
 | 0.7 | Invariantes revisados | [Invariantes](../engenharia/invariantes.md) com id estável e dono, sem pendência | ⬜ |
-| 0.8 | Padrão de módulo no código | Um módulo exemplo com a estrutura do CLAUDE.md: erro com código, paginação, `Idempotency-Key`, teste de rota gerado | ⬜ |
+| 0.8 | Padrão de módulo no código | Um módulo exemplo com a estrutura do CLAUDE.md: erro com código, paginação, `Idempotency-Key`, teste de rota gerado | ✅ `assets/vehicles`, 38 testes |
 | 0.9 | Congelar o escopo | Decisão registrada no roadmap | 🟡 decisão |
 
 ## Fase 1 · Plataforma e ativos (semanas 3–6)
