@@ -45,6 +45,8 @@ Saída: **fatia 1 em homologação**. Empresa B não lê nem altera nada da empr
 | 1.11 | Ativos: veículos por tipo do CTB, eixos e posições, conjuntos, engate (CVC) com histórico, operador, hodômetro | Cadastro e engate pela tela; km do implemento calculado pelo engate | 🟡 veículos (cadastro, lista, desativação) feitos; faltam eixos, conjuntos, engate, operador e hodômetro |
 | 1.12 | Importação de planilha de veículos e conjuntos | Frota real do piloto importada, com relatório de linhas recusadas | ⬜ |
 | 1.13 | Linha de base de performance: base com 100 mil OS e veículos, p95 por rota medido a cada push na `main` | Metas de p95 do CLAUDE.md verificadas desde a fatia 1, não só na fase 4 | ⬜ |
+| 1.14 | Novidades: o que saiu, Em breve com "Quero isso", ponto no menu, banner, aviso de pedido que chegou, painel interno para escrever entradas ([ADR-016](../engenharia/adrs/adr-016-conteudo-da-plataforma.md)) | Igual ao mockup aprovado em 26/09/2026, notebook e celular; pedido é da empresa e da pessoa; texto validado pelo COPY.md no formulário | 🟡 em andamento |
+| 1.15 | Detalhe do veículo: situação agora (parada com etapas), conjunto engatado, números de 90 dias, estados vazios por módulo | Igual à opção C do mockup aprovado em 26/09/2026; bloco sem dado mostra o que falta e o que fazer | ⬜ |
 
 **Quem testa a fatia 1:** o marido da arquiteta, com a frota real. Login, empresa, membros com papéis diferentes (tentando ver o que não devia) e cadastro de ativos.
 

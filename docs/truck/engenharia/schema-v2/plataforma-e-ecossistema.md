@@ -223,6 +223,76 @@ create table maintenance_requests (            -- dono do ativo pede manutençã
 
 **Visões compartilhadas:** para cada concessão ativa, eventos da organização dona alimentam tabelas `shared_*` (ex.: `shared_work_orders`, `shared_vehicle_costs`) com `grantee_org_id` e só as colunas permitidas pelo nível. O RLS dessas tabelas usa `grantee_org_id`. Revogar a concessão apaga as linhas. Um teste gerado do catálogo de níveis garante que nenhum campo acima do nível é publicado (ECO-4).
 
+## Novidades (conteúdo da plataforma)
+
+Escritas pela equipe Facter, lidas por todas as empresas ([ADR-016](../adrs/adr-016-conteudo-da-plataforma.md)). A entrada é da plataforma; o pedido "Quero isso" é da empresa.
+
+```sql
+create schema platform;
+
+alter table identity.users add column platform_staff boolean not null default false;   -- só por migration ou script
+alter table identity.users add column updates_seen_at timestamptz;                     -- "Nova para você" e ponto no menu
+
+create table platform.product_update_images (
+  id            uuid primary key,
+  content_type  text not null check (content_type in ('image/png','image/jpeg')),
+  bytes         bytea not null check (octet_length(bytes) <= 1048576),
+  created_at    timestamptz not null default now()
+);
+
+create table platform.product_updates (
+  id            uuid primary key,
+  kind          text not null check (kind in ('feature','improvement','fix','upcoming')),
+  title         text not null check (char_length(title) between 3 and 70),
+  body          text not null check (char_length(body) between 3 and 280),
+  audience      text[] not null default '{}',       -- owner, fleet_management, finance, yard, workshop, stock, tires; vazio = todos
+  destination   text,                               -- tela do "Experimentar" / "Ver em", chave da web (vehicles, …)
+  important     boolean not null default false,     -- banner no Início; uma por vez
+  feature_key   text unique,                        -- só em upcoming: liga o pedido ao lugar onde a função vai morar
+  collecting    text check (char_length(collecting) <= 160),  -- só em upcoming: o que já é registrado hoje
+  image_id      uuid references platform.product_update_images(id),
+  image_alt     text,
+  locale        text not null default 'pt-BR',
+  status        text not null default 'published' check (status in ('published','withdrawn','shipped')),
+  shipped_as    uuid references platform.product_updates(id),   -- upcoming que virou nova função
+  published_at  timestamptz not null default now(),
+  created_by    uuid not null references identity.users(id),
+  check (kind <> 'upcoming' or (collecting is not null and feature_key is not null and image_id is null and destination is null and not important)),
+  check (kind =  'upcoming' or (collecting is null and feature_key is null)),
+  check (kind <> 'fix' or (cardinality(audience) = 0 and destination is null and image_id is null and not important)),
+  check (image_id is null or image_alt is not null),
+  check ((status = 'shipped') = (shipped_as is not null))
+);
+create index product_updates_feed_idx on platform.product_updates (published_at desc, id desc) where status = 'published' and kind <> 'upcoming';
+create unique index product_updates_one_banner on platform.product_updates ((true)) where important and status = 'published';
+
+create table identity.product_update_dismissals (
+  user_id     uuid not null references identity.users(id),
+  update_id   uuid not null references platform.product_updates(id),
+  dismissed_at timestamptz not null default now(),
+  primary key (user_id, update_id)
+);
+
+create table product_update_interests (             -- dado da empresa: RLS forçado por org_id
+  id               uuid primary key,
+  org_id           uuid not null references organizations(id),
+  actor_id         uuid not null references actors(id),
+  update_id        uuid not null references platform.product_updates(id),
+  note             text check (char_length(note) <= 500),
+  notify           boolean not null default true,
+  created_at       timestamptz not null default now(),
+  withdrawn_at     timestamptz,
+  arrival_seen_at  timestamptz                       -- fechou o aviso "seu pedido chegou"
+);
+create unique index product_update_interests_open on product_update_interests (org_id, actor_id, update_id) where withdrawn_at is null;
+create index product_update_interests_by_update on product_update_interests (org_id, update_id) where withdrawn_at is null;
+```
+
+- **Nova para você** é o que foi publicado depois de `updates_seen_at`; abrir Novidades grava o horário.
+- **Ponto no menu** conta só nova função e melhoria, publicadas depois da última visita, para o público da pessoa. Correção nunca acende o ponto.
+- **Banner**: a única entrada `important` publicada, se for para o público da pessoa e ela não tiver fechado.
+- **Pedido que chegou**: pedido aberto, com `notify`, de entrada `shipped`, ainda sem `arrival_seen_at`.
+
 ## Infraestrutura de dados
 
 ```sql
