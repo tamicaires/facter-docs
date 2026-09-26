@@ -61,7 +61,7 @@ Além dos oito fatores acima (levantados em 26/09/2026):
 | 7 | **Suporte com SLA por gravidade, página de status, comunicação de incidente** | Fornecedor pequeno com processo de verdade | Baixo em processo |
 | 8 | **Seguro de responsabilidade profissional e cibernético** | Alguns contratos exigem | Apólice |
 | 9 | **Pentest por terceiro e plano de continuidade** | O questionário pede evidência | Pentest anual |
-| 10 | **Pronto para outro idioma** (textos fora do código) | CMPC e Bracell têm controle estrangeiro | Baixo agora, alto depois |
+| 10 | **Pronto para outro idioma** (textos fora do código) | CMPC e Bracell têm controle estrangeiro | **Decidido (26/09/2026):** vale desde o primeiro dia |
 
 A arquiteta já presta serviço à Ambev via NTT e conhece por dentro como empresa grande homologa fornecedor: isso ajuda a montar o pacote de confiança. Antes de qualquer conversa comercial com a Ambev, conferir cláusulas de exclusividade e conflito de interesse do contrato.
 

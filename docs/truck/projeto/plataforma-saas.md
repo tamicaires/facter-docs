@@ -22,6 +22,7 @@ Além das funcionalidades, um SaaS com cliente pagante precisa de uma camada com
 | Entrada | Assistente de configuração inicial | Depois | Configuração feita junto com o piloto | Truck |
 | Configuração | Configurações da empresa (fuso, prefixos, turnos, limite de ajuste de horário, base do rateio, campos obrigatórios, papéis) | Sim | Tela simples, esquema tipado com padrões | Truck |
 | Configuração | Preferências de notificação do usuário | Sim (mínima) | — | Hub |
+| Configuração | Idioma e moeda padrão por organização; idioma por usuário | Sim (decidido em 26/09/2026) | pt-BR no lançamento; espanhol e inglês só com tradução | Hub |
 | Configuração | Feature flags por empresa (módulos, "em breve", rollout gradual) | Sim | Mesmo mecanismo dos planos | Hub |
 | Comunicação | E-mail transacional | Sim | Provedor (Resend, SES) | Hub |
 | Comunicação | Notificação no app | Sim | — | Hub |
