@@ -24,6 +24,7 @@ Toda decisão de arquitetura do Truck tem um ADR com número sequencial. Um ADR 
 | 012 | Hospedagem da API (região no Brasil) | A decidir até o fim da fase 1 | — |
 | 013 | [Prisma 7 como ORM da v2](./adr-013-orm-prisma.md) | Aprovado (26/09/2026) | Aqui |
 | 014 | [Multiempresa em banco compartilhado com RLS](./adr-014-multiempresa-banco-compartilhado.md) | Aprovado (26/09/2026) | Aqui |
+| 015 | [Sessão opaca em cookie, sem token com refresh](./adr-015-sessao-opaca-em-cookie.md) | Proposto (26/09/2026); implementado na 1.1 | Aqui |
 
 Os ADRs 001–008 são decisões do v1. Os que o código cita como justificativa (003, 006, 007) importam para quem for portar comportamento. A lista acima veio de uma tabela no arquivo antigo da documentação; os arquivos 005, 007 e 008 não foram encontrados em nenhum repositório.
 

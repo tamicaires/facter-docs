@@ -32,7 +32,7 @@ Saída: **fatia 1 em homologação**. Empresa B não lê nem altera nada da empr
 
 | ID | Task | Pronto quando | Status |
 | --- | --- | --- | --- |
-| 1.1 | Identidade: login, sessão em cookie httpOnly com refresh, convite, primeiro acesso, redefinir senha | Fluxos com teste de integração; senha nunca volta na resposta | ⬜ |
+| 1.1 | Identidade: login, sessão em cookie httpOnly ([ADR-015](../engenharia/adrs/adr-015-sessao-opaca-em-cookie.md)), convite, primeiro acesso, redefinir senha | Fluxos com teste de integração; senha nunca volta na resposta | 🟡 login, sessão, troca de empresa e saída feitos; convite e senha esperam o e-mail (1.8) |
 | 1.2 | Organização, grupo econômico, membros e bases | Troca de empresa sem vazar cache; RLS em toda tabela nova (teste de cobertura) | ⬜ |
 | 1.3 | Permissões v2: 12 papéis padrão, escopos E/B/P, negar por padrão | Teste gerado por rota e papel conforme a [matriz](../produto/papeis-e-permissoes.md) | ⬜ |
 | 1.4 | Matrícula + PIN no tablet compartilhado | Troca de pessoa em segundos; toda ação com autor | ⬜ |

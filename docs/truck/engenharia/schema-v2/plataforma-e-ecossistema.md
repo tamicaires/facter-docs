@@ -52,9 +52,11 @@ create table organizations (
 );
 ```
 
-`organizations` não tem RLS por `org_id`: a leitura é filtrada pela associação do usuário.
+`organizations` tem RLS: cada organização lê a si mesma (`app.org_id`) e o usuário lê as organizações das quais é membro ativo (`app.user_id`, política `member_read`), que é o que o login precisa para listar as empresas.
 
 ## Identidade (destacável para o Hub)
+
+Usuários, credenciais, vínculos com organizações, sessões e tentativas de login ficam no schema `identity` do banco, fora do RLS por organização, porque são lidos antes de existir organização na sessão. É o pedaço que vai para o Hub. Sessão: [ADR-015](../adrs/adr-015-sessao-opaca-em-cookie.md).
 
 ```sql
 create table users (
@@ -78,7 +80,7 @@ create table user_identities (                -- como a pessoa entra
   check (provider in ('password','oidc_entra','oidc_google','pin'))
 );
 
-create table memberships (
+create table memberships (                    -- no schema identity: consultada no login, antes de existir organização
   id            uuid primary key,
   org_id        uuid not null references organizations(id),
   user_id       uuid not null references users(id),
@@ -86,6 +88,26 @@ create table memberships (
   status        text not null default 'active' check (status in ('invited','active','suspended')),
   created_at    timestamptz not null default now(),
   unique (org_id, user_id)                    -- PLT-3
+);
+
+create table sessions (                       -- ADR-015: token opaco no cookie; só o hash no banco
+  id              uuid primary key,
+  user_id         uuid not null references users(id),
+  token_hash      bytea not null unique,
+  active_org_id   uuid references organizations(id),
+  active_actor_id uuid references actors(id),
+  created_at      timestamptz not null default now(),
+  last_seen_at    timestamptz not null default now(),   -- gravado no máximo a cada 5 minutos
+  expires_at      timestamptz not null,                  -- 30 dias; inatividade de 12 horas também encerra
+  revoked_at      timestamptz,
+  user_agent      text
+);
+
+create table login_attempts (                 -- 5 falhas em 15 minutos bloqueiam o e-mail
+  id            uuid primary key,
+  email         text not null,
+  succeeded     boolean not null,
+  attempted_at  timestamptz not null default now()
 );
 
 create table actors (                         -- projeção local de quem age; alvo das FKs de auditoria
