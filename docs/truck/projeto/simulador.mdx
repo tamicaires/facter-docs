@@ -1,0 +1,15 @@
+---
+title: Simulador de receita
+sidebar_position: 4
+tags: [preco, custo, margem, simulador]
+---
+
+import {EconomicsSimulator} from '@site/src/components/EconomicsSimulator';
+
+# Simulador de receita
+
+Mude clientes, preços e custos, e a conta recalcula na hora. Os valores iniciais são os da [economia do produto](./economia-do-produto.md): Suzano Imperatriz com 250 veículos por faixa e Vale das Carretas com 110 frotas atendidas. Nada aqui é salvo; ao recarregar, volta aos valores iniciais.
+
+<EconomicsSimulator />
+
+**Como o cálculo funciona:** a receita por veículo usa faixa progressiva (cada faixa cobra o próprio preço); por frota atendida, preço fixo por frota. O mínimo mensal vale por cliente. A infra automática passa de enxuta para completa com 150 unidades somando todos os clientes. As fotos são o custo do mês depois de 1 ano acumulando no R2. O analytics só cobra acima de 1 milhão de eventos por mês. O ponto de empate varia a quantidade do primeiro cliente da lista, mantendo os demais.

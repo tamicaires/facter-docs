@@ -30,6 +30,10 @@ Preços pesquisados em 26/09/2026, com fonte. Os valores marcados como **premiss
 | Fotos novas por mês | 720 (~0,1 GB) | 10.800 (~1,6 GB) | 54.000 (~8 GB) |
 | Fotos acumuladas em 1 ano | ~1,3 GB | ~19 GB | ~97 GB |
 
+:::tip Simulador
+Para testar outros preços, quantidades e custos, use o [simulador de receita](./simulador.mdx).
+:::
+
 ## Quanto custa servir
 
 ### Infraestrutura fixa (lançamento até ~50 clientes)
