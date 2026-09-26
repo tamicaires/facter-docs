@@ -44,6 +44,7 @@ Saída: **fatia 1 em homologação**. Empresa B não lê nem altera nada da empr
 | 1.10 | Casca da web: auth, layout, troca de empresa, permissões na tela, i18n | Menu e ações seguem o papel; nenhum texto fora do arquivo de tradução | ⬜ |
 | 1.11 | Ativos: veículos por tipo do CTB, eixos e posições, conjuntos, engate (CVC) com histórico, operador, hodômetro | Cadastro e engate pela tela; km do implemento calculado pelo engate | ⬜ |
 | 1.12 | Importação de planilha de veículos e conjuntos | Frota real do piloto importada, com relatório de linhas recusadas | ⬜ |
+| 1.13 | Linha de base de performance: base com 100 mil OS e veículos, p95 por rota medido a cada push na `main` | Metas de p95 do CLAUDE.md verificadas desde a fatia 1, não só na fase 4 | ⬜ |
 
 **Quem testa a fatia 1:** o marido da arquiteta, com a frota real. Login, empresa, membros com papéis diferentes (tentando ver o que não devia) e cadastro de ativos.
 
@@ -90,7 +91,7 @@ Saída: metas de performance atingidas e nenhum achado crítico aberto.
 | 4.3 | Rateio completo com fechamento de período | Custo por veículo inclui o compartilhado; período fechado não muda | ⬜ |
 | 4.4 | Resumo semanal por e-mail para donos e chefias | Chega toda segunda com os números da semana | ⬜ |
 | 4.5 | Playwright nas jornadas críticas | Rodando no CI | ⬜ |
-| 4.6 | Teste de carga com 100 mil OS | p95 dentro das metas do CLAUDE.md | ⬜ |
+| 4.6 | Teste de carga com usuários simultâneos sobre a base de 100 mil OS | p95 dentro das metas com a carga do piloto × 3 | ⬜ |
 | 4.7 | Revisão de segurança e pentest por terceiro | Nenhum achado crítico aberto | ⬜ |
 | 4.8 | Backup com restauração testada, SLA, página de status, processo de incidente e continuidade | Restauração cronometrada e documentada | ⬜ |
 
