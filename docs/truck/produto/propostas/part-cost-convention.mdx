@@ -8,7 +8,11 @@ import { ProposalHeader } from '@site/src/components/ProposalHeader';
 
 # Convenção de Custo por Unidade (Estoque × Consumo)
 
-<ProposalHeader status="em-discussao" date="2026-07-30" />
+<ProposalHeader status="aprovado" date="2026-07-30" />
+
+:::info[Decisão — 27/09/2026]
+Aprovada a **Opção A**: `costPrice` é o custo por **unidade de consumo** (a menor, ex.: litro). O custo de consumo — o número mais usado (custo da OS, rateio, indicadores) — fica direto; o **valor de estoque** passa a aplicar `× conversionFactor`. Uma única função de custo (`custoNaUnidadeDeConsumo`) serve estoque e consumo. Isso destrava a task **2.5 (Estoque)**.
+:::
 
 ---
 
