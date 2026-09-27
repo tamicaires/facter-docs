@@ -56,6 +56,7 @@ As permissões e os papéis padrão do `facter-truck` foram gerados desta págin
 | Permissão | O que permite | Adm | Ges | Sup | Pla | Mec | Alm | CtP | Bor | Ins | Fin | Mot | Lei |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | `member.manage` | Convidar, suspender, trocar papel de pessoas | E | — | — | — | — | — | — | — | — | — | — | — |
+| `member.view` | Ver quem está na empresa e com qual papel; contato só com `personal_data.view` | E | E | B | — | — | — | — | — | — | — | — | — |
 | `role.manage` | Criar e ajustar papéis da empresa | E | — | — | — | — | — | — | — | — | — | — | — |
 | `settings.manage` | Configurações da empresa (fuso, prefixos, limites, motivos) | E | — | — | — | — | — | — | — | — | — | — | — |
 | `base.manage` | Bases, boxes, depósitos | E | — | — | — | — | — | — | — | — | — | — | — |

@@ -35,7 +35,7 @@ Todo invariante tem teste de integração. Onde duas pessoas podem agir ao mesmo
 | PLT-8 | Um comando executa no máximo uma vez por `Idempotency-Key`; a mesma chave com outro conteúdo é recusada; chave, comando e resposta são gravados na mesma transação | Banco (PK) + transação única | ✅ `vehicles.http.spec.ts` |
 | PLT-9 | Duas mudanças concorrentes no mesmo agregado: uma vence, a outra recebe 409 | Banco (update condicional por `version`) | ✅ `vehicles.http.spec.ts` (veículo) |
 | PLT-10 | A aplicação conecta com um papel sem `BYPASSRLS` e que não é dono das tabelas | Banco (papel) + CI com dono sem superusuário | ✅ `global-setup.ts`, `ci.yml` |
-| PLT-11 | Suspender um membro, desativar um usuário ou mudar um papel revoga as sessões afetadas na mesma transação | Domínio | ⬜ 1.2, 1.3 |
+| PLT-11 | Suspender um membro, desativar um usuário ou mudar um papel revoga as sessões afetadas na mesma transação | Domínio | ✅ 1.2 (suspender e mudar papel; desativar usuário fica para 1.3) |
 | PLT-12 | Sessão só vale com o token cujo hash está no banco, não revogada, dentro de 30 dias e de 12 horas sem uso; e-mail com 5 falhas em 15 minutos fica bloqueado | Domínio + teste | ✅ `identity.http.spec.ts` |
 
 ## Ecossistema (`ECO`) — ver [ADR-011](./adrs/adr-011-ecossistema-e-compartilhamento.md)
