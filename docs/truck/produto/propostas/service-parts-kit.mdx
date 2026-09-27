@@ -1,0 +1,67 @@
+---
+title: Kit de peças por tipo de serviço
+sidebar_position: 10
+tags: [truck, proposta, pecas, servico, kit, oficina]
+---
+
+import { ProposalHeader } from '@site/src/components/ProposalHeader';
+
+# Kit de peças por tipo de serviço
+
+<ProposalHeader status="em-discussao" date="2026-09-27" />
+
+---
+
+## Problema
+
+No v1 existia um **kit de peças** por serviço: ao lançar "troca de lona", o sistema já sabia **quais peças** aquele serviço consome, sem o mecânico separar item por item toda vez. No v2 **esse conceito se perdeu**: o tipo de serviço sugere só o **componente** (`default_component_id`), não uma lista de peças. Hoje, cada troca de lona exige montar a requisição do zero — peça a peça, quantidade a quantidade.
+
+É atrito no fluxo **mais repetido da oficina** (adicionar serviço → pedir peça) e fonte de erro (esquecer o rebite, errar a quantidade).
+
+---
+
+## Contexto no schema
+
+- `service_types` tem `default_component_id` (sugere o componente), `location_kinds`, `applies_to`.
+- `parts` (catálogo/SKU) e `part_requests` (requisição ligada à OS/serviço) existem.
+- **Não há tabela** ligando `service_types` → `parts`. A requisição é sempre montada manualmente.
+
+Ou seja: falta a ponte "este serviço normalmente usa estas peças".
+
+---
+
+## Proposta
+
+Uma tabela nova, `service_type_parts`, que associa peças padrão a um tipo de serviço:
+
+```sql
+create table service_type_parts (
+  id              uuid primary key,
+  org_id          uuid not null references organizations(id),
+  service_type_id uuid not null references service_types(id),
+  part_id         uuid not null references parts(id),
+  default_qty     numeric(14,3) not null check (default_qty > 0),   -- em unidade de consumo
+  unique (service_type_id, part_id)
+);
+```
+
+No **cadastro do tipo de serviço**, além do componente sugerido, monta-se o kit (peças + quantidade). Ao **adicionar o serviço na OS**, a **requisição já vem pré-preenchida** com o kit; o mecânico ajusta (tira, adiciona, muda quantidade) e confirma. Segue a mesma filosofia do componente sugerido: o catálogo faz o trabalho, a pessoa confirma.
+
+---
+
+## Decisões em aberto
+
+1. **Fixo ou sugerido/editável na OS?** → **Proposta: sugerido e editável.** O kit pré-preenche, mas cada OS pode ajustar. Kit rígido não sobrevive à realidade da oficina.
+2. **Varia com a configuração do veículo?** (kit de lona de 2 eixos ≠ 3 eixos) → **Proposta: começar com quantidade fixa** e evoluir para "por eixo/lado" (multiplicar pela `location_kinds` do serviço) numa v2. Não travar o começo.
+3. **Peça do kit sem saldo?** → **Proposta: não bloqueia.** Entra no pedido e o **almoxarife** resolve (aprova parcial, compra o resto). O mecânico não vê saldo ([[ui-sem-explicar-regra]] · a regra do estoque).
+4. **Kit do sistema ou da empresa?** → **Proposta: da empresa.** Consumo e fornecedor variam por oficina; kit é configuração local, como as categorias.
+
+---
+
+## Recomendação
+
+Implementar como **kit sugerido, editável e opcional** por tipo de serviço, com **quantidade fixa** na primeira versão (evoluir para por-localização depois). Não bloqueia a **task 2.1** (catálogo base); o cadastro do kit é um extra do tipo de serviço, e o **pré-preenchimento da requisição** entra junto com a **task 2.6** (requisição/consumo).
+
+## Decisão pendente (produto)
+
+> Vale trazer o **kit de peças** do v1 para o v2 como aqui proposto (sugerido/editável, por empresa, quantidade fixa no começo)? Ou o "componente sugerido" já basta e o kit fica para depois?
