@@ -393,6 +393,7 @@ mark{background:hsl(50 100% 80%);border-radius:2px;padding:0 1px;color:inherit}
 .tfoot{margin-top:auto;font-size:13px;color:hsl(240 5% 36%);display:flex;gap:6px;align-items:center}
 .strip{background:hsl(var(--card));border-radius:14px;overflow:hidden;border:1px solid hsl(var(--border));width:100%}
 .strip .nb{border-bottom:0}
+.nb > .srch.center{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);margin:0}
 .handoff{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:0}
 .handoff>div{padding:18px 22px}
 .handoff>div+div{border-left:1px solid hsl(var(--border));background:hsl(var(--toolbar))}
@@ -563,7 +564,7 @@ mark{background:hsl(50 100% 80%);border-radius:2px;padding:0 1px;color:inherit}
             <svg width="20" height="30" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span>
             <div class="wordmark">Facter <b>Truck</b></div>
           </a>
-          <div class="srch pos" role="button" aria-label="Buscar placa, frota ou OS. Atalho Ctrl K">
+          <div class="srch center pos" role="button" aria-label="Buscar placa, frota ou OS. Atalho Ctrl K">
             <span class="pin">2</span>
             <i class="ic s18 i-sparkle" aria-hidden="true"></i><span class="grow">Buscar placa, frota ou OS</span><span class="kbd">Ctrl K</span>
           </div>
@@ -1220,7 +1221,7 @@ mark{background:hsl(50 100% 80%);border-radius:2px;padding:0 1px;color:inherit}
               <div class="strip">
                 <header class="nb">
                   <a class="lockup" href="#"><svg width="20" height="30" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div class="wordmark">Facter <b>Truck</b></div></a>
-                  <div class="srch"><i class="ic s18 i-sparkle" aria-hidden="true"></i><span class="grow">Buscar placa, frota ou OS</span><span class="kbd">Ctrl K</span></div>
+                  <div class="srch center"><i class="ic s18 i-sparkle" aria-hidden="true"></i><span class="grow">Buscar placa, frota ou OS</span><span class="kbd">Ctrl K</span></div>
                   <span class="spacer"></span>
                   <button class="sync off" type="button" aria-expanded="true"><i class="ic s16 i-offline"></i>Sem internet · 3 guardados</button>
                   <button class="org" type="button"><span class="lgo lgo-c">SZ</span>Suzano · Mucuri <i class="ic s16 i-cd" aria-hidden="true"></i></button>
@@ -1241,7 +1242,7 @@ mark{background:hsl(50 100% 80%);border-radius:2px;padding:0 1px;color:inherit}
             <div class="scap"><i class="ic s14 i-sync"></i>Voltou a internet · enviando</div>
             <div class="strip">
               <header class="nb" style="padding-left:14px">
-                <div class="srch" style="width:180px"><i class="ic s18 i-sparkle" aria-hidden="true"></i><span class="grow">Buscar</span><span class="kbd">Ctrl K</span></div>
+                <div class="srch center" style="width:180px"><i class="ic s18 i-sparkle" aria-hidden="true"></i><span class="grow">Buscar</span><span class="kbd">Ctrl K</span></div>
                 <span class="spacer"></span>
                 <span class="sync up" role="status"><i class="ic s16 i-spin"></i>Enviando 2 de 3</span>
                 <button class="org" type="button"><span class="lgo lgo-c">SZ</span>Suzano · Mucuri</button>
@@ -1257,7 +1258,7 @@ mark{background:hsl(50 100% 80%);border-radius:2px;padding:0 1px;color:inherit}
             <div class="sw" style="height:190px">
               <div class="strip">
                 <header class="nb" style="padding-left:14px">
-                  <div class="srch" style="width:180px"><i class="ic s18 i-sparkle" aria-hidden="true"></i><span class="grow">Buscar</span><span class="kbd">Ctrl K</span></div>
+                  <div class="srch center" style="width:180px"><i class="ic s18 i-sparkle" aria-hidden="true"></i><span class="grow">Buscar</span><span class="kbd">Ctrl K</span></div>
                   <span class="spacer"></span>
                   <button class="sync fail" type="button" aria-expanded="true"><i class="ic s16 i-err"></i>1 não enviado</button>
                   <button class="org" type="button"><span class="lgo lgo-c">SZ</span>Suzano · Mucuri</button>
