@@ -159,7 +159,10 @@ mark{background:hsl(50 100% 80%);border-radius:2px;padding:0 1px;color:inherit}
 .nb .spacer{flex:1}
 .nb svg,.bar svg,.m-top svg{flex:none}
 .pos{position:relative}
-.srch{display:flex;align-items:center;gap:8px;width:400px;height:38px;padding:0 6px 0 12px;border:1px solid hsl(240 6% 84%);border-radius:8px;color:hsl(240 4% 40%);font-size:14px;background:hsl(var(--background));cursor:text;flex:none}
+.srch{display:flex;align-items:center;gap:8px;width:400px;height:38px;padding:0 6px 0 14px;border:1px solid transparent;border-radius:999px;color:hsl(240 4% 42%);font-size:14px;background:hsl(240 5% 95%);cursor:text;flex:none;transition:background .15s,border-color .15s}
+.srch:hover{background:hsl(240 5% 93%)}
+.srch .ic{opacity:.7}
+.srch .kbd{background:transparent;border-color:hsl(240 5% 84%);border-bottom-width:1px;color:hsl(240 4% 42%)}
 .srch .grow{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .srch .kbd{height:24px}
 .org{display:flex;align-items:center;gap:8px;height:40px;font-size:14px;font-weight:500;padding:0 8px 0 6px;border-radius:8px;border:1px solid transparent;background:none;cursor:pointer;white-space:nowrap}
@@ -361,7 +364,7 @@ mark{background:hsl(50 100% 80%);border-radius:2px;padding:0 1px;color:inherit}
 .tablet{width:1040px;border-radius:30px;background:hsl(240 8% 12%);padding:16px;box-shadow:0 20px 50px -20px hsl(230 30% 15%/.45);flex:none}
 .tscreen{border-radius:16px;overflow:hidden;background:hsl(var(--background));height:560px;display:flex;flex-direction:column;position:relative}
 .nb.tab{height:68px;padding:0 14px 0 18px;gap:12px;flex:none}
-.nb.tab .srch{width:240px;height:44px;font-size:15px;border-radius:10px}
+.nb.tab .srch{width:240px;height:44px;font-size:15px;border-radius:999px}
 .place{display:flex;flex-direction:column;line-height:1.25;font-size:12.5px;color:hsl(var(--muted-foreground));white-space:nowrap}
 .place b{font-size:14px;color:hsl(var(--foreground));font-weight:600}
 .idle{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 10px;border-radius:999px;font-size:13px;color:hsl(240 5% 34%);font-variant-numeric:tabular-nums;white-space:nowrap;background:hsl(var(--toolbar));border:1px solid hsl(var(--border))}
