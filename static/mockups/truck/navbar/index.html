@@ -116,6 +116,16 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
 .notes h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(240 5% 36%);margin-bottom:6px;display:flex;align-items:center;gap:6px}
 .frame{border-radius:14px;box-shadow:0 1px 2px hsl(230 20% 20%/.06),0 12px 40px -12px hsl(230 30% 20%/.18);overflow:hidden;border:1px solid hsl(var(--border));background:hsl(var(--background))}
 .scrollx{overflow-x:auto;overflow-y:hidden}
+.theme-row{display:flex;flex-direction:column;align-items:stretch;gap:8px;padding:8px 12px 10px;font-size:13.5px;color:hsl(var(--foreground));text-transform:none;letter-spacing:0}
+.theme-row .lbl .ic{margin:0}
+.theme-row .lbl{justify-content:flex-start;display:inline-flex;align-items:center;gap:10px;font-weight:500;text-transform:none;letter-spacing:0;color:hsl(var(--foreground))}
+.theme-seg{display:grid;grid-template-columns:repeat(3,1fr);padding:2px;border-radius:999px;background:hsl(240 5% 94%)}
+.theme-seg span{display:inline-flex;align-items:center;justify-content:center;gap:4px;height:26px;padding:0 9px;border-radius:999px;font-size:12px;font-weight:500;color:hsl(240 4% 36%)}
+.theme-seg span.on{background:hsl(var(--card));color:hsl(var(--foreground));font-weight:600;box-shadow:0 1px 2px hsl(230 30% 10%/.12)}
+.i-sun{--i:url(https://api.iconify.design/ph/sun.svg)}
+.i-moon{--i:url(https://api.iconify.design/ph/moon.svg)}
+.i-auto{--i:url(https://api.iconify.design/ph/circle-half.svg)}
+
 .indent{margin-left:40px}
 .lockup{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
 .lockup svg{color:hsl(var(--primary));flex:none}
@@ -614,6 +624,8 @@ mark{background:hsl(50 100% 80%);border-radius:2px;padding:0 1px;color:inherit}
           <a href="#" role="menuitem"><i class="ic s18 i-lock"></i>Trocar senha</a>
           <a href="#" role="menuitem"><i class="ic s18 i-kbd"></i>Atalhos do teclado<small>?</small></a>
           <hr>
+          <div class="theme-row" role="group" aria-label="Aparência"><span class="lbl"><i class="ic s18 i-auto"></i><span>Aparência</span></span><span class="theme-seg"><span class="on"><i class="ic s14 i-auto"></i>Automático</span><span><i class="ic s14 i-sun"></i>Claro</span><span><i class="ic s14 i-moon"></i>Escuro</span></span></div>
+          <hr>
           <a href="#" role="menuitem" class="danger"><i class="ic s18 i-out"></i>Sair</a>
         </div>
       </div>
@@ -621,7 +633,7 @@ mark{background:hsl(50 100% 80%);border-radius:2px;padding:0 1px;color:inherit}
         <div><span class="n">1</span><span><b>Marca</b>Leva ao Início. Sai do topo do menu lateral: o menu recolhe e abre sem a marca pular.</span></div>
         <div><span class="n">2</span><span><b>Busca</b>Placa, frota, OS, transportadora e pessoa. <span class="kbd">Ctrl K</span> de qualquer tela; no Mac, <span class="kbd">⌘ K</span>.</span></div>
         <div><span class="n">3</span><span><b>Empresa</b>Sempre visível, mesmo com uma empresa só. A seta aparece só quando há outra para trocar.</span></div>
-        <div><span class="n">4</span><span><b>Pessoa</b>Iniciais. O menu diz nome, papel e onde o papel vale. Sair fica por último, em vermelho.</span></div>
+        <div><span class="n">4</span><span><b>Pessoa</b>Iniciais. O menu diz nome, papel e onde o papel vale. Aparência (Automático, Claro, Escuro) troca na hora e fica guardada na conta, não só no navegador. Sair fica por último, em vermelho.</span></div>
         <div><span class="n">5</span><span><b>Onde estou</b>A trilha fica no cabeçalho da página, acima do título, e só em telas de detalhe.</span></div>
       </div>
     </div>
@@ -1183,6 +1195,7 @@ mark{background:hsl(50 100% 80%);border-radius:2px;padding:0 1px;color:inherit}
             <div class="sh-sec" style="border-top:1px solid hsl(var(--border))">
               <div class="sh-row"><span class="ico"><i class="ic s24 i-user"></i></span><b>Meu perfil</b><i class="ic s16 i-cr go"></i></div>
               <div class="sh-row"><span class="ico"><i class="ic s24 i-lock"></i></span><b>Trocar senha</b><i class="ic s16 i-cr go"></i></div>
+              <div class="theme-row" role="group" aria-label="Aparência" style="padding:10px 4px"><span class="lbl"><i class="ic s18 i-auto"></i><span>Aparência</span></span><span class="theme-seg"><span class="on">Automático</span><span>Claro</span><span>Escuro</span></span></div>
               <div class="sh-row"><span class="ico" style="position:relative"><i class="ic s24 i-mega"></i><span class="dotnew" style="position:absolute;top:5px;right:4px;width:8px;height:8px;border-radius:9px;background:hsl(var(--primary));box-shadow:0 0 0 2px hsl(var(--card))"></span></span><div><b>Novidades</b><span class="s">2 novas desde 18/09</span></div><i class="ic s16 i-cr go"></i></div>
               <div class="sh-row danger"><span class="ico"><i class="ic s24 i-out"></i></span><b>Sair</b><span></span></div>
             </div>
