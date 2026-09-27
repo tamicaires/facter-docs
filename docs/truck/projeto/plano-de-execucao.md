@@ -89,7 +89,7 @@ Saída: metas de performance atingidas e nenhum achado crítico aberto.
 | ID | Task | Pronto quando | Status |
 | --- | --- | --- | --- |
 | 4.1 | Tabelas de agregação e os 13 [indicadores de decisão](../produto/indicadores-de-decisao.md) | Clique no número chega às ordens que o compõem | ⬜ |
-| 4.2 | Telas de gestão no notebook: filtros por frota, veículo e período, exportação CSV | Nunca é a tela do tablet esticada | ⬜ |
+| 4.2 | Telas de gestão no notebook: filtros por frota, veículo, transportadora e período, exportação CSV; detalhe da transportadora com custo por km, paradas e OS do período dela (decidido em 27/09/2026: só com os números, mockup nessa hora) | Nunca é a tela do tablet esticada | ⬜ |
 | 4.3 | Rateio completo com fechamento de período | Custo por veículo inclui o compartilhado; período fechado não muda | ⬜ |
 | 4.4 | Resumo semanal por e-mail para donos e chefias | Chega toda segunda com os números da semana | ⬜ |
 | 4.5 | Playwright nas jornadas críticas | Rodando no CI | ⬜ |
