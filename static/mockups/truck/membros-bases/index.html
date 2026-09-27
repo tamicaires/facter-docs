@@ -1,0 +1,1302 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pessoas, bases e boxes · mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --background:0 0% 98%;
+  --foreground:240 10% 3.9%;
+  --card:0 0% 100%;
+  --primary:233 65% 50%;
+  --primary-foreground:0 0% 100%;
+  --muted:240 4.8% 93.9%;
+  --muted-foreground:240 3.8% 42%;
+  --border:240 5.9% 90%;
+  --success:160 60% 38%;
+  --warning:38 92% 45%;
+  --danger:0 84.2% 60.2%;
+  --radius:.5rem;
+  --success-text:160 70% 24%;
+  --danger-text:0 72% 38%;
+  --warning-text:28 85% 28%;
+  --primary-soft:233 85% 96.5%;
+  --success-soft:160 55% 94%;
+  --warning-soft:40 95% 93%;
+  --danger-soft:0 85% 96%;
+  --canvas:225 14% 92%;
+  --ring:233 65% 50%;
+  --toolbar:240 5% 96%;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:hsl(var(--canvas));color:hsl(var(--foreground));font:15px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,p{margin:0}
+button,input,textarea,select{font:inherit;color:inherit}
+a{color:hsl(var(--primary))}
+:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:2px;border-radius:6px}
+.ic{display:inline-block;width:20px;height:20px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;flex:none}
+.ic.s12{width:12px;height:12px}.ic.s14{width:14px;height:14px}.ic.s16{width:16px;height:16px}.ic.s18{width:18px;height:18px}.ic.s24{width:24px;height:24px}
+
+/* ---------- presentation page ---------- */
+.doc{max-width:1328px;margin:0 auto;padding:48px 24px 96px}
+.doc-head{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between;margin-bottom:24px}
+.doc-head h1{font:800 32px/1.15 Sora,Inter,sans-serif;letter-spacing:-.02em}
+.doc-head p{color:hsl(var(--muted-foreground));max-width:680px;margin-top:8px}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.toc a{font-size:13px;text-decoration:none;color:hsl(240 6% 26%);background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:999px;padding:4px 12px}
+.toc a:hover{border-color:hsl(233 60% 78%);color:hsl(var(--primary))}
+.sec{margin-top:72px}
+.sec-label{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-num{font:800 14px Sora,sans-serif;color:hsl(var(--primary));background:hsl(var(--card));border-radius:999px;width:28px;height:28px;display:inline-grid;place-items:center;flex:none}
+.sec h2{font:700 22px/1.3 Inter,sans-serif;letter-spacing:-.01em}
+.sec-sub{color:hsl(var(--muted-foreground));margin:0 0 20px 40px;max-width:780px}
+.notes{margin:20px 0 0 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 32px;font-size:14px;color:hsl(240 6% 25%)}
+.notes li{margin-bottom:6px}
+.notes ul{margin:0;padding-left:18px}
+.notes h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));margin-bottom:6px}
+.frame{background:hsl(var(--background));border-radius:14px;box-shadow:0 1px 2px hsl(230 20% 20%/.06),0 12px 40px -12px hsl(230 30% 20%/.18);overflow:hidden;border:1px solid hsl(var(--border));max-width:1280px}
+.indent{margin-left:40px}
+
+/* ---------- brand ---------- */
+.lockup{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.lockup svg{color:hsl(var(--primary));flex:none}
+.lockup .rule{width:1px;align-self:stretch;background:hsl(var(--border));margin:2px 0}
+.wordmark{font:400 18px/1.1 Sora,sans-serif;letter-spacing:-.01em;white-space:nowrap}
+.wordmark b{font-weight:800}
+.tagline{font-size:11px;color:hsl(var(--muted-foreground));margin-top:3px;white-space:nowrap}
+
+/* ---------- app shell ---------- */
+.app{display:grid;grid-template-columns:72px 1fr;grid-template-rows:64px 1fr;min-height:100%}
+.topbar{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:0 20px 0 18px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
+.topbar .spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;width:300px;max-width:30vw;height:38px;padding:0 12px;border:1px solid hsl(var(--border));border-radius:8px;color:hsl(var(--muted-foreground));font-size:14px;background:hsl(var(--background))}
+.org{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:500;padding:6px 10px;border-radius:8px;border:0;background:none;cursor:pointer}
+.avatar{width:34px;height:34px;border-radius:999px;background:hsl(233 45% 88%);color:hsl(233 60% 30%);display:grid;place-items:center;font-weight:600;font-size:13px;flex:none}
+.sidenav{background:hsl(var(--card));border-right:1px solid hsl(var(--border));padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.navitem{position:relative;width:48px;height:48px;border-radius:10px;display:grid;place-items:center;color:hsl(240 5% 34%);text-decoration:none}
+.navitem:hover{background:hsl(var(--muted))}
+.navitem[aria-current="page"]{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.navitem[aria-current="page"]::before{content:"";position:absolute;left:-12px;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:hsl(var(--primary))}
+.navsep{flex:1}
+.main{padding:32px 40px 40px;min-width:0;position:relative}
+.pagehead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:24px}
+.pagehead h1{font:700 26px/1.2 Inter,sans-serif;letter-spacing:-.015em}
+.pagehead p{color:hsl(var(--muted-foreground));margin-top:4px}
+.pagehead .acts{display:flex;gap:12px}
+
+/* ---------- buttons, badges ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:8px;border:1px solid transparent;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn-primary{background:hsl(var(--primary));color:hsl(var(--primary-foreground))}
+.btn-primary:hover{background:hsl(233 65% 44%)}
+.btn-primary[disabled]{background:hsl(233 40% 72%);cursor:not-allowed}
+.btn-outline{background:hsl(var(--card));border-color:hsl(240 6% 82%);color:hsl(var(--foreground))}
+.btn-outline:hover{background:hsl(var(--muted))}
+.btn-sm{height:34px;padding:0 12px;font-size:13px}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:999px;background:hsl(var(--muted));color:hsl(240 6% 26%);font-size:12px;font-weight:500;white-space:nowrap}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.st{display:inline-flex;align-items:center;height:22px;padding:0 8px;border-radius:999px;font-size:12px;font-weight:600;border:1px solid}
+.st-on{color:hsl(var(--success-text));background:hsl(var(--success-soft));border-color:hsl(160 45% 82%)}
+.st-off{color:hsl(240 6% 32%);background:hsl(var(--muted));border-color:hsl(240 6% 86%)}
+.lk{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px 0 6px;border-radius:6px;font-size:12px;font-weight:600;background:hsl(var(--primary-soft));color:hsl(233 65% 40%)}
+.lk-wait{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.meta{font-size:13px;color:hsl(var(--muted-foreground))}
+.muted{color:hsl(var(--muted-foreground))}
+.num{font-variant-numeric:tabular-nums}
+/* ---------- data table (ds-core look) ---------- */
+.dt-toolbar{background:hsl(var(--toolbar));border-radius:10px;padding:4px 16px 14px}
+.dt-tabs{display:flex;gap:4px;border-bottom:1px solid hsl(var(--border));margin-bottom:14px}
+.dt-tabs button{border:0;background:none;height:44px;padding:0 16px;font-size:14px;color:hsl(240 5% 38%);border-bottom:2px solid transparent;margin-bottom:-1px;display:inline-flex;align-items:center;gap:8px;cursor:pointer}
+.dt-tabs button .c{font-size:12px;background:hsl(240 5% 90%);color:hsl(240 5% 34%);border-radius:5px;padding:1px 6px;font-weight:500}
+.dt-tabs button[aria-selected="true"]{color:hsl(var(--primary));border-bottom-color:hsl(var(--primary));font-weight:500}
+.dt-tabs button[aria-selected="true"] .c{background:hsl(233 70% 92%);color:hsl(233 65% 40%)}
+.dt-search{display:flex;align-items:center;gap:8px;width:360px;white-space:nowrap;height:36px;padding:0 12px;border:1px solid hsl(240 6% 84%);border-radius:8px;background:hsl(var(--card));font-size:14px;color:hsl(240 4% 46%)}
+.dt{background:hsl(var(--card));border-radius:10px;margin-top:16px;border:1px solid hsl(var(--border));overflow:visible}
+table{width:100%;border-collapse:collapse;font-size:14px}
+th{text-align:left;font-weight:400;color:hsl(240 4% 40%);padding:14px 16px;border-bottom:1px solid hsl(var(--border));white-space:nowrap}
+td{padding:11px 16px;border-top:1px solid hsl(var(--border));vertical-align:middle}
+tr:first-child td{border-top:0}
+tbody tr:hover td{background:hsl(240 5% 98.5%)}
+td .nm{font-weight:500}
+td .sub{font-size:12.5px;color:hsl(var(--muted-foreground));font-variant-numeric:tabular-nums}
+td.r,th.r{text-align:right}
+.kebab{width:32px;height:32px;border:0;background:none;border-radius:6px;display:grid;place-items:center;color:hsl(240 5% 30%);cursor:pointer;margin-left:auto}
+.kebab:hover,.kebab[aria-expanded="true"]{background:hsl(var(--muted))}
+.menu{position:absolute;right:0;top:36px;z-index:5;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:8px;box-shadow:0 10px 30px -10px hsl(230 30% 20%/.3);padding:4px;min-width:200px;text-align:left}
+.menu a{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:6px;font-size:14px;color:hsl(var(--foreground));text-decoration:none;white-space:nowrap}
+.menu a:hover{background:hsl(var(--muted))}
+.menu a .ic{color:hsl(240 5% 40%)}
+.menu a.danger{color:hsl(var(--danger-text))}
+.menu a.danger .ic{color:hsl(var(--danger-text))}
+.menu a.new{background:hsl(var(--primary-soft));color:hsl(233 65% 38%);font-weight:500}
+.menu a.new .ic{color:hsl(var(--primary))}
+.menu hr{border:0;border-top:1px solid hsl(var(--border));margin:4px 0}
+.kcell{position:relative}
+.pager{display:flex;justify-content:space-between;align-items:center;margin-top:14px;font-size:14px;color:hsl(var(--muted-foreground))}
+.pager .r{display:flex;align-items:center;gap:12px;color:hsl(var(--foreground));font-weight:500}
+.pbtn{width:32px;height:32px;border:1px solid hsl(var(--border));border-radius:6px;background:hsl(var(--card));display:grid;place-items:center;color:hsl(240 5% 40%)}
+.psel{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 10px;border:1px solid hsl(240 6% 84%);border-radius:6px;background:hsl(var(--card))}
+.opcell{display:flex;align-items:center;gap:6px}
+.opcell .since{font-size:12.5px;color:hsl(var(--muted-foreground))}
+
+/* ---------- dialog ---------- */
+.stage{position:relative;background:hsl(240 8% 20%/.42);padding:40px;display:flex;justify-content:center;gap:28px;align-items:flex-start;flex-wrap:wrap;min-height:600px;
+  background-image:linear-gradient(hsl(240 8% 20%/.42),hsl(240 8% 20%/.42)),radial-gradient(hsl(233 20% 80%) 1px,transparent 1px);background-size:auto,18px 18px;background-color:hsl(var(--background))}
+.dlg{width:520px;max-width:100%;background:hsl(var(--card));border-radius:14px;box-shadow:0 24px 60px -20px hsl(230 30% 10%/.5);padding:24px;position:relative}
+.dlg .x{position:absolute;right:14px;top:14px;width:32px;height:32px;border:0;background:none;border-radius:6px;display:grid;place-items:center;color:hsl(240 5% 40%)}
+.dlg h2{font-size:18px;font-weight:650;letter-spacing:-.01em}
+.dlg .desc{font-size:14px;color:hsl(var(--muted-foreground));margin-top:4px}
+.form{display:flex;flex-direction:column;gap:16px;margin-top:20px}
+.fl{display:block}
+.fl .l{display:block;font-size:14px;font-weight:500;margin-bottom:6px}
+.fl .l .req{color:hsl(var(--danger-text))}
+.input{width:100%;height:40px;border:1px solid hsl(240 6% 82%);border-radius:8px;background:hsl(var(--card));padding:0 12px;font-size:14px;display:flex;align-items:center;gap:8px}
+.input.ph{color:hsl(240 4% 46%)}
+.input.err{border-color:hsl(var(--danger-text));box-shadow:0 0 0 3px hsl(0 80% 60%/.12)}
+.input.focus{border-color:hsl(var(--primary));box-shadow:0 0 0 3px hsl(233 65% 50%/.15)}
+.input .grow{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.input .ic{color:hsl(240 5% 45%)}
+.hint{font-size:13px;color:hsl(var(--muted-foreground));margin-top:6px}
+.errtext{font-size:13px;color:hsl(var(--danger-text));margin-top:6px;display:flex;gap:6px;align-items:center}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.linkbox{border:1px solid hsl(var(--border));border-radius:10px;padding:14px;background:hsl(var(--background))}
+.linkbox h3{font-size:14px;font-weight:600;display:flex;gap:8px;align-items:center}
+.linkbox p{font-size:13.5px;color:hsl(240 6% 28%);margin-top:6px}
+.radio{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+.radio label{display:flex;gap:10px;align-items:flex-start;font-size:14px;padding:10px 12px;border:1px solid hsl(240 6% 86%);border-radius:8px;background:hsl(var(--card));cursor:pointer}
+.radio label:has(input:checked){border-color:hsl(233 60% 70%);background:hsl(var(--primary-soft))}
+.radio input{accent-color:hsl(var(--primary));width:16px;height:16px;margin:2px 0 0;flex:none}
+.radio .d{display:block;font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:1px}
+.dfoot{display:flex;justify-content:flex-end;gap:8px;margin-top:22px}
+.side{width:360px;max-width:100%;display:flex;flex-direction:column;gap:16px}
+.mini-dlg{background:hsl(var(--card));border-radius:14px;box-shadow:0 24px 60px -20px hsl(230 30% 10%/.5);padding:20px}
+.mini-dlg h2{font-size:16px;font-weight:650}
+.mini-dlg p{font-size:14px;color:hsl(240 6% 28%);margin-top:6px}
+.mini-dlg .dfoot{margin-top:16px}
+.btn-danger{background:hsl(0 72% 45%);color:#fff}
+.cap-top{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(0 0% 100%/.92);font-weight:600;margin-bottom:8px}
+.warnbox{display:flex;gap:10px;background:hsl(var(--warning-soft));border:1px solid hsl(38 80% 80%);border-radius:10px;padding:10px 12px;font-size:13.5px;color:hsl(var(--warning-text));margin-top:12px}
+
+/* combobox + history */
+.pop{border:1px solid hsl(var(--border));border-radius:10px;background:hsl(var(--card));box-shadow:0 12px 30px -12px hsl(230 30% 20%/.3);padding:6px;margin-top:6px}
+.pop .q{display:flex;align-items:center;gap:8px;height:36px;padding:0 8px;border-bottom:1px solid hsl(var(--border));margin:-2px -2px 4px;font-size:14px}
+.opt{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px;border-radius:6px;font-size:14px}
+.opt .s{font-size:12.5px;color:hsl(var(--muted-foreground))}
+.opt.sel{background:hsl(var(--primary-soft))}
+.opt mark{background:hsl(50 100% 80%);border-radius:2px;padding:0 1px;color:inherit}
+.opt.grp{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));font-weight:600;padding:8px 8px 2px}
+.hist{border-top:1px solid hsl(var(--border));margin-top:20px;padding-top:16px}
+.hist h3{font-size:13px;font-weight:600;display:flex;align-items:center;gap:6px;color:hsl(240 6% 25%)}
+.hlist{list-style:none;margin:10px 0 0;padding:0;position:relative}
+.hlist::before{content:"";position:absolute;left:6px;top:8px;bottom:8px;width:2px;background:hsl(var(--border))}
+.hlist li{position:relative;padding:6px 0 6px 24px;font-size:14px;display:flex;justify-content:space-between;gap:12px;align-items:baseline}
+.hlist li::before{content:"";position:absolute;left:1px;top:12px;width:12px;height:12px;border-radius:99px;background:hsl(var(--card));border:2px solid hsl(240 5% 70%)}
+.hlist li.now::before{border-color:hsl(var(--primary));background:hsl(var(--primary))}
+.hlist li.next::before{border-color:hsl(var(--primary));border-style:dashed}
+.hlist li.next{color:hsl(233 65% 38%)}
+.hlist .when{font-size:13px;color:hsl(var(--muted-foreground));white-space:nowrap;font-variant-numeric:tabular-nums}
+.hlist .chg{font-size:12.5px;color:hsl(233 65% 38%);font-weight:500}
+.hlist s{color:hsl(var(--muted-foreground))}
+
+/* ---------- phone ---------- */
+.phones{display:flex;flex-wrap:wrap;gap:40px;align-items:flex-start;margin-left:40px}
+.phones .notes{margin:0;flex:1 1 260px;grid-template-columns:1fr;align-self:center}
+.phone-wrap{display:flex;flex-direction:column;gap:12px;align-items:center}
+.phone-cap{font-size:13px;color:hsl(var(--muted-foreground));max-width:360px;text-align:center}
+.phone{width:390px;max-width:calc(100vw - 32px);height:844px;border-radius:48px;background:hsl(240 8% 12%);padding:10px;box-shadow:0 20px 50px -20px hsl(230 30% 15%/.45)}
+.screen{position:relative;height:100%;border-radius:39px;overflow:hidden;background:hsl(var(--background));display:flex;flex-direction:column}
+.status{height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 28px 0 32px;font:600 14px Inter;background:hsl(var(--card))}
+.status .isl{width:110px;height:30px;border-radius:20px;background:hsl(240 8% 12%)}
+.m-top{display:flex;align-items:center;justify-content:space-between;padding:8px 16px 10px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border));flex:none}
+.m-top .wordmark{font-size:16px}
+.m-body{flex:1;overflow:hidden;padding:16px}
+.m-hd{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.m-body h1{font-size:22px;font-weight:700;letter-spacing:-.015em}
+.m-body .sub{font-size:13.5px;color:hsl(var(--muted-foreground));margin-top:2px}
+.mseg{display:flex;gap:4px;padding:4px;background:hsl(var(--muted));border-radius:10px;margin:14px 0 10px}
+.mseg button{flex:1;border:0;background:none;height:34px;border-radius:7px;font-size:13.5px;font-weight:500;color:hsl(240 6% 30%);display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.mseg button .n{font-size:12px;color:hsl(var(--muted-foreground))}
+.mseg button[aria-pressed="true"]{background:hsl(var(--card));color:hsl(var(--foreground));box-shadow:0 1px 2px hsl(240 10% 10%/.12)}
+.msearch{display:flex;align-items:center;gap:8px;height:42px;padding:0 12px;border:1px solid hsl(240 6% 84%);border-radius:10px;background:hsl(var(--card));font-size:14.5px;color:hsl(240 4% 46%)}
+.mlist{display:flex;flex-direction:column;gap:10px;margin-top:12px}
+.mc{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px;padding:12px 12px 12px 14px}
+.mc .t{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.mc .nm{font-weight:600;font-size:15px;line-height:1.3}
+.mc .sub2{font-size:12.5px;color:hsl(var(--muted-foreground));font-variant-numeric:tabular-nums}
+.mc .kebab{margin:-4px -4px 0 0;width:36px;height:36px}
+.mc .row{display:flex;align-items:center;gap:8px;margin-top:8px;font-size:13.5px;flex-wrap:wrap}
+.mc .row .tel{display:inline-flex;align-items:center;gap:5px;color:hsl(var(--primary));text-decoration:none;font-weight:500}
+.mc .foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid hsl(var(--border));font-size:13px}
+.botnav{flex:none;display:grid;grid-template-columns:repeat(5,1fr);background:hsl(var(--card));border-top:1px solid hsl(var(--border));padding:6px 4px 26px}
+.bn{position:relative;display:flex;flex-direction:column;align-items:center;gap:3px;font-size:11px;font-weight:500;color:hsl(240 5% 36%);text-decoration:none;padding:6px 0;border-radius:10px}
+.bn[aria-current="page"]{color:hsl(var(--primary));font-weight:600}
+.fade{position:absolute;left:0;right:0;bottom:84px;height:40px;background:linear-gradient(transparent,hsl(var(--background)));pointer-events:none}
+.scrim{position:absolute;inset:0;background:hsl(240 10% 8%/.45);z-index:3}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:4;background:hsl(var(--card));border-radius:20px 20px 0 0;padding:10px 16px 30px;box-shadow:0 -10px 40px -10px hsl(230 30% 10%/.4)}
+.sheet .grab{width:40px;height:5px;border-radius:99px;background:hsl(240 5% 82%);margin:0 auto 12px}
+.sheet h2{font-size:18px;font-weight:650}
+.sheet .desc{font-size:13.5px;color:hsl(var(--muted-foreground));margin-top:2px}
+.sheet .form{gap:14px;margin-top:16px}
+.sheet .input{height:46px;font-size:15px}
+.sheet .hist{margin-top:16px;padding-top:12px}
+.sheet .hlist li{font-size:13.5px;padding:4px 0 4px 24px}
+.sheet .hlist li::before{top:9px}
+.sheet .btns{display:grid;grid-template-columns:1fr 1.4fr;gap:8px;margin-top:16px}
+.sheet .btns .btn{height:48px;font-size:15px}
+
+/* ---------- open questions ---------- */
+.qs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-left:40px}
+.q{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:28px 1fr;gap:12px}
+.q .qi{width:28px;height:28px;border-radius:8px;background:hsl(var(--warning-soft));color:hsl(var(--warning-text));display:grid;place-items:center}
+.q h3{font-size:15px;font-weight:650;line-height:1.35}
+.q p{font-size:14px;color:hsl(240 6% 26%);margin-top:4px}
+.q .prop{margin-top:8px;font-size:13.5px;color:hsl(233 65% 36%);background:hsl(var(--primary-soft));border-radius:8px;padding:8px 10px}
+.q .prop b{font-weight:600}
+
+/* ---------- this mockup ---------- */
+.frame.app-frame{max-width:1280px}
+.setl{display:grid;grid-template-columns:188px minmax(0,1fr);gap:32px;align-items:start}
+.subnav{display:flex;flex-direction:column;gap:2px;position:sticky;top:0}
+.subnav .h{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:600;padding:4px 10px 8px}
+.subnav a{display:flex;align-items:center;gap:10px;height:38px;padding:0 10px;border-radius:8px;font-size:14px;color:hsl(240 6% 26%);text-decoration:none}
+.subnav a:hover{background:hsl(var(--muted))}
+.subnav a[aria-current="page"]{background:hsl(var(--primary-soft));color:hsl(233 65% 38%);font-weight:600}
+.subnav a .ic{color:hsl(240 5% 42%)}
+.subnav a[aria-current="page"] .ic{color:hsl(var(--primary))}
+
+.pcell{display:flex;align-items:center;gap:12px;min-width:0}
+.pav{width:34px;height:34px;border-radius:999px;display:grid;place-items:center;font-size:12.5px;font-weight:600;flex:none;background:hsl(233 45% 90%);color:hsl(233 60% 30%)}
+.pav.a2{background:hsl(160 40% 88%);color:hsl(160 70% 22%)}
+.pav.a3{background:hsl(28 80% 90%);color:hsl(28 85% 26%)}
+.pav.a4{background:hsl(280 35% 91%);color:hsl(280 45% 32%)}
+.pav.a5{background:hsl(200 50% 89%);color:hsl(200 70% 25%)}
+.pav.dim{background:hsl(var(--muted));color:hsl(240 5% 38%)}
+.you{display:inline-flex;align-items:center;height:18px;padding:0 6px;border-radius:5px;background:hsl(var(--muted));color:hsl(240 6% 30%);font-size:11px;font-weight:600;margin-left:6px;vertical-align:1px}
+.rcs{display:flex;flex-wrap:wrap;gap:6px}
+.rc{display:inline-flex;align-items:center;gap:4px;height:24px;padding:0 9px;border-radius:6px;background:hsl(var(--card));border:1px solid hsl(240 6% 84%);font-size:12.5px;font-weight:500;white-space:nowrap;color:hsl(var(--foreground))}
+.rc .sc{color:hsl(240 4% 40%);font-weight:400}
+.rc.co{border-color:hsl(233 50% 84%);background:hsl(var(--primary-soft))}
+.rc.co .sc{color:hsl(233 45% 38%)}
+.rc.nw{border-color:hsl(160 45% 70%);background:hsl(var(--success-soft))}
+.st{white-space:nowrap}
+.phones .notes{flex:1 1 100%}
+.st-wait{color:hsl(var(--warning-text));background:hsl(var(--warning-soft));border-color:hsl(38 80% 80%)}
+.st-inv{color:hsl(233 65% 40%);background:hsl(var(--primary-soft));border-color:hsl(233 60% 86%)}
+.when2{font-size:14px;font-variant-numeric:tabular-nums}
+.when2 .sub{display:block}
+
+/* ActionMenu (ds-core): icon + label + consequence */
+.menu.am{width:280px;min-width:0;padding:6px;border-radius:10px}
+.menu.am a{align-items:flex-start;white-space:normal;padding:8px 10px}
+.menu.am a .ic{margin-top:2px}
+.menu.am .tx{display:flex;flex-direction:column;gap:1px;min-width:0}
+.menu.am .tx small{font-size:12.5px;line-height:1.35;color:hsl(var(--muted-foreground))}
+.menu.am a.danger .tx small{color:hsl(0 45% 42%)}
+.menu.am .grp{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));font-weight:600;padding:6px 10px 2px}
+
+/* crop frames (table only) */
+.crop2{background:hsl(var(--background));border:1px solid hsl(var(--border));border-radius:14px;padding:20px;box-shadow:0 1px 2px hsl(230 20% 20%/.06),0 12px 40px -12px hsl(230 30% 20%/.18)}
+.split{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:32px;align-items:start;margin-top:24px}
+.split .notes{margin:0;grid-template-columns:1fr}
+
+/* dialog pieces */
+.dlg.w{width:580px}
+.seg3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.seg3 label,.seg2 label{display:flex;align-items:center;justify-content:center;gap:8px;height:40px;border:1px solid hsl(240 6% 84%);border-radius:8px;font-size:13.5px;font-weight:500;background:hsl(var(--card));cursor:pointer;color:hsl(240 6% 26%);text-align:center;padding:0 8px}
+.seg3 label:has(input:checked),.seg2 label:has(input:checked){border-color:hsl(233 60% 62%);background:hsl(var(--primary-soft));color:hsl(233 65% 36%);box-shadow:inset 0 0 0 1px hsl(233 60% 62%)}
+.seg3 input,.seg2 input{position:absolute;opacity:0;pointer-events:none}
+.seg2{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.roles-h{display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.roler{border:1px solid hsl(var(--border));border-radius:10px;padding:14px;background:hsl(var(--background));display:flex;flex-direction:column;gap:12px}
+.roler.nw{border-color:hsl(160 45% 72%);background:hsl(160 50% 97.5%)}
+.roler .top{display:flex;gap:8px;align-items:flex-end}
+.roler .top .fl{flex:1}
+.iconbtn{width:40px;height:40px;border-radius:8px;border:1px solid hsl(240 6% 84%);background:hsl(var(--card));display:grid;place-items:center;color:hsl(240 5% 38%);cursor:pointer;flex:none}
+.sublbl{font-size:13px;font-weight:500;margin-bottom:6px;display:block}
+.bchks{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.bchk{display:inline-flex;align-items:center;gap:8px;height:36px;padding:0 12px;border:1px solid hsl(240 6% 84%);border-radius:8px;background:hsl(var(--card));font-size:13.5px;cursor:pointer}
+.bchk:has(input:checked){border-color:hsl(233 60% 70%);background:hsl(var(--primary-soft))}
+.bchk input{accent-color:hsl(var(--primary));width:16px;height:16px;margin:0}
+.addlink{display:inline-flex;align-items:center;gap:6px;font-size:14px;font-weight:600;color:hsl(var(--primary));background:none;border:0;padding:4px 0;cursor:pointer}
+.scopehelp{display:grid;grid-template-columns:1fr 1fr;gap:10px;font-size:13px;color:hsl(240 6% 28%);margin-top:8px}
+.scopehelp div{display:flex;gap:8px;align-items:flex-start}
+.scopehelp .ic{color:hsl(240 5% 45%);margin-top:2px}
+.can{border:1px dashed hsl(240 6% 80%);border-radius:10px;padding:12px 14px;font-size:13.5px}
+.can h3{font-size:13px;font-weight:600;color:hsl(240 6% 25%);display:flex;align-items:center;gap:6px}
+.can ul{margin:6px 0 0;padding:0;list-style:none;display:flex;flex-direction:column;gap:4px}
+.can li{display:flex;gap:8px;align-items:flex-start}
+.can li .ic{margin-top:2px}
+.can .y{color:hsl(var(--success-text))}
+.can .n{color:hsl(240 5% 45%)}
+.tagnew{font-size:11px;font-weight:700;letter-spacing:.03em;color:hsl(var(--success-text));background:hsl(var(--success-soft));border:1px solid hsl(160 45% 78%);border-radius:5px;padding:1px 6px;margin-left:6px}
+.linkfield{display:flex;align-items:center;gap:8px;height:44px;border:1px solid hsl(240 6% 82%);border-radius:8px;padding:0 6px 0 12px;background:hsl(var(--background));font-size:14px;margin-top:14px}
+.linkfield .u{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-variant-numeric:tabular-nums}
+.btn-wa{background:hsl(142 60% 30%);color:#fff}
+.btn-wa:hover{background:hsl(142 60% 26%)}
+.okhead{display:flex;gap:10px;align-items:flex-start}
+.okhead .oi{width:32px;height:32px;border-radius:9px;background:hsl(var(--success-soft));color:hsl(var(--success-text));display:grid;place-items:center;flex:none}
+.msgprev{margin-top:12px;background:hsl(100 40% 94%);border:1px solid hsl(100 25% 84%);border-radius:10px 10px 10px 2px;padding:10px 12px;font-size:13px;color:hsl(240 8% 18%)}
+.msgprev .h{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:hsl(240 5% 38%);font-weight:600;margin-bottom:4px}
+.dfoot.stretch{justify-content:stretch}
+.dfoot.stretch .btn{flex:1}
+.nowbox{display:flex;gap:10px;align-items:center;border:1px solid hsl(var(--border));border-radius:10px;padding:10px 12px;font-size:13.5px;margin-top:16px;background:hsl(var(--background))}
+.nowbox .dot{width:8px;height:8px;border-radius:99px;background:hsl(var(--success));flex:none;box-shadow:0 0 0 3px hsl(160 60% 38%/.18)}
+.warnbox.out{align-items:flex-start}
+.warnbox.out .ic{margin-top:1px}
+.infobox{display:flex;gap:10px;align-items:flex-start;background:hsl(var(--primary-soft));border:1px solid hsl(233 60% 86%);border-radius:10px;padding:10px 12px;font-size:14px;color:hsl(233 50% 26%)}
+.infobox .ic{color:hsl(var(--primary));margin-top:2px}
+
+/* bases + boxes */
+.bxlist{display:flex;flex-direction:column;border:1px solid hsl(var(--border));border-radius:10px;margin-top:18px;overflow:hidden}
+.bxrow{display:flex;align-items:center;gap:12px;padding:10px 8px 10px 14px;border-top:1px solid hsl(var(--border));background:hsl(var(--card))}
+.bxrow:first-child{border-top:0}
+.bxrow .bi{width:34px;height:34px;border-radius:8px;display:grid;place-items:center;background:hsl(var(--primary-soft));color:hsl(var(--primary));flex:none}
+.bxrow .t{flex:1;min-width:0}
+.bxrow .nm{font-weight:500;font-size:14.5px}
+.bxrow .s{font-size:12.5px;color:hsl(var(--muted-foreground))}
+.bxrow.off .bi{background:hsl(var(--muted));color:hsl(240 5% 45%)}
+.bxrow.off .nm{color:hsl(240 5% 38%)}
+.tg{position:relative;width:40px;height:24px;border-radius:99px;background:hsl(var(--primary));flex:none;border:0;cursor:pointer}
+.tg::after{content:"";position:absolute;top:3px;left:19px;width:18px;height:18px;border-radius:99px;background:#fff;box-shadow:0 1px 2px hsl(240 10% 10%/.25)}
+.tg[aria-checked="false"]{background:hsl(240 5% 78%)}
+.tg[aria-checked="false"]::after{left:3px}
+.tg[disabled]{opacity:.45;cursor:not-allowed}
+.tglbl{font-size:12.5px;color:hsl(240 5% 38%);width:52px;text-align:right}
+.addbx{display:flex;align-items:center;gap:10px;padding:12px 14px;background:hsl(var(--background));border-top:1px solid hsl(var(--border));font-size:14px;flex-wrap:wrap}
+.qty{display:inline-flex;align-items:center;border:1px solid hsl(240 6% 82%);border-radius:8px;height:36px;background:hsl(var(--card))}
+.qty button{width:32px;height:34px;border:0;background:none;display:grid;place-items:center;color:hsl(240 5% 38%)}
+.qty span{min-width:28px;text-align:center;font-weight:600;font-variant-numeric:tabular-nums}
+.picker{width:400px;max-width:100%}
+.bxgrid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:12px}
+.bxt{border:1px solid hsl(240 6% 84%);border-radius:10px;padding:10px;background:hsl(var(--card));min-height:78px;display:flex;flex-direction:column;gap:2px}
+.bxt b{font-size:14.5px;font-weight:600}
+.bxt .s{font-size:12px;color:hsl(var(--muted-foreground));line-height:1.35}
+.bxt.free .s{color:hsl(var(--success-text));font-weight:500}
+.bxt.busy{background:hsl(var(--background));border-style:dashed}
+.bxt.busy b{color:hsl(240 5% 40%)}
+.bxt.sel{border-color:hsl(var(--primary));box-shadow:inset 0 0 0 1px hsl(var(--primary));background:hsl(var(--primary-soft))}
+.bxt.sel .s{color:hsl(233 65% 38%)}
+.bxt.yard{grid-column:1/-1;min-height:0;flex-direction:row;justify-content:space-between;align-items:center}
+
+/* badge + PIN */
+.ppl{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) 300px;gap:24px;align-items:start}
+.panel{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:14px;padding:20px}
+.panel h3{font-size:16px;font-weight:650}
+.phead{display:flex;gap:14px;align-items:center}
+.phead .pav{width:48px;height:48px;font-size:16px}
+.kv{display:grid;grid-template-columns:1fr auto;gap:4px 12px;align-items:center;padding:12px 0;border-top:1px solid hsl(var(--border))}
+.kv:first-of-type{margin-top:16px}
+.kv .k{font-size:13px;color:hsl(var(--muted-foreground))}
+.kv .v{font-size:15px;font-weight:500;grid-column:1}
+.kv .btn{grid-row:1/span 2;grid-column:2}
+.pinbig{display:flex;gap:8px;justify-content:center;margin:18px 0 6px}
+.pinbig span{width:44px;height:56px;border-radius:10px;border:1px solid hsl(240 6% 84%);display:grid;place-items:center;font:700 26px/1 Inter;font-variant-numeric:tabular-nums;background:hsl(var(--background))}
+.badgewrap{display:flex;flex-direction:column;align-items:center;gap:14px}
+.badge{width:236px;height:374px;border-radius:14px;background:#fff;box-shadow:0 1px 2px hsl(230 20% 20%/.12),0 16px 36px -14px hsl(230 30% 20%/.35);overflow:hidden;display:flex;flex-direction:column;position:relative;border:1px solid hsl(var(--border))}
+.badge .band{height:78px;background:hsl(212 60% 22%);display:flex;align-items:center;gap:10px;padding:0 16px;color:#fff}
+.badge .logo{width:38px;height:38px;border-radius:9px;background:hsl(28 90% 55%);display:grid;place-items:center;color:hsl(212 60% 16%);flex:none}
+.badge .co{font:800 14px/1.15 Sora,Inter,sans-serif;letter-spacing:-.01em}
+.badge .co small{display:block;font:500 10.5px/1.3 Inter;color:hsl(212 30% 84%);letter-spacing:0}
+.badge .photo{width:84px;height:84px;border-radius:12px;background:hsl(233 45% 90%);color:hsl(233 60% 30%);display:grid;place-items:center;font:700 26px Inter;margin:18px auto 0}
+.badge .who{text-align:center;padding:8px 14px 0}
+.badge .who b{display:block;font-size:17px;font-weight:700;letter-spacing:-.01em}
+.badge .who span{display:block;font-size:12.5px;color:hsl(240 6% 30%)}
+.badge .reg{display:flex;justify-content:space-between;align-items:flex-end;padding:0 16px 14px;margin-top:auto}
+.badge .reg .k{font-size:10px;text-transform:uppercase;letter-spacing:.06em;color:hsl(240 5% 38%);font-weight:600}
+.badge .reg .v{font:700 22px/1.1 Inter;font-variant-numeric:tabular-nums;letter-spacing:.02em}
+.badge .qr{width:96px;height:96px;color:hsl(240 10% 8%);display:block}
+.badge .ft{display:flex;align-items:center;gap:6px;justify-content:center;font-size:10px;color:hsl(240 5% 38%);border-top:1px solid hsl(var(--border));height:26px}
+.badge .ft svg{color:hsl(var(--primary))}
+.printopts{display:flex;flex-direction:column;gap:8px;width:100%}
+.tabl{margin-top:24px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:24px}
+.scan{height:150px;border-radius:12px;background:hsl(240 8% 14%);position:relative;display:grid;place-items:center;color:hsl(0 0% 100%/.92);font-size:13px;margin-top:12px}
+.scan .fr{width:92px;height:92px;border:3px solid hsl(0 0% 100%/.9);border-radius:12px;position:absolute;top:50%;left:50%;transform:translate(-50%,-58%)}
+.scan span{position:absolute;bottom:12px}
+.recent{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:10px}
+.recent div{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 4px;border:1px solid hsl(var(--border));border-radius:10px;font-size:12.5px;text-align:center;line-height:1.25;background:hsl(var(--card))}
+.recent .pav{width:40px;height:40px}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.keypad span{height:48px;border-radius:10px;background:hsl(var(--muted));display:grid;place-items:center;font-size:19px;font-weight:600}
+.pindots{display:flex;gap:12px;justify-content:center;margin-top:14px}
+.pindots i{width:14px;height:14px;border-radius:99px;border:2px solid hsl(240 5% 55%)}
+.pindots i.f{background:hsl(var(--foreground));border-color:hsl(var(--foreground))}
+
+/* empty + permission */
+.states{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;padding:36px 20px;gap:6px}
+.empty .ei{width:52px;height:52px;border-radius:14px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center;margin-bottom:8px}
+.empty h3{font-size:16px;font-weight:650}
+.empty p{font-size:14px;color:hsl(240 6% 30%);max-width:320px}
+.empty .btn{margin-top:12px}
+.ecap{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:600;margin-bottom:8px}
+.cardf{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:14px;box-shadow:0 8px 28px -18px hsl(230 30% 20%/.3)}
+.cardf .inhead{padding:14px 16px;border-bottom:1px solid hsl(var(--border));display:flex;justify-content:space-between;align-items:center;gap:8px}
+.cardf .inhead b{font-size:15px}
+.dt-tabs.sm button{height:40px;padding:0 12px;font-size:13.5px}
+
+/* phone extras */
+.m-back{display:inline-flex;align-items:center;gap:4px;font-size:13.5px;color:hsl(var(--muted-foreground));margin-bottom:6px}
+.mc .rcs{margin-top:8px}
+.mc .foot .when2{font-size:13px;color:hsl(var(--muted-foreground))}
+.sheet.tall{top:58px;overflow:hidden;padding-bottom:0;display:flex;flex-direction:column}
+.sheet.tall .sbody{flex:1;overflow:hidden}
+.sheet.tall .btns{position:sticky;bottom:0;background:hsl(var(--card));padding:12px 0 30px;margin-top:0;border-top:1px solid hsl(var(--border))}
+.sheet .seg3 label{height:44px;font-size:13px}
+.sheet .seg2 label{height:44px}
+.sheet .bchk{height:40px}
+.sheet .can{font-size:13px;padding:10px 12px}
+.sheet .linkfield{height:48px}
+.sheet .bigbtn{height:52px;font-size:15.5px;width:100%;margin-top:10px}
+
+@media (max-width:1180px){
+  .ppl{grid-template-columns:1fr 1fr}
+  .states{grid-template-columns:1fr 1fr}
+  .split{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .setl{grid-template-columns:1fr}
+  .ppl,.states,.tabl{grid-template-columns:1fr}
+  .scopehelp{grid-template-columns:1fr}
+  .dlg.w{width:100%}
+  .seg3{grid-template-columns:1fr}
+  .split{margin-left:0}
+  .crop2{overflow-x:auto;padding:12px}
+}
+@media (max-width:720px){
+  .doc{padding:32px 16px 64px}
+  .indent,.sec-sub,.notes,.phones,.qs{margin-left:0}
+  .qs{grid-template-columns:1fr}
+  .frame{overflow-x:auto}
+  .stage{padding:16px}
+  .phone{max-width:calc(100vw - 32px)}
+}
+/* the stage overlay is mid-grey: white caption alone reads at ~2.5:1 */
+.cap-top{display:inline-block;background:hsl(240 10% 14%);color:#fff;padding:3px 8px;border-radius:6px}
+html{overflow-x:hidden}
+.crop2,.frame{position:relative}
+.phones{gap:32px 30px}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="facter" viewBox="0 0 207 304"><path fill="currentColor" d="M25.8384 196.911L15.4739 183.729C-10.7189 150.411 0.44781 101.422 38.4895 82.7344L206.266 0.307297V34.2396C206.266 60.1875 191.448 83.8698 168.12 95.2396L56.578 149.594C48.4634 153.547 41.3489 159.344 35.9791 166.609C30.5936 173.901 25.9582 183.906 26.3176 196.526C29.9947 193.609 34.0624 191.026 38.4843 188.854L206.26 106.432V140.359C206.26 166.313 191.437 189.995 168.109 201.365L56.578 255.708C48.4634 259.667 41.3489 265.464 35.9791 272.724C30.4426 280.224 25.6978 290.578 26.3593 303.693L15.4739 289.854C-7.54698 260.568 -1.72407 219.193 25.8384 196.911ZM134.818 266.526L206.208 303.724L206.187 210.802L134.953 246.661C126.828 250.755 126.755 262.323 134.818 266.526Z"/></symbol>
+</svg>
+<div class="doc">
+  <header class="doc-head">
+    <div>
+      <h1>Pessoas, bases e boxes</h1>
+      <p>Quem entra na empresa, com qual papel e onde esse papel vale. Mais as bases e os boxes da oficina, e a prévia do crachá com PIN para o tablet compartilhado. Exemplo: Transportadora Rota Sul, com bases em Curitiba e Ponta Grossa.</p>
+    </div>
+    <div class="lockup" aria-label="Facter Truck">
+      <svg width="27" height="40" aria-hidden="true"><use href="#facter"/></svg>
+      <span class="rule"></span>
+      <div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div>
+    </div>
+  </header>
+  <nav class="toc" aria-label="Seções">
+    <a href="#s1">1 · Pessoas</a><a href="#s2">2 · Convidar pessoa</a><a href="#s3">3 · Editar papéis e suspender</a><a href="#s4">4 · Bases e boxes</a><a href="#s5">5 · Crachá e PIN</a><a href="#s6">6 · Celular</a><a href="#s7">7 · Vazios e sem permissão</a><a href="#s8">8 · Perguntas em aberto</a>
+  </nav>
+
+  <!-- =============== 1. PESSOAS =============== -->
+  <section class="sec" id="s1">
+    <div class="sec-label"><span class="sec-num">1</span><h2>Pessoas · notebook 1280</h2></div>
+    <p class="sec-sub">Fica em Configurações, ao lado de Papéis e Bases e boxes. Cada papel aparece com o lugar onde vale: a empresa toda ou bases escolhidas. O ⋮ diz a consequência de cada ação antes do clique.</p>
+
+    <div class="frame app-frame">
+      <div class="app">
+        <header class="topbar">
+          <a class="lockup" href="#" aria-label="Facter Truck, início">
+            <svg width="24" height="35" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span>
+            <div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div>
+          </a>
+          <span class="spacer"></span>
+          <div class="search"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i>Buscar placa, frota ou OS</div>
+          <button class="org" type="button">Transportadora Rota Sul <i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-down.svg)"></i></button>
+          <span class="avatar" aria-label="Marina Duarte">MD</span>
+        </header>
+        <nav class="sidenav" aria-label="Menu principal">
+          <a class="navitem" href="#" aria-label="Início"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/house.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Veículos"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Ordens de serviço"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Estoque"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/package.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Pneus"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Custos"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/chart-line-up.svg)"></i></a>
+          <span class="navsep"></span>
+          <a class="navitem" href="#" aria-current="page" aria-label="Configurações"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/gear-fill.svg)"></i></a>
+        </nav>
+        <main class="main"><div class="setl">
+          <nav class="subnav" aria-label="Configurações"><div class="h">Configurações</div><a href="#"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/buildings.svg)"></i>Empresa</a><a href="#" aria-current="page"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/users-three.svg)"></i>Pessoas</a><a href="#"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/shield-check.svg)"></i>Papéis</a><a href="#"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/warehouse.svg)"></i>Bases e boxes</a></nav>
+          <div>
+          <div class="pagehead">
+            <div><h1>Pessoas</h1><p>Quem entra na Transportadora Rota Sul e com qual papel</p></div>
+            <div class="acts">
+              <a class="btn btn-primary" href="#s2"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/user-plus.svg)"></i>Convidar pessoa</a>
+            </div>
+          </div>
+          <div class="dt-toolbar">
+            <div class="dt-tabs" role="tablist">
+              <button role="tab" aria-selected="true" type="button">Ativas <span class="c">9</span></button>
+              <button role="tab" aria-selected="false" type="button">Convidadas <span class="c">3</span></button>
+              <button role="tab" aria-selected="false" type="button">Suspensas <span class="c">1</span></button>
+            </div>
+            <div class="dt-search"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i>Buscar por nome, e-mail ou matrícula</div>
+          </div>
+          <div class="dt">
+            <table>
+              <thead><tr><th>Pessoa</th><th>Papéis</th><th>Último acesso</th><th>Situação</th><th style="width:56px"><span class="sr">Ações</span></th></tr></thead>
+              <tbody>
+                <tr><td><div class="pcell"><span class="pav">MD</span><div><div class="nm">Marina Duarte<span class="you">Você</span></div><div class="sub">marina.duarte@rotasul.com.br</div></div></div></td>
+                  <td><div class="rcs"><span class="rc co">Administrador <span class="sc">· Empresa toda</span></span><span class="rc co">Gestor <span class="sc">· Empresa toda</span></span></div></td>
+                  <td class="when2">Agora</td><td><span class="st st-on">Ativa</span></td><td class="kcell"><button class="kebab" type="button" aria-label="Ações de Marina Duarte"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></td></tr>
+                <tr><td><div class="pcell"><span class="pav a2">RS</span><div><div class="nm">Rafael Souza</div><div class="sub">(41) 99713-2280</div></div></div></td>
+                  <td><div class="rcs"><span class="rc">Mecânico <span class="sc">· Base Curitiba</span></span></div></td>
+                  <td class="when2">Há 2 min<span class="sub">tablet da oficina</span></td><td><span class="st st-on">Ativa</span></td>
+                  <td class="kcell"><button class="kebab" type="button" aria-expanded="true" aria-label="Ações de Rafael Souza"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button>
+                    <div class="menu am" role="menu">
+                      <a href="#" role="menuitem"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/user-gear.svg)"></i><span class="tx">Editar papéis<small>Ao salvar, Rafael sai de todos os aparelhos e entra de novo com os papéis novos</small></span></a>
+                      <a href="#" role="menuitem"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/identification-card.svg)"></i><span class="tx">Crachá e PIN<small>Matrícula 0412 · PIN definido</small></span></a>
+                      <hr>
+                      <a href="#" role="menuitem" class="danger"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/prohibit.svg)"></i><span class="tx">Suspender<small>Sai na hora de todos os aparelhos; OS e horas continuam guardadas</small></span></a>
+                    </div></td></tr>
+                <tr><td><div class="pcell"><span class="pav a3">DR</span><div><div class="nm">Diego Ramos</div><div class="sub">diego.ramos@rotasul.com.br</div></div></div></td>
+                  <td><div class="rcs"><span class="rc">Supervisor de manutenção <span class="sc">· Base Curitiba</span></span></div></td>
+                  <td class="when2">Há 20 min</td><td><span class="st st-on">Ativa</span></td><td class="kcell"><button class="kebab" type="button" aria-label="Ações de Diego Ramos"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></td></tr>
+                <tr><td><div class="pcell"><span class="pav a4">AL</span><div><div class="nm">Anderson Lima</div><div class="sub">anderson.lima@rotasul.com.br</div></div></div></td>
+                  <td><div class="rcs"><span class="rc">Almoxarife <span class="sc">· Curitiba e Ponta Grossa</span></span></div></td>
+                  <td class="when2">Ontem, 17:42</td><td><span class="st st-on">Ativa</span></td><td class="kcell"><button class="kebab" type="button" aria-label="Ações de Anderson Lima"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></td></tr>
+                <tr><td><div class="pcell"><span class="pav a5">TM</span><div><div class="nm">Thiago Martins</div><div class="sub">thiago.martins@rotasul.com.br</div></div></div></td>
+                  <td><div class="rcs"><span class="rc">Planejador <span class="sc">· Base Ponta Grossa</span></span></div></td>
+                  <td class="when2">Hoje, 07:15</td><td><span class="st st-on">Ativa</span></td><td class="kcell"><button class="kebab" type="button" aria-label="Ações de Thiago Martins"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></td></tr>
+                <tr><td><div class="pcell"><span class="pav dim">CN</span><div><div class="nm">Carlos Eduardo Nunes</div><div class="sub">Matrícula 0388 · só no tablet</div></div></div></td>
+                  <td><div class="rcs"><span class="rc">Mecânico <span class="sc">· Base Ponta Grossa</span></span><span class="rc">Borracheiro <span class="sc">· Base Ponta Grossa</span></span></div></td>
+                  <td class="when2">Hoje, 06:58<span class="sub">tablet da oficina</span></td><td><span class="st st-wait">PIN provisório</span></td><td class="kcell"><button class="kebab" type="button" aria-label="Ações de Carlos Eduardo Nunes"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></td></tr>
+                <tr><td><div class="pcell"><span class="pav a2">JP</span><div><div class="nm">Juliana Prado</div><div class="sub">juliana.prado@rotasul.com.br</div></div></div></td>
+                  <td><div class="rcs"><span class="rc co">Financeiro <span class="sc">· Empresa toda</span></span></div></td>
+                  <td class="when2">Há 3 dias</td><td><span class="st st-on">Ativa</span></td><td class="kcell"><button class="kebab" type="button" aria-label="Ações de Juliana Prado"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></td></tr>
+                <tr><td><div class="pcell"><span class="pav a4">PG</span><div><div class="nm">Patrícia Gomes</div><div class="sub">patricia.gomes@rotasul.com.br</div></div></div></td>
+                  <td><div class="rcs"><span class="rc co">Controlador de pneus <span class="sc">· Empresa toda</span></span></div></td>
+                  <td class="when2">Ontem, 10:05</td><td><span class="st st-on">Ativa</span></td><td class="kcell"><button class="kebab" type="button" aria-label="Ações de Patrícia Gomes"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></td></tr>
+                <tr><td><div class="pcell"><span class="pav a3">LB</span><div><div class="nm">Leandro Batista</div><div class="sub">(41) 98820-6614</div></div></div></td>
+                  <td><div class="rcs"><span class="rc">Inspetor <span class="sc">· Base Curitiba</span></span></div></td>
+                  <td class="when2">Há 6 dias</td><td><span class="st st-on">Ativa</span></td><td class="kcell"><button class="kebab" type="button" aria-label="Ações de Leandro Batista"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="pager"><span>Página 1 de 1</span>
+            <div class="r">Linhas por página <span class="psel">25 <i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-down.svg)"></i></span>
+              <span class="pbtn"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-left.svg)"></i></span><span class="num">1 / 1</span><span class="pbtn"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-right.svg)"></i></span></div>
+          </div>
+      </div></div></main></div>
+    </div>
+
+    <div class="split indent">
+      <div class="crop2">
+        <div class="dt-toolbar">
+          <div class="dt-tabs" role="tablist">
+            <button role="tab" aria-selected="false" type="button">Ativas <span class="c">9</span></button>
+            <button role="tab" aria-selected="true" type="button">Convidadas <span class="c">3</span></button>
+            <button role="tab" aria-selected="false" type="button">Suspensas <span class="c">1</span></button>
+          </div>
+          <div class="dt-search"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i>Buscar por nome, e-mail ou matrícula</div>
+        </div>
+        <div class="dt" style="margin-bottom:250px">
+          <table>
+            <thead><tr><th>Pessoa</th><th>Papéis</th><th>Convidada</th><th>Convite</th><th style="width:56px"><span class="sr">Ações</span></th></tr></thead>
+            <tbody>
+              <tr><td><div class="nm">Fernanda Costa</div><div class="sub">fernanda.costa@rotasul.com.br</div></td>
+                <td><div class="rcs"><span class="rc">Planejador <span class="sc">· Base Curitiba</span></span></div></td>
+                <td class="when2">Há 2 dias<span class="sub">por Marina Duarte</span></td><td><span class="st st-inv">Vale até 03/10</span></td><td class="kcell"><button class="kebab" type="button" aria-label="Ações de Fernanda Costa"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></td></tr>
+              <tr><td><div class="nm">Bruno Teixeira</div><div class="sub">(42) 99851-3302</div></td>
+                <td><div class="rcs"><span class="rc">Mecânico <span class="sc">· Base Ponta Grossa</span></span></div></td>
+                <td class="when2">21/09<span class="sub">por Marina Duarte</span></td><td><span class="st st-wait">Vence amanhã</span></td>
+                <td class="kcell"><button class="kebab" type="button" aria-expanded="true" aria-label="Ações de Bruno Teixeira"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button>
+                  <div class="menu am" role="menu">
+                    <a href="#" role="menuitem"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/copy.svg)"></i><span class="tx">Copiar link do convite<small>Vale até amanhã, 28/09, e funciona uma vez</small></span></a>
+                    <a href="#" role="menuitem"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/whatsapp-logo.svg)"></i><span class="tx">Enviar pelo WhatsApp<small>Abre o WhatsApp com a mensagem pronta</small></span></a>
+                    <a href="#" role="menuitem"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/arrow-clockwise.svg)"></i><span class="tx">Reenviar convite<small>Gera um link novo; o anterior para de valer</small></span></a>
+                    <a href="#" role="menuitem"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/user-gear.svg)"></i><span class="tx">Editar papéis<small>O convite leva os papéis novos</small></span></a>
+                    <hr>
+                    <a href="#" role="menuitem" class="danger"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/x-circle.svg)"></i><span class="tx">Cancelar convite<small>O link para de valer na hora</small></span></a>
+                  </div></td></tr>
+              <tr><td><div class="nm">Luana Ferreira</div><div class="sub">luana.ferreira@rotasul.com.br</div></td>
+                <td><div class="rcs"><span class="rc">Almoxarife <span class="sc">· Base Ponta Grossa</span></span></div></td>
+                <td class="when2">15/09<span class="sub">por Marina Duarte</span></td><td><span class="st st-off">Venceu em 22/09</span></td><td class="kcell"><button class="kebab" type="button" aria-label="Ações de Luana Ferreira"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="notes">
+        <div><h4>Colunas</h4><ul>
+          <li><b>Pessoa</b>: nome e o jeito de entrar (e-mail, celular ou matrícula). Quem entra só no tablet mostra "Matrícula 0388 · só no tablet".</li>
+          <li><b>Papéis</b>: um chip por papel, com onde vale. Empresa toda em azul, para destacar quem vê tudo.</li>
+          <li><b>Último acesso</b>: relativo, com o aparelho quando é o tablet compartilhado.</li>
+          <li><b>Situação</b> só aparece diferente quando pede ação: "PIN provisório" é quem ainda não trocou o PIN no tablet.</li>
+          <li>Em Convidadas, as colunas mudam: quem convidou, quando, e até quando o link vale.</li>
+        </ul></div>
+        <div><h4>Decisões</h4><ul>
+          <li>Abas no feminino (pessoa): Ativas, Convidadas, Suspensas. Não existe "Excluir": suspender guarda o histórico.</li>
+          <li>O ⋮ usa o ActionMenu do DS: ícone, ação e a consequência na linha de baixo.</li>
+          <li>Sem o envio de e-mail, o convite é um link para copiar ou mandar pelo WhatsApp. "Reenviar" gera outro link.</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== 2. CONVIDAR =============== -->
+  <section class="sec" id="s2">
+    <div class="sec-label"><span class="sec-num">2</span><h2>Convidar pessoa</h2></div>
+    <p class="sec-sub">Nome, como a pessoa vai entrar e um ou mais papéis, cada um com onde vale. A prévia embaixo diz, em frases, o que a pessoa vai poder fazer. O resultado é um link para mandar, porque o envio por e-mail ainda não está ligado.</p>
+
+    <div class="frame stage indent" style="max-width:1240px">
+      <div class="dlg w" role="dialog" aria-labelledby="d1t">
+        <button class="x" type="button" aria-label="Fechar"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/x.svg)"></i></button>
+        <h2 id="d1t">Convidar pessoa</h2>
+        <p class="desc">A pessoa recebe um link para criar o acesso na Transportadora Rota Sul</p>
+        <div class="form">
+          <label class="fl"><span class="l">Nome <span class="req">*</span></span><span class="input"><span class="grow">Gustavo Pereira</span></span></label>
+          <div class="fl"><span class="l">Como vai entrar</span>
+            <div class="seg3" role="radiogroup">
+              <label><input type="radio" name="how1"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/envelope-simple.svg)"></i>E-mail</label>
+              <label><input type="radio" name="how1" checked><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/device-mobile.svg)"></i>Celular</label>
+              <label><input type="radio" name="how1"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/identification-card.svg)"></i>Só no tablet</label>
+            </div>
+          </div>
+          <label class="fl"><span class="l">Celular <span class="req">*</span></span><span class="input"><span class="grow num">(41) 99604-1187</span></span>
+            <span class="hint">No próximo passo, o link vai pelo WhatsApp</span></label>
+
+          <div>
+            <div class="roles-h"><span class="l" style="font-size:14px;font-weight:500">Papéis <span class="req" style="color:hsl(var(--danger-text))">*</span></span></div>
+            <div class="roler" style="margin-top:6px">
+              <div class="top">
+                <label class="fl"><span class="sublbl">Papel</span><span class="input"><span class="grow">Mecânico</span><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-up-down.svg)"></i></span></label>
+                <button class="iconbtn" type="button" aria-label="Tirar o papel Mecânico"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/trash.svg)"></i></button>
+              </div>
+              <div>
+                <span class="sublbl">Onde vale</span>
+                <div class="seg2" role="radiogroup">
+                  <label><input type="radio" name="sc1" checked><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/map-pin.svg)"></i>Bases escolhidas</label>
+                  <label><input type="radio" name="sc1"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/buildings.svg)"></i>Empresa toda</label>
+                </div>
+                <div class="bchks">
+                  <label class="bchk"><input type="checkbox" checked>Base Curitiba</label>
+                  <label class="bchk"><input type="checkbox">Base Ponta Grossa</label>
+                  <label class="bchk"><input type="checkbox">Pátio Araucária</label>
+                </div>
+              </div>
+            </div>
+            <div class="scopehelp">
+              <div><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/map-pin.svg)"></i><span><b>Bases escolhidas:</b> só o que acontece nessas bases, como OS, boxes, estoque e pessoas de lá.</span></div>
+              <div><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/buildings.svg)"></i><span><b>Empresa toda:</b> todas as bases, inclusive as que forem criadas depois.</span></div>
+            </div>
+            <button class="addlink" type="button" style="margin-top:10px"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/plus.svg)"></i>Adicionar outro papel</button>
+          </div>
+
+          <div class="can">
+            <h3><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/eye.svg)"></i>Com esse papel, Gustavo vai poder</h3>
+            <ul>
+              <li class="y"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/check.svg)"></i><span>Ver e trabalhar nas OS em que for designado, na Base Curitiba</span></li>
+              <li class="y"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/check.svg)"></i><span>Pedir peça para essas OS e ver o saldo da Base Curitiba</span></li>
+              <li class="y"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/check.svg)"></i><span>Ver as próprias horas trabalhadas</span></li>
+              <li class="n"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/minus.svg)"></i><span>Não vê custos, outras bases nem as horas dos colegas</span></li>
+            </ul>
+          </div>
+        </div>
+        <div class="dfoot"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Convidar</button></div>
+      </div>
+
+      <div class="side">
+        <div>
+          <div class="cap-top">Depois de convidar</div>
+          <div class="mini-dlg">
+            <div class="okhead"><span class="oi"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/check-circle.svg)"></i></span><div><h2>Convite de Gustavo Pereira criado</h2><p style="margin-top:2px">Mande o link. Vale por 7 dias e funciona uma vez.</p></div></div>
+            <div class="linkfield"><span class="u">truck.facter.com.br/c/7KQ-R2M-4XP</span><button class="btn btn-outline btn-sm" type="button"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/copy.svg)"></i>Copiar</button></div>
+            <div class="msgprev"><div class="h">Mensagem pronta</div>Marina Duarte convidou você para o Facter Truck da Transportadora Rota Sul. Crie seu acesso: truck.facter.com.br/c/7KQ-R2M-4XP</div>
+            <div class="dfoot stretch"><button class="btn btn-outline" type="button">Fechar</button><button class="btn btn-wa" type="button"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/whatsapp-logo.svg)"></i>Enviar pelo WhatsApp</button></div>
+          </div>
+        </div>
+        <div>
+          <div class="cap-top">E-mail de quem já está na empresa</div>
+          <div class="mini-dlg">
+            <label class="fl"><span class="l">E-mail <span class="req">*</span></span><span class="input err"><span class="grow">anderson.lima@rotasul.com.br</span></span>
+              <span class="errtext"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/warning-circle-fill.svg)"></i>Anderson Lima já está na empresa</span></label>
+            <p class="hint" style="margin-top:8px"><a href="#s3">Editar papéis de Anderson Lima</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div><h4>Como se comporta</h4><ul>
+        <li>"Como vai entrar" troca o campo: E-mail, Celular ou nenhum (Só no tablet pede a matrícula, seção 5).</li>
+        <li>Um papel começa com a base de quem convida marcada; empresa com uma base só nem vê "Onde vale".</li>
+        <li>A prévia é gerada da matriz de papéis, em frases; muda na hora ao trocar papel ou base.</li>
+        <li>Quem abre o link cria a senha e já entra na empresa. O convite some de Convidadas e vai para Ativas.</li>
+      </ul></div>
+      <div><h4>Decisões</h4><ul>
+        <li>O e-mail de alguém que usa o Facter em outra empresa é aceito sem aviso: dizer "já tem conta" revelaria quem é cliente.</li>
+        <li>Link de uso único, com validade de 7 dias; o banco guarda só o hash do código.</li>
+        <li>Mesmo papel em duas bases é um papel com duas bases, não dois chips (Anderson Lima).</li>
+        <li>Quando o e-mail chegar (1.8), o link também vai por e-mail; o botão do WhatsApp continua.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- =============== 3. EDITAR PAPÉIS =============== -->
+  <section class="sec" id="s3">
+    <div class="sec-label"><span class="sec-num">3</span><h2>Editar papéis e suspender</h2></div>
+    <p class="sec-sub">Mudar o papel encerra as sessões da pessoa na hora, para ninguém continuar com o acesso antigo. O diálogo diz isso antes de salvar e mostra se ela está usando o Facter agora.</p>
+
+    <div class="frame stage indent" style="max-width:1240px">
+      <div class="dlg w" role="dialog" aria-labelledby="d2t">
+        <button class="x" type="button" aria-label="Fechar"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/x.svg)"></i></button>
+        <h2 id="d2t">Editar papéis</h2>
+        <p class="desc">Rafael Souza · Matrícula 0412</p>
+        <div class="form">
+          <div class="roler">
+            <div class="top">
+              <label class="fl"><span class="sublbl">Papel</span><span class="input"><span class="grow">Mecânico</span><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-up-down.svg)"></i></span></label>
+              <button class="iconbtn" type="button" aria-label="Tirar o papel Mecânico"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/trash.svg)"></i></button>
+            </div>
+            <div><span class="sublbl">Onde vale</span>
+              <div class="seg2"><label><input type="radio" name="sc2" checked><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/map-pin.svg)"></i>Bases escolhidas</label><label><input type="radio" name="sc2"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/buildings.svg)"></i>Empresa toda</label></div>
+              <div class="bchks"><label class="bchk"><input type="checkbox" checked>Base Curitiba</label><label class="bchk"><input type="checkbox">Base Ponta Grossa</label><label class="bchk"><input type="checkbox">Pátio Araucária</label></div>
+            </div>
+          </div>
+          <div class="roler nw">
+            <div class="top">
+              <label class="fl"><span class="sublbl">Papel<span class="tagnew">Novo</span></span><span class="input"><span class="grow">Inspetor</span><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-up-down.svg)"></i></span></label>
+              <button class="iconbtn" type="button" aria-label="Tirar o papel Inspetor"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/trash.svg)"></i></button>
+            </div>
+            <div><span class="sublbl">Onde vale</span>
+              <div class="seg2"><label><input type="radio" name="sc3" checked><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/map-pin.svg)"></i>Bases escolhidas</label><label><input type="radio" name="sc3"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/buildings.svg)"></i>Empresa toda</label></div>
+              <div class="bchks"><label class="bchk"><input type="checkbox" checked>Base Curitiba</label><label class="bchk"><input type="checkbox">Base Ponta Grossa</label><label class="bchk"><input type="checkbox">Pátio Araucária</label></div>
+            </div>
+          </div>
+          <button class="addlink" type="button" style="align-self:flex-start"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/plus.svg)"></i>Adicionar outro papel</button>
+        </div>
+        <div class="nowbox"><span class="dot"></span><span><b>Usando agora</b> no tablet da oficina, Base Curitiba · há 2 min</span></div>
+        <div class="warnbox out"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/sign-out.svg)"></i><span>Ao salvar, Rafael Souza sai do Facter em todos os aparelhos e entra de novo já com os papéis novos. O que estiver preenchido e não salvo se perde.</span></div>
+        <div class="dfoot"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Salvar papéis</button></div>
+      </div>
+
+      <div class="side">
+        <div>
+          <div class="cap-top">Suspender</div>
+          <div class="mini-dlg">
+            <h2>Suspender Rafael Souza?</h2>
+            <p>Sai do Facter na hora, em todos os aparelhos, e não entra mais até ser reativado. As OS, horas e pedidos com o nome de Rafael continuam guardados.</p>
+            <div class="dfoot"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-danger" type="button">Suspender</button></div>
+          </div>
+        </div>
+        <div>
+          <div class="cap-top">Tirar o último Administrador</div>
+          <div class="mini-dlg">
+            <h2>Editar papéis</h2>
+            <p class="meta" style="margin-top:2px">Marina Duarte</p>
+            <div class="warnbox"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/warning.svg)"></i><span>Marina Duarte é a única pessoa com Administrador. Dê esse papel a outra pessoa antes de tirar</span></div>
+            <div class="dfoot"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button" disabled>Salvar papéis</button></div>
+          </div>
+        </div>
+        <div>
+          <div class="cap-top">Os próprios papéis</div>
+          <div class="mini-dlg">
+            <div class="warnbox" style="margin-top:0"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/sign-out.svg)"></i><span>Ao salvar, você sai e entra de novo com os papéis novos</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div><h4>Como se comporta</h4><ul>
+        <li>Salvar grava os papéis e revoga as sessões da pessoa na mesma transação; a próxima tela dela é o login.</li>
+        <li>"Usando agora" só aparece com sessão vista nos últimos 5 minutos, que é quando o aviso muda a decisão.</li>
+        <li>Salvar sem mudança nenhuma não encerra nada: o botão fica desabilitado até algo mudar.</li>
+        <li>Reativar (em Suspensas) devolve os mesmos papéis, sem convite novo.</li>
+      </ul></div>
+      <div><h4>Decisões</h4><ul>
+        <li>Não existe "salvar sem derrubar a sessão": acesso que diminui precisa valer na hora.</li>
+        <li>Sempre sobra ao menos 1 Administrador ativo: tirar o papel ou suspender a última pessoa é bloqueado.</li>
+        <li>Toda mudança de papel e suspensão entra na trilha de auditoria, com quem fez.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- =============== 4. BASES E BOXES =============== -->
+  <section class="sec" id="s4">
+    <div class="sec-label"><span class="sec-num">4</span><h2>Bases e boxes · notebook 1280</h2></div>
+    <p class="sec-sub">A base é o lugar onde a frota fica e a oficina trabalha; é ela que separa OS, boxes, estoque e pessoas. Boxes são da base e aparecem para escolher quando o veículo entra em manutenção.</p>
+
+    <div class="frame app-frame">
+      <div class="app">
+        <header class="topbar">
+          <a class="lockup" href="#" aria-label="Facter Truck, início">
+            <svg width="24" height="35" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span>
+            <div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div>
+          </a>
+          <span class="spacer"></span>
+          <div class="search"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i>Buscar placa, frota ou OS</div>
+          <button class="org" type="button">Transportadora Rota Sul <i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-down.svg)"></i></button>
+          <span class="avatar" aria-label="Marina Duarte">MD</span>
+        </header>
+        <nav class="sidenav" aria-label="Menu principal">
+          <a class="navitem" href="#" aria-label="Início"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/house.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Veículos"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Ordens de serviço"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Estoque"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/package.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Pneus"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Custos"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/chart-line-up.svg)"></i></a>
+          <span class="navsep"></span>
+          <a class="navitem" href="#" aria-current="page" aria-label="Configurações"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/gear-fill.svg)"></i></a>
+        </nav>
+        <main class="main"><div class="setl">
+          <nav class="subnav" aria-label="Configurações"><div class="h">Configurações</div><a href="#"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/buildings.svg)"></i>Empresa</a><a href="#"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/users-three.svg)"></i>Pessoas</a><a href="#"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/shield-check.svg)"></i>Papéis</a><a href="#" aria-current="page"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/warehouse.svg)"></i>Bases e boxes</a></nav>
+          <div>
+          <div class="pagehead">
+            <div><h1>Bases e boxes</h1><p>Onde a frota fica e a oficina trabalha</p></div>
+            <div class="acts"><a class="btn btn-primary" href="#s4d"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/plus.svg)"></i>Cadastrar base</a></div>
+          </div>
+          <div class="dt-toolbar">
+            <div class="dt-tabs" role="tablist">
+              <button role="tab" aria-selected="true" type="button">Ativas <span class="c">3</span></button>
+              <button role="tab" aria-selected="false" type="button">Inativas <span class="c">1</span></button>
+            </div>
+            <div class="dt-search"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i>Buscar por nome ou cidade</div>
+          </div>
+          <div class="dt" style="margin-bottom:120px">
+            <table>
+              <thead><tr><th>Base</th><th>Cidade</th><th class="r">Boxes</th><th class="r">Pessoas</th><th>Situação</th><th style="width:56px"><span class="sr">Ações</span></th></tr></thead>
+              <tbody>
+                <tr><td><div class="nm">Base Curitiba</div><div class="sub">Oficina e pátio</div></td><td>Curitiba · PR</td><td class="r"><span class="num">5</span><div class="sub">1 inativo</div></td><td class="r num">4</td><td><span class="st st-on">Ativa</span></td>
+                  <td class="kcell"><button class="kebab" type="button" aria-expanded="true" aria-label="Ações de Base Curitiba"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button>
+                    <div class="menu am" role="menu">
+                      <a href="#" role="menuitem"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/squares-four.svg)"></i><span class="tx">Boxes<small>5 ativos, 1 inativo</small></span></a>
+                      <a href="#" role="menuitem"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/pencil-simple.svg)"></i><span class="tx">Editar<small>Nome, cidade e fuso</small></span></a>
+                      <a href="#" role="menuitem"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/users-three.svg)"></i><span class="tx">Ver pessoas<small>4 com papel nesta base</small></span></a>
+                      <hr>
+                      <a href="#" role="menuitem" class="danger"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/prohibit.svg)"></i><span class="tx">Desativar<small>Bloqueado: 4 OS abertas nesta base</small></span></a>
+                    </div></td></tr>
+                <tr><td><div class="nm">Base Ponta Grossa</div><div class="sub">Oficina e pátio</div></td><td>Ponta Grossa · PR</td><td class="r num">3</td><td class="r num">3</td><td><span class="st st-on">Ativa</span></td><td class="kcell"><button class="kebab" type="button" aria-label="Ações de Base Ponta Grossa"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></td></tr>
+                <tr><td><div class="nm">Pátio Araucária</div><div class="sub">Só pátio, sem oficina</div></td><td>Araucária · PR</td><td class="r muted">—</td><td class="r num muted">0</td><td><span class="st st-on">Ativa</span></td><td class="kcell"><button class="kebab" type="button" aria-label="Ações de Pátio Araucária"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></td></tr>
+              </tbody>
+            </table>
+          </div>
+      </div></div></main></div>
+    </div>
+
+    <div class="frame stage indent" id="s4d" style="max-width:1240px;margin-top:24px">
+      <div class="dlg" role="dialog" aria-labelledby="d3t">
+        <button class="x" type="button" aria-label="Fechar"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/x.svg)"></i></button>
+        <h2 id="d3t">Boxes da Base Curitiba</h2>
+        <p class="desc">Box inativo não aparece para escolher na OS</p>
+        <div class="bxlist">
+          <div class="bxrow"><span class="bi"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/garage.svg)"></i></span><div class="t"><div class="nm">Box 1</div></div><span class="tglbl">Ativo</span><button class="tg" role="switch" aria-checked="true" aria-label="Box 1 ativo"></button><button class="kebab" type="button" aria-label="Ações de Box 1"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></div>
+          <div class="bxrow"><span class="bi"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/garage.svg)"></i></span><div class="t"><div class="nm">Box 2</div><div class="s">Ocupado: QRT4B22 · OS 1187</div></div><span class="tglbl">Ativo</span><button class="tg" role="switch" aria-checked="true" disabled aria-label="Box 2 ativo, ocupado"></button><button class="kebab" type="button" aria-label="Ações de Box 2"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></div>
+          <div class="bxrow"><span class="bi"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/garage.svg)"></i></span><div class="t"><div class="nm">Box 3</div></div><span class="tglbl">Ativo</span><button class="tg" role="switch" aria-checked="true" aria-label="Box 3 ativo"></button><button class="kebab" type="button" aria-label="Ações de Box 3"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></div>
+          <div class="bxrow off"><span class="bi"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/garage.svg)"></i></span><div class="t"><div class="nm">Box 4</div><div class="s">Inativo desde 02/09</div></div><span class="tglbl">Inativo</span><button class="tg" role="switch" aria-checked="false" aria-label="Box 4 inativo"></button><button class="kebab" type="button" aria-label="Ações de Box 4"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></div>
+          <div class="bxrow"><span class="bi"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/garage.svg)"></i></span><div class="t"><div class="nm">Box 5</div><div class="s">Ocupado: SAL3E09 · OS 1201</div></div><span class="tglbl">Ativo</span><button class="tg" role="switch" aria-checked="true" disabled aria-label="Box 5 ativo, ocupado"></button><button class="kebab" type="button" aria-label="Ações de Box 5"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></div>
+          <div class="bxrow"><span class="bi"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/garage.svg)"></i></span><div class="t"><div class="nm">Box 6 · Elétrica</div></div><span class="tglbl">Ativo</span><button class="tg" role="switch" aria-checked="true" aria-label="Box 6 ativo"></button><button class="kebab" type="button" aria-label="Ações de Box 6"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></div>
+          <div class="addbx"><span>Adicionar</span><span class="qty"><button type="button" aria-label="Menos"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/minus.svg)"></i></button><span>2</span><button type="button" aria-label="Mais"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/plus.svg)"></i></button></span><span class="muted">Box 7 e Box 8</span><span style="flex:1"></span><button class="btn btn-outline btn-sm" type="button"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/plus.svg)"></i>Adicionar boxes</button></div>
+        </div>
+        <p class="hint">Para desativar um box ocupado, libere o veículo antes. Renomear pelo ⋮ (ex.: "Box 6 · Elétrica")</p>
+        <div class="dfoot"><button class="btn btn-outline" type="button">Fechar</button></div>
+      </div>
+
+      <div class="side" style="width:400px">
+        <div>
+          <div class="cap-top">Prévia: o box na OS</div>
+          <div class="mini-dlg picker">
+            <h2>Colocar em manutenção</h2>
+            <p class="meta" style="margin-top:2px">RTB7F31 · Frota 845 · OS 1204 · Base Curitiba</p>
+            <div class="bxgrid">
+              <div class="bxt free"><b>Box 1</b><span class="s">Livre</span></div>
+              <div class="bxt busy"><b>Box 2</b><span class="s">QRT4B22 desde 08:10</span></div>
+              <div class="bxt sel"><b>Box 3</b><span class="s">Livre · escolhido</span></div>
+              <div class="bxt busy"><b>Box 5</b><span class="s">SAL3E09 desde ontem</span></div>
+              <div class="bxt free"><b>Box 6 · Elétrica</b><span class="s">Livre</span></div>
+              <div class="bxt yard"><b style="font-size:14px">Sem box, no pátio</b><span class="s">Para serviço rápido</span></div>
+            </div>
+            <div class="dfoot"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Colocar no Box 3</button></div>
+          </div>
+        </div>
+        <div>
+          <div class="cap-top">Cadastrar base</div>
+          <div class="mini-dlg">
+            <div class="form" style="margin-top:0">
+              <label class="fl"><span class="l">Nome <span class="req">*</span></span><span class="input"><span class="grow">Base Ponta Grossa</span></span></label>
+              <div class="two">
+                <label class="fl"><span class="l">Cidade</span><span class="input"><span class="grow">Ponta Grossa · PR</span></span></label>
+                <div class="fl"><span class="l">Boxes</span><span class="qty" style="height:40px"><button type="button" aria-label="Menos"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/minus.svg)"></i></button><span>3</span><button type="button" aria-label="Mais"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/plus.svg)"></i></button></span></div>
+              </div>
+              <p class="hint" style="margin-top:-6px">Cria Box 1, Box 2 e Box 3. Zero para só pátio</p>
+            </div>
+            <div class="dfoot"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Cadastrar</button></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div><h4>Colunas</h4><ul>
+        <li><b>Boxes</b>: os ativos, com os inativos embaixo quando existem. Pátio sem oficina mostra "—".</li>
+        <li><b>Pessoas</b>: quem tem papel limitado a esta base. Quem tem papel na empresa toda não entra na conta.</li>
+        <li>Fuso só aparece em Editar e só se for diferente do da empresa.</li>
+      </ul></div>
+      <div><h4>Decisões</h4><ul>
+        <li>Nome do box é livre, com sugestão em sequência (Box 7, Box 8). "Box" é o nome do pátio; nada de baia ou vaga.</li>
+        <li>Ativar e desativar um box é na hora, sem confirmar: se desfaz com outro toque.</li>
+        <li>Box ocupado não desativa; base com OS aberta não desativa. A OS usa só boxes ativos da base dela.</li>
+        <li>Na OS, box ocupado aparece com a placa e desde quando, para a oficina ver o pátio de relance.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- =============== 5. CRACHÁ E PIN =============== -->
+  <section class="sec" id="s5">
+    <div class="sec-label"><span class="sec-num">5</span><h2>Crachá e PIN · prévia da 1.4</h2></div>
+    <p class="sec-sub">No tablet compartilhado da oficina, a pessoa troca em segundos: lê o crachá ou digita a matrícula, e confirma com o PIN. Toda ação fica com o nome de quem fez. Aqui só o desenho; entra na tarefa 1.4.</p>
+
+    <div class="ppl indent">
+      <div class="panel">
+        <div class="ecap">Pelo ⋮ · Crachá e PIN</div>
+        <div class="phead"><span class="pav a2">RS</span><div><h3>Rafael Souza</h3><div class="meta">Mecânico · Base Curitiba</div></div></div>
+        <div class="kv"><span class="k">Matrícula</span><span class="v num">0412</span><button class="btn btn-outline btn-sm" type="button">Editar</button></div>
+        <div class="kv"><span class="k">PIN</span><span class="v">Definido por Rafael em 12/09</span><button class="btn btn-outline btn-sm" type="button">Redefinir PIN</button></div>
+        <div class="kv"><span class="k">Crachá</span><span class="v">Impresso em 12/09</span><button class="btn btn-outline btn-sm" type="button"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/printer.svg)"></i>Imprimir crachá</button></div>
+        <p class="hint" style="margin-top:10px">Crachá perdido? "Imprimir crachá" gera um QR novo e o anterior para de funcionar</p>
+      </div>
+
+      <div class="panel">
+        <div class="ecap">Definir PIN</div>
+        <h3>PIN provisório de Rafael Souza</h3>
+        <p class="meta" style="margin-top:4px">Aparece só agora. Entregue em mãos</p>
+        <div class="pinbig" aria-label="PIN provisório 4 8 1 9"><span>4</span><span>8</span><span>1</span><span>9</span></div>
+        <p style="font-size:14px;color:hsl(240 6% 26%);margin-top:12px">No primeiro uso no tablet, Rafael escolhe um PIN próprio. Até lá, a lista mostra "PIN provisório".</p>
+        <div class="dfoot"><button class="btn btn-primary" type="button">Concluir</button></div>
+      </div>
+
+      <div class="badgewrap">
+        <div class="badge" aria-label="Prévia do crachá">
+          <div class="band"><span class="logo"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/road-horizon.svg)"></i></span><div class="co">Rota Sul<small>Transportadora</small></div></div>
+          <div class="photo">RS</div>
+          <div class="who"><b>Rafael Souza</b><span>Mecânico · Base Curitiba</span></div>
+          <div class="reg"><div><div class="k">Matrícula</div><div class="v">0412</div></div><svg class="qr" viewBox="-2 -2 29 29" role="img" aria-label="QR code do crachá" shape-rendering="crispEdges"><rect x="-2" y="-2" width="29" height="29" fill="#fff"/><path fill="currentColor" d="M0 0h1v1h-1zM1 0h1v1h-1zM2 0h1v1h-1zM3 0h1v1h-1zM4 0h1v1h-1zM5 0h1v1h-1zM6 0h1v1h-1zM8 0h1v1h-1zM10 0h1v1h-1zM14 0h1v1h-1zM16 0h1v1h-1zM18 0h1v1h-1zM19 0h1v1h-1zM20 0h1v1h-1zM21 0h1v1h-1zM22 0h1v1h-1zM23 0h1v1h-1zM24 0h1v1h-1zM0 1h1v1h-1zM6 1h1v1h-1zM12 1h1v1h-1zM13 1h1v1h-1zM18 1h1v1h-1zM24 1h1v1h-1zM0 2h1v1h-1zM2 2h1v1h-1zM3 2h1v1h-1zM4 2h1v1h-1zM6 2h1v1h-1zM12 2h1v1h-1zM13 2h1v1h-1zM16 2h1v1h-1zM18 2h1v1h-1zM20 2h1v1h-1zM21 2h1v1h-1zM22 2h1v1h-1zM24 2h1v1h-1zM0 3h1v1h-1zM2 3h1v1h-1zM3 3h1v1h-1zM4 3h1v1h-1zM6 3h1v1h-1zM9 3h1v1h-1zM10 3h1v1h-1zM11 3h1v1h-1zM14 3h1v1h-1zM15 3h1v1h-1zM18 3h1v1h-1zM20 3h1v1h-1zM21 3h1v1h-1zM22 3h1v1h-1zM24 3h1v1h-1zM0 4h1v1h-1zM2 4h1v1h-1zM3 4h1v1h-1zM4 4h1v1h-1zM6 4h1v1h-1zM9 4h1v1h-1zM11 4h1v1h-1zM15 4h1v1h-1zM16 4h1v1h-1zM18 4h1v1h-1zM20 4h1v1h-1zM21 4h1v1h-1zM22 4h1v1h-1zM24 4h1v1h-1zM0 5h1v1h-1zM6 5h1v1h-1zM8 5h1v1h-1zM9 5h1v1h-1zM11 5h1v1h-1zM12 5h1v1h-1zM16 5h1v1h-1zM18 5h1v1h-1zM24 5h1v1h-1zM0 6h1v1h-1zM1 6h1v1h-1zM2 6h1v1h-1zM3 6h1v1h-1zM4 6h1v1h-1zM5 6h1v1h-1zM6 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM12 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM18 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM21 6h1v1h-1zM22 6h1v1h-1zM23 6h1v1h-1zM24 6h1v1h-1zM8 7h1v1h-1zM11 7h1v1h-1zM14 7h1v1h-1zM15 7h1v1h-1zM1 8h1v1h-1zM2 8h1v1h-1zM3 8h1v1h-1zM4 8h1v1h-1zM5 8h1v1h-1zM6 8h1v1h-1zM8 8h1v1h-1zM9 8h1v1h-1zM10 8h1v1h-1zM11 8h1v1h-1zM13 8h1v1h-1zM14 8h1v1h-1zM16 8h1v1h-1zM18 8h1v1h-1zM20 8h1v1h-1zM21 8h1v1h-1zM24 8h1v1h-1zM1 9h1v1h-1zM3 9h1v1h-1zM4 9h1v1h-1zM5 9h1v1h-1zM7 9h1v1h-1zM8 9h1v1h-1zM9 9h1v1h-1zM14 9h1v1h-1zM16 9h1v1h-1zM17 9h1v1h-1zM21 9h1v1h-1zM22 9h1v1h-1zM0 10h1v1h-1zM2 10h1v1h-1zM6 10h1v1h-1zM8 10h1v1h-1zM10 10h1v1h-1zM11 10h1v1h-1zM12 10h1v1h-1zM13 10h1v1h-1zM14 10h1v1h-1zM15 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM1 11h1v1h-1zM3 11h1v1h-1zM8 11h1v1h-1zM9 11h1v1h-1zM12 11h1v1h-1zM14 11h1v1h-1zM15 11h1v1h-1zM16 11h1v1h-1zM24 11h1v1h-1zM1 12h1v1h-1zM2 12h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM9 12h1v1h-1zM11 12h1v1h-1zM14 12h1v1h-1zM16 12h1v1h-1zM19 12h1v1h-1zM20 12h1v1h-1zM0 13h1v1h-1zM2 13h1v1h-1zM3 13h1v1h-1zM4 13h1v1h-1zM13 13h1v1h-1zM14 13h1v1h-1zM16 13h1v1h-1zM18 13h1v1h-1zM19 13h1v1h-1zM20 13h1v1h-1zM21 13h1v1h-1zM22 13h1v1h-1zM24 13h1v1h-1zM1 14h1v1h-1zM2 14h1v1h-1zM6 14h1v1h-1zM8 14h1v1h-1zM16 14h1v1h-1zM17 14h1v1h-1zM22 14h1v1h-1zM23 14h1v1h-1zM24 14h1v1h-1zM1 15h1v1h-1zM2 15h1v1h-1zM7 15h1v1h-1zM8 15h1v1h-1zM10 15h1v1h-1zM11 15h1v1h-1zM12 15h1v1h-1zM20 15h1v1h-1zM21 15h1v1h-1zM24 15h1v1h-1zM0 16h1v1h-1zM1 16h1v1h-1zM4 16h1v1h-1zM6 16h1v1h-1zM7 16h1v1h-1zM12 16h1v1h-1zM13 16h1v1h-1zM14 16h1v1h-1zM15 16h1v1h-1zM16 16h1v1h-1zM17 16h1v1h-1zM18 16h1v1h-1zM19 16h1v1h-1zM20 16h1v1h-1zM22 16h1v1h-1zM9 17h1v1h-1zM11 17h1v1h-1zM13 17h1v1h-1zM14 17h1v1h-1zM15 17h1v1h-1zM16 17h1v1h-1zM20 17h1v1h-1zM21 17h1v1h-1zM23 17h1v1h-1zM24 17h1v1h-1zM0 18h1v1h-1zM1 18h1v1h-1zM2 18h1v1h-1zM3 18h1v1h-1zM4 18h1v1h-1zM5 18h1v1h-1zM6 18h1v1h-1zM8 18h1v1h-1zM10 18h1v1h-1zM11 18h1v1h-1zM14 18h1v1h-1zM15 18h1v1h-1zM16 18h1v1h-1zM18 18h1v1h-1zM20 18h1v1h-1zM21 18h1v1h-1zM24 18h1v1h-1zM0 19h1v1h-1zM6 19h1v1h-1zM13 19h1v1h-1zM15 19h1v1h-1zM16 19h1v1h-1zM20 19h1v1h-1zM21 19h1v1h-1zM24 19h1v1h-1zM0 20h1v1h-1zM2 20h1v1h-1zM3 20h1v1h-1zM4 20h1v1h-1zM6 20h1v1h-1zM11 20h1v1h-1zM12 20h1v1h-1zM14 20h1v1h-1zM16 20h1v1h-1zM17 20h1v1h-1zM18 20h1v1h-1zM19 20h1v1h-1zM20 20h1v1h-1zM21 20h1v1h-1zM23 20h1v1h-1zM24 20h1v1h-1zM0 21h1v1h-1zM2 21h1v1h-1zM3 21h1v1h-1zM4 21h1v1h-1zM6 21h1v1h-1zM8 21h1v1h-1zM9 21h1v1h-1zM10 21h1v1h-1zM11 21h1v1h-1zM12 21h1v1h-1zM19 21h1v1h-1zM20 21h1v1h-1zM22 21h1v1h-1zM24 21h1v1h-1zM0 22h1v1h-1zM2 22h1v1h-1zM3 22h1v1h-1zM4 22h1v1h-1zM6 22h1v1h-1zM11 22h1v1h-1zM12 22h1v1h-1zM13 22h1v1h-1zM14 22h1v1h-1zM15 22h1v1h-1zM16 22h1v1h-1zM17 22h1v1h-1zM20 22h1v1h-1zM21 22h1v1h-1zM0 23h1v1h-1zM6 23h1v1h-1zM8 23h1v1h-1zM9 23h1v1h-1zM14 23h1v1h-1zM18 23h1v1h-1zM21 23h1v1h-1zM24 23h1v1h-1zM0 24h1v1h-1zM1 24h1v1h-1zM2 24h1v1h-1zM3 24h1v1h-1zM4 24h1v1h-1zM5 24h1v1h-1zM6 24h1v1h-1zM16 24h1v1h-1zM18 24h1v1h-1zM19 24h1v1h-1zM20 24h1v1h-1zM21 24h1v1h-1zM24 24h1v1h-1z"/></svg></div>
+          <div class="ft"><svg width="8" height="12" aria-hidden="true"><use href="#facter"/></svg>Facter Truck</div>
+        </div>
+        <div class="printopts">
+          <button class="btn btn-primary" type="button"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/printer.svg)"></i>Imprimir crachá</button>
+          <span class="hint" style="text-align:center;margin:0">Tamanho cartão (CR80) ou folha A4 com 8 crachás</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="tabl indent">
+      <div class="panel">
+        <div class="ecap">No tablet: quem vai usar?</div>
+        <div class="scan"><span class="fr"></span><span>Mostre o QR do crachá para a câmera</span></div>
+        <div class="input" style="margin-top:10px"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/hash.svg)"></i><span class="grow muted">Ou digite a matrícula</span></div>
+        <div class="sublbl" style="margin-top:14px">Últimos neste tablet</div>
+        <div class="recent">
+          <div><span class="pav a2">RS</span>Rafael Souza</div>
+          <div><span class="pav a3">DR</span>Diego Ramos</div>
+          <div><span class="pav a3">LB</span>Leandro Batista</div>
+          <div><span class="pav a4">AL</span>Anderson Lima</div>
+        </div>
+      </div>
+      <div class="panel">
+        <div class="ecap">Depois: o PIN</div>
+        <div class="phead"><span class="pav a2">RS</span><div><h3>Rafael Souza</h3><div class="meta">Matrícula 0412 · <a href="#">Não é Rafael</a></div></div></div>
+        <div class="pindots" aria-label="2 de 4 dígitos"><i class="f"></i><i class="f"></i><i></i><i></i></div>
+        <div class="keypad"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span><span style="background:none"></span><span>0</span><span style="background:none"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/backspace.svg)"></i></span></div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div><h4>Decisões do desenho</h4><ul>
+        <li>O QR só identifica; o PIN é sempre pedido. Crachá achado no chão não abre nada.</li>
+        <li>O QR guarda um código aleatório, não a matrícula: reimprimir troca o código e o crachá perdido para de valer.</li>
+        <li>Quem define o PIN final é a pessoa. A gestão só gera o provisório, que aparece uma vez.</li>
+        <li>Crachá com logo da empresa, nome, papel e base, matrícula grande e o QR. Nada de CPF.</li>
+      </ul></div>
+      <div><h4>No tablet</h4><ul>
+        <li>"Últimos neste tablet" resolve a troca de turno sem câmera nem digitação.</li>
+        <li>Sai sozinho após alguns minutos parado, para a próxima pessoa não agir com o nome da anterior.</li>
+        <li>PIN errado 5 vezes bloqueia a matrícula por 15 minutos, como o login.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- =============== 6. CELULAR =============== -->
+  <section class="sec" id="s6">
+    <div class="sec-label"><span class="sec-num">6</span><h2>No celular · 390 px</h2></div>
+    <p class="sec-sub">No celular, a gestão convida quem acabou de chegar na oficina e manda o link pelo WhatsApp ali mesmo. A tabela vira cartões; o diálogo vira folha de baixo.</p>
+
+    <div class="phones">
+      <div class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="status"><span>9:41</span><span class="isl"></span><span>5G</span></div>
+          <div class="m-top">
+            <div class="lockup"><svg width="18" height="27" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div class="wordmark">Facter <b>Truck</b></div></div>
+            <span class="avatar" style="width:30px;height:30px;font-size:12px">MD</span>
+          </div>
+          <div class="m-body">
+            <div class="m-back"><i class="ic s14" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-left.svg)"></i>Configurações</div>
+            <div class="m-hd">
+              <div><h1>Pessoas</h1><p class="sub">Quem entra na Rota Sul e com qual papel</p></div>
+              <button class="btn btn-primary" type="button" aria-label="Convidar pessoa" style="width:44px;height:44px;padding:0"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/user-plus.svg)"></i></button>
+            </div>
+            <div class="mseg" role="group" aria-label="Situação">
+              <button type="button" aria-pressed="true">Ativas <span class="n">9</span></button>
+              <button type="button" aria-pressed="false">Convidadas <span class="n">3</span></button>
+              <button type="button" aria-pressed="false">Suspensas <span class="n">1</span></button>
+            </div>
+            <div class="msearch"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i>Buscar por nome ou matrícula</div>
+            <div class="mlist">
+              <article class="mc">
+                <div class="t"><div><div class="nm">Rafael Souza</div><div class="sub2">(41) 99713-2280</div></div><button class="kebab" type="button" aria-label="Ações de Rafael Souza"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></div>
+                <div class="rcs"><span class="rc">Mecânico <span class="sc">· Base Curitiba</span></span></div>
+                <div class="foot"><span class="when2">Há 2 min · tablet</span><span class="st st-on">Ativa</span></div>
+              </article>
+              <article class="mc">
+                <div class="t"><div><div class="nm">Diego Ramos</div><div class="sub2">diego.ramos@rotasul.com.br</div></div><button class="kebab" type="button" aria-label="Ações de Diego Ramos"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></div>
+                <div class="rcs"><span class="rc">Supervisor de manutenção <span class="sc">· Curitiba</span></span></div>
+                <div class="foot"><span class="when2">Há 20 min</span><span class="st st-on">Ativa</span></div>
+              </article>
+              <article class="mc">
+                <div class="t"><div><div class="nm">Anderson Lima</div><div class="sub2">anderson.lima@rotasul.com.br</div></div><button class="kebab" type="button" aria-label="Ações de Anderson Lima"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></div>
+                <div class="rcs"><span class="rc">Almoxarife <span class="sc">· Curitiba e Ponta Grossa</span></span></div>
+                <div class="foot"><span class="when2">Ontem, 17:42</span><span class="st st-on">Ativa</span></div>
+              </article>
+              <article class="mc">
+                <div class="t"><div><div class="nm">Carlos Eduardo Nunes</div><div class="sub2">Matrícula 0388 · só no tablet</div></div><button class="kebab" type="button" aria-label="Ações de Carlos Eduardo Nunes"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)"></i></button></div>
+                <div class="rcs"><span class="rc">Mecânico <span class="sc">· Ponta Grossa</span></span><span class="rc">Borracheiro <span class="sc">· Ponta Grossa</span></span></div>
+              </article>
+            </div>
+          </div>
+          <div class="fade"></div>
+          <nav class="botnav" aria-label="Menu principal">
+            <a class="bn" href="#"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/house.svg)"></i>Início</a>
+            <a class="bn" href="#"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck.svg)"></i>Veículos</a>
+            <a class="bn" href="#"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i>OS</a>
+            <a class="bn" href="#"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i>Pneus</a>
+            <a class="bn" href="#" aria-current="page"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/dots-three-outline-fill.svg)"></i>Mais</a>
+          </nav>
+        </div></div>
+        <p class="phone-cap">Cartões com papel e onde vale; em Mais › Configurações</p>
+      </div>
+
+      <div class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="status"><span>9:41</span><span class="isl"></span><span>5G</span></div>
+          <div class="m-top">
+            <div class="lockup"><svg width="18" height="27" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div class="wordmark">Facter <b>Truck</b></div></div>
+            <span class="avatar" style="width:30px;height:30px;font-size:12px">MD</span>
+          </div>
+          <div class="m-body"><h1>Pessoas</h1></div>
+          <div class="scrim"></div>
+          <div class="sheet tall" role="dialog" aria-labelledby="m1t">
+            <div class="grab"></div>
+            <h2 id="m1t">Convidar pessoa</h2>
+            <div class="sbody">
+              <div class="form">
+                <label class="fl"><span class="l">Nome <span class="req">*</span></span><span class="input"><span class="grow">Gustavo Pereira</span></span></label>
+                <div class="fl"><span class="l">Como vai entrar</span>
+                  <div class="seg3" style="grid-template-columns:repeat(3,minmax(0,1fr))"><label><input type="radio" name="hm">E-mail</label><label><input type="radio" name="hm" checked>Celular</label><label><input type="radio" name="hm">Só tablet</label></div></div>
+                <label class="fl"><span class="l">Celular <span class="req">*</span></span><span class="input"><span class="grow num">(41) 99604-1187</span></span></label>
+                <label class="fl"><span class="l">Papel <span class="req">*</span></span><span class="input"><span class="grow">Mecânico</span><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-down.svg)"></i></span></label>
+                <div class="fl"><span class="l">Onde vale</span>
+                  <div class="seg2"><label><input type="radio" name="ms" checked>Bases escolhidas</label><label><input type="radio" name="ms">Empresa toda</label></div>
+                  <div class="bchks"><label class="bchk"><input type="checkbox" checked>Base Curitiba</label><label class="bchk"><input type="checkbox">Base Ponta Grossa</label></div>
+                </div>
+                <button class="addlink" type="button" style="align-self:flex-start"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/plus.svg)"></i>Adicionar outro papel</button>
+              </div>
+            </div>
+            <div class="btns"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Convidar</button></div>
+          </div>
+        </div></div>
+        <p class="phone-cap">Folha de convite: um papel por vez, "Adicionar outro papel" para mais</p>
+      </div>
+
+      <div class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="status"><span>9:41</span><span class="isl"></span><span>5G</span></div>
+          <div class="m-top">
+            <div class="lockup"><svg width="18" height="27" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div class="wordmark">Facter <b>Truck</b></div></div>
+            <span class="avatar" style="width:30px;height:30px;font-size:12px">MD</span>
+          </div>
+          <div class="m-body"><h1>Pessoas</h1></div>
+          <div class="scrim"></div>
+          <div class="sheet" role="dialog" aria-labelledby="m2t">
+            <div class="grab"></div>
+            <div class="okhead"><span class="oi"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/check-circle.svg)"></i></span><div><h2 id="m2t">Convite de Gustavo Pereira criado</h2><p class="desc">Vale por 7 dias e funciona uma vez</p></div></div>
+            <div class="msgprev"><div class="h">Mensagem pronta</div>Marina Duarte convidou você para o Facter Truck da Transportadora Rota Sul. Crie seu acesso: truck.facter.com.br/c/7KQ-R2M-4XP</div>
+            <button class="btn btn-wa bigbtn" type="button"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/whatsapp-logo.svg)"></i>Enviar pelo WhatsApp</button>
+            <button class="btn btn-outline bigbtn" type="button"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/copy.svg)"></i>Copiar link</button>
+            <button class="btn bigbtn" type="button" style="background:none;color:hsl(var(--muted-foreground))">Fechar</button>
+          </div>
+        </div></div>
+        <p class="phone-cap">Convite criado: WhatsApp em primeiro, pelo compartilhamento do celular</p>
+      </div>
+
+      <div class="notes">
+        <div><h4>No celular</h4><ul>
+          <li>Abas viram controle segmentado; as 3 com contagem cabem em 358 px.</li>
+          <li>O chip encurta "Base Curitiba" para "Curitiba" quando a linha não cabe; o nome inteiro fica no detalhe.</li>
+          <li>"Enviar pelo WhatsApp" usa o compartilhamento do celular, com a mensagem pronta.</li>
+          <li>A prévia "vai poder" fica atrás de "Ver o que esse papel faz", para a folha caber sem rolar muito.</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== 7. VAZIOS E PERMISSÃO =============== -->
+  <section class="sec" id="s7">
+    <div class="sec-label"><span class="sec-num">7</span><h2>Estados vazios e sem permissão</h2></div>
+    <p class="sec-sub">Vazio diz o que falta, por que importa e a ação. Sem permissão, a tela diz o papel e quem pode ajudar, e esconde o que a pessoa não pode fazer.</p>
+
+    <div class="states indent">
+      <div>
+        <div class="ecap">Nenhuma base ainda</div>
+        <div class="cardf"><div class="empty">
+          <span class="ei"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/warehouse.svg)"></i></span>
+          <h3>Nenhuma base cadastrada ainda</h3>
+          <p>Cadastre onde a frota fica e a oficina trabalha. Com bases, OS, boxes, estoque e pessoas se separam por lugar.</p>
+          <a class="btn btn-primary" href="#s4d"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/plus.svg)"></i>Cadastrar base</a>
+          <p class="hint" style="margin-top:12px">Sem base, todo papel vale na empresa toda</p>
+        </div></div>
+      </div>
+      <div>
+        <div class="ecap">Ninguém convidado ainda</div>
+        <div class="cardf">
+          <div class="inhead" style="padding:0 16px"><div class="dt-tabs sm" style="margin:0;border:0"><button type="button" aria-selected="false">Ativas <span class="c">1</span></button><button type="button" aria-selected="true">Convidadas <span class="c">0</span></button></div></div>
+          <div class="empty">
+            <span class="ei"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/paper-plane-tilt.svg)"></i></span>
+            <h3>Nenhum convite pendente</h3>
+            <p>Convide quem vai usar o Facter: a oficina, o almoxarifado e o financeiro. Cada pessoa entra com o próprio nome, e toda ação fica registrada com ele.</p>
+            <a class="btn btn-primary" href="#s2"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/user-plus.svg)"></i>Convidar pessoa</a>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="ecap">Busca sem resultado</div>
+        <div class="cardf">
+          <div class="inhead"><div class="dt-search" style="width:100%"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i><span style="color:hsl(var(--foreground))">gustavo</span></div></div>
+          <div class="empty">
+            <span class="ei" style="background:hsl(var(--muted));color:hsl(240 5% 40%)"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i></span>
+            <h3>Nenhuma pessoa ativa encontrada para "gustavo"</h3>
+            <p>Gustavo Pereira está em Convidadas.</p>
+            <div style="display:flex;gap:8px;margin-top:12px"><button class="btn btn-outline" type="button">Limpar busca</button><a class="btn btn-outline" href="#s1">Ver em Convidadas</a></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="frame app-frame" style="margin-top:32px">
+      <div class="app">
+        <header class="topbar">
+          <a class="lockup" href="#" aria-label="Facter Truck, início">
+            <svg width="24" height="35" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span>
+            <div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div>
+          </a>
+          <span class="spacer"></span>
+          <div class="search"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i>Buscar placa, frota ou OS</div>
+          <button class="org" type="button">Transportadora Rota Sul <i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/caret-down.svg)"></i></button>
+          <span class="avatar" aria-label="Diego Ramos">DR</span>
+        </header>
+        <nav class="sidenav" aria-label="Menu principal">
+          <a class="navitem" href="#" aria-label="Início"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/house.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Veículos"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/truck.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Ordens de serviço"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/clipboard-text.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Estoque"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/package.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Pneus"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/tire.svg)"></i></a>
+          <a class="navitem" href="#" aria-label="Custos"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/chart-line-up.svg)"></i></a>
+          <span class="navsep"></span>
+          <a class="navitem" href="#" aria-current="page" aria-label="Configurações"><i class="ic s24" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/gear-fill.svg)"></i></a>
+        </nav>
+        <main class="main"><div class="setl">
+          <nav class="subnav" aria-label="Configurações"><div class="h">Configurações</div><a href="#"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/buildings.svg)"></i>Empresa</a><a href="#" aria-current="page"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/users-three.svg)"></i>Pessoas</a><a href="#"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/shield-check.svg)"></i>Papéis</a><a href="#"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/warehouse.svg)"></i>Bases e boxes</a></nav>
+          <div>
+          <div class="pagehead">
+            <div><h1>Pessoas</h1><p>Quem entra na Transportadora Rota Sul e com qual papel</p></div>
+          </div>
+          <div class="infobox" style="margin-bottom:16px"><i class="ic s18" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/info.svg)"></i><span>Seu papel permite ver as pessoas da Base Curitiba, sem mudar nada. Para convidar ou mudar papéis, fale com Marina Duarte, que administra a empresa.</span></div>
+          <div class="dt-toolbar">
+            <div class="dt-tabs" role="tablist"><button role="tab" aria-selected="true" type="button">Ativas <span class="c">5</span></button></div>
+            <div class="dt-search"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/magnifying-glass.svg)"></i>Buscar por nome, e-mail ou matrícula</div>
+          </div>
+          <div class="dt">
+            <table>
+              <thead><tr><th>Pessoa</th><th>Papéis</th><th>Último acesso</th><th>Situação</th></tr></thead>
+              <tbody>
+                <tr><td><div class="pcell"><span class="pav a3">DR</span><div><div class="nm">Diego Ramos<span class="you">Você</span></div><div class="sub">diego.ramos@rotasul.com.br</div></div></div></td><td><div class="rcs"><span class="rc">Supervisor de manutenção <span class="sc">· Base Curitiba</span></span></div></td><td class="when2">Agora</td><td><span class="st st-on">Ativa</span></td></tr>
+                <tr><td><div class="pcell"><span class="pav">MD</span><div><div class="nm">Marina Duarte</div><div class="sub">marina.duarte@rotasul.com.br</div></div></div></td><td><div class="rcs"><span class="rc co">Administrador <span class="sc">· Empresa toda</span></span><span class="rc co">Gestor <span class="sc">· Empresa toda</span></span></div></td><td class="when2">Há 5 min</td><td><span class="st st-on">Ativa</span></td></tr>
+                <tr><td><div class="pcell"><span class="pav a2">RS</span><div><div class="nm">Rafael Souza</div><div class="sub">(41) 99713-2280 · Matrícula 0412</div></div></div></td><td><div class="rcs"><span class="rc">Mecânico <span class="sc">· Base Curitiba</span></span></div></td><td class="when2">Há 2 min</td><td><span class="st st-on">Ativa</span></td></tr>
+                <tr><td><div class="pcell"><span class="pav a4">AL</span><div><div class="nm">Anderson Lima</div><div class="sub">anderson.lima@rotasul.com.br</div></div></div></td><td><div class="rcs"><span class="rc">Almoxarife <span class="sc">· Curitiba e Ponta Grossa</span></span></div></td><td class="when2">Ontem, 17:42</td><td><span class="st st-on">Ativa</span></td></tr>
+                <tr><td><div class="pcell"><span class="pav a3">LB</span><div><div class="nm">Leandro Batista</div><div class="sub">(41) 98820-6614</div></div></div></td><td><div class="rcs"><span class="rc">Inspetor <span class="sc">· Base Curitiba</span></span></div></td><td class="when2">Há 6 dias</td><td><span class="st st-on">Ativa</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+      </div></div></main></div>
+    </div>
+
+    <div class="notes">
+      <div><h4>Sem member.manage (Diego Ramos, Supervisor · Base Curitiba)</h4><ul>
+        <li>Some "Convidar pessoa", as abas Convidadas e Suspensas e o ⋮. Nada desabilitado para clicar e descobrir que não pode.</li>
+        <li>Vê quem tem papel na Base Curitiba e quem administra a empresa, para saber a quem pedir. O escopo é aplicado na consulta, não só na tela.</li>
+        <li>E-mail e celular só chegam para quem tem personal_data.view; sem ela, a coluna mostra só o nome.</li>
+      </ul></div>
+      <div><h4>Sem nenhuma permissão de pessoas</h4><ul>
+        <li>Pessoas não aparece em Configurações. Pelo endereço direto: "Seu papel não permite ver as pessoas da empresa. Peça a quem administra a empresa".</li>
+        <li>O mesmo vale para Bases e boxes sem base.manage: a lista aparece só para leitura, sem "Cadastrar base" e sem os interruptores.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- =============== 8. PERGUNTAS =============== -->
+  <section class="sec" id="s8">
+    <div class="sec-label"><span class="sec-num">8</span><h2>Perguntas em aberto</h2></div>
+    <p class="sec-sub">O que o mockup assumiu e precisa de decisão. Cada uma traz uma proposta para aceitar ou trocar.</p>
+    <div class="qs">
+      <div class="q"><span class="qi"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/question.svg)"></i></span><div>
+        <h3>Quem vê a lista de Pessoas sem member.manage?</h3>
+        <p>A matriz só tem member.manage (Administrador). O supervisor precisa saber quem é da base dele, e a seção 7 mostra isso.</p>
+        <div class="prop"><b>Proposta:</b> permissão nova member.view: Administrador e Gestor na empresa toda, Supervisor na base. Contato continua protegido por personal_data.view.</div></div></div>
+      <div class="q"><span class="qi"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/question.svg)"></i></span><div>
+        <h3>O que "Empresa toda" faz num papel com permissões de base?</h3>
+        <p>O Mecânico tem estoque com escopo base. Dar Mecânico na empresa toda abre o estoque de todas as bases.</p>
+        <div class="prop"><b>Proposta:</b> base vazia no vínculo significa todas as bases. Papéis só de empresa (Administrador, Financeiro, Leitura) nem mostram "Onde vale".</div></div></div>
+      <div class="q"><span class="qi"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/question.svg)"></i></span><div>
+        <h3>Convite pelo celular: como saber que foi a pessoa certa que abriu?</h3>
+        <p>Sem e-mail nem SMS, quem tiver o link cria o acesso. Um link encaminhado entra com o nome errado.</p>
+        <div class="prop"><b>Proposta:</b> link de uso único e 7 dias; a lista mostra "Aceito em 27/09, 10:12 no celular"; quem convidou pode suspender na hora. Confirmação por SMS fica para depois da 1.8.</div></div></div>
+      <div class="q"><span class="qi"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/question.svg)"></i></span><div>
+        <h3>"Só no tablet" entra na 1.2 ou espera a 1.4?</h3>
+        <p>A pessoa sem e-mail nem celular só existe com matrícula e PIN, que são da 1.4.</p>
+        <div class="prop"><b>Proposta:</b> na 1.2, "Como vai entrar" tem só E-mail e Celular. A terceira opção, a matrícula e o crachá chegam juntos na 1.4.</div></div></div>
+      <div class="q"><span class="qi"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/question.svg)"></i></span><div>
+        <h3>Matrícula: do RH ou gerada pelo Facter?</h3>
+        <p>Empresas com folha já têm matrícula; as pequenas não. Duas numerações confundem a oficina.</p>
+        <div class="prop"><b>Proposta:</b> campo livre, único na empresa, com "Gerar" sugerindo o próximo número quando a empresa não usa a do RH.</div></div></div>
+      <div class="q"><span class="qi"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/question.svg)"></i></span><div>
+        <h3>Desativar base com pessoas que só têm papel nela</h3>
+        <p>Desativar a base deixaria essas pessoas sem acesso a nada, sem ninguém decidir.</p>
+        <div class="prop"><b>Proposta:</b> bloquear enquanto houver OS aberta; com pessoas, o diálogo lista quem fica sem papel e oferece mover para outra base antes.</div></div></div>
+      <div class="q"><span class="qi"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/question.svg)"></i></span><div>
+        <h3>Grupo econômico: convidar para várias empresas de uma vez?</h3>
+        <p>A 1.2 cria o grupo econômico. Uma pessoa pode trabalhar em duas empresas do mesmo grupo.</p>
+        <div class="prop"><b>Proposta:</b> na 1.2, um convite por empresa (cada uma tem seus papéis e bases). Convite para o grupo vem quando houver cliente com o caso.</div></div></div>
+      <div class="q"><span class="qi"><i class="ic s16" aria-hidden="true" style="--i:url(https://api.iconify.design/ph/question.svg)"></i></span><div>
+        <h3>Box tem tipo (elétrica, rampa, lavagem)?</h3>
+        <p>Hoje o nome carrega isso ("Box 6 · Elétrica"). Tipo permitiria sugerir o box certo pelo serviço.</p>
+        <div class="prop"><b>Proposta:</b> só nome na 1.2. Tipo de box entra com a fila da oficina, quando houver dado de uso para sugerir.</div></div></div>
+    </div>
+  </section>
+</div>
+
+</body>
+</html>
