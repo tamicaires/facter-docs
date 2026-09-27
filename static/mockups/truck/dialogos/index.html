@@ -1,0 +1,1331 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Diálogos · mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --background:0 0% 98%;
+  --foreground:240 10% 3.9%;
+  --card:0 0% 100%;
+  --primary:233 65% 50%;
+  --primary-foreground:0 0% 100%;
+  --muted:240 4.8% 93.9%;
+  --muted-foreground:240 3.8% 42%;
+  --border:240 5.9% 90%;
+  --success:160 60% 38%;
+  --warning:38 92% 45%;
+  --danger:0 84.2% 60.2%;
+  --radius:.5rem;
+  --success-text:160 70% 24%;
+  --danger-text:0 72% 38%;
+  --warning-text:28 85% 28%;
+  --primary-soft:233 85% 96.5%;
+  --success-soft:160 55% 94%;
+  --warning-soft:40 95% 93%;
+  --danger-soft:0 85% 96%;
+  --canvas:225 14% 92%;
+  --ring:233 65% 50%;
+  --toolbar:240 5% 96%;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:hsl(var(--canvas));color:hsl(var(--foreground));font:15px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,p{margin:0}
+button,input,textarea,select{font:inherit;color:inherit}
+a{color:hsl(var(--primary))}
+:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:2px;border-radius:6px}
+.ic{display:inline-block;width:20px;height:20px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;flex:none}
+.ic.s12{width:12px;height:12px}.ic.s14{width:14px;height:14px}.ic.s16{width:16px;height:16px}.ic.s18{width:18px;height:18px}.ic.s24{width:24px;height:24px}
+.i-x{--i:url(https://api.iconify.design/ph/x.svg)}
+.i-truck{--i:url(https://api.iconify.design/ph/truck.svg)}
+.i-truckf{--i:url(https://api.iconify.design/ph/truck-fill.svg)}
+.i-book{--i:url(https://api.iconify.design/ph/address-book.svg)}
+.i-bld{--i:url(https://api.iconify.design/ph/buildings.svg)}
+.i-search{--i:url(https://api.iconify.design/ph/magnifying-glass.svg)}
+.i-check{--i:url(https://api.iconify.design/ph/check.svg)}
+.i-checkc{--i:url(https://api.iconify.design/ph/check-circle-fill.svg)}
+.i-err{--i:url(https://api.iconify.design/ph/warning-circle-fill.svg)}
+.i-warn{--i:url(https://api.iconify.design/ph/warning-fill.svg)}
+.i-info{--i:url(https://api.iconify.design/ph/info.svg)}
+.i-cal{--i:url(https://api.iconify.design/ph/calendar-blank.svg)}
+.i-hist{--i:url(https://api.iconify.design/ph/clock-counter-clockwise.svg)}
+.i-arrow{--i:url(https://api.iconify.design/ph/arrow-right.svg)}
+.i-plus{--i:url(https://api.iconify.design/ph/plus.svg)}
+.i-ban{--i:url(https://api.iconify.design/ph/prohibit.svg)}
+.i-wand{--i:url(https://api.iconify.design/ph/magic-wand.svg)}
+.i-pen{--i:url(https://api.iconify.design/ph/pencil-simple.svg)}
+.i-lock{--i:url(https://api.iconify.design/ph/lock-simple.svg)}
+.i-card{--i:url(https://api.iconify.design/ph/identification-card.svg)}
+.i-phone{--i:url(https://api.iconify.design/ph/phone.svg)}
+.i-mail{--i:url(https://api.iconify.design/ph/envelope-simple.svg)}
+.i-user{--i:url(https://api.iconify.design/ph/user.svg)}
+.i-spin{--i:url(https://api.iconify.design/ph/circle-notch-bold.svg)}
+.i-kbd{--i:url(https://api.iconify.design/ph/keyboard.svg)}
+.i-mob{--i:url(https://api.iconify.design/ph/device-mobile.svg)}
+.i-mon{--i:url(https://api.iconify.design/ph/monitor.svg)}
+.i-undo{--i:url(https://api.iconify.design/ph/arrow-counter-clockwise.svg)}
+.i-cl{--i:url(https://api.iconify.design/ph/caret-left.svg)}
+.i-cr{--i:url(https://api.iconify.design/ph/caret-right.svg)}
+.i-cd{--i:url(https://api.iconify.design/ph/caret-down.svg)}
+.i-out{--i:url(https://api.iconify.design/ph/arrow-square-out.svg)}
+.i-arch{--i:url(https://api.iconify.design/ph/archive.svg)}
+.i-q{--i:url(https://api.iconify.design/ph/question.svg)}
+.i-dots{--i:url(https://api.iconify.design/ph/dots-three-vertical-bold.svg)}
+.i-wifi{--i:url(https://api.iconify.design/ph/wifi-slash.svg)}
+.i-cube{--i:url(https://api.iconify.design/ph/puzzle-piece.svg)}
+.i-tag{--i:url(https://api.iconify.design/ph/hash.svg)}
+
+/* ---------- presentation page ---------- */
+.doc{max-width:1328px;margin:0 auto;padding:48px 24px 96px}
+.doc-head{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between;margin-bottom:24px}
+.doc-head h1{font:800 32px/1.15 Sora,Inter,sans-serif;letter-spacing:-.02em}
+.doc-head p{color:hsl(var(--muted-foreground));max-width:720px;margin-top:8px}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.toc a{font-size:13px;text-decoration:none;color:hsl(240 6% 26%);background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:999px;padding:4px 12px}
+.toc a:hover{border-color:hsl(233 60% 78%);color:hsl(var(--primary))}
+.sec{margin-top:72px}
+.sec-label{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-num{font:800 14px Sora,sans-serif;color:hsl(var(--primary));background:hsl(var(--card));border-radius:999px;width:28px;height:28px;display:inline-grid;place-items:center;flex:none}
+.sec h2.st2{font:700 22px/1.3 Inter,sans-serif;letter-spacing:-.01em}
+.sec-sub{color:hsl(var(--muted-foreground));margin:0 0 20px 40px;max-width:800px}
+.sub-h{margin:32px 0 12px 40px;font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:hsl(240 6% 30%);font-weight:600;display:flex;align-items:center;gap:8px}
+.notes{margin:20px 0 0 40px;display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px 32px;font-size:14px;color:hsl(240 6% 25%)}
+.notes li{margin-bottom:6px}
+.notes ul{margin:0;padding-left:18px}
+.notes h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));margin-bottom:6px}
+.frame{border-radius:14px;box-shadow:0 1px 2px hsl(230 20% 20%/.06),0 12px 40px -12px hsl(230 30% 20%/.18);overflow:hidden;border:1px solid hsl(var(--border))}
+.indent{margin-left:40px}
+.lockup{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.lockup svg{color:hsl(var(--primary));flex:none}
+.lockup .rule{width:1px;align-self:stretch;background:hsl(var(--border));margin:2px 0}
+.wordmark{font:400 18px/1.1 Sora,sans-serif;letter-spacing:-.01em;white-space:nowrap}
+.wordmark b{font-weight:800}
+.tagline{font-size:11px;color:hsl(var(--muted-foreground));margin-top:3px;white-space:nowrap}
+.muted{color:hsl(var(--muted-foreground))}
+.num{font-variant-numeric:tabular-nums}
+.stage{position:relative;padding:40px;display:flex;justify-content:center;gap:28px;align-items:flex-start;flex-wrap:wrap;
+  background-image:linear-gradient(hsl(240 8% 20%/.42),hsl(240 8% 20%/.42)),radial-gradient(hsl(233 20% 80%) 1px,transparent 1px);background-size:auto,18px 18px;background-color:hsl(var(--background))}
+.cap-top{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(0 0% 100%/.95);font-weight:600;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.col{display:flex;flex-direction:column;gap:20px;min-width:0}
+.stage>.dx{flex:0 1 auto}
+
+/* ---------- buttons, chips ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:8px;border:1px solid transparent;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;white-space:nowrap}
+.btn-primary{background:hsl(var(--primary));color:hsl(var(--primary-foreground))}
+.btn-primary[disabled]{background:hsl(233 40% 72%);cursor:not-allowed}
+.btn-outline{background:hsl(var(--card));border-color:hsl(240 6% 82%);color:hsl(var(--foreground))}
+.btn-ghost{background:none;color:hsl(233 65% 42%)}
+.btn-danger{background:hsl(0 72% 45%);color:#fff}
+.btn-sm{height:32px;padding:0 10px;font-size:13px}
+.btn .spin{animation:none}
+.chip{display:inline-flex;align-items:center;gap:6px;height:22px;padding:0 8px;border-radius:999px;background:hsl(var(--muted));color:hsl(240 6% 26%);font-size:12px;font-weight:500;white-space:nowrap}
+.tag{display:inline-flex;align-items:center;gap:4px;height:20px;padding:0 7px;border-radius:6px;font-size:11.5px;font-weight:600;white-space:nowrap}
+.tag-new{background:hsl(var(--primary-soft));color:hsl(233 65% 38%)}
+.tag-chg{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.tag-off{background:hsl(var(--muted));color:hsl(240 6% 32%)}
+.tag-ok{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.kbd{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border:1px solid hsl(240 6% 80%);border-bottom-width:2px;border-radius:6px;background:hsl(var(--card));font:600 11.5px Inter;color:hsl(240 6% 25%)}
+
+/* ---------- dialog pattern ---------- */
+.dx{--w:560px;width:var(--w);max-width:100%;background:hsl(var(--card));border-radius:16px;box-shadow:0 24px 60px -20px hsl(230 30% 10%/.5);display:flex;flex-direction:column;position:relative;text-align:left}
+.dx.sm{--w:440px}.dx.md{--w:560px}.dx.lg{--w:780px}.dx.xs{--w:380px}
+.dx-hd{padding:20px 24px 18px;position:relative;border-bottom:1px solid hsl(var(--border))}
+.dx-ctx{display:flex;align-items:center;gap:10px;margin-bottom:14px;min-width:0}
+.dx-hd:has(.dx-x) .dx-ctx{padding-right:36px}
+.dx-ico{width:36px;height:36px;border-radius:10px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center;flex:none}
+.dx-ico.danger{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.dx-ico.warn{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.ent{display:inline-flex;align-items:center;gap:7px;min-height:28px;padding:3px 10px;border-radius:8px;background:hsl(var(--toolbar));border:1px solid hsl(var(--border));font-size:13px;color:hsl(240 6% 28%);min-width:0;white-space:nowrap;overflow:hidden}
+.ent b{font-weight:700;color:hsl(var(--foreground));letter-spacing:.02em}
+.ent .dot{width:3px;height:3px;border-radius:9px;background:hsl(240 5% 60%)}
+.dx-hd h2{font-size:19px;font-weight:650;letter-spacing:-.01em;line-height:1.3}
+.dx-hd .desc{font-size:14px;color:hsl(var(--muted-foreground));margin-top:4px}
+.dx-x{position:absolute;right:14px;top:16px;width:34px;height:34px;border:0;background:none;border-radius:8px;display:grid;place-items:center;color:hsl(240 5% 38%)}
+.dx-bd{padding:20px 24px 22px;display:flex;flex-direction:column;gap:22px;min-width:0}
+.dx-cols{display:grid;grid-template-columns:minmax(0,1fr) 310px}
+.dx-cols>.dx-bd+.dx-bd{background:hsl(var(--toolbar));border-left:1px solid hsl(var(--border))}
+.dsec{display:flex;flex-direction:column;gap:10px;min-width:0}
+.dsec>h3{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(240 5% 36%);font-weight:600;display:flex;align-items:center;gap:6px;justify-content:space-between}
+.dsec>h3 .r{text-transform:none;letter-spacing:0;font-weight:500;font-size:12.5px;color:hsl(var(--muted-foreground))}
+.dx-ft{position:relative;padding:14px 24px;border-top:1px solid hsl(var(--border));background:hsl(var(--toolbar));display:flex;align-items:center;gap:16px;border-radius:0 0 16px 16px;flex-wrap:wrap}
+.conseq{flex:1 1 240px;display:flex;gap:8px;font-size:13px;line-height:1.45;color:hsl(240 6% 26%);min-width:0}
+.conseq .ic{margin-top:1px;color:hsl(var(--primary))}
+.conseq.danger .ic{color:hsl(var(--danger-text))}
+.conseq b{font-weight:600;color:hsl(var(--foreground))}
+.dx-ft .acts{display:flex;gap:8px;margin-left:auto}
+.banner{display:flex;gap:10px;border-radius:10px;padding:10px 12px;font-size:13.5px;line-height:1.45}
+.banner .ic{margin-top:1px}
+.banner.err{background:hsl(var(--danger-soft));color:hsl(var(--danger-text));border:1px solid hsl(0 70% 88%)}
+.banner.warn{background:hsl(var(--warning-soft));color:hsl(var(--warning-text));border:1px solid hsl(38 80% 80%)}
+.banner.info{background:hsl(var(--primary-soft));color:hsl(233 60% 32%);border:1px solid hsl(233 60% 88%)}
+.banner b{font-weight:600}
+
+/* fields */
+.fl{display:block;min-width:0}
+.fl .l{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;margin-bottom:6px}
+.fl .l .req{color:hsl(var(--danger-text))}
+.fl .l .opt{font-weight:400;color:hsl(var(--muted-foreground));font-size:13px}
+.input{width:100%;height:40px;border:1px solid hsl(240 6% 82%);border-radius:8px;background:hsl(var(--card));padding:0 12px;font-size:14px;display:flex;align-items:center;gap:8px;min-width:0}
+.input.ph{color:hsl(240 4% 46%)}
+.input.err{border-color:hsl(var(--danger-text));box-shadow:0 0 0 3px hsl(0 80% 60%/.12)}
+.input.focus{border-color:hsl(var(--primary));box-shadow:0 0 0 3px hsl(233 65% 50%/.15)}
+.input.ok{border-color:hsl(160 45% 60%)}
+.input.dis{background:hsl(var(--toolbar));color:hsl(240 4% 46%)}
+.input .grow{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.input .ic{color:hsl(240 5% 45%)}
+.input .caret{display:inline-block;width:1.5px;height:17px;background:hsl(var(--foreground));margin-left:-6px;vertical-align:middle}
+.hint{font-size:13px;color:hsl(var(--muted-foreground));margin-top:6px}
+.errtext{font-size:13px;color:hsl(var(--danger-text));margin-top:6px;display:flex;gap:6px;align-items:flex-start;line-height:1.4}
+.errtext .ic{margin-top:1px}
+.oktext{font-size:13px;color:hsl(var(--success-text));margin-top:6px;display:flex;gap:6px;align-items:center}
+.errtext a,.hint a{font-weight:600}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.chg-f{position:relative}
+.chg-f::before{content:"";position:absolute;left:-12px;top:2px;bottom:2px;width:3px;border-radius:3px;background:hsl(38 92% 50%)}
+.was{font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:5px}
+.was s{color:hsl(240 5% 40%)}
+.skel{background:linear-gradient(90deg,hsl(240 5% 92%),hsl(240 5% 96%),hsl(240 5% 92%));border-radius:8px}
+
+/* current carrier card */
+.cur{border:1px solid hsl(var(--border));border-radius:12px;padding:12px 14px;display:flex;gap:12px;align-items:center;background:hsl(var(--card))}
+.lgo{width:36px;height:36px;border-radius:9px;display:grid;place-items:center;font:700 12.5px Inter;flex:none;letter-spacing:.02em}
+.lgo-a{background:hsl(28 90% 92%);color:hsl(var(--warning-text))}
+.lgo-b{background:hsl(233 80% 94%);color:hsl(233 65% 38%)}
+.lgo-c{background:hsl(160 50% 92%);color:hsl(var(--success-text))}
+.lgo-d{background:hsl(280 50% 94%);color:hsl(280 45% 35%)}
+.lgo-e{background:hsl(var(--muted));color:hsl(240 5% 38%)}
+.lgo-own{background:hsl(240 10% 12%);color:#fff}
+.cur .nm{font-weight:600;font-size:14.5px;line-height:1.3}
+.cur .s{font-size:12.5px;color:hsl(var(--muted-foreground))}
+.cur .rt{margin-left:auto;text-align:right;font-size:12.5px;color:hsl(var(--muted-foreground));white-space:nowrap}
+.cur .rt b{display:block;font-size:14px;color:hsl(var(--foreground))}
+
+/* choice list */
+.cl{border:1px solid hsl(240 6% 86%);border-radius:12px;overflow:hidden;background:hsl(var(--card))}
+.cl-q{display:flex;align-items:center;gap:8px;height:42px;padding:0 12px;border-bottom:1px solid hsl(var(--border));font-size:14px;color:hsl(240 4% 46%)}
+.cl-q.focus{box-shadow:inset 0 0 0 2px hsl(233 65% 50%/.5);color:hsl(var(--foreground))}
+.cl-grp{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:hsl(240 5% 40%);font-weight:600;padding:10px 14px 4px;background:hsl(var(--card))}
+.cl-row{display:grid;grid-template-columns:18px 36px minmax(0,1fr) auto;gap:12px;align-items:center;padding:9px 14px;border-top:1px solid hsl(var(--border));font-size:14px}
+.cl-row:first-of-type{border-top:0}
+.cl-row .nm{font-weight:600;line-height:1.3;display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.cl-row .s{font-size:12.5px;color:hsl(var(--muted-foreground));line-height:1.35;margin-top:1px}
+.cl-row .n{font-size:12.5px;color:hsl(240 6% 30%);text-align:right;white-space:nowrap}
+.cl-row .n b{display:block;font-size:14px;color:hsl(var(--foreground));font-variant-numeric:tabular-nums}
+.cl-row.sel{background:hsl(var(--primary-soft));box-shadow:inset 3px 0 0 hsl(var(--primary))}
+.cl-row.cur-row{color:hsl(240 5% 45%)}
+.cl-row.cur-row .nm{font-weight:500}
+.cl-row.act{outline:2px solid hsl(233 65% 50%/.55);outline-offset:-2px}
+.rd{width:18px;height:18px;border-radius:99px;border:2px solid hsl(240 6% 70%);background:hsl(var(--card))}
+.cl-row.sel .rd{border-color:hsl(var(--primary));box-shadow:inset 0 0 0 3px hsl(var(--card));background:hsl(var(--primary))}
+.rd.off{border-style:dotted}
+.cl-foot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-top:1px solid hsl(var(--border));background:hsl(var(--toolbar));font-size:13px;flex-wrap:wrap}
+.cl-foot a{display:inline-flex;align-items:center;gap:6px;font-weight:600;text-decoration:none;color:hsl(233 65% 42%)}
+mark{background:hsl(50 100% 80%);border-radius:2px;padding:0 1px;color:inherit}
+
+/* date quick picks */
+.qp{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}
+.qpb{border:1px solid hsl(240 6% 84%);border-radius:10px;padding:8px 10px;background:hsl(var(--card));text-align:left;line-height:1.25;display:flex;flex-direction:column;gap:2px;cursor:pointer;min-width:0}
+.qpb b{font-size:14px;font-weight:600;display:flex;align-items:center;gap:6px}
+.qpb span{font-size:12.5px;color:hsl(var(--muted-foreground));font-variant-numeric:tabular-nums}
+.qpb[aria-pressed="true"]{border-color:hsl(var(--primary));background:hsl(var(--primary-soft));box-shadow:0 0 0 1px hsl(var(--primary))}
+.qpb[aria-pressed="true"] b{color:hsl(233 65% 38%)}
+.qpb.err{border-color:hsl(var(--danger-text));box-shadow:0 0 0 1px hsl(var(--danger-text));background:hsl(var(--danger-soft))}
+.qpb.err b{color:hsl(var(--danger-text))}
+
+/* timeline preview */
+.tlp{list-style:none;margin:0;padding:0;position:relative}
+.tlp::before{content:"";position:absolute;left:7px;top:12px;bottom:14px;width:2px;background:hsl(240 6% 84%)}
+.tlp li{position:relative;padding:6px 0 10px 28px}
+.tlp li::before{content:"";position:absolute;left:1px;top:9px;width:14px;height:14px;border-radius:99px;background:hsl(var(--card));border:2px solid hsl(240 5% 66%)}
+.tlp li.new::before{border-color:hsl(var(--primary));border-style:dashed;background:hsl(var(--primary-soft))}
+.tlp li.closing::before{border-color:hsl(32 85% 45%);background:hsl(40 95% 88%)}
+.tlp .t{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:14px;font-weight:600;line-height:1.3}
+.tlp .w{font-size:12.5px;color:hsl(var(--muted-foreground));font-variant-numeric:tabular-nums;margin-top:2px}
+.tlp .w s{color:hsl(240 5% 50%)}
+.tlp .w b{color:hsl(var(--warning-text));font-weight:600}
+.tlp li.new .w{color:hsl(233 65% 38%)}
+.tlp li.old .t{font-weight:500;color:hsl(240 6% 30%)}
+.yr{display:grid;gap:2px;height:22px;margin-top:4px}
+.yr span{border-radius:5px}
+.yr .y-own{background:hsl(240 6% 82%)}
+.yr .y-a{background:hsl(30 88% 72%)}
+.yr .y-b{background:repeating-linear-gradient(135deg,hsl(233 70% 72%) 0 5px,hsl(233 80% 86%) 5px 10px)}
+.yr-t{display:flex;justify-content:space-between;font-size:11.5px;color:hsl(var(--muted-foreground));margin-top:4px}
+.preview-card{border:1px solid hsl(var(--border));background:hsl(var(--card));border-radius:12px;padding:14px 14px 6px}
+
+/* calendar */
+.cal{border:1px solid hsl(var(--border));border-radius:12px;background:hsl(var(--card));padding:12px;box-shadow:0 12px 30px -12px hsl(230 30% 20%/.3)}
+.cal-hd{display:flex;align-items:center;justify-content:space-between;font-weight:600;font-size:14px;margin-bottom:8px}
+.cal-hd button{width:30px;height:30px;border:1px solid hsl(var(--border));border-radius:8px;background:hsl(var(--card));display:grid;place-items:center}
+.cal-hd button[disabled]{opacity:.4}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;text-align:center;font-size:13px}
+.cal-g .h{font-size:11.5px;color:hsl(var(--muted-foreground));font-weight:600;padding:4px 0}
+.cal-g .d{height:34px;display:grid;place-items:center;border-radius:8px;font-variant-numeric:tabular-nums}
+.cal-g .d.x{color:hsl(240 5% 72%);text-decoration:line-through}
+.cal-g .d.today{box-shadow:inset 0 0 0 1.5px hsl(var(--primary));font-weight:600}
+.cal-g .d.sel{background:hsl(var(--primary));color:#fff;font-weight:600}
+.cal-g .d.cl8{background:hsl(40 95% 92%);color:hsl(var(--warning-text))}
+.cal-leg{display:flex;gap:12px;flex-wrap:wrap;font-size:12px;color:hsl(var(--muted-foreground));margin-top:8px}
+.cal-leg i.sw{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}
+
+/* type cards */
+.tc{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
+.tcard{border:1px solid hsl(240 6% 86%);border-radius:12px;padding:10px 10px 10px;background:hsl(var(--card));display:flex;flex-direction:column;gap:6px;position:relative;min-width:0}
+.tcard svg{width:100%;height:34px;color:hsl(240 6% 34%)}
+.tcard .nm{font-weight:600;font-size:14px;line-height:1.2}
+.tcard .f{font-size:12px;color:hsl(var(--muted-foreground));line-height:1.25}
+.tcard[aria-checked="true"]{border-color:hsl(var(--primary));background:hsl(var(--primary-soft));box-shadow:0 0 0 1px hsl(var(--primary))}
+.tcard[aria-checked="true"] svg{color:hsl(var(--primary))}
+.tcard[aria-checked="true"]::after{content:"";position:absolute;right:8px;top:8px;width:16px;height:16px;border-radius:99px;background:hsl(var(--primary)) url(https://api.iconify.design/ph/check-bold.svg?color=white) center/10px no-repeat}
+.tdesc{display:flex;gap:10px;align-items:flex-start;font-size:13px;color:hsl(240 6% 26%);background:hsl(var(--toolbar));border-radius:10px;padding:10px 12px}
+.tdesc .ic{color:hsl(var(--primary));margin-top:1px}
+.plate{display:inline-flex;flex-direction:column;border:1.5px solid hsl(240 10% 20%);border-radius:5px;overflow:hidden;min-width:104px;padding:0 0 1px;background:#fff;flex:none}
+.plate .top{height:9px;background:hsl(220 80% 35%)}
+.plate .pn{font:700 14px/22px Inter;text-align:center;letter-spacing:.06em;padding:0 8px;white-space:nowrap;color:hsl(240 10% 10%)}
+.plate.old{background:hsl(0 0% 88%)}
+.plate.old .top{display:none}
+.plate.old .pn{line-height:31px}
+.suggest{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 10px;border-radius:999px;border:1px dashed hsl(233 60% 70%);background:hsl(var(--primary-soft));color:hsl(233 65% 38%);font-size:12.5px;font-weight:600;white-space:nowrap}
+.input-btn{display:flex;gap:8px}
+.input-btn .input{flex:1}
+
+/* confirmations */
+.facts{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px;font-size:13.5px}
+.facts li{display:flex;gap:10px;align-items:flex-start;line-height:1.4}
+.facts .ic{margin-top:1px}
+.facts .out .ic{color:hsl(var(--danger-text))}
+.facts .keep .ic{color:hsl(var(--success-text))}
+.facts .back .ic{color:hsl(240 5% 45%)}
+.vl{border:1px solid hsl(var(--border));border-radius:10px;overflow:hidden}
+.vl-row{display:grid;grid-template-columns:72px minmax(0,1fr) auto;gap:8px;padding:8px 12px;border-top:1px solid hsl(var(--border));font-size:13.5px;align-items:center}
+.vl-row:first-child{border-top:0}
+.vl-row b{font-weight:700;letter-spacing:.02em}
+.vl-row .s{color:hsl(var(--muted-foreground));white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.vl-row .w{font-size:12.5px;color:hsl(var(--muted-foreground));white-space:nowrap}
+.vl-more{padding:8px 12px;font-size:13px;color:hsl(var(--muted-foreground));background:hsl(var(--toolbar));border-top:1px solid hsl(var(--border))}
+
+/* anatomy */
+.anat{display:grid;grid-template-columns:minmax(0,1fr) 400px;gap:0;align-items:stretch}
+.anat .stage{padding:48px 40px 48px 72px}
+.pin{position:absolute;left:-46px;width:26px;height:26px;border-radius:99px;background:hsl(50 100% 62%);color:hsl(240 10% 10%);font:800 12.5px Sora;display:grid;place-items:center;box-shadow:0 2px 6px hsl(240 10% 10%/.3);z-index:2}
+.pin::after{content:"";position:absolute;left:26px;top:12px;width:16px;border-top:1.5px dashed hsl(50 100% 62%)}
+.pin.pr::after{left:auto;right:26px}
+.legend{background:hsl(var(--card));padding:24px 26px;border-left:1px solid hsl(var(--border))}
+.legend ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
+.legend li{display:grid;grid-template-columns:26px 1fr;gap:12px;font-size:13.5px;color:hsl(240 6% 26%);line-height:1.45}
+.legend li .n{width:26px;height:26px;border-radius:99px;background:hsl(50 100% 62%);color:hsl(240 10% 10%);font:800 12.5px Sora;display:grid;place-items:center}
+.legend li b{display:block;font-size:14px;color:hsl(var(--foreground));font-weight:650;margin-bottom:1px}
+.legend h3{font-size:15px;font-weight:650;margin-bottom:14px}
+
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.card{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:14px;padding:18px;display:flex;flex-direction:column;gap:12px;min-width:0}
+.card h3{font-size:15px;font-weight:650;display:flex;gap:8px;align-items:center}
+.card p{font-size:13.5px;color:hsl(240 6% 28%)}
+.card .k{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));font-weight:600}
+.card ul{margin:0;padding-left:18px;font-size:13.5px;color:hsl(240 6% 24%)}
+.card li{margin:3px 0}
+/* size wireframes */
+.wf{background:hsl(var(--toolbar));border-radius:10px;height:130px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.wf .b{background:hsl(var(--card));border:1px solid hsl(240 6% 80%);border-radius:7px;height:92px;display:flex;flex-direction:column;overflow:hidden}
+.wf .b i{display:block;height:14px;margin:8px 8px 0;border-radius:3px;background:hsl(240 6% 90%)}
+.wf .b i.t{width:50%;background:hsl(240 6% 76%)}
+.wf .b .f{margin-top:auto;height:18px;background:hsl(240 5% 94%);border-top:1px solid hsl(240 6% 88%)}
+.wf .b.two-c{flex-direction:row}
+.wf .b.two-c>div{flex:1;display:flex;flex-direction:column}
+.wf .b.two-c>div+div{background:hsl(240 5% 96%);border-left:1px solid hsl(240 6% 88%)}
+.wf .ph{width:64px;height:112px;border-radius:12px;border:3px solid hsl(240 8% 20%);background:hsl(240 8% 55%);position:relative;overflow:hidden}
+.wf .ph .sh{position:absolute;left:0;right:0;bottom:0;background:#fff;border-radius:8px 8px 0 0}
+.wf .ph .sh::before{content:"";display:block;width:14px;height:2px;border-radius:2px;background:hsl(240 5% 75%);margin:3px auto}
+.wf .ph .sh::after{content:"";position:absolute;left:4px;right:4px;bottom:4px;height:8px;border-radius:2px;background:hsl(var(--primary))}
+/* states */
+.toast{display:flex;align-items:center;gap:10px;background:hsl(240 10% 12%);color:#fff;border-radius:10px;padding:10px 14px;font-size:14px;box-shadow:0 12px 30px -10px hsl(230 30% 10%/.5)}
+.toast .ic{color:hsl(160 60% 60%)}
+.toast a{color:hsl(233 90% 82%);font-weight:600;margin-left:auto;text-decoration:none}
+.rowflash{border:1px solid hsl(var(--border));border-radius:10px;background:hsl(var(--card));overflow:hidden;font-size:13.5px}
+.rowflash div{display:grid;grid-template-columns:80px 50px 1fr;gap:10px;padding:9px 12px;border-top:1px solid hsl(var(--border))}
+.rowflash div:first-child{border-top:0}
+.rowflash .hl{background:hsl(var(--primary-soft))}
+.rowflash .since{font-size:12px;color:hsl(233 65% 38%);font-weight:500}
+
+/* ds */
+.code{background:hsl(240 10% 10%);color:hsl(240 10% 90%);border-radius:12px;padding:18px 20px;font:13px/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;overflow:auto;white-space:pre}
+.code .c1{color:hsl(233 90% 80%)}.code .c2{color:hsl(160 50% 68%)}.code .c3{color:hsl(40 90% 72%)}.code .c4{color:hsl(240 6% 62%)}
+.dsgrid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:16px;margin-left:40px;align-items:start}
+.dstable{width:100%;border-collapse:collapse;font-size:13.5px;background:hsl(var(--card));border-radius:12px;overflow:hidden}
+.dstable th{text-align:left;font-weight:500;color:hsl(240 4% 38%);padding:10px 14px;border-bottom:1px solid hsl(var(--border));font-size:12.5px}
+.dstable td{padding:9px 14px;border-top:1px solid hsl(var(--border));vertical-align:top}
+.dstable td code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
+.dswrap{border:1px solid hsl(var(--border));border-radius:12px;overflow:hidden;background:hsl(var(--card))}
+
+/* ---------- phone ---------- */
+.phones{display:flex;flex-wrap:wrap;gap:36px;align-items:flex-start;margin-left:40px}
+.phone-wrap{display:flex;flex-direction:column;gap:12px;align-items:center}
+.phone-cap{font-size:13px;color:hsl(240 6% 30%);max-width:360px;text-align:center}
+.phone{width:390px;max-width:calc(100vw - 32px);height:844px;border-radius:48px;background:hsl(240 8% 12%);padding:10px;box-shadow:0 20px 50px -20px hsl(230 30% 15%/.45)}
+.screen{position:relative;height:100%;border-radius:39px;overflow:hidden;background:hsl(var(--background));display:flex;flex-direction:column}
+.status{height:44px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 28px 0 32px;font:600 14px Inter;background:hsl(var(--card))}
+.status .isl{width:110px;height:30px;border-radius:20px;background:hsl(240 8% 12%)}
+.m-top{display:flex;align-items:center;justify-content:space-between;padding:8px 16px 10px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border));flex:none}
+.m-top .wordmark{font-size:16px}
+.m-body{flex:1;overflow:hidden;padding:16px}
+.m-body h1{font-size:22px;font-weight:700}
+.mc{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px;padding:12px 14px;margin-top:10px;font-size:13px}
+.mc b{font-size:15px}
+.scrim{position:absolute;inset:0;background:hsl(240 10% 8%/.5);z-index:3}
+.sheet{position:absolute;left:0;right:0;bottom:0;z-index:4;background:hsl(var(--card));border-radius:22px 22px 0 0;box-shadow:0 -10px 40px -10px hsl(230 30% 10%/.4);display:flex;flex-direction:column;max-height:calc(100% - 52px)}
+.sheet.tall{top:52px}
+.sh-hd{padding:8px 16px 12px;border-bottom:1px solid hsl(var(--border));position:relative;flex:none}
+.grab{width:40px;height:5px;border-radius:99px;background:hsl(240 5% 80%);margin:0 auto 10px}
+.sh-hd .dx-ctx{margin-bottom:10px;padding-right:40px}
+.sh-hd .dx-x{top:22px;right:10px;width:40px;height:40px}
+.sh-hd h2{font-size:18px;font-weight:650;line-height:1.3}
+.sh-hd .desc{font-size:13.5px;color:hsl(var(--muted-foreground));margin-top:2px}
+.sh-hd.compact{display:flex;align-items:center;gap:10px}
+.sh-hd.compact h2{font-size:16px}
+.sh-bd{flex:1;overflow:hidden;padding:14px 16px;display:flex;flex-direction:column;gap:16px;min-height:0}
+.sh-ft{flex:none;border-top:1px solid hsl(var(--border));background:hsl(var(--toolbar));padding:10px 16px 28px}
+.sh-ft .conseq{font-size:12.5px;margin-bottom:10px}
+.sh-ft .btns{display:grid;grid-template-columns:1fr 1.5fr;gap:8px}
+.sh-ft .btns .btn{height:50px;font-size:15.5px;border-radius:10px}
+.sheet .input{height:48px;font-size:15.5px;border-radius:10px}
+.sheet .cl-row{padding:11px 12px;grid-template-columns:18px 34px minmax(0,1fr) auto}
+.sheet .cl-q{height:48px;font-size:15px}
+.sheet .qpb{padding:10px}
+.sheet .tc{grid-template-columns:1fr 1fr}
+.sheet .tcard{flex-direction:row;align-items:center;gap:10px;padding:10px}
+.sheet .tcard svg{width:40px;height:24px;flex:none}
+.sheet .tcard .f{white-space:nowrap}
+.sheet .tcard.wide{grid-column:1/-1}
+.scrollhint{position:absolute;right:4px;width:4px;border-radius:4px;background:hsl(240 5% 70%)}
+
+/* ---------- open questions ---------- */
+.qs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-left:40px}
+.q{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px;padding:16px 18px;display:grid;grid-template-columns:28px 1fr;gap:12px}
+.q .qi{width:28px;height:28px;border-radius:8px;background:hsl(var(--warning-soft));color:hsl(var(--warning-text));display:grid;place-items:center}
+.q h3{font-size:15px;font-weight:650;line-height:1.35}
+.q p{font-size:14px;color:hsl(240 6% 26%);margin-top:4px}
+.q .prop{margin-top:8px;font-size:13.5px;color:hsl(233 65% 34%);background:hsl(var(--primary-soft));border-radius:8px;padding:8px 10px}
+.q .prop b{font-weight:600}
+
+/* before/after strip */
+.ba{display:grid;grid-template-columns:minmax(0,340px) minmax(0,1fr);gap:16px;margin-left:40px;align-items:start}
+.old-dlg{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px;padding:18px;font-size:13.5px}
+.old-dlg h4{font-size:15px;font-weight:600}
+.old-dlg .g{color:hsl(var(--muted-foreground));margin-top:4px;font-size:13px}
+.old-dlg .f{height:34px;border:1px solid hsl(240 6% 84%);border-radius:6px;margin-top:10px;display:flex;align-items:center;padding:0 10px;color:hsl(240 4% 46%)}
+.old-dlg .lb{font-size:12.5px;font-weight:500;margin-top:10px}
+.old-dlg .ft{display:flex;justify-content:flex-end;gap:6px;margin-top:14px}
+.old-dlg .ft span{border:1px solid hsl(240 6% 84%);border-radius:6px;padding:4px 10px;font-size:12.5px}
+.old-dlg .ft span.p{background:hsl(var(--primary));color:#fff;border-color:transparent}
+.gaps{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.gap{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px;padding:12px 14px;font-size:13.5px;display:grid;grid-template-columns:22px 1fr;gap:10px;color:hsl(240 6% 24%)}
+.gap .ic{color:hsl(var(--primary));margin-top:1px}
+.gap b{display:block;color:hsl(var(--foreground));font-weight:600}
+
+@media (max-width:1180px){
+  .anat{grid-template-columns:1fr}
+  .legend{border-left:0;border-top:1px solid hsl(var(--border))}
+  .grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .dsgrid{grid-template-columns:1fr}
+}
+@media (max-width:860px){
+  .dx-cols{grid-template-columns:1fr}
+  .dx-cols>.dx-bd+.dx-bd{border-left:0;border-top:1px solid hsl(var(--border))}
+  .tc{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .grid3{grid-template-columns:1fr}
+  .ba{grid-template-columns:1fr}
+}
+@media (max-width:720px){
+  .doc{padding:32px 16px 64px}
+  .indent,.sec-sub,.notes,.phones,.qs,.sub-h,.dsgrid,.ba{margin-left:0}
+  .qs,.grid4,.gaps{grid-template-columns:1fr}
+  .stage{padding:16px}
+  .anat .stage{padding:24px 12px 24px 40px}
+  .pin{left:-34px;width:22px;height:22px;font-size:11px}
+  .pin::after{display:none}
+  .two{grid-template-columns:1fr}
+  .dx-hd,.dx-bd{padding-left:16px;padding-right:16px}
+  .dx-ft{padding:12px 16px}
+  .dx-ft .acts{width:100%}
+  .dx-ft .acts .btn{flex:1}
+  .phones{justify-content:center}
+  .ent{white-space:normal;flex-wrap:wrap;overflow:visible}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="facter" viewBox="0 0 207 304"><path fill="currentColor" d="M25.8384 196.911L15.4739 183.729C-10.7189 150.411 0.44781 101.422 38.4895 82.7344L206.266 0.307297V34.2396C206.266 60.1875 191.448 83.8698 168.12 95.2396L56.578 149.594C48.4634 153.547 41.3489 159.344 35.9791 166.609C30.5936 173.901 25.9582 183.906 26.3176 196.526C29.9947 193.609 34.0624 191.026 38.4843 188.854L206.26 106.432V140.359C206.26 166.313 191.437 189.995 168.109 201.365L56.578 255.708C48.4634 259.667 41.3489 265.464 35.9791 272.724C30.4426 280.224 25.6978 290.578 26.3593 303.693L15.4739 289.854C-7.54698 260.568 -1.72407 219.193 25.8384 196.911ZM134.818 266.526L206.208 303.724L206.187 210.802L134.953 246.661C126.828 250.755 126.755 262.323 134.818 266.526Z"/></symbol>
+  <!-- vehicle silhouettes, facing left -->
+  <symbol id="v-cavalo" viewBox="0 0 72 32"><path fill="currentColor" d="M5 9a3 3 0 0 1 3-3h11l7 8v8H5z"/><path fill="hsl(0 0% 100%)" d="M9 9h9l4 5H9z"/><rect fill="currentColor" x="5" y="21" width="61" height="3" rx="1.5"/><rect fill="currentColor" x="42" y="17" width="14" height="4" rx="1"/><g fill="hsl(0 0% 100%)" stroke="currentColor" stroke-width="2.5"><circle cx="14" cy="25" r="4"/><circle cx="47" cy="25" r="4"/><circle cx="57" cy="25" r="4"/></g></symbol>
+  <symbol id="v-caminhao" viewBox="0 0 72 32"><path fill="currentColor" d="M4 9a3 3 0 0 1 3-3h10l6 7v9H4z"/><path fill="hsl(0 0% 100%)" d="M8 9h8l3.5 4H8z"/><rect fill="currentColor" x="25" y="3" width="43" height="18" rx="2"/><rect fill="currentColor" x="4" y="21" width="64" height="3" rx="1.5"/><g fill="hsl(0 0% 100%)" stroke="currentColor" stroke-width="2.5"><circle cx="13" cy="25" r="4"/><circle cx="50" cy="25" r="4"/><circle cx="60" cy="25" r="4"/></g></symbol>
+  <symbol id="v-carreta" viewBox="0 0 72 32"><rect fill="currentColor" x="3" y="5" width="66" height="14" rx="2"/><rect fill="currentColor" x="16" y="19" width="2.5" height="7" rx="1"/><rect fill="currentColor" x="12" y="25" width="10" height="2" rx="1"/><rect fill="currentColor" x="6" y="19" width="3" height="3"/><g fill="hsl(0 0% 100%)" stroke="currentColor" stroke-width="2.5"><circle cx="46" cy="24" r="4"/><circle cx="55" cy="24" r="4"/><circle cx="64" cy="24" r="4"/></g></symbol>
+  <symbol id="v-julieta" viewBox="0 0 72 32"><rect fill="currentColor" x="1" y="19" width="14" height="2.5" rx="1"/><rect fill="currentColor" x="12" y="5" width="57" height="14" rx="2"/><g fill="hsl(0 0% 100%)" stroke="currentColor" stroke-width="2.5"><circle cx="20" cy="24" r="4"/><circle cx="29" cy="24" r="4"/><circle cx="54" cy="24" r="4"/><circle cx="63" cy="24" r="4"/></g></symbol>
+  <symbol id="v-dolly" viewBox="0 0 72 32"><rect fill="currentColor" x="4" y="19" width="26" height="2.5" rx="1"/><rect fill="currentColor" x="26" y="17" width="36" height="4" rx="1.5"/><rect fill="currentColor" x="36" y="12" width="16" height="5" rx="1.5"/><g fill="hsl(0 0% 100%)" stroke="currentColor" stroke-width="2.5"><circle cx="38" cy="24" r="4"/><circle cx="51" cy="24" r="4"/></g></symbol>
+</svg>
+
+<div class="doc">
+  <header class="doc-head">
+    <div>
+      <h1>Diálogos</h1>
+      <p>Um padrão de diálogo para o Facter Truck v2 e os seis diálogos que existem hoje redesenhados com ele: definir transportadora, cadastrar e editar transportadora, cadastrar veículo e as confirmações de desativar.</p>
+    </div>
+    <div class="lockup" aria-label="Facter Truck">
+      <svg width="27" height="40" aria-hidden="true"><use href="#facter"/></svg>
+      <span class="rule"></span>
+      <div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div>
+    </div>
+  </header>
+  <nav class="toc" aria-label="Seções">
+    <a href="#s0">0 · Hoje</a><a href="#s1">1 · O padrão</a><a href="#s2">2 · Definir transportadora</a><a href="#s3">3 · Cadastrar transportadora</a><a href="#s4">4 · Cadastrar veículo</a><a href="#s5">5 · Confirmações</a><a href="#s6">6 · Celular</a><a href="#s7">7 · Design system</a><a href="#s8">8 · Perguntas em aberto</a>
+  </nav>
+
+  <!-- =============== 0. HOJE =============== -->
+  <section class="sec" id="s0">
+    <div class="sec-label"><span class="sec-num">0</span><h2 class="st2">O que falta no diálogo de hoje</h2></div>
+    <p class="sec-sub">O diálogo atual funciona, mas não ajuda a decidir: não diz de qual veículo se trata além da placa no título, não mostra o que muda no histórico e trata toda transportadora como um nome solto.</p>
+    <div class="ba">
+      <div class="old-dlg" aria-label="Diálogo atual">
+        <h4>Definir transportadora de QOP1J88</h4>
+        <p class="g">O período atual fecha na véspera da data escolhida; o histórico não se apaga</p>
+        <div class="lb">Transportadora</div><div class="f">Escolha a transportadora</div>
+        <div class="lb">A partir de</div><div class="f">dd/mm/aaaa</div>
+        <div class="lb">Histórico</div>
+        <div style="display:flex;justify-content:space-between;font-size:13px;margin-top:4px"><span>Expresso Norte Cargas</span><span class="muted">desde 12/01/2026</span></div>
+        <div class="ft"><span>Cancelar</span><span class="p">Definir</span></div>
+      </div>
+      <div class="gaps">
+        <div class="gap"><i class="ic s18 i-truck"></i><div><b>Sem contexto</b>Só a placa. Tipo, número de frota e quem roda hoje ficam fora; a pessoa confere na lista antes de abrir.</div></div>
+        <div class="gap"><i class="ic s18 i-book"></i><div><b>Escolha às cegas</b>Select só com o nome. Sem CNPJ, sem quantos veículos a transportadora roda, sem gerente para diferenciar homônimos.</div></div>
+        <div class="gap"><i class="ic s18 i-cal"></i><div><b>Data sem atalho</b>Campo nativo vazio; o caso comum (hoje, ontem) exige abrir o calendário do navegador, que muda em cada aparelho.</div></div>
+        <div class="gap"><i class="ic s18 i-hist"></i><div><b>Consequência invisível</b>A regra está na descrição, mas o histórico não mostra como fica depois de salvar: a véspera que fecha não aparece.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== 1. PADRÃO =============== -->
+  <section class="sec" id="s1">
+    <div class="sec-label"><span class="sec-num">1</span><h2 class="st2">O padrão: anatomia do diálogo</h2></div>
+    <p class="sec-sub">Todo diálogo do Truck tem as mesmas quatro partes. O cabeçalho diz sobre o que é, o corpo organiza em seções, e o rodapé resume a consequência antes do botão. Quem lê só o rodapé sabe o que vai acontecer.</p>
+
+    <div class="frame indent anat">
+      <div class="stage" style="justify-content:center">
+        <div class="dx md" role="dialog" aria-labelledby="a-t" aria-describedby="a-d">
+          <div class="dx-hd">
+            <span class="pin" style="top:22px">1</span>
+            <div class="dx-ctx">
+              <span class="dx-ico"><i class="ic s18 i-truck"></i></span>
+              <span class="ent"><b>QOP1J88</b><span class="dot"></span>Cavalo<span class="dot"></span>frota 817</span>
+            </div>
+            <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+            <span class="pin" style="top:74px">2</span>
+            <h2 id="a-t">Definir transportadora</h2>
+            <p class="desc" id="a-d">O período atual fecha na véspera da data escolhida; o histórico não se apaga</p>
+          </div>
+          <div class="dx-bd">
+            <div class="dsec" style="position:relative">
+              <span class="pin" style="top:-4px;left:-70px">3</span>
+              <h3>Hoje roda com</h3>
+              <div class="cur"><span class="lgo lgo-a">EN</span><div><div class="nm">Expresso Norte Cargas</div><div class="s num">desde 12/01/2026 · há 8 meses</div></div></div>
+            </div>
+            <div class="dsec" style="position:relative">
+              <span class="pin" style="top:26px;left:-70px">4</span>
+              <h3>A partir de</h3>
+              <label class="fl"><span class="input err"><span class="grow num">05/01/2026</span><i class="ic s16 i-cal"></i></span>
+                <span class="errtext" id="a-e"><i class="ic s14 i-err"></i>Escolha uma data depois de 12/01/2026</span></label>
+            </div>
+          </div>
+          <div class="dx-ft">
+            <span class="pin" style="top:18px">5</span>
+            <p class="conseq"><i class="ic s16 i-info"></i><span><b>Expresso Norte Cargas</b> fecha em 26/09/2026</span></p>
+            <div class="acts"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Definir</button></div>
+            <span class="pin pr" style="top:18px;left:auto;right:-46px">6</span>
+          </div>
+        </div>
+      </div>
+      <aside class="legend">
+        <h3>As partes</h3>
+        <ol>
+          <li><span class="n">1</span><div><b>Contexto</b>Ícone do objeto e a identidade como o pátio reconhece: placa, apelido (Cavalo) e número de frota. Em cadastro novo, o contexto é onde ele vai entrar ("Transportadoras").</div></li>
+          <li><span class="n">2</span><div><b>Título e descrição</b>Título é a ação ("Definir transportadora"); a placa já está no contexto. Descrição de uma linha, só com a regra que muda a decisão.</div></li>
+          <li><span class="n">3</span><div><b>Seções</b>Rótulo curto em caixa alta pequena, conteúdo embaixo. Estado atual antes da escolha: primeiro "como está", depois "como fica".</div></li>
+          <li><span class="n">4</span><div><b>Erro no campo</b>Embaixo do campo, com ícone e texto que diz o que fazer. O botão não trava antes de a pessoa tentar; o foco vai para o primeiro erro.</div></li>
+          <li><span class="n">5</span><div><b>Consequência</b>Uma linha no rodapé, atualizada ao vivo, com o que muda ao confirmar. Some quando não há nada escolhido; nunca repete a descrição.</div></li>
+          <li><span class="n">6</span><div><b>Ações</b>Cancelar à esquerda (contorno), a ação à direita com o verbo do título. Destrutiva em vermelho, com foco inicial em Cancelar.</div></li>
+        </ol>
+      </aside>
+    </div>
+
+    <h3 class="sub-h"><i class="ic s16 i-mon"></i>Tamanhos e onde abre</h3>
+    <div class="grid4 indent">
+      <div class="card"><div class="wf"><div class="b" style="width:120px"><i class="t"></i><i></i><div class="f"></div></div></div>
+        <h3>sm · 440 px</h3><p>Confirmação. Contexto, pergunta, consequência e dois botões. Sem seções.</p><p class="muted" style="font-size:12.5px">Desativar veículo, desativar transportadora</p></div>
+      <div class="card"><div class="wf"><div class="b" style="width:150px"><i class="t"></i><i></i><i></i><div class="f"></div></div></div>
+        <h3>md · 560 px</h3><p>Formulário de uma coluna, até duas seções. O padrão de quem não sabe qual usar.</p><p class="muted" style="font-size:12.5px">Cadastrar e editar transportadora</p></div>
+      <div class="card"><div class="wf"><div class="b two-c" style="width:200px"><div><i class="t"></i><i></i><i></i></div><div><i class="t"></i><i></i></div></div></div>
+        <h3>lg · 780 px</h3><p>Escolha à esquerda, prévia do resultado à direita, em fundo cinza. Abaixo de 860 px vira uma coluna.</p><p class="muted" style="font-size:12.5px">Definir transportadora, cadastrar veículo</p></div>
+      <div class="card"><div class="wf"><div class="ph"><div class="sh" style="height:74%"></div></div><div class="ph" style="margin-left:14px"><div class="sh" style="height:44%"></div></div></div>
+        <h3>Celular · folha de baixo</h3><p>Abaixo de 640 px todo diálogo vira folha. Cabeçalho e rodapé fixos, corpo rola. Altura pelo conteúdo, até 92% da tela.</p><p class="muted" style="font-size:12.5px">Botões de 50 px, polegar alcança</p></div>
+    </div>
+
+    <h3 class="sub-h"><i class="ic s16 i-cube"></i>Estados</h3>
+    <div class="frame indent stage" style="justify-content:flex-start;align-items:stretch">
+      <div class="col" style="flex:1 1 440px">
+        <div class="cap-top">Carregando</div>
+        <div class="dx" style="--w:100%">
+          <div class="dx-hd"><div class="dx-ctx"><span class="dx-ico"><i class="ic s18 i-truck"></i></span><span class="ent"><b>QOP1J88</b><span class="dot"></span>Cavalo<span class="dot"></span>frota 817</span></div><h2>Definir transportadora</h2></div>
+          <div class="dx-bd" aria-busy="true"><div class="skel" style="height:62px"></div><div class="skel" style="height:42px"></div><div class="skel" style="height:42px;width:70%"></div></div>
+          <div class="dx-ft"><div class="acts"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button" disabled>Definir</button></div></div>
+        </div>
+        <p style="color:#fff;font-size:13px">Contexto e título aparecem na hora (vêm da linha clicada); só o corpo espera.</p>
+      </div>
+      <div class="col" style="flex:1 1 440px">
+        <div class="cap-top">Salvando</div>
+        <div class="dx" style="--w:100%">
+          <div class="dx-hd"><div class="dx-ctx"><span class="dx-ico"><i class="ic s18 i-truck"></i></span><span class="ent"><b>QOP1J88</b><span class="dot"></span>Cavalo<span class="dot"></span>frota 817</span></div><h2>Definir transportadora</h2></div>
+          <div class="dx-bd"><div class="cur" style="opacity:.6"><span class="lgo lgo-b">RS</span><div><div class="nm">Transportadora Rota Sul</div><div class="s">a partir de 27/09/2026</div></div></div></div>
+          <div class="dx-ft"><p class="conseq"><i class="ic s16 i-info"></i><span><b>Expresso Norte Cargas</b> fecha em 26/09/2026</span></p><div class="acts"><button class="btn btn-outline" type="button" disabled style="opacity:.55">Cancelar</button><button class="btn btn-primary" type="button"><i class="ic s16 i-spin"></i>Definindo…</button></div></div>
+        </div>
+        <p style="color:#fff;font-size:13px">Campos travados, Esc e fechar desligados até a resposta. O botão mantém a largura.</p>
+      </div>
+      <div class="col" style="flex:1 1 440px">
+        <div class="cap-top">Erro geral</div>
+        <div class="dx" style="--w:100%">
+          <div class="dx-hd"><div class="dx-ctx"><span class="dx-ico"><i class="ic s18 i-truck"></i></span><span class="ent"><b>QOP1J88</b><span class="dot"></span>Cavalo<span class="dot"></span>frota 817</span></div><h2>Definir transportadora</h2></div>
+          <div class="dx-bd"><div class="banner err" role="alert"><i class="ic s16 i-wifi"></i><span><b>Não conseguimos salvar agora.</b> O que você escolheu continua aqui; tente de novo em alguns segundos.</span></div>
+            <div class="cur"><span class="lgo lgo-b">RS</span><div><div class="nm">Transportadora Rota Sul</div><div class="s">a partir de 27/09/2026</div></div></div></div>
+          <div class="dx-ft"><div class="acts"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Tentar de novo</button></div></div>
+        </div>
+        <p style="color:#fff;font-size:13px">No topo do corpo, com o que fazer. Nada do que foi preenchido se perde.</p>
+      </div>
+      <div class="col" style="flex:1 1 440px">
+        <div class="cap-top">Deu certo</div>
+        <div class="rowflash">
+          <div class="muted" style="font-size:12px"><span>Placa</span><span>Frota</span><span>Transportadora</span></div>
+          <div class="hl"><b>QOP1J88</b><span class="num">817</span><span>Transportadora Rota Sul <span class="since">desde 27/09</span></span></div>
+          <div><b>RTB7F31</b><span class="num">845</span><span>Expresso Norte Cargas</span></div>
+        </div>
+        <div class="toast" role="status"><i class="ic s18 i-checkc"></i>Transportadora de QOP1J88 definida<a href="#">Desfazer</a></div>
+        <p style="color:#fff;font-size:13px">O diálogo fecha, a linha pisca em azul por 2 s e o toast confirma o fato. Desfazer por 8 s, quando a ação permite.</p>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div><h4><i class="ic s14 i-kbd" style="vertical-align:-2px"></i> Teclado e foco</h4><ul>
+        <li>Ao abrir, foco no primeiro campo útil: a busca na escolha, o nome no cadastro. Em confirmação destrutiva, foco em Cancelar.</li>
+        <li><span class="kbd">Tab</span> fica preso no diálogo; <span class="kbd">↑</span><span class="kbd">↓</span> andam na lista e nos cartões de tipo; <span class="kbd">Espaço</span> escolhe.</li>
+        <li><span class="kbd">Enter</span> confirma fora da lista; <span class="kbd">Esc</span> fecha. Ao fechar, o foco volta ao ⋮ que abriu.</li>
+        <li>Erro ao enviar: foco no primeiro campo com erro, ligado por <code>aria-describedby</code>.</li>
+      </ul></div>
+      <div><h4>Leitor de tela</h4><ul>
+        <li><code>role="dialog"</code> com título e descrição ligados; o contexto entra na descrição acessível ("QOP1J88, Cavalo, frota 817").</li>
+        <li>A consequência é <code>aria-live="polite"</code>: quem escolhe ouve o que vai mudar.</li>
+        <li>Botão só com ícone tem nome: "Fechar".</li>
+      </ul></div>
+      <div><h4>Tom destrutivo</h4><ul>
+        <li>Ícone do contexto em vermelho claro; o botão da ação em vermelho, com o verbo ("Desativar").</li>
+        <li>O corpo diz o que sai e o que fica, em lista com ícone: some do quê, continua guardado onde.</li>
+        <li>Bloqueado não é erro: tom de aviso (âmbar) e a saída como botão principal.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- =============== 2. DEFINIR TRANSPORTADORA =============== -->
+  <section class="sec" id="s2">
+    <div class="sec-label"><span class="sec-num">2</span><h2 class="st2">Definir transportadora</h2></div>
+    <p class="sec-sub">Tamanho lg no notebook: a escolha à esquerda, a data e a prévia do histórico à direita. A prévia muda a cada clique, então a regra da véspera deixa de ser texto e vira desenho.</p>
+
+    <div class="frame stage indent">
+      <div class="dx lg" role="dialog" aria-labelledby="d-t" aria-describedby="d-d">
+        <div class="dx-hd">
+          <div class="dx-ctx">
+            <span class="dx-ico"><i class="ic s18 i-truck"></i></span>
+            <span class="ent"><b>QOP1J88</b><span class="dot"></span>Cavalo<span class="dot"></span>frota 817</span>
+          </div>
+          <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+          <h2 id="d-t">Definir transportadora</h2>
+          <p class="desc" id="d-d">O período atual fecha na véspera da data escolhida; o histórico não se apaga</p>
+        </div>
+        <div class="dx-cols">
+          <div class="dx-bd">
+            <div class="dsec">
+              <h3>Hoje roda com</h3>
+              <div class="cur"><span class="lgo lgo-a">EN</span>
+                <div style="min-width:0"><div class="nm">Expresso Norte Cargas</div><div class="s num">desde 12/01/2026 · há 8 meses</div></div>
+                <div class="rt"><b class="num">14</b>veículos hoje</div></div>
+            </div>
+            <div class="dsec">
+              <h3>Passa a rodar com <span class="r">5 ativas</span></h3>
+              <div class="cl" role="radiogroup" aria-label="Transportadora">
+                <div class="cl-q focus"><i class="ic s16 i-search"></i><span>Buscar por nome ou CNPJ</span></div>
+                <div class="cl-row" role="radio" aria-checked="false"><span class="rd"></span><span class="lgo lgo-own"><i class="ic s18 i-bld"></i></span>
+                  <div style="min-width:0"><div class="nm">Frota própria</div><div class="s">A própria empresa opera; encerra o período</div></div><span class="n"></span></div>
+                <div class="cl-row sel" role="radio" aria-checked="true"><span class="rd"></span><span class="lgo lgo-b">RS</span>
+                  <div style="min-width:0"><div class="nm">Transportadora Rota Sul</div><div class="s num">08.417.552/0001-31 · Carlos Menezes</div></div><span class="n"><b>22</b>veículos</span></div>
+                <div class="cl-row" role="radio" aria-checked="false"><span class="rd"></span><span class="lgo lgo-c">TP</span>
+                  <div style="min-width:0"><div class="nm">Translog Paraná</div><div class="s num">27.903.114/0001-08 · Patrícia Kowalski</div></div><span class="n"><b>0</b>veículos</span></div>
+                <div class="cl-row" role="radio" aria-checked="false"><span class="rd"></span><span class="lgo lgo-d">JB</span>
+                  <div style="min-width:0"><div class="nm">Agregado João Batista <span class="tag tag-off">pessoa física</span></div><div class="s">Sem CNPJ · (41) 99654-2280</div></div><span class="n"><b>1</b>veículo</span></div>
+                <div class="cl-row cur-row" role="radio" aria-checked="false" aria-disabled="true"><span class="rd off"></span><span class="lgo lgo-a">EN</span>
+                  <div style="min-width:0"><div class="nm">Expresso Norte Cargas <span class="tag tag-chg">atual</span></div><div class="s num">12.345.678/0001-90 · Marina Duarte</div></div><span class="n"><b>14</b>veículos</span></div>
+                <div class="cl-foot"><span class="muted">Cargas Serra Verde está inativa e não aparece</span><a href="#s3"><i class="ic s16 i-plus"></i>Cadastrar transportadora</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="dx-bd">
+            <div class="dsec">
+              <h3>A partir de</h3>
+              <div class="qp" role="group" aria-label="A partir de">
+                <button class="qpb" type="button" aria-pressed="true"><b>Hoje</b><span>27/09</span></button>
+                <button class="qpb" type="button" aria-pressed="false"><b>Ontem</b><span>26/09</span></button>
+                <button class="qpb" type="button" aria-pressed="false"><b><i class="ic s14 i-cal"></i>Outra</b><span>escolher</span></button>
+              </div>
+            </div>
+            <div class="dsec">
+              <h3>Como fica o histórico</h3>
+              <div class="preview-card" aria-live="polite">
+                <ol class="tlp">
+                  <li class="new"><div class="t">Transportadora Rota Sul <span class="tag tag-new">novo</span></div><div class="w">a partir de 27/09/2026</div></li>
+                  <li class="closing"><div class="t">Expresso Norte Cargas <span class="tag tag-chg">fecha</span></div><div class="w">12/01/2026 a <b>26/09/2026</b></div></li>
+                  <li class="old"><div class="t">Frota própria</div><div class="w">04/03/2025 a 11/01/2026</div></li>
+                </ol>
+              </div>
+              <div>
+                <div class="yr" style="grid-template-columns:11fr 258fr 96fr" aria-hidden="true"><span class="y-own"></span><span class="y-a"></span><span class="y-b"></span></div>
+                <div class="yr-t"><span>jan 2026</span><span>abr</span><span>jul</span><span>out</span><span>dez</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="dx-ft">
+          <p class="conseq" aria-live="polite"><i class="ic s16 i-info"></i><span><b>Expresso Norte Cargas</b> fecha em 26/09/2026. OS e custos de QOP1J88 a partir de 27/09 contam para <b>Transportadora Rota Sul</b>.</span></p>
+          <div class="acts"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Definir</button></div>
+        </div>
+      </div>
+
+      <div class="col" style="width:340px;max-width:100%">
+        <div>
+          <div class="cap-top"><i class="ic s14 i-cal"></i>Outra data</div>
+          <div class="cal">
+            <div class="cal-hd"><button type="button" aria-label="Mês anterior"><i class="ic s14 i-cl"></i></button><span>setembro de 2026</span><button type="button" aria-label="Próximo mês" disabled><i class="ic s14 i-cr"></i></button></div>
+            <div class="cal-g">
+              <span class="h">D</span><span class="h">S</span><span class="h">T</span><span class="h">Q</span><span class="h">Q</span><span class="h">S</span><span class="h">S</span>
+              <span></span><span></span><span class="d">1</span><span class="d">2</span><span class="d">3</span><span class="d">4</span><span class="d">5</span>
+              <span class="d">6</span><span class="d">7</span><span class="d">8</span><span class="d">9</span><span class="d">10</span><span class="d">11</span><span class="d">12</span>
+              <span class="d">13</span><span class="d">14</span><span class="d">15</span><span class="d">16</span><span class="d">17</span><span class="d">18</span><span class="d">19</span>
+              <span class="d cl8">20</span><span class="d sel">21</span><span class="d">22</span><span class="d">23</span><span class="d">24</span><span class="d">25</span><span class="d">26</span>
+              <span class="d today">27</span><span class="d x">28</span><span class="d x">29</span><span class="d x">30</span><span></span><span></span><span></span>
+            </div>
+            <div class="cal-leg"><span><i class="sw" style="background:hsl(var(--primary))"></i>começa</span><span><i class="sw" style="background:hsl(40 95% 85%)"></i>atual fecha</span><span><i class="sw" style="box-shadow:inset 0 0 0 1.5px hsl(var(--primary))"></i>hoje</span></div>
+          </div>
+          <p style="color:#fff;font-size:13px;margin-top:8px">Dias depois de hoje e antes de 13/01/2026 não abrem. A véspera aparece marcada no próprio calendário.</p>
+        </div>
+        <div>
+          <div class="cap-top"><i class="ic s14 i-err"></i>Data antes do período atual</div>
+          <div class="dx" style="--w:100%">
+            <div class="dx-bd" style="gap:14px">
+              <div class="qp"><button class="qpb" type="button" aria-pressed="false"><b>Hoje</b><span>27/09</span></button><button class="qpb" type="button" aria-pressed="false"><b>Ontem</b><span>26/09</span></button><button class="qpb err" type="button" aria-pressed="true"><b><i class="ic s14 i-cal"></i>Outra</b><span>05/01/2026</span></button></div>
+              <div><span class="errtext" style="margin-top:0"><i class="ic s14 i-err"></i>Escolha uma data depois de 12/01/2026</span>
+              <p class="hint">Para corrigir um período antigo, use Corrigir histórico, no detalhe do veículo</p></div>
+              <div class="preview-card" style="padding:12px;color:hsl(var(--muted-foreground));font-size:13px;display:flex;gap:8px"><i class="ic s16 i-hist"></i>A prévia volta quando a data for válida</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-h">Outros casos</h3>
+    <div class="frame stage indent" style="align-items:stretch">
+      <div class="col" style="flex:1 1 330px">
+        <div class="cap-top">Frota própria escolhida</div>
+        <div class="dx" style="--w:100%">
+          <div class="dx-bd" style="gap:14px">
+            <div class="cl"><div class="cl-row sel"><span class="rd"></span><span class="lgo lgo-own"><i class="ic s18 i-bld"></i></span><div style="min-width:0"><div class="nm">Frota própria</div><div class="s">A própria empresa opera; encerra o período</div></div><span></span></div></div>
+            <div class="preview-card"><ol class="tlp">
+              <li class="new"><div class="t">Frota própria <span class="tag tag-new">novo</span></div><div class="w">a partir de 27/09/2026</div></li>
+              <li class="closing"><div class="t">Expresso Norte Cargas <span class="tag tag-chg">fecha</span></div><div class="w">12/01/2026 a <b>26/09/2026</b></div></li>
+            </ol></div>
+          </div>
+          <div class="dx-ft"><p class="conseq"><i class="ic s16 i-info"></i><span>Encerra o período com <b>Expresso Norte Cargas</b> em 26/09/2026. QOP1J88 volta para a frota própria.</span></p></div>
+        </div>
+      </div>
+      <div class="col" style="flex:1 1 330px">
+        <div class="cap-top">Nenhuma transportadora cadastrada</div>
+        <div class="dx" style="--w:100%">
+          <div class="dx-hd"><div class="dx-ctx"><span class="dx-ico"><i class="ic s18 i-truck"></i></span><span class="ent"><b>RUE4K70</b><span class="dot"></span>Caminhão<span class="dot"></span>frota 702</span></div><h2>Definir transportadora</h2></div>
+          <div class="dx-bd" style="align-items:center;text-align:center;gap:10px;padding:28px 24px">
+            <span class="dx-ico" style="width:48px;height:48px;border-radius:14px"><i class="ic s24 i-book"></i></span>
+            <h3 style="font-size:16px;font-weight:650">Nenhuma transportadora cadastrada ainda</h3>
+            <p style="font-size:14px;color:hsl(var(--muted-foreground));max-width:320px">Cadastre quem roda com os veículos para ver custo e indicadores por transportadora</p>
+            <button class="btn btn-primary" type="button" style="margin-top:6px"><i class="ic s16 i-plus"></i>Cadastrar transportadora</button>
+          </div>
+          <div class="dx-ft"><p class="conseq"><i class="ic s16 i-bld"></i><span>Hoje: frota própria, desde 04/03/2025</span></p></div>
+        </div>
+      </div>
+      <div class="col" style="flex:1 1 330px">
+        <div class="cap-top">Busca sem resultado</div>
+        <div class="dx" style="--w:100%">
+          <div class="dx-bd" style="gap:14px">
+            <div class="cl">
+              <div class="cl-q focus"><i class="ic s16 i-search"></i><span style="color:hsl(var(--foreground))">serra</span><span class="caret" style="margin-left:0"></span></div>
+              <div style="padding:18px 14px;text-align:center;font-size:14px"><b style="font-weight:600">Nenhuma transportadora ativa encontrada para “serra”</b>
+                <p class="muted" style="font-size:13px;margin-top:4px">Cargas Serra Verde está inativa. Reative em Transportadoras para escolher.</p></div>
+              <div class="cl-foot"><a href="#">Limpar busca</a><a href="#s3"><i class="ic s16 i-plus"></i>Cadastrar “serra”</a></div>
+            </div>
+          </div>
+        </div>
+        <p style="color:#fff;font-size:13px">Cadastrar a partir daqui troca o conteúdo do diálogo (com voltar) e, ao salvar, volta com a nova já escolhida.</p>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div><h4>Como se comporta</h4><ul>
+        <li>"A partir de" vem em Hoje. Só hoje ou antes, e depois do início do período atual (12/01/2026).</li>
+        <li>A transportadora atual aparece na lista, travada e marcada "atual"; escolhê-la de novo não faria nada.</li>
+        <li>Frota própria fica sempre no topo, separada das empresas pelo ícone.</li>
+        <li>Definir só libera com transportadora escolhida; a consequência aparece junto.</li>
+      </ul></div>
+      <div><h4>Decisões</h4><ul>
+        <li>Número de veículos e gerente na linha: é como a gestão diferencia "Rota Sul" de "Rota Sul Cargas".</li>
+        <li>O rodapé nomeia o efeito no dinheiro (OS e custos passam a contar para a nova): é para isso que o período existe.</li>
+        <li>A faixa do ano mostra o peso de cada período; a lista mostra as datas exatas.</li>
+      </ul></div>
+      <div><h4>Custo de implementar</h4><ul>
+        <li>Lista com busca, atalhos de data e prévia: tudo com os dados que o diálogo já carrega (transportadoras e histórico). Nenhuma chamada nova.</li>
+        <li>Contagem de veículos por transportadora já existe (<code>vehiclesRunning</code>).</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- =============== 3. CADASTRAR / EDITAR TRANSPORTADORA =============== -->
+  <section class="sec" id="s3">
+    <div class="sec-label"><span class="sec-num">3</span><h2 class="st2">Cadastrar e editar transportadora</h2></div>
+    <p class="sec-sub">Duas seções: quem é a empresa e com quem falar. O CNPJ é formatado enquanto se digita e conferido ao sair do campo, inclusive contra as transportadoras já cadastradas.</p>
+
+    <div class="frame stage indent">
+      <div class="dx md" role="dialog" aria-labelledby="c-t">
+        <div class="dx-hd">
+          <div class="dx-ctx"><span class="dx-ico"><i class="ic s18 i-book"></i></span><span class="ent">Transportadoras<span class="dot"></span>Suzano · Mucuri</span></div>
+          <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+          <h2 id="c-t">Cadastrar transportadora</h2>
+          <p class="desc">Só o nome é obrigatório; o resto ajuda a falar com quem opera o veículo</p>
+        </div>
+        <div class="dx-bd">
+          <div class="dsec">
+            <h3><span style="display:flex;gap:6px;align-items:center"><i class="ic s14 i-bld"></i>Empresa</span></h3>
+            <label class="fl"><span class="l">Nome <span class="req">*</span></span><span class="input"><span class="grow">Translog Paraná</span></span></label>
+            <label class="fl"><span class="l">CNPJ</span><span class="input ok"><span class="grow num">27.903.114/0001-08</span><i class="ic s16 i-checkc" style="color:hsl(var(--success-text))" aria-label="CNPJ válido"></i></span>
+              <span class="hint">Deixe em branco para agregado pessoa física</span></label>
+          </div>
+          <div class="dsec">
+            <h3><span style="display:flex;gap:6px;align-items:center"><i class="ic s14 i-user"></i>Contato</span></h3>
+            <label class="fl"><span class="l">Gerente</span><span class="input"><span class="grow">Patrícia Kowalski</span></span></label>
+            <div class="two">
+              <label class="fl"><span class="l">Telefone do gerente</span><span class="input"><i class="ic s16 i-phone"></i><span class="grow num">(41) 99731-5820</span></span></label>
+              <label class="fl"><span class="l">E-mail</span><span class="input focus"><i class="ic s16 i-mail"></i><span class="grow">patricia@translogpr.com.br</span><span class="caret" style="margin-left:-8px"></span></span></label>
+            </div>
+          </div>
+        </div>
+        <div class="dx-ft">
+          <p class="conseq"><i class="ic s16 i-info"></i><span>Depois de cadastrar, ela já aparece para definir nos veículos</span></p>
+          <div class="acts"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Cadastrar</button></div>
+        </div>
+      </div>
+
+      <div class="col" style="width:360px;max-width:100%">
+        <div>
+          <div class="cap-top">CNPJ enquanto digita</div>
+          <div class="dx" style="--w:100%"><div class="dx-bd" style="gap:16px">
+            <label class="fl"><span class="l">CNPJ</span><span class="input focus"><span class="grow num">27.903.114/000<span class="caret" style="margin-left:1px"></span></span></span>
+              <span class="hint">Pontos, barra e traço entram sozinhos; colar com ou sem eles funciona</span></label>
+          </div></div>
+        </div>
+        <div>
+          <div class="cap-top">Dígito que não fecha</div>
+          <div class="dx" style="--w:100%"><div class="dx-bd">
+            <label class="fl"><span class="l">CNPJ</span><span class="input err"><span class="grow num">27.903.114/0001-80</span></span>
+              <span class="errtext"><i class="ic s14 i-err"></i>Confira os 2 últimos dígitos</span></label>
+          </div></div>
+        </div>
+        <div>
+          <div class="cap-top">Já cadastrado</div>
+          <div class="dx" style="--w:100%"><div class="dx-bd" style="gap:16px">
+            <label class="fl"><span class="l">CNPJ</span><span class="input err"><span class="grow num">12.345.678/0001-90</span></span>
+              <span class="errtext"><i class="ic s14 i-err"></i><span>CNPJ já cadastrado: Expresso Norte Cargas · <a href="#">Abrir</a></span></span></label>
+            <label class="fl"><span class="l">CNPJ</span><span class="input err"><span class="grow num">33.618.402/0001-55</span></span>
+              <span class="errtext"><i class="ic s14 i-err"></i><span>CNPJ de Cargas Serra Verde, inativa · <a href="#">Reativar</a></span></span></label>
+          </div></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-h"><i class="ic s16 i-pen"></i>Editar: o que mudou fica marcado</h3>
+    <div class="frame stage indent">
+      <div class="dx md" role="dialog" aria-labelledby="e-t">
+        <div class="dx-hd">
+          <div class="dx-ctx"><span class="dx-ico"><i class="ic s18 i-book"></i></span><span class="ent"><b>Transportadora Rota Sul</b><span class="dot"></span>22 veículos<span class="dot"></span>ativa</span></div>
+          <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+          <h2 id="e-t">Editar Transportadora Rota Sul</h2>
+          <p class="desc">As mudanças valem para os 22 veículos e para o histórico dela</p>
+        </div>
+        <div class="dx-bd">
+          <div class="dsec">
+            <h3><span style="display:flex;gap:6px;align-items:center"><i class="ic s14 i-bld"></i>Empresa</span></h3>
+            <label class="fl"><span class="l">Nome <span class="req">*</span></span><span class="input"><span class="grow">Transportadora Rota Sul</span></span></label>
+            <label class="fl"><span class="l">CNPJ</span><span class="input ok"><span class="grow num">08.417.552/0001-31</span><i class="ic s16 i-checkc" style="color:hsl(var(--success-text))" aria-label="CNPJ válido"></i></span></label>
+          </div>
+          <div class="dsec">
+            <h3><span style="display:flex;gap:6px;align-items:center"><i class="ic s14 i-user"></i>Contato</span><span class="r">2 alterações</span></h3>
+            <label class="fl"><span class="l">Gerente</span><span class="input"><span class="grow">Carlos Menezes</span></span></label>
+            <div class="two">
+              <label class="fl chg-f"><span class="l">Telefone do gerente <span class="tag tag-chg">alterado</span></span><span class="input"><i class="ic s16 i-phone"></i><span class="grow num">(41) 98877-2031</span></span>
+                <span class="was">antes: <s class="num">(41) 99812-4471</s></span></label>
+              <label class="fl chg-f" style="margin-left:0"><span class="l">E-mail <span class="tag tag-chg">alterado</span></span><span class="input"><i class="ic s16 i-mail"></i><span class="grow">operacao@rotasul.com.br</span></span>
+                <span class="was">antes: <s>carlos@rotasul.com.br</s></span></label>
+            </div>
+          </div>
+        </div>
+        <div class="dx-ft">
+          <p class="conseq"><i class="ic s16 i-pen"></i><span><b>2 alterações:</b> telefone e e-mail · <a href="#" style="font-weight:600">Desfazer</a></span></p>
+          <div class="acts"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Salvar</button></div>
+        </div>
+      </div>
+      <div class="col" style="width:360px;max-width:100%">
+        <div>
+          <div class="cap-top">Sem alteração</div>
+          <div class="dx" style="--w:100%">
+            <div class="dx-ft" style="border-top:0;border-radius:16px"><p class="conseq"><i class="ic s16 i-check" style="color:hsl(240 5% 45%)"></i><span class="muted">Nada alterado ainda</span></p><div class="acts"><button class="btn btn-outline" type="button">Fechar</button><button class="btn btn-primary" type="button" disabled>Salvar</button></div></div>
+          </div>
+          <p style="color:#fff;font-size:13px;margin-top:8px">Sem mudança, o botão da esquerda é Fechar e Salvar fica apagado: não há o que salvar.</p>
+        </div>
+        <div>
+          <div class="cap-top">Fechar com alteração</div>
+          <div class="dx sm" style="--w:100%">
+            <div class="dx-hd" style="border-bottom:0;padding-bottom:6px"><h2 style="font-size:17px">Descartar as 2 alterações?</h2><p class="desc">Telefone e e-mail voltam ao que estavam</p></div>
+            <div class="dx-ft" style="background:none;border-top:0"><div class="acts"><button class="btn btn-outline" type="button">Continuar editando</button><button class="btn btn-danger" type="button">Descartar</button></div></div>
+          </div>
+          <p style="color:#fff;font-size:13px;margin-top:8px">Esc, X ou clique fora com algo alterado pedem confirmação. Sem alteração, fecham direto.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="notes">
+      <div><h4>Decisões</h4><ul>
+        <li>Contato agrupado: gerente, telefone e e-mail são uma coisa só para quem lê ("com quem falo").</li>
+        <li>CNPJ confere o dígito no navegador (sem custo) e a duplicidade no servidor ao sair do campo.</li>
+        <li>Duplicado aponta para a existente, e para a inativa oferece Reativar em vez de criar uma segunda.</li>
+      </ul></div>
+      <div><h4>Editar</h4><ul>
+        <li>Faixa âmbar e "antes:" nos campos mudados; o rodapé soma as alterações.</li>
+        <li>"Desfazer", no rodapé, volta tudo ao salvo sem fechar o diálogo.</li>
+        <li>O contexto mostra quantos veículos a mudança atinge.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- =============== 4. CADASTRAR VEÍCULO =============== -->
+  <section class="sec" id="s4">
+    <div class="sec-label"><span class="sec-num">4</span><h2 class="st2">Cadastrar veículo</h2></div>
+    <p class="sec-sub">O tipo deixa de ser um select e vira cartões com o desenho, o nome do pátio e o nome do CTB. A placa reconhece o formato e mostra a placa desenhada; o número de frota sugere o próximo livre.</p>
+
+    <div class="frame stage indent">
+      <div class="dx lg" role="dialog" aria-labelledby="v-t">
+        <div class="dx-hd">
+          <div class="dx-ctx"><span class="dx-ico"><i class="ic s18 i-truck"></i></span><span class="ent">Veículos<span class="dot"></span>86 ativos</span></div>
+          <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+          <h2 id="v-t">Cadastrar veículo</h2>
+          <p class="desc">Tipo e placa identificam o veículo; o número de frota é como a oficina chama</p>
+        </div>
+        <div class="dx-bd">
+          <div class="dsec">
+            <h3>Tipo <span class="r">obrigatório</span></h3>
+            <div class="tc" role="radiogroup" aria-label="Tipo">
+              <div class="tcard" role="radio" aria-checked="true"><svg aria-hidden="true"><use href="#v-cavalo"/></svg><div><div class="nm">Cavalo</div><div class="f">Caminhão-trator</div></div></div>
+              <div class="tcard" role="radio" aria-checked="false"><svg aria-hidden="true"><use href="#v-carreta"/></svg><div><div class="nm">Carreta</div><div class="f">Semirreboque</div></div></div>
+              <div class="tcard" role="radio" aria-checked="false"><svg aria-hidden="true"><use href="#v-julieta"/></svg><div><div class="nm">Julieta</div><div class="f">Reboque</div></div></div>
+              <div class="tcard" role="radio" aria-checked="false"><svg aria-hidden="true"><use href="#v-dolly"/></svg><div><div class="nm">Dolly</div><div class="f">Dolly</div></div></div>
+              <div class="tcard" role="radio" aria-checked="false"><svg aria-hidden="true"><use href="#v-caminhao"/></svg><div><div class="nm">Caminhão</div><div class="f">Truck ou toco</div></div></div>
+            </div>
+            <p class="tdesc"><i class="ic s16 i-info"></i><span><b>Cavalo mecânico, que puxa as carretas.</b> Engata pela quinta roda; o conjunto é montado depois, no detalhe.</span></p>
+          </div>
+          <div class="two" style="gap:20px;align-items:start">
+            <div class="dsec">
+              <h3>Placa</h3>
+              <label class="fl"><span class="l">Placa <span class="req">*</span></span>
+                <span style="display:flex;gap:10px;align-items:center"><span class="input focus" style="flex:1"><span class="grow num" style="font-weight:600;letter-spacing:.06em">QOP1J88</span></span>
+                <span class="plate" aria-hidden="true"><span class="top"></span><span class="pn">QOP1J88</span></span></span>
+                <span class="hint">Mercosul · formato ABC1D23. A antiga (ABC1234) também vale</span></label>
+            </div>
+            <div class="dsec">
+              <h3>Na oficina</h3>
+              <label class="fl"><span class="l">Número de frota</span>
+                <span class="input-btn"><span class="input ph"><i class="ic s16 i-tag"></i><span class="grow">Ex.: 812</span></span><button class="btn btn-outline" type="button"><i class="ic s16 i-wand"></i>Gerar</button></span>
+                <span class="hint">Como a oficina chama o veículo. Próximo livre: <b class="num" style="color:hsl(var(--foreground))">818</b></span></label>
+            </div>
+          </div>
+        </div>
+        <div class="dx-ft">
+          <p class="conseq"><i class="ic s16 i-info"></i><span>Entra ativo, como <b>frota própria</b>. A transportadora se define depois, pelo ⋮ da linha</span></p>
+          <div class="acts"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Cadastrar</button></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sub-h">Placa e número de frota: casos</h3>
+    <div class="grid4 indent">
+      <div class="card"><span class="k">Placa antiga reconhecida</span>
+        <label class="fl"><span style="display:flex;gap:10px;align-items:center"><span class="input" style="flex:1"><span class="grow num" style="font-weight:600;letter-spacing:.06em">JMH5350</span></span><span class="plate old" aria-hidden="true"><span class="top"></span><span class="pn">JMH-5350</span></span></span>
+        <span class="hint">Antiga · formato ABC1234</span></label></div>
+      <div class="card"><span class="k">Formato que não existe</span>
+        <label class="fl"><span class="input err"><span class="grow num" style="font-weight:600;letter-spacing:.06em">QO1J88</span></span>
+        <span class="errtext"><i class="ic s14 i-err"></i>Use o formato ABC1234 ou ABC1D23</span></label></div>
+      <div class="card"><span class="k">Placa já cadastrada</span>
+        <label class="fl"><span class="input err"><span class="grow num" style="font-weight:600;letter-spacing:.06em">RTB7F31</span></span>
+        <span class="errtext"><i class="ic s14 i-err"></i><span>Placa já cadastrada: frota 845 · <a href="#">Abrir</a></span></span></label></div>
+      <div class="card"><span class="k">Dolly: placa opcional</span>
+        <label class="fl"><span class="l">Placa <span class="opt">(opcional para dolly)</span></span><span class="input ph"><span class="grow">ABC1D23</span></span>
+        <span class="hint">Dolly sem placa entra pelo número de frota</span></label></div>
+    </div>
+    <div class="notes">
+      <div><h4>Decisões</h4><ul>
+        <li>Nome do pátio em destaque e o formal (CTB) embaixo, como pede o vocabulário do COPY.md. Na lista e no relatório, o formal.</li>
+        <li>A frase de apoio do tipo aparece só para o escolhido, não para os cinco: menos texto na tela.</li>
+        <li>Ordem dos cartões pela frequência na frota de cavalo e carreta; Caminhão por último.</li>
+      </ul></div>
+      <div><h4>Gerar número de frota</h4><ul>
+        <li>"Gerar" preenche o maior número de frota da organização + 1 (818). A dica já mostra o valor, então quem digita não precisa clicar.</li>
+        <li>O número continua editável; é sugestão, não regra.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- =============== 5. CONFIRMAÇÕES =============== -->
+  <section class="sec" id="s5">
+    <div class="sec-label"><span class="sec-num">5</span><h2 class="st2">Confirmações</h2></div>
+    <p class="sec-sub">Tamanho sm. Título é a pergunta com a ação e o objeto; o corpo lista o que sai e o que fica; o botão repete o verbo. Quando não dá para desativar, o diálogo não finge: mostra por quê e leva ao que resolve.</p>
+
+    <div class="frame stage indent" style="align-items:flex-start">
+      <div class="col" style="flex:1 1 360px;max-width:420px">
+        <div class="cap-top">Desativar veículo</div>
+        <div class="dx" style="--w:100%" role="alertdialog" aria-labelledby="x1">
+          <div class="dx-hd">
+            <div class="dx-ctx"><span class="dx-ico danger"><i class="ic s18 i-ban"></i></span><span class="ent"><b>QOP1J88</b><span class="dot"></span>Cavalo<span class="dot"></span>frota 817</span></div>
+            <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+            <h2 id="x1">Desativar QOP1J88?</h2>
+          </div>
+          <div class="dx-bd" style="gap:14px">
+            <ul class="facts">
+              <li class="out"><i class="ic s16 i-ban"></i><span>Sai das listas de operação e da escolha em novas OS</span></li>
+              <li class="keep"><i class="ic s16 i-checkc"></i><span>Continuam guardados: 38 OS, <span class="num">R$ 48.320,00</span> em custos e o histórico de transportadoras</span></li>
+              <li class="back"><i class="ic s16 i-undo"></i><span>Dá para reativar depois, na aba Inativos</span></li>
+            </ul>
+          </div>
+          <div class="dx-ft"><div class="acts"><button class="btn btn-outline" type="button" style="box-shadow:0 0 0 2px hsl(var(--card)),0 0 0 4px hsl(var(--ring))">Cancelar</button><button class="btn btn-danger" type="button">Desativar</button></div></div>
+        </div>
+      </div>
+
+      <div class="col" style="flex:1 1 360px;max-width:420px">
+        <div class="cap-top">Desativar transportadora</div>
+        <div class="dx" style="--w:100%" role="alertdialog" aria-labelledby="x2">
+          <div class="dx-hd">
+            <div class="dx-ctx"><span class="dx-ico danger"><i class="ic s18 i-ban"></i></span><span class="ent"><b>Translog Paraná</b><span class="dot"></span>sem veículos</span></div>
+            <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+            <h2 id="x2">Desativar Translog Paraná?</h2>
+          </div>
+          <div class="dx-bd" style="gap:14px">
+            <ul class="facts">
+              <li class="out"><i class="ic s16 i-ban"></i><span>Deixa de aparecer para definir em veículos</span></li>
+              <li class="keep"><i class="ic s16 i-checkc"></i><span>Os 6 períodos em que operou continuam no histórico, com os custos de cada um</span></li>
+              <li class="back"><i class="ic s16 i-undo"></i><span>Dá para reativar depois, na aba Inativas</span></li>
+            </ul>
+          </div>
+          <div class="dx-ft"><div class="acts"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-danger" type="button">Desativar</button></div></div>
+        </div>
+      </div>
+
+      <div class="col" style="flex:1 1 360px;max-width:420px">
+        <div class="cap-top">Bloqueado: ainda tem veículos</div>
+        <div class="dx" style="--w:100%" role="alertdialog" aria-labelledby="x3">
+          <div class="dx-hd">
+            <div class="dx-ctx"><span class="dx-ico warn"><i class="ic s18 i-warn"></i></span><span class="ent"><b>Expresso Norte Cargas</b><span class="dot"></span>ativa</span></div>
+            <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+            <h2 id="x3">Expresso Norte Cargas ainda tem veículos</h2>
+            <p class="desc">14 veículos rodam com ela hoje. Defina outra transportadora ou frota própria para eles antes de desativar.</p>
+          </div>
+          <div class="dx-bd" style="gap:10px">
+            <div class="vl">
+              <div class="vl-row"><b>QOP1J88</b><span class="s">Cavalo · frota 817</span><span class="w">desde 12/01</span></div>
+              <div class="vl-row"><b>RTB7F31</b><span class="s">Cavalo · frota 845</span><span class="w">desde 12/01</span></div>
+              <div class="vl-row"><b>PQA9H12</b><span class="s">Carreta · frota C-318</span><span class="w">desde 03/02</span></div>
+              <div class="vl-row"><b>SAL3E09</b><span class="s">Cavalo · frota 851</span><span class="w">desde 03/02</span></div>
+              <div class="vl-row"><b>RUA4K71</b><span class="s">Carreta · frota C-322</span><span class="w">desde 18/05</span></div>
+              <div class="vl-more">e mais 9</div>
+            </div>
+          </div>
+          <div class="dx-ft"><div class="acts"><button class="btn btn-outline" type="button">Fechar</button><button class="btn btn-primary" type="button">Ver os 14 veículos<i class="ic s16 i-arrow"></i></button></div></div>
+        </div>
+      </div>
+    </div>
+    <div class="notes">
+      <div><h4>Decisões</h4><ul>
+        <li>Consequência em lista com ícone (sai, fica, volta) em vez de parágrafo: lê-se em 2 segundos.</li>
+        <li>Os números (38 OS, R$ 48.320,00) mostram o que está protegido. Custo: uma contagem agregada por veículo ao abrir, com índice por veículo.</li>
+        <li>Bloqueado não tem botão vermelho nem desabilitado: a ação principal é a saída ("Ver os 14 veículos", já filtrado).</li>
+      </ul></div>
+      <div><h4>Sem permissão</h4><ul>
+        <li>O item do ⋮ some para quem não pode. Se o diálogo abrir por link: "Seu papel não permite desativar veículos. Peça a quem administra a empresa", com um só botão, Fechar.</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- =============== 6. CELULAR =============== -->
+  <section class="sec" id="s6">
+    <div class="sec-label"><span class="sec-num">6</span><h2 class="st2">No celular · 390 px</h2></div>
+    <p class="sec-sub">O mesmo diálogo vira folha de baixo. Cabeçalho e rodapé ficam fixos; o corpo rola. Ao rolar, o cabeçalho encolhe para o contexto e o título, e a consequência continua à vista acima dos botões.</p>
+
+    <div class="phones" id="phones">
+      <!-- phone 1: define carrier, top -->
+      <div class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="status"><span>9:41</span><span class="isl"></span><span>5G</span></div>
+          <div class="m-top"><div class="lockup"><svg width="18" height="27" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div class="wordmark">Facter <b>Truck</b></div></div></div>
+          <div class="m-body"><h1>Veículos</h1><div class="mc"><b>QOP1J88</b> · frota 817</div><div class="mc"><b>RTB7F31</b> · frota 845</div></div>
+          <div class="scrim"></div>
+          <div class="sheet tall" role="dialog" aria-labelledby="p1t">
+            <div class="sh-hd">
+              <div class="grab"></div>
+              <div class="dx-ctx"><span class="dx-ico"><i class="ic s18 i-truck"></i></span><span class="ent"><b>QOP1J88</b><span class="dot"></span>Cavalo<span class="dot"></span>frota 817</span></div>
+              <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+              <h2 id="p1t">Definir transportadora</h2>
+              <p class="desc">O período atual fecha na véspera da data escolhida</p>
+            </div>
+            <div class="sh-bd" style="position:relative">
+              <span class="scrollhint" style="top:6px;height:120px"></span>
+              <div class="dsec"><h3>Hoje roda com</h3>
+                <div class="cur" style="padding:10px 12px"><span class="lgo lgo-a">EN</span><div style="min-width:0"><div class="nm">Expresso Norte Cargas</div><div class="s num">desde 12/01/2026</div></div></div></div>
+              <div class="dsec"><h3>Passa a rodar com</h3>
+                <div class="cl">
+                  <div class="cl-q"><i class="ic s18 i-search"></i><span>Buscar por nome ou CNPJ</span></div>
+                  <div class="cl-row"><span class="rd"></span><span class="lgo lgo-own"><i class="ic s16 i-bld"></i></span><div style="min-width:0"><div class="nm">Frota própria</div><div class="s">Encerra o período</div></div><span></span></div>
+                  <div class="cl-row sel"><span class="rd"></span><span class="lgo lgo-b">RS</span><div style="min-width:0"><div class="nm">Transportadora Rota Sul</div><div class="s">Carlos Menezes</div></div><span class="n"><b>22</b>veíc.</span></div>
+                  <div class="cl-row"><span class="rd"></span><span class="lgo lgo-c">TP</span><div style="min-width:0"><div class="nm">Translog Paraná</div><div class="s">Patrícia Kowalski</div></div><span class="n"><b>0</b>veíc.</span></div>
+                  <div class="cl-row"><span class="rd"></span><span class="lgo lgo-d">JB</span><div style="min-width:0"><div class="nm">Agregado João Batista</div><div class="s">Pessoa física</div></div><span class="n"><b>1</b>veíc.</span></div>
+                  <div class="cl-row cur-row" aria-disabled="true"><span class="rd off"></span><span class="lgo lgo-a">EN</span><div style="min-width:0"><div class="nm">Expresso Norte Cargas <span class="tag tag-chg">atual</span></div><div class="s">Marina Duarte</div></div><span class="n"><b>14</b>veíc.</span></div>
+                </div></div>
+            </div>
+            <div class="sh-ft">
+              <p class="conseq"><i class="ic s16 i-info"></i><span><b>Expresso Norte Cargas</b> fecha em 26/09/2026</span></p>
+              <div class="btns"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Definir</button></div>
+            </div>
+          </div>
+        </div></div>
+        <p class="phone-cap">Definir transportadora: a escolha. A busca não abre o teclado sozinha no celular; só ao tocar</p>
+      </div>
+
+      <!-- phone 2: define carrier, scrolled -->
+      <div class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="status"><span>9:41</span><span class="isl"></span><span>5G</span></div>
+          <div class="m-top"><div class="lockup"><svg width="18" height="27" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div class="wordmark">Facter <b>Truck</b></div></div></div>
+          <div class="m-body"><h1>Veículos</h1></div>
+          <div class="scrim"></div>
+          <div class="sheet tall" role="dialog" aria-labelledby="p2t">
+            <div class="sh-hd compact" style="padding-top:8px;flex-direction:column;align-items:stretch;gap:0">
+              <div class="grab"></div>
+              <div style="display:flex;align-items:center;gap:10px;padding-right:44px"><span class="dx-ico" style="width:32px;height:32px"><i class="ic s16 i-truck"></i></span><div style="min-width:0"><h2 id="p2t">Definir transportadora</h2><div class="muted" style="font-size:12.5px"><b style="color:hsl(var(--foreground))">QOP1J88</b> · Cavalo · frota 817</div></div></div>
+              <button class="dx-x" type="button" aria-label="Fechar" style="top:18px"><i class="ic s18 i-x"></i></button>
+            </div>
+            <div class="sh-bd" style="position:relative">
+              <span class="scrollhint" style="top:40%;height:90px"></span>
+              <div class="cl" style="margin-top:-6px;border-top-left-radius:0;border-top-right-radius:0;border-top:0">
+                <div class="cl-row cur-row" style="border-top:0" aria-disabled="true"><span class="rd off"></span><span class="lgo lgo-a">EN</span><div style="min-width:0"><div class="nm">Expresso Norte Cargas <span class="tag tag-chg">atual</span></div><div class="s">Marina Duarte</div></div><span class="n"><b>14</b>veíc.</span></div>
+                <div class="cl-foot"><a href="#"><i class="ic s16 i-plus"></i>Cadastrar transportadora</a></div>
+              </div>
+              <div class="dsec"><h3>A partir de</h3>
+                <div class="qp">
+                  <button class="qpb" type="button" aria-pressed="true"><b>Hoje</b><span>27/09</span></button>
+                  <button class="qpb" type="button" aria-pressed="false"><b>Ontem</b><span>26/09</span></button>
+                  <button class="qpb" type="button" aria-pressed="false"><b>Outra</b><span>escolher</span></button>
+                </div></div>
+              <div class="dsec"><h3>Como fica o histórico</h3>
+                <div class="preview-card"><ol class="tlp">
+                  <li class="new"><div class="t">Transportadora Rota Sul <span class="tag tag-new">novo</span></div><div class="w">a partir de 27/09/2026</div></li>
+                  <li class="closing"><div class="t">Expresso Norte Cargas <span class="tag tag-chg">fecha</span></div><div class="w">12/01/2026 a <b>26/09/2026</b></div></li>
+                  <li class="old"><div class="t">Frota própria</div><div class="w">04/03/2025 a 11/01/2026</div></li>
+                </ol></div></div>
+            </div>
+            <div class="sh-ft">
+              <p class="conseq"><i class="ic s16 i-info"></i><span><b>Expresso Norte Cargas</b> fecha em 26/09. OS e custos a partir de 27/09 contam para <b>Rota Sul</b></span></p>
+              <div class="btns"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Definir</button></div>
+            </div>
+          </div>
+        </div></div>
+        <p class="phone-cap">Rolado até a data: o cabeçalho encolhe, a prévia do histórico entra, os botões não saem do lugar</p>
+      </div>
+
+
+      <div class="notes" style="margin:0;flex:1 1 260px;grid-template-columns:1fr;align-self:center">
+        <div><h4>Folha de baixo</h4><ul>
+          <li>Abre na altura do conteúdo; a de escolha abre quase inteira (92%), porque a lista é o trabalho.</li>
+          <li>Arrastar para baixo fecha, com a mesma regra do Esc: com algo alterado, pergunta antes.</li>
+          <li>Botões de 50 px, a ação à direita, no alcance do polegar. A consequência fica logo acima deles.</li>
+          <li>O teclado não abre sozinho: no celular, abrir o teclado esconde metade da lista.</li>
+        </ul></div>
+        <div><h4>Mesmo componente</h4><ul>
+          <li>Nada é escrito duas vezes: o <code>Dialog</code> troca de forma abaixo de 640 px. A prévia do histórico desce para depois da data.</li>
+        </ul></div>
+      </div>
+      <!-- phone 3: register vehicle -->
+      <div class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="status"><span>9:41</span><span class="isl"></span><span>5G</span></div>
+          <div class="m-top"><div class="lockup"><svg width="18" height="27" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div class="wordmark">Facter <b>Truck</b></div></div></div>
+          <div class="m-body"><h1>Veículos</h1></div>
+          <div class="scrim"></div>
+          <div class="sheet tall" role="dialog" aria-labelledby="p3t">
+            <div class="sh-hd">
+              <div class="grab"></div>
+              <div class="dx-ctx"><span class="dx-ico"><i class="ic s18 i-truck"></i></span><span class="ent">Veículos<span class="dot"></span>86 ativos</span></div>
+              <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+              <h2 id="p3t">Cadastrar veículo</h2>
+            </div>
+            <div class="sh-bd">
+              <div class="dsec"><h3>Tipo <span class="r">obrigatório</span></h3>
+                <div class="tc" role="radiogroup" aria-label="Tipo">
+                  <div class="tcard" role="radio" aria-checked="true"><svg aria-hidden="true"><use href="#v-cavalo"/></svg><div><div class="nm">Cavalo</div><div class="f">Caminhão-trator</div></div></div>
+                  <div class="tcard" role="radio" aria-checked="false"><svg aria-hidden="true"><use href="#v-carreta"/></svg><div><div class="nm">Carreta</div><div class="f">Semirreboque</div></div></div>
+                  <div class="tcard" role="radio" aria-checked="false"><svg aria-hidden="true"><use href="#v-julieta"/></svg><div><div class="nm">Julieta</div><div class="f">Reboque</div></div></div>
+                  <div class="tcard" role="radio" aria-checked="false"><svg aria-hidden="true"><use href="#v-dolly"/></svg><div><div class="nm">Dolly</div><div class="f">Dolly</div></div></div>
+                  <div class="tcard wide" role="radio" aria-checked="false"><svg aria-hidden="true"><use href="#v-caminhao"/></svg><div><div class="nm">Caminhão</div><div class="f">Truck ou toco</div></div></div>
+                </div></div>
+              <label class="fl"><span class="l">Placa <span class="req">*</span></span>
+                <span style="display:flex;gap:10px;align-items:center"><span class="input focus" style="flex:1"><span class="grow num" style="font-weight:600;letter-spacing:.06em">QOP1J88</span></span><span class="plate" aria-hidden="true" style="width:84px"><span class="top"></span><span class="pn" style="font-size:14px">QOP1J88</span></span></span>
+                <span class="hint">Mercosul · ABC1D23 ou antiga · ABC1234</span></label>
+              <label class="fl"><span class="l">Número de frota</span>
+                <span class="input-btn"><span class="input ph"><span class="grow">Ex.: 812</span></span><button class="btn btn-outline" type="button" style="height:48px;border-radius:10px"><i class="ic s16 i-wand"></i>818</button></span></label>
+            </div>
+            <div class="sh-ft">
+              <p class="conseq"><i class="ic s16 i-info"></i><span>Entra ativo, como <b>frota própria</b></span></p>
+              <div class="btns"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Cadastrar</button></div>
+            </div>
+          </div>
+        </div></div>
+        <p class="phone-cap">Cadastrar veículo: cartões em 2 colunas, teclado de placa em maiúsculas, "Gerar" já mostra o número</p>
+      </div>
+
+      <!-- phone 4: confirmation -->
+      <div class="phone-wrap">
+        <div class="phone"><div class="screen">
+          <div class="status"><span>9:41</span><span class="isl"></span><span>5G</span></div>
+          <div class="m-top"><div class="lockup"><svg width="18" height="27" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div class="wordmark">Facter <b>Truck</b></div></div></div>
+          <div class="m-body"><h1>Veículos</h1><div class="mc"><b>QOP1J88</b> · frota 817</div><div class="mc"><b>RTB7F31</b> · frota 845</div><div class="mc"><b>PQA9H12</b> · frota C-318</div></div>
+          <div class="scrim"></div>
+          <div class="sheet" role="alertdialog" aria-labelledby="p4t">
+            <div class="sh-hd" style="border-bottom:0;padding-bottom:4px">
+              <div class="grab"></div>
+              <div class="dx-ctx"><span class="dx-ico danger"><i class="ic s18 i-ban"></i></span><span class="ent"><b>QOP1J88</b><span class="dot"></span>Cavalo<span class="dot"></span>frota 817</span></div>
+              <h2 id="p4t">Desativar QOP1J88?</h2>
+            </div>
+            <div class="sh-bd" style="padding-top:10px">
+              <ul class="facts" style="font-size:14px">
+                <li class="out"><i class="ic s16 i-ban"></i><span>Sai das listas de operação e da escolha em novas OS</span></li>
+                <li class="keep"><i class="ic s16 i-checkc"></i><span>Continuam guardados: 38 OS, R$ 48.320,00 em custos e o histórico</span></li>
+                <li class="back"><i class="ic s16 i-undo"></i><span>Dá para reativar depois, na aba Inativos</span></li>
+              </ul>
+            </div>
+            <div class="sh-ft" style="background:none;border-top:0">
+              <div class="btns"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-danger" type="button">Desativar</button></div>
+            </div>
+          </div>
+        </div></div>
+        <p class="phone-cap">Confirmação: folha baixa, na altura do conteúdo. Sem botão de fechar: Cancelar e arrastar para baixo bastam</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== 7. DESIGN SYSTEM =============== -->
+  <section class="sec" id="s7">
+    <div class="sec-label"><span class="sec-num">7</span><h2 class="st2">O que entra no design system</h2></div>
+    <p class="sec-sub">Um componente composto no <code>@facter/ds-core</code> que monta o padrão e decide sozinho entre diálogo centralizado e folha de baixo. As peças de escolha entram separadas, porque servem fora de diálogo também.</p>
+    <div class="dsgrid">
+<div class="code"><span class="c4">// Dialog passa a ser composto; decide diálogo ou folha pela largura</span>
+&lt;<span class="c1">Dialog</span> open={open} onOpenChange={close} size=<span class="c2">"lg"</span> tone=<span class="c2">"default"</span>&gt;
+  &lt;<span class="c1">Dialog.Header</span>&gt;
+    &lt;<span class="c1">Dialog.Context</span> icon={Truck}&gt;
+      &lt;<span class="c1">EntityChip</span> primary=<span class="c2">"QOP1J88"</span> parts={[kind, fleet]} /&gt;
+    &lt;/<span class="c1">Dialog.Context</span>&gt;
+    &lt;<span class="c1">Dialog.Title</span>&gt;{t(<span class="c2">'carriers.defineTitle'</span>)}&lt;/<span class="c1">Dialog.Title</span>&gt;
+    &lt;<span class="c1">Dialog.Description</span>&gt;…&lt;/<span class="c1">Dialog.Description</span>&gt;
+  &lt;/<span class="c1">Dialog.Header</span>&gt;
+  &lt;<span class="c1">Dialog.Body</span> aside={&lt;<span class="c1">PeriodPreview</span> … /&gt;}&gt;
+    &lt;<span class="c1">Dialog.Alert</span> error={problem} /&gt;
+    &lt;<span class="c1">Dialog.Section</span> title={t(<span class="c2">'carriers.runsToday'</span>)}&gt;…&lt;/<span class="c1">Dialog.Section</span>&gt;
+    &lt;<span class="c1">Dialog.Section</span> title={t(<span class="c2">'carriers.runsWith'</span>)}&gt;
+      &lt;<span class="c1">ChoiceList</span> searchable items={carriers} pinned={ownFleet} /&gt;
+    &lt;/<span class="c1">Dialog.Section</span>&gt;
+  &lt;/<span class="c1">Dialog.Body</span>&gt;
+  &lt;<span class="c1">Dialog.Footer</span>&gt;
+    &lt;<span class="c1">Dialog.Consequence</span>&gt;{summary}&lt;/<span class="c1">Dialog.Consequence</span>&gt;
+    &lt;<span class="c1">Dialog.Cancel</span> /&gt;
+    &lt;<span class="c1">Dialog.Action</span> loading={saving}&gt;{t(<span class="c2">'carriers.define'</span>)}&lt;/<span class="c1">Dialog.Action</span>&gt;
+  &lt;/<span class="c1">Dialog.Footer</span>&gt;
+&lt;/<span class="c1">Dialog</span>&gt;
+
+<span class="c4">// Confirmação é um atalho do mesmo Dialog</span>
+&lt;<span class="c1">ConfirmDialog</span> tone=<span class="c2">"danger"</span> context={…} title={…}
+  facts={[{ kind: <span class="c2">'out'</span>, … }, { kind: <span class="c2">'keep'</span>, … }]} action={…} /&gt;</div>
+      <div class="dswrap"><table class="dstable">
+        <thead><tr><th>Peça</th><th>O que faz</th></tr></thead>
+        <tbody>
+          <tr><td><code>Dialog</code> <span class="muted">size, tone</span></td><td>sm, md, lg; default, danger, warning. Abaixo de 640 px vira folha, com cabeçalho e rodapé fixos. Trava foco, Esc, devolve foco.</td></tr>
+          <tr><td><code>Dialog.Header / Context / Title / Description</code></td><td>Contexto com ícone no tom; título ligado por aria-labelledby.</td></tr>
+          <tr><td><code>Dialog.Body</code> <span class="muted">aside</span></td><td>Uma coluna; com <code>aside</code>, duas no lg.</td></tr>
+          <tr><td><code>Dialog.Section</code></td><td>Rótulo pequeno, contador opcional à direita.</td></tr>
+          <tr><td><code>Dialog.Alert</code></td><td>Erro geral no topo do corpo, a partir do problema da API.</td></tr>
+          <tr><td><code>Dialog.Footer / Consequence / Cancel / Action</code></td><td>Consequência com aria-live; Cancel vira Fechar sem alteração; Action com loading.</td></tr>
+          <tr><td><code>Dialog.DirtyGuard</code></td><td>Pergunta "Descartar as N alterações?" ao fechar com mudança.</td></tr>
+          <tr><td><code>ConfirmDialog</code></td><td>sm pronto: pergunta, lista sai/fica/volta, foco em Cancelar.</td></tr>
+          <tr><td><code>EntityChip</code></td><td>Identidade do objeto: placa + partes. Serve em cabeçalho de página e OS.</td></tr>
+          <tr><td><code>ChoiceList</code></td><td>Radio rico com busca, item fixo no topo, item travado com etiqueta.</td></tr>
+          <tr><td><code>ChoiceCards</code></td><td>Radio em cartões com desenho; setas navegam.</td></tr>
+          <tr><td><code>DateQuickPick</code></td><td>Hoje, Ontem, Outra + calendário com limites e dia marcado.</td></tr>
+          <tr><td><code>Form.Input</code> <span class="muted">status, previous</span></td><td>Estado válido (ícone) e "antes:" para edição.</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="notes">
+      <div><h4>Fica no Truck, não no DS</h4><ul>
+        <li><code>PeriodPreview</code> (prévia do histórico) e a faixa do ano: regra de período é do domínio.</li>
+        <li>Desenhos dos tipos de veículo e o reconhecimento de placa.</li>
+      </ul></div>
+      <div><h4>Chaves de texto novas</h4><ul>
+        <li><code>carriers.runsToday</code> "Hoje roda com", <code>carriers.runsWith</code> "Passa a rodar com", <code>carriers.defineConsequence</code>, <code>carriers.today</code>, <code>carriers.yesterday</code>, <code>carriers.otherDate</code>.</li>
+        <li><code>vehicles.generateFleetCode</code> "Gerar", <code>vehicles.nextFleetCode</code>, <code>vehicles.plateFormat.mercosul/old</code>, <code>vehicles.kindsShort.*</code> (Cavalo, Carreta, Julieta).</li>
+      </ul></div>
+    </div>
+  </section>
+
+  <!-- =============== 8. PERGUNTAS =============== -->
+  <section class="sec" id="s8">
+    <div class="sec-label"><span class="sec-num">8</span><h2 class="st2">Perguntas em aberto</h2></div>
+    <p class="sec-sub">Pontos que mudam regra ou custo. Cada um com uma proposta para aceitar ou cortar.</p>
+    <div class="qs">
+      <div class="q"><span class="qi"><i class="ic s16 i-q"></i></span><div><h3>Troca com data futura?</h3><p>A regra hoje só aceita hoje ou antes. Contrato que começa dia 1º precisa ser lançado no dia 1º.</p><p class="prop"><b>Proposta:</b> manter assim agora. Troca agendada entra depois, como período "a partir de 01/10" marcado como agendado na prévia.</p></div></div>
+      <div class="q"><span class="qi"><i class="ic s16 i-q"></i></span><div><h3>Cadastrar transportadora de dentro do Definir</h3><p>Hoje o atalho leva para a tela de Transportadoras e o diálogo se perde.</p><p class="prop"><b>Proposta:</b> trocar o conteúdo do mesmo diálogo pelo cadastro (com Voltar) e, ao salvar, voltar com a nova escolhida. Sem diálogo sobre diálogo.</p></div></div>
+      <div class="q"><span class="qi"><i class="ic s16 i-q"></i></span><div><h3>Transportadora no cadastro do veículo</h3><p>Todo veículo entra como frota própria e precisa de um segundo passo.</p><p class="prop"><b>Proposta:</b> seção opcional "Quem roda com ele" no cadastro, com Frota própria já marcada. Custo: reaproveita <code>ChoiceList</code>; 1 campo a mais na API de cadastro.</p></div></div>
+      <div class="q"><span class="qi"><i class="ic s16 i-q"></i></span><div><h3>Desativar veículo com OS aberta</h3><p>A confirmação atual não fala de OS aberta. Com a OS 1042 aberta, não fica claro o que acontece com ela.</p><p class="prop"><b>Proposta:</b> mesmo formato do bloqueado da transportadora: "QOP1J88 tem 1 OS aberta" com "Ver OS 1042".</p></div></div>
+      <div class="q"><span class="qi"><i class="ic s16 i-q"></i></span><div><h3>Agregado pessoa física</h3><p>Hoje é "deixe o CNPJ em branco". Não dá para diferenciar de empresa que só não informou.</p><p class="prop"><b>Proposta:</b> escolha "Empresa · Agregado" no topo do cadastro; agregado pede CPF opcional, mostrado mascarado (***.482.***-10). Precisa de revisão de LGPD.</p></div></div>
+      <div class="q"><span class="qi"><i class="ic s16 i-q"></i></span><div><h3>Número de frota repetido</h3><p>Não sabemos se duas placas podem ter a mesma frota (cavalo e carreta do conjunto costumam repetir: 845 e C-845).</p><p class="prop"><b>Proposta:</b> aviso, não erro: "Frota 817 já é de QOP1J88" com Continuar. "Gerar" usa maior número + 1 só entre os numéricos.</p></div></div>
+      <div class="q"><span class="qi"><i class="ic s16 i-q"></i></span><div><h3>Cadastrar vários em sequência</h3><p>A implantação cadastra 80 a 200 veículos; fechar e reabrir a cada um cansa.</p><p class="prop"><b>Proposta:</b> caixa "Cadastrar outro em seguida" no rodapé, que mantém o tipo e limpa placa e frota. Importar planilha fica para outra task.</p></div></div>
+      <div class="q"><span class="qi"><i class="ic s16 i-q"></i></span><div><h3>Preencher pela Receita</h3><p>Digitar o CNPJ poderia trazer razão social e endereço.</p><p class="prop"><b>Proposta:</b> não agora. Depende de API externa paga ou com limite; custo e fonte precisam ser levantados antes.</p></div></div>
+    </div>
+  </section>
+</div>
+</body>
+</html>
