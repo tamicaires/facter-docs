@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Configurações · Empresa, Papéis e Tablets</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@400;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --background:0 0% 98%;--foreground:240 10% 3.9%;--card:0 0% 100%;
+  --primary:233 65% 50%;--primary-foreground:0 0% 100%;
+  --muted:240 4.8% 93.9%;--muted-foreground:240 3.8% 42%;--border:240 5.9% 90%;
+  --success:160 60% 38%;--warning:38 92% 45%;--danger:0 84% 60%;
+  --success-text:160 70% 24%;--warning-text:28 85% 28%;--danger-text:0 72% 42%;
+  --primary-soft:233 85% 96.5%;--success-soft:160 55% 94%;--warning-soft:40 95% 93%;--danger-soft:0 85% 96%;
+  --canvas:225 14% 92%;
+}
+*{box-sizing:border-box}
+body{margin:0;background:hsl(var(--canvas));color:hsl(var(--foreground));font:15px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+.ic{display:inline-block;width:20px;height:20px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;flex:none}
+.s14{width:14px;height:14px}.s16{width:16px;height:16px}.s18{width:18px;height:18px}.s20{width:20px;height:20px}
+.i-people{--i:url(https://api.iconify.design/ph/users-three.svg)}
+.i-base{--i:url(https://api.iconify.design/ph/map-pin.svg)}
+.i-comp{--i:url(https://api.iconify.design/ph/buildings.svg)}
+.i-role{--i:url(https://api.iconify.design/ph/shield-check.svg)}
+.i-tablet{--i:url(https://api.iconify.design/ph/device-tablet.svg)}
+.i-edit{--i:url(https://api.iconify.design/ph/pencil-simple.svg)}
+.i-plus{--i:url(https://api.iconify.design/ph/plus.svg)}
+.i-power{--i:url(https://api.iconify.design/ph/power.svg)}
+.i-upload{--i:url(https://api.iconify.design/ph/image.svg)}
+.i-link{--i:url(https://api.iconify.design/ph/arrow-square-out.svg)}
+.i-dot{--i:url(https://api.iconify.design/ph/circle-fill.svg)}
+
+.doc{max-width:1160px;margin:0 auto;padding:44px 24px 96px}
+.doc h1{font:800 30px/1.15 Sora,sans-serif;letter-spacing:-.02em}
+.doc>p{color:hsl(var(--muted-foreground));max-width:720px;margin-top:8px}
+.sec{margin-top:56px}
+.sec-lbl{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+.sec-num{font:800 13px Sora,sans-serif;color:hsl(var(--primary));background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:999px;width:26px;height:26px;display:grid;place-items:center}
+.sec h2{font:700 20px/1.3 Inter,sans-serif;letter-spacing:-.01em}
+.sec-sub{color:hsl(var(--muted-foreground));margin:0 0 18px 36px;font-size:14px;max-width:780px}
+
+/* settings shell */
+.shell{display:grid;grid-template-columns:236px minmax(0,1fr);background:hsl(var(--card));border-radius:18px;box-shadow:0 18px 44px -22px hsl(230 40% 20%/.3),0 0 0 1px hsl(var(--border));overflow:hidden;min-height:560px}
+.nav{border-right:1px solid hsl(var(--border));padding:18px 14px;background:hsl(240 5% 99%)}
+.nav .ttl{font:700 12px Inter;text-transform:uppercase;letter-spacing:.08em;color:hsl(var(--muted-foreground));padding:6px 10px 12px}
+.nav a{display:flex;align-items:center;gap:11px;padding:9px 11px;border-radius:10px;text-decoration:none;color:hsl(240 6% 25%);font-size:14px;font-weight:500;margin-bottom:2px}
+.nav a .ic{color:hsl(var(--muted-foreground))}
+.nav a:hover{background:hsl(var(--muted)/.6)}
+.nav a.on{background:hsl(var(--primary-soft));color:hsl(var(--primary));font-weight:600}
+.nav a.on .ic{color:hsl(var(--primary))}
+.body{padding:26px 30px}
+.head{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:22px}
+.head h3{font:700 21px/1.2 Inter;letter-spacing:-.01em}
+.head p{color:hsl(var(--muted-foreground));font-size:14px;margin-top:3px;max-width:520px}
+
+.btn{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:9px;font-size:13.5px;font-weight:600;border:1px solid hsl(var(--border));background:hsl(var(--card));white-space:nowrap}
+.btn:hover{background:hsl(var(--muted)/.6)}
+.btn-primary{background:hsl(var(--primary));color:hsl(var(--primary-foreground));border-color:transparent}
+.btn-sm{height:32px;padding:0 11px;font-size:13px}
+.btn-danger{color:hsl(var(--danger-text));border-color:hsl(var(--danger)/.3)}
+.btn-danger:hover{background:hsl(var(--danger-soft))}
+
+.card{border:1px solid hsl(var(--border));border-radius:14px;overflow:hidden;background:hsl(var(--card))}
+.row{display:flex;align-items:center;gap:16px;padding:15px 18px;border-top:1px solid hsl(var(--border))}
+.row:first-child{border-top:0}
+.row .k{width:150px;flex:none;font-size:13px;color:hsl(var(--muted-foreground))}
+.row .v{flex:1;min-width:0;font-weight:600}
+.row .v small{display:block;font-weight:400;font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:1px}
+.tile{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:none;background:hsl(var(--muted));color:hsl(var(--muted-foreground))}
+.chip{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 9px;border-radius:999px;font:600 11px Inter}
+.chip.e{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.chip.b{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.chip.p{background:hsl(var(--muted));color:hsl(240 6% 30%)}
+.chip.ok{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.hint{font-size:12.5px;color:hsl(var(--muted-foreground))}
+.gridcards{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* empresa logo */
+.logo{width:64px;height:64px;border-radius:14px;background:hsl(var(--primary));color:#fff;display:grid;place-items:center;font:800 22px Inter;flex:none}
+.grp{display:flex;flex-wrap:wrap;gap:8px}
+.grp .co{display:flex;align-items:center;gap:8px;border:1px solid hsl(var(--border));border-radius:999px;padding:5px 12px 5px 6px;font-size:13px;font-weight:600}
+.grp .co span{width:24px;height:24px;border-radius:999px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center;font:700 10px Inter}
+
+/* papéis */
+.role{display:flex;align-items:center;gap:14px;padding:13px 16px;border-top:1px solid hsl(var(--border))}
+.role:first-child{border-top:0}
+.role .av{width:34px;height:34px;border-radius:9px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center;font:700 12px Inter;flex:none}
+.role .nm{font-weight:600}
+.role .ds{font-size:12.5px;color:hsl(var(--muted-foreground))}
+.role .sc{margin-left:auto;flex:none}
+
+/* tablets list */
+.dev{display:flex;align-items:center;gap:14px;padding:15px 18px;border-top:1px solid hsl(var(--border))}
+.dev:first-child{border-top:0}
+.dev .nm{font-weight:600}
+.dev .meta{font-size:12.5px;color:hsl(var(--muted-foreground))}
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:40px 20px;color:hsl(var(--muted-foreground))}
+.empty .big{width:52px;height:52px;border-radius:14px;background:hsl(var(--muted));display:grid;place-items:center;color:hsl(var(--muted-foreground))}
+.empty b{color:hsl(var(--foreground));font-size:15px}
+.callout{display:flex;gap:14px;align-items:center;background:hsl(var(--primary-soft));border:1px solid hsl(var(--primary)/.2);border-radius:14px;padding:16px 18px;margin-bottom:16px}
+.callout .big{width:44px;height:44px;border-radius:11px;background:hsl(var(--primary));color:#fff;display:grid;place-items:center;flex:none}
+.callout b{font-size:14.5px}
+.callout p{font-size:13px;color:hsl(240 6% 30%)}
+</style>
+</head>
+<body>
+<div class="doc">
+  <h1>Configurações · Empresa, Papéis e Tablets</h1>
+  <p>As três seções que faltavam no painel de Configurações, ao lado de Pessoas e Bases. Mesmo layout (menu à esquerda, conteúdo à direita). Tarefas 1.2 (Empresa, Papéis) e 1.4 (Tablets).</p>
+
+  <!-- ===== EMPRESA ===== -->
+  <section class="sec">
+    <div class="sec-lbl"><span class="sec-num">1</span><h2>Empresa</h2></div>
+    <p class="sec-sub">Os dados da empresa e o grupo econômico a que ela pertence. Quem administra edita; o CNPJ é a identidade e não muda sozinho.</p>
+    <div class="shell">
+      <nav class="nav">
+        <div class="ttl">Configurações</div>
+        <a href="#"><span class="ic s18 i-people"></span>Pessoas</a>
+        <a href="#"><span class="ic s18 i-base"></span>Bases e boxes</a>
+        <a class="on" href="#"><span class="ic s18 i-comp"></span>Empresa</a>
+        <a href="#"><span class="ic s18 i-role"></span>Papéis</a>
+        <a href="#"><span class="ic s18 i-tablet"></span>Tablets</a>
+      </nav>
+      <div class="body">
+        <div class="head"><div><h3>Empresa</h3><p>Identidade da empresa e o grupo econômico</p></div><button class="btn"><span class="ic s16 i-edit"></span>Editar</button></div>
+        <div class="card" style="margin-bottom:16px">
+          <div class="row"><span class="logo">RS</span><div class="v" style="display:flex;flex-direction:column;justify-content:center">Transportadora Rota Sul<small>Logo aparece no crachá e nos relatórios</small></div><button class="btn btn-sm"><span class="ic s14 i-upload"></span>Trocar logo</button></div>
+          <div class="row"><span class="k">Nome fantasia</span><span class="v">Transportadora Rota Sul</span></div>
+          <div class="row"><span class="k">Razão social</span><span class="v">Rota Sul Logística Ltda.</span></div>
+          <div class="row"><span class="k">CNPJ</span><span class="v">08.417.552/0001-31</span></div>
+          <div class="row"><span class="k">Fuso horário</span><span class="v">América/São_Paulo (BRT)</span></div>
+        </div>
+        <div class="head" style="margin:0 0 12px"><div><h3 style="font-size:16px">Grupo econômico</h3><p>Empresas que compartilham frota e dados. A troca fica na barra do topo.</p></div><button class="btn btn-sm"><span class="ic s14 i-plus"></span>Adicionar empresa</button></div>
+        <div class="grp">
+          <div class="co"><span>RS</span>Rota Sul <span class="chip ok" style="margin-left:2px">atual</span></div>
+          <div class="co"><span>RN</span>Rota Norte</div>
+          <div class="co"><span>LP</span>Log Paraná</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== PAPÉIS ===== -->
+  <section class="sec">
+    <div class="sec-lbl"><span class="sec-num">2</span><h2>Papéis</h2></div>
+    <p class="sec-sub">Os 12 papéis padrão do Truck e onde cada um vale: <span class="chip e">Empresa</span> <span class="chip b">Base</span> <span class="chip p">Próprio</span>. Na v2 os papéis são fixos; personalizados ficam para depois.</p>
+    <div class="shell">
+      <nav class="nav">
+        <div class="ttl">Configurações</div>
+        <a href="#"><span class="ic s18 i-people"></span>Pessoas</a>
+        <a href="#"><span class="ic s18 i-base"></span>Bases e boxes</a>
+        <a href="#"><span class="ic s18 i-comp"></span>Empresa</a>
+        <a class="on" href="#"><span class="ic s18 i-role"></span>Papéis</a>
+        <a href="#"><span class="ic s18 i-tablet"></span>Tablets</a>
+      </nav>
+      <div class="body">
+        <div class="head"><div><h3>Papéis</h3><p>O que cada papel pode fazer e onde vale</p></div><a class="btn" href="#"><span class="ic s16 i-link"></span>Ver a matriz completa</a></div>
+        <div class="card">
+          <div class="role"><span class="av">AD</span><div><div class="nm">Administrador</div><div class="ds">Gerencia tudo: pessoas, papéis, empresa e configurações</div></div><span class="chip e sc">Empresa</span></div>
+          <div class="role"><span class="av">GE</span><div><div class="nm">Gestor</div><div class="ds">Opera frota e oficina no dia a dia, sem configurações sensíveis</div></div><span class="chip e sc">Empresa</span></div>
+          <div class="role"><span class="av">SM</span><div><div class="nm">Supervisor de manutenção</div><div class="ds">Comanda a oficina da base: OS, serviços e equipe</div></div><span class="chip b sc">Base</span></div>
+          <div class="role"><span class="av">PL</span><div><div class="nm">Planejador</div><div class="ds">Programa preventivas e manutenções</div></div><span class="chip e sc">Empresa</span></div>
+          <div class="role"><span class="av">ME</span><div><div class="nm">Mecânico</div><div class="ds">Executa serviços e registra horas</div></div><span class="chip p sc">Próprio</span></div>
+          <div class="role"><span class="av">AL</span><div><div class="nm">Almoxarife</div><div class="ds">Controla peças e estoque da base</div></div><span class="chip b sc">Base</span></div>
+          <div class="role"><span class="av">CP</span><div><div class="nm">Controlador de pneus</div><div class="ds">Gerencia a vida dos pneus</div></div><span class="chip e sc">Empresa</span></div>
+          <div class="role"><span class="av">BO</span><div><div class="nm">Borracheiro</div><div class="ds">Registra serviços de pneus</div></div><span class="chip p sc">Próprio</span></div>
+          <div class="role"><span class="av">IN</span><div><div class="nm">Inspetor</div><div class="ds">Faz inspeções e checklists</div></div><span class="chip p sc">Próprio</span></div>
+          <div class="role"><span class="av">FI</span><div><div class="nm">Financeiro</div><div class="ds">Vê custos e fecha valores</div></div><span class="chip e sc">Empresa</span></div>
+          <div class="role"><span class="av">MO</span><div><div class="nm">Motorista</div><div class="ds">Abre solicitações e vê o próprio veículo</div></div><span class="chip p sc">Próprio</span></div>
+          <div class="role"><span class="av">LE</span><div><div class="nm">Leitura</div><div class="ds">Só vê, não altera</div></div><span class="chip e sc">Empresa</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== TABLETS ===== -->
+  <section class="sec">
+    <div class="sec-lbl"><span class="sec-num">3</span><h2>Tablets</h2></div>
+    <p class="sec-sub">Os aparelhos da oficina em modo compartilhado. Este aparelho vira tablet num toque; cada um fica preso a uma empresa e a uma base. Revogar tira o aparelho na hora.</p>
+    <div class="shell">
+      <nav class="nav">
+        <div class="ttl">Configurações</div>
+        <a href="#"><span class="ic s18 i-people"></span>Pessoas</a>
+        <a href="#"><span class="ic s18 i-base"></span>Bases e boxes</a>
+        <a href="#"><span class="ic s18 i-comp"></span>Empresa</a>
+        <a href="#"><span class="ic s18 i-role"></span>Papéis</a>
+        <a class="on" href="#"><span class="ic s18 i-tablet"></span>Tablets</a>
+      </nav>
+      <div class="body">
+        <div class="head"><div><h3>Tablets</h3><p>Aparelhos da oficina onde a equipe entra com crachá ou PIN</p></div><button class="btn btn-primary"><span class="ic s16 i-tablet"></span>Ativar este tablet</button></div>
+        <div class="callout"><span class="big"><span class="ic s20 i-tablet"></span></span><div><b>Ativar este aparelho como tablet</b><p>Ele passa a abrir a tela de entrada da oficina, preso a esta empresa e a uma base. Faça isso no próprio tablet do box.</p></div></div>
+        <div class="card">
+          <div class="dev"><span class="tile"><span class="ic s18 i-tablet"></span></span><div style="flex:1"><div class="nm">Tablet do box 3</div><div class="meta">Base Curitiba · ativado por Renata Alves · 12/09</div></div><button class="btn btn-sm btn-danger"><span class="ic s14 i-power"></span>Revogar</button></div>
+          <div class="dev"><span class="tile"><span class="ic s18 i-tablet"></span></span><div style="flex:1"><div class="nm">Tablet da recepção</div><div class="meta">Base Ponta Grossa · ativado por Carlos Menezes · 03/09</div></div><button class="btn btn-sm btn-danger"><span class="ic s14 i-power"></span>Revogar</button></div>
+        </div>
+        <p class="hint" style="margin-top:12px">Sem uso por alguns minutos, o tablet sai sozinho da pessoa atual, para a próxima não agir com o nome errado.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
