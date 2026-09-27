@@ -13,7 +13,7 @@ Todas as propostas de produto do Truck, com o status real e o que cada uma signi
 | [Aprender com o cliente](./aprender-com-o-cliente.mdx) ("Quero isso", analytics de uso, feedback, Novidades) | Em discussão | 2026-09-26 | **Levar** para o lançamento: cerca de 1 semana |
 | [Devolução de peças](./part-return.mdx) | Implementado | 2026-07-15 | **Levar.** Entra no livro de movimentações; devoluções concorrentes contam em dobro no v1 (STK-3) |
 | [Unidade de medida e conversão](./unit-of-measure.mdx) | Implementado, com o fator de conversão ignorado no custo (FACTRK-10) | 2026-07-19 | **Levar**, corrigindo a conversão no cálculo de custo |
-| [Convenção de custo por unidade](./part-cost-convention.mdx) | Em discussão | 2026-07-30 | **Decidir antes da fase 2**: define como o livro de movimentações guarda preço |
+| [Convenção de custo por unidade](./part-cost-convention.mdx) | Aprovado (Opção A) | 2026-07-30 | Custo por unidade de consumo; destrava a task 2.5 (Estoque) |
 | [Custeio de mão de obra](./labour-cost.mdx) | Aprovado; código fora da `homolog` | 2026-08-04 | **Levar**, calculando pelo tempo das sessões de trabalho, não pelo tempo decorrido |
 | [Rateio de materiais compartilhados](./shared-material-allocation.mdx) | Implementado | 2026-07-28 | **Levar para o lançamento** (decidido em 26/09/2026), completo, sobre o livro de movimentações, com preço congelado e mês cortado no fuso da empresa |
 | [Formulário de peça em drawer](./part-form-drawer.mdx) | Em discussão | 2026-07-19 | **Levar** para a fase 3 (frontend) |
