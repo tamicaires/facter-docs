@@ -37,6 +37,7 @@ Todo invariante tem teste de integração. Onde duas pessoas podem agir ao mesmo
 | PLT-10 | A aplicação conecta com um papel sem `BYPASSRLS` e que não é dono das tabelas | Banco (papel) + CI com dono sem superusuário | ✅ `global-setup.ts`, `ci.yml` |
 | PLT-11 | Suspender um membro, desativar um usuário ou mudar um papel revoga as sessões afetadas na mesma transação | Domínio | ✅ 1.2 (suspender e mudar papel; desativar usuário fica para 1.3) |
 | PLT-12 | Sessão só vale com o token cujo hash está no banco, não revogada, dentro de 30 dias e de 12 horas sem uso; e-mail com 5 falhas em 15 minutos fica bloqueado | Domínio + teste | ✅ `identity.http.spec.ts` |
+| PLT-13 | Campo sensível de leitura (custo, valor de estoque, mão de obra, dado pessoal) só sai da API para quem tem a permissão de leitura (`cost.view`, `stock.value_view`, `labor_rate.view`, `personal_data.view`); sem ela, vem nulo | DTO de saída + teste | 🟡 `parts.http.spec.ts` (custo/valor no estoque); demais campos a seguir |
 
 ## Ecossistema (`ECO`) — ver [ADR-011](./adrs/adr-011-ecossistema-e-compartilhamento.md)
 

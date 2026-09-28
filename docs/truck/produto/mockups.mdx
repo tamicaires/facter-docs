@@ -96,11 +96,19 @@ Aprovado em 27/09/2026. A base que os serviços e as peças da OS usam, em quatr
 
 ### Estoque
 
-Aprovado em 27/09/2026. **Peças** (SKU, categoria, unidade de estoque e de consumo com fator), **Requisições** vindas das OS, **Movimentações** como livro só-inserção (saldo é a soma, cada linha tem motivo, autor e referência) e **Depósitos** (dono + local, incluindo consignado). Traz os casos de borda com selects abertos. O custo por peça segue a [convenção aprovada](propostas/part-cost-convention) (custo na unidade de consumo). Task 2.5.
+Aprovado em 27/09/2026. **Peças** (SKU, categoria, unidade de estoque e de consumo com fator), **Requisições** vindas das OS, **Movimentações** como livro só-inserção (saldo é a soma, cada linha tem motivo, autor e referência) e **Depósitos** (dono + local, incluindo consignado). Traz os casos de borda com selects abertos e os **estados da lista nova** (skeleton, busca/filtro sem resultado, só inativas, sem permissão, erro e paginação por cursor). O custo por peça segue a [convenção aprovada](propostas/part-cost-convention) (custo na unidade de consumo). Task 2.5.
 
 [Ver o mockup](/telas/truck/estoque)
 
 <img src="/mockups/truck/estoque/desktop.png" alt="Mockup do estoque" style={{maxHeight: 360, width: '100%', objectFit: 'cover', objectPosition: 'top', borderRadius: 8, border: '1px solid var(--ifm-color-emphasis-300)'}} />
+
+### Entrada de compra & Fornecedores
+
+Rascunho · 28/09/2026. Como a peça ganha **saldo**: entra por **nota fiscal**. O fornecedor manda a **NF-e (XML)** ou cola a **chave de acesso** (44 díg); o sistema lê fornecedor, número, itens e custos, e a gente **mapeia cada item** para a nossa peça — um **de-para que aprende** (código do fornecedor → nossa peça casa sozinho na próxima). Custo médio recalcula, **preço congela** na entrada, a mesma NF não entra duas vezes. Traz **Fornecedores** (cadastro leve), o passo a passo da entrada e os edge cases (NF repetida, item sem match, fornecedor novo, XML inválido, custo destoando, sem permissão, e o **estorno** — correção é movimento inverso, nunca apagar). Próxima frente do Estoque.
+
+[Ver o mockup](/telas/truck/entrada-nf)
+
+<img src="/mockups/truck/entrada-nf/desktop.png" alt="Mockup da entrada de compra por nota fiscal e fornecedores" style={{maxHeight: 360, width: '100%', objectFit: 'cover', objectPosition: 'top', borderRadius: 8, border: '1px solid var(--ifm-color-emphasis-300)'}} />
 
 ### Solicitar peça
 

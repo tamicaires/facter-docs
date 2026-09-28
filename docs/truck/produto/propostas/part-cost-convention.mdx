@@ -8,10 +8,14 @@ import { ProposalHeader } from '@site/src/components/ProposalHeader';
 
 # Convenção de Custo por Unidade (Estoque × Consumo)
 
-<ProposalHeader status="aprovado" date="2026-07-30" />
+<ProposalHeader status="implementado" date="2026-07-30" />
 
 :::info[Decisão — 27/09/2026]
 Aprovada a **Opção A**: `costPrice` é o custo por **unidade de consumo** (a menor, ex.: litro). O custo de consumo — o número mais usado (custo da OS, rateio, indicadores) — fica direto; o **valor de estoque** passa a aplicar `× conversionFactor`. Uma única função de custo (`custoNaUnidadeDeConsumo`) serve estoque e consumo. Isso destrava a task **2.5 (Estoque)**.
+:::
+
+:::tip[Implementado — 28/09/2026 (task 2.5)]
+`cost_price` (por unidade de consumo) e `minimum_qty` ficam **na peça** (`parts`), não no saldo por depósito — uma peça, um custo e um mínimo. O `average_cost` do `stock_balances` continua sendo o custo médio móvel do saldo. Custo e valor de estoque são leitura sensível ([PLT-13](../../engenharia/invariantes.md)): só saem com `cost.view` / `stock.value_view`.
 :::
 
 ---

@@ -56,20 +56,30 @@ create table parts (                           -- o SKU: catálogo, sem quantida
   id                  uuid primary key,
   org_id              uuid not null references organizations(id),
   category_id         uuid not null references part_categories(id),
-  part_number         text not null,
+  part_number         text,                      -- opcional: o cadastro "Nova peça" não exige SKU
   name                text not null,
   brand               text,
   stock_unit_id       uuid not null references units(id),
   consumption_unit_id uuid references units(id),
   conversion_factor   numeric(14,6) not null default 1 check (conversion_factor > 0),
   tracking            text not null default 'quantity' check (tracking in ('quantity','serialized')),
+  cost_price          numeric(14,2) check (cost_price >= 0),   -- custo de referência por unidade de CONSUMO (Opção A)
+  currency            char(3) not null default 'BRL',
+  minimum_qty         numeric(14,4) check (minimum_qty >= 0),  -- ponto de reposição, em unidade de consumo
   supplier_id         uuid references suppliers(id),
-  deleted_at          timestamptz,
-  unique (org_id, part_number)
+  active              boolean not null default true,           -- desativar tira das escolhas; histórico fica
+  unique (id, org_id)
 );
+create unique index parts_org_number_key on parts (org_id, lower(part_number));   -- SKU único quando informado (nulos não colidem)
+create index parts_org_active_name_idx on parts (org_id, active, name, id);                        -- lista por nome
+create index parts_org_active_category_name_idx on parts (org_id, active, category_id, name, id);   -- lista filtrada por categoria
 ```
 
 No v1, `Part` misturava catálogo e item físico (número de série na mesma linha do saldo). Aqui o catálogo não tem saldo nem série.
+
+**Custo de referência × custo médio do saldo.** `parts.cost_price` é o custo **de referência por unidade de consumo** (Opção A: o litro, não o balde), usado como sugestão e para o valor de catálogo; o **custo real** de uma saída é o `average_cost` do `stock_balances` (custo médio móvel), congelado na movimentação (STK-6). O **mínimo** e o **custo** são atributos da peça (uma decisão, um lugar), não do saldo por depósito.
+
+**Leitura sensível (PLT-13).** `cost_price` só sai da API para quem tem `cost.view`; o **valor de estoque** (`GET /parts/summary`) só para quem tem `stock.value_view`. Sem a permissão, o campo vem nulo.
 
 ## Depósitos e saldo
 
@@ -97,15 +107,17 @@ create table stock_balances (
   part_id       uuid not null references parts(id),
   quantity      numeric(14,4) not null default 0 check (quantity >= 0),   -- STK-2
   reserved_qty  numeric(14,4) not null default 0 check (reserved_qty >= 0 and reserved_qty <= quantity),  -- STK-13
-  minimum_qty   numeric(14,4) check (minimum_qty >= 0),                  -- abaixo disto, alerta de reposição
-  reorder_qty   numeric(14,4) check (reorder_qty > 0),                   -- quanto sugerir comprar
-  average_cost  numeric(14,4) not null default 0,
+  average_cost  numeric(14,4) not null default 0,    -- custo médio móvel do saldo (valorização)
   version       int not null default 0,
-  primary key (depot_id, part_id)
+  primary key (depot_id, part_id),
+  foreign key (depot_id, org_id) references depots (id, org_id),   -- saldo e depósito na mesma organização
+  foreign key (part_id, org_id)  references parts  (id, org_id)
 );
 ```
 
-**Disponível** = `quantity - reserved_qty`. Quando o disponível fica abaixo de `minimum_qty`, um evento do outbox avisa o responsável pelo depósito e entra no resumo semanal: é a previsão de falta de peça, antes de a OS parar esperando por ela.
+O **mínimo** é da peça (`parts.minimum_qty`), não do saldo por depósito: uma peça, um ponto de reposição. O `reorder_qty` (quanto sugerir comprar) fica para a fase de compras.
+
+**Disponível** = `quantity - reserved_qty`. Quando o disponível fica abaixo de `parts.minimum_qty`, um evento do outbox avisa o responsável pelo depósito e entra no resumo semanal: é a previsão de falta de peça, antes de a OS parar esperando por ela. **Hoje** (fatia entregue da 2.5) `depots`/`stock_balances` existem mas ainda não há movimentações, então o saldo é 0 e "abaixo do mínimo" é toda peça com `minimum_qty > 0`; a tela mostra o saldo 0 em âmbar. Quando as movimentações entrarem, a comparação passa a ser sobre o saldo real e a valorização vira agregado mantido por evento (nunca varrido por requisição).
 
 ```sql
 create table stock_receipts (                  -- entrada de compra, com a nota fiscal
@@ -247,12 +259,17 @@ create table part_request_transitions (
 
 O status inicial não vem do cliente (STK-5): o DTO de criação não tem o campo, e o banco usa o default.
 
+## Leitura e performance
+
+`GET /parts` é paginado por **cursor** (keyset por `(name, id)`, `limit` máximo 100, `nextCursor`), com filtros no servidor (`status`, `q` por nome/SKU, `categoryId`, `belowMinimum`). Os índices `parts_org_active_name_idx` e `parts_org_active_category_name_idx` servem a ordenação e o filtro sem `Seq Scan` nem `Sort` — provado no teste de plano de consulta (`parts.query-plans.spec.ts`). Os KPIs vêm de `GET /parts/summary` (contagens indexadas); o **valor de estoque** é 0 até as movimentações e nunca é somado por varredura na requisição.
+
 ## Invariantes garantidos aqui
 
-STK-1 a STK-13, PLT-5, AST-3, TIR-1, TIR-2.
+Já em produção nesta fatia: **PLT-13** (custo/valor só com permissão). Futuros (movimentações/requisições): STK-1 a STK-13, PLT-5; e AST-3, TIR-1, TIR-2 nos serializados.
 
-## Decidido em 26/09/2026
+## Decidido
 
-- **Custo médio móvel por depósito.** Em qual unidade o custo é guardado (a de estoque, como balde, ou a de consumo, como litro) é outra decisão, da [proposta de convenção de custo por unidade](../../produto/propostas/part-cost-convention.mdx), e fica para antes da fase 2.
+- **Custo por unidade de consumo, na peça (Opção A).** `parts.cost_price` é o custo de referência por unidade de consumo; o valor de estoque aplica `× conversion_factor`. Ver a [proposta de convenção de custo por unidade](../../produto/propostas/part-cost-convention.mdx) (aprovada, implementada na 2.5).
+- **Custo médio móvel por depósito** (`stock_balances.average_cost`) é o custo real do saldo, congelado na movimentação (STK-6).
 - **Fornecedores** num cadastro por organização, compartilhado por peças, pneus, recapagem e serviços externos.
 - **Transferência entre depósitos de organizações diferentes** só dentro do mesmo grupo ou com concessão explícita.

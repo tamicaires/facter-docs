@@ -60,7 +60,7 @@ Saída: **fatia 2 em homologação**. Uma OS real feita do começo ao fim no tab
 | 2.2 | Pessoas: funcionários, cargos, turnos, boxes | Executor escolhido por cargo e turno | ⬜ |
 | 2.3 | Ordem de serviço: abertura no conjunto, implemento ou posição; km na entrada; kanban | Invariantes da OS com teste, incluindo concorrência | ⬜ |
 | 2.4 | Serviços, executores e sessões de trabalho (iniciar, pausar com motivo, concluir) | Tempo trabalhado conforme SVC-7 (pausa nunca conta); horário vem do servidor | ⬜ |
-| 2.5 | Estoque: catálogo, depósitos (dono e local, consignado), livro de movimentações, saldo | Saldo sempre igual à soma do livro (teste) | 🟡 catálogo de peças e categorias de peça feito (back + tela + testes, contexto `stock`); depósitos, movimentações e saldo a seguir |
+| 2.5 | Estoque: catálogo, depósitos (dono e local, consignado), livro de movimentações, saldo | Saldo sempre igual à soma do livro (teste) | 🟡 catálogo de peças e categorias feito (back + tela + testes, contexto `stock`): **custo e mínimo na peça** (Opção A), **paginação por cursor** com teste de plano, **gate de custo/valor** (PLT-13); `depots`/`stock_balances` criados como fundação (sem UI, saldo 0). Movimentações, requisições e saldo real a seguir |
 | 2.6 | Requisição com aprovação segregada e consumo na OS com preço congelado | Quem pede não aprova; custo da OS não muda quando o preço muda | ⬜ |
 | 2.7 | Itens serializados e transferência entre depósitos | Um serializado nunca está em dois lugares | ⬜ |
 | 2.8 | Notas, anexos (storage de objetos) e OS em PDF | PDF com veículo, km, serviços, peças, custos e assinatura | ⬜ |

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Estoque · mockups</title>
+<title>Entrada de compra <title>Estoque · mockups</title> Fornecedores · mockups</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -753,315 +753,153 @@ body.shot-phone #phone{margin-top:0;padding:24px 16px 8px}
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="facter" viewBox="0 0 207 304"><path fill="currentColor" d="M25.8384 196.911L15.4739 183.729C-10.7189 150.411 0.44781 101.422 38.4895 82.7344L206.266 0.307297V34.2396C206.266 60.1875 191.448 83.8698 168.12 95.2396L56.578 149.594C48.4634 153.547 41.3489 159.344 35.9791 166.609C30.5936 173.901 25.9582 183.906 26.3176 196.526C29.9947 193.609 34.0624 191.026 38.4843 188.854L206.26 106.432V140.359C206.26 166.313 191.437 189.995 168.109 201.365L56.578 255.708C48.4634 259.667 41.3489 265.464 35.9791 272.724C30.4426 280.224 25.6978 290.578 26.3593 303.693L15.4739 289.854C-7.54698 260.568 -1.72407 219.193 25.8384 196.911ZM134.818 266.526L206.208 303.724L206.187 210.802L134.953 246.661C126.828 250.755 126.755 262.323 134.818 266.526Z"/></symbol></svg>
+
 <div class="doc">
   <header class="doc-head"><div>
-    <h1>Estoque · o almoxarifado onde as peças vivem</h1>
-    <p>Aqui ficam as <b>peças</b> (task 2.5) — separadas do catálogo de serviços. Quem cuida é o <b>almoxarife</b>. Cada peça tem preço (por unidade de consumo, decidido), saldo por depósito e mínimo. A ponte com a OS é a <b>requisição</b>: o mecânico pede, o almoxarife aprova e entrega, o custo entra na OS com preço congelado.</p>
-    <nav class="toc"><a href="#s1"><b>1</b>Peças e saldo</a><a href="#s2"><b>2</b>Requisições</a><a href="#s3"><b>3</b>Nova peça</a><a href="#s4"><b>4</b>Pedir peça (na OS)</a></nav>
+    <h1>Entrada de compra & Fornecedores · a peça entra por nota fiscal</h1>
+    <p>A peça só ganha <b>saldo</b> quando entra — e ela entra por <b>nota fiscal</b>. O fornecedor manda a <b>NF-e (XML)</b> ou a gente lê pela <b>chave de acesso</b>; o sistema identifica fornecedor, número, itens e custos, a gente <b>mapeia cada item</b> para a nossa peça (de-para que aprende) e confirma. O custo médio recalcula, o <b>preço congela</b> na entrada, e a mesma nota nunca entra duas vezes.</p>
+    <nav class="toc"><a href="#s1"><b>1</b>Fornecedores</a><a href="#s2"><b>2</b>Entrada por NF-e</a><a href="#s3"><b>3</b>Mapear itens</a><a href="#s4"><b>4</b>Confirmar</a><a href="#s5"><b>5</b>Edge cases</a><a href="#s6"><b>6</b>Vazios</a></nav>
   </div><div class="lockup"><svg width="27" height="40"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></div></header>
 
   <section class="sec" id="s1">
-    <div class="sec-label"><span class="sec-num">1</span><h2>Painel · a visão de comando do almoxarife</h2></div>
-    <p class="sec-sub">A home do estoque não é lista, é <b>decisão</b>. Abre dizendo o que vai <b>romper hoje</b> (e qual OS trava), o que <b>comprar</b> (com quanto e quanto custa), quanto <b>dinheiro está parado</b> e o que está na <b>fila</b>. As listas (peças, movimentações, depósitos) ficam a um clique — aqui é onde ele age. O que a sugestão inteligente propõe <span class="chip"><i class="ic s14 i-spark spark"></i>ele confirma</span>, nunca decide sozinho.</p>
-    <div class="frame"><div class="app"><header class="topbar"><a class="lockup" href="#"><svg width="24" height="35"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></a><span class="spacer"></span><div class="search"><i class="ic s18 i-mag"></i>Buscar placa, frota ou OS</div><button class="org">Transportadora Rota Sul <i class="ic s16 i-down"></i></button><span class="avatar av-b">AL</span></header><nav class="sidenav" aria-label="Menu"><a class="navitem" href="#"><i class="ic s24 i-house"></i></a><a class="navitem" href="#"><i class="ic s24 i-truck"></i></a><a class="navitem" href="#"><i class="ic s24 i-os"></i></a><a class="navitem" href="#" aria-current="page"><i class="ic s24 i-box"></i></a><a class="navitem" href="#"><i class="ic s24 i-chart"></i></a><span class="navsep"></span><a class="navitem" href="#"><i class="ic s24 i-gear"></i></a></nav>
-      <main class="main">
-        <div class="pagehead"><div><h1>Estoque</h1><p class="meta">Depósito Mucuri · almoxarife</p></div></div>
-        <div class="tabbar"><a href="#" aria-current="page"><i class="ic s16 i-chart"></i>Painel</a><a href="#"><i class="ic s16 i-box"></i>Peças <span class="n">312</span></a><a href="#"><i class="ic s16 i-cart"></i>Requisições <span class="n">3</span></a><a href="#"><i class="ic s16 i-boxes"></i>Depósitos <span class="n">2</span></a><a href="#"><i class="ic s16 i-move"></i>Movimentações</a></div>
-        <div class="kpis">
-          <div class="card kpi danger"><div class="tp"><i class="ic s16 i-warning"></i>Em ruptura</div><div class="big">3 peças</div><div class="sub">travando <b>2 OS</b> aguardando material</div></div>
-          <div class="card kpi warn"><div class="tp"><i class="ic s16 i-trend-down"></i>Abaixo do mínimo</div><div class="big">11 peças</div><div class="sub">no ponto de reposição — repor antes de zerar</div></div>
-          <div class="card kpi"><a href="#" class="lk">ver fila</a><div class="tp"><i class="ic s16 i-cart"></i>Requisições na fila</div><div class="big">3</div><div class="sub">a mais antiga há <b>20 min</b></div></div>
-          <div class="card kpi"><a href="#" class="lk">detalhar</a><div class="tp"><i class="ic s16 i-coins"></i>Valor em estoque</div><div class="big">R$ 148 mil</div><div class="sub"><b>R$ 22 mil</b> parado (sem giro há 90 d)</div></div>
-        </div>
-        <div class="panelcols">
-          <div>
-            <div class="card pnl">
-              <div class="pnl-h"><i class="ic s18 i-spark spark"></i><span class="ti">A comprar agora</span><span class="cnt">7 itens</span><button class="act"><i class="ic s16 i-cart"></i>Gerar pedido de compra</button></div>
-              <div class="pnl-b">
-                <table class="tbl">
-                  <thead><tr><th>Peça</th><th class="r">Saldo / mín</th><th class="r">Sugerido</th><th class="r">Custo est.</th></tr></thead>
-                  <tbody>
-                    <tr><td class="p"><b>Lona de freio</b><span>SKU FR-LONA · Bosch</span></td><td class="r"><span class="wtag d">0 / 8</span></td><td class="r">24 un</td><td class="r">R$ 1.104</td></tr>
-                    <tr><td class="p"><b>Filtro de óleo</b><span>SKU MO-FILT · Mann</span></td><td class="r"><span class="wtag d">1 / 6</span></td><td class="r">18 un</td><td class="r">R$ 486</td></tr>
-                    <tr><td class="p"><b>Óleo 15W40</b><span>SKU MO-OL15 · Ipiranga · litro</span></td><td class="r"><span class="wtag a">40 / 120</span></td><td class="r">200 L</td><td class="r">R$ 3.600</td></tr>
-                    <tr><td class="p"><b>Feixe de mola</b><span>SKU SU-FEIX · Rassini</span></td><td class="r"><span class="wtag a">2 / 4</span></td><td class="r">6 un</td><td class="r">R$ 2.640</td></tr>
-                    <tr><td class="p"><b>Bucha de jumelo</b><span>SKU SU-BUCH</span></td><td class="r"><span class="wtag a">6 / 12</span></td><td class="r">24 un</td><td class="r">R$ 288</td></tr>
-                  </tbody>
-                </table>
-                <div class="rl" style="border-top:1px solid hsl(var(--border));margin-top:2px"><span>Total sugerido · 7 itens</span><b style="font:700 15px Sora">R$ 8.900</b></div>
-              </div>
-            </div>
-            <div class="card pnl">
-              <div class="pnl-h"><i class="ic s18 i-coins"></i><span class="ti">Onde o dinheiro vai · consumo 90 d</span><a href="#" class="lk" style="position:static;margin-left:auto">curva ABC</a></div>
-              <div class="pnl-b">
-                <div class="consume"><div><div class="nm">Óleo 15W40</div><div class="sk">1.240 L consumidos</div></div><div class="v">R$ 22.320</div><div class="bar"><i style="width:100%"></i></div></div>
-                <div class="consume"><div><div class="nm">Lona de freio</div><div class="sk">168 un</div></div><div class="v">R$ 7.728</div><div class="bar"><i style="width:35%"></i></div></div>
-                <div class="consume"><div><div class="nm">Feixe de mola</div><div class="sk">14 un</div></div><div class="v">R$ 6.160</div><div class="bar"><i style="width:28%"></i></div></div>
-                <div class="consume"><div><div class="nm">Pneu 295/80</div><div class="sk">6 un</div></div><div class="v">R$ 5.400</div><div class="bar"><i style="width:24%"></i></div></div>
-              </div>
-            </div>
-          </div>
-          <aside>
-            <div class="card pnl">
-              <div class="pnl-h"><i class="ic s18 i-cart"></i><span class="ti">Requisições aguardando</span><span class="cnt">3</span></div>
-              <div class="pnl-b">
-                <div class="mrow"><div><div class="nm">Pedido 319 · OS 1042</div><div class="s">Rafael · Box 3 · Troca de lona · 3 itens</div></div><div class="rt"><span class="wtag a">6 min</span></div></div>
-                <div class="mrow"><div><div class="nm">Pedido 320 · OS 1041</div><div class="s">Diego · Box 1 · Troca de óleo · 1 item</div></div><div class="rt"><span class="wtag a">12 min</span></div></div>
-                <div class="mrow"><div><div class="nm">Pedido 321 · OS 1043</div><div class="s">Leandro · Box 2 · Suspensão · 5 itens</div></div><div class="rt"><span class="wtag d">20 min</span></div></div>
-              </div>
-            </div>
-            <div class="card pnl">
-              <div class="pnl-h"><i class="ic s18 i-coins"></i><span class="ti">Dinheiro parado</span></div>
-              <div class="pnl-b pad">
-                <div class="subhd">Sem giro há 90 d</div>
-                <div class="mrow"><div><div class="nm">Turbina reman.</div><div class="s">2 un · última saída há 7 meses</div></div><div class="rt"><b>R$ 9.400</b></div></div>
-                <div class="mrow"><div><div class="nm">Radiador L-model</div><div class="s">3 un · sem consumo</div></div><div class="rt"><b>R$ 4.800</b></div></div>
-                <div class="subhd">Consignado a acertar</div>
-                <div class="mrow"><div><div class="nm">Bosch</div><div class="s">saldo na sua base, peça do fornecedor</div></div><div class="rt"><b>R$ 6.200</b></div></div>
-              </div>
-            </div>
-            <div class="card pnl">
-              <div class="pnl-h"><i class="ic s18 i-move"></i><span class="ti">Últimas movimentações</span><a href="#" class="lk" style="position:static;margin-left:auto">livro</a></div>
-              <div class="pnl-b">
-                <div class="mrow"><div><div class="nm">Consumo · Lona de freio</div><div class="s">−4 un · OS 1042 · Rafael</div></div><div class="rt s">há 6 min</div></div>
-                <div class="mrow"><div><div class="nm">Entrada · Óleo 15W40</div><div class="s">+200 L · NF 8842 · Ipiranga</div></div><div class="rt s">há 2 h</div></div>
-                <div class="mrow"><div><div class="nm">Ajuste · Rebite de lona</div><div class="s">−12 un · inventário · Ana</div></div><div class="rt s">ontem</div></div>
-              </div>
-            </div>
-          </aside>
-        </div>
-      </main>
+    <div class="sec-label"><span class="sec-num">1</span><h2>Fornecedores · o cadastro leve</h2></div>
+    <p class="sec-sub">Fornecedor é um <b>cadastro nosso</b> (nome + CNPJ + contato), não um login. Distribuidora comum não precisa de acesso — ela só manda a nota. Criação <b>inline</b> na entrada (quando a NF traz um CNPJ novo) e uma gestão leve aqui.</p>
+    <p class="view-cap">Notebook · 1.280 px</p>
+    <div class="tablet-wrap"><div class="frame notebook"><main class="pane">
+      <div class="pagehead"><div><h1>Estoque</h1><p class="meta">Depósito Mucuri · almoxarife</p></div><div style="display:flex;gap:8px"><button class="btn btn-outline"><i class="ic s16 i-arrowdown"></i>Entrada de compra</button><button class="btn btn-primary"><i class="ic s16 i-plus"></i>Novo fornecedor</button></div></div>
+      <div class="tabbar"><a href="#"><i class="ic s16 i-box"></i>Peças <span class="n">312</span></a><a href="#"><i class="ic s16 i-cart"></i>Requisições <span class="n">3</span></a><a href="#"><i class="ic s16 i-boxes"></i>Depósitos <span class="n">2</span></a><a href="#"><i class="ic s16 i-move"></i>Movimentações</a><a href="#" aria-current="page"><i class="ic s16 i-store"></i>Fornecedores <span class="n">6</span></a></div>
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:14px"><div class="search"><i class="ic s16 i-search"></i>Buscar fornecedor por nome ou CNPJ</div></div>
+      <div class="plist">
+        <div class="prow" style="grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) auto auto"><div><div class="nm">Distribuidora Sul</div><div class="sku">CNPJ 12.345.678/0001-90</div></div><div style="font-size:13px;color:hsl(240 6% 30%)">compras@distsul.com.br</div><div class="saldo"><b>18 NFs</b><div class="s">última há 3 d</div></div><button class="kebab"><i class="ic s18 i-dots-v"></i></button></div>
+        <div class="prow" style="grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) auto auto"><div><div class="nm">Freios Paraná</div><div class="sku">CNPJ 98.765.432/0001-10</div></div><div style="font-size:13px;color:hsl(240 6% 30%)">(41) 3555-1020</div><div class="saldo"><b>7 NFs</b><div class="s">última há 12 d</div></div><button class="kebab"><i class="ic s18 i-dots-v"></i></button></div>
+        <div class="prow" style="grid-template-columns:minmax(0,1.6fr) minmax(0,1fr) auto auto"><div><div class="nm">Lubrificantes Mucuri</div><div class="sku">CNPJ 04.222.111/0001-55</div></div><div style="font-size:13px;color:hsl(240 6% 30%)">vendas@lubmucuri.com.br</div><div class="saldo"><b>31 NFs</b><div class="s">última há 1 d</div></div><button class="kebab"><i class="ic s18 i-dots-v"></i></button></div>
+      </div>
+    </main></div></div>
+
+    <p class="view-cap" style="margin-top:26px">Diálogo · Novo fornecedor</p>
+    <div class="stage2"><div class="dx" style="max-width:520px">
+      <button class="dx-x"><i class="ic s18 i-x"></i></button>
+      <div class="dx-hd"><span class="dx-ico"><i class="ic s20 i-store"></i></span><div><h2>Novo fornecedor</h2><div class="desc">Quem emite as notas de compra</div></div></div>
+      <div class="dx-bd">
+        <div><label class="flbl">Nome</label><div class="inp focus">Distribuidora Sul</div></div>
+        <div class="two"><div><label class="flbl">CNPJ <span class="opt">· opcional</span></label><div class="inp">12.345.678/0001-90</div></div><div><label class="flbl">Contato <span class="opt">· opcional</span></label><div class="inp">compras@distsul.com.br</div></div></div>
+        <div class="infobox"><i class="ic s18 i-info"></i><span>O CNPJ é o que <b>casa a nota fiscal automaticamente</b> com o fornecedor na hora da entrada. Sem ele, dá pra vincular à mão.</span></div>
+      </div>
+      <div class="dx-ft"><span class="cons"><i class="ic s16 i-info"></i>Fica disponível ao lançar uma entrada de compra.</span><div class="acts"><button class="btn btn-outline">Cancelar</button><button class="btn btn-primary">Salvar fornecedor</button></div></div>
     </div></div>
-    <p class="notes" style="margin:14px 0 0 0;max-width:900px"><b>Decisão, não vaidade:</b> cada número aponta uma ação — ruptura leva à compra, fila leva à separação, parado leva a devolver/vender. A compra é <b>sugerida</b> (saldo × mínimo × consumo), o almoxarife revisa e confirma; preço com fonte (último recebimento por peça), nunca de memória. Consignado aparece separado porque é dinheiro que está na base mas não é seu.</p>
   </section>
 
   <section class="sec" id="s2">
-    <div class="sec-label"><span class="sec-num">2</span><h2>Peças e saldo · a tela do almoxarife</h2></div>
-    <p class="sec-sub">O catálogo de peças com o saldo de cada depósito. O preço é <b>por unidade de consumo</b> (litro, kg, un) — a decisão que fechamos. Quem está abaixo do mínimo salta em âmbar.</p>
-    <p class="view-cap">Notebook · 1.280 px</p>
-    <div class="frame"><div class="app"><header class="topbar"><a class="lockup" href="#"><svg width="24" height="35"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></a><span class="spacer"></span><div class="search"><i class="ic s18 i-mag"></i>Buscar placa, frota ou OS</div><button class="org">Transportadora Rota Sul <i class="ic s16 i-down"></i></button><span class="avatar av-b">AL</span></header><nav class="sidenav" aria-label="Menu"><a class="navitem" href="#"><i class="ic s24 i-house"></i></a><a class="navitem" href="#"><i class="ic s24 i-truck"></i></a><a class="navitem" href="#"><i class="ic s24 i-os"></i></a><a class="navitem" href="#" aria-current="page"><i class="ic s24 i-box"></i></a><a class="navitem" href="#"><i class="ic s24 i-chart"></i></a><span class="navsep"></span><a class="navitem" href="#"><i class="ic s24 i-gear"></i></a></nav>
-      <main class="main">
-        <div class="pagehead"><div><h1>Estoque</h1><p class="meta">Depósito Mucuri · almoxarife</p></div><div style="display:flex;gap:8px"><button class="btn btn-outline"><i class="ic s16 i-arrowdown"></i>Entrada de compra</button><button class="btn btn-primary"><i class="ic s16 i-plus"></i>Nova peça</button></div></div>
-        <div class="kpis"><div class="kpi"><div class="k">Itens em catálogo</div><div class="v num">312</div></div><div class="kpi"><div class="k">Valor em estoque</div><div class="v num">R$ 84.200</div></div><div class="kpi"><div class="k">Abaixo do mínimo</div><div class="v num" style="color:hsl(var(--warning-text))">7</div></div><div class="kpi"><div class="k">Requisições abertas</div><div class="v num">3</div></div></div>
-        <div class="tabbar"><a href="#" aria-current="page"><i class="ic s16 i-box"></i>Peças <span class="n">312</span></a><a href="#"><i class="ic s16 i-cart"></i>Requisições <span class="n">3</span></a><a href="#"><i class="ic s16 i-boxes"></i>Depósitos <span class="n">2</span></a><a href="#"><i class="ic s16 i-move"></i>Movimentações</a></div>
-        <div class="localsearch"><i class="ic s16 i-mag"></i>Buscar peça por nome ou SKU</div>
-        <div class="plist"><div class="prow"><div><div class="nm">Óleo de motor 15W40</div><div class="sku">SKU MO-15W40</div></div><div><span class="pchip">Lubrificantes</span></div><div class="cost">R$ 22,00<small>por litro</small></div><div class="saldo"><b>340 L</b><div class="s">17 baldes · Dep. Mucuri</div></div><button class="kebab"><i class="ic s18 i-dots-v"></i></button></div><div class="prow"><div><div class="nm">Lona de freio</div><div class="sku">SKU FR-LONA</div></div><div><span class="pchip">Freios</span></div><div class="cost">R$ 42,00<small>por unidade</small></div><div class="saldo"><b>18 un</b><div class="s">Dep. Mucuri</div></div><button class="kebab"><i class="ic s18 i-dots-v"></i></button></div><div class="prow"><div><div class="nm">Filtro de óleo</div><div class="sku">SKU MO-FILT</div></div><div><span class="pchip">Motor</span></div><div class="cost">R$ 38,00<small>por unidade</small></div><div class="saldo low"><b>6 un</b><div class="s">mínimo 10 un</div></div><button class="kebab"><i class="ic s18 i-dots-v"></i></button></div><div class="prow"><div><div class="nm">Amortecedor dianteiro</div><div class="sku">SKU SU-AMORT</div></div><div><span class="pchip">Suspensão</span></div><div class="cost">R$ 480,00<small>por unidade</small></div><div class="saldo"><b>4 un</b><div class="s">Dep. Mucuri</div></div><button class="kebab"><i class="ic s18 i-dots-v"></i></button></div><div class="prow"><div><div class="nm">Graxa de chassi</div><div class="sku">SKU LU-GRAXA</div></div><div><span class="pchip">Lubrificantes</span></div><div class="cost">R$ 18,00<small>por kg</small></div><div class="saldo"><b>45 kg</b><div class="s">Dep. Mucuri</div></div><button class="kebab"><i class="ic s18 i-dots-v"></i></button></div></div>
-      </main>
+    <div class="sec-label"><span class="sec-num">2</span><h2>Entrada por NF-e · o fornecedor manda, a gente lê</h2></div>
+    <p class="sec-sub">Duas portas para a mesma coisa: subir o <b>XML da NF-e</b> (o fornecedor já emite) ou colar a <b>chave de acesso</b> (44 dígitos, do DANFE) para buscar. Digitar item por item é o último recurso.</p>
+    <p class="view-cap">Diálogo · Entrada de compra (início)</p>
+    <div class="stage2"><div class="dx" style="max-width:640px">
+      <button class="dx-x"><i class="ic s18 i-x"></i></button>
+      <div class="dx-hd"><span class="dx-ico"><i class="ic s20 i-arrowdown"></i></span><div><h2>Entrada de compra</h2><div class="desc">A peça ganha saldo · sempre com nota fiscal</div></div></div>
+      <div class="dx-bd">
+        <div style="border:2px dashed hsl(var(--border));border-radius:12px;padding:26px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:8px;background:hsl(var(--background))">
+          <span style="width:44px;height:44px;border-radius:12px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center"><i class="ic s24 i-clip"></i></span>
+          <b style="font-size:14.5px">Arraste o XML da NF-e aqui</b>
+          <p style="font-size:12.5px;color:hsl(var(--muted-foreground));margin:0">ou <a href="#">escolha o arquivo</a> · a gente lê fornecedor, número, itens e custos</p>
+        </div>
+        <div style="display:flex;align-items:center;gap:12px;color:hsl(var(--muted-foreground));font-size:12px;margin:2px 0"><span style="flex:1;height:1px;background:hsl(var(--border))"></span>ou pela chave<span style="flex:1;height:1px;background:hsl(var(--border))"></span></div>
+        <div><label class="flbl">Chave de acesso <span class="opt">· 44 dígitos do DANFE</span></label><div class="inp" style="font-variant-numeric:tabular-nums;letter-spacing:.5px">3524 0912 3456 7800 0190 5500 1000 0045 1210 0004 5127</div></div>
+        <div class="infobox"><i class="ic s18 i-info"></i><span>A NF-e já vem <b>estruturada</b> (XML) — nada de OCR. Da chave, buscamos a nota; do XML, lemos direto. Foto/PDF só se não houver jeito.</span></div>
+      </div>
+      <div class="dx-ft"><span class="cons"><i class="ic s16 i-info"></i>Próximo: conferir o fornecedor e mapear os itens.</span><div class="acts"><button class="btn btn-outline">Cancelar</button><button class="btn btn-primary">Ler nota</button></div></div>
     </div></div>
-    <div class="notes-row">
-      <div class="notes"><h4>Onde a peça vive</h4><ul><li><b>Catálogo (`parts`)</b> = o SKU, sem quantidade. <b>Saldo</b> = soma do livro de movimentações, por depósito.</li><li><b>Preço por unidade de consumo</b> (Opção A): o custo na OS é direto; o valor de estoque aplica o fator.</li></ul></div>
-      <div class="notes"><h4>Quem mexe</h4><ul><li><b>Almoxarife</b> (papel de base): cadastra peça, dá entrada de compra, aprova e entrega requisição.</li><li><b>Consignado:</b> um depósito pode ser de outra empresa; o consumo é custo do dono, não da oficina.</li></ul></div>
-      <div class="notes"><h4>Ligação com a OS</h4><ul><li>A peça só vira custo pela <b>requisição</b> (próxima seção), sempre amarrada a uma OS/serviço.</li><li><b>Preço congelado</b> na entrega: reajuste depois não muda o custo da OS.</li></ul></div>
-    </div>
   </section>
 
   <section class="sec" id="s3">
-    <div class="sec-label"><span class="sec-num">3</span><h2>Requisições · a ponte com a OS</h2></div>
-    <p class="sec-sub">Cada pedido de peça é ligado a uma OS (e ao serviço). O mecânico pede, o almoxarife aprova e entrega — <b>quem pede não aprova</b> (PLT-5). Na entrega, o preço congela e entra no custo da OS.</p>
-    <p class="view-cap">Notebook · 1.280 px</p>
-    <div class="frame"><div class="app"><header class="topbar"><a class="lockup" href="#"><svg width="24" height="35"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></a><span class="spacer"></span><div class="search"><i class="ic s18 i-mag"></i>Buscar placa, frota ou OS</div><button class="org">Transportadora Rota Sul <i class="ic s16 i-down"></i></button><span class="avatar av-b">AL</span></header><nav class="sidenav" aria-label="Menu"><a class="navitem" href="#"><i class="ic s24 i-house"></i></a><a class="navitem" href="#"><i class="ic s24 i-truck"></i></a><a class="navitem" href="#"><i class="ic s24 i-os"></i></a><a class="navitem" href="#" aria-current="page"><i class="ic s24 i-box"></i></a><a class="navitem" href="#"><i class="ic s24 i-chart"></i></a><span class="navsep"></span><a class="navitem" href="#"><i class="ic s24 i-gear"></i></a></nav>
-      <main class="main">
-        <div class="pagehead"><div><h1>Estoque</h1><p class="meta">Depósito Mucuri · almoxarife</p></div></div>
-        <div class="tabbar"><a href="#"><i class="ic s16 i-box"></i>Peças <span class="n">312</span></a><a href="#" aria-current="page"><i class="ic s16 i-cart"></i>Requisições <span class="n">3</span></a><a href="#"><i class="ic s16 i-boxes"></i>Depósitos <span class="n">2</span></a><a href="#"><i class="ic s16 i-move"></i>Movimentações</a></div>
-        <div class="plist"><div class="reqrow"><div><div class="reqnum num">Pedido 319</div><div class="os">OS 1042 · Troca de lona</div></div><div><div class="it">Lona de freio × 4</div><div class="os">Rafael Souza · há 6 min</div></div><div></div><span class="st wait">Aguardando aprovação</span><button class="btn btn-outline btn-sm">Aprovar</button></div><div class="reqrow"><div><div class="reqnum num">Pedido 318</div><div class="os">OS 1042 · Troca de óleo</div></div><div><div class="it">Óleo 15W40 × 20 L</div><div class="os">aprovado por Carla Nunes</div></div><div></div><span class="st deliver">Aprovada · a entregar</span><button class="btn btn-outline btn-sm">Entregar</button></div><div class="reqrow"><div><div class="reqnum num">Pedido 311</div><div class="os">OS 1041 · Filtro</div></div><div><div class="it">Filtro de óleo × 1</div><div class="os">entregue há 1 h</div></div><div></div><span class="st ok">Entregue</span><span style="width:1px"></span></div></div>
-      </main>
+    <div class="sec-label"><span class="sec-num">3</span><h2>Mapear itens · o de-para que aprende</h2></div>
+    <p class="sec-sub">Lida a nota, cada linha da NF aponta para uma <b>peça nossa</b>. O que já foi mapeado antes vem <b>reconhecido</b> (✓); o resto é um clique — mapear numa peça existente ou <b>criar</b> na hora. O vínculo (código do fornecedor → nossa peça) fica salvo e casa sozinho na próxima.</p>
+    <p class="view-cap">Diálogo · NF lida</p>
+    <div class="stage2"><div class="dx" style="max-width:760px">
+      <button class="dx-x"><i class="ic s18 i-x"></i></button>
+      <div class="dx-hd"><span class="dx-ico"><i class="ic s20 i-store"></i></span><div><h2>NF 4.513 · Distribuidora Sul</h2><div class="desc">Série 1 · emitida 12/03 · CNPJ 12.345.678/0001-90</div></div></div>
+      <div class="dx-bd">
+        <div class="two"><div><label class="flbl">Depósito de entrada</label><div class="sel">Depósito Mucuri <i class="ic s16 i-down"></i></div></div><div><label class="flbl">Recebido em</label><div class="inp">13/03/2026</div></div></div>
+        <div style="border:1px solid hsl(var(--border));border-radius:12px;overflow:hidden">
+          <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.3fr) auto auto;gap:14px;padding:9px 14px;background:hsl(var(--muted));font-size:11.5px;font-weight:600;color:hsl(var(--muted-foreground));text-transform:uppercase;letter-spacing:.04em"><span>Item da nota</span><span>Nossa peça</span><span style="text-align:right">Qtd × custo</span><span style="text-align:right">Total</span></div>
+          <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.3fr) auto auto;gap:14px;padding:12px 14px;align-items:center;border-top:1px solid hsl(var(--border))"><div><div class="nm" style="font-size:13.5px">ÓLEO MOTOR 15W40 BALDE 20L</div><div class="sku">cód. 7788 · NCM 2710.19</div></div><div><span class="st ok"><i class="ic s14 i-check"></i>Óleo de motor 15W40</span></div><div style="text-align:right;font-variant-numeric:tabular-nums">10 baldes<div class="sku">R$ 440,00</div></div><div style="text-align:right;font-weight:600;font-variant-numeric:tabular-nums">R$ 4.400</div></div>
+          <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.3fr) auto auto;gap:14px;padding:12px 14px;align-items:center;border-top:1px solid hsl(var(--border))"><div><div class="nm" style="font-size:13.5px">LONA FREIO DIANT LP</div><div class="sku">cód. 3401 · NCM 8708.30</div></div><div><span class="st ok"><i class="ic s14 i-check"></i>Lona de freio</span></div><div style="text-align:right;font-variant-numeric:tabular-nums">4 un<div class="sku">R$ 42,00</div></div><div style="text-align:right;font-weight:600;font-variant-numeric:tabular-nums">R$ 168</div></div>
+          <div style="display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1.3fr) auto auto;gap:14px;padding:12px 14px;align-items:center;border-top:1px solid hsl(var(--border));background:hsl(var(--warning-soft)/.5)"><div><div class="nm" style="font-size:13.5px">FILTRO OLEO ROSCA MANN W950</div><div class="sku">cód. 9120 · NCM 8421.23</div></div><div style="display:flex;gap:6px"><button class="btn btn-outline btn-sm">Mapear peça <i class="ic s14 i-down"></i></button><button class="btn btn-outline btn-sm"><i class="ic s14 i-plus"></i>Criar</button></div><div style="text-align:right;font-variant-numeric:tabular-nums">6 un<div class="sku">R$ 38,00</div></div><div style="text-align:right;font-weight:600;font-variant-numeric:tabular-nums">R$ 228</div></div>
+        </div>
+        <div class="infobox"><i class="ic s18 i-info"></i><span><b>Preço congela na entrada</b> (STK-6): o custo unitário da nota vira o custo do movimento e recalcula o <b>custo médio</b> da peça no depósito. Reajuste depois não muda esta entrada nem OS passada.</span></div>
+      </div>
+      <div class="dx-ft"><span class="cons"><i class="ic s16 i-warning"></i>1 item ainda sem peça — mapeie ou crie para lançar.</span><div class="acts"><button class="btn btn-outline">Cancelar</button><button class="btn btn-primary" style="opacity:.55">Lançar entrada</button></div></div>
     </div></div>
   </section>
 
   <section class="sec" id="s4">
-    <div class="sec-label"><span class="sec-num">4</span><h2>Nova peça · com a decisão de custo por consumo</h2></div>
-    <p class="sec-sub">Unidade de estoque (balde) × unidade de consumo (litro) × fator. O <b>custo é por litro</b> (unidade de consumo) — do jeito que decidimos. O valor de estoque é derivado (saldo × fator × custo).</p>
-    <div class="stage2"><div class="dx">
+    <div class="sec-label"><span class="sec-num">4</span><h2>Confirmar · vira movimento e sobe o saldo</h2></div>
+    <p class="sec-sub">Tudo mapeado: um clique lança. Cada linha vira um <b>movimento de entrada</b> no livro, o saldo sobe, o custo médio recalcula — numa transação só, com a nota gravada para não entrar de novo.</p>
+    <p class="view-cap">Diálogo · pronto para lançar</p>
+    <div class="stage2"><div class="dx" style="max-width:640px">
       <button class="dx-x"><i class="ic s18 i-x"></i></button>
-      <div class="dx-hd"><span class="dx-ico"><i class="ic s20 i-box"></i></span><div><h2>Nova peça</h2><div class="desc">Entra no catálogo · saldo começa em zero</div></div></div>
+      <div class="dx-hd"><span class="dx-ico"><i class="ic s20 i-arrowdown"></i></span><div><h2>Lançar NF 4.513</h2><div class="desc">Distribuidora Sul · Depósito Mucuri</div></div></div>
       <div class="dx-bd">
-        <div class="two"><div><label class="flbl">Nome</label><div class="inp focus">Óleo de motor 15W40</div></div><div><label class="flbl">Categoria</label><div class="sel">Lubrificantes <i class="ic s16 i-down"></i></div></div></div>
-        <div class="three"><div><label class="flbl">Unidade de estoque</label><div class="sel">Balde <i class="ic s16 i-down"></i></div></div><div><label class="flbl">Unidade de consumo</label><div class="sel">Litro <i class="ic s16 i-down"></i></div></div><div><label class="flbl">Fator</label><div class="inp">20</div></div></div>
-        <div class="two"><div><label class="flbl">Custo <span class="opt">· por litro (consumo)</span></label><div class="inp">R$ 22,00</div></div><div><label class="flbl">Saldo mínimo <span class="opt">· em litros</span></label><div class="inp">100</div></div></div>
-        <div class="infobox"><i class="ic s18 i-info"></i><span>1 balde = 20 L. O <b>custo por litro</b> vai direto pro custo da OS; o <b>valor de estoque</b> = saldo × 20 × R$ 22,00. Uma peça, um custo, sem superfaturar.</span></div>
+        <div class="kpis" style="margin:0"><div class="kpi"><div class="k">Itens</div><div class="v num">3</div></div><div class="kpi"><div class="k">Total da nota</div><div class="v num">R$ 4.796</div></div><div class="kpi"><div class="k">Depósito</div><div class="v" style="font-size:15px">Mucuri</div></div></div>
+        <div class="plist" style="margin-top:2px">
+          <div class="prow" style="grid-template-columns:minmax(0,1fr) auto auto"><div class="nm" style="font-size:13.5px">Óleo de motor 15W40</div><div class="saldo"><b>+200 L</b><div class="s">340 → 540 L</div></div><div style="text-align:right;font-weight:600;font-variant-numeric:tabular-nums">R$ 4.400</div></div>
+          <div class="prow" style="grid-template-columns:minmax(0,1fr) auto auto"><div class="nm" style="font-size:13.5px">Lona de freio</div><div class="saldo"><b>+4 un</b><div class="s">18 → 22 un</div></div><div style="text-align:right;font-weight:600;font-variant-numeric:tabular-nums">R$ 168</div></div>
+          <div class="prow" style="grid-template-columns:minmax(0,1fr) auto auto"><div class="nm" style="font-size:13.5px">Filtro de óleo</div><div class="saldo low"><b>+6 un</b><div class="s">6 → 12 un · sai do mínimo</div></div><div style="text-align:right;font-weight:600;font-variant-numeric:tabular-nums">R$ 228</div></div>
+        </div>
       </div>
-      <div class="dx-ft"><span class="cons"><i class="ic s16 i-info"></i>A entrada de estoque (com nota) é o próximo passo.</span><div class="acts"><button class="btn btn-outline">Cancelar</button><button class="btn btn-primary">Salvar peça</button></div></div>
+      <div class="dx-ft"><span class="cons"><i class="ic s16 i-info"></i>Cada item vira uma entrada no livro · a mesma NF não entra duas vezes.</span><div class="acts"><button class="btn btn-outline">Voltar</button><button class="btn btn-primary">Lançar entrada</button></div></div>
     </div></div>
   </section>
 
   <section class="sec" id="s5">
-    <div class="sec-label"><span class="sec-num">5</span><h2>Pedir peça · a partir de um serviço da OS</h2></div>
-    <p class="sec-sub">O mecânico pede a peça dentro do serviço: escolhe a peça e a quantidade, e o pedido segue para o almoxarife. Saldo e preço são do estoque — ele não vê.</p>
-    <div class="stage2"><div class="dx">
-      <button class="dx-x"><i class="ic s18 i-x"></i></button>
-      <div class="dx-hd"><span class="dx-ico"><i class="ic s20 i-cart"></i></span><div><h2>Pedir peça · OS 1042</h2><div class="desc">Serviço: Troca de lona de freio · Cavalo RTB7F31</div></div></div>
-      <div class="dx-bd">
-        <div><label class="flbl">Peça</label><div class="inp focus"><i class="ic s16 i-mag" style="color:hsl(240 5% 45%);margin-right:8px"></i>Lona de freio</div></div>
-        <div class="pickpart"><div><div class="nm">Lona de freio</div><div class="s">SKU FR-LONA · Freios</div></div><div class="qtybox"><span class="u">Qtd</span><div class="q">4</div><span class="u">un</span></div></div>
-        <div class="infobox"><i class="ic s18 i-info"></i><span>O pedido vai para o <b>almoxarife</b> aprovar e separar.</span></div>
-      </div>
-      <div class="dx-ft"><span class="cons"><i class="ic s16 i-info"></i>Aguarda aprovação do almoxarife.</span><div class="acts"><button class="btn btn-outline">Cancelar</button><button class="btn btn-primary"><i class="ic s16 i-cart"></i>Enviar pedido</button></div></div>
-    </div></div>
-    <div class="notes-row">
-      <div class="notes"><h4>Regras por trás (não na tela)</h4><ul><li><b>Mecânico não vê saldo nem preço</b> — isso é do estoque; ele só pede.</li><li><b>Quem pede não aprova</b> (PLT-5): a aprovação é de outra pessoa com permissão de estoque.</li></ul></div>
-      <div class="notes"><h4>Custo</h4><ul><li><b>Preço congela na entrega</b> (STK-6): reajuste depois não muda a OS.</li><li>Só na entrega o consumo vira <b>custo da OS</b> (linha no livro + <code>work_order_cost_lines</code>).</li></ul></div>
-      <div class="notes"><h4>A tela fica limpa</h4><ul><li>O componente diz só o essencial ("vai para o almoxarife aprovar"). O resto é regra do sistema, não texto pro usuário ler toda vez.</li></ul></div>
-    </div>
-  </section>
-  <section class="sec">
-    <div class="sec-label"><span class="sec-num">6</span><h2>Edge cases, cenários e estados</h2></div>
-    <p class="sec-sub">Os selects abertos e as situações que quebram o caminho feliz — o que aparece quando falta saldo, é consignado, quem pede tenta aprovar, ou o preço mudou depois.</p>
-
-    <h3 style="font:700 15px Sora;margin:0 0 12px 0;color:hsl(240 6% 30%)">Selects abertos</h3>
+    <div class="sec-label"><span class="sec-num">5</span><h2>Edge cases · o que quebra o caminho feliz</h2></div>
+    <p class="sec-sub">Nota repetida, item que não casa, fornecedor novo, XML ilegível, custo destoando, sem permissão — e a correção, que é estorno e não borracha.</p>
     <div class="grid2">
-      <div class="frag"><div class="cap">Peça — busca do almoxarife (com saldo)</div><div class="in">
-        <div class="menu">
-          <div class="mq"><i class="ic s16 i-mag"></i>lona</div>
-          <div class="mi sel">Lona de freio <span class="r">saldo 18 un · R$ 42,00</span></div>
-          <div class="mi">Lona de freio reforçada <span class="r">saldo 3 un</span></div>
-          <div class="mi" style="color:hsl(var(--danger-text))">Lona traseira <span class="r">esgotada · 0 un</span></div>
-        </div>
+      <div class="frag"><div class="cap">NF já lançada (idempotência · STK-14)</div><div class="in">
+        <div class="emptybox" style="padding:16px 14px"><span class="big" style="background:hsl(var(--warning-soft));color:hsl(var(--warning-text))"><i class="ic s20 i-warning"></i></span><b>Esta nota já foi lançada</b><p>NF 4.512 · Distribuidora Sul, entrada em 09/03 por Carla Nunes. A mesma chave não entra de novo.</p><button class="btn btn-outline btn-sm" style="margin-top:4px"><i class="ic s16 i-move"></i>Ver a entrada no livro</button></div>
       </div></div>
-      <div class="frag"><div class="cap">Peça — busca do mecânico (sem saldo)</div><div class="in">
-        <div class="menu">
-          <div class="mq"><i class="ic s16 i-mag"></i>lona</div>
-          <div class="mi sel">Lona de freio <span class="r">Freios</span></div>
-          <div class="mi">Lona de freio reforçada <span class="r">Freios</span></div>
-          <div class="mi">Lona traseira <span class="r">Freios</span></div>
-        </div>
-        <p style="font-size:12px;color:hsl(var(--muted-foreground));margin-top:9px">O mecânico escolhe a peça pelo nome. Saldo e preço são do estoque — o almoxarife confere ao separar.</p>
-      </div></div>
-      <div class="frag"><div class="cap">Unidade de consumo — lista</div><div class="in">
-        <div class="menu">
-          <div class="mi sel">Litro <i class="ic s16 i-check ck"></i></div>
-          <div class="mi">Mililitro</div>
-          <div class="mi">Quilograma</div>
-          <div class="mi">Unidade</div>
-          <div class="mi">Metro</div>
-        </div>
-      </div></div>
-      <div class="frag"><div class="cap">Depósito — inclui consignado</div><div class="in">
-        <div class="menu">
-          <div class="mi sel">Depósito Mucuri <span class="r">próprio</span></div>
-          <div class="mi">Depósito Ponta Grossa <span class="r">próprio</span></div>
-          <div class="mi">Consignado Bosch <span class="consbadge" style="margin-left:auto"><i class="ic s12 i-box"></i>de terceiro</span></div>
-        </div>
-      </div></div>
-      <div class="frag"><div class="cap">Categoria — com "nova"</div><div class="in">
-        <div class="menu">
-          <div class="mi sel">Lubrificantes <i class="ic s16 i-check ck"></i></div>
-          <div class="mi">Freios</div>
-          <div class="mi">Motor</div>
-          <div class="mi" style="color:hsl(var(--primary));font-weight:600"><i class="ic s16 i-plus"></i>Nova categoria…</div>
-        </div>
-      </div></div>
-    </div>
 
-    <h3 style="font:700 15px Sora;margin:28px 0 12px 0;color:hsl(240 6% 30%)">Cenários e estados</h3>
-    <div class="grid2">
-      <div class="frag"><div class="cap">Saldo insuficiente (na aprovação do almoxarife)</div><div class="in" style="display:flex;flex-direction:column;gap:10px">
-        <div class="serial"><div><b>Amortecedor dianteiro</b><div style="font-size:12px;color:hsl(var(--muted-foreground))">saldo 4 un · Dep. Mucuri</div></div><span style="margin-left:auto;font-weight:600">Qtd 6</span></div>
-        <div class="blockbanner bb-warn"><i class="ic s18 i-warn"></i><span>Só há <b>4 em estoque</b>. Peça 4 agora e o resto por compra, ou reduza a quantidade.</span></div>
+      <div class="frag"><div class="cap">Item da NF sem peça</div><div class="in" style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 12px;border:1px solid hsl(var(--warning)/.4);background:hsl(var(--warning-soft)/.5);border-radius:10px"><div><div class="nm" style="font-size:13px">FILTRO OLEO MANN W950</div><div class="sku">cód. 9120 · nunca lançado antes</div></div><div style="display:flex;gap:6px"><button class="btn btn-outline btn-sm">Mapear</button><button class="btn btn-primary btn-sm"><i class="ic s14 i-plus"></i>Criar peça</button></div></div>
+        <p class="notes" style="margin:0">Ao mapear/criar, o vínculo <b>código 9120 → Filtro de óleo</b> fica salvo: a próxima NF desse fornecedor casa sozinha.</p>
       </div></div>
-      <div class="frag"><div class="cap">Quem pede não aprova (PLT-5)</div><div class="in">
-        <div class="blockbanner bb-danger"><i class="ic s18 i-warn"></i><span>Você abriu este pedido, então não pode aprová-lo. Outra pessoa com permissão de estoque precisa aprovar.</span></div>
+
+      <div class="frag"><div class="cap">Fornecedor da nota não cadastrado</div><div class="in">
+        <div class="emptybox" style="padding:16px 14px"><span class="big"><i class="ic s20 i-store"></i></span><b>Fornecedor novo na nota</b><p>«Rolamentos Brasil» · CNPJ 21.888.333/0001-04 não está no cadastro.</p><button class="btn btn-primary btn-sm" style="margin-top:4px"><i class="ic s16 i-plus"></i>Cadastrar e usar</button></div>
       </div></div>
-      <div class="frag"><div class="cap">Preço congelado × atual</div><div class="in">
-        <div class="pricecmp"><span>Congelado na entrega (sáb.)</span><b class="frozen">R$ 42,00</b></div>
-        <div class="pricecmp"><span>Preço de hoje</span><b class="now">R$ 47,00</b></div>
-        <p style="font-size:12px;color:hsl(var(--muted-foreground));margin-top:6px">O custo da OS usa o congelado. O reajuste de R$ 5 não mexe em ordens já fechadas (STK-6).</p>
+
+      <div class="frag"><div class="cap">XML inválido / ilegível</div><div class="in">
+        <div class="emptybox" style="padding:16px 14px"><span class="big" style="background:hsl(var(--danger-soft));color:hsl(var(--danger-text))"><i class="ic s20 i-warning"></i></span><b>Não consegui ler este arquivo</b><p>Não parece um XML de NF-e válido. Confira se é o arquivo da nota (não o DANFE em PDF) ou cole a chave de acesso.</p></div>
       </div></div>
-      <div class="frag"><div class="cap">Item serializado (bateria, pneu)</div><div class="in">
-        <div class="serial"><span class="tag">SÉRIE BX-99213</span><div><b>Bateria 150Ah</b><div style="font-size:12px;color:hsl(var(--muted-foreground))">em 1 lugar por vez · rastreada por número</div></div></div>
-        <p style="font-size:12px;color:hsl(var(--muted-foreground));margin-top:8px">Serializado não tem "quantidade": cada unidade é única e vai por baixa registrada (STK-12).</p>
+
+      <div class="frag"><div class="cap">Custo destoando do histórico</div><div class="in">
+        <div style="display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid hsl(var(--warning)/.4);background:hsl(var(--warning-soft)/.5);border-radius:10px"><i class="ic s18 i-trend-down" style="color:hsl(var(--warning-text))"></i><div style="font-size:12.5px;color:hsl(var(--warning-text))"><b>Óleo 15W40 a R$ 44,00/balde</b> — 15% acima do último recebimento (R$ 38,00). Confere antes de lançar?</div></div>
       </div></div>
-      <div class="frag"><div class="cap">Catálogo vazio</div><div class="in">
-        <div class="emptybox"><span class="big"><i class="ic s20 i-box"></i></span><b>Nenhuma peça ainda</b><p>Cadastre a primeira peça ou importe do sistema antigo para começar o estoque.</p><button class="btn btn-primary btn-sm" style="margin-top:4px"><i class="ic s16 i-plus"></i>Nova peça</button></div>
+
+      <div class="frag"><div class="cap">Sem permissão (stock.receive)</div><div class="in">
+        <div class="emptybox" style="padding:16px 14px"><span class="big" style="background:hsl(var(--muted));color:hsl(var(--muted-foreground))"><i class="ic s20 i-lock"></i></span><b>Você não pode lançar entradas</b><p>Dar entrada com nota é do almoxarife (<code>stock.receive</code>). Você pode consultar, mas não lançar.</p></div>
       </div></div>
-      <div class="frag"><div class="cap">Consumo de consignado</div><div class="in">
-        <div class="blockbanner bb-warn" style="background:hsl(285 60% 97%);border-color:hsl(285 55% 88%);color:hsl(285 40% 32%)"><i class="ic s18 i-info" style="color:hsl(285 45% 45%)"></i><span>Esta peça sai do <b>depósito consignado da Bosch</b>. O custo é do dono do estoque, não da oficina (STK-10) — some do custo interno da OS.</span></div>
+
+      <div class="frag"><div class="cap">Correção é estorno (nunca apagar)</div><div class="in" style="display:flex;flex-direction:column;gap:10px">
+        <div class="mvrow" style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 12px;border:1px solid hsl(var(--border));border-radius:10px"><span class="mvchip mv-in"><i class="ic i-in2"></i>Entrada</span><div><div class="pnm" style="font-weight:600">Óleo 15W40 · NF 4.512</div><div class="ref">lançado por engano — dobrou o saldo</div></div><button class="btn btn-outline btn-sm"><i class="ic s16 i-return"></i>Estornar</button></div>
+        <div class="mvrow" style="display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px 12px;border:1px solid hsl(var(--border));border-radius:10px;background:hsl(var(--danger-soft)/.4)"><span class="mvchip mv-out"><i class="ic i-out2"></i>Estorno</span><div><div class="pnm" style="font-weight:600">−200 L · estorno da NF 4.512</div><div class="ref">Marina Duarte · motivo: entrada duplicada</div></div><span></span></div>
+        <p class="notes" style="margin:0">O estorno é um <b>movimento inverso</b> que aponta para o original. O livro nunca perde uma linha — dá pra reconstruir o saldo em qualquer data.</p>
       </div></div>
     </div>
   </section>
 
-  <section class="sec">
-    <div class="sec-label"><span class="sec-num">7</span><h2>Depósitos · próprios e consignados</h2></div>
-    <p class="sec-sub">Todo saldo é por depósito (STK-9). Um depósito tem <b>dono</b> e <b>local</b> — que podem ser de empresas diferentes: é assim que o <b>consignado</b> funciona (a peça fica na sua base, mas é da Bosch, e o consumo é custo dela). Cada depósito lista quem pode movimentar.</p>
-    <p class="view-cap">Notebook · 1.280 px</p>
-    <div class="frame"><div class="app"><header class="topbar"><a class="lockup" href="#"><svg width="24" height="35"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></a><span class="spacer"></span><div class="search"><i class="ic s18 i-mag"></i>Buscar placa, frota ou OS</div><button class="org">Transportadora Rota Sul <i class="ic s16 i-down"></i></button><span class="avatar av-b">AL</span></header><nav class="sidenav" aria-label="Menu"><a class="navitem" href="#"><i class="ic s24 i-house"></i></a><a class="navitem" href="#"><i class="ic s24 i-truck"></i></a><a class="navitem" href="#"><i class="ic s24 i-os"></i></a><a class="navitem" href="#" aria-current="page"><i class="ic s24 i-box"></i></a><a class="navitem" href="#"><i class="ic s24 i-chart"></i></a><span class="navsep"></span><a class="navitem" href="#"><i class="ic s24 i-gear"></i></a></nav>
-      <main class="main">
-        <div class="pagehead"><div><h1>Estoque</h1><p class="meta">Depósito Mucuri · almoxarife</p></div><button class="btn btn-primary"><i class="ic s16 i-plus"></i>Novo depósito</button></div>
-        <div class="tabbar"><a href="#"><i class="ic s16 i-box"></i>Peças <span class="n">312</span></a><a href="#"><i class="ic s16 i-cart"></i>Requisições <span class="n">3</span></a><a href="#" aria-current="page"><i class="ic s16 i-boxes"></i>Depósitos <span class="n">3</span></a><a href="#"><i class="ic s16 i-move"></i>Movimentações</a></div>
-        <div class="deplist">
-  <div class="deprow"><span class="dico"><i class="ic s18 i-box"></i></span><div><div class="nm">Depósito Mucuri</div><div class="lc">Base Mucuri · dono: Rota Sul</div></div><div class="num2">312 itens<small>de 340 SKUs</small></div><div class="num2">R$ 84.200<small>valor</small></div><div class="ops"><span class="avatar av-sm av-b">CN</span><span class="avatar av-sm av-a">MD</span></div><button class="kebab"><i class="ic s18 i-dots-v"></i></button></div>
-  <div class="deprow"><span class="dico"><i class="ic s18 i-box"></i></span><div><div class="nm">Depósito Ponta Grossa</div><div class="lc">Base Ponta Grossa · dono: Rota Sul</div></div><div class="num2">128 itens</div><div class="num2">R$ 31.900<small>valor</small></div><div class="ops"><span class="avatar av-sm av-c">LB</span></div><button class="kebab"><i class="ic s18 i-dots-v"></i></button></div>
-  <div class="deprow"><span class="dico" style="background:hsl(285 60% 95%);color:hsl(285 45% 42%)"><i class="ic s18 i-box"></i></span><div><div class="nm">Consignado Bosch <span class="consbadge" style="margin-left:4px"><i class="ic s12 i-box"></i>de terceiro</span></div><div class="lc">Local: Base Mucuri · dono: Bosch · consumo é custo do dono</div></div><div class="num2">54 itens</div><div class="num2">—<small>não imobiliza</small></div><div class="ops"><span class="avatar av-sm av-b">CN</span></div><button class="kebab"><i class="ic s18 i-dots-v"></i></button></div>
-</div>
-      </main>
-    </div></div>
-  </section>
-
-  <section class="sec">
-    <div class="sec-label"><span class="sec-num">8</span><h2>Movimentações · o livro do estoque</h2></div>
-    <p class="sec-sub">A fonte da verdade: o saldo é a <b>soma do livro</b> (STK-1). Só entra linha, nunca edita nem apaga — corrigir é uma nova movimentação. Toda linha tem <b>tipo, peça, quantidade, motivo, autor e referência</b> (STK-8): entrada de compra (NF), consumo (OS/pedido), transferência e ajuste.</p>
-    <p class="view-cap">Notebook · 1.280 px</p>
-    <div class="frame"><div class="app"><header class="topbar"><a class="lockup" href="#"><svg width="24" height="35"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></a><span class="spacer"></span><div class="search"><i class="ic s18 i-mag"></i>Buscar placa, frota ou OS</div><button class="org">Transportadora Rota Sul <i class="ic s16 i-down"></i></button><span class="avatar av-b">AL</span></header><nav class="sidenav" aria-label="Menu"><a class="navitem" href="#"><i class="ic s24 i-house"></i></a><a class="navitem" href="#"><i class="ic s24 i-truck"></i></a><a class="navitem" href="#"><i class="ic s24 i-os"></i></a><a class="navitem" href="#" aria-current="page"><i class="ic s24 i-box"></i></a><a class="navitem" href="#"><i class="ic s24 i-chart"></i></a><span class="navsep"></span><a class="navitem" href="#"><i class="ic s24 i-gear"></i></a></nav>
-      <main class="main">
-        <div class="pagehead"><div><h1>Estoque</h1><p class="meta">Depósito Mucuri · almoxarife</p></div><button class="btn btn-outline"><i class="ic s16 i-adjust"></i>Ajuste de inventário</button></div>
-        <div class="tabbar"><a href="#"><i class="ic s16 i-box"></i>Peças <span class="n">312</span></a><a href="#"><i class="ic s16 i-cart"></i>Requisições <span class="n">3</span></a><a href="#"><i class="ic s16 i-boxes"></i>Depósitos <span class="n">3</span></a><a href="#" aria-current="page"><i class="ic s16 i-move"></i>Movimentações</a></div>
-        <div class="mvfilters"><button class="mvf" aria-pressed="true">Todas</button><button class="mvf"><i class="ic s14 i-in2"></i>Entradas</button><button class="mvf"><i class="ic s14 i-out2"></i>Consumo</button><button class="mvf"><i class="ic s14 i-transfer"></i>Transferências</button><button class="mvf"><i class="ic s14 i-adjust"></i>Ajustes</button><button class="mvf">Este mês <i class="ic s14 i-down"></i></button></div>
-        <div class="mvlist"><div class="mvrow"><span class="mvchip mv-in"><i class="ic i-in2"></i>Entrada</span><div><div class="pnm">Óleo de motor 15W40</div><div class="ref">NF 4.512 · Distribuidora Sul · Dep. Mucuri</div></div><div class="qt plus">+200 L</div><div class="who">Carla Nunes · sáb 08:40</div><div class="val plus">+R$ 4.400</div></div><div class="mvrow"><span class="mvchip mv-out"><i class="ic i-out2"></i>Consumo</span><div><div class="pnm">Lona de freio</div><div class="ref">OS 1042 · pedido 319 · Rafael Souza</div></div><div class="qt minus">−4 un</div><div class="who">Carla Nunes · seg 09:20</div><div class="val ">−R$ 168</div></div><div class="mvrow"><span class="mvchip mv-tr"><i class="ic i-transfer"></i>Transferência</span><div><div class="pnm">Filtro de óleo</div><div class="ref">para Dep. Ponta Grossa</div></div><div class="qt minus">−10 un</div><div class="who">Carla Nunes · dom 14:10</div><div></div></div><div class="mvrow"><span class="mvchip mv-aj"><i class="ic i-adjust"></i>Ajuste</span><div><div class="pnm">Graxa de chassi</div><div class="ref">inventário · motivo: perda/quebra</div></div><div class="qt minus">−2 kg</div><div class="who">Marina Duarte · sex 17:00</div><div></div></div><div class="mvrow"><span class="mvchip mv-in"><i class="ic i-in2"></i>Entrada</span><div><div class="pnm">Amortecedor dianteiro</div><div class="ref">NF 2.207 · Freios Paraná · Dep. Mucuri</div></div><div class="qt plus">+6 un</div><div class="who">Carla Nunes · qui 10:30</div><div class="val plus">+R$ 2.880</div></div></div>
-      </main>
-    </div></div>
-    <p class="notes" style="margin:14px 0 0 0;max-width:860px"><b>Por que um livro só-insert:</b> auditável (dá pra reconstruir o saldo em qualquer data), à prova de "sumiço" (nada é apagado), e é o que responde "cadê a peça?" e "quem mexeu?". Entrada de compra sempre com nota fiscal, e a mesma nota não entra duas vezes (STK-14).</p>
-  </section>
-
-  <section class="sec" id="s9">
-    <div class="sec-label"><span class="sec-num">9</span><h2>Estados da lista de peças · a tela nova do almoxarife</h2></div>
-    <p class="sec-sub">A lista implementada: busca no servidor, filtros (categoria · abaixo do mínimo), paginação por "carregar mais". Hoje o <b>saldo começa em zero</b> (as movimentações ainda não existem), então quase tudo mostra <b>0</b> e "abaixo do mínimo" quer dizer só que <b>há um mínimo definido</b>.</p>
-    <p class="view-cap">Notebook · 1.280 px</p>
-
+  <section class="sec" id="s6">
+    <div class="sec-label"><span class="sec-num">6</span><h2>Vazios · antes da primeira nota</h2></div>
+    <p class="sec-sub">O estoque nasce vazio. Fornecedores e o livro de movimentações só ganham vida com a primeira entrada de compra.</p>
     <div class="grid2">
-      <div class="frag"><div class="cap">Carregando (skeleton)</div><div class="in" style="padding:0">
-        <div class="plist" style="border:0">
-          <div class="prow"><div><div style="height:13px;width:62%;background:hsl(var(--muted));border-radius:5px"></div><div style="height:9px;width:34%;background:hsl(var(--muted));border-radius:5px;margin-top:8px"></div></div><div><span style="display:block;height:22px;width:78px;background:hsl(var(--muted));border-radius:99px"></span></div><div style="text-align:right"><div style="height:12px;width:60px;background:hsl(var(--muted));border-radius:5px;margin-left:auto"></div></div><div style="text-align:right"><div style="height:13px;width:44px;background:hsl(var(--muted));border-radius:5px;margin-left:auto"></div></div><span style="width:24px;height:24px;background:hsl(var(--muted));border-radius:6px"></span></div>
-          <div class="prow"><div><div style="height:13px;width:48%;background:hsl(var(--muted));border-radius:5px"></div><div style="height:9px;width:30%;background:hsl(var(--muted));border-radius:5px;margin-top:8px"></div></div><div><span style="display:block;height:22px;width:64px;background:hsl(var(--muted));border-radius:99px"></span></div><div style="text-align:right"><div style="height:12px;width:60px;background:hsl(var(--muted));border-radius:5px;margin-left:auto"></div></div><div style="text-align:right"><div style="height:13px;width:44px;background:hsl(var(--muted));border-radius:5px;margin-left:auto"></div></div><span style="width:24px;height:24px;background:hsl(var(--muted));border-radius:6px"></span></div>
-          <div class="prow"><div><div style="height:13px;width:55%;background:hsl(var(--muted));border-radius:5px"></div><div style="height:9px;width:32%;background:hsl(var(--muted));border-radius:5px;margin-top:8px"></div></div><div><span style="display:block;height:22px;width:72px;background:hsl(var(--muted));border-radius:99px"></span></div><div style="text-align:right"><div style="height:12px;width:60px;background:hsl(var(--muted));border-radius:5px;margin-left:auto"></div></div><div style="text-align:right"><div style="height:13px;width:44px;background:hsl(var(--muted));border-radius:5px;margin-left:auto"></div></div><span style="width:24px;height:24px;background:hsl(var(--muted));border-radius:6px"></span></div>
-        </div>
+      <div class="frag"><div class="cap">Fornecedores · vazio</div><div class="in">
+        <div class="emptybox"><span class="big"><i class="ic s20 i-store"></i></span><b>Nenhum fornecedor ainda</b><p>Cadastre quem emite as notas — ou deixe que a primeira NF-e sugira o fornecedor pelo CNPJ.</p><button class="btn btn-primary btn-sm" style="margin-top:4px"><i class="ic s16 i-plus"></i>Novo fornecedor</button></div>
       </div></div>
-
-      <div class="frag"><div class="cap">Só inativas (toggle "Inativas · N")</div><div class="in" style="padding:0">
-        <div style="display:flex;align-items:center;gap:12px;padding:12px 16px">
-          <div class="search" style="width:auto;flex:1"><i class="ic s16 i-search"></i>Buscar peça por nome ou SKU</div>
-          <a href="#" style="font-size:13px;font-weight:600">Ver ativas</a>
-        </div>
-        <div class="plist" style="border:0">
-          <div class="prow" style="opacity:.72"><div><div class="nm">Correia dentada (antiga)</div><div class="sku">SKU MO-CORR · inativa</div></div><div><span class="pchip">Motor</span></div><div class="cost">R$ 90,00<small>por unidade</small></div><div class="saldo"><b>0 un</b></div><button class="kebab"><i class="ic s18 i-dots-v"></i></button></div>
-        </div>
+      <div class="frag"><div class="cap">Movimentações · livro vazio</div><div class="in">
+        <div class="emptybox"><span class="big"><i class="ic s20 i-move"></i></span><b>O livro está vazio</b><p>A primeira <b>entrada de compra</b> abre o estoque: dá saldo às peças e começa a contar o custo médio.</p><button class="btn btn-outline btn-sm" style="margin-top:4px"><i class="ic s16 i-arrowdown"></i>Entrada de compra</button></div>
       </div></div>
-
-      <div class="frag"><div class="cap">Busca sem resultado</div><div class="in">
-        <div class="search" style="width:100%;margin-bottom:12px"><i class="ic s16 i-search"></i>parafuso m20 inox</div>
-        <div class="emptybox"><span class="big"><i class="ic s20 i-search"></i></span><b>Nenhuma peça encontrada para "parafuso m20 inox"</b><p>Confira o nome ou o SKU, ou limpe a busca.</p></div>
-      </div></div>
-
-      <div class="frag"><div class="cap">Filtro sem match (categoria)</div><div class="in">
-        <div style="display:flex;gap:8px;margin-bottom:12px"><button class="mvf" aria-pressed="true">Suspensão <i class="ic s14 i-down"></i></button><button class="mvf"><i class="ic s14 i-warning"></i>Abaixo do mínimo</button></div>
-        <div class="emptybox"><span class="big"><i class="ic s20 i-box"></i></span><b>Nenhuma peça em Suspensão</b><p>Troque a categoria ou cadastre uma peça nessa categoria.</p></div>
-      </div></div>
-
-      <div class="frag"><div class="cap">Filtro "abaixo do mínimo" sem match</div><div class="in">
-        <div style="display:flex;gap:8px;margin-bottom:12px"><button class="mvf">Categoria <i class="ic s14 i-down"></i></button><button class="mvf" aria-pressed="true"><i class="ic s14 i-warning"></i>Abaixo do mínimo</button></div>
-        <div class="emptybox"><span class="big" style="background:hsl(var(--success-soft));color:hsl(var(--success-text))"><i class="ic s20 i-check-c"></i></span><b>Nada abaixo do mínimo</b><p>Todo item com mínimo definido está no ponto — nada a repor agora.</p></div>
-      </div></div>
-
-      <div class="frag"><div class="cap">Erro de carregamento</div><div class="in">
-        <div class="emptybox"><span class="big" style="background:hsl(var(--danger-soft));color:hsl(var(--danger-text))"><i class="ic s20 i-warning"></i></span><b>Não deu pra carregar as peças</b><p>Falha de conexão. Nada foi perdido — tente de novo.</p><button class="btn btn-outline btn-sm" style="margin-top:4px"><i class="ic s16 i-cycle"></i>Tentar de novo</button></div>
-      </div></div>
-
-      <div class="frag"><div class="cap">Sem acesso (sem part.view)</div><div class="in">
-        <div class="emptybox"><span class="big" style="background:hsl(var(--muted));color:hsl(var(--muted-foreground))"><i class="ic s20 i-lock"></i></span><b>Você não tem acesso ao estoque</b><p>Só o almoxarife (e quem tiver <code>part.view</code>) enxerga as peças. Fale com o gestor.</p></div>
-      </div></div>
-
-      <div class="frag"><div class="cap">Paginação (carregar mais · fim)</div><div class="in" style="display:flex;flex-direction:column;gap:14px">
-        <div style="display:flex;justify-content:center"><button class="btn btn-outline btn-sm"><i class="ic s16 i-down"></i>Carregar mais</button></div>
-        <div style="text-align:center;font-size:12.5px;color:hsl(var(--muted-foreground))">— fim da lista · 312 peças —</div>
-        <p class="notes" style="margin:0"><b>Por cursor (STK-perf):</b> a lista pagina por <code>(nome, id)</code>, no servidor, com índice — aguenta 2 mil peças sem varrer nem ordenar em memória. Busca e filtros também vão para a API, não filtram só o que já veio.</p>
+      <div class="frag"><div class="cap">Peça sem saldo ainda (hoje)</div><div class="in">
+        <div class="plist" style="border:0"><div class="prow"><div><div class="nm">Amortecedor dianteiro</div><div class="sku">SKU SU-AMORT</div></div><div><span class="pchip">Suspensão</span></div><div class="cost">R$ 480,00<small>por unidade</small></div><div class="saldo"><b>0 un</b></div><button class="kebab"><i class="ic s18 i-dots-v"></i></button></div></div>
+        <p class="notes" style="margin:10px 0 0 0">Enquanto as movimentações não existem, <b>toda peça mostra saldo 0</b> e "abaixo do mínimo" só marca que <b>há um mínimo definido</b>. A entrada por NF é o que troca isso por número real.</p>
       </div></div>
     </div>
   </section>
