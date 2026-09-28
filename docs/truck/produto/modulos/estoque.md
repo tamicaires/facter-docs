@@ -22,8 +22,9 @@ As peças que a oficina consome, como se agrupam e quanto custam — o cadastro 
 
 1. **Nova peça** — nome, categoria, unidade de estoque × unidade de consumo × fator, **custo por unidade de consumo** e **saldo mínimo**. Entra no catálogo; o saldo começa em zero.
 2. **Categorias de peça** — agrupam as peças e dizem se o custo é direto ou rateado.
-3. **Buscar e filtrar** — busca por nome ou SKU (no servidor), filtro por categoria e por "abaixo do mínimo"; a lista rola infinito (paginação por cursor).
-4. Entrada de compra, requisições, depósitos e movimentações: **a seguir** (o botão e as abas já aparecem como próximo passo).
+3. **Fornecedores** — cadastro leve (nome + CNPJ opcional + contato). O **CNPJ** é o que casa a NF-e ao fornecedor na entrada, sem digitar; sem ele, vincula-se à mão. Criação/edição/desativação, busca por nome ou CNPJ, lista paginada por cursor.
+4. **Buscar e filtrar** — busca por nome ou SKU (no servidor), filtro por categoria e por "abaixo do mínimo"; a lista rola infinito (paginação por cursor).
+5. Entrada de compra, requisições, depósitos e movimentações: **a seguir** (o botão e as abas já aparecem como próximo passo).
 
 ## Regras de negócio
 
@@ -38,6 +39,8 @@ As peças que a oficina consome, como se agrupam e quanto custam — o cadastro 
 | --- | --- |
 | Ver peças (`part.view`) | Almoxarife, gestor, admin, mecânico, consultor |
 | Cadastrar/editar peças e categorias (`part.manage`) | Almoxarife, admin |
+| Ver fornecedores (`supplier.view`) | Almoxarife, gestor, admin |
+| Cadastrar/editar fornecedores (`supplier.manage`) | Almoxarife, gestor, admin |
 | Ver **custo** da peça (`cost.view`) | Almoxarife, gestor, admin, financeiro |
 | Ver **valor em estoque** (`stock.value_view`) | Almoxarife, gestor, admin, financeiro |
 
@@ -57,3 +60,4 @@ Painel do almoxarife: **itens em catálogo**, **valor em estoque**, **abaixo do 
 | Data | Mudança | PR / ADR |
 | --- | --- | --- |
 | 2026-09 | Catálogo de peças e categorias; custo/mínimo na peça (Opção A); paginação por cursor; gate de custo/valor | task 2.5 |
+| 2026-09 | Fornecedores (cadastro: nome + CNPJ único + contato), aba no Estoque | frente Entrada por NF-e |

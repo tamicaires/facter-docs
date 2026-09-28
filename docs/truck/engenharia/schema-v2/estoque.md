@@ -43,15 +43,23 @@ create table units (
   fractional    boolean not null default false
 );
 
-create table suppliers (                       -- peças, pneus, recapagem e serviços externos
+create table suppliers (                       -- cadastro leve: quem emite a nota de compra
   id            uuid primary key,
   org_id        uuid not null references organizations(id),
-  name          text not null,
-  tax_id        text,
-  kinds         text[] not null check (kinds <@ array['parts','tires','retread','services']),
-  unique (org_id, tax_id)
+  name          text not null check (char_length(name) between 2 and 120),
+  tax_id        text check (tax_id ~ '^[0-9]{14}$'),   -- CNPJ só com dígitos
+  contact       text check (contact is null or char_length(contact) between 1 and 200),
+  active        boolean not null default true,
+  version       int not null default 0
 );
+create unique index suppliers_org_name_key on suppliers (org_id, lower(name));
+create unique index suppliers_org_tax_id_key on suppliers (org_id, tax_id) where tax_id is not null;  -- CNPJ único por org: casa a NF-e sozinha
+create index suppliers_org_active_name_idx on suppliers (org_id, active, name, id);                   -- keyset por (name, id)
+```
 
+O fornecedor é um **cadastro nosso** (nome + CNPJ opcional + contato), não um login: a distribuidora só manda a nota. O **CNPJ único por org** é o que casa a NF-e ao fornecedor na entrada, sem digitar. Permissões `supplier.view` / `supplier.manage`. Fornecedor multiuso (pneus, recapagem, serviços, via `kinds`) fica para quando esses contextos entrarem.
+
+```sql
 create table parts (                           -- o SKU: catálogo, sem quantidade
   id                  uuid primary key,
   org_id              uuid not null references organizations(id),
