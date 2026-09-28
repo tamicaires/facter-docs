@@ -1,0 +1,388 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Datas · componente</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;800&display=swap" rel="stylesheet" />
+<style>
+  :root{
+    --background:0 0% 98%;
+    --foreground:240 10% 3.9%;
+    --card:0 0% 100%;
+    --primary:233 65% 50%;
+    --primary-foreground:0 0% 100%;
+    --muted:240 4.8% 93.9%;
+    --muted-foreground:240 3.8% 42%;
+    --border:240 5.9% 90%;
+    --success:160 60% 38%;
+    --warning:38 92% 45%;
+    --danger:0 84.2% 60.2%;
+    --radius:.5rem;
+    --success-text:160 70% 24%;
+    --danger-text:0 72% 38%;
+    --warning-text:28 85% 28%;
+    --primary-soft:233 85% 96.5%;
+    --success-soft:160 55% 94%;
+    --warning-soft:40 95% 93%;
+    --danger-soft:0 85% 96%;
+    --canvas:225 14% 92%;
+    --ring:233 65% 50%;
+    --toolbar:240 5% 96%;
+    color-scheme:light;
+  }
+  *{box-sizing:border-box}
+  html{-webkit-text-size-adjust:100%}
+  body{margin:0;background:hsl(var(--canvas));color:hsl(var(--foreground));
+    font:15px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+  h1,h2,h3,p{margin:0}
+  button{font:inherit;color:inherit}
+  a{color:hsl(var(--primary))}
+  :focus-visible{outline:2px solid hsl(var(--ring));outline-offset:2px;border-radius:6px}
+
+  /* ---------- presentation page ---------- */
+  .doc{max-width:900px;margin:0 auto;padding:48px 24px 96px}
+  .doc-head{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between;margin-bottom:8px}
+  .doc-head h1{font:800 32px/1.15 Sora,Inter,sans-serif;letter-spacing:-.02em}
+  .doc-head .lead{color:hsl(var(--muted-foreground));max-width:62ch;margin-top:10px;font-size:14.5px;line-height:1.55}
+  .lockup{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+  .lockup svg{color:hsl(var(--primary));flex:none}
+  .lockup .rule{width:1px;align-self:stretch;background:hsl(var(--border));margin:2px 0}
+  .wordmark{font:400 18px/1.1 Sora,sans-serif;letter-spacing:-.01em;white-space:nowrap}
+  .wordmark b{font-weight:800}
+  .tagline{font-size:11px;color:hsl(var(--muted-foreground));margin-top:3px;white-space:nowrap}
+
+  section{display:flex;flex-direction:column;gap:12px;margin-top:56px}
+  .cap{font-size:12.5px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:hsl(var(--muted-foreground));margin:0;display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
+  .cap b{color:hsl(var(--primary));font-family:Sora,Inter,sans-serif;font-weight:800;letter-spacing:0}
+  .sub{font-size:13.5px;color:hsl(var(--muted-foreground));margin:-4px 0 4px;line-height:1.5;max-width:70ch}
+  .grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,260px),1fr));gap:12px}
+  .card{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px;
+    box-shadow:0 1px 2px hsl(230 20% 20%/.05);overflow:hidden}
+  .card.pad{padding:16px}
+  .frag{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px;padding:14px}
+  .frag .st{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));margin:0 0 10px}
+
+  /* label + field */
+  .flabel{font-size:12.5px;font-weight:600;color:hsl(var(--foreground));margin:0 0 7px}
+  .field{display:flex;align-items:center;gap:10px;height:42px;padding:0 12px;border-radius:8px;
+    border:1px solid hsl(var(--border));background:hsl(var(--card));color:hsl(var(--foreground));font-size:14.5px}
+  .field svg{flex:none;color:hsl(var(--muted-foreground))}
+  .field .val{flex:1}
+  .field .ph{flex:1;color:hsl(var(--muted-foreground))}
+  .field .chev{color:hsl(var(--muted-foreground))}
+  .field.focus{border-color:hsl(var(--primary));box-shadow:0 0 0 3px hsl(var(--ring)/.16)}
+  .field.error{border-color:hsl(var(--danger));box-shadow:0 0 0 3px hsl(var(--danger)/.14)}
+  .field.disabled{background:hsl(var(--muted));color:hsl(var(--muted-foreground));border-color:hsl(var(--border))}
+  .field.disabled svg{color:hsl(var(--muted-foreground))}
+  .caret{display:inline-block;width:1.5px;height:18px;background:hsl(var(--primary));vertical-align:-3px;animation:bl 1s steps(1) infinite}
+  @keyframes bl{50%{opacity:0}}
+  .err{display:flex;align-items:center;gap:6px;font-size:12.5px;color:hsl(var(--danger-text));margin:7px 0 0}
+  .hint{font-size:12px;color:hsl(var(--muted-foreground));margin:7px 0 0}
+
+  /* calendar */
+  .pop{display:flex;gap:0;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px;overflow:hidden;box-shadow:0 18px 44px -22px hsl(230 30% 20%/.28),0 1px 2px hsl(230 20% 20%/.06);width:max-content;max-width:100%}
+  .presets{display:flex;flex-direction:column;gap:2px;padding:12px 10px;border-right:1px solid hsl(var(--border));background:hsl(var(--toolbar));min-width:132px}
+  .presets .pt{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));padding:2px 8px 6px}
+  .preset{text-align:left;border:0;background:none;font:inherit;font-size:13px;color:hsl(var(--foreground));padding:7px 9px;border-radius:8px;cursor:pointer}
+  .preset:hover{background:hsl(var(--muted))}
+  .preset.on{background:hsl(var(--primary-soft));color:hsl(var(--primary));font-weight:600}
+  .cal{padding:12px}
+  .cal-head{display:flex;align-items:center;justify-content:space-between;padding:2px 4px 10px}
+  .cal-head .mo{font-size:13.5px;font-weight:700}
+  .nav{width:28px;height:28px;display:grid;place-items:center;border-radius:8px;border:0;background:none;color:hsl(var(--muted-foreground));cursor:pointer}
+  .nav:hover{background:hsl(var(--muted))}
+  .cal-grid{display:grid;grid-template-columns:repeat(7,32px);gap:2px}
+  .cal-grid.wide{grid-template-columns:repeat(7,34px)}
+  .wd{height:24px;display:grid;place-items:center;font-size:10.5px;font-weight:600;text-transform:uppercase;color:hsl(var(--muted-foreground))}
+  .day{height:32px;display:grid;place-items:center;font-size:13px;border-radius:8px;color:hsl(var(--foreground));cursor:pointer;font-variant-numeric:tabular-nums;position:relative;border:0;background:none;font-family:inherit}
+  .day:hover:not(.out):not(.disabled){background:hsl(var(--muted))}
+  .day.out{color:hsl(var(--muted-foreground)/.55);cursor:default}
+  .day.disabled{color:hsl(var(--muted-foreground)/.5);cursor:not-allowed;text-decoration:line-through;text-decoration-thickness:1px}
+  .day.today{box-shadow:inset 0 0 0 1.5px hsl(var(--primary)/.55);font-weight:700}
+  .day.sel{background:hsl(var(--primary));color:hsl(var(--primary-foreground));font-weight:700}
+  .day.sel:hover{background:hsl(var(--primary))}
+  .day.range{background:hsl(var(--primary)/.12);border-radius:0;color:hsl(var(--foreground))}
+  .day.range.rstart{border-radius:8px 0 0 8px}
+  .day.range.rend{border-radius:0 8px 8px 0}
+  .day.edge{background:hsl(var(--primary));color:hsl(var(--primary-foreground));font-weight:700}
+  .day.edge.rstart{border-radius:8px 0 0 8px}
+  .day.edge.rend{border-radius:0 8px 8px 0}
+  .cal-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;border-top:1px solid hsl(var(--border));background:hsl(var(--toolbar));padding:10px 12px;font-size:12.5px;color:hsl(var(--muted-foreground))}
+  .cal-foot b{color:hsl(var(--foreground));font-weight:700}
+  .btn{border:0;border-radius:8px;font:inherit;font-size:13px;font-weight:600;padding:7px 14px;cursor:pointer}
+  .btn.primary{background:hsl(var(--primary));color:hsl(var(--primary-foreground))}
+  .btn.ghost{background:hsl(var(--muted));color:hsl(var(--foreground))}
+
+  /* time list */
+  .times{display:flex;flex-direction:column;gap:2px;padding:12px 8px;border-left:1px solid hsl(var(--border));min-width:96px;max-height:284px;overflow:auto}
+  .times .pt{font-size:10.5px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));padding:2px 8px 6px}
+  .time{border:0;background:none;font:inherit;font-size:13px;color:hsl(var(--foreground));padding:6px 12px;border-radius:8px;text-align:center;cursor:pointer;font-variant-numeric:tabular-nums}
+  .time:hover{background:hsl(var(--muted))}
+  .time.on{background:hsl(var(--primary));color:hsl(var(--primary-foreground));font-weight:700}
+
+  /* skeleton */
+  .sk{background:linear-gradient(90deg,hsl(240 5% 90%),hsl(240 5% 95%),hsl(240 5% 90%));border-radius:6px;animation:pulse 1.4s ease-in-out infinite}
+  @keyframes pulse{50%{opacity:.55}}
+
+  .trade{display:flex;gap:8px;font-size:12.5px;color:hsl(var(--muted-foreground));line-height:1.5;margin:2px 0 0}
+  .trade b{color:hsl(var(--foreground));font-weight:600}
+  .scenario{font-size:11.5px;font-weight:600;color:hsl(var(--primary));background:hsl(var(--primary-soft));border-radius:999px;padding:3px 10px;align-self:flex-start}
+  .phone{width:340px;max-width:100%;border:1px solid hsl(var(--border));border-radius:22px;background:hsl(var(--card));padding:14px;box-shadow:0 18px 44px -26px hsl(230 30% 20%/.28)}
+  .center{display:flex;justify-content:center}
+  @media (prefers-reduced-motion: reduce){*{animation:none!important}}
+  @media (max-width:720px){.doc{padding:32px 16px 64px}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="facter" viewBox="0 0 207 304"><path fill="currentColor" d="M25.8384 196.911L15.4739 183.729C-10.7189 150.411 0.44781 101.422 38.4895 82.7344L206.266 0.307297V34.2396C206.266 60.1875 191.448 83.8698 168.12 95.2396L56.578 149.594C48.4634 153.547 41.3489 159.344 35.9791 166.609C30.5936 173.901 25.9582 183.906 26.3176 196.526C29.9947 193.609 34.0624 191.026 38.4843 188.854L206.26 106.432V140.359C206.26 166.313 191.437 189.995 168.109 201.365L56.578 255.708C48.4634 259.667 41.3489 265.464 35.9791 272.724C30.4426 280.224 25.6978 290.578 26.3593 303.693L15.4739 289.854C-7.54698 260.568 -1.72407 219.193 25.8384 196.911ZM134.818 266.526L206.208 303.724L206.187 210.802L134.953 246.661C126.828 250.755 126.755 262.323 134.818 266.526Z"/></symbol>
+</svg>
+
+<div class="doc">
+  <header class="doc-head">
+    <div>
+      <h1>Datas · componente</h1>
+      <p class="lead">Estudo do seletor de datas do Facter Truck: dos níveis mais simples aos mais completos, com os cenários reais do pátio e as variações de técnica. Paleta calma, cor só onde decide (dia de hoje, dia escolhido, faixa do período).</p>
+    </div>
+    <div class="lockup" aria-label="Facter Truck">
+      <svg width="27" height="40" aria-hidden="true"><use href="#facter"/></svg>
+      <span class="rule"></span>
+      <div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div>
+    </div>
+  </header>
+
+  <!-- NÍVEL 1 -->
+  <section>
+    <p class="cap"><b>Nível 1</b> · Campo de data simples — máscara dd/mm/aaaa</p>
+    <p class="sub">Para uma data única e conhecida, digitada rápido. O calendário abre pelo ícone, mas quem sabe a data só digita.</p>
+    <div class="grid2">
+      <div class="frag"><p class="st">Vazio</p>
+        <div class="field"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><span class="ph">dd/mm/aaaa</span></div>
+      </div>
+      <div class="frag"><p class="st">Preenchido</p>
+        <div class="field"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><span class="val">20/09/2026</span></div>
+      </div>
+      <div class="frag"><p class="st">Foco (digitando)</p>
+        <div class="field focus"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><span class="val">20/09/<span class="caret"></span><span style="color:hsl(var(--muted-foreground))">aaaa</span></span></div>
+      </div>
+      <div class="frag"><p class="st">Erro</p>
+        <div class="field error"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><span class="val">31/09/2026</span></div>
+        <p class="err"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16.5v.5"/></svg>Data inválida. Confira o dia e o mês.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- NÍVEL 2 -->
+  <section>
+    <p class="cap"><b>Nível 2</b> · Date picker em popover — calendário do mês com atalhos</p>
+    <p class="sub">Uma data escolhida no olho. Hoje vem marcado, o futuro fica bloqueado, e os atalhos poupam a navegação.</p>
+    <div class="center">
+      <div class="pop">
+        <div class="presets">
+          <span class="pt">Atalhos</span>
+          <button class="preset on">Hoje</button>
+          <button class="preset">Ontem</button>
+          <button class="preset">Últimos 7 dias</button>
+          <button class="preset">Este mês</button>
+        </div>
+        <div>
+          <div class="cal" data-cal='{"id":"n2","today":28,"selected":28,"disableAfter":28}'></div>
+          <div class="cal-foot"><span>Escolhido: <b>28/09/2026</b></span><button class="btn primary">Aplicar</button></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NÍVEL 3 -->
+  <section>
+    <p class="cap"><b>Nível 3</b> · Intervalo de datas — dois meses e presets de período</p>
+    <p class="sub">Do primeiro clique ao segundo, a faixa se preenche. Os presets cobrem o que se pede toda hora; "Personalizado" libera os dois cliques.</p>
+    <div class="center">
+      <div class="pop">
+        <div class="presets">
+          <span class="pt">Período</span>
+          <button class="preset">Hoje</button>
+          <button class="preset">Últimos 7 dias</button>
+          <button class="preset">Últimos 30 dias</button>
+          <button class="preset">Este mês</button>
+          <button class="preset">Mês passado</button>
+          <button class="preset on">Personalizado</button>
+        </div>
+        <div>
+          <div style="display:flex;gap:4px;flex-wrap:wrap">
+            <div class="cal" data-cal='{"id":"n3a","rangeStart":12,"rangeEnd":28,"today":28,"disableAfter":28}'></div>
+            <div class="cal" data-cal='{"id":"n3b","month":9,"disableAll":true}'></div>
+          </div>
+          <div class="cal-foot"><span><b>12/09</b> – <b>28/09</b> · 16 dias</span><div style="display:flex;gap:8px"><button class="btn ghost">Limpar</button><button class="btn primary">Aplicar</button></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- NÍVEL 4 -->
+  <section>
+    <p class="cap"><b>Nível 4</b> · Data e hora — agendamento</p>
+    <p class="sub">Quando não basta o dia. O passado fica bloqueado, e a hora sai de uma lista em passos de 30 min.</p>
+    <div class="center">
+      <div class="pop">
+        <div>
+          <div class="cal" data-cal='{"id":"n4","today":28,"selected":30,"disableBefore":28}'></div>
+          <div class="cal-foot"><span>Agendado: <b>30/09/2026 · 09:30</b></span><button class="btn primary">Confirmar</button></div>
+        </div>
+        <div class="times" id="times"><span class="pt">Hora</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CENÁRIOS -->
+  <section>
+    <p class="cap">Cenários do pátio — o mesmo componente, cada um no seu nível</p>
+    <div class="grid2">
+      <div class="frag">
+        <span class="scenario">Entrada de compra</span>
+        <p class="flabel" style="margin-top:12px">Data da nota</p>
+        <div class="field"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><span class="val">20/09/2026</span><svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div>
+        <p class="hint">Nível 1–2 · não aceita data futura (a nota já foi emitida).</p>
+      </div>
+      <div class="frag">
+        <span class="scenario">Km lido em</span>
+        <p class="flabel" style="margin-top:12px">Data da leitura</p>
+        <div class="field"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><span class="val">28/09/2026</span><svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div>
+        <p class="hint">Nível 1 · atalho "Hoje" resolve a maioria.</p>
+      </div>
+      <div class="frag">
+        <span class="scenario">Relatório de custos</span>
+        <p class="flabel" style="margin-top:12px">Período</p>
+        <div class="field"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><span class="val">01/09 – 28/09/2026</span><svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div>
+        <p class="hint">Nível 3 · abre em "Este mês", presets sempre à mão.</p>
+      </div>
+      <div class="frag">
+        <span class="scenario">Agendar manutenção</span>
+        <p class="flabel" style="margin-top:12px">Data e hora</p>
+        <div class="field"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><span class="val">30/09/2026 · 09:30</span><svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div>
+        <p class="hint">Nível 4 · datas passadas bloqueadas.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPÇÕES -->
+  <section>
+    <p class="cap">Opções de técnica — o trade-off de cada uma</p>
+    <div class="grid2">
+      <div class="frag"><p class="st">A · Input mascarado + calendário</p>
+        <div class="field"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><span class="val">20/09/2026</span><svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div>
+        <p class="trade"><b>Rápido pra quem sabe a data</b>, mas exige validação da digitação.</p>
+      </div>
+      <div class="frag"><p class="st">B · Só botão que abre o calendário</p>
+        <div class="field"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><span class="ph">Escolher data</span><svg class="chev" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg></div>
+        <p class="trade"><b>Zero erro de digitação</b>, porém mais cliques para uma data distante.</p>
+      </div>
+      <div class="frag"><p class="st">C · Popover (flutua sobre a tela)</p>
+        <div class="field focus"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><span class="val">28/09/2026</span></div>
+        <p class="trade"><b>Cabe em formulário apertado</b>; some ao clicar fora. Bom no notebook.</p>
+      </div>
+      <div class="frag"><p class="st">D · Inline (sempre visível)</p>
+        <div class="cal" data-cal='{"id":"optd","compact":true,"today":28,"selected":28,"disableAfter":28}'></div>
+        <p class="trade"><b>Nada esconde o calendário</b>; ocupa mais espaço. Bom no tablet e em telas de filtro.</p>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:4px">
+      <div class="frag"><p class="st">Com presets à esquerda</p>
+        <p class="trade"><b>Período comum em 1 clique</b> (Hoje, 7/30 dias, mês). Ideal para relatórios.</p>
+      </div>
+      <div class="frag"><p class="st">Sem presets</p>
+        <p class="trade"><b>Mais enxuto</b> quando a data é sempre pontual (data da nota, leitura de km).</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESTADOS + MOBILE -->
+  <section>
+    <p class="cap">Estados transversais e mobile</p>
+    <div class="grid2">
+      <div class="frag"><p class="st">Desabilitado</p>
+        <div class="field disabled"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><span class="val">Definido pela OS</span></div>
+        <p class="hint">Quando o sistema já sabe a data e não deixa mudar.</p>
+      </div>
+      <div class="frag"><p class="st">Carregando (skeleton)</p>
+        <div style="padding:2px 0">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px"><span class="sk" style="height:14px;width:96px"></span><span class="sk" style="height:22px;width:22px;border-radius:7px"></span></div>
+          <div class="cal-grid">
+            <span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span>
+            <span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span>
+            <span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span><span class="sk" style="height:32px"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="sub" style="margin-top:14px">No celular o calendário ocupa a largura toda e os atalhos viram uma fileira rolável em cima.</p>
+    <div class="center">
+      <div class="phone">
+        <p class="flabel">Data da nota</p>
+        <div class="field focus" style="margin-bottom:12px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4.5" width="18" height="17" rx="2.5"/><path d="M3 9h18M8 2.5v4M16 2.5v4"/></svg><span class="val">28/09/2026</span></div>
+        <div style="display:flex;gap:6px;overflow:auto;padding-bottom:10px;margin-bottom:2px">
+          <button class="preset on" style="flex:none">Hoje</button><button class="preset" style="flex:none">Ontem</button><button class="preset" style="flex:none">7 dias</button><button class="preset" style="flex:none">Este mês</button>
+        </div>
+        <div class="cal" data-cal='{"id":"mob","full":true,"today":28,"selected":28,"disableAfter":28}'></div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<script>
+  const WD = ['dom','seg','ter','qua','qui','sex','sáb'];
+  const MONTHS = ['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+  // September 2026: 1st is Tuesday (col 2); 30 days. October 2026: 1st is Thursday; 31 days.
+  function build(cfg){
+    const month = cfg.month ?? 8; // 0-based; 8 = setembro
+    const year = 2026;
+    const first = new Date(Date.UTC(year, month, 1)).getUTCDay();
+    const days = new Date(Date.UTC(year, month+1, 0)).getUTCDate();
+    const prevDays = new Date(Date.UTC(year, month, 0)).getUTCDate();
+    const el = document.createElement('div');
+    const compact = cfg.compact || cfg.full;
+    const head = document.createElement('div'); head.className='cal-head';
+    head.innerHTML = '<button class="nav" aria-label="Mês anterior"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 6-6 6 6 6"/></svg></button>'
+      + '<span class="mo">'+MONTHS[month].charAt(0).toUpperCase()+MONTHS[month].slice(1)+' '+year+'</span>'
+      + '<button class="nav" aria-label="Próximo mês"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 6 6 6-6 6"/></svg></button>';
+    el.appendChild(head);
+    const grid = document.createElement('div'); grid.className = 'cal-grid' + (cfg.full ? '' : '');
+    if(cfg.full){ grid.style.gridTemplateColumns='repeat(7,1fr)'; grid.style.width='100%'; }
+    WD.forEach(w=>{ const c=document.createElement('div'); c.className='wd'; c.textContent=w; grid.appendChild(c); });
+    let cell = 0;
+    for(let i=first-1;i>=0;i--){ const d=document.createElement('div'); d.className='day out'; d.textContent=prevDays-i; grid.appendChild(d); cell++; }
+    for(let d=1; d<=days; d++){
+      const c=document.createElement('button'); c.type='button'; c.className='day'; c.textContent=d;
+      if(cfg.disableAfter && d>cfg.disableAfter) c.classList.add('disabled');
+      if(cfg.disableBefore && d<cfg.disableBefore) c.classList.add('disabled');
+      if(cfg.disableAll) c.classList.add('disabled');
+      if(cfg.today===d) c.classList.add('today');
+      if(cfg.selected===d) c.classList.add('sel');
+      // range
+      if(cfg.rangeStart || cfg.rangeStartBefore){
+        const start = cfg.rangeStartBefore ? -Infinity : cfg.rangeStart;
+        const end = cfg.rangeEndOut ? Infinity : cfg.rangeEnd;
+        if(d>=start && d<=end){
+          if(d===cfg.rangeStart){ c.classList.add('edge','rstart'); }
+          else if(d===cfg.rangeEnd){ c.classList.add('edge','rend'); }
+          else { c.classList.add('range'); if(d===1&&cfg.rangeStartBefore) c.classList.add('rstart'); if(cfg.rangeEndOut&&d===days) c.classList.add('rend'); }
+        }
+      }
+      grid.appendChild(c); cell++;
+    }
+    let next=1; while(cell%7!==0){ const d=document.createElement('div'); d.className='day out'; d.textContent=next++; grid.appendChild(d); cell++; }
+    el.appendChild(grid);
+    return el;
+  }
+  document.querySelectorAll('[data-cal]').forEach(node=>{
+    try{ const cfg=JSON.parse(node.getAttribute('data-cal')); node.appendChild(build(cfg)); }catch(e){}
+  });
+  // time list
+  const times = document.getElementById('times');
+  if(times){ for(let h=8;h<=12;h++){ for(const m of ['00','30']){ const b=document.createElement('button'); b.type='button'; b.className='time'+(h===9&&m==='30'?' on':''); b.textContent=String(h).padStart(2,'0')+':'+m; times.appendChild(b);} } }
+</script>
+</body>
+</html>
