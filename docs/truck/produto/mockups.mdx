@@ -110,6 +110,14 @@ Rascunho · 28/09/2026. Como a peça ganha **saldo**: entra por **nota fiscal**.
 
 <img src="/mockups/truck/entrada-nf/desktop.png" alt="Mockup da entrada de compra por nota fiscal e fornecedores" style={{maxHeight: 360, width: '100%', objectFit: 'cover', objectPosition: 'top', borderRadius: 8, border: '1px solid var(--ifm-color-emphasis-300)'}} />
 
+### Import de fornecedores
+
+Rascunho · 28/09/2026. Cadastrar centenas de fornecedores em massa por **planilha** (CSV ou Excel), em vez de um a um. O segredo é **validar antes de gravar**: cada linha passa pela **mesma regra do cadastro manual** (nome obrigatório, CNPJ de 14 dígitos, contato opcional), duplicados dentro do arquivo são pegos, e a **pré-visualização** mostra linha a linha o que está **pronto** (verde), **com erro** (com o motivo) e o que **já existe**. Cobre o de-para de colunas ("Razão Social" → Nome), o toggle **atualizar existentes**, o **relatório** (criados, atualizados, pulados, com erro + baixar erros) e os edge cases (arquivo vazio, coluna Nome faltando, CNPJ inválido, duplicado, arquivo grande vira job, sem permissão). O mesmo motor serve peças depois.
+
+[Ver o mockup](/telas/truck/import-fornecedores)
+
+<img src="/mockups/truck/import-fornecedores/desktop.png" alt="Mockup do import de fornecedores por planilha" style={{maxHeight: 360, width: '100%', objectFit: 'cover', objectPosition: 'top', borderRadius: 8, border: '1px solid var(--ifm-color-emphasis-300)'}} />
+
 ### Solicitar peça
 
 Aprovado em 27/09/2026. Três fluxos no mesmo assunto. **Mecânico no tablet do box**: pedir é "pedir", não formulário — o kit do serviço enche o carrinho num toque, frequentes e busca resolvem o resto, alvo grande pra mão com luva; ele não vê saldo. **Consultor em massa**: a OS chegou com vários serviços, então o pedido já vem montado (soma dos kits, agrupado por serviço) — revisa, desliga o que não começa hoje, ajusta e envia um pedido só; serviço sem kit aparece marcado, avulsas entram em multi-toque. **Almoxarife**: a fila de separação, o que pegar e em qual prateleira, e a entrega que congela o preço no custo da OS. Kit de peças por serviço é a [proposta em discussão](propostas/service-parts-kit). Tasks 2.5 e 2.6.
