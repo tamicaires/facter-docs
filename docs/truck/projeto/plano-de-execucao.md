@@ -56,7 +56,7 @@ Saída: **fatia 2 em homologação**. Uma OS real feita do começo ao fim no tab
 
 | ID | Task | Pronto quando | Status |
 | --- | --- | --- | --- |
-| 2.1 | Catálogos: tipos de serviço, componentes, causas, motivos de parada | Sugestão de componente e causa pelo tipo de serviço | 🟡 categorias, motivos de parada e componentes feitos (back + tela + testes, contexto `maintenance`); falta tipos de serviço |
+| 2.1 | Catálogos: tipos de serviço, componentes, causas, motivos de parada | Sugestão de componente e causa pelo tipo de serviço | ✅ categorias, motivos de parada, componentes e tipos de serviço (back + tela + testes, contexto `maintenance`); mesma DataTable do Pessoas |
 | 2.2 | Pessoas: funcionários, cargos, turnos, boxes | Executor escolhido por cargo e turno | ⬜ |
 | 2.3 | Ordem de serviço: abertura no conjunto, implemento ou posição; km na entrada; kanban | Invariantes da OS com teste, incluindo concorrência | ⬜ |
 | 2.4 | Serviços, executores e sessões de trabalho (iniciar, pausar com motivo, concluir) | Tempo trabalhado conforme SVC-7 (pausa nunca conta); horário vem do servidor | ⬜ |
