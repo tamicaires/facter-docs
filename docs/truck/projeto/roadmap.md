@@ -134,6 +134,7 @@ O `@facter/ds-core` evolui puxado pela web v2, não como um projeto v2 separado.
 - [x] Hospedagem: web na Vercel (`apps/web`); API e worker da fila no Render (`apps/api`); Redis no Render Key Value; Postgres no Neon ou Render (com Neon, contexto de RLS via `SET LOCAL` por transação)
 - [ ] Papéis padrão do produto e o que cada um pode fazer
 - [x] O que conta como tempo trabalhado ([SVC-7](../engenharia/invariantes.md)): nenhuma pausa conta como trabalho; o tempo parado é registrado por motivo (26/09/2026)
+- [ ] **Débito técnico — busca global (Ctrl+K):** os resultados levam para a lista (`/veiculos`, `/transportadoras`), não para o detalhe do item, porque as telas de detalhe ainda não existem. Fazer o deep-link (`/veiculos/:id`, `/transportadoras/:id`) junto com o detalhe do veículo/transportadora
 
 ## Enquanto a v2 não sai
 
