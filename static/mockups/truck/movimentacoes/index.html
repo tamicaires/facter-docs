@@ -635,6 +635,124 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
 .hoverlbl{font-size:11px;color:hsl(var(--muted-foreground));font-style:italic;white-space:nowrap}
 .demo-note{font-size:13px;color:hsl(240 6% 30%);margin-top:2px;max-width:44ch}
 
+/* ---------- lens toggle + clickable KPIs ---------- */
+.lensbar{display:flex;align-items:center;gap:14px;margin-bottom:16px;flex-wrap:wrap}
+.lens{display:inline-flex;padding:3px;background:hsl(var(--muted));border-radius:10px;gap:2px}
+.lens button{display:inline-flex;align-items:center;gap:7px;height:32px;padding:0 14px;border:0;background:none;border-radius:8px;font:600 13px Inter,sans-serif;color:hsl(240 6% 40%);cursor:pointer}
+.lens button[aria-selected="true"]{background:hsl(var(--card));color:hsl(var(--foreground));box-shadow:0 1px 2px hsl(240 10% 10%/.14)}
+.lens button .ic{width:15px;height:15px}
+.lensbar .hint{font-size:12.5px;color:hsl(var(--muted-foreground));display:flex;align-items:center;gap:6px}
+.lensbar .hint .ic{color:hsl(240 5% 50%)}
+.kpis .kpi{cursor:pointer;position:relative;transition:box-shadow .12s,border-color .12s}
+.kpi.clk:hover,.kpi.hover{border-color:hsl(233 60% 80%);box-shadow:0 4px 14px -6px hsl(230 30% 20%/.22)}
+.kpi.hover::after,.kpi.active::after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:2px;background:hsl(var(--primary))}
+.kpi.active{border-color:hsl(233 60% 82%);background:hsl(var(--primary-soft)/.5)}
+.kpi .flt{position:absolute;right:12px;top:12px;display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;color:hsl(var(--primary));background:hsl(var(--card));border:1px solid hsl(233 60% 85%);border-radius:99px;padding:1px 7px}
+
+/* ---------- attention strip (accuracy) ---------- */
+.attn{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.attn .item{display:flex;align-items:center;gap:10px;padding:8px 10px 8px 12px;border:1px solid hsl(var(--border));border-radius:10px;background:hsl(var(--card));font-size:12.5px;min-width:0}
+.attn .item .ico{width:28px;height:28px;border-radius:8px;display:grid;place-items:center;flex:none}
+.attn .item.warn .ico{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.attn .item.danger .ico{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.attn .item.note .ico{background:hsl(var(--note-soft));color:hsl(var(--note))}
+.attn .item b{font-weight:700}
+.attn .item .go{display:inline-flex;align-items:center;gap:5px;height:28px;padding:0 10px;border-radius:8px;border:1px solid hsl(240 6% 84%);background:hsl(var(--card));font-size:12px;font-weight:600;color:hsl(233 65% 42%);cursor:pointer;white-space:nowrap;margin-left:4px}
+
+/* ---------- análise (aggregations) ---------- */
+.agrid{display:grid;grid-template-columns:1.1fr 1fr;gap:16px;align-items:start}
+.agrid .full{grid-column:1/-1}
+.acard{border:1px solid hsl(var(--border));border-radius:12px;background:hsl(var(--card));overflow:hidden}
+.acard .ah{display:flex;align-items:center;gap:8px;padding:13px 16px 11px;border-bottom:1px solid hsl(var(--border))}
+.acard .ah .t{font:650 14px Inter,sans-serif}
+.acard .ah .ic{color:hsl(240 6% 45%)}
+.acard .ah .r{margin-left:auto;font-size:12px;color:hsl(var(--muted-foreground))}
+.acard .ab{padding:6px 16px 12px}
+/* ranked rows with bars */
+.rank .row{display:grid;grid-template-columns:20px minmax(0,1fr) 96px;gap:12px;align-items:center;padding:10px 0;border-top:1px solid hsl(240 6% 95%);cursor:pointer}
+.rank .row:first-child{border-top:0}
+.rank .row:hover{background:hsl(240 5% 98.5%)}
+.rank .n{font:700 12px Sora,sans-serif;color:hsl(var(--muted-foreground));text-align:center}
+.rank .nm{font-weight:600;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rank .sk{font-size:11.5px;color:hsl(var(--muted-foreground))}
+.rank .bar{height:6px;border-radius:99px;background:hsl(var(--muted));overflow:hidden;margin-top:5px}
+.rank .bar i{display:block;height:100%;background:hsl(var(--primary));border-radius:99px}
+.rank .bar i.neg{background:hsl(var(--danger-text))}
+.rank .val{text-align:right;font:700 13.5px Sora,sans-serif;font-variant-numeric:tabular-nums}
+.rank .val small{display:block;font:400 11px Inter,sans-serif;color:hsl(var(--muted-foreground))}
+/* por tipo breakdown */
+.bd .row{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:11px;align-items:center;padding:9px 0;border-top:1px solid hsl(240 6% 95%)}
+.bd .row:first-child{border-top:0}
+.bd .ci{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;background:hsl(var(--muted));color:hsl(240 5% 45%)}
+.bd .lb{font-weight:600;font-size:13px}
+.bd .track{grid-column:2/-1;height:7px;border-radius:99px;background:hsl(var(--muted));overflow:hidden;margin-top:6px;display:flex}
+.bd .track i{display:block;height:100%}
+.bd .val{text-align:right;font:700 13px Sora,sans-serif;font-variant-numeric:tabular-nums}
+.bd .val small{font:400 11px Inter;color:hsl(var(--muted-foreground));margin-left:4px}
+/* anomalies */
+.anoms{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:16px}
+.anom{display:flex;gap:11px;padding:14px 15px;border-radius:12px;border:1px solid hsl(var(--border));background:hsl(var(--card));align-items:flex-start}
+.anom .ico{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;flex:none}
+.anom.danger{border-color:hsl(0 60% 88%)}.anom.danger .ico{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.anom.warn{border-color:hsl(38 80% 82%)}.anom.warn .ico{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.anom.note .ico{background:hsl(var(--note-soft));color:hsl(var(--note))}
+.anom .big{font:800 18px Sora,sans-serif;letter-spacing:-.01em;line-height:1.15}
+.anom .lb{font-size:12.5px;color:hsl(240 6% 30%);margin-top:3px;line-height:1.35}
+.anom .lk{font-size:12px;font-weight:600;color:hsl(233 65% 42%);margin-top:7px;display:inline-flex;align-items:center;gap:4px;cursor:pointer}
+
+/* ---------- per-peça drill-down ---------- */
+.pp-head{display:flex;align-items:center;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.pp-ic{width:46px;height:46px;border-radius:12px;background:hsl(var(--muted));color:hsl(240 5% 42%);display:grid;place-items:center;flex:none}
+.pp-head h1{font:700 21px/1.15 Sora,sans-serif;letter-spacing:-.01em}
+.pp-head .sk{font-size:13px;color:hsl(var(--muted-foreground));margin-top:2px}
+.pp-head .k>b{}
+.pp-tot{margin-left:auto;display:flex;gap:20px;text-align:right}
+.pp-tot .c .k{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));font-weight:600}
+.pp-tot .c .v{font:800 22px Sora,sans-serif;font-variant-numeric:tabular-nums;letter-spacing:-.02em;margin-top:2px}
+.pp-tot .c .v.warn{color:hsl(var(--warning-text))}
+.pp-grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start}
+.chartcard{border:1px solid hsl(var(--border));border-radius:12px;background:hsl(var(--card));overflow:hidden}
+.chartcard .ch-h{display:flex;align-items:center;gap:10px;padding:13px 16px 4px}
+.chartcard .ch-h .t{font:650 14px Inter,sans-serif}
+.chartcard .ch-h .lg{margin-left:auto;display:flex;gap:12px;font-size:11.5px;color:hsl(var(--muted-foreground))}
+.chartcard .ch-h .lg .d{display:inline-flex;align-items:center;gap:5px}
+.chartcard .ch-h .lg .d i{width:8px;height:8px;border-radius:99px}
+.chartcard .ch-b{padding:6px 12px 12px}
+.pp-svg{display:block;width:100%;height:190px}
+.pp-x{display:flex;justify-content:space-between;padding:2px 6px 0;font-size:11px;color:hsl(var(--muted-foreground));font-variant-numeric:tabular-nums}
+.dep-list .row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 12px;align-items:center;padding:11px 0;border-top:1px solid hsl(240 6% 95%)}
+.dep-list .row:first-child{border-top:0}
+.dep-list .nm{font-weight:600;font-size:13.5px}
+.dep-list .v{font:700 14px Sora,sans-serif;font-variant-numeric:tabular-nums}
+.dep-list .v.low{color:hsl(var(--warning-text))}
+.dep-list .bar{grid-column:1/-1;height:6px;border-radius:99px;background:hsl(var(--muted));overflow:hidden;margin-top:2px}
+.dep-list .bar i{display:block;height:100%;background:hsl(var(--primary))}
+.dep-list .bar i.low{background:hsl(var(--warning))}
+.mini-stmt .txn{grid-template-columns:32px minmax(0,1fr) auto;padding:9px 16px;gap:11px}
+.mini-stmt .txn-ic{width:32px;height:32px}
+.mini-stmt .day-hd{padding:9px 16px}
+
+/* ---------- cockpit de acurácia ---------- */
+.ck-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.ck{border:1px solid hsl(var(--border));border-radius:12px;background:hsl(var(--card));overflow:hidden}
+.ck .h{display:flex;align-items:center;gap:9px;padding:13px 16px;border-bottom:1px solid hsl(var(--border))}
+.ck .h .ico{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;flex:none}
+.ck.warn .h .ico{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.ck.danger .h .ico{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.ck .h .t{font:650 14px Inter,sans-serif}
+.ck .h .cnt{margin-left:auto;font:700 11.5px Sora;border-radius:99px;padding:1px 8px}
+.ck.warn .h .cnt{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.ck.danger .h .cnt{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.ck .row{display:grid;grid-template-columns:34px minmax(0,1fr) auto;gap:11px;align-items:center;padding:11px 16px;border-top:1px solid hsl(240 6% 95%)}
+.ck .row:first-of-type{border-top:0}
+.ck .row .pi{width:34px;height:34px;border-radius:9px;background:hsl(var(--muted));color:hsl(240 5% 45%);display:grid;place-items:center}
+.ck .row .nm{font-weight:600;font-size:13.5px}
+.ck .row .s{font-size:12px;color:hsl(var(--muted-foreground));margin-top:1px}
+.ck .row .s.bad{color:hsl(var(--danger-text));font-weight:600}
+.ck .row .s.old{color:hsl(var(--warning-text));font-weight:600}
+.ck .row .go{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:8px;border:1px solid hsl(240 6% 84%);background:hsl(var(--card));font-size:12.5px;font-weight:600;color:hsl(233 65% 42%);cursor:pointer;white-space:nowrap}
+.ck .row .go.prim{background:hsl(var(--primary));color:#fff;border-color:transparent}
+
 @media (max-width:1120px){
   .frame .app{min-width:1060px}
   .frame:not(.stage){overflow-x:auto}
@@ -655,7 +773,7 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
     <div>
       <h1>Movimentações · o livro-razão do estoque</h1>
       <p>A aba <b>Movimentações</b> do Estoque. Um registro <b>append-only</b> de todo fato que mexeu no saldo: entrada por compra, saída para OS, devolução, transferência, ajuste e saldo inicial. Não se edita nem se apaga — uma correção é um lançamento contrário. É a tela onde o truck cumpre a promessa: <b>cada fato fica gravado</b>, com quem, quando, de onde e por quanto.</p>
-      <nav class="toc"><a href="#s1"><b>1</b>A aba (padrão)</a><a href="#s2"><b>2</b>Carregando</a><a href="#s3"><b>3</b>Sem resultado</a><a href="#s4"><b>4</b>Cabeçalho por persona</a><a href="#s5"><b>5</b>Ajuste de estoque</a><a href="#s6"><b>6</b>Transferência</a><a href="#s7"><b>7</b>Estornar</a><a href="#s8"><b>8</b>Detalhe do lançamento</a><a href="#s9"><b>9</b>Notebook · tablet · celular</a><a href="#s10"><b>10</b>Rótulo: curto vs. tooltip</a></nav>
+      <nav class="toc"><a href="#s1"><b>1</b>Extrato + lentes</a><a href="#s11"><b>11</b>Lente Análise</a><a href="#s8"><b>8</b>Drill-down por peça</a><a href="#s12"><b>12</b>Cockpit de acurácia</a><a href="#s2"><b>2</b>Carregando</a><a href="#s3"><b>3</b>Sem resultado</a><a href="#s4"><b>4</b>Cabeçalho por persona</a><a href="#s5"><b>5</b>Ajuste</a><a href="#s6"><b>6</b>Transferência</a><a href="#s7"><b>7</b>Estornar</a><a href="#s9"><b>9</b>Três modos</a><a href="#s10"><b>10</b>Rótulo</a></nav>
     </div>
     <div class="lockup" aria-label="Facter Truck"><svg width="27" height="40"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></div>
   </header>
@@ -663,7 +781,7 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
   <!-- =============== 1. DEFAULT =============== -->
   <section class="sec" id="s1">
     <div class="sec-label"><span class="sec-num">1</span><h2>A aba Movimentações · notebook · 1280</h2></div>
-    <p class="sec-sub">Filtros no topo (período, tipo, depósito, busca no servidor), a faixa de KPIs do período e o razão como um <b>extrato</b> — agrupado por dia (Hoje, Ontem, datas), cada lançamento uma linha limpa. A cor mora só no valor à direita (+ entrada, − saída). Tocar numa linha abre o detalhe (seção 8). A rolagem infinita traz os dias anteriores — a tela nasce pronta para milhares de lançamentos.</p>
+    <p class="sec-sub">Duas pessoas, dois trabalhos: o <b>almoxarife</b> mantém o saldo certo e registra com pouco atrito; o <b>gestor/financeiro</b> quer <b>respostas e exceções</b>, não rolar um feed. Por isso a lente <b>Extrato | Análise</b>: mesmo dado, duas leituras. Aqui, o <b>Extrato</b> — os KPIs viram filtros clicáveis (Saídas em destaque de hover), uma faixa de <b>atenção</b> aponta o que precisa de conferência, e o razão vem como extrato agrupado por dia. A cor mora só no valor (+ entrada, − saída). Clicar numa peça abre o drill-down (seção 8). A Análise está na seção 11.</p>
     <div class="frame">
       <div class="app">
         <header class="topbar">
@@ -687,11 +805,11 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
             <div><h1>Estoque</h1><p class="meta">Depósito Mucuri · almoxarife</p></div>
             <div class="acts"><button class="btn btn-outline"><i class="ic s16 i-receipt"></i>Exportar CSV</button></div>
           </div>
-          <div class="kpis">
-            <div class="kpi"><div class="tp"><i class="ic s16 i-move"></i>Movimentações</div><div class="big">1.284</div><div class="sub">no período · <b>set/2026</b></div></div>
-            <div class="kpi"><div class="tp"><i class="ic s16 i-in"></i>Entradas</div><div class="big pos">+R$ 27,7 mil</div><div class="sub"><b>318</b> lançamentos</div></div>
-            <div class="kpi"><div class="tp"><i class="ic s16 i-out"></i>Saídas</div><div class="big neg">−R$ 21,4 mil</div><div class="sub"><b>942</b> lançamentos · consumo + transf.</div></div>
-            <div class="kpi"><div class="tp"><i class="ic s16 i-adjust"></i>Ajustes</div><div class="big">9</div><div class="sub"><b>2</b> saídas de correção</div></div>
+          <div class="kpis" role="group" aria-label="Filtrar por tipo">
+            <div class="kpi clk"><div class="tp"><i class="ic s16 i-move"></i>Movimentações</div><div class="big">1.284</div><div class="sub">no período · <b>set/2026</b></div></div>
+            <div class="kpi clk"><div class="tp"><i class="ic s16 i-in"></i>Entradas</div><div class="big pos">+R$ 27,7 mil</div><div class="sub"><b>318</b> lançamentos</div></div>
+            <div class="kpi clk hover"><div class="tp"><i class="ic s16 i-out"></i>Saídas</div><div class="big neg">−R$ 21,4 mil</div><div class="sub"><b>942</b> lançamentos · consumo + transf.</div></div>
+            <div class="kpi clk"><div class="tp"><i class="ic s16 i-adjust"></i>Ajustes</div><div class="big">9</div><div class="sub"><b>2</b> saídas de correção</div></div>
           </div>
 
           <div class="tabbar">
@@ -709,6 +827,20 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
             <div class="fld"><span class="l">Depósito</span><div class="field sel"><span class="val">Todos</span><i class="ic s14 i-down chev"></i></div></div>
             <div class="fld"><span class="l">Buscar</span><div class="field srch"><i class="ic s16 i-mag"></i><span class="val">Buscar por peça, NF ou OS</span></div></div>
             <button class="clearf"><i class="ic s14 i-x"></i>Limpar filtros</button>
+          </div>
+
+          <div class="lensbar">
+            <div class="lens" role="tablist" aria-label="Lente">
+              <button role="tab" aria-selected="true"><i class="ic i-move"></i>Extrato</button>
+              <button role="tab" aria-selected="false"><i class="ic i-chart"></i>Análise</button>
+            </div>
+            <span class="hint"><i class="ic s14 i-lock"></i>Mesmo dado, duas lentes · o Extrato é a prova, a Análise responde</span>
+          </div>
+
+          <div class="attn">
+            <div class="item danger"><span class="ico"><i class="ic s16 i-warn"></i></span><span><b>1 peça</b> com saldo negativo</span><button class="go"><i class="ic s13 i-adjust"></i>Conferir</button></div>
+            <div class="item warn"><span class="ico"><i class="ic s16 i-clock"></i></span><span><b>7 peças</b> sem contagem há 90+ dias</span><button class="go">Ver lista</button></div>
+            <div class="item note"><span class="ico"><i class="ic s16 i-undo"></i></span><span><b>1 estorno</b> hoje</span><button class="go">Abrir</button></div>
           </div>
 
           <div class="auditbar"><i class="ic s16 i-lock"></i><span>Registro <b>somente leitura</b>. Uma correção entra como lançamento contrário — nada é editado ou apagado.</span></div>
@@ -996,35 +1128,66 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
     <div class="notes"><h4>Nota</h4><ul><li>Estornar aparece só nos tipos que fazem sentido reverter (ajuste, transferência, saldo inicial). Uma saída para OS normalmente se corrige pela própria OS; aqui é exemplo do padrão. Depois do estorno, os dois lançamentos ligados ficam visíveis no razão.</li></ul></div>
   </section>
 
-  <!-- =============== 8. ROW DETAIL =============== -->
+  <!-- =============== 8. DRILL-DOWN POR PEÇA =============== -->
   <section class="sec" id="s8">
-    <div class="sec-label"><span class="sec-num">8</span><h2>Detalhe do lançamento · a visão de auditoria</h2></div>
-    <p class="sec-sub">Clicar numa linha abre o fato inteiro: o saldo <b>antes → depois</b>, a referência de origem completa (NF, OS ou motivo), quem, quando e por quanto. É o que faz do razão uma prova, não uma lista.</p>
-    <div class="frame stage">
-      <div class="detail" role="dialog" aria-labelledby="dt-t">
-        <div class="dh">
-          <div class="top"><span class="kpill k-issue"><i class="ic ki i-wrench"></i><span class="lb">Saída para OS</span></span><button class="dx-x" type="button" aria-label="Fechar" style="position:absolute;right:14px;top:16px"><i class="ic s18 i-x"></i></button></div>
-          <h2 id="dt-t">Pastilha de freio <span class="num" style="font-weight:500;color:hsl(var(--muted-foreground));font-size:15px">· −4 un</span></h2>
-          <p class="desc"><i class="ic s14 i-box"></i>SKU SP-20418<span class="dot" style="width:3px;height:3px;border-radius:9px;background:hsl(240 5% 60%);display:inline-block;margin:0 4px"></span>Depósito Mucuri</p>
+    <div class="sec-label"><span class="sec-num">8</span><h2>Drill-down por peça · a história da peça</h2></div>
+    <p class="sec-sub">Clicar numa peça — no extrato ou na Análise — abre a investigação: "o que aconteceu com a <b>Pastilha de freio</b>?". A <b>curva de saldo no tempo</b> com os pontos de entrada e saída, o <b>extrato só dela</b>, e o <b>saldo atual por depósito</b>. É onde o gestor entende, e o almoxarife confere.</p>
+    <div class="frame" style="padding:22px 24px 26px">
+      <div class="pp-head">
+        <span class="pp-ic"><i class="ic s24 i-box"></i></span>
+        <div><h1>Pastilha de freio</h1><div class="sk">SKU SP-20418 · Freios · custo médio R$ 89,00</div></div>
+        <div class="pp-tot">
+          <div class="c"><div class="k">Saldo atual</div><div class="v">18 un</div></div>
+          <div class="c"><div class="k">Entrou (set)</div><div class="v" style="color:hsl(var(--success-text))">+31</div></div>
+          <div class="c"><div class="k">Saiu (set)</div><div class="v" style="color:hsl(var(--danger-text))">−25</div></div>
+          <div class="c"><div class="k">Ajustes</div><div class="v warn">2</div></div>
         </div>
-        <div class="db">
-          <div class="balflow">
-            <div class="cell"><div class="k">Saldo antes</div><div class="v num">22</div></div>
-            <div class="mid"><i class="ic s18 i-arr-up"></i><b class="num">−4 un</b></div>
-            <div class="cell"><div class="k">Saldo depois</div><div class="v num">18</div></div>
-          </div>
-          <div class="kv">
-            <div class="row"><span class="k"><i class="ic s14 i-os"></i>Origem</span><span class="v">OS #1042 · troca de pastilhas</span></div>
-            <div class="row"><span class="k"><i class="ic s14 i-coins"></i>Custo unitário</span><span class="v num">R$ 89,00</span></div>
-            <div class="row"><span class="k"><i class="ic s14 i-coins"></i>Valor do lançamento</span><span class="v num">R$ 356,00</span></div>
-            <div class="row"><span class="k"><i class="ic s14 i-user"></i>Autor</span><span class="v"><span class="av av-3">RS</span>Rafael Souza</span></div>
-            <div class="row"><span class="k"><i class="ic s14 i-clock"></i>Data / hora</span><span class="v num">28/09/2026 · 16:42</span></div>
-            <div class="row"><span class="k"><i class="ic s14 i-info"></i>Referência</span><span class="v num" style="font-weight:500;color:hsl(var(--muted-foreground))">MOV-0009142</span></div>
+      </div>
+      <div class="pp-grid">
+        <div class="chartcard">
+          <div class="ch-h"><span class="t">Saldo no tempo</span><span class="lg"><span class="d"><i style="background:hsl(var(--primary))"></i>saldo</span><span class="d"><i style="background:hsl(var(--success))"></i>entrada</span><span class="d"><i style="background:hsl(var(--danger-text))"></i>saída</span></span></div>
+          <div class="ch-b">
+            <svg class="pp-svg" viewBox="0 0 720 190" preserveAspectRatio="none" role="img" aria-label="Curva de saldo da peça no mês">
+              <defs><linearGradient id="ppfill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="hsl(233 65% 50%)" stop-opacity="0.18"/><stop offset="1" stop-color="hsl(233 65% 50%)" stop-opacity="0"/></linearGradient></defs>
+              <line x1="0" y1="175" x2="720" y2="175" stroke="hsl(240 6% 90%)" stroke-width="1"/>
+              <line x1="0" y1="97" x2="720" y2="97" stroke="hsl(240 6% 93%)" stroke-width="1" stroke-dasharray="3 4"/>
+              <path d="M40,83 L121,110 L202,151 L283,29 L364,56 L445,56 L526,22 L607,70 L688,97 L688,175 L40,175 Z" fill="url(#ppfill)"/>
+              <path d="M40,83 L121,110 L202,151 L283,29 L364,56 L445,56 L526,22 L607,70 L688,97" fill="none" stroke="hsl(233 65% 50%)" stroke-width="2.5" stroke-linejoin="round" stroke-linecap="round"/>
+              <g stroke="#fff" stroke-width="2.5"><circle cx="202" cy="151" r="5" fill="hsl(0 72% 45%)"/><circle cx="283" cy="29" r="5" fill="hsl(160 60% 38%)"/><circle cx="526" cy="22" r="5" fill="hsl(160 60% 38%)"/><circle cx="607" cy="70" r="5" fill="hsl(0 72% 45%)"/></g>
+              <circle cx="688" cy="97" r="5.5" fill="hsl(233 65% 50%)" stroke="#fff" stroke-width="2.5"/>
+            </svg>
+            <div class="pp-x"><span>01/09</span><span>08/09</span><span>15/09</span><span>22/09</span><span>hoje</span></div>
           </div>
         </div>
-        <div class="df">
-          <span class="locknote"><i class="ic s14 i-lock"></i>Lançamento imutável. Uma correção entra como estorno.</span>
-          <button class="btn btn-outline btn-sm" type="button"><i class="ic s16 i-undo"></i>Estornar</button>
+        <div class="acard">
+          <div class="ah"><i class="ic s16 i-boxes"></i><span class="t">Saldo por depósito</span><span class="r">18 un no total</span></div>
+          <div class="ab dep-list">
+            <div class="row"><span class="nm">Depósito Mucuri</span><span class="v">14 un</span><span class="bar"><i style="width:78%"></i></span></div>
+            <div class="row"><span class="nm">Almoxarifado Central</span><span class="v">4 un</span><span class="bar"><i style="width:22%"></i></span></div>
+            <div class="row"><span class="nm">Depósito Ponta Grossa</span><span class="v low">0 un</span><span class="bar"><i class="low" style="width:3%"></i></span></div>
+          </div>
+        </div>
+      </div>
+      <div style="display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start;margin-top:16px">
+        <div class="acard">
+          <div class="ah"><i class="ic s16 i-move"></i><span class="t">Extrato da peça</span><span class="r">últimos lançamentos</span></div>
+          <div class="stmt mini-stmt" style="border:0;border-radius:0">
+            <div class="day-hd"><div class="cap"><b>Hoje</b><span class="dt">28 de setembro</span></div></div>
+            <div class="txn"><span class="txn-ic"><i class="ic i-wrench"></i></span><div class="txn-mid"><div class="txn-title">Saída para OS</div><div class="txn-sub">OS #1042 · Depósito Mucuri · Rafael Souza</div></div><div class="txn-right"><div class="txn-time">16:42</div><div class="txn-qty out">−4 un</div><div class="txn-val">saldo 18</div></div></div>
+            <div class="day-hd"><div class="cap"><b>26 de setembro</b></div></div>
+            <div class="txn"><span class="txn-ic"><i class="ic i-adjust"></i></span><div class="txn-mid"><div class="txn-title">Ajuste (entrada)</div><div class="txn-sub">Inventário — contagem · Almox. Central · Paulo Reis</div></div><div class="txn-right"><div class="txn-time">09:31</div><div class="txn-qty in">+5 un</div><div class="txn-val">saldo 22</div></div></div>
+            <div class="day-hd"><div class="cap"><b>15 de setembro</b></div></div>
+            <div class="txn"><span class="txn-ic"><i class="ic i-in"></i></span><div class="txn-mid"><div class="txn-title">Entrada por compra</div><div class="txn-sub">NF 4488 · Freios Paraná · Carla Nunes</div></div><div class="txn-right"><div class="txn-time">10:05</div><div class="txn-qty in">+18 un</div><div class="txn-val">saldo 28</div></div></div>
+            <div class="txn"><span class="txn-ic"><i class="ic i-wrench"></i></span><div class="txn-mid"><div class="txn-title">Saída para OS</div><div class="txn-sub">OS #1031 · Depósito Mucuri · Diego Alves</div></div><div class="txn-right"><div class="txn-time">08:20</div><div class="txn-qty out">−6 un</div><div class="txn-val">saldo 10</div></div></div>
+          </div>
+        </div>
+        <div class="acard">
+          <div class="ah"><i class="ic s16 i-info"></i><span class="t">O que investigar</span></div>
+          <div class="ab" style="padding:12px 16px 14px;display:flex;flex-direction:column;gap:12px">
+            <div class="explain"><i class="ic s16 i-adjust"></i><span><b>2 ajustes</b> no mês (+5 e −2). O de +5 fecha a contagem de inventário; confira se a diferença tem causa.</span></div>
+            <div class="explain"><i class="ic s16 i-warn" style="color:hsl(var(--warning-text))"></i><span>Consumo de <b>25 un/mês</b> contra saldo de 18 — no ritmo, <b>rompe em ~22 dias</b>. Ponto de reposição sugerido: 24 un.</span></div>
+            <button class="btn btn-outline btn-sm" style="align-self:flex-start"><i class="ic s16 i-adjust"></i>Conferir / Ajustar saldo</button>
+          </div>
         </div>
       </div>
     </div>
@@ -1126,6 +1289,84 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- =============== 11. LENTE ANÁLISE =============== -->
+  <section class="sec" id="s11">
+    <div class="sec-label"><span class="sec-num">11</span><h2>Lente Análise · as respostas do gestor</h2></div>
+    <p class="sec-sub">A outra lente do mesmo dado. O gestor/financeiro não quer rolar o feed — quer <b>respostas</b>: o que mais saiu, para onde, quem ajustou demais, tem perda estranha. Abre pelas <b>anomalias</b> (as exceções que importam) e desce para as agregações. Cada linha é clicável e leva ao drill-down da peça (seção 8).</p>
+    <div class="frame" style="padding:22px 24px 26px">
+      <div class="lensbar" style="margin-bottom:16px">
+        <div class="lens" role="tablist"><button role="tab" aria-selected="false"><i class="ic i-move"></i>Extrato</button><button role="tab" aria-selected="true"><i class="ic i-chart"></i>Análise</button></div>
+        <span class="hint"><i class="ic s14 i-cal"></i>Setembro 2026 · todos os depósitos</span>
+      </div>
+      <div class="kpis" style="margin-bottom:16px">
+        <div class="kpi clk"><div class="tp"><i class="ic s16 i-move"></i>Movimentações</div><div class="big">1.284</div><div class="sub">no período</div></div>
+        <div class="kpi clk"><div class="tp"><i class="ic s16 i-in"></i>Entradas</div><div class="big pos">+R$ 27,7 mil</div><div class="sub"><b>318</b> lançamentos</div></div>
+        <div class="kpi clk active"><span class="flt"><i class="ic s12 i-check"></i>filtrando</span><div class="tp"><i class="ic s16 i-out"></i>Saídas</div><div class="big neg">−R$ 21,4 mil</div><div class="sub"><b>942</b> lançamentos</div></div>
+        <div class="kpi clk"><div class="tp"><i class="ic s16 i-adjust"></i>Ajustes</div><div class="big">9</div><div class="sub"><b>2</b> de correção</div></div>
+      </div>
+      <div class="anoms">
+        <div class="anom danger"><span class="ico"><i class="ic s18 i-warn"></i></span><div><div class="big">3 ajustes de perda</div><div class="lb">hoje · <b>R$ 1.240</b> baixados como perda/quebra</div><span class="lk">investigar <i class="ic s12 i-cr"></i></span></div></div>
+        <div class="anom warn"><span class="ico"><i class="ic s18 i-trend-down"></i></span><div><div class="big">1 peça negativa</div><div class="lb">Correia dentada · saldo <b>−2 un</b> no Mucuri</div><span class="lk">conferir <i class="ic s12 i-cr"></i></span></div></div>
+        <div class="anom note"><span class="ico"><i class="ic s18 i-undo"></i></span><div><div class="big">1 estorno</div><div class="lb">OS #1042 · Pastilha de freio · +4 un devolvidos</div><span class="lk">abrir <i class="ic s12 i-cr"></i></span></div></div>
+      </div>
+      <div class="agrid">
+        <div class="acard">
+          <div class="ah"><i class="ic s16 i-out"></i><span class="t">Maiores saídas por peça</span><span class="r">valor · set/2026</span></div>
+          <div class="ab rank">
+            <div class="row"><span class="n">1</span><div style="min-width:0"><div class="nm">Bateria 150Ah</div><div class="bar"><i style="width:100%"></i></div></div><span class="val">R$ 5.340<small>6 un</small></span></div>
+            <div class="row"><span class="n">2</span><div style="min-width:0"><div class="nm">Pastilha de freio</div><div class="bar"><i style="width:64%"></i></div></div><span class="val">R$ 3.382<small>38 un</small></span></div>
+            <div class="row"><span class="n">3</span><div style="min-width:0"><div class="nm">Óleo 15W40</div><div class="bar"><i style="width:47%"></i></div></div><span class="val">R$ 2.508<small>114 L</small></span></div>
+            <div class="row"><span class="n">4</span><div style="min-width:0"><div class="nm">Lona de freio</div><div class="bar"><i style="width:33%"></i></div></div><span class="val">R$ 1.748<small>38 un</small></span></div>
+            <div class="row"><span class="n">5</span><div style="min-width:0"><div class="nm">Correia dentada</div><div class="bar"><i style="width:21%"></i></div></div><span class="val">R$ 1.118<small>9 un</small></span></div>
+          </div>
+        </div>
+        <div class="acard">
+          <div class="ah"><i class="ic s16 i-boxes"></i><span class="t">Saídas por depósito</span><span class="r">valor</span></div>
+          <div class="ab rank">
+            <div class="row"><span class="n">1</span><div style="min-width:0"><div class="nm">Depósito Mucuri</div><div class="bar"><i style="width:100%"></i></div></div><span class="val">R$ 12,9 mil<small>612 lanç.</small></span></div>
+            <div class="row"><span class="n">2</span><div style="min-width:0"><div class="nm">Almoxarifado Central</div><div class="bar"><i style="width:52%"></i></div></div><span class="val">R$ 6,7 mil<small>248 lanç.</small></span></div>
+            <div class="row"><span class="n">3</span><div style="min-width:0"><div class="nm">Depósito Ponta Grossa</div><div class="bar"><i style="width:14%"></i></div></div><span class="val">R$ 1,8 mil<small>82 lanç.</small></span></div>
+          </div>
+        </div>
+        <div class="acard full">
+          <div class="ah"><i class="ic s16 i-move"></i><span class="t">Por tipo de movimentação</span><span class="r">quantidade de lançamentos e valor</span></div>
+          <div class="ab bd">
+            <div class="row"><span class="ci"><i class="ic s14 i-in"></i></span><span class="lb">Entrada por compra</span><span class="val">R$ 26,4 mil <small>288 lanç.</small></span><span class="track"><i style="width:62%;background:hsl(var(--success))"></i></span></div>
+            <div class="row"><span class="ci"><i class="ic s14 i-wrench"></i></span><span class="lb">Saída para OS</span><span class="val">R$ 18,1 mil <small>842 lanç.</small></span><span class="track"><i style="width:43%;background:hsl(var(--danger-text))"></i></span></div>
+            <div class="row"><span class="ci"><i class="ic s14 i-transfer"></i></span><span class="lb">Transferências</span><span class="val">R$ 9,2 mil <small>96 lanç.</small></span><span class="track"><i style="width:22%;background:hsl(240 5% 60%)"></i></span></div>
+            <div class="row"><span class="ci"><i class="ic s14 i-adjust"></i></span><span class="lb">Ajustes</span><span class="val">R$ 1,2 mil <small>9 lanç.</small></span><span class="track"><i style="width:6%;background:hsl(var(--warning))"></i></span></div>
+            <div class="row"><span class="ci"><i class="ic s14 i-return"></i></span><span class="lb">Devoluções</span><span class="val">R$ 640 <small>11 lanç.</small></span><span class="track"><i style="width:3%;background:hsl(var(--note))"></i></span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes"><h4>Por que a lente</h4><ul><li>O Extrato é a <b>prova</b> (cada fato, cronológico, imutável); a Análise é a <b>resposta</b> (agregada, comparável). Mesmo dado, mesma verdade — muda só a pergunta que a tela responde.</li></ul></div>
+  </section>
+
+  <!-- =============== 12. COCKPIT DE ACURÁCIA =============== -->
+  <section class="sec" id="s12">
+    <div class="sec-label"><span class="sec-num">12</span><h2>Cockpit de acurácia · a higiene do estoque</h2></div>
+    <p class="sec-sub">O trabalho do almoxarife é o saldo <b>bater</b>. Em vez de log passivo, a tela aponta o que precisa de conferência — <b>saldo negativo</b> (impossível, tem erro) e <b>peças sem contagem há muito tempo</b> — e cada item leva, com um toque, ao fluxo de Ajuste (seção 5).</p>
+    <div class="frame" style="padding:22px 24px 26px">
+      <div class="ck-grid">
+        <div class="ck danger">
+          <div class="h"><span class="ico"><i class="ic s16 i-warn"></i></span><span class="t">Saldo negativo</span><span class="cnt">1</span></div>
+          <div class="row"><span class="pi"><i class="ic s16 i-box"></i></span><div style="min-width:0"><div class="nm">Correia dentada</div><div class="s bad">−2 un no Depósito Mucuri · saída sem saldo</div></div><button class="go prim"><i class="ic s14 i-adjust"></i>Conferir agora</button></div>
+        </div>
+        <div class="ck warn">
+          <div class="h"><span class="ico"><i class="ic s16 i-clock"></i></span><span class="t">Sem contagem há 90+ dias</span><span class="cnt">7</span></div>
+          <div class="row"><span class="pi"><i class="ic s16 i-box"></i></span><div style="min-width:0"><div class="nm">Graxa de chassi</div><div class="s old">última contagem há 142 dias</div></div><button class="go"><i class="ic s14 i-adjust"></i>Contar</button></div>
+          <div class="row"><span class="pi"><i class="ic s16 i-box"></i></span><div style="min-width:0"><div class="nm">Aditivo radiador</div><div class="s old">última contagem há 118 dias</div></div><button class="go"><i class="ic s14 i-adjust"></i>Contar</button></div>
+          <div class="row"><span class="pi"><i class="ic s16 i-box"></i></span><div style="min-width:0"><div class="nm">Parafuso roda M22</div><div class="s old">última contagem há 96 dias</div></div><button class="go"><i class="ic s14 i-adjust"></i>Contar</button></div>
+        </div>
+      </div>
+      <div class="attn" style="margin:16px 0 0">
+        <div class="item note"><span class="ico"><i class="ic s16 i-spark"></i></span><span>Contagem cíclica: <b>~6 peças/dia</b> mantêm o estoque inteiro conferido no trimestre</span><button class="go">Programar</button></div>
+      </div>
+    </div>
+    <div class="notes"><h4>Como fecha o ciclo</h4><ul><li>"Conferir" abre o <b>Ajuste de estoque</b> (seção 5) já com a peça e o depósito preenchidos — a pessoa só digita o saldo contado. Toda correção é um lançamento novo; o saldo negativo vira uma entrada de ajuste com motivo, e a acurácia sobe sem apagar história.</li></ul></div>
   </section>
 
 </div>
