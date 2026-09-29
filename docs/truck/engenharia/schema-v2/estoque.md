@@ -281,3 +281,11 @@ Já em produção nesta fatia: **PLT-13** (custo/valor só com permissão). Futu
 - **Custo médio móvel por depósito** (`stock_balances.average_cost`) é o custo real do saldo, congelado na movimentação (STK-6).
 - **Fornecedores** num cadastro por organização, compartilhado por peças, pneus, recapagem e serviços externos.
 - **Transferência entre depósitos de organizações diferentes** só dentro do mesmo grupo ou com concessão explícita.
+
+## Estoque serializado (rastreio de unidade)
+
+Peça com `tracking = 'serialized'` tem **unidades individuais** rastreáveis, guardadas em `serialized_items` — ver [ADR-017](../adrs/adr-017-estoque-serializado.md).
+
+- **`serialized_items`**: `id`, `org_id` (RLS forçado), `part_id` (FK org-safe), `code` (serial/etiqueta/QR, `unique (org_id, code)`), `state` (`in_stock` \| `in_maintenance` \| `retired`), `depot_id` (FK org-safe; nulo só quando `retired`), `acquisition_cost`/`currency` (custo é leitura sensível, sai só com `cost.view`), `received_at`, `retired_reason`, `version`. `check`: unidade `retired` não tem depósito e tem motivo; ativa mora num depósito. Índice `(org_id, received_at desc, id desc)` para a lista; escrita de código race-safe por `on conflict (org_id, code)`.
+- **`serialized_item_events`**: histórico append-only da unidade (`received`, `maintenance`, `returned`, `retired`, `relabeled`), com autor e instante; correção é novo evento.
+- **Fatia 1 (fundação, implementada):** unidade em depósito — registrar, listar (filtros + cursor, plano testado), ficha com histórico. **Instalar/mover numa posição do veículo** e a **planta clicável** ([mockup](/telas/truck/rastreabilidade)) são as próximas fatias; exigem `unique (id, org_id)` em `vehicles` e o modelo de posição. **Pneus** é o primeiro vertical sobre esta base.
