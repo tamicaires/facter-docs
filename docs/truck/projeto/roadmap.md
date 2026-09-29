@@ -135,6 +135,7 @@ O `@facter/ds-core` evolui puxado pela web v2, não como um projeto v2 separado.
 - [ ] Papéis padrão do produto e o que cada um pode fazer
 - [x] O que conta como tempo trabalhado ([SVC-7](../engenharia/invariantes.md)): nenhuma pausa conta como trabalho; o tempo parado é registrado por motivo (26/09/2026)
 - [ ] **Débito técnico — busca global (Ctrl+K):** os resultados levam para a lista (`/veiculos`, `/transportadoras`), não para o detalhe do item, porque as telas de detalhe ainda não existem. Fazer o deep-link (`/veiculos/:id`, `/transportadoras/:id`) junto com o detalhe do veículo/transportadora
+- [ ] **Endereçamento de estoque (localização física dentro do depósito):** hoje o v2 só modela o **depósito** (saldo por `(depósito, peça)`), sem sublocalização — mas o glossário já prevê "Location (Prateleira A3)". Ideia levantada pelo uso real (achar a peça na separação). Decidir a profundidade: **leve** (localização por peça no depósito — setor + prateleira/posição, exibida na peça e na hora de separar) vs **WMS completo** (hierarquia setor→corredor→prateleira, múltiplas posições, picking). Recomendação: versão leve no lançamento; WMS pós-lançamento. Muda o schema (coluna/tabela de localização). Mockups da versão leve em andamento (`/telas/truck/enderecamento`)
 
 ## Enquanto a v2 não sai
 
