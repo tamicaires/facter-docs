@@ -94,6 +94,18 @@ Aprovado em 27/09/2026. A base que os serviços e as peças da OS usam, em quatr
 
 <img src="/mockups/truck/catalogos/desktop.png" alt="Mockup dos catálogos da oficina" style={{maxHeight: 360, width: '100%', objectFit: 'cover', objectPosition: 'top', borderRadius: 8, border: '1px solid var(--ifm-color-emphasis-300)'}} />
 
+### Tipos de eixo
+
+Em revisão (30/09/2026). O cadastro/catálogo dos tipos de eixo usados na configuração de veículos e carretas (inclusive a carreta florestal): lista com busca e filtro por função, controle e origem, os quatro estados (skeleton, vazio, busca sem resultado, sem permissão), o diálogo de cadastrar/editar e a versão celular. Destaque para o campo **Controle** (por quantidade × individual/rastreável), o mesmo padrão de `parts.tracking` hoje só usado pelo pneu — eixo montado, fueiro e barrote são candidatos à mesma família rastreável.
+
+[Ver o mockup](/telas/truck/tipos-de-eixo)
+
+### Rastreabilidade de unidades
+
+Em revisão (30/09/2026). Protótipo **interativo** das peças serializadas (pneu, eixo, fueiro): o conjunto real (cavalo + carreta florestal) vira uma **planta 2D clicável** — toca numa peça, ou lê a etiqueta (QR), e vê a ficha da unidade com identidade, posição no conjunto, estado (em uso/atenção/manutenção/sem etiqueta) e histórico. Mostra como o mesmo padrão do pneu se estende a eixo e fueiro, e os cenários externos (oficina terceira, em trânsito, consignada, baixada, garantia). Esquema 2D de propósito — sem 3D; no app vira um componente `VehicleSchematic` no DS.
+
+[Ver o mockup](/telas/truck/rastreabilidade)
+
 ### Estoque
 
 Aprovado em 27/09/2026. **Peças** (SKU, categoria, unidade de estoque e de consumo com fator), **Requisições** vindas das OS, **Movimentações** como livro só-inserção (saldo é a soma, cada linha tem motivo, autor e referência) e **Depósitos** (dono + local, incluindo consignado). Traz os casos de borda com selects abertos e os **estados da lista nova** (skeleton, busca/filtro sem resultado, só inativas, sem permissão, erro e paginação por cursor). O custo por peça segue a [convenção aprovada](propostas/part-cost-convention) (custo na unidade de consumo). Task 2.5.

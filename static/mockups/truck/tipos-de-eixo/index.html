@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tipos de eixo · mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --background:0 0% 98%;
+  --foreground:240 10% 3.9%;
+  --card:0 0% 100%;
+  --primary:233 65% 50%;
+  --primary-foreground:0 0% 100%;
+  --muted:240 4.8% 94%;
+  --muted-foreground:240 3.8% 40%;
+  --border:240 5.9% 90%;
+  --success:160 60% 38%;
+  --warning:38 92% 45%;
+  --danger:0 84.2% 60.2%;
+  --success-text:160 70% 24%;
+  --danger-text:0 72% 38%;
+  --warning-text:28 85% 28%;
+  --primary-soft:233 85% 96.5%;
+  --success-soft:160 55% 94%;
+  --warning-soft:40 95% 93%;
+  --danger-soft:0 90% 96%;
+  --canvas:225 14% 92%;
+  --ring:233 65% 50%;
+  --toolbar:240 5% 96%;
+  --note:285 55% 38%;
+  --note-soft:285 60% 96%;
+  --ink:240 10% 12%;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:hsl(var(--canvas));color:hsl(var(--foreground));font:14px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,p{margin:0}
+button,input{font:inherit;color:inherit}
+a{color:hsl(var(--primary))}
+:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:2px;border-radius:6px}
+.num{font-variant-numeric:tabular-nums}
+.ic{display:inline-block;width:20px;height:20px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;flex:none}
+.ic.s12{width:12px;height:12px}.ic.s14{width:14px;height:14px}.ic.s16{width:16px;height:16px}.ic.s18{width:18px;height:18px}.ic.s20{width:20px;height:20px}.ic.s24{width:24px;height:24px}
+
+/* icon set (Phosphor via iconify) */
+.i-house{--i:url(https://api.iconify.design/ph/house.svg)}
+.i-truck{--i:url(https://api.iconify.design/ph/truck.svg)}
+.i-trailer{--i:url(https://api.iconify.design/ph/truck-trailer.svg)}
+.i-dolly{--i:url(https://api.iconify.design/ph/circles-three.svg)}
+.i-os{--i:url(https://api.iconify.design/ph/clipboard-text.svg)}
+.i-tire{--i:url(https://api.iconify.design/ph/tire.svg)}
+.i-chart{--i:url(https://api.iconify.design/ph/chart-line-up.svg)}
+.i-gear{--i:url(https://api.iconify.design/ph/gear.svg)}
+.i-search{--i:url(https://api.iconify.design/ph/magnifying-glass.svg)}
+.i-down{--i:url(https://api.iconify.design/ph/caret-down.svg)}
+.i-left{--i:url(https://api.iconify.design/ph/caret-left.svg)}
+.i-right{--i:url(https://api.iconify.design/ph/caret-right.svg)}
+.i-check{--i:url(https://api.iconify.design/ph/check.svg)}
+.i-checkc{--i:url(https://api.iconify.design/ph/check-circle-fill.svg)}
+.i-plus{--i:url(https://api.iconify.design/ph/plus.svg)}
+.i-x{--i:url(https://api.iconify.design/ph/x.svg)}
+.i-dots{--i:url(https://api.iconify.design/ph/dots-three-vertical.svg)}
+.i-warn{--i:url(https://api.iconify.design/ph/warning.svg)}
+.i-info{--i:url(https://api.iconify.design/ph/info.svg)}
+.i-lock{--i:url(https://api.iconify.design/ph/lock-key.svg)}
+.i-package{--i:url(https://api.iconify.design/ph/package.svg)}
+.i-fingerprint{--i:url(https://api.iconify.design/ph/fingerprint.svg)}
+.i-scales{--i:url(https://api.iconify.design/ph/scales.svg)}
+.i-steering{--i:url(https://api.iconify.design/ph/steering-wheel.svg)}
+.i-engine{--i:url(https://api.iconify.design/ph/engine.svg)}
+.i-circle{--i:url(https://api.iconify.design/ph/circle-dashed.svg)}
+.i-lift{--i:url(https://api.iconify.design/ph/arrow-line-up.svg)}
+.i-hist{--i:url(https://api.iconify.design/ph/clock-counter-clockwise.svg)}
+.i-pin{--i:url(https://api.iconify.design/ph/map-pin.svg)}
+.i-tag{--i:url(https://api.iconify.design/ph/hash.svg)}
+.i-pencil{--i:url(https://api.iconify.design/ph/pencil-simple.svg)}
+.i-tree{--i:url(https://api.iconify.design/ph/tree-structure.svg)}
+
+/* ---------- presentation page ---------- */
+.doc{max-width:1328px;margin:0 auto;padding:48px 24px 96px}
+.doc-head{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between}
+.doc-head h1{font:800 30px/1.15 Sora,sans-serif;letter-spacing:-.02em}
+.doc-head p{color:hsl(240 6% 25%);max-width:760px;margin-top:10px;font-size:14.5px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.toc a{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:999px;background:hsl(var(--card));border:1px solid hsl(var(--border));font-size:13px;font-weight:500;color:hsl(var(--foreground));text-decoration:none}
+.toc a b{color:hsl(var(--primary));font-weight:700}
+.sec{margin-top:72px}
+.sec-label{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-num{font:800 14px Sora,sans-serif;color:hsl(var(--primary));background:hsl(var(--card));border-radius:999px;min-width:28px;height:28px;padding:0 8px;display:inline-grid;place-items:center;flex:none}
+.sec h2{font:700 21px/1.3 Sora,sans-serif;letter-spacing:-.01em}
+.sec-sub{color:hsl(240 6% 25%);margin:0 0 20px 40px;max-width:840px}
+.view-cap{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:600;margin:0 0 10px 40px}
+.notes{font-size:13.5px;color:hsl(240 6% 22%)}
+.notes h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));margin:0 0 6px}
+.notes ul{margin:0 0 18px;padding-left:18px}
+.notes li{margin-bottom:6px}
+.notes-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 40px;margin:28px 0 0 40px}
+.frame{position:relative;width:1280px;background:hsl(var(--background));border-radius:14px;box-shadow:0 1px 2px hsl(230 20% 20%/.06),0 12px 40px -12px hsl(230 30% 20%/.18);overflow:hidden;border:1px solid hsl(var(--border))}
+.indent{margin-left:40px}
+
+/* ---------- app shell ---------- */
+.lockup{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.lockup svg{color:hsl(var(--primary));flex:none}
+.lockup .rule{width:1px;align-self:stretch;background:hsl(var(--border));margin:2px 0}
+.wordmark{font:400 18px/1.1 Sora,sans-serif;letter-spacing:-.01em;white-space:nowrap}
+.wordmark b{font-weight:800}
+.tagline{font-size:11px;color:hsl(var(--muted-foreground));margin-top:3px;white-space:nowrap}
+.app{display:grid;grid-template-columns:72px 1fr;grid-template-rows:64px 1fr}
+.topbar{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:0 20px 0 18px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
+.topbar .spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;width:300px;height:38px;padding:0 12px;border:1px solid hsl(var(--border));border-radius:8px;color:hsl(var(--muted-foreground));font-size:13px;background:hsl(var(--background))}
+.org{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:6px 10px;border-radius:8px;border:0;background:none}
+.avatar{width:34px;height:34px;border-radius:999px;background:hsl(233 45% 88%);color:hsl(233 60% 30%);display:grid;place-items:center;font-weight:600;font-size:12px;flex:none}
+.sidenav{background:hsl(var(--card));border-right:1px solid hsl(var(--border));padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.navitem{position:relative;width:48px;height:48px;border-radius:10px;display:grid;place-items:center;color:hsl(240 5% 34%)}
+.navitem[aria-current="page"]{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.navitem[aria-current="page"]::before{content:"";position:absolute;left:-12px;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:hsl(var(--primary))}
+.navsep{flex:1}
+.main{padding:22px 40px 40px;min-width:0}
+
+/* ---------- primitives ---------- */
+.card{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:8px;border:1px solid transparent;font-weight:600;font-size:13.5px;text-decoration:none;white-space:nowrap;cursor:pointer}
+.btn-primary{background:hsl(var(--primary));color:#fff}
+.btn-primary[disabled]{background:hsl(233 40% 78%);cursor:not-allowed}
+.btn-outline{background:hsl(var(--card));border-color:hsl(240 6% 82%);color:hsl(var(--foreground))}
+.btn-sm{height:34px;padding:0 12px;font-size:13px}
+.kebab{width:32px;height:32px;border-radius:8px;border:1px solid transparent;background:none;color:hsl(240 5% 45%);display:grid;place-items:center;cursor:pointer}
+.kebab:hover{background:hsl(var(--muted))}
+.crumb{display:inline-flex;align-items:center;gap:4px;font-size:13px;color:hsl(var(--muted-foreground));text-decoration:none;margin-bottom:8px}
+.pagehead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:4px}
+.pagehead h1{font:700 23px/1.2 Sora,sans-serif;letter-spacing:-.01em}
+.pagehead .meta{font-size:13px;color:hsl(var(--muted-foreground));margin-top:3px}
+.crumbrow{display:flex;align-items:center;gap:8px;font-size:13px;color:hsl(var(--muted-foreground));margin-bottom:6px}
+.crumbrow a{color:inherit;text-decoration:none}
+.crumbrow .cur{color:hsl(var(--foreground));font-weight:600}
+
+/* chip / badge / tag */
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:999px;background:hsl(var(--muted));color:hsl(240 6% 24%);font-size:12px;font-weight:500;white-space:nowrap}
+.sys{display:inline-block;font:600 9.5px Sora;letter-spacing:.02em;color:hsl(233 65% 42%);background:hsl(var(--primary-soft));border-radius:5px;padding:1px 6px;margin-left:7px;vertical-align:middle;text-transform:uppercase}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;height:23px;padding:0 9px 0 7px;border-radius:6px;white-space:nowrap}
+.b-info{background:hsl(var(--primary-soft));color:hsl(233 65% 40%)}
+.b-success{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.b-warn{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.b-mute{background:hsl(var(--muted));color:hsl(240 6% 28%)}
+
+/* ---------- filters ---------- */
+.filterbar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin:16px 0 14px}
+.fsearch{display:flex;align-items:center;gap:8px;height:38px;padding:0 12px;border:1px solid hsl(var(--border));border-radius:8px;color:hsl(var(--muted-foreground));font-size:13.5px;background:hsl(var(--card));width:260px}
+.seg{display:inline-flex;gap:2px;padding:3px;background:hsl(var(--muted));border-radius:9px}
+.seg button{border:0;background:none;height:28px;padding:0 10px;border-radius:7px;font-size:12.5px;font-weight:500;color:hsl(240 6% 28%);cursor:pointer}
+.seg button[aria-pressed="true"]{background:hsl(var(--card));color:hsl(var(--foreground));box-shadow:0 1px 2px hsl(240 10% 10%/.12);font-weight:600}
+.fchips{display:flex;flex-wrap:wrap;gap:6px}
+.fchip{height:32px;padding:0 12px;border-radius:999px;border:1px solid hsl(240 6% 84%);background:hsl(var(--card));font-size:12.5px;font-weight:500;color:hsl(240 6% 30%);cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.fchip.gen{color:hsl(var(--muted-foreground))}
+.fchip[aria-pressed="true"]{border-color:hsl(var(--primary));background:hsl(var(--primary-soft));color:hsl(233 65% 36%);font-weight:600}
+.fclear{font-size:12.5px;font-weight:600;color:hsl(var(--primary));background:none;border:0;cursor:pointer;padding:0}
+.fsep{width:1px;align-self:stretch;background:hsl(var(--border));margin:2px 2px}
+
+/* ---------- axle type list ---------- */
+.axhd{display:grid;grid-template-columns:minmax(0,1.9fr) 168px 168px 92px 30px;gap:16px;padding:0 16px 8px;font-size:11.5px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground))}
+.axlist{border:1px solid hsl(var(--border));border-radius:12px;overflow:hidden;background:hsl(var(--card))}
+.axrow{display:grid;grid-template-columns:minmax(0,1.9fr) 168px 168px 92px 30px;gap:16px;align-items:center;padding:12px 16px;border-top:1px solid hsl(var(--border))}
+.axrow:first-child{border-top:0}
+.axrow:hover{background:hsl(240 5% 98.5%)}
+.axname{display:flex;align-items:center;gap:12px;min-width:0}
+.axname .nm{font-weight:600;font-size:14px;display:flex;align-items:center;min-width:0}
+.axname .meta{font-size:12px;color:hsl(var(--muted-foreground));margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.axsvg{flex:none;color:hsl(240 6% 46%)}
+.axchips{display:flex;flex-direction:column;gap:5px;align-items:flex-start}
+.apps{font-size:12.5px;color:hsl(240 6% 32%);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.axuse{text-align:right;font-size:12px;color:hsl(var(--muted-foreground))}
+.axuse b{display:block;font:700 15px Sora,sans-serif;color:hsl(var(--foreground))}
+.axfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;font-size:12.5px;color:hsl(var(--muted-foreground))}
+
+/* função tone chips */
+.ftype{display:inline-flex;align-items:center;gap:5px;height:22px;padding:0 8px;border-radius:6px;font:600 11.5px Sora,sans-serif;white-space:nowrap}
+.ftype .ic{width:12px;height:12px}
+.ftype.dir{background:hsl(var(--primary-soft));color:hsl(233 65% 40%)}
+.ftype.trac{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.ftype.livre{background:hsl(var(--muted));color:hsl(240 6% 30%)}
+.ftype.elev{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+
+/* skeleton */
+.skel{background:linear-gradient(90deg,hsl(240 5% 92%),hsl(240 5% 96%),hsl(240 5% 92%));border-radius:8px}
+.skrow{display:grid;grid-template-columns:minmax(0,1.9fr) 168px 168px 92px 30px;gap:16px;align-items:center;padding:14px 16px;border-top:1px solid hsl(var(--border))}
+.skrow:first-child{border-top:0}
+
+/* ---------- states gallery ---------- */
+.states{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.cardf{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:14px;box-shadow:0 8px 28px -18px hsl(230 30% 20%/.3);overflow:hidden}
+.cardf .inhead{padding:12px 16px;border-bottom:1px solid hsl(var(--border))}
+.ecap{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:600;margin-bottom:8px}
+.empty{display:flex;flex-direction:column;align-items:center;text-align:center;padding:36px 22px;gap:6px}
+.empty .ei{width:52px;height:52px;border-radius:14px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center;margin-bottom:8px}
+.empty.mut .ei{background:hsl(var(--muted));color:hsl(240 5% 40%)}
+.empty.lock .ei{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.empty h3{font-size:15.5px;font-weight:650}
+.empty p{font-size:13.5px;color:hsl(240 6% 30%);max-width:340px}
+.empty .btn{margin-top:10px}
+.empty .row2{display:flex;gap:8px;margin-top:10px}
+
+/* ---------- dialog pattern ---------- */
+.stage{position:relative;padding:40px;display:flex;justify-content:center;gap:28px;align-items:flex-start;flex-wrap:wrap;
+  background-image:linear-gradient(hsl(240 8% 20%/.42),hsl(240 8% 20%/.42)),radial-gradient(hsl(233 20% 80%) 1px,transparent 1px);background-size:auto,18px 18px;background-color:hsl(var(--background))}
+.dx{--w:600px;width:var(--w);max-width:100%;background:hsl(var(--card));border-radius:16px;box-shadow:0 24px 60px -20px hsl(230 30% 10%/.5);display:flex;flex-direction:column;position:relative;text-align:left}
+.dx-hd{padding:20px 24px 18px;position:relative;border-bottom:1px solid hsl(var(--border))}
+.dx-ico{width:36px;height:36px;border-radius:10px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center;flex:none;margin-bottom:12px}
+.dx-hd h2{font-size:19px;font-weight:650;letter-spacing:-.01em;line-height:1.3}
+.dx-hd .desc{font-size:13.5px;color:hsl(var(--muted-foreground));margin-top:4px}
+.dx-x{position:absolute;right:14px;top:16px;width:34px;height:34px;border:0;background:none;border-radius:8px;display:grid;place-items:center;color:hsl(240 5% 38%);cursor:pointer}
+.dx-bd{padding:20px 24px 22px;display:flex;flex-direction:column;gap:20px;min-width:0}
+.dsec{display:flex;flex-direction:column;gap:12px;min-width:0}
+.dsec>h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:hsl(240 5% 36%);font-weight:600;display:flex;align-items:center;gap:6px}
+.dx-ft{position:relative;padding:14px 24px;border-top:1px solid hsl(var(--border));background:hsl(var(--toolbar));display:flex;align-items:center;gap:16px;border-radius:0 0 16px 16px;flex-wrap:wrap}
+.conseq{flex:1 1 240px;display:flex;gap:8px;font-size:12.5px;line-height:1.45;color:hsl(240 6% 26%);min-width:0}
+.conseq .ic{margin-top:1px;color:hsl(var(--primary))}
+.conseq b{font-weight:600;color:hsl(var(--foreground))}
+.dx-ft .acts{display:flex;gap:8px;margin-left:auto}
+
+/* fields */
+.fl{display:block;min-width:0}
+.fl .l{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:500;margin-bottom:6px}
+.fl .l .req{color:hsl(var(--danger-text))}
+.fl .l .opt{font-weight:400;color:hsl(var(--muted-foreground));font-size:12px}
+.input{width:100%;height:40px;border:1px solid hsl(240 6% 82%);border-radius:8px;background:hsl(var(--card));padding:0 12px;font-size:13.5px;display:flex;align-items:center;gap:8px;min-width:0}
+.input.ph{color:hsl(240 4% 46%)}
+.input .grow{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.hint{font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:6px;display:flex;gap:6px;align-items:flex-start}
+.hint .ic{margin-top:1px;color:hsl(var(--muted-foreground));flex:none}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+/* função radiogroup (cards) */
+.tc{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.tcard{border:1px solid hsl(240 6% 86%);border-radius:12px;padding:12px 10px;background:hsl(var(--card));display:flex;flex-direction:column;align-items:flex-start;gap:8px;cursor:pointer;min-width:0}
+.tcard .ti{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:hsl(var(--muted));color:hsl(240 6% 30%)}
+.tcard .nm{font-weight:600;font-size:13px;line-height:1.2}
+.tcard .f{font-size:11.5px;color:hsl(var(--muted-foreground))}
+.tcard[aria-checked="true"]{border-color:hsl(var(--primary));background:hsl(var(--primary-soft));box-shadow:0 0 0 1px hsl(var(--primary))}
+.tcard[aria-checked="true"] .ti{background:hsl(var(--primary));color:#fff}
+
+/* controle segmented */
+.ctlseg{display:flex;gap:8px}
+.ctlopt{flex:1;border:1.5px solid hsl(240 6% 86%);border-radius:11px;padding:12px 14px;cursor:pointer;display:flex;flex-direction:column;gap:4px;min-width:0}
+.ctlopt .h{display:flex;align-items:center;gap:8px;font-weight:650;font-size:13.5px}
+.ctlopt .h .ic{color:hsl(240 6% 42%)}
+.ctlopt .s{font-size:12px;color:hsl(var(--muted-foreground));line-height:1.4}
+.ctlopt[aria-checked="true"]{border-color:hsl(var(--primary));background:hsl(var(--primary-soft))}
+.ctlopt[aria-checked="true"] .h .ic{color:hsl(var(--primary))}
+
+/* rastreável preview */
+.trkprev{border:1px dashed hsl(233 55% 78%);background:hsl(var(--primary-soft)/.35);border-radius:12px;padding:14px 16px;display:flex;gap:14px;align-items:flex-start}
+.trkprev .pi{width:38px;height:38px;border-radius:10px;background:hsl(var(--primary));color:#fff;display:grid;place-items:center;flex:none}
+.trkprev h4{font-size:13.5px;font-weight:650}
+.trkprev p{font-size:12.5px;color:hsl(240 6% 30%);margin-top:2px}
+.trkprev .kv{display:flex;flex-wrap:wrap;gap:8px 18px;margin-top:10px}
+.trkprev .kv div{font-size:12px;color:hsl(var(--muted-foreground))}
+.trkprev .kv b{display:block;font-size:13px;color:hsl(var(--foreground));font-weight:600}
+
+/* ---------- phone ---------- */
+.phones{display:flex;gap:40px;align-items:flex-start;flex-wrap:wrap}
+.phone{width:390px;border-radius:46px;background:hsl(var(--ink));padding:10px;box-shadow:0 20px 50px -20px hsl(230 30% 15%/.45);flex:none}
+.screen{position:relative;width:370px;height:800px;border-radius:36px;overflow:hidden;background:hsl(var(--background));display:flex;flex-direction:column}
+.status{height:46px;flex:none;display:flex;align-items:center;justify-content:space-between;padding:0 28px 0 32px;font:600 14px Sora,sans-serif;background:hsl(var(--card))}
+.status .isl{width:100px;height:28px;border-radius:20px;background:hsl(var(--ink))}
+.m-top{display:flex;align-items:center;gap:10px;padding:10px 14px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
+.m-top .back{display:inline-flex;align-items:center;gap:2px;font-size:14px;font-weight:500;color:hsl(var(--primary));text-decoration:none}
+.m-top h1{font-size:17px;font-weight:700;flex:1}
+.m-body{padding:12px 14px 90px;display:flex;flex-direction:column;gap:10px;overflow:auto}
+.m-search{display:flex;align-items:center;gap:8px;height:40px;padding:0 12px;border:1px solid hsl(var(--border));border-radius:9px;color:hsl(var(--muted-foreground));font-size:13.5px;background:hsl(var(--card))}
+.m-fchips{display:flex;gap:6px;overflow-x:auto;padding-bottom:2px}
+.m-card{border:1px solid hsl(var(--border));border-radius:14px;background:hsl(var(--card));padding:13px 14px;display:flex;flex-direction:column;gap:6px}
+.m-card .nm{font-weight:650;font-size:14.5px;display:flex;align-items:center;gap:8px}
+.m-card .meta{font-size:12px;color:hsl(240 6% 32%)}
+.m-card .row{display:flex;flex-wrap:wrap;gap:6px;margin-top:2px}
+.m-card .use{margin-left:auto;font-size:11.5px;color:hsl(var(--muted-foreground));text-align:right}
+.fab{position:absolute;right:16px;bottom:24px;width:56px;height:56px;border-radius:99px;background:hsl(var(--primary));color:#fff;display:grid;place-items:center;box-shadow:0 12px 24px -8px hsl(233 60% 40%/.55);border:0;z-index:3}
+.overlay{position:absolute;inset:0;background:hsl(240 10% 8%/.55);display:flex;align-items:flex-end;justify-content:center;z-index:4}
+.sheet{width:100%;background:hsl(var(--card));border-radius:22px 22px 0 0;padding:10px 20px 26px;max-height:88%;overflow:auto}
+.sheet .grab{width:44px;height:5px;border-radius:9px;background:hsl(240 5% 80%);margin:0 auto 14px}
+.sheet h2{font-size:19px;font-weight:700}
+.sheet .desc{font-size:13px;color:hsl(240 6% 30%);margin-top:3px}
+.sheet .dx-bd{padding:16px 0 4px}
+.sheet .dx-ft{padding:14px 0 0;background:none;border-radius:0}
+
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="facter" viewBox="0 0 207 304"><path fill="currentColor" d="M25.8384 196.911L15.4739 183.729C-10.7189 150.411 0.44781 101.422 38.4895 82.7344L206.266 0.307297V34.2396C206.266 60.1875 191.448 83.8698 168.12 95.2396L56.578 149.594C48.4634 153.547 41.3489 159.344 35.9791 166.609C30.5936 173.901 25.9582 183.906 26.3176 196.526C29.9947 193.609 34.0624 191.026 38.4843 188.854L206.26 106.432V140.359C206.26 166.313 191.437 189.995 168.109 201.365L56.578 255.708C48.4634 259.667 41.3489 265.464 35.9791 272.724C30.4426 280.224 25.6978 290.578 26.3593 303.693L15.4739 289.854C-7.54698 260.568 -1.72407 219.193 25.8384 196.911ZM134.818 266.526L206.208 303.724L206.187 210.802L134.953 246.661C126.828 250.755 126.755 262.323 134.818 266.526Z"/></symbol>
+<symbol id="ax-2" viewBox="0 0 48 20"><rect x="0" y="7" width="10" height="6" rx="1.5" fill="currentColor"/><rect x="38" y="7" width="10" height="6" rx="1.5" fill="currentColor"/><rect x="10" y="9" width="28" height="2" fill="currentColor" opacity=".55"/></symbol>
+<symbol id="ax-4" viewBox="0 0 48 20"><rect x="0" y="1" width="10" height="6" rx="1.5" fill="currentColor"/><rect x="0" y="13" width="10" height="6" rx="1.5" fill="currentColor"/><rect x="38" y="1" width="10" height="6" rx="1.5" fill="currentColor"/><rect x="38" y="13" width="10" height="6" rx="1.5" fill="currentColor"/><rect x="10" y="9" width="28" height="2" fill="currentColor" opacity=".55"/></symbol>
+</svg>
+<div class="doc">
+  <header class="doc-head"><div>
+    <h1>Tipos de eixo · catálogo</h1>
+    <p>O cadastro que descreve os tipos de eixo usados na configuração de veículos e implementos (cavalo, carreta, dolly) — inclusive a carreta florestal. Cada tipo diz a função, a rodagem, a capacidade e, principalmente, se as unidades físicas são controladas por <b>quantidade</b> ou <b>individualmente, com rastreabilidade</b>, do mesmo jeito que hoje só o pneu tem.</p>
+    <nav class="toc"><a href="#s1"><b>1</b>Lista</a><a href="#s2"><b>2</b>Estados</a><a href="#s3"><b>3</b>Cadastrar e editar</a><a href="#s4"><b>4</b>Celular</a></nav>
+  </div><div class="lockup"><svg width="27" height="40"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></div></header>
+
+  <!-- =============== 1. LISTA =============== -->
+  <section class="sec" id="s1">
+    <div class="sec-label"><span class="sec-num">1</span><h2>Lista de tipos de eixo</h2></div>
+    <p class="sec-sub">Busca no servidor, filtro por função, controle e origem. O selo "sistema" ao lado do nome marca o que vale para todas as empresas; sem selo, é um tipo próprio da empresa. O chip de controle mostra, sem precisar abrir o cadastro, se esse tipo vira unidade rastreável (número de série, posição, histórico) ou some ao saldo por quantidade.</p>
+    <p class="view-cap">Notebook · 1.280 px</p>
+    <div class="frame"><div class="app">
+      <header class="topbar"><a class="lockup" href="#"><svg width="24" height="35"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></a><span class="spacer"></span><div class="search"><i class="ic s18 i-search"></i>Buscar placa, frota ou OS</div><button class="org">Suzano · Mucuri <i class="ic s16 i-down"></i></button><span class="avatar">MD</span></header>
+      <nav class="sidenav" aria-label="Menu"><a class="navitem" href="#"><i class="ic s24 i-house"></i></a><a class="navitem" href="#"><i class="ic s24 i-truck"></i></a><a class="navitem" href="#"><i class="ic s24 i-os"></i></a><a class="navitem" href="#"><i class="ic s24 i-tire"></i></a><a class="navitem" href="#"><i class="ic s24 i-chart"></i></a><span class="navsep"></span><a class="navitem" href="#" aria-current="page"><i class="ic s24 i-gear"></i></a></nav>
+      <main class="main">
+        <div class="crumbrow"><a href="#">Configurações</a><i class="ic s12 i-right"></i><a href="#">Catálogos</a><i class="ic s12 i-right"></i><span class="cur">Tipos de eixo</span></div>
+        <div class="pagehead"><div><h1>Tipos de eixo</h1><p class="meta">Base para o desenho de eixos de veículos e carretas</p></div><button class="btn btn-primary"><i class="ic s16 i-plus"></i>Cadastrar tipo de eixo</button></div>
+
+        <div class="filterbar">
+          <div class="fsearch"><i class="ic s16 i-search"></i>Buscar tipo de eixo</div>
+          <div class="seg" role="group" aria-label="Origem"><button aria-pressed="true">Todos</button><button aria-pressed="false">Sistema</button><button aria-pressed="false">Empresa</button></div>
+          <span class="fsep"></span>
+          <div class="fchips" role="group" aria-label="Função">
+            <button class="fchip gen" aria-pressed="true">Todas as funções</button>
+            <button class="fchip" aria-pressed="false"><i class="ic s12 i-steering"></i>Direcional</button>
+            <button class="fchip" aria-pressed="true"><i class="ic s12 i-engine"></i>Tração</button>
+            <button class="fchip" aria-pressed="false"><i class="ic s12 i-circle"></i>Livre</button>
+            <button class="fchip" aria-pressed="false"><i class="ic s12 i-lift"></i>Elevável</button>
+          </div>
+          <span class="fsep"></span>
+          <div class="fchips" role="group" aria-label="Controle">
+            <button class="fchip gen" aria-pressed="true">Todo controle</button>
+            <button class="fchip" aria-pressed="false"><i class="ic s12 i-package"></i>Por quantidade</button>
+            <button class="fchip" aria-pressed="false"><i class="ic s12 i-fingerprint"></i>Individual</button>
+          </div>
+          <button class="fclear">Limpar filtros</button>
+        </div>
+
+        <div class="axhd"><span>Tipo de eixo</span><span>Classificação</span><span>Aplicação</span><span style="text-align:right">Uso</span><span></span></div>
+        <div class="axlist">
+          <div class="axrow">
+            <div class="axname"><svg class="axsvg" width="40" height="18"><use href="#ax-2"/></svg><div style="min-width:0"><div class="nm">Direcional simples<span class="sys">sistema</span></div><div class="meta" title="Rodagem simples · 2 pneus · carga até 6.500 kg">Rodagem simples · 2 pneus · até 6.500 kg</div></div></div>
+            <div class="axchips"><span class="ftype dir"><i class="ic i-steering"></i>Direcional</span><span class="badge b-mute"><i class="ic s12 i-package"></i>Por quantidade</span></div>
+            <div class="apps" title="Cavalo, Caminhão">Cavalo, Caminhão</div>
+            <div class="axuse"><b>38</b>veículos</div>
+            <button class="kebab" aria-label="Mais ações"><i class="ic s18 i-dots"></i></button>
+          </div>
+          <div class="axrow">
+            <div class="axname"><svg class="axsvg" width="40" height="18"><use href="#ax-4"/></svg><div style="min-width:0"><div class="nm">Tração tandem duplo<span class="sys">sistema</span></div><div class="meta" title="Rodagem dupla · 4 pneus · carga até 10.500 kg">Rodagem dupla · 4 pneus · até 10.500 kg</div></div></div>
+            <div class="axchips"><span class="ftype trac"><i class="ic i-engine"></i>Tração</span><span class="badge b-mute"><i class="ic s12 i-package"></i>Por quantidade</span></div>
+            <div class="apps" title="Cavalo">Cavalo</div>
+            <div class="axuse"><b>52</b>veículos</div>
+            <button class="kebab" aria-label="Mais ações"><i class="ic s18 i-dots"></i></button>
+          </div>
+          <div class="axrow">
+            <div class="axname"><svg class="axsvg" width="40" height="18"><use href="#ax-2"/></svg><div style="min-width:0"><div class="nm">Livre simples<span class="sys">sistema</span></div><div class="meta" title="Rodagem simples · 2 pneus · carga até 7.000 kg">Rodagem simples · 2 pneus · até 7.000 kg</div></div></div>
+            <div class="axchips"><span class="ftype livre"><i class="ic i-circle"></i>Livre</span><span class="badge b-mute"><i class="ic s12 i-package"></i>Por quantidade</span></div>
+            <div class="apps" title="Carreta, Dolly">Carreta, Dolly</div>
+            <div class="axuse"><b>91</b>veículos</div>
+            <button class="kebab" aria-label="Mais ações"><i class="ic s18 i-dots"></i></button>
+          </div>
+          <div class="axrow">
+            <div class="axname"><svg class="axsvg" width="40" height="18"><use href="#ax-4"/></svg><div style="min-width:0"><div class="nm">Livre elevável (pusher)<span class="sys">sistema</span></div><div class="meta" title="Rodagem dupla · 4 pneus · carga até 9.000 kg">Rodagem dupla · 4 pneus · até 9.000 kg</div></div></div>
+            <div class="axchips"><span class="ftype elev"><i class="ic i-lift"></i>Elevável</span><span class="badge b-info"><i class="ic s12 i-fingerprint"></i>Individual</span></div>
+            <div class="apps" title="Carreta">Carreta</div>
+            <div class="axuse"><b>22</b>veículos</div>
+            <button class="kebab" aria-label="Mais ações"><i class="ic s18 i-dots"></i></button>
+          </div>
+          <div class="axrow">
+            <div class="axname"><svg class="axsvg" width="40" height="18"><use href="#ax-4"/></svg><div style="min-width:0"><div class="nm">Tração reforçado florestal</div><div class="meta" title="Rodagem dupla · 4 pneus · carga até 13.000 kg">Rodagem dupla · 4 pneus · até 13.000 kg</div></div></div>
+            <div class="axchips"><span class="ftype trac"><i class="ic i-engine"></i>Tração</span><span class="badge b-info"><i class="ic s12 i-fingerprint"></i>Individual</span></div>
+            <div class="apps" title="Carreta florestal">Carreta florestal</div>
+            <div class="axuse"><b>14</b>veículos</div>
+            <button class="kebab" aria-label="Mais ações"><i class="ic s18 i-dots"></i></button>
+          </div>
+          <div class="axrow">
+            <div class="axname"><svg class="axsvg" width="40" height="18"><use href="#ax-4"/></svg><div style="min-width:0"><div class="nm">Elevável florestal</div><div class="meta" title="Rodagem dupla · 4 pneus · carga até 12.000 kg">Rodagem dupla · 4 pneus · até 12.000 kg</div></div></div>
+            <div class="axchips"><span class="ftype elev"><i class="ic i-lift"></i>Elevável</span><span class="badge b-info"><i class="ic s12 i-fingerprint"></i>Individual</span></div>
+            <div class="apps" title="Carreta florestal">Carreta florestal</div>
+            <div class="axuse"><b>6</b>veículos</div>
+            <button class="kebab" aria-label="Mais ações"><i class="ic s18 i-dots"></i></button>
+          </div>
+        </div>
+        <div class="axfoot"><span>Mostrando 6 de 18 tipos</span><button class="btn btn-outline btn-sm">Carregar mais</button></div>
+
+        <div class="trkprev" style="margin-top:22px">
+          <span class="pi"><i class="ic s18 i-fingerprint"></i></span>
+          <div style="min-width:0">
+            <h4>O que muda quando o controle é "Individual"</h4>
+            <p>Cada unidade física desse tipo — um eixo montado, não o tipo em si — ganha identidade própria, como já acontece com o pneu. Prévia de uma unidade:</p>
+            <div class="kv">
+              <div>Identidade<b>Eixo AX-2291</b></div>
+              <div>Posição atual<b title="Cavalo QOP1J88 · eixo 2">Cavalo QOP1J88 · eixo 2</b></div>
+              <div>Instalado há<b>14 meses</b></div>
+              <div>Histórico<b>3 eventos</b></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="notes-row" style="margin-left:0">
+          <div class="notes"><h4>Por que existe</h4><ul><li><b>Tipo não é texto livre.</b> Hoje o layout de eixos de um veículo (<code>axle_layouts.definition</code>) guarda a função como texto solto dentro do JSON. Este catálogo formaliza isso: um tipo reutilizável, com função, rodagem e controle.</li><li><b>Função vem do schema.</b> As 4 opções (direcional, tração, livre, elevável) batem com o <code>check</code> de <code>axles.kind</code> em <a href="/docs/truck/engenharia/schema-v2/ativos#eixos-e-posições-de-roda">Ativos</a>.</li></ul></div>
+          <div class="notes"><h4>Controle: quantidade × individual</h4><ul><li>Mesmo padrão de <code>parts.tracking</code> (<a href="/docs/truck/engenharia/schema-v2/estoque">Estoque</a>): <code>quantity</code> vira saldo comum; <code>serialized</code> vira <code>serialized_items</code> rastreado.</li><li>Eixo montado, fueiro e barrote são a mesma família de candidatos a rastreável: trocam de implemento, desgastam, têm histórico próprio.</li></ul></div>
+          <div class="notes"><h4>Origem</h4><ul><li>"Sistema" = igual para todas as empresas (<code>org_id</code> nulo); sem o selo, é um tipo próprio da empresa — como o florestal da Suzano.</li></ul></div>
+        </div>
+      </main>
+    </div></div>
+  </section>
+
+  <!-- =============== 2. ESTADOS =============== -->
+  <section class="sec" id="s2">
+    <div class="sec-label"><span class="sec-num">2</span><h2>Estados</h2></div>
+    <p class="sec-sub">Skeleton, vazio (com a ação de cadastrar), busca sem resultado, e sem permissão — os quatro nascem juntos com a lista.</p>
+    <div class="states indent">
+      <div>
+        <div class="ecap">Carregando</div>
+        <div class="cardf">
+          <div class="skrow"><div style="display:flex;gap:12px;align-items:center"><div class="skel" style="width:40px;height:18px"></div><div style="flex:1"><div class="skel" style="height:14px;width:65%"></div><div class="skel" style="height:11px;width:45%;margin-top:6px"></div></div></div><div class="skel" style="height:20px;width:100px"></div><div class="skel" style="height:14px;width:80px"></div><div class="skel" style="height:14px;width:50px;margin-left:auto"></div><div></div></div>
+          <div class="skrow"><div style="display:flex;gap:12px;align-items:center"><div class="skel" style="width:40px;height:18px"></div><div style="flex:1"><div class="skel" style="height:14px;width:55%"></div><div class="skel" style="height:11px;width:38%;margin-top:6px"></div></div></div><div class="skel" style="height:20px;width:100px"></div><div class="skel" style="height:14px;width:80px"></div><div class="skel" style="height:14px;width:50px;margin-left:auto"></div><div></div></div>
+          <div class="skrow"><div style="display:flex;gap:12px;align-items:center"><div class="skel" style="width:40px;height:18px"></div><div style="flex:1"><div class="skel" style="height:14px;width:70%"></div><div class="skel" style="height:11px;width:42%;margin-top:6px"></div></div></div><div class="skel" style="height:20px;width:100px"></div><div class="skel" style="height:14px;width:80px"></div><div class="skel" style="height:14px;width:50px;margin-left:auto"></div><div></div></div>
+        </div>
+      </div>
+      <div>
+        <div class="ecap">Vazio</div>
+        <div class="cardf"><div class="empty">
+          <span class="ei"><svg width="28" height="14"><use href="#ax-4"/></svg></span>
+          <h3>Nenhum tipo de eixo cadastrado</h3>
+          <p>Cadastre os tipos usados na frota para descrever o eixo de cada veículo e carreta com precisão, em vez de texto livre.</p>
+          <button class="btn btn-primary"><i class="ic s16 i-plus"></i>Cadastrar tipo de eixo</button>
+        </div></div>
+      </div>
+      <div>
+        <div class="ecap">Busca sem resultado</div>
+        <div class="cardf">
+          <div class="inhead"><div class="fsearch" style="width:100%"><i class="ic s16 i-search"></i><span style="color:hsl(var(--foreground))">eixo aéreo</span></div></div>
+          <div class="empty mut">
+            <span class="ei"><i class="ic s24 i-search"></i></span>
+            <h3>Nenhum tipo encontrado para "eixo aéreo"</h3>
+            <p>Confira a grafia ou tente outro termo — nome, função ou aplicação.</p>
+            <button class="btn btn-outline btn-sm">Limpar busca</button>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="ecap">Sem permissão</div>
+        <div class="cardf"><div class="empty lock">
+          <span class="ei"><i class="ic s24 i-lock"></i></span>
+          <h3>Você não tem acesso a este catálogo</h3>
+          <p>Ver os tipos de eixo exige a permissão <b>gerenciar catálogos</b>. Fale com um gestor para liberar.</p>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== 3. CADASTRAR / EDITAR =============== -->
+  <section class="sec" id="s3">
+    <div class="sec-label"><span class="sec-num">3</span><h2>Cadastrar e editar tipo de eixo</h2></div>
+    <p class="sec-sub">Lidera pelo título, sem eyebrow repetindo "tipos de eixo" — o diálogo já está no contexto certo. O campo <b>Controle</b> muda a dica do rodapé: individual fala em número de série; por quantidade, em saldo.</p>
+    <div class="stage indent">
+      <div class="dx" role="dialog" aria-labelledby="c-t">
+        <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+        <div class="dx-hd">
+          <span class="dx-ico"><svg width="20" height="9"><use href="#ax-4"/></svg></span>
+          <h2 id="c-t">Cadastrar tipo de eixo</h2>
+          <p class="desc">Fica disponível para toda a frota da empresa</p>
+        </div>
+        <div class="dx-bd">
+          <div class="dsec">
+            <h3>Identificação</h3>
+            <label class="fl"><span class="l">Nome <span class="req">*</span></span><span class="input"><span class="grow">Tração reforçado florestal</span></span></label>
+          </div>
+          <div class="dsec">
+            <h3>Função <span style="text-transform:none;font-weight:500;color:hsl(var(--muted-foreground))">· obrigatória</span></h3>
+            <div class="tc" role="radiogroup" aria-label="Função">
+              <div class="tcard" role="radio" aria-checked="false"><span class="ti"><i class="ic s16 i-steering"></i></span><div><div class="nm">Direcional</div><div class="f">Faz a curva</div></div></div>
+              <div class="tcard" role="radio" aria-checked="true"><span class="ti"><i class="ic s16 i-engine"></i></span><div><div class="nm">Tração</div><div class="f">Recebe tração</div></div></div>
+              <div class="tcard" role="radio" aria-checked="false"><span class="ti"><i class="ic s16 i-circle"></i></span><div><div class="nm">Livre</div><div class="f">Só roda</div></div></div>
+              <div class="tcard" role="radio" aria-checked="false"><span class="ti"><i class="ic s16 i-lift"></i></span><div><div class="nm">Elevável</div><div class="f">Sobe/desce (pusher)</div></div></div>
+            </div>
+          </div>
+          <div class="two">
+            <div class="dsec">
+              <h3>Rodagem</h3>
+              <div class="seg" style="width:100%;justify-content:stretch"><button aria-pressed="false" style="flex:1">Simples · 2 pneus</button><button aria-pressed="true" style="flex:1">Dupla · 4 pneus</button></div>
+            </div>
+            <div class="dsec">
+              <h3>Capacidade <span style="text-transform:none;font-weight:400;color:hsl(var(--muted-foreground))">(opcional)</span></h3>
+              <label class="fl"><span class="input"><i class="ic s16 i-scales"></i><span class="grow num">13.000</span><span style="color:hsl(var(--muted-foreground))">kg</span></span></label>
+            </div>
+          </div>
+          <div class="dsec">
+            <h3>Aplicação <span style="text-transform:none;font-weight:500;color:hsl(var(--muted-foreground))">· pode marcar mais de uma</span></h3>
+            <div class="fchips"><button class="fchip" aria-pressed="false">Cavalo</button><button class="fchip" aria-pressed="true">Carreta</button><button class="fchip" aria-pressed="false">Dolly</button></div>
+          </div>
+          <div class="dsec">
+            <h3>Controle das unidades</h3>
+            <div class="ctlseg" role="radiogroup" aria-label="Controle">
+              <div class="ctlopt" role="radio" aria-checked="false"><div class="h"><i class="ic s16 i-package"></i>Por quantidade</div><div class="s">Some ao saldo do depósito, sem identidade própria — como uma peça comum.</div></div>
+              <div class="ctlopt" role="radio" aria-checked="true"><div class="h"><i class="ic s16 i-fingerprint"></i>Individual (rastreável)</div><div class="s">Cada unidade ganha número de série ou etiqueta e fica rastreável: posição, troca e histórico próprios.</div></div>
+            </div>
+            <span class="hint"><i class="ic s14 i-info"></i>Com controle individual, o cadastro de cada unidade física vai pedir o número de série ou a etiqueta.</span>
+          </div>
+        </div>
+        <div class="dx-ft">
+          <p class="conseq"><i class="ic s16 i-info"></i><span>Depois de cadastrado, já aparece para descrever eixos de veículos e carretas</span></p>
+          <div class="acts"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Cadastrar</button></div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="sec-sub" style="margin-top:28px;font-weight:600;color:hsl(var(--foreground))">Editar: mesmo formulário, o botão nomeia "salvar tipo"</h3>
+    <div class="stage indent" style="padding-top:16px">
+      <div class="dx" style="--w:600px" role="dialog" aria-labelledby="e-t">
+        <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+        <div class="dx-hd">
+          <span class="dx-ico"><svg width="20" height="9"><use href="#ax-4"/></svg></span>
+          <h2 id="e-t">Editar Tração reforçado florestal</h2>
+          <p class="desc">Usado em 14 veículos hoje</p>
+        </div>
+        <div class="dx-bd" style="gap:12px">
+          <label class="fl"><span class="l">Nome <span class="req">*</span></span><span class="input"><span class="grow">Tração reforçado florestal</span></span></label>
+        </div>
+        <div class="dx-ft"><p class="conseq"><i class="ic s16 i-info"></i><span>Muda a descrição para os 14 veículos que já usam este tipo</span></p><div class="acts"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Salvar tipo</button></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== 4. CELULAR =============== -->
+  <section class="sec" id="s4">
+    <div class="sec-label"><span class="sec-num">4</span><h2>Celular</h2></div>
+    <p class="sec-sub">A lista vira cartões; o cadastro vira folha de baixo, com a mesma ordem de campos.</p>
+    <div class="phones indent">
+      <div>
+        <div class="ecap">Lista</div>
+        <div class="phone"><div class="screen">
+          <div class="status"><span>9:41</span><span class="isl"></span><span></span></div>
+          <div class="m-top"><a class="back" href="#"><i class="ic s18 i-left"></i></a><h1>Tipos de eixo</h1></div>
+          <div class="m-body">
+            <div class="m-search"><i class="ic s16 i-search"></i>Buscar tipo de eixo</div>
+            <div class="m-fchips"><button class="fchip gen" aria-pressed="true">Todos</button><button class="fchip" aria-pressed="false">Sistema</button><button class="fchip" aria-pressed="false">Empresa</button><button class="fchip" aria-pressed="false">Individual</button></div>
+            <div class="m-card"><div class="nm">Direcional simples<span class="sys">sistema</span></div><div class="meta">Rodagem simples · 2 pneus · até 6.500 kg</div><div class="row"><span class="ftype dir"><i class="ic i-steering"></i>Direcional</span><span class="badge b-mute"><i class="ic s12 i-package"></i>Quantidade</span><span class="use">38 veículos</span></div></div>
+            <div class="m-card"><div class="nm">Livre elevável (pusher)<span class="sys">sistema</span></div><div class="meta">Rodagem dupla · 4 pneus · até 9.000 kg</div><div class="row"><span class="ftype elev"><i class="ic i-lift"></i>Elevável</span><span class="badge b-info"><i class="ic s12 i-fingerprint"></i>Individual</span><span class="use">22 veículos</span></div></div>
+            <div class="m-card"><div class="nm">Tração reforçado florestal</div><div class="meta">Rodagem dupla · 4 pneus · até 13.000 kg</div><div class="row"><span class="ftype trac"><i class="ic i-engine"></i>Tração</span><span class="badge b-info"><i class="ic s12 i-fingerprint"></i>Individual</span><span class="use">14 veículos</span></div></div>
+          </div>
+          <button class="fab" aria-label="Cadastrar tipo de eixo"><i class="ic s24 i-plus"></i></button>
+        </div></div>
+      </div>
+      <div>
+        <div class="ecap">Cadastrar · folha de baixo</div>
+        <div class="phone"><div class="screen">
+          <div class="status"><span>9:41</span><span class="isl"></span><span></span></div>
+          <div class="m-top"><a class="back" href="#"><i class="ic s18 i-left"></i></a><h1>Tipos de eixo</h1></div>
+          <div class="m-body"></div>
+          <div class="overlay">
+            <div class="sheet" role="dialog" aria-labelledby="m-c-t">
+              <div class="grab"></div>
+              <h2 id="m-c-t">Cadastrar tipo de eixo</h2>
+              <p class="desc">Fica disponível para toda a frota da empresa</p>
+              <div class="dx-bd">
+                <div class="dsec"><h3>Identificação</h3><label class="fl"><span class="l">Nome <span class="req">*</span></span><span class="input"><span class="grow">Tração reforçado florestal</span></span></label></div>
+                <div class="dsec"><h3>Função</h3><div class="tc" style="grid-template-columns:repeat(2,1fr)"><div class="tcard" role="radio" aria-checked="false"><span class="ti"><i class="ic s16 i-steering"></i></span><div class="nm">Direcional</div></div><div class="tcard" role="radio" aria-checked="true"><span class="ti"><i class="ic s16 i-engine"></i></span><div class="nm">Tração</div></div><div class="tcard" role="radio" aria-checked="false"><span class="ti"><i class="ic s16 i-circle"></i></span><div class="nm">Livre</div></div><div class="tcard" role="radio" aria-checked="false"><span class="ti"><i class="ic s16 i-lift"></i></span><div class="nm">Elevável</div></div></div></div>
+                <div class="dsec"><h3>Controle das unidades</h3><div class="ctlseg" style="flex-direction:column"><div class="ctlopt" role="radio" aria-checked="false"><div class="h"><i class="ic s16 i-package"></i>Por quantidade</div><div class="s">Some ao saldo, sem identidade própria.</div></div><div class="ctlopt" role="radio" aria-checked="true"><div class="h"><i class="ic s16 i-fingerprint"></i>Individual (rastreável)</div><div class="s">Cada unidade ganha número de série e histórico próprio.</div></div></div></div>
+              </div>
+              <div class="dx-ft"><div class="acts" style="width:100%"><button class="btn btn-outline" type="button" style="flex:1">Cancelar</button><button class="btn btn-primary" type="button" style="flex:1">Cadastrar</button></div></div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
