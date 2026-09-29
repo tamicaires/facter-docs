@@ -110,6 +110,14 @@ Em revisão (28/09/2026). A aba Movimentações do Estoque: o livro-razão appen
 
 <img src="/mockups/truck/movimentacoes/desktop.png" alt="Mockup das movimentações de estoque" style={{maxHeight: 360, width: '100%', objectFit: 'cover', objectPosition: 'top', borderRadius: 8, border: '1px solid var(--ifm-color-emphasis-300)'}} />
 
+### Endereçamento de estoque
+
+Em revisão (29/09/2026). Onde a peça fica fisicamente dentro do depósito — **Setor · Prateleira · Posição** (ex.: "Setor A · Prateleira 3 · Pos. 02", código `A-3-02`), um endereço por peça em cada depósito. Levanta um gap: o v2 modela depósito, mas não a sublocalização (o glossário já prevê "Location"). Versão leve. Telas: onde a peça está (por depósito), definir localização (diálogo), **separação/picking** com a localização em destaque e a lista ordenada por setor (o pagamento), e a organização do depósito (visão do gestor). Ver a [decisão em aberto](../projeto/roadmap.md).
+
+[Ver o mockup](/telas/truck/enderecamento)
+
+<img src="/mockups/truck/enderecamento/desktop.png" alt="Mockup do endereçamento de estoque" style={{maxHeight: 360, width: '100%', objectFit: 'cover', objectPosition: 'top', borderRadius: 8, border: '1px solid var(--ifm-color-emphasis-300)'}} />
+
 ### Entrada de compra & Fornecedores
 
 Rascunho · 28/09/2026. Como a peça ganha **saldo**: entra por **nota fiscal**. O fornecedor manda a **NF-e (XML)** ou cola a **chave de acesso** (44 díg); o sistema lê fornecedor, número, itens e custos, e a gente **mapeia cada item** para a nossa peça — um **de-para que aprende** (código do fornecedor → nossa peça casa sozinho na próxima). Custo médio recalcula, **preço congela** na entrada, a mesma NF não entra duas vezes. Traz **Fornecedores** (cadastro leve), o passo a passo da entrada e os edge cases (NF repetida, item sem match, fornecedor novo, XML inválido, custo destoando, sem permissão, e o **estorno** — correção é movimento inverso, nunca apagar). Próxima frente do Estoque.
