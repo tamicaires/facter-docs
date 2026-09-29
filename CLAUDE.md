@@ -18,7 +18,8 @@ A documentação do Truck acompanha o código. Cada módulo entregue na v2 atual
 - Engenharia: `docs/truck/engenharia/modulos/<modulo>.md`, a partir de `docs/truck/_templates/modulo-engenharia.md`
 - Regras que nunca podem ser violadas: `docs/truck/engenharia/invariantes.md` (ids estáveis como `WO-3`; testes e PRs citam o id)
 - Decisões: um ADR por decisão em `docs/truck/engenharia/adrs/adr-NNN-titulo.md`, numeração sequencial, nunca editado depois de aceito
-- Padrões vivos: `docs/truck/engenharia/padroes/` (padrões de engenharia, estratégia de testes, métricas e definição de pronto)
+- Padrões vivos: `docs/truck/engenharia/padroes/` (padrões de engenharia, estratégia de testes, métricas e definição de pronto, **interface e UX**)
+- Mockups: HTML self-contained em `static/mockups/truck/<slug>/index.html`, página em `src/pages/telas/truck/<slug>.tsx` (componente `MockupScreen`), e uma entrada em `docs/truck/produto/mockups.mdx`. O passo a passo e o contrato de design estão em `docs/truck/produto/como-fazer-mockups.md`. A implementação no `facter-truck` **segue o mockup aprovado**
 - Legado v1: `docs/truck/engenharia/legado-v1/` é o sistema atual congelado, referência para portar comportamento. Não recebe conteúdo novo; doc do v1 que precisar de correção ganha nota, não reescrita
 - Índices que mudam junto com o conteúdo: `engenharia/adrs/indice.md` (todo ADR novo entra lá) e `produto/propostas/indice.md` (status e impacto na v2 de toda proposta)
 - Entrada do Truck: `docs/truck/visao-geral.md`; roadmap e decisões em aberto: `docs/truck/projeto/roadmap.md`
