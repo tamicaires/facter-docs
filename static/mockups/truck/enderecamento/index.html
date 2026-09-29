@@ -32,8 +32,6 @@
   --canvas:225 14% 92%;
   --ring:233 65% 50%;
   --toolbar:240 5% 96%;
-  --note:285 55% 38%;
-  --note-soft:285 60% 96%;
   --ink:240 10% 12%;
 }
 *{box-sizing:border-box}
@@ -71,42 +69,37 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
 .i-warehouse{--i:url(https://api.iconify.design/ph/warehouse.svg)}
 .i-info{--i:url(https://api.iconify.design/ph/info.svg)}
 .i-cart{--i:url(https://api.iconify.design/ph/shopping-cart-simple.svg)}
-.i-spark{--i:url(https://api.iconify.design/ph/sparkle-fill.svg)}
 .i-wrench{--i:url(https://api.iconify.design/ph/wrench.svg)}
 .i-arrowr{--i:url(https://api.iconify.design/ph/arrow-right.svg)}
 .i-rows{--i:url(https://api.iconify.design/ph/rows.svg)}
 .i-map{--i:url(https://api.iconify.design/ph/map-trifold.svg)}
-.i-foot{--i:url(https://api.iconify.design/ph/footprints.svg)}
-.i-nav{--i:url(https://api.iconify.design/ph/navigation-arrow-fill.svg)}
-.i-tag{--i:url(https://api.iconify.design/ph/tag.svg)}
 .i-checks{--i:url(https://api.iconify.design/ph/list-checks.svg)}
 .i-lock{--i:url(https://api.iconify.design/ph/lock-key.svg)}
 .i-coins{--i:url(https://api.iconify.design/ph/coins.svg)}
 .i-move{--i:url(https://api.iconify.design/ph/arrows-down-up.svg)}
-.i-copy{--i:url(https://api.iconify.design/ph/copy.svg)}
 .i-print{--i:url(https://api.iconify.design/ph/printer.svg)}
 
 /* ---------- presentation page ---------- */
-.doc{max-width:1328px;margin:0 auto;padding:48px 24px 96px}
+.doc{max-width:1328px;margin:0 auto;padding:52px 24px 104px}
 .doc-head{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between;margin-bottom:24px}
 .doc-head h1{font:800 32px/1.15 Sora,Inter,sans-serif;letter-spacing:-.02em}
-.doc-head p{color:hsl(240 6% 25%);max-width:860px;margin-top:10px;font-size:14.5px}
-.toc{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
-.toc a{font-size:13px;text-decoration:none;color:hsl(240 6% 26%);background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:999px;padding:4px 12px}
+.doc-head p{color:hsl(var(--muted-foreground));max-width:880px;margin-top:10px;font-size:14.5px;line-height:1.6}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+.toc a{font-size:13px;text-decoration:none;color:hsl(240 6% 26%);background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:999px;padding:5px 13px}
 .toc a b{color:hsl(var(--primary));font-weight:700;margin-right:5px}
-.sec{margin-top:64px}
-.sec-label{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
-.sec-num{font:800 14px Sora,sans-serif;color:hsl(var(--primary));background:hsl(var(--card));border-radius:999px;width:28px;height:28px;display:inline-grid;place-items:center;flex:none}
+.sec{margin-top:80px}
+.sec-label{display:flex;align-items:baseline;gap:12px;margin-bottom:8px}
+.sec-num{font:800 14px Sora,sans-serif;color:hsl(var(--primary));background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:999px;width:30px;height:30px;display:inline-grid;place-items:center;flex:none}
 .sec h2{font:700 22px/1.3 Sora,sans-serif;letter-spacing:-.01em}
-.sec-sub{color:hsl(240 5% 30%);margin:0 0 20px 40px;max-width:920px;font-size:14.5px}
-.view-cap{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:600;margin:0 0 10px 40px}
-.frame{position:relative;width:1280px;max-width:100%;border-radius:14px;box-shadow:0 1px 2px hsl(230 20% 20%/.06),0 12px 40px -12px hsl(230 30% 20%/.18);overflow:hidden;border:1px solid hsl(var(--border));background:hsl(var(--background))}
-.stage{background-image:radial-gradient(hsl(233 20% 82%) 1px,transparent 1px);background-size:18px 18px;background-color:hsl(var(--background));padding:40px;display:flex;justify-content:center;gap:28px;align-items:flex-start;flex-wrap:wrap;width:auto}
-.notes-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 40px;margin:24px 0 0 40px}
+.sec-sub{color:hsl(var(--muted-foreground));margin:0 0 24px 42px;max-width:940px;font-size:14.5px;line-height:1.6}
+.view-cap{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:hsl(var(--muted-foreground));font-weight:600;margin:0 0 12px 42px}
+.frame{position:relative;width:1280px;max-width:100%;border-radius:16px;box-shadow:0 1px 2px hsl(230 20% 20%/.05),0 18px 48px -18px hsl(230 30% 20%/.20);overflow:hidden;border:1px solid hsl(var(--border));background:hsl(var(--background))}
+.stage{background-image:radial-gradient(hsl(233 16% 84%) 1px,transparent 1px);background-size:20px 20px;background-color:hsl(var(--background));padding:48px 40px;display:flex;justify-content:center;gap:32px;align-items:flex-start;flex-wrap:wrap;width:auto}
+.notes-row{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px 44px;margin:28px 0 0 42px}
 .notes{font-size:13.5px;color:hsl(240 6% 24%)}
-.notes h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));margin:0 0 6px}
+.notes h4{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:hsl(var(--muted-foreground));margin:0 0 8px;font-weight:700}
 .notes ul{margin:0;padding-left:18px}
-.notes li{margin-bottom:6px}
+.notes li{margin-bottom:7px;line-height:1.5}
 .notes b{color:hsl(var(--foreground));font-weight:650}
 
 /* ---------- app shell ---------- */
@@ -120,246 +113,252 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
 .topbar{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:0 20px 0 18px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
 .topbar .spacer{flex:1}
 .search{display:flex;align-items:center;gap:8px;width:300px;height:38px;padding:0 12px;border:1px solid hsl(var(--border));border-radius:8px;color:hsl(var(--muted-foreground));font-size:13px;background:hsl(var(--background))}
-.org{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:6px 10px;border-radius:8px;border:0;background:none}
-.avatar{width:34px;height:34px;border-radius:999px;background:hsl(28 80% 88%);color:hsl(28 85% 25%);display:grid;place-items:center;font-weight:600;font-size:12px;flex:none}
+.org{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:6px 10px;border-radius:8px;border:0;background:none;color:inherit}
+.avatar{width:34px;height:34px;border-radius:999px;background:hsl(var(--muted));color:hsl(240 6% 30%);display:grid;place-items:center;font-weight:600;font-size:12px;flex:none}
 .sidenav{background:hsl(var(--card));border-right:1px solid hsl(var(--border));padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:4px}
 .navitem{position:relative;width:48px;height:48px;border-radius:10px;display:grid;place-items:center;color:hsl(240 5% 34%);text-decoration:none}
 .navitem[aria-current="page"]{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
 .navitem[aria-current="page"]::before{content:"";position:absolute;left:-12px;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:hsl(var(--primary))}
 .navsep{flex:1}
-.main{padding:22px 32px 32px;min-width:0}
+.main{padding:24px 34px 34px;min-width:0}
 
 /* ---------- page head + tabs ---------- */
-.pagehead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.pagehead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap}
 .pagehead h1{font:700 23px/1.2 Sora,sans-serif;letter-spacing:-.01em}
-.pagehead .meta{font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:4px}
+.pagehead .meta{font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:5px}
 .pagehead .acts{display:flex;gap:8px}
-.crumb{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:hsl(var(--muted-foreground));text-decoration:none;margin-bottom:6px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;padding:0 14px;border-radius:8px;border:1px solid transparent;font-weight:600;font-size:13.5px;text-decoration:none;white-space:nowrap;cursor:pointer}
+.crumb{display:inline-flex;align-items:center;gap:5px;font-size:12.5px;color:hsl(var(--muted-foreground));text-decoration:none;margin-bottom:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;padding:0 15px;border-radius:8px;border:1px solid transparent;font-weight:600;font-size:13.5px;text-decoration:none;white-space:nowrap;cursor:pointer}
 .btn-outline{background:hsl(var(--card));border-color:hsl(240 6% 82%);color:hsl(var(--foreground))}
 .btn-primary{background:hsl(var(--primary));color:#fff}
 .btn-ghost{background:none;color:hsl(233 65% 42%)}
 .btn-sm{height:34px;padding:0 12px;font-size:13px}
-.tabbar{display:flex;gap:2px;border-bottom:1px solid hsl(var(--border));margin-bottom:16px;flex-wrap:wrap}
-.tabbar a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;font-size:13.5px;font-weight:600;color:hsl(var(--muted-foreground));text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabbar{display:flex;gap:2px;border-bottom:1px solid hsl(var(--border));margin-bottom:20px;flex-wrap:wrap}
+.tabbar a{display:inline-flex;align-items:center;gap:8px;padding:11px 14px;font-size:13.5px;font-weight:600;color:hsl(var(--muted-foreground));text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px}
 .tabbar a[aria-current]{color:hsl(var(--primary));border-color:hsl(var(--primary))}
 .tabbar .n{font-size:11px;font-weight:700;background:hsl(var(--muted));color:hsl(240 6% 30%);border-radius:99px;padding:1px 7px}
 .tabbar a[aria-current] .n{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
 .card{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px}
 
-/* ---------- the address token (the star) ---------- */
-.addr{display:inline-flex;align-items:center;gap:10px;min-width:0}
-.setor-tile{width:34px;height:34px;border-radius:9px;background:hsl(var(--primary));color:#fff;display:grid;place-items:center;font:800 17px Sora,sans-serif;flex:none;letter-spacing:-.01em}
-.setor-tile.sm{width:26px;height:26px;font-size:13px;border-radius:7px}
-.setor-tile.lg{width:56px;height:56px;font-size:28px;border-radius:14px}
-.setor-tile.a{background:hsl(233 65% 50%)}
-.setor-tile.b{background:hsl(160 55% 34%)}
-.setor-tile.c{background:hsl(28 80% 44%)}
-.setor-tile.d{background:hsl(285 45% 44%)}
-.setor-tile.soft{background:hsl(var(--muted));color:hsl(240 6% 40%)}
-.addr .parts{min-width:0}
-.addr .human{font-size:13.5px;font-weight:600;color:hsl(var(--foreground));white-space:nowrap}
-.addr .human span{color:hsl(240 6% 40%);font-weight:500}
-.addr .code{font:700 12px Sora,sans-serif;letter-spacing:.04em;color:hsl(var(--primary));font-variant-numeric:tabular-nums;margin-top:1px}
-.codechip{display:inline-flex;align-items:center;height:24px;padding:0 10px;border-radius:7px;background:hsl(var(--primary-soft));color:hsl(233 65% 40%);font:700 12.5px Sora,sans-serif;letter-spacing:.06em;font-variant-numeric:tabular-nums;white-space:nowrap}
-.noloc{display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 11px;border-radius:99px;border:1px dashed hsl(240 6% 76%);background:hsl(var(--background));color:hsl(240 6% 42%);font-size:12.5px;font-weight:600}
+/* ---------- the address token (neutral, premium) ---------- */
+.stile{width:32px;height:32px;border-radius:8px;background:hsl(var(--muted));color:hsl(var(--foreground));display:grid;place-items:center;font:700 14px Sora,sans-serif;flex:none;border:1px solid hsl(var(--border))}
+.stile.sm{width:24px;height:24px;font-size:11.5px;border-radius:6px}
+.stile.lg{width:52px;height:52px;font-size:23px;border-radius:12px}
+.stile.primary{background:hsl(var(--primary));color:#fff;border-color:transparent}
+.stile.on-primary{background:hsl(0 0% 100%/.18);color:#fff;border-color:transparent}
+.stile.soft{opacity:.55}
+.addr{display:inline-flex;align-items:center;gap:11px;min-width:0}
+.addr .human{font-size:13.5px;font-weight:500;color:hsl(240 6% 30%);white-space:nowrap}
+.addr .human b{color:hsl(var(--foreground));font-weight:600}
+.code{display:inline-flex;align-items:center;height:23px;padding:0 9px;border-radius:6px;background:hsl(var(--toolbar));border:1px solid hsl(var(--border));color:hsl(240 6% 34%);font:600 12px ui-monospace,Menlo,monospace;letter-spacing:.03em;white-space:nowrap}
+.noloc{display:inline-flex;align-items:center;gap:7px;height:26px;padding:0 11px;border-radius:99px;background:hsl(var(--warning-soft));color:hsl(var(--warning-text));font-size:12px;font-weight:600}
 
 /* ---------- part detail (screen 1) ---------- */
-.detail-grid{display:grid;grid-template-columns:minmax(0,1fr) 360px;gap:16px;align-items:start}
-.pcard{padding:18px 20px}
-.pcard .top{display:flex;align-items:center;gap:14px}
-.pcard .pico{width:52px;height:52px;border-radius:13px;background:hsl(var(--muted));color:hsl(240 6% 42%);display:grid;place-items:center;flex:none}
+.detail-grid{display:grid;grid-template-columns:minmax(0,1fr) 344px;gap:18px;align-items:start}
+.pcard{padding:20px 22px}
+.pcard .top{display:flex;align-items:center;gap:15px}
+.pcard .pico{width:52px;height:52px;border-radius:13px;background:hsl(var(--muted));color:hsl(240 6% 42%);display:grid;place-items:center;flex:none;border:1px solid hsl(var(--border))}
 .pcard h2{font:700 19px/1.2 Sora,sans-serif}
-.pcard .sk{font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:3px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.pcard .sk{font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:4px;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
 .pchip{display:inline-flex;align-items:center;height:22px;padding:0 9px;border-radius:99px;background:hsl(var(--muted));color:hsl(240 6% 30%);font:600 11.5px Sora;white-space:nowrap}
-.kv{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid hsl(var(--border));margin-top:16px}
-.kv .cell{padding:14px 16px 4px;border-left:1px solid hsl(var(--border))}
+.kv{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid hsl(var(--border));margin-top:18px}
+.kv .cell{padding:16px 18px 2px;border-left:1px solid hsl(var(--border))}
 .kv .cell:first-child{border-left:0;padding-left:0}
-.kv .k{font-size:11.5px;color:hsl(var(--muted-foreground));text-transform:uppercase;letter-spacing:.04em;font-weight:600}
-.kv .v{font:700 18px Sora;font-variant-numeric:tabular-nums;margin-top:4px}
-.kv .v small{font-size:12.5px;font-weight:500;color:hsl(240 6% 34%)}
+.kv .k{font-size:11px;color:hsl(var(--muted-foreground));text-transform:uppercase;letter-spacing:.05em;font-weight:600}
+.kv .v{font:700 19px Sora;font-variant-numeric:tabular-nums;margin-top:5px}
+.kv .v small{font-size:12.5px;font-weight:500;color:hsl(240 6% 40%)}
 
-.hd{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:14px 18px;border-bottom:1px solid hsl(var(--border))}
-.hd h3{font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:8px}
-.hd h3 .ic{color:hsl(240 6% 45%)}
-.hd .n{font-size:11px;font-weight:700;background:hsl(var(--muted));color:hsl(240 6% 30%);border-radius:99px;padding:1px 8px}
+.hd{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:15px 20px;border-bottom:1px solid hsl(var(--border))}
+.hd h3{font-size:13.5px;font-weight:700;display:flex;align-items:center;gap:9px}
+.hd h3 .ic{color:hsl(240 6% 48%)}
+.hd .n{font-size:11px;font-weight:700;background:hsl(var(--muted));color:hsl(240 6% 34%);border-radius:99px;padding:2px 9px}
 .loc-list{display:flex;flex-direction:column}
-.loc-row{display:grid;grid-template-columns:150px 1fr auto;gap:14px;align-items:center;padding:15px 18px;border-top:1px solid hsl(var(--border))}
+.loc-row{display:grid;grid-template-columns:180px 1fr auto;gap:16px;align-items:center;padding:17px 20px;border-top:1px solid hsl(var(--border))}
 .loc-row:first-child{border-top:0}
-.loc-row .dep{display:flex;align-items:center;gap:8px;min-width:0;font-size:13.5px;font-weight:600}
-.loc-row .dep .ic{color:hsl(240 6% 45%);flex:none}
-.loc-row .dep small{display:block;font-weight:400;color:hsl(var(--muted-foreground));font-size:11.5px}
-.loc-row .ed{display:flex;align-items:center;gap:8px}
-.miniloc{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:hsl(var(--muted-foreground))}
-.iconbtn{width:34px;height:34px;border-radius:8px;border:1px solid hsl(240 6% 84%);background:hsl(var(--card));display:grid;place-items:center;color:hsl(240 6% 40%);cursor:pointer;flex:none}
+.loc-row .dep{display:flex;align-items:center;gap:9px;min-width:0;font-size:13.5px;font-weight:600}
+.loc-row .dep .ic{color:hsl(240 6% 50%);flex:none}
+.loc-row .dep small{display:block;font-weight:400;color:hsl(var(--muted-foreground));font-size:11.5px;margin-top:1px}
+.loc-row .ed{display:flex;align-items:center;gap:10px;justify-content:flex-end}
+.iconbtn{width:34px;height:34px;border-radius:8px;border:1px solid hsl(240 6% 84%);background:hsl(var(--card));display:grid;place-items:center;color:hsl(240 6% 42%);cursor:pointer;flex:none}
 
 .railcard{overflow:hidden}
-.rl{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:11px 18px;border-top:1px solid hsl(var(--border));font-size:13px;align-items:center}
+.rl{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:12px 20px;border-top:1px solid hsl(var(--border));font-size:13px;align-items:center}
 .rl:first-of-type{border-top:0}
-.rl .l{color:hsl(240 6% 26%)}
+.rl .l{color:hsl(240 6% 28%)}
 .rl .v{text-align:right;font-weight:600;font-variant-numeric:tabular-nums}
-.rl .s{grid-column:1/-1;font-size:11.5px;color:hsl(var(--muted-foreground));margin-top:1px}
-.hist{list-style:none;margin:0;padding:6px 18px 12px}
-.hist li{display:grid;grid-template-columns:22px 1fr;gap:10px;padding:8px 0;font-size:12.5px}
-.hist .d{width:22px;height:22px;border-radius:99px;background:hsl(var(--muted));color:hsl(240 6% 40%);display:grid;place-items:center}
+.rl .s{grid-column:1/-1;font-size:11.5px;color:hsl(var(--muted-foreground));margin-top:2px}
+.hist{list-style:none;margin:0;padding:8px 20px 14px}
+.hist li{display:grid;grid-template-columns:24px 1fr;gap:11px;padding:9px 0;font-size:12.5px}
+.hist .d{width:24px;height:24px;border-radius:99px;background:hsl(var(--muted));color:hsl(240 6% 42%);display:grid;place-items:center}
 .hist .w b{font-weight:600}
-.hist .w span{display:block;color:hsl(var(--muted-foreground));font-size:11.5px}
+.hist .w span{display:block;color:hsl(var(--muted-foreground));font-size:11.5px;margin-top:1px}
 
 /* anatomy explainer */
-.anat{display:flex;align-items:center;gap:22px;flex-wrap:wrap;padding:16px 20px;margin:0 0 16px 40px;max-width:920px}
+.anat{display:flex;align-items:center;gap:26px;flex-wrap:wrap;padding:22px 26px;margin:0 0 20px 42px;max-width:920px}
 .anat .seg{text-align:center}
-.anat .seg .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));font-weight:700;margin-bottom:8px}
-.anat .plus{font:800 20px Sora;color:hsl(240 5% 70%)}
-.anat .eq{font:800 20px Sora;color:hsl(240 5% 60%)}
-.anat .big-code{font:700 22px Sora;letter-spacing:.08em;color:hsl(var(--primary));font-variant-numeric:tabular-nums}
+.anat .seg .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.07em;color:hsl(var(--muted-foreground));font-weight:700;margin-bottom:10px}
+.anat .num-b{font:800 24px Sora;font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.anat .op{font:400 18px Sora;color:hsl(240 5% 68%)}
+.anat .out{font:700 20px ui-monospace,Menlo,monospace;letter-spacing:.06em;color:hsl(var(--foreground))}
+.anat .say{flex:1;min-width:220px;font-size:12.5px;color:hsl(var(--muted-foreground));line-height:1.55}
 
 /* ---------- dialog (screen 2) ---------- */
-.col{display:flex;flex-direction:column;gap:12px;min-width:0;align-items:center}
-.cap-top{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(240 6% 22%);font-weight:600;display:inline-flex;align-items:center;gap:6px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:999px;padding:3px 10px}
-.dx{--w:460px;width:var(--w);max-width:100%;background:hsl(var(--card));border-radius:16px;box-shadow:0 24px 60px -20px hsl(230 30% 10%/.5);display:flex;flex-direction:column;position:relative;text-align:left}
-.dx-hd{padding:20px 24px 18px;position:relative;border-bottom:1px solid hsl(var(--border))}
-.dx-hd h2{font-size:19px;font-weight:650;letter-spacing:-.01em;line-height:1.3;padding-right:34px;display:flex;align-items:center;gap:10px}
-.tico{width:32px;height:32px;border-radius:9px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center;flex:none}
-.dx-x{position:absolute;right:14px;top:16px;width:34px;height:34px;border:0;background:none;border-radius:8px;display:grid;place-items:center;color:hsl(240 5% 38%);cursor:pointer}
-.dx-bd{padding:20px 24px 22px;display:flex;flex-direction:column;gap:18px;min-width:0}
-.dx-ft{position:relative;padding:14px 24px;border-top:1px solid hsl(var(--border));background:hsl(var(--toolbar));display:flex;align-items:center;gap:16px;border-radius:0 0 16px 16px;flex-wrap:wrap}
+.col{display:flex;flex-direction:column;gap:14px;min-width:0;align-items:center}
+.cap-top{font-size:11.5px;text-transform:uppercase;letter-spacing:.07em;color:hsl(240 6% 26%);font-weight:600;display:inline-flex;align-items:center;gap:6px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:999px;padding:4px 12px}
+.dx{--w:468px;width:var(--w);max-width:100%;background:hsl(var(--card));border-radius:16px;box-shadow:0 24px 64px -22px hsl(230 30% 10%/.5);display:flex;flex-direction:column;position:relative;text-align:left}
+.dx-hd{padding:22px 24px 18px;position:relative;border-bottom:1px solid hsl(var(--border))}
+.dx-hd h2{font-size:19px;font-weight:650;letter-spacing:-.01em;line-height:1.3;padding-right:34px;display:flex;align-items:center;gap:11px}
+.tico{width:34px;height:34px;border-radius:9px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center;flex:none}
+.dx-x{position:absolute;right:16px;top:18px;width:34px;height:34px;border:0;background:none;border-radius:8px;display:grid;place-items:center;color:hsl(240 5% 40%);cursor:pointer}
+.dx-bd{padding:22px 24px 24px;display:flex;flex-direction:column;gap:20px;min-width:0}
+.dx-ft{position:relative;padding:15px 24px;border-top:1px solid hsl(var(--border));background:hsl(var(--toolbar));display:flex;align-items:center;gap:16px;border-radius:0 0 16px 16px;flex-wrap:wrap}
 .conseq{flex:1 1 200px;display:flex;gap:8px;font-size:13px;line-height:1.45;color:hsl(240 6% 26%);min-width:0;align-items:center}
-.conseq .ic{color:hsl(var(--primary));flex:none}
+.conseq .ic{color:hsl(240 6% 48%);flex:none}
 .conseq b{font-weight:600;color:hsl(var(--foreground))}
 .dx-ft .acts{display:flex;gap:8px;margin-left:auto}
 .fl{display:block;min-width:0}
-.fl .l{display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;margin-bottom:8px}
+.fl .l{display:flex;align-items:center;gap:6px;font-size:13.5px;font-weight:600;margin-bottom:9px}
+.fl .l .req{color:hsl(var(--danger-text))}
 .fl .l .opt{font-weight:400;color:hsl(var(--muted-foreground));font-size:13px}
-.wbal{display:flex;align-items:center;gap:12px;padding:11px 13px;border:1px solid hsl(var(--border));border-radius:11px;background:hsl(var(--background))}
-.wbal .pi{width:38px;height:38px;border-radius:10px;background:hsl(var(--card));border:1px solid hsl(var(--border));color:hsl(240 6% 42%);display:grid;place-items:center;flex:none}
+.wbal{display:flex;align-items:center;gap:12px;padding:13px 14px;border:1px solid hsl(var(--border));border-radius:11px;background:hsl(var(--background))}
+.wbal .pi{width:38px;height:38px;border-radius:10px;background:hsl(var(--card));border:1px solid hsl(var(--border));color:hsl(240 6% 44%);display:grid;place-items:center;flex:none}
 .wbal .nm{font-weight:650;font-size:14px;line-height:1.2}
-.wbal .sk{font-size:12px;color:hsl(var(--muted-foreground))}
+.wbal .sk{font-size:12px;color:hsl(var(--muted-foreground));margin-top:1px}
 .wbal .bg{margin-left:auto;text-align:right;white-space:nowrap}
 .wbal .bg .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));font-weight:600}
 .wbal .bg .v{font:700 15px Sora;font-variant-numeric:tabular-nums}
-.sectr{display:flex;flex-wrap:wrap;gap:8px}
-.schip{display:inline-flex;align-items:center;gap:7px;height:40px;padding:0 8px 0 8px;border-radius:11px;border:1.5px solid hsl(240 6% 84%);background:hsl(var(--card));font-size:14px;font-weight:600;color:hsl(240 6% 32%);cursor:pointer}
-.schip .st{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font:800 13px Sora;color:#fff}
-.schip[aria-pressed="true"]{border-color:hsl(var(--primary));background:hsl(var(--primary-soft));color:hsl(233 65% 36%)}
-.schip.add{color:hsl(233 65% 42%);border-style:dashed;padding:0 14px;gap:6px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sectr{display:flex;flex-wrap:wrap;gap:9px}
+.schip{display:inline-flex;align-items:center;gap:9px;height:42px;padding:0 15px 0 8px;border-radius:11px;border:1px solid hsl(240 6% 84%);background:hsl(var(--card));font-size:14px;font-weight:600;color:hsl(240 6% 34%);cursor:pointer}
+.schip .st{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font:700 13px Sora;background:hsl(var(--muted));color:hsl(var(--foreground));border:1px solid hsl(var(--border))}
+.schip[aria-pressed="true"]{border-color:hsl(var(--primary));background:hsl(var(--primary-soft));color:hsl(233 65% 34%)}
+.schip[aria-pressed="true"] .st{background:hsl(var(--primary));color:#fff;border-color:transparent}
+.schip.add{color:hsl(233 65% 42%);border-style:dashed;padding:0 16px;gap:6px}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .stepper{display:inline-flex;align-items:center;justify-content:space-between;width:100%;height:46px;border:1px solid hsl(240 6% 82%);border-radius:10px;background:hsl(var(--card));overflow:hidden}
-.stepper.focus{border-color:hsl(var(--primary));box-shadow:0 0 0 3px hsl(233 65% 50%/.15)}
-.stepper button{width:46px;height:100%;border:0;background:hsl(var(--toolbar));font:600 22px Sora;color:hsl(240 6% 30%);cursor:pointer}
+.stepper.focus{border-color:hsl(var(--primary));box-shadow:0 0 0 3px hsl(233 65% 50%/.14)}
+.stepper button{width:46px;height:100%;border:0;background:hsl(var(--toolbar));font:600 22px Sora;color:hsl(240 6% 34%);cursor:pointer}
 .stepper .val{flex:1;display:flex;align-items:baseline;justify-content:center;gap:5px;font:700 18px Sora;font-variant-numeric:tabular-nums}
-.input{width:100%;height:46px;border:1px solid hsl(240 6% 82%);border-radius:10px;background:hsl(var(--card));padding:0 13px;font-size:15px;display:flex;align-items:center;gap:8px;font-weight:600;font-variant-numeric:tabular-nums}
-.input .caret{display:inline-block;width:1.5px;height:19px;background:hsl(var(--foreground));margin-left:-2px;animation:bl 1s steps(1) infinite}
+.input{width:100%;height:46px;border:1px solid hsl(240 6% 82%);border-radius:10px;background:hsl(var(--card));padding:0 14px;font-size:15px;display:flex;align-items:center;gap:2px;font-weight:600;font-variant-numeric:tabular-nums}
+.input.focus{border-color:hsl(var(--primary));box-shadow:0 0 0 3px hsl(233 65% 50%/.14)}
+.input .caret{display:inline-block;width:1.5px;height:19px;background:hsl(var(--foreground));animation:bl 1s steps(1) infinite}
 @keyframes bl{50%{opacity:0}}
-.preview{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:12px;background:hsl(var(--primary-soft));border:1px solid hsl(233 60% 90%)}
-.preview .lbl{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:hsl(233 55% 42%);font-weight:700;margin-bottom:4px}
-.preview .human{font-size:15px;font-weight:700}
-.preview .big-code{font:700 26px Sora;letter-spacing:.06em;color:hsl(var(--primary));font-variant-numeric:tabular-nums;margin-left:auto;white-space:nowrap}
-.hint{font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:7px;display:flex;gap:6px;align-items:center}
-.hint kbd{font:600 11px ui-monospace,Menlo,monospace;background:hsl(var(--muted));border:1px solid hsl(var(--border));border-radius:5px;padding:1px 6px}
+.preview{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:16px 18px;border-radius:11px;background:hsl(var(--background));border:1px solid hsl(var(--border))}
+.preview .lbl{font-size:10.5px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:700;margin-bottom:5px}
+.preview .human{font-size:14.5px;font-weight:600;color:hsl(var(--foreground))}
+.preview .out{font:700 24px ui-monospace,Menlo,monospace;letter-spacing:.05em;color:hsl(var(--foreground));white-space:nowrap}
+.phone-cap{font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:12px;line-height:1.5}
+.phone-cap b{color:hsl(var(--foreground));font-weight:650}
 
 /* ---------- picking notebook (screen 3) ---------- */
-.pickhead{display:flex;align-items:center;gap:16px;padding:16px 20px;flex-wrap:wrap}
-.pickhead .prog{display:flex;flex-direction:column;gap:6px;min-width:180px}
+.pickhead{display:flex;align-items:center;gap:18px;padding:18px 20px;flex-wrap:wrap}
+.pickhead .prog{display:flex;flex-direction:column;gap:8px;min-width:190px}
 .pickhead .prog .t{font-size:12.5px;color:hsl(240 6% 34%)}
 .pickhead .prog .t b{color:hsl(var(--foreground));font-weight:700}
 .pbar{height:8px;border-radius:99px;background:hsl(var(--muted));overflow:hidden}
 .pbar i{display:block;height:100%;background:hsl(var(--success))}
-.path{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin-left:auto}
-.path .st{display:inline-flex;align-items:center;gap:6px;height:30px;padding:0 10px 0 6px;border-radius:99px;background:hsl(var(--muted));color:hsl(240 6% 34%);font:600 12.5px Sora}
-.path .st .setor-tile{width:22px;height:22px;font-size:11px;border-radius:6px}
+.path{display:flex;align-items:center;gap:7px;flex-wrap:wrap;margin-left:auto}
+.path .st{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 13px 0 5px;border-radius:99px;background:hsl(var(--muted));color:hsl(240 6% 34%);font:600 12.5px Sora}
+.path .st .stile{width:24px;height:24px;font-size:11px;border-radius:6px}
 .path .st.done{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.path .st.done .stile{background:hsl(0 0% 100%/.6);color:hsl(var(--success-text));border-color:hsl(160 30% 82%)}
 .path .st.cur{background:hsl(var(--primary));color:#fff}
-.path .arr{color:hsl(240 5% 66%)}
-.grp{display:flex;align-items:center;gap:10px;padding:11px 20px;background:hsl(var(--background));border-top:1px solid hsl(var(--border));border-bottom:1px solid hsl(var(--border));font:700 12.5px Sora;color:hsl(240 6% 26%)}
-.grp .cnt{font-size:11px;font-weight:700;background:hsl(var(--card));border:1px solid hsl(var(--border));color:hsl(240 6% 34%);border-radius:99px;padding:1px 8px}
+.path .arr{color:hsl(240 5% 70%)}
+.grp{display:flex;align-items:center;gap:11px;padding:12px 20px;background:hsl(var(--background));border-top:1px solid hsl(var(--border));border-bottom:1px solid hsl(var(--border));font:700 12.5px Sora;color:hsl(240 6% 26%)}
+.grp .cnt{font-size:11px;font-weight:700;background:hsl(var(--card));border:1px solid hsl(var(--border));color:hsl(240 6% 36%);border-radius:99px;padding:2px 9px}
 .grp .done{margin-left:auto;font-size:11.5px;color:hsl(var(--success-text));font-weight:700;display:inline-flex;align-items:center;gap:5px}
-.pk{display:grid;grid-template-columns:26px 190px 1fr auto auto;gap:14px;align-items:center;padding:13px 20px;border-top:1px solid hsl(var(--border))}
+.pk{display:grid;grid-template-columns:24px 168px 1fr auto auto;gap:16px;align-items:center;padding:15px 20px;border-top:1px solid hsl(var(--border))}
 .pk:first-of-type{border-top:0}
-.pk.picked{background:hsl(160 40% 98%)}
-.pk.picked .nm{color:hsl(240 6% 45%)}
+.pk.picked{background:hsl(240 5% 98.6%)}
+.pk.picked .nm{color:hsl(240 6% 48%)}
 .cb{width:22px;height:22px;border-radius:6px;border:2px solid hsl(240 6% 74%);display:grid;place-items:center;cursor:pointer;color:#fff}
 .cb.on{background:hsl(var(--success));border-color:hsl(var(--success))}
 .pk .nm{font-weight:600;font-size:14px}
-.pk .sk{font-size:11.5px;color:hsl(var(--muted-foreground));margin-top:1px}
+.pk .sk{font-size:11.5px;color:hsl(var(--muted-foreground));margin-top:2px}
 .pk .qt{text-align:right;font:700 15px Sora;font-variant-numeric:tabular-nums;white-space:nowrap}
 .pk .qt small{display:block;font:400 11px Inter;color:hsl(var(--muted-foreground))}
 .pk .os{font-size:12px;color:hsl(var(--muted-foreground));white-space:nowrap}
 
 /* ---------- tablet (screen 3 hero) ---------- */
-.tablet{width:1024px;padding:16px;border-radius:30px;background:hsl(var(--ink));box-shadow:0 24px 60px -24px hsl(230 30% 10%/.55);flex:none;max-width:100%}
-.tscreen{position:relative;width:992px;max-width:100%;height:744px;border-radius:16px;overflow:hidden;background:hsl(var(--background));display:flex;flex-direction:column;font-size:16px}
-.t-top{height:64px;flex:none;display:flex;align-items:center;gap:14px;padding:0 18px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
+.tablet{width:1024px;padding:16px;border-radius:32px;background:hsl(var(--ink));box-shadow:0 30px 70px -28px hsl(230 30% 10%/.6);flex:none;max-width:100%}
+.tscreen{position:relative;width:992px;max-width:100%;height:664px;border-radius:18px;overflow:hidden;background:hsl(var(--background));display:flex;flex-direction:column;font-size:16px}
+.t-top{height:66px;flex:none;display:flex;align-items:center;gap:14px;padding:0 20px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
 .t-back{display:inline-flex;align-items:center;gap:6px;height:46px;padding:0 12px 0 8px;border-radius:11px;font-size:15px;font-weight:600;color:hsl(var(--primary))}
 .t-title{font:700 19px/1.1 Sora,sans-serif}
-.t-title span{font-weight:500;color:hsl(240 6% 34%);font-size:14px;display:block;margin-top:1px}
+.t-title span{font-weight:500;color:hsl(var(--muted-foreground));font-size:13.5px;display:block;margin-top:2px}
 .t-top .spacer{flex:1}
-.t-prog{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 16px;border-radius:999px;background:hsl(var(--success-soft));color:hsl(var(--success-text));font:700 15px Sora}
-.t-path{flex:none;display:flex;align-items:center;gap:8px;padding:0 18px;height:56px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border));overflow:hidden}
-.t-path .st{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px 0 6px;border-radius:99px;background:hsl(var(--muted));color:hsl(240 6% 34%);font:700 14px Sora}
-.t-path .st .setor-tile{width:26px;height:26px;font-size:13px;border-radius:7px}
+.t-prog{display:inline-flex;align-items:center;gap:10px;height:44px;padding:0 18px;border-radius:999px;background:hsl(var(--muted));color:hsl(240 6% 26%);font:700 15px Sora}
+.t-prog b{color:hsl(var(--foreground))}
+.t-path{flex:none;display:flex;align-items:center;gap:9px;padding:0 20px;height:58px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border));overflow:hidden}
+.t-path .cap{font:700 11px Sora;text-transform:uppercase;letter-spacing:.07em;color:hsl(var(--muted-foreground));margin-right:4px}
+.t-path .st{display:inline-flex;align-items:center;gap:9px;height:38px;padding:0 15px 0 6px;border-radius:99px;background:hsl(var(--muted));color:hsl(240 6% 34%);font:700 14px Sora}
+.t-path .st .stile{width:26px;height:26px;font-size:12.5px;border-radius:7px}
 .t-path .st.done{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
-.t-path .st.cur{background:hsl(var(--primary));color:#fff;box-shadow:0 6px 16px -8px hsl(233 65% 40%/.7)}
-.t-path .arr{color:hsl(240 5% 62%)}
-.t-body{flex:1;padding:16px 18px;overflow:hidden;display:flex;flex-direction:column;gap:12px}
-.t-cur-h{display:flex;align-items:center;gap:10px;font:700 13px Sora;text-transform:uppercase;letter-spacing:.05em;color:hsl(240 6% 34%)}
-.t-cur-h .setor-tile{width:24px;height:24px;font-size:12px;border-radius:6px}
-.pck{display:grid;grid-template-columns:auto 1fr auto;gap:16px;align-items:center;padding:16px 18px;background:hsl(var(--card));border:1.5px solid hsl(var(--border));border-radius:16px}
-.pck.next{border-color:hsl(160 50% 62%);box-shadow:0 8px 24px -16px hsl(160 60% 25%/.6)}
-.pck .locbox{display:flex;align-items:center;gap:12px}
+.t-path .st.done .stile{background:hsl(0 0% 100%/.6);color:hsl(var(--success-text));border-color:hsl(160 30% 82%)}
+.t-path .st.cur{background:hsl(var(--primary));color:#fff}
+.t-path .arr{color:hsl(240 5% 66%)}
+.t-body{flex:1;padding:18px 20px 8px;overflow:hidden;display:flex;flex-direction:column;gap:13px}
+.t-cur-h{display:flex;align-items:center;gap:11px;font:700 12.5px Sora;text-transform:uppercase;letter-spacing:.06em;color:hsl(240 6% 34%)}
+.t-cur-h .stile{width:24px;height:24px;font-size:12px;border-radius:6px}
+.pck{display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;padding:16px 20px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:16px}
+.pck.next{border-color:hsl(var(--primary));box-shadow:0 0 0 1px hsl(var(--primary)),0 10px 26px -18px hsl(233 65% 40%/.6)}
+.pck .locbox{display:flex;align-items:center;gap:14px}
 .pck .locbox .meta{text-align:left}
-.pck .locbox .prat{font:700 15px Sora;color:hsl(240 6% 24%);white-space:nowrap}
-.pck .locbox .pos{font-size:12.5px;color:hsl(var(--muted-foreground))}
+.pck .locbox .prat{font:700 16px Sora;color:hsl(var(--foreground));white-space:nowrap}
+.pck .locbox .pos{font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:2px;display:flex;align-items:center;gap:7px}
 .pck .info .nm{font:700 18px Sora}
-.pck .info .sk{font-size:13px;color:hsl(var(--muted-foreground));margin-top:2px}
-.pck .info .os{font-size:12.5px;color:hsl(240 6% 40%);margin-top:4px;display:inline-flex;align-items:center;gap:6px}
-.pck .right{display:flex;align-items:center;gap:16px}
+.pck .info .sk{font-size:13px;color:hsl(var(--muted-foreground));margin-top:3px}
+.pck .info .os{font-size:12.5px;color:hsl(240 6% 42%);margin-top:6px;display:inline-flex;align-items:center;gap:6px}
+.pck .right{display:flex;align-items:center;gap:18px}
 .pck .qty{text-align:right;white-space:nowrap}
 .pck .qty b{font:800 24px Sora;font-variant-numeric:tabular-nums}
 .pck .qty small{display:block;font-size:12px;color:hsl(var(--muted-foreground))}
-.tbtn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:60px;padding:0 22px;border-radius:14px;font:700 17px Sora;border:2px solid transparent;cursor:pointer;white-space:nowrap}
-.tbtn-done{background:hsl(var(--success-text));color:#fff}
-.tbtn.small{height:52px;padding:0 18px;font-size:15px}
-.pck.picked{background:hsl(160 40% 97.5%);border-color:hsl(160 40% 86%);opacity:.85}
-.pck.picked .info .nm{color:hsl(240 6% 45%)}
+.tbtn{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:58px;padding:0 22px;border-radius:14px;font:700 16px Sora;border:1px solid transparent;cursor:pointer;white-space:nowrap}
+.tbtn-done{background:hsl(var(--primary));color:#fff}
+.tbtn.small{height:50px;padding:0 18px;font-size:15px;background:hsl(var(--card));border-color:hsl(240 6% 82%);color:hsl(var(--foreground))}
+.pck.picked{background:hsl(240 5% 98.6%);opacity:.82}
+.pck.picked .info .nm{color:hsl(240 6% 48%)}
+.pck.picked .locbox .prat{color:hsl(240 6% 52%)}
 .pc-done{display:inline-flex;align-items:center;gap:8px;color:hsl(var(--success-text));font:700 15px Sora}
+.t-foot{flex:none;display:flex;align-items:center;gap:14px;padding:14px 20px;background:hsl(var(--card));border-top:1px solid hsl(var(--border))}
+.t-foot .nx{font-size:13.5px;color:hsl(var(--muted-foreground))}
+.t-foot .nx b{color:hsl(var(--foreground));font-weight:700}
+.t-foot .btn{margin-left:auto;height:48px;font-size:15px;padding:0 22px}
 
 /* ---------- bottom sheet (screen 2 tablet) ---------- */
-.sheet-frame{position:relative;width:520px;height:600px;border-radius:26px;overflow:hidden;background:hsl(var(--background));border:1px solid hsl(var(--border));box-shadow:0 24px 60px -24px hsl(230 30% 10%/.5);flex:none;max-width:100%}
-.sheet-bg{position:absolute;inset:0;padding:18px}
-.scrim{position:absolute;inset:0;background:hsl(240 10% 8%/.45)}
-.sheet{position:absolute;left:0;right:0;bottom:0;background:hsl(var(--card));border-radius:22px 22px 0 0;padding:8px 22px 22px;display:flex;flex-direction:column;gap:16px}
-.sheet .grab{width:44px;height:5px;border-radius:9px;background:hsl(240 5% 80%);margin:6px auto 8px}
-.sheet h3{font-size:19px;font-weight:700;display:flex;align-items:center;gap:10px}
+.sheet-frame{position:relative;width:512px;height:604px;border-radius:26px;overflow:hidden;background:hsl(var(--background));border:1px solid hsl(var(--border));box-shadow:0 30px 70px -28px hsl(230 30% 10%/.55);flex:none;max-width:100%}
+.sheet-bg{position:absolute;inset:0;padding:22px}
+.sheet-bg .nm{font:700 18px Sora;margin-bottom:4px}
+.sheet-bg .s{font-size:13px;color:hsl(var(--muted-foreground))}
+.scrim{position:absolute;inset:0;background:hsl(240 10% 8%/.42)}
+.sheet{position:absolute;left:0;right:0;bottom:0;background:hsl(var(--card));border-radius:22px 22px 0 0;padding:8px 24px 24px;display:flex;flex-direction:column;gap:18px}
+.sheet .grab{width:44px;height:5px;border-radius:9px;background:hsl(240 5% 82%);margin:8px auto 10px}
+.sheet h3{font-size:19px;font-weight:700;display:flex;align-items:center;gap:11px}
 .sheet .schip{height:48px}
 .sheet .stepper{height:52px}
 
 /* ---------- depot organisation (screen 4) ---------- */
-.orgcols{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:16px;align-items:start}
-.setor-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
-.sc{padding:16px 18px}
-.sc .top{display:flex;align-items:center;gap:12px}
+.orgcols{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:18px;align-items:start}
+.setor-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.sc{padding:18px 20px}
+.sc .top{display:flex;align-items:center;gap:13px}
 .sc h3{font:700 15px Sora}
-.sc .top .cap{font-size:12px;color:hsl(var(--muted-foreground));margin-top:2px}
+.sc .top .cap{font-size:12px;color:hsl(var(--muted-foreground));margin-top:3px}
 .sc .top .val{margin-left:auto;text-align:right}
-.sc .top .val b{font:800 18px Sora;font-variant-numeric:tabular-nums}
+.sc .top .val b{font:800 19px Sora;font-variant-numeric:tabular-nums}
 .sc .top .val small{display:block;font-size:11.5px;color:hsl(var(--muted-foreground))}
-.prat-list{margin-top:14px;border-top:1px solid hsl(var(--border))}
-.prat{display:flex;align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid hsl(240 6% 95%);font-size:13px}
+.prat-list{margin-top:16px;border-top:1px solid hsl(var(--border))}
+.prat{display:flex;align-items:center;gap:12px;padding:10px 0;border-bottom:1px solid hsl(240 6% 95%);font-size:13px}
 .prat:last-child{border-bottom:0}
-.prat .pnum{font:700 12px Sora;color:hsl(240 6% 40%);width:58px;flex:none}
+.prat .pnum{font:600 12px Sora;color:hsl(240 6% 42%);width:60px;flex:none}
 .prat .fill{flex:1;height:7px;border-radius:99px;background:hsl(var(--muted));overflow:hidden}
-.prat .fill i{display:block;height:100%;background:hsl(var(--primary))}
-.prat .n{font-variant-numeric:tabular-nums;color:hsl(240 6% 34%);width:52px;text-align:right;flex:none}
-.legend{display:flex;flex-direction:column;gap:2px}
-.orgrow{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:11px 18px;border-top:1px solid hsl(var(--border));font-size:13px;align-items:center}
+.prat .fill i{display:block;height:100%;background:hsl(240 6% 62%)}
+.prat .n{font-variant-numeric:tabular-nums;color:hsl(240 6% 36%);width:52px;text-align:right;flex:none;font-weight:500}
+.orgrow{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:12px 20px;border-top:1px solid hsl(var(--border));font-size:13px;align-items:center}
 .orgrow:first-of-type{border-top:0}
 .orgrow .nm{font-weight:600}
-.orgrow .s{font-size:11.5px;color:hsl(var(--muted-foreground))}
-.orgrow .rt{text-align:right;font:700 13.5px Sora;font-variant-numeric:tabular-nums}
-.wtag{font-size:11px;font-weight:700;border-radius:99px;padding:1px 8px}
+.orgrow .s{font-size:11.5px;color:hsl(var(--muted-foreground));margin-top:1px}
+.wtag{font-size:11px;font-weight:700;border-radius:99px;padding:2px 10px}
 .wtag.a{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
-.phone-cap{font-size:12.5px;color:hsl(240 6% 34%);margin-top:10px;line-height:1.45}
-.phone-cap b{color:hsl(var(--foreground));font-weight:650}
 </style>
 </head>
 <body>
@@ -377,14 +376,14 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
     <p class="sec-sub">A peça pode viver em mais de um depósito, então a localização é <b>uma por depósito</b>. Aqui, no detalhe da peça, o almoxarife lê de relance onde ir — e edita quando reorganiza a prateleira. O endereço é curto e estruturado, com um código compacto para conferência: <code>A-3-02</code>.</p>
 
     <div class="anat card">
-      <div class="seg"><div class="lbl">Setor</div><span class="setor-tile a">A</span></div>
-      <span class="plus">·</span>
-      <div class="seg"><div class="lbl">Prateleira</div><div class="big-code">3</div></div>
-      <span class="plus">·</span>
-      <div class="seg"><div class="lbl">Posição</div><div class="big-code">02</div></div>
-      <span class="eq">=</span>
-      <div class="seg"><div class="lbl">Endereço</div><div class="big-code">A-3-02</div></div>
-      <div style="flex:1;min-width:200px;font-size:12.5px;color:hsl(240 6% 34%);line-height:1.45">Setor separa a área do galpão (letra), prateleira e posição afinam até o ponto exato. Três campos só — o suficiente para andar direto até a peça.</div>
+      <div class="seg"><div class="lbl">Setor</div><span class="stile" style="margin:0 auto">A</span></div>
+      <span class="op">·</span>
+      <div class="seg"><div class="lbl">Prateleira</div><div class="num-b">3</div></div>
+      <span class="op">·</span>
+      <div class="seg"><div class="lbl">Posição</div><div class="num-b">02</div></div>
+      <span class="op">=</span>
+      <div class="seg"><div class="lbl">Endereço</div><div class="out">A-3-02</div></div>
+      <div class="say">Setor separa a área do galpão (letra), prateleira e posição afinam até o ponto exato. Três campos só — o suficiente para andar direto até a peça.</div>
     </div>
 
     <p class="view-cap">Notebook · 1.280 px</p>
@@ -393,7 +392,7 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
         <a class="crumb" href="#"><i class="ic s14 i-left"></i>Estoque · Peças</a>
         <div class="pagehead"><div><h1>Filtro de óleo</h1><p class="meta">SKU MO-FILT · Mann · almoxarife</p></div><div class="acts"><button class="btn btn-outline"><i class="ic s16 i-move"></i>Movimentações</button><button class="btn btn-primary"><i class="ic s16 i-pencil"></i>Editar peça</button></div></div>
         <div class="detail-grid">
-          <div style="display:flex;flex-direction:column;gap:16px">
+          <div style="display:flex;flex-direction:column;gap:18px">
             <div class="card pcard">
               <div class="top"><span class="pico"><i class="ic s28 i-box"></i></span><div style="min-width:0"><h2>Filtro de óleo</h2><div class="sk"><span class="pchip">Motor</span><span>SKU MO-FILT</span>·<span>Mann</span></div></div></div>
               <div class="kv"><div class="cell"><div class="k">Saldo total</div><div class="v">14 <small>un</small></div></div><div class="cell"><div class="k">Custo</div><div class="v">R$ 38,00 <small>/un</small></div></div><div class="cell"><div class="k">Mínimo</div><div class="v">6 <small>un</small></div></div></div>
@@ -403,13 +402,13 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
               <div class="loc-list">
                 <div class="loc-row">
                   <div class="dep"><i class="ic s16 i-warehouse"></i><div>Depósito Mucuri<small>8 un aqui</small></div></div>
-                  <div class="addr"><span class="setor-tile a">A</span><div class="parts"><div class="human">Setor A · Prateleira 3 · <span>Pos.</span> 02</div><div class="code">A-3-02</div></div></div>
-                  <div class="ed"><span class="codechip">A-3-02</span><button class="iconbtn" aria-label="Editar localização"><i class="ic s16 i-pencil"></i></button></div>
+                  <div class="addr"><span class="stile">A</span><div class="human"><b>Setor A</b> · Prateleira 3 · Pos. 02</div></div>
+                  <div class="ed"><span class="code">A-3-02</span><button class="iconbtn" aria-label="Editar localização"><i class="ic s16 i-pencil"></i></button></div>
                 </div>
                 <div class="loc-row">
                   <div class="dep"><i class="ic s16 i-warehouse"></i><div>Almoxarifado Central<small>6 un aqui</small></div></div>
-                  <div class="addr"><span class="setor-tile b">B</span><div class="parts"><div class="human">Setor B · Prateleira 1 · <span>Pos.</span> 05</div><div class="code">B-1-05</div></div></div>
-                  <div class="ed"><span class="codechip">B-1-05</span><button class="iconbtn" aria-label="Editar localização"><i class="ic s16 i-pencil"></i></button></div>
+                  <div class="addr"><span class="stile">B</span><div class="human"><b>Setor B</b> · Prateleira 1 · Pos. 05</div></div>
+                  <div class="ed"><span class="code">B-1-05</span><button class="iconbtn" aria-label="Editar localização"><i class="ic s16 i-pencil"></i></button></div>
                 </div>
                 <div class="loc-row">
                   <div class="dep"><i class="ic s16 i-warehouse"></i><div>Ponta Grossa<small>0 un aqui</small></div></div>
@@ -419,7 +418,7 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
               </div>
             </div>
           </div>
-          <aside style="display:flex;flex-direction:column;gap:16px">
+          <aside style="display:flex;flex-direction:column;gap:18px">
             <div class="card railcard">
               <div class="hd"><h3><i class="ic s16 i-coins"></i>Resumo</h3></div>
               <div class="rl"><span class="l">Saldo total</span><span class="v">14 un</span></div>
@@ -460,38 +459,38 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
           </div>
           <div class="dx-bd">
             <div class="wbal"><span class="pi"><i class="ic s18 i-box"></i></span><div style="min-width:0"><div class="nm">Filtro de óleo</div><div class="sk">SKU MO-FILT · Depósito Mucuri</div></div><div class="bg"><div class="k">Saldo aqui</div><div class="v">8 un</div></div></div>
-            <div class="fl"><span class="l">Setor <span class="req" style="color:hsl(var(--danger-text))">*</span></span>
+            <div class="fl"><span class="l">Setor <span class="req">*</span></span>
               <div class="sectr">
-                <button class="schip" aria-pressed="true" type="button"><span class="st" style="background:hsl(233 65% 50%)">A</span>Motor</button>
-                <button class="schip" type="button"><span class="st" style="background:hsl(160 55% 34%)">B</span>Freios</button>
-                <button class="schip" type="button"><span class="st" style="background:hsl(28 80% 44%)">C</span>Suspensão</button>
-                <button class="schip" type="button"><span class="st" style="background:hsl(285 45% 44%)">D</span>Lubrif.</button>
+                <button class="schip" aria-pressed="true" type="button"><span class="st">A</span>Motor</button>
+                <button class="schip" type="button"><span class="st">B</span>Freios</button>
+                <button class="schip" type="button"><span class="st">C</span>Suspensão</button>
+                <button class="schip" type="button"><span class="st">D</span>Lubrif.</button>
                 <button class="schip add" type="button"><i class="ic s14 i-plus"></i>Novo</button>
               </div>
             </div>
             <div class="two">
-              <div class="fl"><span class="l">Prateleira <span class="req" style="color:hsl(var(--danger-text))">*</span></span>
+              <div class="fl"><span class="l">Prateleira <span class="req">*</span></span>
                 <span class="stepper focus"><button type="button" aria-label="Diminuir">−</button><span class="val">3</span><button type="button" aria-label="Aumentar">+</button></span>
               </div>
               <div class="fl"><span class="l">Posição <span class="opt">· nº ou código</span></span>
-                <span class="input">02<span class="caret"></span></span>
+                <span class="input focus">02<span class="caret"></span></span>
               </div>
             </div>
             <div class="preview">
               <div><div class="lbl">Endereço resultante</div><div class="human">Setor A · Prateleira 3 · Pos. 02</div></div>
-              <div class="big-code">A-3-02</div>
+              <div class="out">A-3-02</div>
             </div>
           </div>
-          <div class="dx-ft"><p class="conseq"><i class="ic s16 i-pin-f"></i><span>Fica salvo nesta peça, neste depósito.</span></p><div class="acts"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button"><i class="ic s16 i-check"></i>Salvar localização</button></div></div>
+          <div class="dx-ft"><p class="conseq"><i class="ic s16 i-pin-f"></i><span>Fica salvo nesta peça, neste depósito.</span></p><div class="acts"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button"><i class="ic s16 i-check"></i>Salvar</button></div></div>
         </div>
-        <p class="phone-cap" style="max-width:460px">Modal centrado e denso. Setor por chips (mouse), prateleira no stepper (com teclado), posição digitada. O código atualiza a cada escolha.</p>
+        <p class="phone-cap" style="max-width:468px">Modal centrado e denso. Setor por chips (mouse), prateleira no stepper (com teclado), posição digitada. O código atualiza a cada escolha.</p>
       </div>
       <div class="col">
         <div class="cap-top"><i class="ic s14 i-boxes"></i>Tablet · operação (bottom-sheet)</div>
         <div class="sheet-frame">
           <div class="sheet-bg">
-            <div style="font:700 18px Sora;margin-bottom:4px">Filtro de óleo</div>
-            <div style="font-size:13px;color:hsl(240 6% 40%)">Depósito Mucuri · 8 un</div>
+            <div class="nm">Filtro de óleo</div>
+            <div class="s">Depósito Mucuri · 8 un</div>
           </div>
           <div class="scrim"></div>
           <div class="sheet" role="dialog" aria-labelledby="dls-t">
@@ -499,20 +498,20 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
             <h3 id="dls-t"><span class="tico"><i class="ic s18 i-pin"></i></span>Definir localização</h3>
             <div class="fl"><span class="l">Setor</span>
               <div class="sectr">
-                <button class="schip" aria-pressed="true" type="button"><span class="st" style="background:hsl(233 65% 50%)">A</span>Motor</button>
-                <button class="schip" type="button"><span class="st" style="background:hsl(160 55% 34%)">B</span>Freios</button>
-                <button class="schip" type="button"><span class="st" style="background:hsl(28 80% 44%)">C</span>Susp.</button>
+                <button class="schip" aria-pressed="true" type="button"><span class="st">A</span>Motor</button>
+                <button class="schip" type="button"><span class="st">B</span>Freios</button>
+                <button class="schip" type="button"><span class="st">C</span>Susp.</button>
               </div>
             </div>
             <div class="two">
               <div class="fl"><span class="l">Prateleira</span><span class="stepper focus"><button type="button">−</button><span class="val">3</span><button type="button">+</button></span></div>
-              <div class="fl"><span class="l">Posição</span><span class="input" style="height:52px">02<span class="caret"></span></span></div>
+              <div class="fl"><span class="l">Posição</span><span class="input focus" style="height:52px">02<span class="caret"></span></span></div>
             </div>
-            <div class="preview"><div><div class="lbl">Endereço</div><div class="human">Setor A · Prat. 3 · Pos. 02</div></div><div class="big-code">A-3-02</div></div>
+            <div class="preview"><div><div class="lbl">Endereço</div><div class="human">Setor A · Prat. 3 · Pos. 02</div></div><div class="out">A-3-02</div></div>
             <button class="btn btn-primary" style="height:54px;font-size:16px" type="button"><i class="ic s18 i-check"></i>Salvar localização</button>
           </div>
         </div>
-        <p class="phone-cap" style="max-width:460px">Mesmo fluxo, alvos grandes: a folha sobe de baixo, chips e stepper crescem, botão fixo. Ele define a posição em pé, na frente da prateleira.</p>
+        <p class="phone-cap" style="max-width:468px">Mesmo fluxo, alvos grandes: a folha sobe de baixo, chips e stepper crescem, botão fixo. Ele define a posição em pé, na frente da prateleira.</p>
       </div>
     </div>
   </section>
@@ -522,40 +521,41 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
     <div class="sec-label"><span class="sec-num">3</span><h2>Separação · o uso real (o payoff)</h2></div>
     <p class="sec-sub">Quando as requisições entram, o almoxarife separa as peças. A tela é feita para <b>andar o galpão uma vez só</b>: a lista vem <b>agrupada e ordenada por setor</b>, e a <b>localização é a heroína</b> de cada item. No tablet, alvos grandes e o setor atual em destaque; no notebook, a versão de conferência. Ele lê o endereço, anda até lá, confirma.</p>
     <p class="view-cap">Tablet · 1.024 px · o almoxarife andando com o tablet</p>
-    <div class="frame stage" style="padding:34px 20px">
+    <div class="frame stage" style="padding:40px 28px">
       <div class="tablet"><div class="tscreen">
-        <div class="t-top"><span class="t-back"><i class="ic s18 i-left"></i>Fila</span><div class="t-title">Separação<span>3 requisições · Depósito Mucuri</span></div><span class="spacer"></span><span class="t-prog"><i class="ic s18 i-checks"></i>2 de 7 separadas</span></div>
+        <div class="t-top"><span class="t-back"><i class="ic s18 i-left"></i>Fila</span><div class="t-title">Separação<span>3 requisições · Depósito Mucuri</span></div><span class="spacer"></span><span class="t-prog"><i class="ic s18 i-checks"></i><b>2</b> de 7 separadas</span></div>
         <div class="t-path">
-          <span style="font:700 12px Sora;text-transform:uppercase;letter-spacing:.05em;color:hsl(240 6% 40%);margin-right:2px">Caminho</span>
-          <span class="st done"><span class="setor-tile a">A</span>Motor <i class="ic s16 i-check"></i></span>
+          <span class="cap">Caminho</span>
+          <span class="st done"><span class="stile">A</span>Motor <i class="ic s16 i-check"></i></span>
           <i class="ic s16 i-arrowr arr"></i>
-          <span class="st cur"><span class="setor-tile" style="background:hsl(0 0% 100%/.25)">B</span>Freios · 3</span>
+          <span class="st cur"><span class="stile on-primary">B</span>Freios · 3</span>
           <i class="ic s16 i-arrowr arr"></i>
-          <span class="st"><span class="setor-tile c">C</span>Suspensão · 2</span>
+          <span class="st"><span class="stile">C</span>Suspensão · 2</span>
         </div>
         <div class="t-body">
-          <div class="t-cur-h"><span class="setor-tile b">B</span>Setor B · Freios — 3 peças aqui</div>
+          <div class="t-cur-h"><span class="stile primary">B</span>Setor B · Freios — 3 peças aqui</div>
           <div class="pck next">
-            <div class="locbox"><span class="setor-tile b lg">B</span><div class="meta"><div class="prat">Prateleira 3</div><div class="pos">Posição 01 · <b style="color:hsl(233 65% 42%)">B-3-01</b></div></div></div>
+            <div class="locbox"><span class="stile primary lg">B</span><div class="meta"><div class="prat">Prateleira 3 · Pos. 01</div><div class="pos"><span class="code">B-3-01</span></div></div></div>
             <div class="info"><div class="nm">Lona de freio</div><div class="sk">SKU FR-LONA · Bosch</div><div class="os"><i class="ic s13 i-os"></i>OS 1042 · Rafael</div></div>
             <div class="right"><div class="qty"><b>4</b><small>un</small></div><button class="tbtn tbtn-done"><i class="ic s18 i-check"></i>Separei</button></div>
           </div>
           <div class="pck">
-            <div class="locbox"><span class="setor-tile b lg">B</span><div class="meta"><div class="prat">Prateleira 1</div><div class="pos">Posição 05 · <b style="color:hsl(233 65% 42%)">B-1-05</b></div></div></div>
+            <div class="locbox"><span class="stile lg">B</span><div class="meta"><div class="prat">Prateleira 1 · Pos. 05</div><div class="pos"><span class="code">B-1-05</span></div></div></div>
             <div class="info"><div class="nm">Pastilha de freio</div><div class="sk">SKU FR-PAST · Fras-le</div><div class="os"><i class="ic s13 i-os"></i>OS 1043 · Leandro</div></div>
-            <div class="right"><div class="qty"><b>2</b><small>jogos</small></div><button class="tbtn tbtn-done small"><i class="ic s18 i-check"></i>Separei</button></div>
+            <div class="right"><div class="qty"><b>2</b><small>jogos</small></div><button class="tbtn small"><i class="ic s18 i-check"></i>Separei</button></div>
           </div>
           <div class="pck picked">
-            <div class="locbox"><span class="setor-tile soft lg">B</span><div class="meta"><div class="prat" style="color:hsl(240 6% 48%)">Prateleira 2</div><div class="pos">B-2-03</div></div></div>
+            <div class="locbox"><span class="stile lg soft">B</span><div class="meta"><div class="prat">Prateleira 2 · Pos. 03</div><div class="pos"><span class="code">B-2-03</span></div></div></div>
             <div class="info"><div class="nm">Fluido de freio DOT4</div><div class="sk">SKU FR-DOT4</div></div>
             <div class="right"><span class="pc-done"><i class="ic s22 i-check-c"></i>Separado</span></div>
           </div>
         </div>
+        <div class="t-foot"><span class="nx">Depois de Freios: <b>Setor C · Suspensão</b> · 2 peças</span><button class="btn btn-primary">Ir para Setor C<i class="ic s16 i-arrowr"></i></button></div>
       </div></div>
-      <p class="phone-cap" style="max-width:960px;margin-left:0"><b>A localização é o herói:</b> tile grande do setor, prateleira e posição em texto grande, com o código para conferir. A fila já vem ordenada por setor (A → B → C), então ele caminha uma vez. "Separei" dá baixa e passa ao próximo — a barra no topo conta o progresso.</p>
+      <p class="phone-cap" style="max-width:960px;margin-left:0"><b>A localização é o herói:</b> tile do setor, prateleira e posição em texto grande, com o código monoespaçado para conferir. A fila já vem ordenada por setor (A → B → C), então ele caminha uma vez. "Separei" dá baixa e passa ao próximo — a barra no topo conta o progresso.</p>
     </div>
 
-    <p class="view-cap" style="margin-top:36px">Notebook · lista de separação (conferência), agrupada por setor</p>
+    <p class="view-cap" style="margin-top:44px">Notebook · lista de separação (conferência), agrupada por setor</p>
     <div class="frame"><div class="app"><header class="topbar"><a class="lockup" href="#"><svg width="24" height="35"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></a><span class="spacer"></span><div class="search"><i class="ic s18 i-mag"></i>Buscar placa, frota ou OS</div><button class="org">Transportadora Rota Sul <i class="ic s16 i-down"></i></button><span class="avatar">AL</span></header><nav class="sidenav" aria-label="Menu"><a class="navitem" href="#"><i class="ic s24 i-house"></i></a><a class="navitem" href="#"><i class="ic s24 i-truck"></i></a><a class="navitem" href="#"><i class="ic s24 i-os"></i></a><a class="navitem" href="#" aria-current="page"><i class="ic s24 i-box"></i></a><a class="navitem" href="#"><i class="ic s24 i-chart"></i></a><span class="navsep"></span><a class="navitem" href="#"><i class="ic s24 i-gear"></i></a></nav>
       <main class="main">
         <a class="crumb" href="#"><i class="ic s14 i-left"></i>Estoque · Requisições</a>
@@ -564,23 +564,23 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
           <div class="pickhead">
             <div class="prog"><div class="t"><b>2</b> de <b>7</b> peças separadas</div><div class="pbar"><i style="width:29%"></i></div></div>
             <div class="path">
-              <span class="st done"><span class="setor-tile a">A</span>Motor<i class="ic s13 i-check"></i></span>
+              <span class="st done"><span class="stile">A</span>Motor<i class="ic s13 i-check"></i></span>
               <i class="ic s14 i-arrowr arr"></i>
-              <span class="st cur"><span class="setor-tile" style="background:hsl(0 0% 100%/.25)">B</span>Freios</span>
+              <span class="st cur"><span class="stile on-primary">B</span>Freios</span>
               <i class="ic s14 i-arrowr arr"></i>
-              <span class="st"><span class="setor-tile c">C</span>Suspensão</span>
+              <span class="st"><span class="stile">C</span>Suspensão</span>
             </div>
           </div>
-          <div class="grp"><span class="setor-tile a sm">A</span>Setor A · Motor<span class="cnt">2 peças</span><span class="done"><i class="ic s13 i-check-c"></i>completo</span></div>
-          <div class="pk picked"><span class="cb on"><i class="ic s14 i-check"></i></span><div class="addr"><span class="setor-tile a sm">A</span><div class="parts"><div class="human">Prat. 3 · Pos. 02</div></div></div><div><div class="nm">Filtro de óleo</div><div class="sk">SKU MO-FILT · A-3-02</div></div><div class="qt">1 <small>un</small></div><div class="os">OS 1041 · Diego</div></div>
-          <div class="pk picked"><span class="cb on"><i class="ic s14 i-check"></i></span><div class="addr"><span class="setor-tile a sm">A</span><div class="parts"><div class="human">Prat. 5 · Pos. 01</div></div></div><div><div class="nm">Óleo 15W40</div><div class="sk">SKU MO-OL15 · A-5-01</div></div><div class="qt">20 <small>L</small></div><div class="os">OS 1041 · Diego</div></div>
-          <div class="grp"><span class="setor-tile b sm">B</span>Setor B · Freios<span class="cnt">3 peças</span></div>
-          <div class="pk"><span class="cb"></span><div class="addr"><span class="setor-tile b sm">B</span><div class="parts"><div class="human">Prat. 3 · Pos. 01</div></div></div><div><div class="nm">Lona de freio</div><div class="sk">SKU FR-LONA · B-3-01</div></div><div class="qt">4 <small>un</small></div><div class="os">OS 1042 · Rafael</div></div>
-          <div class="pk"><span class="cb"></span><div class="addr"><span class="setor-tile b sm">B</span><div class="parts"><div class="human">Prat. 1 · Pos. 05</div></div></div><div><div class="nm">Pastilha de freio</div><div class="sk">SKU FR-PAST · B-1-05</div></div><div class="qt">2 <small>jg</small></div><div class="os">OS 1043 · Leandro</div></div>
-          <div class="pk"><span class="cb"></span><div class="addr"><span class="setor-tile b sm">B</span><div class="parts"><div class="human">Prat. 2 · Pos. 03</div></div></div><div><div class="nm">Fluido de freio DOT4</div><div class="sk">SKU FR-DOT4 · B-2-03</div></div><div class="qt">1 <small>un</small></div><div class="os">OS 1043 · Leandro</div></div>
-          <div class="grp"><span class="setor-tile c sm">C</span>Setor C · Suspensão<span class="cnt">2 peças</span></div>
-          <div class="pk"><span class="cb"></span><div class="addr"><span class="setor-tile c sm">C</span><div class="parts"><div class="human">Prat. 4 · Pos. 02</div></div></div><div><div class="nm">Feixe de mola</div><div class="sk">SKU SU-FEIX · C-4-02</div></div><div class="qt">2 <small>un</small></div><div class="os">OS 1043 · Leandro</div></div>
-          <div class="pk"><span class="cb"></span><div class="addr"><span class="noloc"><i class="ic s13 i-pin-l"></i>Sem local</span></div><div><div class="nm">Bucha de jumelo</div><div class="sk">SKU SU-BUCH · definir localização</div></div><div class="qt">4 <small>un</small></div><div class="os">OS 1043 · Leandro</div></div>
+          <div class="grp"><span class="stile sm">A</span>Setor A · Motor<span class="cnt">2 peças</span><span class="done"><i class="ic s13 i-check-c"></i>completo</span></div>
+          <div class="pk picked"><span class="cb on"><i class="ic s14 i-check"></i></span><div class="addr"><span class="stile sm">A</span><div class="human"><b>Prat. 3</b> · Pos. 02</div></div><div><div class="nm">Filtro de óleo</div><div class="sk">SKU MO-FILT · <span class="code">A-3-02</span></div></div><div class="qt">1 <small>un</small></div><div class="os">OS 1041 · Diego</div></div>
+          <div class="pk picked"><span class="cb on"><i class="ic s14 i-check"></i></span><div class="addr"><span class="stile sm">A</span><div class="human"><b>Prat. 5</b> · Pos. 01</div></div><div><div class="nm">Óleo 15W40</div><div class="sk">SKU MO-OL15 · <span class="code">A-5-01</span></div></div><div class="qt">20 <small>L</small></div><div class="os">OS 1041 · Diego</div></div>
+          <div class="grp"><span class="stile sm">B</span>Setor B · Freios<span class="cnt">3 peças</span></div>
+          <div class="pk"><span class="cb"></span><div class="addr"><span class="stile sm">B</span><div class="human"><b>Prat. 3</b> · Pos. 01</div></div><div><div class="nm">Lona de freio</div><div class="sk">SKU FR-LONA · <span class="code">B-3-01</span></div></div><div class="qt">4 <small>un</small></div><div class="os">OS 1042 · Rafael</div></div>
+          <div class="pk"><span class="cb"></span><div class="addr"><span class="stile sm">B</span><div class="human"><b>Prat. 1</b> · Pos. 05</div></div><div><div class="nm">Pastilha de freio</div><div class="sk">SKU FR-PAST · <span class="code">B-1-05</span></div></div><div class="qt">2 <small>jg</small></div><div class="os">OS 1043 · Leandro</div></div>
+          <div class="pk"><span class="cb"></span><div class="addr"><span class="stile sm">B</span><div class="human"><b>Prat. 2</b> · Pos. 03</div></div><div><div class="nm">Fluido de freio DOT4</div><div class="sk">SKU FR-DOT4 · <span class="code">B-2-03</span></div></div><div class="qt">1 <small>un</small></div><div class="os">OS 1043 · Leandro</div></div>
+          <div class="grp"><span class="stile sm">C</span>Setor C · Suspensão<span class="cnt">2 peças</span></div>
+          <div class="pk"><span class="cb"></span><div class="addr"><span class="stile sm">C</span><div class="human"><b>Prat. 4</b> · Pos. 02</div></div><div><div class="nm">Feixe de mola</div><div class="sk">SKU SU-FEIX · <span class="code">C-4-02</span></div></div><div class="qt">2 <small>un</small></div><div class="os">OS 1043 · Leandro</div></div>
+          <div class="pk"><span class="cb"></span><div class="addr"><span class="noloc"><i class="ic s13 i-pin-l"></i>Sem local</span></div><div><div class="nm">Bucha de jumelo</div><div class="sk">SKU SU-BUCH · <a href="#">definir localização</a></div></div><div class="qt">4 <small>un</small></div><div class="os">OS 1043 · Leandro</div></div>
         </div>
       </main>
     </div></div>
@@ -603,7 +603,7 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
         <div class="orgcols">
           <div class="setor-grid">
             <div class="card sc">
-              <div class="top"><span class="setor-tile a">A</span><div><h3>Setor A · Motor</h3><div class="cap">6 prateleiras</div></div><div class="val"><b>84</b><small>peças</small></div></div>
+              <div class="top"><span class="stile">A</span><div><h3>Setor A · Motor</h3><div class="cap">6 prateleiras</div></div><div class="val"><b>84</b><small>peças</small></div></div>
               <div class="prat-list">
                 <div class="prat"><span class="pnum">Prat. 1</span><span class="fill"><i style="width:70%"></i></span><span class="n">18 pç</span></div>
                 <div class="prat"><span class="pnum">Prat. 2</span><span class="fill"><i style="width:52%"></i></span><span class="n">14 pç</span></div>
@@ -611,31 +611,31 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
               </div>
             </div>
             <div class="card sc">
-              <div class="top"><span class="setor-tile b">B</span><div><h3>Setor B · Freios</h3><div class="cap">4 prateleiras</div></div><div class="val"><b>61</b><small>peças</small></div></div>
+              <div class="top"><span class="stile">B</span><div><h3>Setor B · Freios</h3><div class="cap">4 prateleiras</div></div><div class="val"><b>61</b><small>peças</small></div></div>
               <div class="prat-list">
-                <div class="prat"><span class="pnum">Prat. 1</span><span class="fill"><i style="width:60%;background:hsl(160 55% 40%)"></i></span><span class="n">15 pç</span></div>
-                <div class="prat"><span class="pnum">Prat. 2</span><span class="fill"><i style="width:44%;background:hsl(160 55% 40%)"></i></span><span class="n">11 pç</span></div>
-                <div class="prat"><span class="pnum">Prat. 3</span><span class="fill"><i style="width:76%;background:hsl(160 55% 40%)"></i></span><span class="n">19 pç</span></div>
+                <div class="prat"><span class="pnum">Prat. 1</span><span class="fill"><i style="width:60%"></i></span><span class="n">15 pç</span></div>
+                <div class="prat"><span class="pnum">Prat. 2</span><span class="fill"><i style="width:44%"></i></span><span class="n">11 pç</span></div>
+                <div class="prat"><span class="pnum">Prat. 3</span><span class="fill"><i style="width:76%"></i></span><span class="n">19 pç</span></div>
               </div>
             </div>
             <div class="card sc">
-              <div class="top"><span class="setor-tile c">C</span><div><h3>Setor C · Suspensão</h3><div class="cap">5 prateleiras</div></div><div class="val"><b>72</b><small>peças</small></div></div>
+              <div class="top"><span class="stile">C</span><div><h3>Setor C · Suspensão</h3><div class="cap">5 prateleiras</div></div><div class="val"><b>72</b><small>peças</small></div></div>
               <div class="prat-list">
-                <div class="prat"><span class="pnum">Prat. 1</span><span class="fill"><i style="width:40%;background:hsl(28 80% 48%)"></i></span><span class="n">9 pç</span></div>
-                <div class="prat"><span class="pnum">Prat. 4</span><span class="fill"><i style="width:66%;background:hsl(28 80% 48%)"></i></span><span class="n">16 pç</span></div>
-                <div class="prat"><span class="pnum">Prat. 5</span><span class="fill"><i style="width:30%;background:hsl(28 80% 48%)"></i></span><span class="n">7 pç</span></div>
+                <div class="prat"><span class="pnum">Prat. 1</span><span class="fill"><i style="width:40%"></i></span><span class="n">9 pç</span></div>
+                <div class="prat"><span class="pnum">Prat. 4</span><span class="fill"><i style="width:66%"></i></span><span class="n">16 pç</span></div>
+                <div class="prat"><span class="pnum">Prat. 5</span><span class="fill"><i style="width:30%"></i></span><span class="n">7 pç</span></div>
               </div>
             </div>
             <div class="card sc">
-              <div class="top"><span class="setor-tile d">D</span><div><h3>Setor D · Lubrificantes</h3><div class="cap">3 prateleiras</div></div><div class="val"><b>95</b><small>peças</small></div></div>
+              <div class="top"><span class="stile">D</span><div><h3>Setor D · Lubrificantes</h3><div class="cap">3 prateleiras</div></div><div class="val"><b>95</b><small>peças</small></div></div>
               <div class="prat-list">
-                <div class="prat"><span class="pnum">Prat. 1</span><span class="fill"><i style="width:92%;background:hsl(285 45% 48%)"></i></span><span class="n">40 pç</span></div>
-                <div class="prat"><span class="pnum">Prat. 2</span><span class="fill"><i style="width:64%;background:hsl(285 45% 48%)"></i></span><span class="n">28 pç</span></div>
-                <div class="prat"><span class="pnum">Prat. 3</span><span class="fill"><i style="width:58%;background:hsl(285 45% 48%)"></i></span><span class="n">27 pç</span></div>
+                <div class="prat"><span class="pnum">Prat. 1</span><span class="fill"><i style="width:92%"></i></span><span class="n">40 pç</span></div>
+                <div class="prat"><span class="pnum">Prat. 2</span><span class="fill"><i style="width:64%"></i></span><span class="n">28 pç</span></div>
+                <div class="prat"><span class="pnum">Prat. 3</span><span class="fill"><i style="width:58%"></i></span><span class="n">27 pç</span></div>
               </div>
             </div>
           </div>
-          <aside style="display:flex;flex-direction:column;gap:16px">
+          <aside style="display:flex;flex-direction:column;gap:18px">
             <div class="card railcard">
               <div class="hd"><h3><i class="ic s16 i-warehouse"></i>Cobertura</h3></div>
               <div class="rl"><span class="l">Peças endereçadas</span><span class="v">312 de 324</span></div>
