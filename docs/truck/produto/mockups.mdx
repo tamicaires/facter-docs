@@ -104,7 +104,7 @@ Aprovado em 27/09/2026. **Peças** (SKU, categoria, unidade de estoque e de cons
 
 ### Movimentações
 
-Em revisão (28/09/2026). A aba Movimentações do Estoque: o livro-razão append-only de tudo que mexe no saldo — entrada por compra, saída para OS, devolução, transferência, ajuste e saldo inicial. Não se edita nem se apaga; correção é lançamento contrário. Filtros por período (componente de datas), tipo, depósito e busca (peça, NF, OS); faixa de KPIs (movimentações, entradas, saídas, ajustes); tabela com direção e sinal (+/−), custo, origem (NF/OS/ajuste) e autor; rolagem infinita e os estados (lista, skeleton, vazio). Fatia 3.
+Aprovado em 28/09/2026, e em implementação (extrato/livro-razão na Fatia 3.1 e **ajuste de estoque** na 3.2a — back, tela e testes; transferência e estorno a seguir). A aba Movimentações do Estoque: o livro-razão append-only de tudo que mexe no saldo — entrada por compra, saída para OS, devolução, transferência, ajuste e saldo inicial. Não se edita nem se apaga; correção é lançamento contrário. Filtros por período (componente de datas), tipo, depósito e busca (peça, NF, OS); faixa de KPIs (movimentações, entradas, saídas, ajustes); tabela com direção e sinal (+/−), custo, origem (NF/OS/ajuste) e autor; rolagem infinita e os estados (lista, skeleton, vazio). Fatia 3.
 
 [Ver o mockup](/telas/truck/movimentacoes)
 
@@ -112,7 +112,7 @@ Em revisão (28/09/2026). A aba Movimentações do Estoque: o livro-razão appen
 
 ### Endereçamento de estoque
 
-Em revisão (29/09/2026). Onde a peça fica fisicamente dentro do depósito — **Setor · Prateleira · Posição** (ex.: "Setor A · Prateleira 3 · Pos. 02", código `A-3-02`), um endereço por peça em cada depósito. Levanta um gap: o v2 modela depósito, mas não a sublocalização (o glossário já prevê "Location"). Versão leve. Telas: onde a peça está (por depósito), definir localização (diálogo), **separação/picking** com a localização em destaque e a lista ordenada por setor (o pagamento), e a organização do depósito (visão do gestor). Ver a [decisão em aberto](../projeto/roadmap.md).
+Aprovado em 29/09/2026. Onde a peça fica fisicamente dentro do depósito — **Setor · Prateleira · Posição** (ex.: "Setor A · Prateleira 3 · Pos. 02", código `A-3-02`), um endereço por peça em cada depósito. Levanta um gap: o v2 modela depósito, mas não a sublocalização (o glossário já prevê "Location"). Versão leve. Telas: onde a peça está (por depósito), definir localização (diálogo), **separação/picking** com a localização em destaque e a lista ordenada por setor (o pagamento), e a organização do depósito (visão do gestor). Ver a [decisão em aberto](../projeto/roadmap.md).
 
 [Ver o mockup](/telas/truck/enderecamento)
 
@@ -160,6 +160,6 @@ Aprovado em 27/09/2026. O checking do veículo na oficina: o movimento do dia e 
 
 ## Componente de datas
 
-Em revisão (28/09/2026). O componente de datas do DS em cenários, opções e níveis: data única, intervalo, data e hora, atalhos ("hoje", "últimos 7 dias"), estados de erro e vazio, e o comportamento no celular. Base para os filtros de período dos relatórios e para os campos de data das OS e movimentações.
+Aprovado em 28/09/2026, e implementado no DS (`DateRangePicker`, intervalo com presets), já em uso no filtro de período das Movimentações. O componente de datas do DS em cenários, opções e níveis: data única, intervalo, data e hora, atalhos ("hoje", "últimos 7 dias"), estados de erro e vazio, e o comportamento no celular. Base para os filtros de período dos relatórios e para os campos de data das OS e movimentações.
 
 [Ver o mockup](/telas/truck/datas)
