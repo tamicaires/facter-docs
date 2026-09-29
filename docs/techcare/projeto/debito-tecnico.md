@@ -73,6 +73,20 @@ Seja qual for, o passo seguinte é o mesmo: escrever a regra no `CLAUDE.md` do r
 
 ---
 
+## Baixo · "Oficina" no vocabulário interno
+
+O TechCare é um sistema de **assistência técnica**, e "oficina" é palavra de mecânica. O termo entrou cedo e se espalhou: em 18/09/2026 havia 32 ocorrências em 20 arquivos.
+
+As que o usuário lia foram corrigidas para **assistência** — o aviso na página pública do orçamento, o status "Equipamento na assistência", a contagem de "aparelhos na assistência" em O Dia, a ficha do cliente, o catálogo de serviços e a tela de equipe.
+
+Restam **14 arquivos com o termo em comentários de código**, entre eles `middleware.ts`, `prazo-sugerido.ts`, `quem-segura.ts`, `service-order-stepper.tsx`, `use-service-order-actions.tsx`, `use-customer-profile.ts` e `use-o-dia.ts`.
+
+Não muda comportamento nem aparece para ninguém de fora, mas desalinha o vocabulário de quem lê o código do vocabulário de quem usa o produto — e o próprio código já se contradiz: `service-order/types/index.ts` diz "são os itens de uma assistência de informática" poucas linhas acima de um comentário que fala em oficina.
+
+Vale corrigir quando se passar por cada arquivo, não numa varredura própria.
+
+---
+
 ## Médio · READMEs são resíduo de boilerplate
 
 `api/README.md` e `web/README.md` ainda descrevem o "Facter Boilerplate", com uma estrutura `src/modules/...` que não existe mais. Quem clona e lê o README é orientado errado no primeiro minuto.
@@ -114,13 +128,13 @@ A causa continua: **duas empresas compartilham chave**. Enquanto for assim, qual
 
 ---
 
-## Alto · A tela de perfil está quebrada
+## Baixo · A foto de perfil ainda não tem para onde ir
 
-`useUpdateProfile` chama `PATCH /users/me` e `userService.uploadAvatar` chama `/users/me/avatar`. **Nenhum dos dois existe na API** — as duas rotas estão declaradas em `web/src/config/api-routes.ts` e nunca foram implementadas. Salvar o perfil dá 404.
+**Resolvido em parte, em 18/09/2026.** `PATCH /users/me` não existia e salvar o perfil respondia 404; o endpoint foi implementado junto da tela de equipe.
 
-No mesmo formulário, o botão "Alterar foto" não tem `onClick` — não faz nada, nem o 404.
+O que continua: `userService.uploadAvatar` chama `/users/me/avatar`, que não existe, e o botão "Alterar foto" não tem `onClick` — não faz nada, nem o 404. Depende da funcionalidade de upload, que não existe em lugar nenhum do produto (ver [Limites conhecidos](../produto/limites-conhecidos)).
 
-É a única tela do produto que falha em silêncio para o usuário final. Correção de horas, não de dias.
+Enquanto isso, `User.avatar` e `Company.logo` são campos que a interface não tem como preencher.
 
 ---
 

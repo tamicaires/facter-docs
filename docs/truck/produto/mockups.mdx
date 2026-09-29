@@ -110,7 +110,11 @@ Aprovado em 28/09/2026, e em implementação (extrato/livro-razão na Fatia 3.1 
 
 <img src="/mockups/truck/movimentacoes/desktop.png" alt="Mockup das movimentações de estoque" style={{maxHeight: 360, width: '100%', objectFit: 'cover', objectPosition: 'top', borderRadius: 8, border: '1px solid var(--ifm-color-emphasis-300)'}} />
 
-### Endereçamento de estoque
+### Transferência multi-peça
+
+Em revisão (29/09/2026). Evolução da transferência da Fatia 3.2b para mover **várias peças** de um depósito a outro num registro só. Origem e destino no topo com **botão de inverter (⇄)**; lista de peças adicionadas, cada uma com o **saldo na origem** e um contador **travado no saldo daquela peça**. Picker **inteligente**: mostra o saldo por peça, as com saldo primeiro, e as **sem saldo neste depósito** não somem — aparecem acinzentadas e bloqueadas com o porquê (existe no catálogo, o estoque está em outro lugar). Grava numa **transação única, tudo ou nada** (N pares espelhados, escrita condicional por `version`); o campo de quantidade só aceita número.
+
+[Ver o mockup](/telas/truck/transferencia)
 
 Aprovado em 29/09/2026. Onde a peça fica fisicamente dentro do depósito — **Setor · Prateleira · Posição** (ex.: "Setor A · Prateleira 3 · Pos. 02", código `A-3-02`), um endereço por peça em cada depósito. Levanta um gap: o v2 modela depósito, mas não a sublocalização (o glossário já prevê "Location"). Versão leve. Telas: onde a peça está (por depósito), definir localização (diálogo), **separação/picking** com a localização em destaque e a lista ordenada por setor (o pagamento), e a organização do depósito (visão do gestor). Ver a [decisão em aberto](../projeto/roadmap.md).
 

@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Transferência multi-peça · mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --background:0 0% 98%; --foreground:240 10% 3.9%; --card:0 0% 100%;
+  --primary:233 65% 50%; --primary-foreground:0 0% 100%;
+  --muted:240 4.8% 93.9%; --muted-foreground:240 3.8% 42%; --border:240 5.9% 90%;
+  --success:160 60% 38%; --danger:0 84.2% 60.2%;
+  --success-text:160 70% 24%; --danger-text:0 72% 38%;
+  --primary-soft:233 85% 96.5%; --success-soft:160 55% 94%; --danger-soft:0 85% 96%;
+  --canvas:225 14% 92%; --ring:233 65% 50%; --toolbar:240 5% 96%;
+}
+*{box-sizing:border-box}
+body{margin:0;background:hsl(var(--canvas));color:hsl(var(--foreground));font:15px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,p{margin:0}
+button,input{font:inherit;color:inherit}
+code{font:600 12px ui-monospace,Menlo,monospace;color:hsl(233 65% 40%);background:hsl(var(--muted));padding:1px 5px;border-radius:5px}
+.num{font-variant-numeric:tabular-nums}
+.ic{display:inline-block;width:18px;height:18px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;flex:none}
+.ic.s14{width:14px;height:14px}.ic.s16{width:16px;height:16px}.ic.s20{width:20px;height:20px}.ic.s22{width:22px;height:22px}
+.i-transfer{--i:url(https://api.iconify.design/ph/arrows-left-right.svg)}
+.i-swap{--i:url(https://api.iconify.design/ph/arrows-left-right-bold.svg)}
+.i-box{--i:url(https://api.iconify.design/ph/package.svg)}
+.i-warehouse{--i:url(https://api.iconify.design/ph/warehouse.svg)}
+.i-down{--i:url(https://api.iconify.design/ph/caret-down.svg)}
+.i-x{--i:url(https://api.iconify.design/ph/x.svg)}
+.i-mag{--i:url(https://api.iconify.design/ph/magnifying-glass.svg)}
+.i-plus{--i:url(https://api.iconify.design/ph/plus.svg)}
+.i-minus{--i:url(https://api.iconify.design/ph/minus.svg)}
+.i-trash{--i:url(https://api.iconify.design/ph/trash.svg)}
+.i-arrowr{--i:url(https://api.iconify.design/ph/arrow-right.svg)}
+.i-info{--i:url(https://api.iconify.design/ph/info.svg)}
+.i-check{--i:url(https://api.iconify.design/ph/check.svg)}
+.i-checkc{--i:url(https://api.iconify.design/ph/check-circle-fill.svg)}
+.i-ban{--i:url(https://api.iconify.design/ph/prohibit.svg)}
+.i-lock{--i:url(https://api.iconify.design/ph/lock-key.svg)}
+
+/* page */
+.doc{max-width:1120px;margin:0 auto;padding:48px 24px 96px}
+.doc-head h1{font:800 30px/1.15 Sora,Inter,sans-serif;letter-spacing:-.02em}
+.doc-head p{color:hsl(var(--muted-foreground));max-width:760px;margin-top:8px}
+.sec{margin-top:52px}
+.sec-label{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-num{font:800 13px Sora,sans-serif;color:hsl(var(--primary));background:hsl(var(--card));border-radius:999px;width:26px;height:26px;display:inline-grid;place-items:center;flex:none;border:1px solid hsl(var(--border))}
+.sec h2{font:700 20px/1.3 Inter,sans-serif;letter-spacing:-.01em}
+.sec-sub{color:hsl(240 5% 34%);margin:0 0 18px 38px;max-width:820px}
+.view-cap{font-size:11.5px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:600;margin:0 0 10px 38px}
+.stage{margin-left:38px;display:flex;flex-wrap:wrap;gap:28px;align-items:flex-start}
+
+/* dialog shell (DS ActionDialog look) */
+.dx{width:560px;max-width:100%;background:hsl(var(--card));border-radius:16px;border:1px solid hsl(var(--border));box-shadow:0 24px 60px -24px hsl(230 30% 20%/.32);overflow:hidden}
+.dx-h{display:flex;align-items:center;gap:10px;padding:18px 20px 14px}
+.tico{width:28px;height:28px;border-radius:9px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center;flex:none}
+.dx-h h2{font-size:18px;font-weight:700;letter-spacing:-.01em}
+.dx-h .cls{margin-left:auto;color:hsl(var(--muted-foreground));width:28px;height:28px;display:grid;place-items:center;border-radius:8px;border:0;background:none;cursor:pointer}
+.wsteps{display:flex;align-items:center;gap:8px;padding:0 20px 4px;font-size:12.5px;font-weight:500}
+.st{display:flex;align-items:center;gap:6px;color:hsl(var(--muted-foreground))}
+.st .n{width:20px;height:20px;border-radius:999px;display:grid;place-items:center;font-size:11px;background:hsl(var(--muted));color:hsl(var(--muted-foreground))}
+.st.on{color:hsl(var(--foreground))}
+.st.on .n{background:hsl(var(--primary));color:#fff}
+.st.done{color:hsl(var(--success-text))}
+.st.done .n{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.wsteps .ln{flex:1;max-width:44px;height:1px;background:hsl(var(--border))}
+.dx-b{padding:14px 20px 4px;max-height:none}
+.fl{display:block;margin-bottom:14px}
+.fl>.l{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.grid2{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:end}
+.input{height:42px;border:1px solid hsl(var(--border));border-radius:10px;background:hsl(var(--card));display:flex;align-items:center;gap:8px;padding:0 12px;font-size:14px}
+.input.sel{cursor:pointer}
+.input .grow{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.input .clr{color:hsl(var(--muted-foreground))}
+.input .cv{color:hsl(var(--muted-foreground))}
+.input.foc{border-color:hsl(var(--primary));box-shadow:0 0 0 3px hsl(var(--primary)/.12)}
+/* DE ⇄ PARA route card */
+.route{display:grid;grid-template-columns:1fr auto 1fr;gap:2px;align-items:center;background:hsl(var(--primary-soft)/.55);border:1px solid hsl(var(--primary)/.14);border-radius:16px;padding:10px 8px;margin-bottom:14px}
+.rcell{background:none;border:0;cursor:pointer;padding:6px 8px;border-radius:12px;display:flex;flex-direction:column;align-items:center;gap:5px;min-width:0}
+.rcell:hover{background:hsl(0 0% 100%/.55)}
+.rcell .eye{display:inline-flex;align-items:center;gap:4px;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:hsl(var(--muted-foreground));font-weight:600}
+.rc-body{display:flex;align-items:center;gap:9px;min-width:0;max-width:100%}
+.rc-ic{width:34px;height:34px;border-radius:10px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center;flex:none}
+.rc-txt{min-width:0;display:flex;flex-direction:column;line-height:1.2;text-align:left}
+.rc-nm{font-size:15px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rc-sub{font-size:12px;color:hsl(var(--muted-foreground))}
+.rswap{width:42px;height:42px;border-radius:999px;background:hsl(var(--primary));color:#fff;border:0;cursor:pointer;display:grid;place-items:center;box-shadow:0 8px 18px -6px hsl(var(--primary)/.6);flex:none;justify-self:center;transition:filter .15s}
+.rswap:hover{filter:brightness(1.06)}
+
+/* part picker */
+.pick{position:relative}
+.menu{margin-top:6px;border:1px solid hsl(var(--border));border-radius:12px;background:hsl(var(--card));box-shadow:0 16px 40px -18px hsl(230 30% 20%/.3);overflow:hidden}
+.menu .search{display:flex;align-items:center;gap:8px;padding:10px 12px;border-bottom:1px solid hsl(var(--border));color:hsl(var(--muted-foreground));font-size:13.5px}
+.menu .grp{font-size:11px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));font-weight:600;padding:8px 12px 4px;background:hsl(var(--toolbar))}
+.opt{display:flex;align-items:center;gap:10px;padding:9px 12px;cursor:pointer;border-top:1px solid hsl(var(--border))}
+.opt:first-child{border-top:0}
+.opt:hover{background:hsl(var(--muted)/.5)}
+.opt .oi{width:30px;height:30px;border-radius:8px;background:hsl(var(--muted));color:hsl(var(--muted-foreground));display:grid;place-items:center;flex:none}
+.opt .om{min-width:0;flex:1}
+.opt .om .nm{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.opt .om .sk{font-size:11.5px;color:hsl(var(--muted-foreground))}
+.opt .bal{font-size:12.5px;font-weight:700;color:hsl(var(--success-text));font-variant-numeric:tabular-nums;flex:none}
+.opt.zero{cursor:not-allowed;opacity:.85}
+.opt.zero:hover{background:none}
+.opt.zero .oi,.opt.zero .nm{color:hsl(var(--muted-foreground))}
+.opt.zero .bal{color:hsl(var(--muted-foreground));font-weight:600;display:flex;align-items:center;gap:5px}
+
+/* line list */
+.lines{border:1px solid hsl(var(--border));border-radius:12px;overflow:hidden;margin-top:2px}
+.lh{display:grid;grid-template-columns:1fr 132px 40px;gap:10px;background:hsl(var(--toolbar));padding:8px 12px;font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));font-weight:600}
+.lh .c{text-align:center}
+.ln{display:grid;grid-template-columns:1fr 132px 40px;gap:10px;align-items:center;padding:10px 12px;border-top:1px solid hsl(var(--border))}
+.ln .p{display:flex;align-items:center;gap:10px;min-width:0}
+.ln .p .oi{width:30px;height:30px;border-radius:8px;background:hsl(var(--muted));color:hsl(var(--muted-foreground));display:grid;place-items:center;flex:none}
+.ln .nm{font-size:13.5px;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ln .sk{font-size:11.5px;color:hsl(var(--muted-foreground))}
+.ln .sk b{color:hsl(var(--success-text));font-weight:700}
+.step{display:flex;align-items:center;height:36px;border:1px solid hsl(var(--border));border-radius:9px;overflow:hidden}
+.step button{width:34px;height:100%;border:0;background:none;color:hsl(var(--muted-foreground));cursor:pointer;display:grid;place-items:center}
+.step button:hover{background:hsl(var(--muted))}
+.step .v{flex:1;text-align:center;font-size:13.5px;font-weight:600;font-variant-numeric:tabular-nums;border-left:1px solid hsl(var(--border));border-right:1px solid hsl(var(--border));line-height:34px}
+.rm{width:32px;height:32px;border-radius:8px;border:0;background:none;color:hsl(var(--muted-foreground));cursor:pointer;display:grid;place-items:center;margin:0 auto}
+.rm:hover{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.empty{border:1px dashed hsl(var(--border));border-radius:12px;background:hsl(var(--muted)/.3);color:hsl(var(--muted-foreground));font-size:13.5px;display:flex;align-items:center;gap:8px;padding:18px;margin-top:2px}
+
+/* footer */
+.dx-f{display:flex;align-items:center;gap:14px;border-top:1px solid hsl(var(--border));background:hsl(var(--muted)/.4);padding:12px 20px}
+.conseq{display:flex;align-items:flex-start;gap:8px;font-size:12.5px;color:hsl(240 5% 34%);flex:1;min-width:0}
+.conseq .ic{color:hsl(var(--primary));margin-top:1px}
+.conseq b{color:hsl(var(--foreground))}
+.btn{height:38px;padding:0 16px;border-radius:9px;font-size:13.5px;font-weight:600;border:1px solid transparent;cursor:pointer;display:inline-flex;align-items:center;gap:7px}
+.btn.ghost{background:hsl(var(--card));border-color:hsl(var(--border))}
+.btn.primary{background:hsl(var(--primary));color:#fff}
+
+/* confirm */
+.hero{display:flex;align-items:center;gap:12px;border:1px solid hsl(var(--border));border-radius:12px;background:hsl(var(--muted)/.3);padding:14px 16px;margin-bottom:14px}
+.hero .ci{width:44px;height:44px;border-radius:999px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center;flex:none}
+.hero .big{font-size:18px;font-weight:800}
+.hero .rt{display:flex;align-items:center;gap:6px;font-size:12.5px;color:hsl(var(--muted-foreground))}
+.crow{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-top:1px solid hsl(var(--border));font-size:14px}
+.crow:first-child{border-top:0}
+.clist{border:1px solid hsl(var(--border));border-radius:12px;overflow:hidden}
+.crow .q{font-weight:700;font-variant-numeric:tabular-nums}
+
+.notes{margin:16px 0 0 38px;max-width:820px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-left:3px solid hsl(var(--primary));border-radius:10px;padding:14px 18px}
+.notes h4{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--primary));margin-bottom:8px}
+.notes ul{margin:0;padding-left:18px;color:hsl(240 5% 30%);font-size:13.5px}
+.notes li{margin:5px 0}
+.notes b{color:hsl(var(--foreground))}
+</style>
+</head>
+<body>
+<div class="doc">
+  <div class="doc-head">
+    <h1>Transferência multi-peça</h1>
+    <p>Mover <b>várias peças</b> de um depósito para outro num único registro. Escolhe origem e destino uma vez — com <b>botão de inverter</b> —, adiciona as peças pela busca, e o sistema grava tudo numa <b>transação só</b> (tudo ou nada). O picker mostra o <b>saldo de cada peça na origem</b>, e nunca esconde uma peça: a que está sem saldo ali aparece, mas explicada e bloqueada.</p>
+  </div>
+
+  <!-- 1. Passo 1 -->
+  <div class="sec">
+    <div class="sec-label"><span class="sec-num">1</span><h2>Passo 1 · Dados e peças</h2></div>
+    <p class="sec-sub">Origem e destino num card <b>De ⇄ Para</b> (o mesmo gesto do "trocar turno" do Truck antigo): cada lado abre o seletor de depósito, e o botão redondo no meio <b>inverte</b> os dois. Cada peça adicionada vira uma linha com seu saldo na origem e um contador que <b>trava no saldo daquela peça</b>. O rodapé resume quantas peças e itens vão junto.</p>
+    <p class="view-cap">Diálogo de gestão (notebook) · lista com peças</p>
+    <div class="stage">
+      <div class="dx">
+        <div class="dx-h"><span class="tico"><i class="ic s18 i-transfer"></i></span><h2>Registrar transferência</h2><button class="cls"><i class="ic s16 i-x"></i></button></div>
+        <div class="wsteps"><span class="st on"><span class="n">1</span>Dados</span><span class="ln"></span><span class="st"><span class="n">2</span>Confirmar</span></div>
+        <div class="dx-b">
+          <div class="route">
+            <button class="rcell" title="Escolher depósito de origem">
+              <span class="eye">De <i class="ic s12 i-down"></i></span>
+              <span class="rc-body"><span class="rc-ic"><i class="ic s18 i-warehouse"></i></span><span class="rc-txt"><span class="rc-nm">Almox. Central</span><span class="rc-sub">Ponta Grossa</span></span></span>
+            </button>
+            <button class="rswap" title="Inverter origem e destino"><i class="ic s18 i-swap"></i></button>
+            <button class="rcell" title="Escolher depósito de destino">
+              <span class="eye">Para <i class="ic s12 i-down"></i></span>
+              <span class="rc-body"><span class="rc-ic"><i class="ic s18 i-warehouse"></i></span><span class="rc-txt"><span class="rc-nm">Depósito Mucuri</span><span class="rc-sub">Mucuri</span></span></span>
+            </button>
+          </div>
+          <div class="fl">
+            <span class="l">Adicionar peça</span>
+            <div class="input sel"><i class="ic s16 i-mag clr"></i><span class="grow" style="color:hsl(var(--muted-foreground))">Busque por nome ou código…</span><i class="ic s16 i-down cv"></i></div>
+          </div>
+          <div class="lines">
+            <div class="lh"><span>Peça · saldo na origem</span><span class="c">Quantidade</span><span></span></div>
+            <div class="ln">
+              <div class="p"><span class="oi"><i class="ic s16 i-box"></i></span><div style="min-width:0"><div class="nm">Pastilha de freio</div><div class="sk">SP-20418 · <b>saldo 12 un</b></div></div></div>
+              <div class="step"><button><i class="ic s14 i-minus"></i></button><span class="v">4</span><button><i class="ic s14 i-plus"></i></button></div>
+              <button class="rm"><i class="ic s16 i-trash"></i></button>
+            </div>
+            <div class="ln">
+              <div class="p"><span class="oi"><i class="ic s16 i-box"></i></span><div style="min-width:0"><div class="nm">Correia dentada</div><div class="sk">SP-01583 · <b>saldo 30 un</b></div></div></div>
+              <div class="step"><button><i class="ic s14 i-minus"></i></button><span class="v">10</span><button><i class="ic s14 i-plus"></i></button></div>
+              <button class="rm"><i class="ic s16 i-trash"></i></button>
+            </div>
+            <div class="ln">
+              <div class="p"><span class="oi"><i class="ic s16 i-box"></i></span><div style="min-width:0"><div class="nm">Filtro de óleo</div><div class="sk">SP-00145 · <b>saldo 40 un</b></div></div></div>
+              <div class="step"><button><i class="ic s14 i-minus"></i></button><span class="v">6</span><button><i class="ic s14 i-plus"></i></button></div>
+              <button class="rm"><i class="ic s16 i-trash"></i></button>
+            </div>
+          </div>
+        </div>
+        <div class="dx-f">
+          <p class="conseq"><i class="ic s16 i-info"></i><span><b>3 peças · 20 itens</b> — um pacote de lançamentos, tudo ou nada.</span></p>
+          <button class="btn ghost">Cancelar</button>
+          <button class="btn primary">Continuar</button>
+        </div>
+      </div>
+      <div style="width:360px">
+        <p class="view-cap" style="margin:0 0 8px 0">Ao clicar em <b>De</b> (ou <b>Para</b>)</p>
+        <div class="dx" style="width:360px">
+          <div class="dx-b" style="padding:16px 16px 18px">
+            <span class="l" style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Depósito de origem</span>
+            <div class="input sel foc"><i class="ic s16 i-warehouse clr"></i><span class="grow">Almox. Central</span><i class="ic s16 i-down cv"></i></div>
+            <div class="menu">
+              <div class="search"><i class="ic s16 i-mag"></i>Buscar depósito…</div>
+              <div class="opt"><span class="oi"><i class="ic s16 i-warehouse"></i></span><div class="om"><div class="nm">Almox. Central</div><div class="sk">Ponta Grossa</div></div><i class="ic s16 i-check" style="color:hsl(var(--primary))"></i></div>
+              <div class="opt"><span class="oi"><i class="ic s16 i-warehouse"></i></span><div class="om"><div class="nm">Depósito Mucuri</div><div class="sk">Mucuri</div></div></div>
+              <div class="opt"><span class="oi"><i class="ic s16 i-warehouse"></i></span><div class="om"><div class="nm">Almox. Bandeirantes</div><div class="sk">Ponta Grossa · consignado</div></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes"><h4>A setinha</h4><ul><li>Clicar em <b>De</b> ou <b>Para</b> (ou na setinha) abre o seletor de depósito — a mesma lista permitida, com busca. O depósito já escolhido do outro lado aparece desabilitado (origem ≠ destino). O <b>⇄</b> troca os dois de uma vez.</li></ul></div>
+  </div>
+
+  <!-- 2. Picker inteligente -->
+  <div class="sec">
+    <div class="sec-label"><span class="sec-num">2</span><h2>Picker inteligente · saldo por peça</h2></div>
+    <p class="sec-sub">Ao buscar, cada peça mostra <b>quanto tem na origem</b>. As <b>com saldo vêm primeiro</b> e são selecionáveis. As <b>sem saldo neste depósito</b> não somem — apareceriam ainda, mas <b>acinzentadas e bloqueadas</b>, com o porquê: a peça existe, o estoque é que está em outro lugar. Assim a pessoa nunca escolhe às cegas nem se pergunta "cadê minha peça?".</p>
+    <p class="view-cap">Dropdown de busca aberto</p>
+    <div class="stage">
+      <div class="dx" style="width:520px">
+        <div class="dx-b" style="padding:16px 20px 20px">
+          <span class="l" style="display:block;font-size:13px;font-weight:600;margin-bottom:6px">Adicionar peça</span>
+          <div class="input sel foc"><i class="ic s16 i-mag clr"></i><span class="grow">amort</span><i class="ic s16 i-down cv"></i></div>
+          <div class="menu">
+            <div class="search"><i class="ic s16 i-mag"></i>Buscando "amort" no Almox. Central</div>
+            <div class="grp">Com saldo</div>
+            <div class="opt"><span class="oi"><i class="ic s16 i-box"></i></span><div class="om"><div class="nm">Amortecedor 1/2"</div><div class="sk">SP-01023</div></div><span class="bal">12 un</span></div>
+            <div class="opt"><span class="oi"><i class="ic s16 i-box"></i></span><div class="om"><div class="nm">Amortecedor 12V</div><div class="sk">SP-01653</div></div><span class="bal">3 un</span></div>
+            <div class="grp">Sem saldo neste depósito</div>
+            <div class="opt zero"><span class="oi"><i class="ic s16 i-box"></i></span><div class="om"><div class="nm">Amortecedor 1/2"</div><div class="sk">SP-00463</div></div><span class="bal"><i class="ic s14 i-ban"></i>sem saldo aqui</span></div>
+            <div class="opt zero"><span class="oi"><i class="ic s16 i-box"></i></span><div class="om"><div class="nm">Amortecedor 1/2"</div><div class="sk">SP-01583</div></div><span class="bal"><i class="ic s14 i-ban"></i>sem saldo aqui</span></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="notes">
+      <h4>Por que não esconder</h4>
+      <ul>
+        <li>Esconder a peça sem saldo confunde: a pessoa <b>sabe</b> que cadastrou aquela peça e procura por ela. Some, ela acha que é bug.</li>
+        <li>Mostrar acinzentada com <b>"sem saldo aqui"</b> ensina no lugar certo: existe no catálogo, o estoque está em <b>outro depósito</b> (dá pra trocar a origem no ⇄).</li>
+        <li>Peça já adicionada some da lista (não repete). O saldo por peça é um <b>join indexado</b> em <code>stock_balances</code> — sem varredura, sem custo de performance.</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 3. Passo 2 -->
+  <div class="sec">
+    <div class="sec-label"><span class="sec-num">3</span><h2>Passo 2 · Confirmar</h2></div>
+    <p class="sec-sub">O resumo do que vai acontecer: o roteiro <b>de → para</b>, as peças com suas quantidades, e a garantia de que é <b>um pacote atômico</b> — se uma peça falhar (saldo mudou na corrida), <b>nada</b> é gravado. Custo médio da origem vai junto pro destino.</p>
+    <p class="view-cap">Passo 2 · confirmar</p>
+    <div class="stage">
+      <div class="dx">
+        <div class="dx-h"><span class="tico"><i class="ic s18 i-transfer"></i></span><h2>Confirmar transferência</h2><button class="cls"><i class="ic s16 i-x"></i></button></div>
+        <div class="wsteps"><span class="st done"><span class="n"><i class="ic s14 i-check"></i></span>Dados</span><span class="ln"></span><span class="st on"><span class="n">2</span>Confirmar</span></div>
+        <div class="dx-b">
+          <div class="hero">
+            <span class="ci"><i class="ic s22 i-transfer"></i></span>
+            <div><div class="big">3 peças · 20 itens</div><div class="rt">Almox. Central <i class="ic s14 i-arrowr"></i> Depósito Mucuri</div></div>
+          </div>
+          <div class="clist">
+            <div class="crow"><span>Pastilha de freio <span style="color:hsl(var(--muted-foreground));font-size:12.5px">· SP-20418</span></span><span class="q">4 un</span></div>
+            <div class="crow"><span>Correia dentada <span style="color:hsl(var(--muted-foreground));font-size:12.5px">· SP-01583</span></span><span class="q">10 un</span></div>
+            <div class="crow"><span>Filtro de óleo <span style="color:hsl(var(--muted-foreground));font-size:12.5px">· SP-00145</span></span><span class="q">6 un</span></div>
+          </div>
+        </div>
+        <div class="dx-f">
+          <p class="conseq"><i class="ic s16 i-lock"></i><span><b>Tudo ou nada.</b> Mesmo custo médio nos dois depósitos.</span></p>
+          <button class="btn ghost">Voltar</button>
+          <button class="btn primary"><i class="ic s16 i-check"></i>Transferir</button>
+        </div>
+      </div>
+    </div>
+    <div class="notes">
+      <h4>Regras</h4>
+      <ul>
+        <li><b>Uma transação, tudo ou nada:</b> N pares espelhados (saída na origem + entrada no destino), escrita condicional por <code>version</code> em cada saldo. Uma peça em conflito derruba o pacote inteiro — <b>nada</b> grava pela metade.</li>
+        <li><b>Quantidade travada por linha</b> no saldo daquela peça na origem; o contador não passa disso e o campo <b>só aceita número</b>.</li>
+        <li><b>Inverter (⇄)</b> troca origem e destino e recalcula os saldos das peças já adicionadas (as que ficarem sem saldo na nova origem acendem o aviso).</li>
+        <li><b>Só depósitos que você acessa:</b> origem e destino listam apenas os depósitos permitidos (RLS da organização + escopo de <code>depot.view</code>). O depósito de <b>outra empresa</b> (ex.: Suzano transferindo pra Vale) não aparece — mover estoque entre organizações não é transferência, é <b>consignação/remessa do ecossistema</b> (ADR-011), com concessão de acesso; fluxo próprio, à parte.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</body>
+</html>
