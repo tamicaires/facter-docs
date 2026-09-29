@@ -518,6 +518,56 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
 .explain .ic{flex:none;margin-top:1px;color:hsl(var(--primary))}
 .explain b{font-weight:650;color:hsl(var(--foreground))}
 
+/* ---------- web (gestão) dialog flow bits ---------- */
+.wsteps{display:flex;align-items:center;gap:7px;font-size:12px;color:hsl(var(--muted-foreground));flex-wrap:wrap;margin-top:2px}
+.wsteps .st{display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.wsteps .st .n{width:19px;height:19px;border-radius:99px;background:hsl(var(--muted));color:hsl(240 6% 42%);display:grid;place-items:center;font:700 10.5px Sora,sans-serif}
+.wsteps .st.on{color:hsl(var(--foreground));font-weight:600}
+.wsteps .st.on .n{background:hsl(var(--primary));color:#fff}
+.wsteps .st.done .n{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.wsteps .ln{width:14px;height:1.5px;background:hsl(240 6% 84%)}
+.wbal{display:flex;align-items:center;gap:11px;padding:10px 13px;border:1px solid hsl(var(--border));border-radius:10px;background:hsl(var(--background))}
+.wbal .pi{width:34px;height:34px;border-radius:9px;background:hsl(var(--card));border:1px solid hsl(var(--border));color:hsl(240 5% 42%);display:grid;place-items:center;flex:none}
+.wbal .nm{font-weight:600;font-size:13.5px;line-height:1.2}
+.wbal .sk{font-size:11.5px;color:hsl(var(--muted-foreground))}
+.wbal .bg{margin-left:auto;text-align:right;white-space:nowrap}
+.wbal .bg .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));font-weight:600}
+.wbal .bg .v{font:800 17px Sora,sans-serif;font-variant-numeric:tabular-nums}
+.stepper{display:inline-flex;align-items:stretch;border:1px solid hsl(240 6% 82%);border-radius:10px;overflow:hidden;height:46px}
+.stepper.focus{border-color:hsl(var(--primary));box-shadow:0 0 0 3px hsl(var(--ring)/.15)}
+.stepper button{width:44px;border:0;background:hsl(var(--card));font:600 19px Sora,sans-serif;color:hsl(240 6% 42%);cursor:pointer;display:grid;place-items:center}
+.stepper button:hover{background:hsl(var(--muted))}
+.stepper .val{min-width:104px;display:flex;align-items:center;justify-content:center;gap:5px;border-left:1px solid hsl(var(--border));border-right:1px solid hsl(var(--border));padding:0 10px}
+.stepper .val b{font:700 22px Sora,sans-serif;font-variant-numeric:tabular-nums}
+.stepper .val .u{font:600 13px Sora,sans-serif;color:hsl(var(--muted-foreground))}
+.stepper .val .caret{width:2px;height:22px;background:hsl(var(--primary));animation:bl 1s steps(1) infinite}
+.stephint{font-size:12px;color:hsl(var(--muted-foreground));margin-top:7px;display:flex;align-items:center;gap:6px}
+.stephint kbd{font:600 11px ui-monospace,Menlo,monospace;border:1px solid hsl(240 6% 82%);border-bottom-width:2px;border-radius:5px;padding:1px 5px;background:hsl(var(--card));color:hsl(240 6% 30%)}
+.wres{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;font-size:13.5px;background:hsl(var(--danger-soft))}
+.wres.in{background:hsl(var(--success-soft))}.wres.tr{background:hsl(var(--primary-soft))}
+.wres .k{font:700 14px Sora,sans-serif;color:hsl(var(--danger-text));white-space:nowrap}
+.wres.in .k{color:hsl(var(--success-text))}.wres.tr .k{color:hsl(var(--primary))}
+.wres .flw{color:hsl(240 6% 30%);font-variant-numeric:tabular-nums}
+.wres .flw b{font-weight:700;color:hsl(var(--foreground))}
+.mchip.sm{height:32px;font-size:13px;padding:0 13px}
+.mchip.sm .ic{width:13px;height:13px}
+.whero{display:flex;align-items:center;gap:12px;padding:13px 15px;border-radius:12px;background:hsl(var(--background));border:1px solid hsl(var(--border))}
+.whero .ci{width:42px;height:42px;border-radius:12px;display:grid;place-items:center;flex:none}
+.whero .ci.out{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.whero .ci.tr{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.whero .big{font:800 19px Sora,sans-serif;letter-spacing:-.02em;line-height:1.15}
+.whero .s{font-size:12.5px;color:hsl(240 6% 30%);margin-top:2px}
+.wroute{display:flex;align-items:center;gap:8px;font-size:13px}
+.wroute .nd{flex:1;min-width:0;border:1px solid hsl(var(--border));border-radius:9px;padding:8px 11px;background:hsl(var(--card))}
+.wroute .nd .k{font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));font-weight:600}
+.wroute .nd .v{font-weight:650;font-size:13.5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wroute .nd .s{font-size:11.5px;color:hsl(var(--muted-foreground));font-variant-numeric:tabular-nums}
+.wroute .ar{color:hsl(var(--primary));flex:none}
+/* three-mode comparison */
+.modes{display:flex;gap:24px;align-items:flex-start;justify-content:center;flex-wrap:wrap}
+.mode{display:flex;flex-direction:column;gap:10px;align-items:center}
+.phone.cmp{zoom:.84}
+
 /* ---------- row detail panel ---------- */
 .detail{width:520px;max-width:100%;background:hsl(var(--card));border-radius:16px;box-shadow:0 24px 60px -20px hsl(230 30% 10%/.5);text-align:left;overflow:hidden}
 .detail .dh{padding:20px 24px 18px;border-bottom:1px solid hsl(var(--border));position:relative}
@@ -605,7 +655,7 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
     <div>
       <h1>Movimentações · o livro-razão do estoque</h1>
       <p>A aba <b>Movimentações</b> do Estoque. Um registro <b>append-only</b> de todo fato que mexeu no saldo: entrada por compra, saída para OS, devolução, transferência, ajuste e saldo inicial. Não se edita nem se apaga — uma correção é um lançamento contrário. É a tela onde o truck cumpre a promessa: <b>cada fato fica gravado</b>, com quem, quando, de onde e por quanto.</p>
-      <nav class="toc"><a href="#s1"><b>1</b>A aba (padrão)</a><a href="#s2"><b>2</b>Carregando</a><a href="#s3"><b>3</b>Sem resultado</a><a href="#s4"><b>4</b>Cabeçalho por persona</a><a href="#s5"><b>5</b>Ajuste de estoque</a><a href="#s6"><b>6</b>Transferência</a><a href="#s7"><b>7</b>Estornar</a><a href="#s8"><b>8</b>Detalhe do lançamento</a><a href="#s9"><b>9</b>No celular</a><a href="#s10"><b>10</b>Rótulo: curto vs. tooltip</a></nav>
+      <nav class="toc"><a href="#s1"><b>1</b>A aba (padrão)</a><a href="#s2"><b>2</b>Carregando</a><a href="#s3"><b>3</b>Sem resultado</a><a href="#s4"><b>4</b>Cabeçalho por persona</a><a href="#s5"><b>5</b>Ajuste de estoque</a><a href="#s6"><b>6</b>Transferência</a><a href="#s7"><b>7</b>Estornar</a><a href="#s8"><b>8</b>Detalhe do lançamento</a><a href="#s9"><b>9</b>Notebook · tablet · celular</a><a href="#s10"><b>10</b>Rótulo: curto vs. tooltip</a></nav>
     </div>
     <div class="lockup" aria-label="Facter Truck"><svg width="27" height="40"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></div>
   </header>
@@ -817,164 +867,133 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
     </div>
   </section>
 
-  <!-- =============== 5. AJUSTE DE ESTOQUE (FLUXO) =============== -->
+  <!-- =============== 5. AJUSTE DE ESTOQUE (WEB) =============== -->
   <section class="sec" id="s5">
-    <div class="sec-label"><span class="sec-num">5</span><h2>Ajuste de estoque · um fluxo guiado</h2></div>
-    <p class="sec-sub">Como um app de banco: uma decisão por tela, número grande e tátil, e o resultado aparecendo ao vivo antes de confirmar. O ajuste é sempre pelo <b>saldo contado</b> — a pessoa digita quanto tem, o sistema calcula a entrada ou a saída.</p>
+    <div class="sec-label"><span class="sec-num">5</span><h2>Ajuste de estoque · diálogo de gestão (notebook)</h2></div>
+    <p class="sec-sub">Esta é a tela de <b>gestão</b>: mouse + teclado, densidade, modal centrado no DS. O fluxo guiado continua — saldo à vista, resultado ao vivo, motivo em chips, confirmação — mas o número se <b>digita</b> (teclado, com stepper para o mouse), sem teclado numérico na tela. O toque de tablet e o celular são adaptações desse mesmo fluxo (seção 9).</p>
+    <p class="view-cap">Passo 1 · registrar · e Passo 2 · confirmar</p>
     <div class="frame stage light">
-      <div class="flows">
-        <div class="flowcol">
-          <span class="cap-top">Passo 1 · contagem</span>
-          <div class="flow">
-            <div class="flow-hd"><span class="x"><i class="ic s18 i-x"></i></span><div class="ti">Ajuste de estoque<span>Depósito Mucuri</span></div><div class="sdots"><i class="on"></i><i></i><i></i></div></div>
-            <div class="flow-bd">
-              <div class="bal-card"><span class="pi"><i class="ic s20 i-box"></i></span><div style="min-width:0"><div class="nm">Pastilha de freio</div><div class="sk">SKU SP-20418</div></div><div class="bg"><div class="k">Saldo atual</div><div class="v">12 un</div></div></div>
-              <div>
-                <div class="amt-label">Quanto você contou?</div>
-                <div class="big-amt"><span class="val">8</span><span class="u">un</span><span class="caret"></span></div>
-                <div class="amt-help">novo saldo na prateleira</div>
-              </div>
-              <div class="kpad"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>6</button><button>7</button><button>8</button><button>9</button><button class="del"><i class="ic s18 i-bksp"></i></button><button>0</button><button class="del"><i class="ic s18 i-check"></i></button></div>
-            </div>
-            <div class="flow-ft"><button class="cta cta-primary">Continuar</button></div>
+      <div class="col" style="align-items:center">
+        <div class="cap-top">Passo 1 · registrar</div>
+        <div class="dx md" role="dialog" aria-labelledby="aj-t">
+          <div class="dx-hd">
+            <div class="dx-ctx"><span class="dx-ico warn"><i class="ic s18 i-adjust"></i></span><span class="ent">Ajuste de estoque<span class="dot"></span>Depósito Mucuri</span></div>
+            <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+            <h2 id="aj-t">Registrar ajuste</h2>
+            <div class="wsteps"><span class="st on"><span class="n">1</span>Contagem</span><span class="ln"></span><span class="st"><span class="n">2</span>Confirmar</span></div>
           </div>
+          <div class="dx-bd" style="gap:16px">
+            <div class="wbal"><span class="pi"><i class="ic s18 i-box"></i></span><div style="min-width:0"><div class="nm">Pastilha de freio</div><div class="sk">SKU SP-20418</div></div><div class="bg"><div class="k">Saldo atual</div><div class="v">12 un</div></div></div>
+            <div class="two" style="align-items:end;gap:16px">
+              <label class="fl"><span class="l">Novo saldo (contado) <span class="req">*</span></span>
+                <span class="stepper focus"><button type="button" aria-label="Diminuir">−</button><span class="val"><b>8</b><span class="caret"></span><span class="u">un</span></span><button type="button" aria-label="Aumentar">+</button></span>
+                <span class="stephint"><i class="ic s14 i-info"></i>Digite, ou <kbd>↑</kbd><kbd>↓</kbd> · <kbd>Enter</kbd> avança</span></label>
+              <div class="wres out"><span class="k">Saída de 4 un</span><span class="flw">saldo <b>12</b> → <b>8</b></span></div>
+            </div>
+            <div class="dsec"><h3>Motivo <span class="r">obrigatório</span></h3>
+              <div class="chip-grid"><button class="mchip sm" aria-pressed="true"><i class="ic i-check"></i>Inventário</button><button class="mchip sm">Perda</button><button class="mchip sm">Quebra</button><button class="mchip sm">Achado</button><button class="mchip sm">Outro</button></div>
+            </div>
+          </div>
+          <div class="dx-ft"><p class="conseq"><i class="ic s16 i-info"></i><span>Registra uma <b>saída de 4 un</b> no Depósito Mucuri. Nada é editado — é um lançamento novo.</span></p><div class="acts"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Continuar</button></div></div>
         </div>
-
-        <div class="flowcol">
-          <span class="cap-top">Passo 2 · motivo + resultado ao vivo</span>
-          <div class="flow">
-            <div class="flow-hd"><span class="bk"><i class="ic s16 i-cl"></i></span><div class="ti">Ajuste de estoque<span>Pastilha de freio · Depósito Mucuri</span></div><div class="sdots"><i></i><i class="on"></i><i></i></div></div>
-            <div class="flow-bd">
-              <div class="hero-res out"><span class="lead">vai registrar uma saída</span><span class="big">−4 un</span><span class="flw">saldo <b>12</b> → <b>8 un</b></span></div>
-              <div>
-                <div class="step-q" style="margin-bottom:11px">Por que o ajuste?</div>
-                <div class="chip-grid">
-                  <button class="mchip" aria-pressed="true"><i class="ic i-check"></i>Inventário</button>
-                  <button class="mchip">Perda</button>
-                  <button class="mchip">Quebra</button>
-                  <button class="mchip">Achado</button>
-                  <button class="mchip">Outro</button>
-                </div>
-                <p class="amt-help" style="text-align:left;margin-top:11px">"Outro" abre um campo para descrever.</p>
-              </div>
-            </div>
-            <div class="flow-ft"><button class="cta cta-primary">Revisar ajuste</button></div>
+      </div>
+      <div class="col" style="align-items:center;width:420px;max-width:100%">
+        <div class="cap-top">Passo 2 · confirmar</div>
+        <div class="dx sm" style="--w:100%" role="dialog" aria-labelledby="ajc-t">
+          <div class="dx-hd">
+            <div class="dx-ctx"><span class="dx-ico warn"><i class="ic s18 i-adjust"></i></span><span class="ent">Ajuste de estoque<span class="dot"></span>Depósito Mucuri</span></div>
+            <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+            <h2 id="ajc-t">Confirmar ajuste</h2>
+            <div class="wsteps"><span class="st done"><span class="n"><i class="ic s12 i-check"></i></span>Contagem</span><span class="ln"></span><span class="st on"><span class="n">2</span>Confirmar</span></div>
           </div>
-        </div>
-
-        <div class="flowcol">
-          <span class="cap-top">Confirmação</span>
-          <div class="flow">
-            <div class="flow-hd"><span class="bk"><i class="ic s16 i-cl"></i></span><div class="ti">Confirmar ajuste<span>última conferida</span></div><div class="sdots"><i></i><i></i><i class="on"></i></div></div>
-            <div class="flow-bd" style="gap:14px">
-              <div class="sum-hero"><span class="ci out"><i class="ic s24 i-adjust"></i></span><div class="big">Saída de 4 un</div><div class="s">Pastilha de freio · saldo 12 → 8</div></div>
-              <div class="sum">
-                <div class="r"><span class="k">Depósito</span><span class="v">Depósito Mucuri</span></div>
-                <div class="r"><span class="k">Peça</span><span class="v">Pastilha de freio</span></div>
-                <div class="r"><span class="k">Movimento</span><span class="v num">−4 un</span></div>
-                <div class="r"><span class="k">Motivo</span><span class="v">Inventário</span></div>
-                <div class="r"><span class="k">Autor</span><span class="v">Carla Nunes</span></div>
-              </div>
+          <div class="dx-bd" style="gap:14px">
+            <div class="whero"><span class="ci out"><i class="ic s20 i-adjust"></i></span><div><div class="big">Saída de 4 un</div><div class="s">Pastilha de freio · saldo 12 → 8</div></div></div>
+            <div class="sum">
+              <div class="r"><span class="k">Depósito</span><span class="v">Depósito Mucuri</span></div>
+              <div class="r"><span class="k">Movimento</span><span class="v num">−4 un</span></div>
+              <div class="r"><span class="k">Motivo</span><span class="v">Inventário</span></div>
+              <div class="r"><span class="k">Autor</span><span class="v">Carla Nunes</span></div>
             </div>
-            <div class="flow-ft"><button class="cta cta-primary"><i class="ic s18 i-check"></i>Confirmar ajuste</button><p class="flow-note"><i class="ic s14 i-lock"></i>É um lançamento novo no razão. Nada é editado nem apagado.</p></div>
           </div>
+          <div class="dx-ft"><p class="conseq"><i class="ic s16 i-lock"></i><span>Lançamento novo. Nada é editado nem apagado.</span></p><div class="acts"><button class="btn btn-outline" type="button">Voltar</button><button class="btn btn-primary" type="button"><i class="ic s16 i-check"></i>Confirmar ajuste</button></div></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- =============== 6. TRANSFERÊNCIA (FLUXO) =============== -->
+  <!-- =============== 6. TRANSFERÊNCIA (WEB) =============== -->
   <section class="sec" id="s6">
-    <div class="sec-label"><span class="sec-num">6</span><h2>Transferência entre depósitos · como um Pix</h2></div>
-    <p class="sec-sub">De onde sai, para onde vai, quanto. Um par de lançamentos ligados: sai de um depósito e entra no outro com o mesmo custo. A quantidade nunca passa do saldo disponível na origem.</p>
+    <div class="sec-label"><span class="sec-num">6</span><h2>Transferência entre depósitos · diálogo de gestão</h2></div>
+    <p class="sec-sub">Mesmo modo gestão: origem e destino em <b>selects</b>, peça e quantidade digitadas, o roteiro "de → para" à vista, e a confirmação. Um par de lançamentos ligados, mesmo custo. A quantidade nunca passa do saldo da origem.</p>
+    <p class="view-cap">Passo 1 · dados · e Passo 2 · confirmar</p>
     <div class="frame stage light">
-      <div class="flows">
-        <div class="flowcol">
-          <span class="cap-top">Passo 1 · de → para</span>
-          <div class="flow">
-            <div class="flow-hd"><span class="x"><i class="ic s18 i-x"></i></span><div class="ti">Transferência<span>entre depósitos</span></div><div class="sdots"><i class="on"></i><i></i><i></i></div></div>
-            <div class="flow-bd">
-              <div class="step-q">Para onde vai a peça?</div>
-              <div class="route-big">
-                <div class="rnode from"><span class="ci"><i class="ic s20 i-warehouse"></i></span><div style="min-width:0"><div class="k">De</div><div class="v">Almoxarifado Central</div><div class="s num">disponível: 16 un</div></div><i class="ic s16 i-cr chev"></i></div>
-                <div class="route-mid"><span class="line"></span><span class="dot"><i class="ic s16 i-arrowr" style="transform:rotate(90deg)"></i></span></div>
-                <div class="rnode to"><span class="ci"><i class="ic s20 i-warehouse"></i></span><div style="min-width:0"><div class="k">Para</div><div class="v">Depósito Mucuri</div><div class="s num">saldo hoje: 2 un</div></div><i class="ic s16 i-cr chev"></i></div>
-              </div>
-            </div>
-            <div class="flow-ft"><button class="cta cta-primary">Continuar</button></div>
+      <div class="col" style="align-items:center">
+        <div class="cap-top">Passo 1 · dados</div>
+        <div class="dx md" role="dialog" aria-labelledby="tr-t">
+          <div class="dx-hd">
+            <div class="dx-ctx"><span class="dx-ico"><i class="ic s18 i-transfer"></i></span><span class="ent">Transferência entre depósitos</span></div>
+            <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+            <h2 id="tr-t">Nova transferência</h2>
+            <div class="wsteps"><span class="st on"><span class="n">1</span>Dados</span><span class="ln"></span><span class="st"><span class="n">2</span>Confirmar</span></div>
           </div>
+          <div class="dx-bd" style="gap:16px">
+            <div class="two" style="gap:14px">
+              <label class="fl"><span class="l">Depósito de origem <span class="req">*</span></span><span class="input select"><span class="grow">Almoxarifado Central</span><i class="ic s16 i-down"></i></span><span class="hint">disponível: <b style="color:hsl(var(--foreground))">16 un</b></span></label>
+              <label class="fl"><span class="l">Depósito de destino <span class="req">*</span></span><span class="input select"><span class="grow">Depósito Mucuri</span><i class="ic s16 i-down"></i></span><span class="hint">saldo hoje: 2 un</span></label>
+            </div>
+            <div class="fl"><span class="l">Peça <span class="req">*</span></span>
+              <div class="combo"><div class="combo-sel" style="padding:9px 12px"><span class="pi"><i class="ic s16 i-box"></i></span><div style="min-width:0"><div class="nm">Filtro de óleo</div><div class="sk">SKU SP-10088</div></div><div class="bal">Na origem<b class="num">16 un</b></div></div></div>
+            </div>
+            <div class="two" style="align-items:end;gap:16px">
+              <label class="fl"><span class="l">Quantidade <span class="req">*</span></span>
+                <span class="stepper focus"><button type="button" aria-label="Diminuir">−</button><span class="val"><b>10</b><span class="caret"></span><span class="u">un</span></span><button type="button" aria-label="Aumentar">+</button></span>
+                <span class="stephint"><i class="ic s14 i-info"></i>máx. <b style="color:hsl(var(--foreground))">16 un</b> na origem</span></label>
+              <div class="wres tr"><span class="k">10 un</span><span class="flw">Almox. Central → Mucuri</span></div>
+            </div>
+          </div>
+          <div class="dx-ft"><p class="conseq"><i class="ic s16 i-info"></i><span>Sai <b>10 un</b> do Almoxarifado Central e entra <b>10 un</b> no Depósito Mucuri (dois lançamentos ligados).</span></p><div class="acts"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Continuar</button></div></div>
         </div>
-
-        <div class="flowcol">
-          <span class="cap-top">Passo 2 · peça + quantidade</span>
-          <div class="flow">
-            <div class="flow-hd"><span class="bk"><i class="ic s16 i-cl"></i></span><div class="ti">Transferência<span>Almox. Central → Mucuri</span></div><div class="sdots"><i></i><i class="on"></i><i></i></div></div>
-            <div class="flow-bd">
-              <div class="bal-card"><span class="pi"><i class="ic s20 i-box"></i></span><div style="min-width:0"><div class="nm">Filtro de óleo</div><div class="sk">SKU SP-10088</div></div><div class="bg"><div class="k">Na origem</div><div class="v">16 un</div></div></div>
-              <div>
-                <div class="amt-label">Quanto transferir?</div>
-                <div class="big-amt"><span class="val">10</span><span class="u">un</span><span class="caret"></span></div>
-                <div class="amt-help">máx. <b>16 un</b> disponíveis na origem</div>
-              </div>
-              <div class="kpad"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>6</button><button>7</button><button>8</button><button>9</button><button class="del"><i class="ic s18 i-bksp"></i></button><button>0</button><button class="del"><i class="ic s18 i-check"></i></button></div>
-            </div>
-            <div class="flow-ft"><button class="cta cta-primary">Revisar transferência</button></div>
+      </div>
+      <div class="col" style="align-items:center;width:420px;max-width:100%">
+        <div class="cap-top">Passo 2 · confirmar</div>
+        <div class="dx sm" style="--w:100%" role="dialog" aria-labelledby="trc-t">
+          <div class="dx-hd">
+            <div class="dx-ctx"><span class="dx-ico"><i class="ic s18 i-transfer"></i></span><span class="ent">Transferência</span></div>
+            <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+            <h2 id="trc-t">Confirmar transferência</h2>
+            <div class="wsteps"><span class="st done"><span class="n"><i class="ic s12 i-check"></i></span>Dados</span><span class="ln"></span><span class="st on"><span class="n">2</span>Confirmar</span></div>
           </div>
-        </div>
-
-        <div class="flowcol">
-          <span class="cap-top">Confirmação</span>
-          <div class="flow">
-            <div class="flow-hd"><span class="bk"><i class="ic s16 i-cl"></i></span><div class="ti">Confirmar transferência<span>última conferida</span></div><div class="sdots"><i></i><i></i><i class="on"></i></div></div>
-            <div class="flow-bd" style="gap:14px">
-              <div class="sum-hero"><span class="ci tr"><i class="ic s24 i-transfer"></i></span><div class="big">Transferir 10 un</div><div class="s">Filtro de óleo</div></div>
-              <div class="route-big">
-                <div class="rnode from"><span class="ci"><i class="ic s18 i-out"></i></span><div style="min-width:0"><div class="k">Sai de</div><div class="v">Almoxarifado Central</div><div class="s num">−10 un · fica com 6 un</div></div></div>
-                <div class="route-mid"><span class="line"></span><span class="dot"><i class="ic s16 i-arrowr" style="transform:rotate(90deg)"></i></span></div>
-                <div class="rnode to"><span class="ci"><i class="ic s18 i-in"></i></span><div style="min-width:0"><div class="k">Entra em</div><div class="v">Depósito Mucuri</div><div class="s num">+10 un · fica com 12 un</div></div></div>
-              </div>
-            </div>
-            <div class="flow-ft"><button class="cta cta-primary"><i class="ic s18 i-check"></i>Confirmar transferência</button><p class="flow-note"><i class="ic s14 i-info"></i>Gera dois lançamentos ligados, mesmo custo unitário (R$ 27,00).</p></div>
+          <div class="dx-bd" style="gap:14px">
+            <div class="whero"><span class="ci tr"><i class="ic s20 i-transfer"></i></span><div><div class="big">Transferir 10 un</div><div class="s">Filtro de óleo · R$ 27,00/un</div></div></div>
+            <div class="wroute"><div class="nd"><div class="k">Sai de</div><div class="v">Almox. Central</div><div class="s num">−10 · fica 6 un</div></div><i class="ic s18 i-arrowr ar"></i><div class="nd"><div class="k">Entra em</div><div class="v">Mucuri</div><div class="s num">+10 · fica 12 un</div></div></div>
           </div>
+          <div class="dx-ft"><p class="conseq"><i class="ic s16 i-info"></i><span>Dois lançamentos ligados, mesmo custo.</span></p><div class="acts"><button class="btn btn-outline" type="button">Voltar</button><button class="btn btn-primary" type="button"><i class="ic s16 i-check"></i>Confirmar</button></div></div>
         </div>
       </div>
     </div>
-    <div class="notes"><h4>Regra</h4><ul><li>Se a quantidade passar do saldo da origem, o campo mostra o erro na hora ("Só há 6 un disponíveis") e o CTA fica bloqueado — a pessoa nunca chega na confirmação com um valor inválido.</li></ul></div>
+    <div class="notes"><h4>Regra</h4><ul><li>Se a quantidade passa do saldo da origem, o stepper mostra o erro na hora ("Só há 6 un disponíveis") e Continuar fica bloqueado — nunca se chega à confirmação com valor inválido.</li></ul></div>
   </section>
 
-  <!-- =============== 7. ESTORNAR (FLUXO) =============== -->
+  <!-- =============== 7. ESTORNAR (WEB) =============== -->
   <section class="sec" id="s7">
-    <div class="sec-label"><span class="sec-num">7</span><h2>Estornar · uma confirmação tranquila</h2></div>
-    <p class="sec-sub">Não se apaga uma linha do razão. Estornar cria um <b>lançamento contrário</b> que devolve o saldo e fica ligado ao original — os dois continuam visíveis. A tela mostra exatamente o que volta, sem susto.</p>
+    <div class="sec-label"><span class="sec-num">7</span><h2>Estornar · confirmação de gestão</h2></div>
+    <p class="sec-sub">Modal centrado, tranquilo e claro — não um alerta cru. Mostra o lançamento que volta, o saldo que retorna e por quê. Estornar cria um <b>lançamento contrário</b>; o original continua no razão, marcado como estornado.</p>
     <div class="frame stage light">
-      <div class="flows">
-        <div class="flowcol">
-          <span class="cap-top">Confirmação</span>
-          <div class="flow">
-            <div class="flow-hd"><span class="x"><i class="ic s18 i-x"></i></span><div class="ti">Estornar lançamento<span>28/09 · 16:42</span></div></div>
-            <div class="flow-bd">
-              <div class="rev-txn"><span class="ci"><i class="ic s18 i-wrench"></i></span><div style="min-width:0"><div class="nm">Pastilha de freio</div><div class="s">Saída para OS · OS #1042 · Rafael Souza</div></div><div class="amt">−4 un<small>R$ 356,00</small></div></div>
-              <div class="rev-flow"><div class="cell"><div class="k">saldo agora</div><div class="v">18</div></div><i class="ic s20 i-arrowr ar"></i><div class="cell"><div class="k">volta para</div><div class="v">22 un</div></div></div>
-              <div class="explain"><i class="ic s16 i-undo"></i><span>Cria uma <b>entrada de +4 un</b> que devolve o saldo. O lançamento original <b>continua no razão</b>, marcado como <b>estornado</b>, e os dois apontam um para o outro.</span></div>
-            </div>
-            <div class="flow-ft"><button class="cta cta-danger"><i class="ic s18 i-undo"></i>Estornar</button><button class="cta" style="background:none;color:hsl(240 6% 34%);height:44px;font-size:14px;margin-top:2px">Cancelar</button></div>
-          </div>
+      <div class="dx sm" role="alertdialog" aria-labelledby="es-t">
+        <div class="dx-hd">
+          <div class="dx-ctx"><span class="dx-ico danger"><i class="ic s18 i-undo"></i></span><span class="ent"><b>Saída para OS #1042</b><span class="dot"></span>28/09 16:42</span></div>
+          <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
+          <h2 id="es-t">Estornar este lançamento?</h2>
         </div>
-
-        <div class="flowcol">
-          <span class="cap-top">Depois · no razão</span>
-          <div class="flow">
-            <div class="flow-hd"><div class="ti" style="display:flex;align-items:center;gap:8px"><span style="width:26px;height:26px;border-radius:99px;background:hsl(var(--success-soft));color:hsl(var(--success-text));display:grid;place-items:center"><i class="ic s16 i-check"></i></span>Estorno registrado</div></div>
-            <div class="flow-bd">
-              <p class="explain" style="color:hsl(240 6% 30%)"><span>Os dois lançamentos ficam ligados e visíveis — a auditoria conta a história inteira.</span></p>
-              <div class="rev-txn" style="opacity:.85"><span class="ci"><i class="ic s18 i-wrench"></i></span><div style="min-width:0"><div class="nm">Pastilha de freio <span class="chip" style="margin-left:2px">estornado</span></div><div class="s">Saída para OS · 28/09 16:42</div></div><div class="amt">−4 un<small>R$ 356,00</small></div></div>
-              <div class="rev-txn"><span class="ci" style="background:hsl(var(--success-soft));color:hsl(var(--success-text))"><i class="ic s18 i-undo"></i></span><div style="min-width:0"><div class="nm">Pastilha de freio</div><div class="s">Estorno de OS #1042 · agora</div></div><div class="amt" style="color:hsl(var(--success-text))">+4 un<small>R$ 356,00</small></div></div>
-            </div>
-            <div class="flow-ft"><button class="cta cta-primary">Ver no razão</button><p class="flow-note"><i class="ic s14 i-lock"></i>Saldo de volta em 22 un. Nada foi apagado.</p></div>
-          </div>
+        <div class="dx-bd" style="gap:14px">
+          <div class="rev-txn"><span class="ci"><i class="ic s18 i-wrench"></i></span><div style="min-width:0"><div class="nm">Pastilha de freio</div><div class="s">Saída para OS · OS #1042 · Rafael Souza</div></div><div class="amt">−4 un<small>R$ 356,00</small></div></div>
+          <div class="rev-flow"><div class="cell"><div class="k">saldo agora</div><div class="v">18</div></div><i class="ic s18 i-arrowr ar"></i><div class="cell"><div class="k">volta para</div><div class="v">22 un</div></div></div>
+          <div class="explain"><i class="ic s16 i-undo"></i><span>Cria uma <b>entrada de +4 un</b> que devolve o saldo. O original <b>continua no razão</b>, marcado como <b>estornado</b>, e os dois apontam um para o outro.</span></div>
         </div>
+        <div class="dx-ft"><p class="conseq danger"><i class="ic s16 i-warn"></i><span>Devolve <b>4 un</b> ao Depósito Mucuri.</span></p><div class="acts"><button class="btn btn-outline" type="button" style="box-shadow:0 0 0 2px hsl(var(--card)),0 0 0 4px hsl(var(--ring))">Cancelar</button><button class="btn btn-danger" type="button"><i class="ic s16 i-undo"></i>Estornar</button></div></div>
       </div>
     </div>
+    <div class="notes"><h4>Nota</h4><ul><li>Estornar aparece só nos tipos que fazem sentido reverter (ajuste, transferência, saldo inicial). Uma saída para OS normalmente se corrige pela própria OS; aqui é exemplo do padrão. Depois do estorno, os dois lançamentos ligados ficam visíveis no razão.</li></ul></div>
   </section>
 
   <!-- =============== 8. ROW DETAIL =============== -->
@@ -1011,38 +1030,70 @@ code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
     </div>
   </section>
 
-  <!-- =============== 9. MOBILE =============== -->
+  <!-- =============== 9. UM FLUXO, TRÊS MODOS =============== -->
   <section class="sec" id="s9">
-    <div class="sec-label"><span class="sec-num">9</span><h2>No celular · o ajuste em bottom-sheet</h2></div>
-    <p class="sec-sub">No celular o mesmo diálogo vira <b>bottom-sheet</b>: sobe de baixo, campos maiores para o toque, a consequência e os botões fixos no rodapé. Mesmo conteúdo, mesma regra.</p>
-    <div class="frame stage light" style="padding:36px 20px">
-      <div>
-        <div class="phone"><div class="screen">
-          <div class="status"><span>9:41</span><span class="isl"></span><span>5G</span></div>
-          <div class="m-top"><div class="lockup"><svg width="18" height="27" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div class="wordmark">Facter <b>Truck</b></div></div></div>
-          <div class="m-body"><h1>Movimentações</h1><div class="mc"><b>Pastilha de freio</b> · −4 un · OS #1042</div><div class="mc"><b>Óleo 15W40</b> · +200 L · NF 4513</div></div>
-          <div class="scrim"></div>
-          <div class="sheet" role="dialog" aria-labelledby="sh-t">
-            <div class="sh-hd">
-              <div class="grab"></div>
-              <div class="dx-ctx"><span class="dx-ico warn"><i class="ic s18 i-adjust"></i></span><span class="ent">Ajuste<span class="dot"></span>Depósito Mucuri</span></div>
+    <div class="sec-label"><span class="sec-num">9</span><h2>Um fluxo, três modos · notebook, tablet, celular</h2></div>
+    <p class="sec-sub">A regra da casa: <b>a tela de gestão nunca é a de tablet esticada</b>. O mesmo Ajuste, desenhado por modo — <b>gestão</b> no notebook (mouse + teclado, denso, modal do DS) e <b>operação</b> no tablet/celular (toque, alvos grandes, teclado numérico na tela). Componentes do DS que se adaptam (input, stepper, chips), não uma UI refeita.</p>
+    <div class="frame stage light" style="padding:34px 20px">
+      <div class="modes">
+        <!-- NOTEBOOK -->
+        <div class="mode">
+          <div class="cap-top"><i class="ic s14 i-chart"></i>Notebook · gestão</div>
+          <div class="dx" style="--w:398px" role="dialog" aria-labelledby="mn-t">
+            <div class="dx-hd">
+              <div class="dx-ctx"><span class="dx-ico warn"><i class="ic s18 i-adjust"></i></span><span class="ent">Ajuste<span class="dot"></span>Mucuri</span></div>
               <button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button>
-              <h2 id="sh-t">Ajuste de estoque</h2>
-              <p class="desc">Digite o saldo que você contou</p>
+              <h2 id="mn-t">Registrar ajuste</h2>
             </div>
-            <div class="sh-bd" style="gap:14px">
+            <div class="dx-bd" style="gap:14px;padding-bottom:18px">
+              <div class="wbal"><span class="pi"><i class="ic s18 i-box"></i></span><div style="min-width:0"><div class="nm">Pastilha de freio</div><div class="sk">SKU SP-20418</div></div><div class="bg"><div class="k">Saldo</div><div class="v">12 un</div></div></div>
+              <label class="fl"><span class="l">Novo saldo (contado)</span>
+                <span style="display:flex;align-items:center;gap:12px"><span class="stepper focus"><button type="button">−</button><span class="val"><b>8</b><span class="caret"></span><span class="u">un</span></span><button type="button">+</button></span><span class="wres out" style="flex:1"><span class="k">−4 un</span><span class="flw">12 → 8</span></span></span>
+                <span class="stephint"><i class="ic s14 i-info"></i>Digite ou <kbd>↑</kbd><kbd>↓</kbd></span></label>
+              <div class="chip-grid"><button class="mchip sm" aria-pressed="true"><i class="ic i-check"></i>Inventário</button><button class="mchip sm">Perda</button><button class="mchip sm">Quebra</button></div>
+            </div>
+            <div class="dx-ft"><div class="acts" style="margin-left:0;width:100%"><button class="btn btn-outline" type="button" style="flex:1">Cancelar</button><button class="btn btn-primary" type="button" style="flex:1">Continuar</button></div></div>
+          </div>
+          <p class="phone-cap" style="max-width:398px">Modal centrado, denso. Número digitado (stepper para o mouse), sem teclado na tela. Resultado ao vivo ao lado do campo.</p>
+        </div>
+
+        <!-- TABLET -->
+        <div class="mode">
+          <div class="cap-top"><i class="ic s14 i-boxes"></i>Tablet · operação</div>
+          <div class="flow" style="width:360px">
+            <div class="flow-hd"><span class="x"><i class="ic s18 i-x"></i></span><div class="ti">Ajuste de estoque<span>Depósito Mucuri</span></div></div>
+            <div class="flow-bd" style="gap:14px">
               <div class="bal-card"><span class="pi"><i class="ic s20 i-box"></i></span><div style="min-width:0"><div class="nm">Pastilha de freio</div><div class="sk">SKU SP-20418</div></div><div class="bg"><div class="k">Saldo atual</div><div class="v">12 un</div></div></div>
               <div><div class="amt-label">Quanto você contou?</div><div class="big-amt"><span class="val">8</span><span class="u">un</span><span class="caret"></span></div></div>
               <div class="hero-res out"><span class="lead">vai registrar uma saída</span><span class="big">−4 un</span><span class="flw">saldo <b>12</b> → <b>8 un</b></span></div>
-              <div class="chip-grid"><button class="mchip" aria-pressed="true"><i class="ic i-check"></i>Inventário</button><button class="mchip">Perda</button><button class="mchip">Quebra</button><button class="mchip">Outro</button></div>
+              <div class="kpad"><button>1</button><button>2</button><button>3</button><button>4</button><button>5</button><button>6</button><button>7</button><button>8</button><button>9</button><button class="del"><i class="ic s18 i-bksp"></i></button><button>0</button><button class="del"><i class="ic s18 i-check"></i></button></div>
             </div>
-            <div class="sh-ft">
-              <p class="conseq"><i class="ic s16 i-lock"></i><span>Lançamento novo no razão. Nada é editado.</span></p>
-              <div class="btns"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Confirmar ajuste</button></div>
-            </div>
+            <div class="flow-ft"><button class="cta cta-primary">Continuar</button></div>
           </div>
-        </div></div>
-        <p class="phone-cap">Ajuste de estoque no celular: o almoxarife conta na prateleira e registra ali mesmo.</p>
+          <p class="phone-cap" style="max-width:360px">Adaptação de toque: alvos grandes, número grande, teclado numérico na tela. Mesmo fluxo, mesmos passos.</p>
+        </div>
+
+        <!-- CELULAR -->
+        <div class="mode">
+          <div class="cap-top"><i class="ic s14 i-move"></i>Celular · bottom sheet</div>
+          <div class="phone cmp"><div class="screen">
+            <div class="status"><span>9:41</span><span class="isl"></span><span>5G</span></div>
+            <div class="m-top"><div class="lockup"><svg width="18" height="27" aria-hidden="true"><use href="#facter"/></svg><span class="rule"></span><div class="wordmark">Facter <b>Truck</b></div></div></div>
+            <div class="m-body"><h1>Movimentações</h1><div class="mc"><b>Pastilha de freio</b> · −4 un · OS #1042</div></div>
+            <div class="scrim"></div>
+            <div class="sheet" role="dialog" aria-labelledby="mm-t">
+              <div class="sh-hd"><div class="grab"></div><div class="dx-ctx"><span class="dx-ico warn"><i class="ic s18 i-adjust"></i></span><span class="ent">Ajuste<span class="dot"></span>Mucuri</span></div><button class="dx-x" type="button" aria-label="Fechar"><i class="ic s18 i-x"></i></button><h2 id="mm-t">Ajuste de estoque</h2><p class="desc">Digite o saldo que você contou</p></div>
+              <div class="sh-bd" style="gap:14px">
+                <div class="bal-card"><span class="pi"><i class="ic s20 i-box"></i></span><div style="min-width:0"><div class="nm">Pastilha de freio</div><div class="sk">SKU SP-20418</div></div><div class="bg"><div class="k">Saldo</div><div class="v">12 un</div></div></div>
+                <div><div class="amt-label">Quanto você contou?</div><div class="big-amt"><span class="val">8</span><span class="u">un</span><span class="caret"></span></div></div>
+                <div class="hero-res out"><span class="lead">vai registrar uma saída</span><span class="big">−4 un</span><span class="flw">saldo <b>12</b> → <b>8 un</b></span></div>
+                <div class="chip-grid"><button class="mchip" aria-pressed="true"><i class="ic i-check"></i>Inventário</button><button class="mchip">Perda</button><button class="mchip">Outro</button></div>
+              </div>
+              <div class="sh-ft"><p class="conseq"><i class="ic s16 i-lock"></i><span>Lançamento novo. Nada é editado.</span></p><div class="btns"><button class="btn btn-outline" type="button">Cancelar</button><button class="btn btn-primary" type="button">Confirmar</button></div></div>
+            </div>
+          </div></div>
+          <p class="phone-cap" style="max-width:330px">Bottom sheet: sobe de baixo, teclado numérico, botões fixos no rodapé. A operação no bolso do almoxarife.</p>
+        </div>
       </div>
     </div>
   </section>
