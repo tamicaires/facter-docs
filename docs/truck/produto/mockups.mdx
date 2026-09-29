@@ -102,6 +102,14 @@ Aprovado em 27/09/2026. **Peças** (SKU, categoria, unidade de estoque e de cons
 
 <img src="/mockups/truck/estoque/desktop.png" alt="Mockup do estoque" style={{maxHeight: 360, width: '100%', objectFit: 'cover', objectPosition: 'top', borderRadius: 8, border: '1px solid var(--ifm-color-emphasis-300)'}} />
 
+### Movimentações
+
+Em revisão (28/09/2026). A aba Movimentações do Estoque: o livro-razão append-only de tudo que mexe no saldo — entrada por compra, saída para OS, devolução, transferência, ajuste e saldo inicial. Não se edita nem se apaga; correção é lançamento contrário. Filtros por período (componente de datas), tipo, depósito e busca (peça, NF, OS); faixa de KPIs (movimentações, entradas, saídas, ajustes); tabela com direção e sinal (+/−), custo, origem (NF/OS/ajuste) e autor; rolagem infinita e os estados (lista, skeleton, vazio). Fatia 3.
+
+[Ver o mockup](/telas/truck/movimentacoes)
+
+<img src="/mockups/truck/movimentacoes/desktop.png" alt="Mockup das movimentações de estoque" style={{maxHeight: 360, width: '100%', objectFit: 'cover', objectPosition: 'top', borderRadius: 8, border: '1px solid var(--ifm-color-emphasis-300)'}} />
+
 ### Entrada de compra & Fornecedores
 
 Rascunho · 28/09/2026. Como a peça ganha **saldo**: entra por **nota fiscal**. O fornecedor manda a **NF-e (XML)** ou cola a **chave de acesso** (44 díg); o sistema lê fornecedor, número, itens e custos, e a gente **mapeia cada item** para a nossa peça — um **de-para que aprende** (código do fornecedor → nossa peça casa sozinho na próxima). Custo médio recalcula, **preço congela** na entrada, a mesma NF não entra duas vezes. Traz **Fornecedores** (cadastro leve), o passo a passo da entrada e os edge cases (NF repetida, item sem match, fornecedor novo, XML inválido, custo destoando, sem permissão, e o **estorno** — correção é movimento inverso, nunca apagar). Próxima frente do Estoque.

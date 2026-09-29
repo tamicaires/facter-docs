@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Movimentações · mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --background:0 0% 98%;
+  --foreground:240 10% 3.9%;
+  --card:0 0% 100%;
+  --primary:233 65% 50%;
+  --primary-foreground:0 0% 100%;
+  --muted:240 4.8% 93.9%;
+  --muted-foreground:240 3.8% 42%;
+  --border:240 5.9% 90%;
+  --success:160 60% 38%;
+  --warning:38 92% 45%;
+  --danger:0 84.2% 60.2%;
+  --radius:.5rem;
+  --success-text:160 70% 24%;
+  --danger-text:0 72% 38%;
+  --warning-text:28 85% 28%;
+  --primary-soft:233 85% 96.5%;
+  --success-soft:160 55% 94%;
+  --warning-soft:40 95% 93%;
+  --danger-soft:0 85% 96%;
+  --canvas:225 14% 92%;
+  --ring:233 65% 50%;
+  --toolbar:240 5% 96%;
+  --note:285 55% 38%;
+  --note-soft:285 60% 96%;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:hsl(var(--canvas));color:hsl(var(--foreground));font:15px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,p{margin:0}
+button,input{font:inherit;color:inherit}
+a{color:hsl(var(--primary))}
+code{font:600 12.5px ui-monospace,Menlo,monospace;color:hsl(233 65% 38%)}
+:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:2px;border-radius:6px}
+.num{font-variant-numeric:tabular-nums}
+.ic{display:inline-block;width:20px;height:20px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;flex:none}
+.ic.s12{width:12px;height:12px}.ic.s13{width:13px;height:13px}.ic.s14{width:14px;height:14px}.ic.s16{width:16px;height:16px}.ic.s18{width:18px;height:18px}.ic.s24{width:24px;height:24px}
+
+/* icon set (Phosphor via iconify) */
+.i-house{--i:url(https://api.iconify.design/ph/house.svg)}
+.i-truck{--i:url(https://api.iconify.design/ph/truck.svg)}
+.i-os{--i:url(https://api.iconify.design/ph/clipboard-text.svg)}
+.i-chart{--i:url(https://api.iconify.design/ph/chart-line-up.svg)}
+.i-gear{--i:url(https://api.iconify.design/ph/gear.svg)}
+.i-box{--i:url(https://api.iconify.design/ph/package.svg)}
+.i-boxes{--i:url(https://api.iconify.design/ph/stack.svg)}
+.i-stack{--i:url(https://api.iconify.design/ph/squares-four.svg)}
+.i-store{--i:url(https://api.iconify.design/ph/storefront.svg)}
+.i-cart{--i:url(https://api.iconify.design/ph/shopping-cart-simple.svg)}
+.i-move{--i:url(https://api.iconify.design/ph/arrows-down-up.svg)}
+.i-mag{--i:url(https://api.iconify.design/ph/magnifying-glass.svg)}
+.i-down{--i:url(https://api.iconify.design/ph/caret-down.svg)}
+.i-cal{--i:url(https://api.iconify.design/ph/calendar-blank.svg)}
+.i-x{--i:url(https://api.iconify.design/ph/x.svg)}
+.i-in{--i:url(https://api.iconify.design/ph/tray-arrow-down.svg)}
+.i-out{--i:url(https://api.iconify.design/ph/tray-arrow-up.svg)}
+.i-arr-down{--i:url(https://api.iconify.design/ph/arrow-down.svg)}
+.i-arr-up{--i:url(https://api.iconify.design/ph/arrow-up.svg)}
+.i-return{--i:url(https://api.iconify.design/ph/arrow-bend-up-left.svg)}
+.i-transfer{--i:url(https://api.iconify.design/ph/arrows-left-right.svg)}
+.i-adjust{--i:url(https://api.iconify.design/ph/sliders-horizontal.svg)}
+.i-flag{--i:url(https://api.iconify.design/ph/flag.svg)}
+.i-receipt{--i:url(https://api.iconify.design/ph/receipt.svg)}
+.i-wrench{--i:url(https://api.iconify.design/ph/wrench.svg)}
+.i-warehouse{--i:url(https://api.iconify.design/ph/warehouse.svg)}
+.i-info{--i:url(https://api.iconify.design/ph/info.svg)}
+.i-lock{--i:url(https://api.iconify.design/ph/lock-key.svg)}
+.i-coins{--i:url(https://api.iconify.design/ph/coins.svg)}
+.i-spark{--i:url(https://api.iconify.design/ph/sparkle-fill.svg)}
+
+/* ---------- presentation page ---------- */
+.doc{max-width:1328px;margin:0 auto;padding:48px 24px 96px}
+.doc-head{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between;margin-bottom:24px}
+.doc-head h1{font:800 32px/1.15 Sora,Inter,sans-serif;letter-spacing:-.02em}
+.doc-head p{color:hsl(var(--muted-foreground));max-width:820px;margin-top:8px}
+.toc{display:flex;flex-wrap:wrap;gap:6px;margin-top:6px}
+.toc a{font-size:13px;text-decoration:none;color:hsl(240 6% 26%);background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:999px;padding:4px 12px}
+.toc a b{color:hsl(var(--primary));font-weight:700;margin-right:5px}
+.sec{margin-top:64px}
+.sec-label{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-num{font:800 14px Sora,sans-serif;color:hsl(var(--primary));background:hsl(var(--card));border-radius:999px;width:28px;height:28px;display:inline-grid;place-items:center;flex:none}
+.sec h2{font:700 22px/1.3 Inter,sans-serif;letter-spacing:-.01em}
+.sec-sub{color:hsl(240 5% 34%);margin:0 0 20px 40px;max-width:900px}
+.view-cap{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:600;margin:0 0 10px 40px}
+.frame{border-radius:14px;box-shadow:0 1px 2px hsl(230 20% 20%/.06),0 12px 40px -12px hsl(230 30% 20%/.18);overflow:hidden;border:1px solid hsl(var(--border));background:hsl(var(--background))}
+.lockup{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.lockup svg{color:hsl(var(--primary));flex:none}
+.lockup .rule{width:1px;align-self:stretch;background:hsl(var(--border));margin:2px 0}
+.wordmark{font:400 18px/1.1 Sora,sans-serif;letter-spacing:-.01em;white-space:nowrap}
+.wordmark b{font-weight:800}
+.tagline{font-size:11px;color:hsl(var(--muted-foreground));margin-top:3px;white-space:nowrap}
+
+/* ---------- app shell ---------- */
+.app{display:grid;grid-template-columns:72px 1fr;grid-template-rows:64px 1fr}
+.topbar{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:0 20px 0 18px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
+.topbar .spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;width:300px;height:38px;padding:0 12px;border:1px solid hsl(var(--border));border-radius:8px;color:hsl(var(--muted-foreground));font-size:13px;background:hsl(var(--background))}
+.org{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:6px 10px;border-radius:8px;border:0;background:none}
+.org .ic{color:hsl(240 5% 40%)}
+.avatar{width:34px;height:34px;border-radius:999px;background:hsl(160 40% 86%);color:hsl(160 70% 20%);display:grid;place-items:center;font-weight:600;font-size:12px;flex:none}
+.sidenav{background:hsl(var(--card));border-right:1px solid hsl(var(--border));padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.navitem{position:relative;width:48px;height:48px;border-radius:10px;display:grid;place-items:center;color:hsl(240 5% 34%);text-decoration:none}
+.navitem[aria-current="page"]{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.navitem[aria-current="page"]::before{content:"";position:absolute;left:-12px;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:hsl(var(--primary))}
+.navsep{flex:1}
+.main{padding:22px 32px 32px;min-width:0}
+
+/* ---------- page head + tabs ---------- */
+.pagehead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.pagehead h1{font:700 23px/1.2 Sora,sans-serif;letter-spacing:-.01em}
+.pagehead .meta{font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:4px}
+.pagehead .acts{display:flex;gap:8px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;padding:0 14px;border-radius:8px;border:1px solid transparent;font-weight:600;font-size:13.5px;text-decoration:none;white-space:nowrap;cursor:pointer}
+.btn-outline{background:hsl(var(--card));border-color:hsl(240 6% 82%);color:hsl(var(--foreground))}
+.btn-primary{background:hsl(var(--primary));color:#fff}
+.tabbar{display:flex;gap:2px;border-bottom:1px solid hsl(var(--border));margin-bottom:16px;flex-wrap:wrap}
+.tabbar a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;font-size:13.5px;font-weight:600;color:hsl(var(--muted-foreground));text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px}
+.tabbar a[aria-current]{color:hsl(var(--primary));border-color:hsl(var(--primary))}
+.tabbar .n{font-size:11px;font-weight:700;background:hsl(var(--muted));color:hsl(240 6% 30%);border-radius:99px;padding:1px 7px}
+.tabbar a[aria-current] .n{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+
+/* ---------- kpi strip ---------- */
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid hsl(var(--border));border-radius:12px;overflow:hidden;margin-bottom:16px;background:hsl(var(--card))}
+.kpi{padding:14px 18px;border-left:1px solid hsl(var(--border))}
+.kpi:first-child{border-left:0}
+.kpi .tp{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:600;color:hsl(var(--muted-foreground))}
+.kpi .big{font:800 25px Sora,sans-serif;letter-spacing:-.02em;margin-top:8px;line-height:1}
+.kpi .big.pos{color:hsl(var(--success-text))}
+.kpi .big.neg{color:hsl(var(--danger-text))}
+.kpi .sub{font-size:12px;color:hsl(240 6% 34%);margin-top:7px}
+.kpi .sub b{font-weight:700}
+
+/* ---------- filters bar ---------- */
+.filters{display:flex;align-items:flex-end;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.fld{display:flex;flex-direction:column;gap:6px}
+.fld .l{font-size:11.5px;font-weight:600;color:hsl(240 6% 34%)}
+.field{display:flex;align-items:center;gap:9px;height:40px;padding:0 12px;border-radius:8px;border:1px solid hsl(240 6% 82%);background:hsl(var(--card));color:hsl(var(--foreground));font-size:13.5px;white-space:nowrap}
+.field .ic{color:hsl(var(--muted-foreground))}
+.field .val{font-weight:500}
+.field .chev{margin-left:2px;color:hsl(var(--muted-foreground))}
+.field.period{min-width:214px}
+.field.period.on{border-color:hsl(var(--primary));box-shadow:0 0 0 3px hsl(var(--ring)/.15)}
+.field.sel{min-width:170px;justify-content:space-between;cursor:pointer}
+.field.sel .val.active{color:hsl(var(--primary));font-weight:600}
+.field.srch{flex:1;min-width:240px;color:hsl(var(--muted-foreground))}
+.field.srch .val{color:hsl(var(--muted-foreground));font-weight:400}
+.clearf{display:inline-flex;align-items:center;gap:6px;height:40px;padding:0 12px;border-radius:8px;border:0;background:none;color:hsl(233 65% 42%);font-size:13px;font-weight:600;cursor:pointer}
+
+/* ---------- ledger table ---------- */
+.ledger{border:1px solid hsl(var(--border));border-radius:12px;overflow:hidden;background:hsl(var(--card))}
+.mvt{width:100%;border-collapse:collapse;font-size:13.5px}
+.mvt thead th{text-align:left;font-weight:600;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;color:hsl(var(--muted-foreground));padding:11px 14px;background:hsl(var(--background));border-bottom:1px solid hsl(var(--border));white-space:nowrap}
+.mvt th.r,.mvt td.r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.mvt tbody td{padding:11px 14px;border-bottom:1px solid hsl(var(--border));vertical-align:middle}
+.mvt tbody tr:last-child td{border-bottom:0}
+.mvt tbody tr:hover{background:hsl(240 5% 98.5%)}
+.mvt td:first-child,.mvt th:first-child{padding-left:18px}
+.mvt td:last-child,.mvt th:last-child{padding-right:18px}
+.dt{white-space:nowrap;font-variant-numeric:tabular-nums}
+.dt b{font-weight:600}
+.dt span{display:block;font-size:11.5px;color:hsl(var(--muted-foreground))}
+
+.mvcell{display:flex;align-items:center;gap:8px}
+.dir{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;flex:none}
+.dir.in{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.dir.out{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.kchip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 10px;border-radius:99px;font:600 12px Sora,sans-serif;white-space:nowrap}
+.kchip .ic{width:13px;height:13px}
+.k-buy{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.k-issue{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.k-return{background:hsl(var(--note-soft));color:hsl(var(--note))}
+.k-tr{background:hsl(var(--muted));color:hsl(240 6% 30%)}
+.k-adj{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.k-init{background:hsl(var(--primary-soft));color:hsl(233 65% 40%)}
+
+.pnm{font-weight:600}
+.psku{font-size:11.5px;color:hsl(var(--muted-foreground));margin-top:1px}
+.dep{color:hsl(240 6% 26%);white-space:nowrap}
+.qt{font:700 14px Sora,sans-serif;font-variant-numeric:tabular-nums}
+.qt.plus{color:hsl(var(--success-text))}
+.qt.minus{color:hsl(var(--danger-text))}
+.qv{display:block;font:400 11.5px Inter,sans-serif;color:hsl(var(--muted-foreground));margin-top:1px}
+.cu{font-variant-numeric:tabular-nums;color:hsl(240 6% 24%)}
+.origin{color:hsl(240 6% 26%)}
+.origin .oi{display:inline-flex;align-items:center;gap:5px}
+.origin .oi .ic{color:hsl(var(--muted-foreground))}
+.author{display:flex;align-items:center;gap:8px;white-space:nowrap}
+.author .av{width:26px;height:26px;border-radius:99px;display:grid;place-items:center;font:600 10.5px Inter;flex:none}
+.av-1{background:hsl(233 45% 88%);color:hsl(233 60% 30%)}
+.av-2{background:hsl(160 40% 86%);color:hsl(160 70% 20%)}
+.av-3{background:hsl(28 80% 88%);color:hsl(28 85% 25%)}
+.av-4{background:hsl(285 40% 90%);color:hsl(285 55% 30%)}
+.av-5{background:hsl(200 45% 87%);color:hsl(205 60% 28%)}
+
+/* infinite scroll foot */
+.loadmore{display:flex;align-items:center;justify-content:center;gap:9px;padding:14px;border-top:1px solid hsl(var(--border));font-size:12.5px;color:hsl(var(--muted-foreground));background:hsl(var(--background))}
+.dots-ld{display:inline-flex;gap:4px;align-items:center;color:hsl(var(--primary))}
+.dots-ld i{width:6px;height:6px;border-radius:9px;background:currentColor;opacity:.35}
+.dots-ld i:nth-child(2){opacity:.65}.dots-ld i:nth-child(3){opacity:1}
+.mvfoot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px;font-size:12.5px;color:hsl(var(--muted-foreground))}
+
+/* audit banner */
+.auditbar{display:flex;align-items:center;gap:9px;padding:9px 14px;border-radius:9px;background:hsl(var(--primary-soft));border:1px solid hsl(233 60% 90%);font-size:12.5px;color:hsl(240 6% 28%);margin-bottom:14px}
+.auditbar .ic{color:hsl(var(--primary));flex:none}
+.auditbar b{color:hsl(var(--foreground));font-weight:600}
+
+/* skeleton */
+.skel{background:linear-gradient(90deg,hsl(240 5% 91%),hsl(240 5% 95%),hsl(240 5% 91%));border-radius:6px;display:block;height:12px}
+.sk-chip{height:22px;width:118px;border-radius:99px}
+.sk-av{height:26px;width:26px;border-radius:99px}
+
+/* empty */
+.emptybox{display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px;padding:52px 20px}
+.emptybox .big{width:52px;height:52px;border-radius:14px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center}
+.emptybox h3{font-size:15.5px;font-weight:650}
+.emptybox p{font-size:13px;color:hsl(var(--muted-foreground));max-width:44ch}
+.emptybox .sugg{display:flex;flex-wrap:wrap;gap:8px;margin-top:6px;justify-content:center}
+.emptybox .sugg button{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 13px;border-radius:999px;border:1px solid hsl(233 60% 82%);background:hsl(var(--card));color:hsl(233 65% 40%);font-size:12.5px;font-weight:600;cursor:pointer}
+
+.notes{margin:18px 0 0 40px;font-size:14px;color:hsl(240 6% 25%)}
+.notes h4{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(240 5% 36%);margin:0 0 6px}
+.notes ul{margin:0;padding-left:18px}
+.notes li{margin-bottom:5px}
+.notes b{color:hsl(var(--foreground));font-weight:650}
+
+@media (max-width:1120px){
+  .frame .app{min-width:1060px}
+  .frame{overflow-x:auto}
+}
+@media (max-width:720px){
+  .doc{padding:32px 16px 64px}
+  .sec-sub,.view-cap,.notes{margin-left:0}
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="facter" viewBox="0 0 207 304"><path fill="currentColor" d="M25.8384 196.911L15.4739 183.729C-10.7189 150.411 0.44781 101.422 38.4895 82.7344L206.266 0.307297V34.2396C206.266 60.1875 191.448 83.8698 168.12 95.2396L56.578 149.594C48.4634 153.547 41.3489 159.344 35.9791 166.609C30.5936 173.901 25.9582 183.906 26.3176 196.526C29.9947 193.609 34.0624 191.026 38.4843 188.854L206.26 106.432V140.359C206.26 166.313 191.437 189.995 168.109 201.365L56.578 255.708C48.4634 259.667 41.3489 265.464 35.9791 272.724C30.4426 280.224 25.6978 290.578 26.3593 303.693L15.4739 289.854C-7.54698 260.568 -1.72407 219.193 25.8384 196.911ZM134.818 266.526L206.208 303.724L206.187 210.802L134.953 246.661C126.828 250.755 126.755 262.323 134.818 266.526Z"/></symbol></svg>
+
+<div class="doc">
+  <header class="doc-head">
+    <div>
+      <h1>Movimentações · o livro-razão do estoque</h1>
+      <p>A aba <b>Movimentações</b> do Estoque. Um registro <b>append-only</b> de todo fato que mexeu no saldo: entrada por compra, saída para OS, devolução, transferência, ajuste e saldo inicial. Não se edita nem se apaga — uma correção é um lançamento contrário. É a tela onde o truck cumpre a promessa: <b>cada fato fica gravado</b>, com quem, quando, de onde e por quanto.</p>
+      <nav class="toc"><a href="#s1"><b>1</b>A aba (padrão)</a><a href="#s2"><b>2</b>Carregando</a><a href="#s3"><b>3</b>Sem resultado</a></nav>
+    </div>
+    <div class="lockup" aria-label="Facter Truck"><svg width="27" height="40"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></div>
+  </header>
+
+  <!-- =============== 1. DEFAULT =============== -->
+  <section class="sec" id="s1">
+    <div class="sec-label"><span class="sec-num">1</span><h2>A aba Movimentações · notebook · 1280</h2></div>
+    <p class="sec-sub">Filtros no topo (período, tipo, depósito, busca no servidor), a faixa de KPIs do período e o livro-razão em ordem cronológica inversa. A rolagem infinita carrega os lançamentos mais antigos conforme desce — a tela nasce pronta para milhares de linhas.</p>
+    <div class="frame">
+      <div class="app">
+        <header class="topbar">
+          <a class="lockup" href="#"><svg width="24" height="35"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></a>
+          <span class="spacer"></span>
+          <div class="search"><i class="ic s18 i-mag"></i>Buscar placa, frota ou OS</div>
+          <button class="org">Transportadora Rota Sul <i class="ic s16 i-down"></i></button>
+          <span class="avatar">AL</span>
+        </header>
+        <nav class="sidenav" aria-label="Menu">
+          <a class="navitem" href="#"><i class="ic s24 i-house"></i></a>
+          <a class="navitem" href="#"><i class="ic s24 i-truck"></i></a>
+          <a class="navitem" href="#"><i class="ic s24 i-os"></i></a>
+          <a class="navitem" href="#" aria-current="page"><i class="ic s24 i-box"></i></a>
+          <a class="navitem" href="#"><i class="ic s24 i-chart"></i></a>
+          <span class="navsep"></span>
+          <a class="navitem" href="#"><i class="ic s24 i-gear"></i></a>
+        </nav>
+        <main class="main">
+          <div class="pagehead">
+            <div><h1>Estoque</h1><p class="meta">Depósito Mucuri · almoxarife</p></div>
+            <div class="acts"><button class="btn btn-outline"><i class="ic s16 i-receipt"></i>Exportar CSV</button></div>
+          </div>
+          <div class="tabbar">
+            <a href="#"><i class="ic s16 i-box"></i>Peças <span class="n">312</span></a>
+            <a href="#"><i class="ic s16 i-cart"></i>Requisições <span class="n">3</span></a>
+            <a href="#"><i class="ic s16 i-boxes"></i>Depósitos <span class="n">3</span></a>
+            <a href="#" aria-current="page"><i class="ic s16 i-move"></i>Movimentações</a>
+            <a href="#"><i class="ic s16 i-stack"></i>Categorias <span class="n">14</span></a>
+            <a href="#"><i class="ic s16 i-store"></i>Fornecedores <span class="n">9</span></a>
+          </div>
+
+          <div class="kpis">
+            <div class="kpi"><div class="tp"><i class="ic s16 i-move"></i>Movimentações</div><div class="big">1.284</div><div class="sub">no período · <b>set/2026</b></div></div>
+            <div class="kpi"><div class="tp"><i class="ic s16 i-in"></i>Entradas</div><div class="big pos">+R$ 27,7 mil</div><div class="sub"><b>318</b> lançamentos</div></div>
+            <div class="kpi"><div class="tp"><i class="ic s16 i-out"></i>Saídas</div><div class="big neg">−R$ 21,4 mil</div><div class="sub"><b>942</b> lançamentos · consumo + transf.</div></div>
+            <div class="kpi"><div class="tp"><i class="ic s16 i-adjust"></i>Ajustes</div><div class="big">9</div><div class="sub"><b>2</b> saídas de correção</div></div>
+          </div>
+
+          <div class="filters">
+            <div class="fld"><span class="l">Período</span><div class="field period on"><i class="ic s16 i-cal"></i><span class="val">01/09 – 28/09/2026</span><i class="ic s14 i-down chev"></i></div></div>
+            <div class="fld"><span class="l">Tipo</span><div class="field sel"><span class="val active">Saída para OS</span><i class="ic s14 i-down chev"></i></div></div>
+            <div class="fld"><span class="l">Depósito</span><div class="field sel"><span class="val">Todos</span><i class="ic s14 i-down chev"></i></div></div>
+            <div class="fld" style="flex:1;min-width:240px"><span class="l">Buscar</span><div class="field srch"><i class="ic s16 i-mag"></i><span class="val">Buscar por peça, NF ou OS</span></div></div>
+            <button class="clearf"><i class="ic s14 i-x"></i>Limpar filtros</button>
+          </div>
+
+          <div class="auditbar"><i class="ic s16 i-lock"></i><span>Registro <b>somente leitura</b>. Uma correção entra como lançamento contrário — nada é editado ou apagado.</span></div>
+
+          <div class="ledger">
+            <table class="mvt">
+              <thead>
+                <tr>
+                  <th>Data/hora</th>
+                  <th>Movimentação</th>
+                  <th>Peça</th>
+                  <th>Depósito</th>
+                  <th class="r">Quantidade</th>
+                  <th class="r">Custo unit.</th>
+                  <th>Origem</th>
+                  <th>Autor</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td class="dt"><b>28/09/2026</b><span>16:42</span></td>
+                  <td><div class="mvcell"><span class="dir out"><i class="ic s13 i-arr-up"></i></span><span class="kchip k-issue"><i class="ic i-wrench"></i>Saída para OS</span></div></td>
+                  <td><div class="pnm">Pastilha de freio</div><div class="psku">SKU SP-20418</div></td>
+                  <td class="dep">Depósito Mucuri</td>
+                  <td class="r"><span class="qt minus">−4 un</span><span class="qv">R$ 356,00</span></td>
+                  <td class="r cu">R$ 89,00</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-os"></i>OS #1042</span></td>
+                  <td><div class="author"><span class="av av-3">RS</span>Rafael Souza</div></td>
+                </tr>
+                <tr>
+                  <td class="dt"><b>28/09/2026</b><span>15:10</span></td>
+                  <td><div class="mvcell"><span class="dir in"><i class="ic s13 i-arr-down"></i></span><span class="kchip k-buy"><i class="ic i-in"></i>Entrada por compra</span></div></td>
+                  <td><div class="pnm">Óleo 15W40</div><div class="psku">SKU SP-10023</div></td>
+                  <td class="dep">Almoxarifado Central</td>
+                  <td class="r"><span class="qt plus">+200 L</span><span class="qv">R$ 4.400,00</span></td>
+                  <td class="r cu">R$ 22,00</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-receipt"></i>NF 4513 · Distribuidora Central</span></td>
+                  <td><div class="author"><span class="av av-2">CN</span>Carla Nunes</div></td>
+                </tr>
+                <tr>
+                  <td class="dt"><b>28/09/2026</b><span>11:28</span></td>
+                  <td><div class="mvcell"><span class="dir out"><i class="ic s13 i-arr-up"></i></span><span class="kchip k-issue"><i class="ic i-wrench"></i>Saída para OS</span></div></td>
+                  <td><div class="pnm">Lona de freio</div><div class="psku">SKU SP-20415</div></td>
+                  <td class="dep">Depósito Mucuri</td>
+                  <td class="r"><span class="qt minus">−6 un</span><span class="qv">R$ 276,00</span></td>
+                  <td class="r cu">R$ 46,00</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-os"></i>OS #1039</span></td>
+                  <td><div class="author"><span class="av av-1">DA</span>Diego Alves</div></td>
+                </tr>
+                <tr>
+                  <td class="dt"><b>28/09/2026</b><span>09:03</span></td>
+                  <td><div class="mvcell"><span class="dir in"><i class="ic s13 i-arr-down"></i></span><span class="kchip k-return"><i class="ic i-return"></i>Devolução</span></div></td>
+                  <td><div class="pnm">Filtro de óleo</div><div class="psku">SKU SP-10088</div></td>
+                  <td class="dep">Depósito Mucuri</td>
+                  <td class="r"><span class="qt plus">+2 un</span><span class="qv">R$ 54,00</span></td>
+                  <td class="r cu">R$ 27,00</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-os"></i>OS #1039 · não usado</span></td>
+                  <td><div class="author"><span class="av av-1">DA</span>Diego Alves</div></td>
+                </tr>
+                <tr>
+                  <td class="dt"><b>27/09/2026</b><span>17:55</span></td>
+                  <td><div class="mvcell"><span class="dir out"><i class="ic s13 i-arr-up"></i></span><span class="kchip k-tr"><i class="ic i-transfer"></i>Transferência (saída)</span></div></td>
+                  <td><div class="pnm">Bateria 150Ah</div><div class="psku">SKU SP-30111</div></td>
+                  <td class="dep">Almoxarifado Central</td>
+                  <td class="r"><span class="qt minus">−3 un</span><span class="qv">R$ 2.670,00</span></td>
+                  <td class="r cu">R$ 890,00</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-warehouse"></i>para Depósito Ponta Grossa</span></td>
+                  <td><div class="author"><span class="av av-4">MD</span>Marina Duarte</div></td>
+                </tr>
+                <tr>
+                  <td class="dt"><b>27/09/2026</b><span>17:55</span></td>
+                  <td><div class="mvcell"><span class="dir in"><i class="ic s13 i-arr-down"></i></span><span class="kchip k-tr"><i class="ic i-transfer"></i>Transferência (entrada)</span></div></td>
+                  <td><div class="pnm">Bateria 150Ah</div><div class="psku">SKU SP-30111</div></td>
+                  <td class="dep">Depósito Ponta Grossa</td>
+                  <td class="r"><span class="qt plus">+3 un</span><span class="qv">R$ 2.670,00</span></td>
+                  <td class="r cu">R$ 890,00</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-warehouse"></i>de Almoxarifado Central</span></td>
+                  <td><div class="author"><span class="av av-4">MD</span>Marina Duarte</div></td>
+                </tr>
+                <tr>
+                  <td class="dt"><b>27/09/2026</b><span>14:20</span></td>
+                  <td><div class="mvcell"><span class="dir in"><i class="ic s13 i-arr-down"></i></span><span class="kchip k-buy"><i class="ic i-in"></i>Entrada por compra</span></div></td>
+                  <td><div class="pnm">Lona de freio</div><div class="psku">SKU SP-20415</div></td>
+                  <td class="dep">Depósito Mucuri</td>
+                  <td class="r"><span class="qt plus">+24 un</span><span class="qv">R$ 1.104,00</span></td>
+                  <td class="r cu">R$ 46,00</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-receipt"></i>NF 4498 · Freios Paraná</span></td>
+                  <td><div class="author"><span class="av av-2">CN</span>Carla Nunes</div></td>
+                </tr>
+                <tr>
+                  <td class="dt"><b>27/09/2026</b><span>10:12</span></td>
+                  <td><div class="mvcell"><span class="dir out"><i class="ic s13 i-arr-up"></i></span><span class="kchip k-adj"><i class="ic i-adjust"></i>Ajuste (saída)</span></div></td>
+                  <td><div class="pnm">Graxa de chassi</div><div class="psku">SKU SP-50077</div></td>
+                  <td class="dep">Depósito Mucuri</td>
+                  <td class="r"><span class="qt minus">−2 kg</span><span class="qv">R$ 37,00</span></td>
+                  <td class="r cu">R$ 18,50</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-adjust"></i>Perda/quebra · Marina D.</span></td>
+                  <td><div class="author"><span class="av av-4">MD</span>Marina Duarte</div></td>
+                </tr>
+                <tr>
+                  <td class="dt"><b>26/09/2026</b><span>16:40</span></td>
+                  <td><div class="mvcell"><span class="dir out"><i class="ic s13 i-arr-up"></i></span><span class="kchip k-issue"><i class="ic i-wrench"></i>Saída para OS</span></div></td>
+                  <td><div class="pnm">Filtro de ar</div><div class="psku">SKU SP-10091</div></td>
+                  <td class="dep">Depósito Mucuri</td>
+                  <td class="r"><span class="qt minus">−1 un</span><span class="qv">R$ 63,00</span></td>
+                  <td class="r cu">R$ 63,00</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-os"></i>OS #1042</span></td>
+                  <td><div class="author"><span class="av av-3">RS</span>Rafael Souza</div></td>
+                </tr>
+                <tr>
+                  <td class="dt"><b>26/09/2026</b><span>09:31</span></td>
+                  <td><div class="mvcell"><span class="dir in"><i class="ic s13 i-arr-down"></i></span><span class="kchip k-adj"><i class="ic i-adjust"></i>Ajuste (entrada)</span></div></td>
+                  <td><div class="pnm">Pastilha de freio</div><div class="psku">SKU SP-20418</div></td>
+                  <td class="dep">Almoxarifado Central</td>
+                  <td class="r"><span class="qt plus">+5 un</span><span class="qv">R$ 445,00</span></td>
+                  <td class="r cu">R$ 89,00</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-adjust"></i>Inventário — contagem · Paulo R.</span></td>
+                  <td><div class="author"><span class="av av-5">PR</span>Paulo Reis</div></td>
+                </tr>
+                <tr>
+                  <td class="dt"><b>25/09/2026</b><span>18:07</span></td>
+                  <td><div class="mvcell"><span class="dir in"><i class="ic s13 i-arr-down"></i></span><span class="kchip k-buy"><i class="ic i-in"></i>Entrada por compra</span></div></td>
+                  <td><div class="pnm">Bateria 150Ah</div><div class="psku">SKU SP-30111</div></td>
+                  <td class="dep">Almoxarifado Central</td>
+                  <td class="r"><span class="qt plus">+8 un</span><span class="qv">R$ 7.120,00</span></td>
+                  <td class="r cu">R$ 890,00</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-receipt"></i>NF 4472 · Baterias Moura</span></td>
+                  <td><div class="author"><span class="av av-2">CN</span>Carla Nunes</div></td>
+                </tr>
+                <tr>
+                  <td class="dt"><b>25/09/2026</b><span>13:44</span></td>
+                  <td><div class="mvcell"><span class="dir out"><i class="ic s13 i-arr-up"></i></span><span class="kchip k-issue"><i class="ic i-wrench"></i>Saída para OS</span></div></td>
+                  <td><div class="pnm">Correia dentada</div><div class="psku">SKU SP-40022</div></td>
+                  <td class="dep">Depósito Mucuri</td>
+                  <td class="r"><span class="qt minus">−2 un</span><span class="qv">R$ 238,00</span></td>
+                  <td class="r cu">R$ 119,00</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-os"></i>OS #1039</span></td>
+                  <td><div class="author"><span class="av av-1">DA</span>Diego Alves</div></td>
+                </tr>
+                <tr>
+                  <td class="dt"><b>25/09/2026</b><span>08:15</span></td>
+                  <td><div class="mvcell"><span class="dir in"><i class="ic s13 i-arr-down"></i></span><span class="kchip k-tr"><i class="ic i-transfer"></i>Transferência (entrada)</span></div></td>
+                  <td><div class="pnm">Óleo 15W40</div><div class="psku">SKU SP-10023</div></td>
+                  <td class="dep">Depósito Mucuri</td>
+                  <td class="r"><span class="qt plus">+60 L</span><span class="qv">R$ 1.320,00</span></td>
+                  <td class="r cu">R$ 22,00</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-warehouse"></i>de Almoxarifado Central</span></td>
+                  <td><div class="author"><span class="av av-4">MD</span>Marina Duarte</div></td>
+                </tr>
+                <tr>
+                  <td class="dt"><b>24/09/2026</b><span>10:00</span></td>
+                  <td><div class="mvcell"><span class="dir in"><i class="ic s13 i-arr-down"></i></span><span class="kchip k-init"><i class="ic i-flag"></i>Saldo inicial</span></div></td>
+                  <td><div class="pnm">Filtro de óleo</div><div class="psku">SKU SP-10088</div></td>
+                  <td class="dep">Depósito Ponta Grossa</td>
+                  <td class="r"><span class="qt plus">+40 un</span><span class="qv">R$ 1.080,00</span></td>
+                  <td class="r cu">R$ 27,00</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-boxes"></i>Cadastro do depósito</span></td>
+                  <td><div class="author"><span class="av av-5">PR</span>Paulo Reis</div></td>
+                </tr>
+                <tr>
+                  <td class="dt"><b>24/09/2026</b><span>09:58</span></td>
+                  <td><div class="mvcell"><span class="dir in"><i class="ic s13 i-arr-down"></i></span><span class="kchip k-init"><i class="ic i-flag"></i>Saldo inicial</span></div></td>
+                  <td><div class="pnm">Correia dentada</div><div class="psku">SKU SP-40022</div></td>
+                  <td class="dep">Depósito Ponta Grossa</td>
+                  <td class="r"><span class="qt plus">+12 un</span><span class="qv">R$ 1.428,00</span></td>
+                  <td class="r cu">R$ 119,00</td>
+                  <td class="origin"><span class="oi"><i class="ic s14 i-boxes"></i>Cadastro do depósito</span></td>
+                  <td><div class="author"><span class="av av-5">PR</span>Paulo Reis</div></td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="loadmore"><span class="dots-ld"><i></i><i></i><i></i></span>Carregando mais lançamentos…</div>
+          </div>
+          <div class="mvfoot"><span>Mostrando <b>15</b> de <b>1.284</b> movimentações</span><span>Ordenado por data/hora · mais recente primeiro</span></div>
+        </main>
+      </div>
+    </div>
+    <div class="notes">
+      <h4>Tipos de movimentação</h4>
+      <ul>
+        <li><b>Entrada por compra</b> (entrada) — origem em nota fiscal · <b>Saída para OS</b> (saída) — origem na OS · <b>Devolução</b> (entrada) — sobra da OS de volta ao depósito</li>
+        <li><b>Transferência (saída/entrada)</b> — par espelhado entre depósitos · <b>Ajuste (entrada/saída)</b> — motivo + autor · <b>Saldo inicial</b> (entrada) — cadastro do depósito</li>
+        <li>Quantidade sempre positiva no banco; a direção aparece como <b>sinal e cor</b>: <b>+</b> verde para entrada, <b>−</b> vermelho para saída. Valor da linha = quantidade × custo unitário.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- =============== 2. LOADING =============== -->
+  <section class="sec" id="s2">
+    <div class="sec-label"><span class="sec-num">2</span><h2>Carregando · skeleton da lista</h2></div>
+    <p class="sec-sub">Como o livro tem layout de tabela, o carregamento usa <b>skeleton</b> (não o loader de dots): a estrutura já aparece, as linhas se preenchem. Os filtros e a faixa de KPIs ficam visíveis e desabilitados enquanto a consulta volta do servidor.</p>
+    <p class="view-cap">Somente a área de conteúdo</p>
+    <div class="frame" style="padding:20px 24px">
+      <div class="filters">
+        <div class="fld"><span class="l">Período</span><div class="field period"><i class="ic s16 i-cal"></i><span class="val">01/09 – 28/09/2026</span><i class="ic s14 i-down chev"></i></div></div>
+        <div class="fld"><span class="l">Tipo</span><div class="field sel"><span class="val">Todos os tipos</span><i class="ic s14 i-down chev"></i></div></div>
+        <div class="fld"><span class="l">Depósito</span><div class="field sel"><span class="val">Todos</span><i class="ic s14 i-down chev"></i></div></div>
+        <div class="fld" style="flex:1;min-width:240px"><span class="l">Buscar</span><div class="field srch"><i class="ic s16 i-mag"></i><span class="val">Buscar por peça, NF ou OS</span></div></div>
+      </div>
+      <div class="ledger">
+        <table class="mvt">
+          <thead>
+            <tr><th>Data/hora</th><th>Movimentação</th><th>Peça</th><th>Depósito</th><th class="r">Quantidade</th><th class="r">Custo unit.</th><th>Origem</th><th>Autor</th></tr>
+          </thead>
+          <tbody>
+            <!-- 6 skeleton rows -->
+            <tr><td><span class="skel" style="width:64px"></span><span class="skel" style="width:40px;margin-top:5px"></span></td><td><span class="skel sk-chip"></span></td><td><span class="skel" style="width:130px"></span><span class="skel" style="width:80px;margin-top:5px"></span></td><td><span class="skel" style="width:120px"></span></td><td class="r"><span class="skel" style="width:56px;margin-left:auto"></span></td><td class="r"><span class="skel" style="width:60px;margin-left:auto"></span></td><td><span class="skel" style="width:150px"></span></td><td><div class="author"><span class="skel sk-av"></span><span class="skel" style="width:78px"></span></div></td></tr>
+            <tr><td><span class="skel" style="width:64px"></span><span class="skel" style="width:40px;margin-top:5px"></span></td><td><span class="skel sk-chip" style="width:96px"></span></td><td><span class="skel" style="width:110px"></span><span class="skel" style="width:80px;margin-top:5px"></span></td><td><span class="skel" style="width:130px"></span></td><td class="r"><span class="skel" style="width:48px;margin-left:auto"></span></td><td class="r"><span class="skel" style="width:56px;margin-left:auto"></span></td><td><span class="skel" style="width:170px"></span></td><td><div class="author"><span class="skel sk-av"></span><span class="skel" style="width:70px"></span></div></td></tr>
+            <tr><td><span class="skel" style="width:64px"></span><span class="skel" style="width:40px;margin-top:5px"></span></td><td><span class="skel sk-chip" style="width:130px"></span></td><td><span class="skel" style="width:120px"></span><span class="skel" style="width:80px;margin-top:5px"></span></td><td><span class="skel" style="width:110px"></span></td><td class="r"><span class="skel" style="width:52px;margin-left:auto"></span></td><td class="r"><span class="skel" style="width:64px;margin-left:auto"></span></td><td><span class="skel" style="width:140px"></span></td><td><div class="author"><span class="skel sk-av"></span><span class="skel" style="width:82px"></span></div></td></tr>
+            <tr><td><span class="skel" style="width:64px"></span><span class="skel" style="width:40px;margin-top:5px"></span></td><td><span class="skel sk-chip" style="width:110px"></span></td><td><span class="skel" style="width:100px"></span><span class="skel" style="width:80px;margin-top:5px"></span></td><td><span class="skel" style="width:120px"></span></td><td class="r"><span class="skel" style="width:44px;margin-left:auto"></span></td><td class="r"><span class="skel" style="width:60px;margin-left:auto"></span></td><td><span class="skel" style="width:160px"></span></td><td><div class="author"><span class="skel sk-av"></span><span class="skel" style="width:74px"></span></div></td></tr>
+            <tr><td><span class="skel" style="width:64px"></span><span class="skel" style="width:40px;margin-top:5px"></span></td><td><span class="skel sk-chip" style="width:126px"></span></td><td><span class="skel" style="width:124px"></span><span class="skel" style="width:80px;margin-top:5px"></span></td><td><span class="skel" style="width:118px"></span></td><td class="r"><span class="skel" style="width:50px;margin-left:auto"></span></td><td class="r"><span class="skel" style="width:58px;margin-left:auto"></span></td><td><span class="skel" style="width:150px"></span></td><td><div class="author"><span class="skel sk-av"></span><span class="skel" style="width:80px"></span></div></td></tr>
+            <tr><td><span class="skel" style="width:64px"></span><span class="skel" style="width:40px;margin-top:5px"></span></td><td><span class="skel sk-chip" style="width:100px"></span></td><td><span class="skel" style="width:116px"></span><span class="skel" style="width:80px;margin-top:5px"></span></td><td><span class="skel" style="width:128px"></span></td><td class="r"><span class="skel" style="width:46px;margin-left:auto"></span></td><td class="r"><span class="skel" style="width:54px;margin-left:auto"></span></td><td><span class="skel" style="width:165px"></span></td><td><div class="author"><span class="skel sk-av"></span><span class="skel" style="width:72px"></span></div></td></tr>
+          </tbody>
+        </table>
+        <div class="loadmore"><span class="dots-ld"><i></i><i></i><i></i></span>Carregando movimentações…</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- =============== 3. EMPTY =============== -->
+  <section class="sec" id="s3">
+    <div class="sec-label"><span class="sec-num">3</span><h2>Sem resultado · nenhum lançamento no período</h2></div>
+    <p class="sec-sub">Quando os filtros não retornam nada. A tela não fica muda: diz o que aconteceu e oferece o caminho de volta — alargar o período ou limpar os filtros. Os filtros continuam no topo, mostrando o recorte ativo.</p>
+    <p class="view-cap">Somente a área de conteúdo</p>
+    <div class="frame" style="padding:20px 24px">
+      <div class="filters">
+        <div class="fld"><span class="l">Período</span><div class="field period on"><i class="ic s16 i-cal"></i><span class="val">21/09 – 28/09/2026</span><i class="ic s14 i-down chev"></i></div></div>
+        <div class="fld"><span class="l">Tipo</span><div class="field sel"><span class="val active">Ajuste (saída)</span><i class="ic s14 i-down chev"></i></div></div>
+        <div class="fld"><span class="l">Depósito</span><div class="field sel"><span class="val active">Depósito Ponta Grossa</span><i class="ic s14 i-down chev"></i></div></div>
+        <div class="fld" style="flex:1;min-width:240px"><span class="l">Buscar</span><div class="field srch"><i class="ic s16 i-mag"></i><span class="val">Buscar por peça, NF ou OS</span></div></div>
+        <button class="clearf"><i class="ic s14 i-x"></i>Limpar filtros</button>
+      </div>
+      <div class="ledger">
+        <div class="emptybox">
+          <div class="big"><i class="ic s24 i-move"></i></div>
+          <h3>Nenhuma movimentação no período</h3>
+          <p>Não há lançamentos de <b>Ajuste (saída)</b> no <b>Depósito Ponta Grossa</b> entre 21 e 28/09. Tente alargar o período ou remover um filtro.</p>
+          <div class="sugg">
+            <button><i class="ic s14 i-cal"></i>Ampliar para 30 dias</button>
+            <button><i class="ic s14 i-x"></i>Limpar filtros</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
