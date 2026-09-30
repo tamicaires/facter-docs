@@ -1,0 +1,1274 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Pneus · ciclo de vida · mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --background:0 0% 98%;--foreground:240 10% 3.9%;--card:0 0% 100%;
+  --primary:233 65% 50%;--primary-foreground:0 0% 100%;
+  --muted:240 4.8% 94%;--muted-foreground:240 3.8% 40%;--border:240 5.9% 90%;
+  --success:160 60% 38%;--warning:38 92% 45%;--danger:0 84.2% 60.2%;
+  --success-text:160 70% 24%;--danger-text:0 72% 38%;--warning-text:28 85% 28%;
+  --primary-soft:233 85% 96.5%;--success-soft:160 55% 94%;--warning-soft:40 95% 93%;--danger-soft:0 90% 96%;
+  --canvas:225 14% 92%;--ring:233 65% 50%;--note:285 55% 38%;--note-soft:285 60% 96%;--ink:240 10% 12%;--toolbar:240 5% 96%;
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:hsl(var(--canvas));color:hsl(var(--foreground));font:14px/1.5 Sora,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,p{margin:0}
+button,input{font:inherit;color:inherit}
+a{color:hsl(var(--primary))}
+:focus-visible{outline:2px solid hsl(var(--ring));outline-offset:2px;border-radius:6px}
+.num{font-variant-numeric:tabular-nums}
+code{font:600 12px ui-monospace,Menlo,monospace;color:hsl(233 65% 40%);background:hsl(var(--muted));padding:1px 6px;border-radius:5px}
+.ic{display:inline-block;width:20px;height:20px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;flex:none}
+.ic.s12{width:12px;height:12px}.ic.s14{width:14px;height:14px}.ic.s16{width:16px;height:16px}.ic.s18{width:18px;height:18px}.ic.s24{width:24px;height:24px}.ic.s28{width:28px;height:28px}.ic.s32{width:32px;height:32px}
+.i-house{--i:url(https://api.iconify.design/ph/house.svg)}
+.i-truck{--i:url(https://api.iconify.design/ph/truck.svg)}
+.i-trailer{--i:url(https://api.iconify.design/ph/truck-trailer.svg)}
+.i-tire{--i:url(https://api.iconify.design/ph/tire.svg)}
+.i-fire{--i:url(https://api.iconify.design/ph/flame.svg)}
+.i-fire-f{--i:url(https://api.iconify.design/ph/flame-fill.svg)}
+.i-os{--i:url(https://api.iconify.design/ph/clipboard-text.svg)}
+.i-box{--i:url(https://api.iconify.design/ph/package.svg)}
+.i-chart{--i:url(https://api.iconify.design/ph/chart-line-up.svg)}
+.i-gear{--i:url(https://api.iconify.design/ph/gear.svg)}
+.i-mag{--i:url(https://api.iconify.design/ph/magnifying-glass.svg)}
+.i-down{--i:url(https://api.iconify.design/ph/caret-down.svg)}
+.i-right{--i:url(https://api.iconify.design/ph/caret-right.svg)}
+.i-check{--i:url(https://api.iconify.design/ph/check.svg)}
+.i-check-c{--i:url(https://api.iconify.design/ph/check-circle.svg)}
+.i-plus{--i:url(https://api.iconify.design/ph/plus.svg)}
+.i-x{--i:url(https://api.iconify.design/ph/x.svg)}
+.i-kebab{--i:url(https://api.iconify.design/ph/dots-three-vertical.svg)}
+.i-warn{--i:url(https://api.iconify.design/ph/warning.svg)}
+.i-warn-f{--i:url(https://api.iconify.design/ph/warning-fill.svg)}
+.i-cycle{--i:url(https://api.iconify.design/ph/arrows-clockwise.svg)}
+.i-swap{--i:url(https://api.iconify.design/ph/arrows-left-right.svg)}
+.i-down-a{--i:url(https://api.iconify.design/ph/arrow-line-down.svg)}
+.i-recap{--i:url(https://api.iconify.design/ph/recycle.svg)}
+.i-lock{--i:url(https://api.iconify.design/ph/lock-key.svg)}
+.i-cloud-x{--i:url(https://api.iconify.design/ph/cloud-slash.svg)}
+.i-cloud-up{--i:url(https://api.iconify.design/ph/cloud-arrow-up.svg)}
+.i-hist{--i:url(https://api.iconify.design/ph/clock-counter-clockwise.svg)}
+.i-pin{--i:url(https://api.iconify.design/ph/map-pin.svg)}
+.i-money{--i:url(https://api.iconify.design/ph/currency-circle-dollar.svg)}
+.i-gauge{--i:url(https://api.iconify.design/ph/gauge.svg)}
+.i-scan{--i:url(https://api.iconify.design/ph/scan.svg)}
+.i-qr{--i:url(https://api.iconify.design/ph/qr-code.svg)}
+.i-shield{--i:url(https://api.iconify.design/ph/shield-check.svg)}
+.i-shield-w{--i:url(https://api.iconify.design/ph/shield-warning.svg)}
+.i-thermo{--i:url(https://api.iconify.design/ph/thermometer-simple.svg)}
+.i-wind{--i:url(https://api.iconify.design/ph/wind.svg)}
+.i-buildings{--i:url(https://api.iconify.design/ph/buildings.svg)}
+.i-trash{--i:url(https://api.iconify.design/ph/trash.svg)}
+.i-info{--i:url(https://api.iconify.design/ph/info.svg)}
+.i-bell{--i:url(https://api.iconify.design/ph/bell.svg)}
+.i-filter{--i:url(https://api.iconify.design/ph/funnel.svg)}
+.i-full{--i:url(https://api.iconify.design/ph/arrows-out.svg)}
+.i-fullexit{--i:url(https://api.iconify.design/ph/arrows-in.svg)}
+.i-fit{--i:url(https://api.iconify.design/ph/corners-out.svg)}
+.i-hand{--i:url(https://api.iconify.design/ph/hand-tap.svg)}
+.i-list{--i:url(https://api.iconify.design/ph/list-bullets.svg)}
+.i-mic{--i:url(https://api.iconify.design/ph/microphone.svg)}
+.i-return{--i:url(https://api.iconify.design/ph/arrow-bend-up-left.svg)}
+
+/* presentation */
+.doc{max-width:1328px;margin:0 auto;padding:48px 24px 96px}
+.doc-head{display:flex;flex-wrap:wrap;gap:24px;align-items:flex-end;justify-content:space-between}
+.doc-head h1{font:800 30px/1.15 Sora,sans-serif;letter-spacing:-.02em}
+.doc-head p{color:hsl(240 6% 25%);max-width:820px;margin-top:10px;font-size:14.5px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:24px}
+.toc a{display:inline-flex;align-items:center;gap:6px;height:32px;padding:0 12px;border-radius:999px;background:hsl(var(--card));border:1px solid hsl(var(--border));font-size:13px;font-weight:500;color:hsl(var(--foreground));text-decoration:none}
+.toc a b{color:hsl(var(--primary));font-weight:800}
+.sec{margin-top:64px}
+.sec-label{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-num{font:800 14px Sora,sans-serif;color:hsl(var(--primary));background:hsl(var(--card));border-radius:999px;min-width:28px;height:28px;padding:0 8px;display:inline-grid;place-items:center;flex:none;border:1px solid hsl(var(--border))}
+.sec h2{font:700 21px/1.3 Sora,sans-serif;letter-spacing:-.01em}
+.sec-sub{color:hsl(240 6% 25%);margin:0 0 20px 40px;max-width:860px}
+.view-cap{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:600;margin:0 0 10px 40px;display:flex;align-items:center;gap:8px}
+.frame{position:relative;width:1280px;max-width:100%;background:hsl(var(--background));border-radius:14px;box-shadow:0 1px 2px hsl(230 20% 20%/.06),0 12px 40px -12px hsl(230 30% 20%/.18);overflow:hidden;border:1px solid hsl(var(--border));margin-left:40px}
+.dep{display:inline-flex;align-items:center;gap:4px;height:20px;padding:0 6px;border:1px dashed hsl(var(--note));border-radius:5px;background:hsl(var(--note-soft));color:hsl(var(--note));font:600 11px/1 Sora,sans-serif;white-space:nowrap;flex:none}
+@media(max-width:1360px){.frame{width:100%}}
+@media(max-width:760px){.sec-sub,.view-cap,.frame{margin-left:0}}
+
+/* app shell */
+.lockup{display:flex;align-items:center;gap:12px;text-decoration:none;color:inherit}
+.lockup svg{color:hsl(var(--primary));flex:none}
+.lockup .rule{width:1px;align-self:stretch;background:hsl(var(--border));margin:2px 0}
+.wordmark{font:400 18px/1.1 Sora,sans-serif;letter-spacing:-.01em;white-space:nowrap}
+.wordmark b{font-weight:800}
+.tagline{font-size:11px;color:hsl(var(--muted-foreground));margin-top:3px;white-space:nowrap}
+.app{display:grid;grid-template-columns:72px 1fr;grid-template-rows:64px 1fr}
+.topbar{grid-column:1/-1;display:flex;align-items:center;gap:16px;padding:0 20px 0 18px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
+.topbar .spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;width:300px;height:38px;padding:0 12px;border:1px solid hsl(var(--border));border-radius:8px;color:hsl(var(--muted-foreground));font-size:13px;background:hsl(var(--background))}
+.org{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;padding:6px 10px;border-radius:8px;border:0;background:none}
+.avatar{width:34px;height:34px;border-radius:999px;background:hsl(233 45% 88%);color:hsl(233 60% 30%);display:grid;place-items:center;font-weight:600;font-size:12px;flex:none}
+.av-a{background:hsl(160 40% 86%);color:hsl(160 70% 20%)}
+.av-b{background:hsl(28 80% 88%);color:hsl(28 85% 25%)}
+.sidenav{background:hsl(var(--card));border-right:1px solid hsl(var(--border));padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.navitem{position:relative;width:48px;height:48px;border-radius:10px;display:grid;place-items:center;color:hsl(240 5% 34%)}
+.navitem[aria-current="page"]{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.navitem[aria-current="page"]::before{content:"";position:absolute;left:-12px;top:12px;bottom:12px;width:3px;border-radius:0 3px 3px 0;background:hsl(var(--primary))}
+.navsep{flex:1}
+.main{padding:22px 32px 40px;min-width:0}
+.pagehead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.pagehead h1{font:700 23px/1.2 Sora,sans-serif;letter-spacing:-.01em}
+.meta{font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:4px}
+
+/* primitives */
+.card{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:40px;padding:0 16px;border-radius:8px;border:1px solid transparent;font-weight:600;font-size:13.5px;text-decoration:none;white-space:nowrap;cursor:pointer}
+.btn-primary{background:hsl(var(--primary));color:#fff}
+.btn-outline{background:hsl(var(--card));border-color:hsl(240 6% 82%);color:hsl(var(--foreground))}
+.btn-ghost{background:none;color:hsl(var(--primary));padding:0 8px;height:32px}
+.btn-sm{height:34px;padding:0 12px;font-size:13px}
+.iconbtn{width:40px;height:40px;border-radius:8px;border:1px solid hsl(240 6% 82%);background:hsl(var(--card));display:grid;place-items:center;color:hsl(var(--foreground));flex:none}
+.iconbtn.bare{border-color:transparent;background:none;color:hsl(240 5% 34%)}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:999px;background:hsl(var(--muted));color:hsl(240 6% 24%);font-size:12px;font-weight:500;white-space:nowrap}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:12px;font-weight:600;height:24px;padding:0 9px 0 7px;border-radius:6px;white-space:nowrap}
+.b-ok{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.b-stop{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.b-wait{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.b-mute{background:hsl(var(--muted));color:hsl(240 6% 28%)}
+.b-info{background:hsl(var(--primary-soft));color:hsl(233 65% 40%)}
+.meta-dot{display:inline-block;width:3px;height:3px;border-radius:9px;background:hsl(240 5% 60%);vertical-align:middle;margin:0 6px}
+.cb{width:18px;height:18px;border-radius:5px;border:1.6px solid hsl(240 6% 72%);display:grid;place-items:center;color:#fff;flex:none;cursor:pointer;background:hsl(var(--card))}
+.cb.on{background:hsl(var(--primary));border-color:hsl(var(--primary))}
+
+/* tabbar + filters + strip */
+.tabbar{display:flex;gap:2px;border-bottom:1px solid hsl(var(--border));margin-bottom:16px;flex-wrap:wrap}
+.tabbar a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;font-size:13.5px;font-weight:600;color:hsl(var(--muted-foreground));text-decoration:none;border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer}
+.tabbar a[aria-current]{color:hsl(var(--primary));border-color:hsl(var(--primary))}
+.tabbar .n{font-size:11px;font-weight:700;background:hsl(var(--muted));color:hsl(240 6% 30%);border-radius:99px;padding:1px 7px}
+.tabbar a[aria-current] .n{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.tabbar .n.warn{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.tabbar .n.dng{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.strip{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));margin-bottom:16px;overflow:hidden}
+.strip .cell{padding:14px 18px;border-left:1px solid hsl(var(--border));min-width:0}
+.strip .cell:first-child{border-left:0}
+.strip .k{font-size:12px;color:hsl(var(--muted-foreground));display:flex;align-items:center;gap:6px}
+.strip .v{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-top:2px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.strip .v.warnt{color:hsl(var(--warning-text))}.strip .v.dngt{color:hsl(var(--danger-text))}
+.strip .s{font-size:12px;color:hsl(240 6% 30%);margin-top:2px}
+.toolbar{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.toolbar .search{width:280px;background:hsl(var(--card))}
+.toolbar .spacer{flex:1}
+.chips-pick{display:flex;flex-wrap:wrap;gap:6px}
+.chips-pick button{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:999px;border:1px solid hsl(240 6% 82%);background:hsl(var(--card));font-size:12.5px;font-weight:500;cursor:pointer}
+.chips-pick button[aria-pressed="true"]{border-color:hsl(var(--primary));background:hsl(var(--primary-soft));color:hsl(233 65% 36%);font-weight:600}
+.chips-pick button .ic{color:hsl(240 6% 50%)}
+
+/* table */
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;font-weight:500;font-size:12px;color:hsl(var(--muted-foreground));padding:0 12px 9px;border-bottom:1px solid hsl(var(--border));white-space:nowrap}
+.tbl td{padding:11px 12px;border-bottom:1px solid hsl(var(--border));vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tbody tr.sel{background:hsl(var(--primary-soft))}
+.tbl tbody tr{cursor:pointer}
+.tbl .r{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tbl .fire{font-weight:700;display:flex;align-items:center;gap:6px}
+.tbl .fire .ic{color:hsl(var(--warning-text))}
+.tbl .sub{font-size:11.5px;color:hsl(var(--muted-foreground))}
+.tbl .mut{color:hsl(var(--muted-foreground))}
+.tbl .grp td{background:hsl(var(--background));font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:hsl(240 6% 30%);font-weight:700;padding:7px 12px}
+.tbl .where{display:flex;align-items:center;gap:6px}
+.tbl .where .ic{color:hsl(240 6% 55%)}
+.tbl .kb{width:30px;text-align:center;color:hsl(240 5% 55%)}
+.list-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:14px;font-size:12.5px;color:hsl(240 6% 30%)}
+.pager{display:flex;gap:4px}
+.pager button{min-width:32px;height:32px;padding:0 8px;border-radius:8px;border:1px solid hsl(240 6% 84%);background:hsl(var(--card));font-size:12.5px;font-weight:600;cursor:pointer}
+.pager button[aria-current]{background:hsl(var(--primary));color:#fff;border-color:transparent}
+
+/* selection bar */
+.selbar{position:absolute;left:50%;transform:translateX(-50%);bottom:22px;display:flex;align-items:center;gap:4px;padding:6px 6px 6px 16px;background:hsl(var(--ink));color:#fff;border-radius:14px;box-shadow:0 16px 40px -10px hsl(230 30% 10%/.5);z-index:6;white-space:nowrap}
+.selbar.hidden{display:none}
+.selbar .cnt{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:13.5px;padding-right:12px;margin-right:4px;border-right:1px solid hsl(240 6% 30%)}
+.selbar .cnt span{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:99px;background:hsl(var(--primary));font-size:12px}
+.selbar button{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 12px;border-radius:9px;border:0;background:none;color:#fff;font-size:13px;font-weight:600;cursor:pointer}
+.selbar button:hover{background:hsl(240 8% 22%)}
+.selbar .x{width:38px;padding:0;justify-content:center;color:hsl(240 6% 80%)}
+.selbar .save{background:hsl(var(--primary))}
+.selbar .save:hover{background:hsl(233 65% 45%)}
+
+/* interactive plan (VehicleSchematic — aprovado na rastreabilidade) */
+.plan-wrap{display:grid;grid-template-columns:minmax(0,1fr) 360px}
+@media(max-width:900px){.plan-wrap{grid-template-columns:1fr}}
+.plan-bar{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid hsl(var(--border));background:hsl(var(--card))}
+.plan-bar .title{font-weight:700;font-size:14.5px}.plan-bar .sub{color:hsl(var(--muted-foreground));font-size:12px}
+.plan-bar .spacer{flex:1}
+.seg{display:inline-flex;gap:2px;padding:3px;background:hsl(var(--muted));border-radius:9px}
+.seg button{border:0;background:none;height:28px;padding:0 10px;border-radius:7px;font-size:12.5px;font-weight:500;color:hsl(240 6% 28%);cursor:pointer}
+.seg button[aria-pressed="true"]{background:hsl(var(--card));color:hsl(var(--foreground));box-shadow:0 1px 2px hsl(240 10% 10%/.12);font-weight:600}
+.scanbtn{display:inline-flex;align-items:center;gap:7px;background:hsl(var(--primary));color:#fff;border:0;border-radius:8px;padding:8px 13px;font-size:13px;font-weight:600;cursor:pointer}
+.plan{position:relative;background:radial-gradient(hsl(220 8% 84%) 1px,transparent 1.4px) 0 0/22px 22px,hsl(220 10% 90%);cursor:grab;min-height:430px}
+.plan.grabbing{cursor:grabbing}.plan.grabbing svg .tire{pointer-events:none}
+svg .rail{fill:url(#steel);stroke:#6b7079;stroke-width:.5}
+svg .cab{fill:url(#cabpaint);stroke:#aab0b8;stroke-width:1.5}
+svg .body{fill:hsl(220 12% 93%);stroke:#9aa0aa;stroke-width:1.5}
+svg .lbl{fill:hsl(var(--muted-foreground));font:700 11px Sora,sans-serif;text-transform:uppercase;letter-spacing:.06em}
+svg .tire{cursor:pointer}
+svg .tire rect{fill:url(#tread);stroke-width:1.6;paint-order:stroke}
+svg .tire.ok rect{stroke:#5b6068}
+svg .tire.atencao rect{stroke:hsl(var(--warning));stroke-width:3}
+svg .tire.critico rect{stroke:hsl(var(--danger));stroke-width:3}
+svg .tire.rodizio rect{stroke:hsl(var(--primary));stroke-width:3;stroke-dasharray:5 2.5}
+svg .tire.vazia rect{fill:hsl(var(--muted));stroke:#8a8f98;stroke-width:2;stroke-dasharray:3 3}
+svg .tire:hover rect{stroke-width:3.4}
+svg .tire.sel rect{stroke:hsl(var(--primary));stroke-width:4}
+.tip{position:absolute;pointer-events:none;background:hsl(240 10% 12%);color:#fff;font-size:11.5px;font-weight:600;padding:5px 9px;border-radius:8px;transform:translate(-50%,-160%);white-space:nowrap;opacity:0;transition:opacity .1s;z-index:5}
+.tip .st{opacity:.72;font-weight:500}.tip .st2{display:block;opacity:.72;font-weight:500;font-size:10.5px}
+.zoom{position:absolute;right:14px;bottom:14px;display:flex;flex-direction:column;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:10px;overflow:hidden;box-shadow:0 4px 14px -6px hsl(230 30% 20%/.3);z-index:4}
+.zoom button{width:34px;height:34px;display:grid;place-items:center;border:0;background:hsl(var(--card));color:hsl(var(--foreground));font-size:19px;font-weight:600;cursor:pointer}
+.zoom button+button{border-top:1px solid hsl(var(--border))}
+.hint{position:absolute;left:16px;bottom:16px;font-size:11px;color:hsl(var(--muted-foreground));background:hsl(0 0% 100%/.82);padding:3px 9px;border-radius:999px;pointer-events:none;z-index:4}
+.legend{display:flex;flex-wrap:wrap;gap:14px;padding:10px 16px;border-top:1px solid hsl(var(--border));background:hsl(var(--card));font-size:12px;color:hsl(var(--muted-foreground))}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:4px;border:1.5px solid;background:#2b2f36}
+.dot.ok{border-color:#5b6068}.dot.atencao{border-color:hsl(var(--warning))}.dot.critico{border-color:hsl(var(--danger))}
+.dot.rodizio{border-color:hsl(var(--primary));border-style:dashed}.dot.vazia{background:hsl(var(--muted));border-color:#8a8f98;border-style:dashed}
+.scan-ov{position:absolute;inset:0;background:hsl(240 10% 8%/.5);display:none;align-items:center;justify-content:center;z-index:8}
+.scan-ov.on{display:flex}
+.scan-fr{width:186px;height:186px;position:relative}
+.scan-fr .cn{position:absolute;width:30px;height:30px;border:3px solid #fff}
+.scan-fr .tl{top:0;left:0;border-right:0;border-bottom:0;border-radius:12px 0 0 0}
+.scan-fr .tr{top:0;right:0;border-left:0;border-bottom:0;border-radius:0 12px 0 0}
+.scan-fr .bl{bottom:0;left:0;border-right:0;border-top:0;border-radius:0 0 0 12px}
+.scan-fr .br{bottom:0;right:0;border-left:0;border-top:0;border-radius:0 0 12px 0}
+.scan-fr .beam{position:absolute;left:6px;right:6px;height:2px;background:hsl(var(--primary));box-shadow:0 0 12px 2px hsl(var(--primary)/.85);border-radius:2px;animation:beam 1.05s ease-in-out infinite}
+@keyframes beam{0%,100%{top:8px}50%{top:176px}}
+.scan-ov .l2{position:absolute;bottom:42px;color:#fff;font-size:13px;font-weight:600}
+.panel{border-left:1px solid hsl(var(--border));background:hsl(var(--card));display:flex;flex-direction:column;min-width:0}
+@media(max-width:900px){.panel{border-left:0;border-top:1px solid hsl(var(--border))}}
+.ph{padding:16px 18px 14px;border-bottom:1px solid hsl(var(--border))}
+.ph .kind{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:700}
+.ph .fire{font:800 20px Sora,sans-serif;letter-spacing:-.01em;margin-top:3px;display:flex;align-items:center;gap:8px}
+.ph .fire .ic{color:hsl(var(--warning-text))}
+.ph .name{color:hsl(var(--muted-foreground));font-size:12.5px;margin-top:2px}
+.ph .chips{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.pstats{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid hsl(var(--border))}
+.pstat{padding:11px 14px;border-left:1px solid hsl(var(--border))}
+.pstat:first-child{border-left:0}
+.pstat .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:hsl(var(--muted-foreground));font-weight:600}
+.pstat .v{font:700 17px Sora,sans-serif;margin-top:2px}
+.pstat .v small{font-size:11px;color:hsl(var(--muted-foreground));font-weight:500}
+.pbody{padding:14px 18px;overflow:auto;flex:1}
+.fact{display:flex;gap:9px;font-size:13px;padding:6px 0}
+.fact .k{color:hsl(var(--muted-foreground));width:74px;flex:none}
+.fact .v{font-weight:600}.fact .v .path{color:hsl(var(--primary))}
+.tl{margin-top:8px;border-left:2px solid hsl(var(--border));padding-left:14px}
+.ev{position:relative;padding:6px 0}
+.ev::before{content:"";position:absolute;left:-19px;top:11px;width:8px;height:8px;border-radius:999px;background:hsl(var(--muted-foreground)/.5);box-shadow:0 0 0 3px hsl(var(--card))}
+.ev.now::before{background:hsl(var(--primary))}.ev.recap::before{background:hsl(var(--success))}
+.ev .t{font-size:11px;color:hsl(var(--muted-foreground))}.ev .d{font-size:12.5px}
+.acts{padding:12px 16px;border-top:1px solid hsl(var(--border));display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.acts button{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid hsl(var(--border));background:hsl(var(--card));border-radius:9px;padding:9px;font-size:12.5px;font-weight:600;cursor:pointer}
+.acts button.pri{grid-column:1/3;background:hsl(var(--primary));color:#fff;border-color:transparent}
+
+/* ficha detail */
+.ficha{margin-left:40px}
+@media(max-width:760px){.ficha{margin-left:0}}
+.ff-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:16px}
+@media(max-width:900px){.ff-grid{grid-template-columns:1fr}}
+.hero{overflow:hidden;border-color:hsl(38 60% 84%)}
+.hero .top{padding:20px 22px;background:linear-gradient(180deg,hsl(40 90% 97%),hsl(var(--card)) 70%);display:flex;align-items:flex-start;justify-content:space-between;gap:12px}
+.hero .fire{font:800 26px Sora,sans-serif;letter-spacing:-.02em;display:flex;align-items:center;gap:10px}
+.hero .fire .ic{color:hsl(var(--warning-text))}
+.hero .name{color:hsl(240 6% 30%);font-size:13.5px;margin-top:4px}
+.c-nums{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}
+.c-nums .cell{padding:14px 16px;border-left:1px solid hsl(var(--border));border-top:1px solid hsl(var(--border));min-width:0}
+.c-nums .cell:nth-child(4n+1){border-left:0}
+.c-nums .k{font-size:12px;color:hsl(var(--muted-foreground));display:flex;align-items:center;gap:5px}
+.c-nums .v{font:700 20px Sora,sans-serif;font-variant-numeric:tabular-nums;margin-top:3px}
+.c-nums .v small{font-size:12px;color:hsl(240 6% 30%);font-weight:500}
+.c-nums .s{font-size:11.5px;margin-top:1px}.c-nums .s.good{color:hsl(var(--success-text));font-weight:600}.c-nums .s.warnt{color:hsl(var(--warning-text));font-weight:600}
+.card-h{display:flex;align-items:center;justify-content:space-between;padding:13px 16px;border-bottom:1px solid hsl(var(--border))}
+.card-h h3{font:700 14px Sora,sans-serif;display:flex;align-items:center;gap:8px}
+.pad{padding:14px 16px}
+.telem{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tm-box{border:1px solid hsl(var(--border));border-radius:11px;padding:12px 14px}
+.tm-box .k{font-size:11.5px;color:hsl(var(--muted-foreground));display:flex;align-items:center;gap:6px}
+.tm-box .v{font:700 22px Sora,sans-serif;margin-top:4px}
+.tm-box .v small{font-size:12px;font-weight:500;color:hsl(240 6% 30%)}
+.tm-box.warn{border-color:hsl(38 80% 78%);background:hsl(var(--warning-soft))}
+.tm-box.warn .v{color:hsl(var(--warning-text))}
+.sulco{margin-top:8px}
+.sulco .track{height:10px;border-radius:99px;background:linear-gradient(90deg,hsl(var(--danger)) 0 28%,hsl(var(--warning)) 28% 52%,hsl(var(--success)) 52%);position:relative}
+.sulco .track .mk{position:absolute;top:-4px;width:3px;height:18px;background:hsl(var(--foreground));border-radius:2px;box-shadow:0 0 0 2px #fff}
+.lifebar{display:flex;gap:4px;margin-top:8px}
+.lifebar i{flex:1;height:8px;border-radius:3px;background:hsl(var(--muted))}
+.lifebar i.done{background:hsl(var(--success))}.lifebar i.now{background:hsl(var(--primary))}
+.lbls{display:flex;justify-content:space-between;font-size:10.5px;color:hsl(var(--muted-foreground));margin-top:4px}
+.cost-life{list-style:none;margin:0;padding:0;font-size:13px}
+.cost-life li{display:grid;grid-template-columns:44px 1fr auto;gap:10px;align-items:center;padding:9px 0;border-top:1px solid hsl(var(--border))}
+.cost-life li:first-child{border-top:0}
+.cost-life .life{font-weight:700;font-size:12px;color:hsl(var(--primary))}
+.cost-life .track{height:7px;border-radius:99px;background:hsl(var(--muted));overflow:hidden}
+.cost-life .track i{display:block;height:100%;background:hsl(var(--primary))}
+.cost-life .m{font-variant-numeric:tabular-nums;font-weight:600;font-size:12.5px;white-space:nowrap}
+.rl{display:grid;grid-template-columns:1fr auto;gap:2px 10px;padding:9px 0;border-top:1px solid hsl(var(--border));font-size:13px}
+.rl:first-child{border-top:0;padding-top:0}
+.rl .l{color:hsl(240 6% 22%)}.rl .v{text-align:right;font-weight:600;white-space:nowrap}.rl .v .path{color:hsl(var(--primary))}
+.ficha-acts{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin-top:16px}
+.ficha-acts .btn{height:44px}
+@media(max-width:760px){.ficha-acts{grid-template-columns:1fr 1fr}}
+
+/* recapagem steps */
+.steps{list-style:none;margin:0 0 0 40px;padding:22px 24px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:14px}
+@media(max-width:760px){.steps{margin-left:0;grid-template-columns:1fr}}
+.steps li{position:relative;padding:26px 14px 0 0;font-size:12.5px;line-height:1.4}
+.steps li::before{content:"";position:absolute;top:8px;left:0;right:0;height:2px;background:hsl(var(--border))}
+.steps li::after{content:"";position:absolute;top:2px;left:0;width:14px;height:14px;border-radius:99px;background:hsl(var(--primary));color:#fff;box-shadow:0 0 0 3px hsl(var(--card))}
+.steps li:last-child::before{display:none}
+.steps li b{display:block;font:700 14px Sora,sans-serif;margin-bottom:3px}
+.steps li .cnt{position:absolute;top:16px;right:16px;font:800 20px Sora,sans-serif}
+.steps li span{color:hsl(240 6% 30%)}
+@media(max-width:760px){.steps li::before{display:none}.steps li{padding:8px 0 8px 24px}.steps li::after{top:12px}}
+
+/* tablet (padrão solicitar-peca) */
+.tabwrap{background:hsl(240 8% 14%);border-radius:20px;padding:30px;display:grid;place-items:center;margin-left:40px}
+@media(max-width:760px){.tabwrap{margin-left:0;padding:16px}}
+.tab{width:980px;max-width:100%;height:640px;background:hsl(var(--background));border-radius:16px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 22px 54px -20px hsl(0 0% 0%/.5);position:relative}
+.tab-top{display:flex;align-items:center;gap:12px;padding:14px 20px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border));flex:none}
+.tab-top .osc{display:inline-flex;align-items:center;gap:8px;font:700 15px Sora;color:hsl(var(--foreground))}
+.tab-top .osc .ic{color:hsl(var(--primary))}
+.tab-top .svc{font-size:13px;color:hsl(var(--muted-foreground));white-space:nowrap}
+.tab-top .spacer{flex:1}
+.tab-top .sync{display:inline-flex;align-items:center;gap:8px;height:40px;padding:0 14px;border-radius:999px;background:hsl(var(--warning-soft));color:hsl(var(--warning-text));font-size:13px;font-weight:600;border:1px solid hsl(38 80% 80%)}
+.tab-top .me{display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 8px 0 6px;border-radius:12px;border:1px solid hsl(240 6% 84%);background:hsl(var(--card));font-size:14px;font-weight:600}
+.tab-top .me .avatar{width:36px;height:36px;font-size:13px}
+.tab-top .me .sw{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 10px;border-radius:9px;background:hsl(var(--muted));color:hsl(240 6% 24%);font-size:12.5px}
+.tab-body{flex:1;display:grid;grid-template-columns:minmax(0,1fr) 400px;overflow:hidden}
+.tab-left{padding:20px 22px;overflow:auto}
+.tab-right{padding:20px 22px;background:hsl(var(--toolbar));display:flex;flex-direction:column;min-height:0;border-left:1px solid hsl(var(--border))}
+.tab-lbl{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));font-weight:600;margin:0 0 12px;display:flex;align-items:center;gap:8px}
+.tab-lbl .st{width:22px;height:22px;border-radius:999px;background:hsl(var(--primary));color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700}
+.posgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.postile{border:1.5px solid hsl(240 6% 84%);background:hsl(var(--card));border-radius:14px;padding:16px;text-align:left}
+.postile .p{font:700 17px Sora}
+.postile .s{font-size:13px;color:hsl(var(--muted-foreground));margin-top:3px}
+.postile.empty{border-style:dashed}
+.postile.on{border-color:hsl(var(--primary));background:hsl(var(--primary-soft))}
+.postile.on .p,.postile.on .s{color:hsl(var(--primary))}
+.scanbox{border:1.5px dashed hsl(233 60% 62%);border-radius:14px;background:hsl(233 80% 98%);padding:34px 20px;text-align:center;color:hsl(233 55% 44%);box-shadow:0 0 0 4px hsl(233 80% 94%/.6)}
+.scanbox .ic{width:48px;height:48px;margin-bottom:10px}
+.scanbox b{font:700 17px Sora;display:block}
+.scanbox small{display:block;font-size:14px;color:hsl(240 6% 34%);margin-top:6px}
+.tab-right .tbtn{height:60px;border-radius:13px;font-size:17px;margin-top:16px}
+.tab-right .tbtn.sm{height:52px;font-size:15px;margin-top:10px}
+.tab-done{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:14px;padding:20px}
+.tab-done .big{width:84px;height:84px;border-radius:999px;background:hsl(var(--success-soft));color:hsl(var(--success-text));display:grid;place-items:center}
+.tab-done h3{font:800 24px Sora}
+.tab-done p{font-size:15px;color:hsl(240 6% 30%);max-width:340px}
+.tab-queue{display:inline-flex;align-items:center;gap:9px;padding:11px 16px;border-radius:12px;border:1.5px dashed hsl(38 70% 65%);background:hsl(var(--warning-soft));color:hsl(var(--warning-text));font-size:13.5px;font-weight:600}
+.tcap{font-size:13px;color:hsl(240 6% 25%);margin:12px 0 0 40px;max-width:640px}
+.tcap b{color:hsl(var(--foreground))}
+@media(max-width:760px){.tcap{margin-left:0}}
+
+/* gestor */
+.gestor{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;margin-left:40px}
+@media(max-width:900px){.gestor{grid-template-columns:1fr;margin-left:0}}
+.cpk-row{display:grid;grid-template-columns:140px 1fr 66px;gap:12px;align-items:center;padding:9px 0;border-top:1px solid hsl(var(--border));font-size:13px}
+.cpk-row:first-of-type{border-top:0}
+.cpk-row .nm{font-weight:600}
+.cpk-row .track{height:9px;border-radius:99px;background:hsl(var(--muted));overflow:hidden}
+.cpk-row .track i{display:block;height:100%;border-radius:99px;background:hsl(var(--primary))}
+.cpk-row .track i.best{background:hsl(var(--success))}.cpk-row .track i.bad{background:hsl(var(--danger))}
+.cpk-row .m{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;font-size:12.5px}
+.alerts{display:flex;flex-direction:column}
+.alert{display:flex;align-items:center;gap:11px;padding:11px 0;border-top:1px solid hsl(var(--border));font-size:13px}
+.alert:first-of-type{border-top:0}
+.alert .ai{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex:none}
+.alert.w .ai{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.alert.d .ai{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.alert.i .ai{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.alert .n{margin-left:auto;font-weight:800;font-size:16px;font-variant-numeric:tabular-nums}
+.alert b{font-weight:700}
+
+/* externos + states + questions */
+.cards3{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-left:40px}
+@media(max-width:900px){.cards3{grid-template-columns:1fr;margin-left:0}}
+.ext-c{padding:16px 18px}
+.ext-c .top{display:flex;align-items:center;gap:10px}
+.ext-c .ei{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:none}
+.ext-c h4{font:700 14.5px Sora}
+.ext-c .st{margin-left:auto}
+.ext-c p{font-size:13px;color:hsl(240 6% 26%);margin:10px 0}
+.ext-c .kv{display:flex;gap:8px;font-size:12.5px;padding:5px 0;border-top:1px solid hsl(var(--border))}
+.ext-c .kv .k{color:hsl(var(--muted-foreground));width:100px;flex:none}
+.ext-c .kv .v{font-weight:600}
+.states{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-left:40px}
+@media(max-width:900px){.states{grid-template-columns:1fr;margin-left:0}}
+.st-card{background:hsl(var(--background));border:1px solid hsl(var(--border));border-radius:13px;padding:16px;box-shadow:0 8px 24px -18px hsl(230 30% 20%/.25)}
+.st-cap{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));margin-bottom:12px}
+.empty{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:20px;border:1.5px dashed hsl(240 6% 84%);border-radius:11px;background:hsl(var(--card))}
+.empty .ei{width:40px;height:40px;border-radius:11px;background:hsl(var(--muted));color:hsl(240 5% 34%);display:grid;place-items:center;margin-bottom:4px}
+.empty h4{font:700 15px Sora}
+.empty p{font-size:13px;color:hsl(240 6% 28%);max-width:48ch}
+.empty.tag{border-color:hsl(38 70% 70%);background:hsl(var(--warning-soft))}
+.empty.tag .ei{background:hsl(var(--warning));color:#fff}
+.notes{margin:0 0 24px 40px;max-width:960px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-left:3px solid hsl(var(--primary));border-radius:12px;padding:18px 22px}
+.notes h4{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--primary));margin-bottom:10px}
+.notes ul{margin:0;padding-left:18px;color:hsl(240 5% 28%);font-size:13.5px}
+.notes li{margin:7px 0}.notes b{color:hsl(var(--foreground))}
+.qs{margin-left:40px;max-width:960px;counter-reset:q}
+.q{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px;padding:14px 18px;margin-bottom:10px;display:grid;grid-template-columns:28px 1fr;gap:14px}
+.q::before{counter-increment:q;content:counter(q);width:26px;height:26px;border-radius:999px;background:hsl(var(--note-soft));color:hsl(var(--note));font-weight:700;font-size:13px;display:grid;place-items:center}
+.q h4{font:700 14px Sora}.q p{font-size:13px;color:hsl(240 6% 30%);margin-top:3px}
+@media(max-width:760px){.notes,.qs{margin-left:0}}
+.personas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-left:40px}
+@media(max-width:900px){.personas{grid-template-columns:1fr;margin-left:0}}
+.persona{padding:18px 20px}
+.persona .top{display:flex;align-items:center;gap:12px}
+.persona .pic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center}
+.persona h3{font:700 15px Sora}.persona .role{font-size:12px;color:hsl(var(--muted-foreground))}
+.persona ul{margin:14px 0 0;padding:0;list-style:none;font-size:13px;color:hsl(240 6% 25%)}
+.persona li{display:flex;gap:8px;padding:5px 0}.persona li .ic{color:hsl(var(--success));margin-top:2px}
+
+/* movimentação de pneus (arrastar + rodas realistas) */
+.mov-grid{display:grid;grid-template-columns:290px minmax(0,1fr) 300px}
+@media(max-width:1100px){.mov-grid{grid-template-columns:1fr}}
+.mov-col{border-left:1px solid hsl(var(--border));min-width:0}
+.mov-col:first-child{border-left:0}
+.mov-side{padding:16px 18px}
+.mov-h{font:700 13px Sora;color:hsl(var(--primary));display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.pool{display:grid;grid-template-columns:repeat(2,1fr);gap:9px;max-height:290px;overflow:auto;padding:2px}
+.pooltile{display:flex;flex-direction:column;align-items:center;gap:7px;text-align:center;padding:13px 8px}
+.pooltile .txt .fn{font:700 12px Sora}
+.pooltile .txt .vd{font-size:10.5px;color:hsl(var(--muted-foreground));margin-top:1px}
+.pooltile{border:1px solid hsl(var(--border));border-radius:11px;padding:7px 3px 5px;text-align:center;cursor:grab;background:hsl(var(--card))}
+.pooltile:hover{border-color:hsl(var(--primary));box-shadow:0 2px 8px -5px hsl(233 40% 40%/.5)}
+.pooltile.dragging{opacity:.35}
+.pooltile svg{display:block;margin:0 auto}
+.pooltile .fn{font:700 10.5px Sora;margin-top:3px}
+.pooltile .vd{font-size:9px;color:hsl(var(--muted-foreground))}
+.dz{margin-top:14px;border:1.6px dashed hsl(240 6% 78%);border-radius:12px;padding:14px;text-align:center;font-size:12px;color:hsl(var(--muted-foreground))}
+.dz b{display:block;color:hsl(var(--foreground));font-size:13px;margin-bottom:2px;font-weight:600}
+.dz.reform.over{border-color:hsl(var(--warning));border-style:solid;background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.dz.scrap.over{border-color:hsl(var(--danger));border-style:solid;background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.dz .items{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;justify-content:center}
+.dz .items .fn{font:700 11px Sora;color:hsl(240 6% 30%);background:transparent;border:0;padding:6px 8px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.dz .items .fn svg{flex:none}
+.dz .items .fn.more{justify-content:center;align-items:center;min-width:44px;align-self:stretch;color:hsl(var(--primary));font:800 15px Sora;cursor:default;background:hsl(233 60% 92%/.5);border-radius:12px}
+.mov-veh{display:flex;align-items:center;gap:26px;flex-wrap:wrap;padding:14px 20px;border-bottom:1px solid hsl(var(--border))}
+.mov-veh .k{color:hsl(var(--muted-foreground));font-size:11px}
+.mov-veh .v{font-weight:700;font-size:13.5px;margin-top:1px}
+.planbox{position:relative;height:530px;overflow:auto;background:radial-gradient(hsl(220 8% 86%) 1px,transparent 1.4px) 0 0/22px 22px,hsl(220 10% 92%);display:flex;justify-content:center;padding:22px 10px}
+.planbox svg{display:block}
+.wheel{cursor:grab}
+.wheel .ring{fill:none}
+.wheel.ok .ring{stroke:hsl(var(--success))}
+.wheel.atencao .ring{stroke:hsl(var(--warning))}
+.wheel.critico .ring{stroke:hsl(var(--danger))}
+.wheel.rodizio .ring{stroke:hsl(var(--primary));stroke-dasharray:6 3}
+.wheel.sel .ring{stroke:hsl(var(--primary));stroke-width:4.5}
+.wheel .fn{fill:hsl(var(--foreground));font:700 11px Sora;text-anchor:middle}
+.pendmark{animation:pend 1.3s ease-in-out infinite}
+@keyframes pend{0%,100%{opacity:1}50%{opacity:.35}}
+.wheel.pend .ring{stroke-dasharray:5 3}
+.slot-empty{cursor:copy}
+.slot-empty .disc{fill:hsl(var(--muted));stroke:#8a8f98;stroke-width:2;stroke-dasharray:4 3}
+.slot-empty.over .disc{fill:hsl(var(--primary-soft));stroke:hsl(var(--primary));stroke-dasharray:none}
+.axtag{fill:#fff;font:700 10px Sora;text-anchor:middle;letter-spacing:.03em}
+.det-top{display:flex;gap:12px;align-items:center}
+.det-top .nm{font:800 17px Sora;letter-spacing:-.01em}
+.det-top .br{font-size:12px;color:hsl(var(--muted-foreground))}
+.det-empty{padding:24px 6px;text-align:center;color:hsl(var(--muted-foreground));font-size:12.5px}
+.det-empty .ic{width:28px;height:28px;margin-bottom:8px}
+.det-acts{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:14px}
+.det-acts button{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid hsl(var(--border));background:hsl(var(--card));border-radius:9px;padding:8px;font-size:12px;font-weight:600;cursor:pointer}
+.det-acts button.pri{background:hsl(var(--primary));color:#fff;border-color:transparent}
+/* fluxo */
+.flow{display:flex;flex-wrap:wrap;gap:14px;align-items:stretch;margin-left:40px}
+.fstep{flex:1 1 160px;min-width:160px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:12px;padding:14px 15px;position:relative}
+.fstep.here{border-color:hsl(var(--primary));box-shadow:0 0 0 2px hsl(var(--primary-soft))}
+.fstep .n{width:26px;height:26px;border-radius:8px;background:hsl(var(--primary-soft));color:hsl(var(--primary));font:800 13px Sora;display:grid;place-items:center}
+.fstep.here .n{background:hsl(var(--primary));color:#fff}
+.fstep.loop .n{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.fstep h4{font:700 13.5px Sora;margin-top:9px}
+.fstep p{font-size:12px;color:hsl(240 6% 32%);margin-top:4px;line-height:1.45}
+.fstep .tag{margin-top:9px}
+.fstep .arr{position:absolute;right:-15px;top:50%;transform:translateY(-50%);z-index:2;width:24px;height:24px;border-radius:999px;background:hsl(var(--card));border:1px solid hsl(var(--border));display:grid;place-items:center;color:hsl(240 5% 55%)}
+.entry{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-left:40px}
+.entry-c{display:flex;gap:11px;align-items:flex-start;padding:14px 16px}
+.entry-c .ei{width:34px;height:34px;border-radius:9px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center;flex:none}
+.entry-c b{font:700 13.5px Sora}
+.entry-c p{font-size:12px;color:hsl(240 6% 32%);margin-top:2px}
+@media(max-width:760px){.flow,.entry{margin-left:0}.fstep .arr{display:none}.entry{grid-template-columns:1fr}}
+/* aprovação & concorrência */
+.banner{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;font-size:13.5px}
+.banner .bi{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:none}
+.banner.warn{background:hsl(var(--warning-soft));border:1px solid hsl(38 80% 82%);color:hsl(240 8% 20%)}
+.banner.warn .bi{background:hsl(var(--warning));color:#fff}
+.banner.danger{background:hsl(var(--danger-soft));border:1px solid hsl(0 80% 88%);color:hsl(240 8% 20%)}
+.banner.danger .bi{background:hsl(var(--danger));color:#fff}
+.banner.info{background:hsl(var(--primary-soft));border:1px solid hsl(233 60% 88%);color:hsl(240 8% 20%)}
+.banner.info .bi{background:hsl(var(--primary));color:#fff}
+.banner b{font-weight:700}
+.banner .btn{margin-left:auto;flex:none}
+.reqcard .rh{display:flex;align-items:center;gap:11px;padding:14px 16px;border-bottom:1px solid hsl(var(--border))}
+.reqcard .rh .nm{font:700 14px Sora}
+.reqcard .rh .mt{font-size:12px;color:hsl(var(--muted-foreground))}
+.reqrow{display:flex;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid hsl(240 6% 94%);font-size:13px}
+.reqrow:first-of-type{border-top:0}
+.reqrow .ri{width:28px;height:28px;border-radius:8px;background:hsl(var(--muted));display:grid;place-items:center;color:hsl(240 6% 40%);flex:none}
+.reqrow b{font-weight:600}
+.reqfoot{display:flex;gap:8px;justify-content:flex-end;padding:12px 16px;border-top:1px solid hsl(var(--border));background:hsl(var(--toolbar))}
+.selbar.stat{position:static;transform:none;display:inline-flex}
+.vehpick{display:inline-flex;align-items:center;gap:7px;border:1px solid hsl(240 6% 82%);border-radius:8px;padding:4px 8px 4px 10px;background:hsl(var(--card));font:700 13.5px Sora;cursor:pointer;margin-top:2px}
+.vehpick .ic{color:hsl(240 5% 45%)}
+.vsel{margin-left:40px;max-width:720px}
+.vsel .pad{padding:8px 16px 12px}
+.vsel .row{display:flex;align-items:center;gap:12px;padding:12px 6px;border-top:1px solid hsl(var(--border));cursor:pointer;border-radius:8px}
+.vsel .row:first-child{border-top:0}
+.vsel .row:hover{background:hsl(var(--primary-soft))}
+.vsel .plate{display:inline-flex;flex-direction:column;border:1.5px solid hsl(240 10% 22%);border-radius:5px;overflow:hidden;min-width:78px;flex:none}
+.vsel .plate .tp{height:6px;background:hsl(220 80% 38%)}
+.vsel .plate .pn{font:700 12px/18px ui-monospace,Menlo,monospace;text-align:center;letter-spacing:.03em}
+.vsel .vi b{font:700 14px Sora}
+.vsel .vi span{font-size:12px;color:hsl(var(--muted-foreground))}
+.vsel .st{margin-left:auto;display:flex;align-items:center;gap:8px}
+.vsel .go{color:hsl(var(--primary));font-weight:700;font-size:13px;display:inline-flex;align-items:center;gap:3px}
+@media(max-width:760px){.vsel{margin-left:0}}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><symbol id="facter" viewBox="0 0 207 304"><path fill="currentColor" d="M25.8384 196.911L15.4739 183.729C-10.7189 150.411 0.44781 101.422 38.4895 82.7344L206.266 0.307297V34.2396C206.266 60.1875 191.448 83.8698 168.12 95.2396L56.578 149.594C48.4634 153.547 41.3489 159.344 35.9791 166.609C30.5936 173.901 25.9582 183.906 26.3176 196.526C29.9947 193.609 34.0624 191.026 38.4843 188.854L206.26 106.432V140.359C206.26 166.313 191.437 189.995 168.109 201.365L56.578 255.708C48.4634 259.667 41.3489 265.464 35.9791 272.724C30.4426 280.224 25.6978 290.578 26.3593 303.693L15.4739 289.854C-7.54698 260.568 -1.72407 219.193 25.8384 196.911ZM134.818 266.526L206.208 303.724L206.187 210.802L134.953 246.661C126.828 250.755 126.755 262.323 134.818 266.526Z"/></symbol></svg>
+<div class="doc">
+  <header class="doc-head"><div>
+    <h1>Pneus · o ciclo de vida completo</h1>
+    <p>Handoff da gestão de pneus como peça <b>serializada</b> — um dos três mockups por família (pneu, eixo, fueiro/barrote). O centro do dia a dia é <b>gerir muitos</b>: a lista da frota com filtro, seleção e ação em massa. A planta clicável, a ficha, a recapagem, o tablet do borracheiro e o painel do gestor são os fluxos que essa lista alimenta. Dados de exemplo; validar estrutura, estados e interações.</p>
+    <nav class="toc">
+      <a href="#s1"><b>1</b>Quem usa</a>
+      <a href="#s2"><b>2</b>Lista da frota</a>
+      <a href="#s3"><b>3</b>Planta no veículo</a>
+      <a href="#s4"><b>4</b>Ficha do pneu</a>
+      <a href="#s5"><b>5</b>Recapagem</a>
+      <a href="#s6"><b>6</b>Tablet do borracheiro</a>
+      <a href="#s7"><b>7</b>Painel do gestor</a>
+      <a href="#s8"><b>8</b>Cenários externos</a>
+      <a href="#s9"><b>9</b>Estados</a>
+      <a href="#s10"><b>10</b>Fluxo</a>
+      <a href="#s11"><b>11</b>Aprovação</a>
+    </nav>
+  </div><div class="lockup"><svg width="27" height="40"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></div></header>
+
+  <!-- 1 personas -->
+  <section class="sec" id="s1">
+    <div class="sec-label"><span class="sec-num">1</span><h2>Quem usa, onde e pra quê</h2></div>
+    <p class="sec-sub">Três modos, três telas. Gestão densa e comparativa no notebook; operação de toque grande e offline no tablet; garantia e reposição com o comprador.</p>
+    <div class="personas">
+      <div class="card persona"><div class="top"><span class="pic" style="background:hsl(var(--primary-soft));color:hsl(var(--primary))"><i class="ic s24 i-chart"></i></span><div><h3>Gestor de frota</h3><div class="role">Notebook · gestão</div></div></div>
+        <ul><li><i class="ic s16 i-check"></i>Filtra a frota e age em massa</li><li><i class="ic s16 i-check"></i>Acompanha CPK, sulco e rodízio</li><li><i class="ic s16 i-check"></i>Previsão de troca e garantia</li></ul></div>
+      <div class="card persona"><div class="top"><span class="pic" style="background:hsl(var(--success-soft));color:hsl(var(--success-text))"><i class="ic s24 i-tire"></i></span><div><h3>Borracheiro</h3><div class="role">Tablet · pátio</div></div></div>
+        <ul><li><i class="ic s16 i-check"></i>Monta, desmonta e rodízio em 2 toques</li><li><i class="ic s16 i-check"></i>Bipa o número de fogo, não digita</li><li><i class="ic s16 i-check"></i>Funciona sem sinal</li></ul></div>
+      <div class="card persona"><div class="top"><span class="pic" style="background:hsl(var(--warning-soft));color:hsl(var(--warning-text))"><i class="ic s24 i-money"></i></span><div><h3>Comprador</h3><div class="role">Notebook · suprimentos</div></div></div>
+        <ul><li><i class="ic s16 i-check"></i>Aciona garantia com NF e fornecedor</li><li><i class="ic s16 i-check"></i>Envia carcaça e recebe recapada</li><li><i class="ic s16 i-check"></i>Repõe pela previsão de troca</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 2 lista da frota -->
+  <section class="sec" id="s2">
+    <div class="sec-label"><span class="sec-num">2</span><h2>Lista da frota — gerir muitos de uma vez</h2></div>
+    <p class="sec-sub">A tela principal do gestor. Todos os pneus rastreados, com resumo, abas por situação, filtro chip e busca por nº de fogo. <b>Marque vários e aja em massa</b>: mandar recapar, transferir de base, marcar rodízio, baixar. Cada linha é uma unidade — clique pra abrir a ficha ou ver no veículo.</p>
+    <p class="view-cap">Notebook · 1.280 px · <b style="color:hsl(var(--primary))">3 selecionados</b></p>
+    <div class="frame">
+      <div class="app">
+        <header class="topbar"><a class="lockup" href="#"><svg width="24" height="35"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></a><span class="spacer"></span><div class="search"><i class="ic s18 i-mag"></i>Buscar nº de fogo, placa, marca…</div><button class="org">Suzano · Base Ponta Grossa <i class="ic s16 i-down"></i></button><span class="avatar av-a">MG</span></header>
+        <nav class="sidenav"><a class="navitem" href="#"><i class="ic s24 i-house"></i></a><a class="navitem" href="#"><i class="ic s24 i-truck"></i></a><a class="navitem" href="#" aria-current="page"><i class="ic s24 i-tire"></i></a><a class="navitem" href="#"><i class="ic s24 i-box"></i></a><a class="navitem" href="#"><i class="ic s24 i-chart"></i></a><span class="navsep"></span><a class="navitem" href="#"><i class="ic s24 i-gear"></i></a></nav>
+        <main class="main">
+          <div class="pagehead"><div><h1>Pneus</h1><p class="meta">1.284 unidades rastreadas · Suzano · 3 bases</p></div>
+            <div style="display:flex;gap:8px"><button class="btn btn-outline btn-sm"><i class="ic s16 i-scan"></i>Ler etiqueta</button><button class="btn btn-primary btn-sm"><i class="ic s16 i-plus"></i>Nova unidade</button></div></div>
+          <div class="tabbar"><a aria-current="page"><i class="ic s16 i-list"></i>Todos <span class="n">1.284</span></a><a><i class="ic s16 i-truck"></i>Montados <span class="n">1.061</span></a><a><i class="ic s16 i-box"></i>Em estoque <span class="n">142</span></a><a><i class="ic s16 i-recap"></i>Recapagem <span class="n">63</span></a><a>Atenção <span class="n dng">18</span></a></div>
+          <div class="card strip">
+            <div class="cell"><div class="k"><i class="ic s14 i-tire"></i>Rastreados</div><div class="v">1.284</div><div class="s">18 famílias · 3 bases</div></div>
+            <div class="cell"><div class="k"><i class="ic s14 i-truck"></i>Montados</div><div class="v">1.061</div><div class="s">em 74 veículos</div></div>
+            <div class="cell"><div class="k"><i class="ic s14 i-box"></i>Em estoque</div><div class="v">142</div><div class="s">desmontados</div></div>
+            <div class="cell"><div class="k"><i class="ic s14 i-warn"></i>Sulco no limite</div><div class="v warnt">27</div><div class="s">programar rodízio/recap</div></div>
+            <div class="cell"><div class="k"><i class="ic s14 i-warn-f"></i>Crítico</div><div class="v dngt">6</div><div class="s">desmontar já</div></div>
+          </div>
+          <div class="toolbar">
+            <div class="search"><i class="ic s18 i-mag"></i>Buscar nº de fogo…</div>
+            <div class="chips-pick">
+              <button aria-pressed="true"><i class="ic s14 i-warn"></i>Sulco no limite</button>
+              <button>Marca <i class="ic s14 i-down"></i></button>
+              <button>Vida <i class="ic s14 i-down"></i></button>
+              <button>Base <i class="ic s14 i-down"></i></button>
+              <button><i class="ic s14 i-filter"></i>Mais filtros</button>
+            </div>
+            <span class="spacer"></span>
+            <div class="seg"><button aria-pressed="true"><i class="ic s14 i-list"></i>Lista</button><button><i class="ic s14 i-truck"></i>Planta</button></div>
+          </div>
+          <table class="tbl" id="fleet">
+            <thead><tr>
+              <th style="width:34px"><span class="cb" id="cbAll"></span></th>
+              <th>Nº de fogo</th><th>Marca / medida</th><th>Vida</th><th>Sulco</th>
+              <th class="r">CPK</th><th class="r">Km casco</th><th>Onde está</th><th>Estado</th><th></th>
+            </tr></thead>
+            <tbody>
+              <tr class="sel"><td><span class="cb on"><i class="ic s12 i-check"></i></span></td><td><span class="fire"><i class="ic s14 i-fire"></i>PN-0498</span></td><td>Michelin X Multi<div class="sub">295/80 R22.5</div></td><td><span class="badge b-info">R1</span></td><td class="warnt" style="color:hsl(var(--warning-text));font-weight:600">6 mm</td><td class="r">R$ 0,18</td><td class="r">82.400</td><td><span class="where"><i class="ic s14 i-truck"></i>FRT-1234 · eixo 4 dir</span></td><td><span class="badge b-wait"><i class="ic s14 i-warn-f"></i>Sulco</span></td><td class="kb"><i class="ic s16 i-kebab"></i></td></tr>
+              <tr class="sel"><td><span class="cb on"><i class="ic s12 i-check"></i></span></td><td><span class="fire"><i class="ic s14 i-fire"></i>PN-0455</span></td><td>Michelin X Multi<div class="sub">295/80 R22.5</div></td><td><span class="badge b-info">R1</span></td><td class="warnt" style="color:hsl(var(--warning-text));font-weight:600">5 mm</td><td class="r">R$ 0,19</td><td class="r">96.100</td><td><span class="where"><i class="ic s14 i-truck"></i>FRT-1234 · eixo 5 esq</span></td><td><span class="badge b-wait"><i class="ic s14 i-warn-f"></i>Sulco</span></td><td class="kb"><i class="ic s16 i-kebab"></i></td></tr>
+              <tr class="sel"><td><span class="cb on"><i class="ic s12 i-check"></i></span></td><td><span class="fire"><i class="ic s14 i-fire"></i>PN-0377</span></td><td>Bridgestone R<div class="sub">295/80 R22.5</div></td><td><span class="badge b-info">R2</span></td><td class="dngt" style="color:hsl(var(--danger-text));font-weight:600">3 mm</td><td class="r">R$ 0,17</td><td class="r">241.000</td><td><span class="where"><i class="ic s14 i-truck"></i>FRT-0987 · eixo 2 dir</span></td><td><span class="badge b-stop"><i class="ic s14 i-warn-f"></i>Crítico</span></td><td class="kb"><i class="ic s16 i-kebab"></i></td></tr>
+              <tr><td><span class="cb"></span></td><td><span class="fire"><i class="ic s14 i-fire"></i>PN-0733</span></td><td>Michelin X Multi<div class="sub">295/80 R22.5</div></td><td><span class="badge b-info">R1</span></td><td>9 mm</td><td class="r">R$ 0,14</td><td class="r">198.000</td><td><span class="where mut"><i class="ic s14 i-box"></i>Estoque · Mucuri</span></td><td><span class="badge b-ok"><i class="ic s14 i-check"></i>OK</span></td><td class="kb"><i class="ic s16 i-kebab"></i></td></tr>
+              <tr><td><span class="cb"></span></td><td><span class="fire"><i class="ic s14 i-fire"></i>PN-0701</span></td><td>Pirelli FR<div class="sub">295/80 R22.5</div></td><td><span class="badge b-ok">Novo</span></td><td>14 mm</td><td class="r mut">—</td><td class="r">0</td><td><span class="where mut"><i class="ic s14 i-box"></i>Estoque · Mucuri</span></td><td><span class="badge b-ok"><i class="ic s14 i-check"></i>OK</span></td><td class="kb"><i class="ic s16 i-kebab"></i></td></tr>
+              <tr><td><span class="cb"></span></td><td><span class="fire"><i class="ic s14 i-fire"></i>PN-0402</span></td><td>Michelin X Multi<div class="sub">295/80 R22.5</div></td><td><span class="badge b-info">R1 → R2</span></td><td class="mut">2 mm</td><td class="r">R$ 0,20</td><td class="r">245.000</td><td><span class="where mut"><i class="ic s14 i-recap"></i>Fila de recapagem</span></td><td><span class="badge b-mute">Desmontado</span></td><td class="kb"><i class="ic s16 i-kebab"></i></td></tr>
+              <tr><td><span class="cb"></span></td><td><span class="fire"><i class="ic s14 i-fire"></i>PN-0361</span></td><td>Recap Vipal XZ<div class="sub">295/80 R22.5</div></td><td><span class="badge b-info">R2</span></td><td class="mut">—</td><td class="r">R$ 0,11</td><td class="r">312.000</td><td><span class="where mut"><i class="ic s14 i-buildings"></i>Recapadora · romaneio 88</span></td><td><span class="badge b-wait">Em recapagem</span></td><td class="kb"><i class="ic s16 i-kebab"></i></td></tr>
+              <tr><td><span class="cb"></span></td><td><span class="fire"><i class="ic s14 i-fire"></i>PN-0298</span></td><td>Michelin X Multi<div class="sub">295/80 R22.5</div></td><td><span class="badge b-info">R1</span></td><td>11 mm</td><td class="r">R$ 0,15</td><td class="r">64.000</td><td><span class="where"><i class="ic s14 i-truck"></i>FRT-0771 · eixo 1 esq</span></td><td><span class="badge b-ok"><i class="ic s14 i-check"></i>OK</span></td><td class="kb"><i class="ic s16 i-kebab"></i></td></tr>
+            </tbody>
+          </table>
+          <div class="list-foot"><span>Mostrando 8 de 1.284</span><div class="pager"><button>‹</button><button aria-current>1</button><button>2</button><button>3</button><button>…</button><button>161</button><button>›</button></div></div>
+        </main>
+      </div>
+      <div class="selbar" id="selbar">
+        <div class="cnt"><span id="selcount">3</span> selecionados</div>
+        <button><i class="ic s16 i-cycle"></i>Rodízio</button>
+        <button><i class="ic s16 i-recap"></i>Enviar recapar</button>
+        <button><i class="ic s16 i-swap"></i>Transferir base</button>
+        <button><i class="ic s16 i-down-a"></i>Baixar</button>
+        <button class="x" id="selclear"><i class="ic s16 i-x"></i></button>
+      </div>
+    </div>
+    <div class="notes" style="margin-top:20px">
+      <h4>Por que a lista é o centro</h4>
+      <ul>
+        <li>Frota grande = centenas de pneus. O gestor <b>filtra</b> (sulco no limite, marca, base) e <b>age em lote</b>, não um a um. A barra de seleção traz as ações que fazem sentido para o conjunto marcado.</li>
+        <li>A coluna <b>Onde está</b> unifica montado (veículo + posição), estoque, fila e recapadora — some a divisão artificial "montado × depósito".</li>
+        <li><b>Lista ⇄ Planta</b> é só um alternador de visão do mesmo dado; a planta é a próxima seção.</li>
+        <li>Sem <code>cost.view</code>, as colunas CPK e valor não saem da API — a lista renderiza sem elas.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- 3 movimentação -->
+  <section class="sec" id="s3">
+    <div class="sec-label"><span class="sec-num">3</span><h2>Movimentação de pneus — arrastar e montar no veículo</h2></div>
+    <p class="sec-sub">A visão real do caminhão, de cima. <b>Arraste</b> um pneu de "Disponível para uso" até uma posição vazia pra montar; arraste pra "Reforma" ou "Baixa" pra tirar de operação. Nada é aplicado sozinho: cada ação vira <b>pendência</b> e a barra embaixo aparece pra <b>Salvar</b> (ou descartar). Clique numa roda pra ver a ficha e a linha do tempo. <span class="dep">componente <code>VehicleSchematic</code> do DS</span></p>
+    <p class="view-cap">Notebook · 1.280 px · <b style="color:hsl(var(--primary))">arraste e solte</b></p>
+    <div class="frame">
+      <div class="app">
+        <header class="topbar"><a class="lockup" href="#"><svg width="24" height="35"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></a><span class="spacer"></span><div class="search"><i class="ic s18 i-mag"></i>Buscar nº de fogo, placa, marca…</div><button class="org">Suzano · Base Ponta Grossa <i class="ic s16 i-down"></i></button><span class="avatar av-a">MG</span></header>
+        <nav class="sidenav"><a class="navitem" href="#"><i class="ic s24 i-house"></i></a><a class="navitem" href="#"><i class="ic s24 i-truck"></i></a><a class="navitem" href="#" aria-current="page"><i class="ic s24 i-tire"></i></a><a class="navitem" href="#"><i class="ic s24 i-box"></i></a><a class="navitem" href="#"><i class="ic s24 i-chart"></i></a><span class="navsep"></span><a class="navitem" href="#"><i class="ic s24 i-gear"></i></a></nav>
+        <main class="main" style="padding:0">
+          <div class="pagehead" style="padding:18px 24px 12px"><div><h1>FRT-1234 · movimentação de pneus</h1><p class="meta">Rodotrem florestal · placa RTB-7F31 · escolha a unidade pra montar/mover</p></div>
+            <div class="seg"><button><i class="ic s14 i-list"></i>Lista</button><button aria-pressed="true"><i class="ic s14 i-truck"></i>Planta</button></div></div>
+          <div class="mov-grid">
+            <div class="mov-col mov-side">
+              <div class="mov-h">Disponível para uso <span class="chip" id="poolCount">—</span></div>
+              <div class="search" style="height:34px;background:hsl(var(--card));margin-bottom:10px"><i class="ic s16 i-mag"></i>Procurar pneu…</div>
+              <div class="pool" id="pool"></div>
+              <div class="dz reform" id="dzReform"><b><i class="ic s14 i-recap"></i> Enviar para reforma</b>Arraste os cascos que vão recapar<div class="items" id="reformItems"></div></div>
+              <div class="dz scrap" id="dzScrap"><b><i class="ic s14 i-trash"></i> Enviar para baixa</b>Arraste os pneus pra sucata<div class="items" id="scrapItems"></div></div>
+            </div>
+            <div class="mov-col">
+              <div class="mov-veh">
+                <div><div class="k">Veículo</div><button class="vehpick">FRT-1234 <i class="ic s16 i-down"></i></button></div>
+                <div><div class="k">Placa</div><div class="v">RTB-7F31</div></div>
+                <div><div class="k">Modelo</div><div class="v">Scania R450 6×4</div></div>
+                <div><div class="k">Unidade</div><div class="v" id="unitName">Cavalo · 3 eixos</div></div>
+                <div class="seg" id="unitSeg" style="margin-left:auto"><button data-u="cavalo" aria-pressed="true">Cavalo</button><button data-u="carreta1">Carreta 1</button><button data-u="dolly">Dolly</button><button data-u="carreta2">Carreta 2</button></div>
+              </div>
+              <div class="planbox">
+                <svg id="svg" width="360" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"><defs>
+                  <radialGradient id="tireG" cx="42%" cy="36%" r="66%"><stop offset="0" stop-color="#3b4048"/><stop offset=".62" stop-color="#24272c"/><stop offset="1" stop-color="#121317"/></radialGradient>
+                  <radialGradient id="rimG" cx="40%" cy="34%" r="72%"><stop offset="0" stop-color="#f3f5f8"/><stop offset=".55" stop-color="#c7ccd3"/><stop offset="1" stop-color="#868c96"/></radialGradient>
+                  <linearGradient id="chassis" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b7bdc6"/><stop offset=".5" stop-color="#dce0e6"/><stop offset="1" stop-color="#b7bdc6"/></linearGradient>
+                  <linearGradient id="tireP" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#34383f"/><stop offset=".5" stop-color="#1b1d21"/><stop offset="1" stop-color="#0e0f12"/></linearGradient>
+                  <symbol id="wheel" viewBox="0 0 64 64">
+                    <ellipse cx="33" cy="34" rx="27" ry="27" fill="#000" opacity=".12"/>
+                    <circle cx="32" cy="32" r="27" fill="url(#tireG)" stroke="#0d0e11" stroke-width="1.5"/>
+                    <circle cx="32" cy="32" r="26" fill="none" stroke="#0b0c0f" stroke-width="5" stroke-dasharray="2.6 3.3"/>
+                    <circle cx="32" cy="32" r="18.5" fill="url(#rimG)" stroke="#7c828c" stroke-width="1"/>
+                    <circle cx="32" cy="32" r="5" fill="#c7ccd3" stroke="#868c96"/>
+                    <g fill="#8b919b"><circle cx="32" cy="21.5" r="1.7"/><circle cx="42" cy="28.7" r="1.7"/><circle cx="38.2" cy="40.5" r="1.7"/><circle cx="25.8" cy="40.5" r="1.7"/><circle cx="22" cy="28.7" r="1.7"/></g>
+                    <ellipse cx="25" cy="24" rx="7" ry="4" fill="#fff" opacity=".14"/>
+                  </symbol>
+                </defs></svg>
+              </div>
+              <div class="legend"><b style="color:hsl(var(--foreground))">Estado:</b><span><i class="dot ok"></i>OK</span><span><i class="dot atencao"></i>Sulco</span><span><i class="dot critico"></i>Crítico</span><span><i class="dot rodizio"></i>Rodízio</span><span><i class="dot vazia"></i>Vazia</span><span><i class="dot" style="background:hsl(38 92% 48%);border:0"></i>pendente (não salvo)</span><span style="margin-left:auto"><i class="ic s14 i-hand"></i>arraste do pool pra montar</span></div>
+            </div>
+            <div class="mov-col">
+              <div class="mov-side"><div class="mov-h">Detalhes do pneu</div><div id="details"></div></div>
+              <div class="mov-side" style="border-top:1px solid hsl(var(--border))"><div class="mov-h">Linha do tempo</div><div id="timeline"></div></div>
+            </div>
+          </div>
+        </main>
+      </div>
+      <div class="selbar hidden" id="movbar">
+        <div class="cnt"><span id="movcount">0</span> alterações não salvas</div>
+        <button id="movundo"><i class="ic s16 i-return"></i>Descartar</button>
+        <button id="movother"><i class="ic s16 i-kebab"></i>Outras ações</button>
+        <button class="save" id="movsave"><i class="ic s16 i-check"></i>Salvar alterações</button>
+      </div>
+    </div>
+    <p class="view-cap" style="margin-top:26px">Estado · veio de "Lista → Planta" sem veículo escolhido</p>
+    <div class="frame">
+      <div class="app">
+        <header class="topbar"><a class="lockup" href="#"><svg width="24" height="35"><use href="#facter"/></svg><span class="rule"></span><div><div class="wordmark">Facter <b>Truck</b></div><div class="tagline">Gestão inteligente de frotas</div></div></a><span class="spacer"></span><div class="search"><i class="ic s18 i-mag"></i>Buscar nº de fogo, placa, marca…</div><button class="org">Suzano · Base Ponta Grossa <i class="ic s16 i-down"></i></button><span class="avatar av-a">MG</span></header>
+        <nav class="sidenav"><a class="navitem" href="#"><i class="ic s24 i-house"></i></a><a class="navitem" href="#"><i class="ic s24 i-truck"></i></a><a class="navitem" href="#" aria-current="page"><i class="ic s24 i-tire"></i></a><a class="navitem" href="#"><i class="ic s24 i-box"></i></a><a class="navitem" href="#"><i class="ic s24 i-chart"></i></a><span class="navsep"></span><a class="navitem" href="#"><i class="ic s24 i-gear"></i></a></nav>
+        <main class="main">
+          <div class="pagehead"><div><h1>Pneus · movimentação</h1><p class="meta">Escolha um veículo pra montar/mover os pneus</p></div>
+            <div class="seg"><button><i class="ic s14 i-list"></i>Lista</button><button aria-pressed="true"><i class="ic s14 i-truck"></i>Planta</button></div></div>
+          <div style="max-width:780px;margin:36px auto 44px">
+            <div style="text-align:center">
+              <div style="width:64px;height:64px;border-radius:16px;background:hsl(var(--primary-soft));color:hsl(var(--primary));display:grid;place-items:center;margin:0 auto 14px"><i class="ic s32 i-truck"></i></div>
+              <h3 style="font:700 19px Sora">Escolha um veículo pra ver a planta</h3>
+              <p style="color:hsl(240 6% 32%);margin-top:6px">A planta e a movimentação são sempre de um veículo.</p>
+            </div>
+            <div class="search" style="background:hsl(var(--card));margin:18px 0 4px;height:44px"><i class="ic s18 i-mag"></i>Buscar placa ou frota…</div>
+            <div class="vsel" style="margin-left:0;max-width:none">
+              <div class="row"><span class="plate"><span class="tp"></span><span class="pn">RTB7F31</span></span><div class="vi"><b>FRT-1234</b><span>Scania R450 · rodotrem florestal</span></div><div class="st"><span class="chip">18 montados</span><span class="badge b-wait">2 no limite</span><span class="go">Ver planta<i class="ic s14 i-right"></i></span></div></div>
+              <div class="row"><span class="plate"><span class="tp"></span><span class="pn">RKD2A08</span></span><div class="vi"><b>FRT-0987</b><span>Volvo FH · rodotrem</span></div><div class="st"><span class="chip">18 montados</span><span class="badge b-stop">1 crítico</span><span class="go">Ver planta<i class="ic s14 i-right"></i></span></div></div>
+              <div class="row"><span class="plate"><span class="tp"></span><span class="pn">RPL5C63</span></span><div class="vi"><b>FRT-0771</b><span>Scania R450 · rodotrem</span></div><div class="st"><span class="chip">14 montados</span><span class="badge b-ok">ok</span><span class="go">Ver planta<i class="ic s14 i-right"></i></span></div></div>
+              <div class="row"><span class="plate"><span class="tp"></span><span class="pn">RTM9J14</span></span><div class="vi"><b>FRT-1102</b><span>Mercedes Actros · truck</span></div><div class="st"><span class="chip">6 montados</span><span class="badge b-info">3 rodízio</span><span class="go">Ver planta<i class="ic s14 i-right"></i></span></div></div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+    <p class="tcap"><b>Regra:</b> a planta é sempre de um veículo. Do menu Pneus ou de "Lista → Planta" sem filtro, cai neste seletor; do detalhe do veículo (ou da lista já num veículo), abre direto na planta dele. No topo, o seletor de veículo troca sem sair da tela.</p>
+
+    <div class="notes" style="margin-top:20px"><h4>O que essa visão resolve</h4><ul>
+      <li>É a mesma frota da lista, agora <b>no veículo</b>: montar, rodízio, reforma e baixa viram <b>arrastar</b>, sem formulário.</li>
+      <li>Rodas realistas e chassi de cima dão leitura imediata; a cor do contorno é o estado. Trocar a unidade (cavalo/carretas/dolly) mantém a mesma mecânica.</li>
+      <li>Ao montar, o <b>km entra do hodômetro</b>. Pra reforma abre o envio à recapadora; pra baixa pede o motivo.</li>
+    </ul></div>
+  </section>
+
+  <!-- 4 ficha -->
+  <section class="sec" id="s4">
+    <div class="sec-label"><span class="sec-num">4</span><h2>Ficha do pneu — a unidade por inteiro</h2></div>
+    <p class="sec-sub">O que abre ao clicar na lista, na planta ou ao bipar a etiqueta. Identidade, telemetria, vida, custo por vida e CPK, garantia, posição e histórico.</p>
+    <div class="ficha">
+      <div class="ff-grid">
+        <div>
+          <div class="card hero">
+            <div class="top">
+              <div><div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:700">Pneu · unidade serializada</div>
+                <div class="fire"><i class="ic s24 i-fire-f"></i>PN-0498</div>
+                <div class="name">Michelin X Multi D · 295/80 R22.5 · rodagem dupla</div></div>
+              <div style="text-align:right"><span class="badge b-wait"><i class="ic s14 i-warn-f"></i>Sulco no limite</span><div style="margin-top:8px"><span class="badge b-info">2ª vida · R1</span></div></div>
+            </div>
+            <div class="c-nums">
+              <div class="cell"><div class="k"><i class="ic s14 i-gauge"></i>CPK</div><div class="v">R$ 0,18<small>/km</small></div><div class="s good">−12% vs. média</div></div>
+              <div class="cell"><div class="k"><i class="ic s14 i-truck"></i>Km na vida</div><div class="v">82.400</div><div class="s">460 mil no total</div></div>
+              <div class="cell"><div class="k"><i class="ic s14 i-tire"></i>Sulco</div><div class="v" style="color:hsl(var(--warning-text))">6 mm</div><div class="s warnt">limite 5 mm</div></div>
+              <div class="cell"><div class="k"><i class="ic s14 i-money"></i>Valor</div><div class="v">R$ 1.240</div><div class="s">depreciado <span class="dep" style="height:16px">custo</span></div></div>
+            </div>
+          </div>
+          <div class="card" style="margin-top:16px">
+            <div class="card-h"><h3><i class="ic s16 i-gauge" style="color:hsl(var(--primary))"></i>Telemetria · última leitura há 2 h</h3><span class="chip"><i class="ic s14 i-wind"></i>TPMS ativo</span></div>
+            <div class="pad"><div class="telem">
+              <div class="tm-box"><div class="k"><i class="ic s14 i-tire"></i>Sulco medido</div><div class="v" style="color:hsl(var(--warning-text))">6,0 <small>mm</small></div><div class="sulco"><div class="track"><div class="mk" style="left:56%"></div></div></div></div>
+              <div class="tm-box warn"><div class="k"><i class="ic s14 i-wind"></i>Pressão</div><div class="v">116 <small>psi</small></div><div style="font-size:11.5px;color:hsl(var(--warning-text));font-weight:600;margin-top:2px">4 abaixo do alvo (120)</div></div>
+              <div class="tm-box"><div class="k"><i class="ic s14 i-thermo"></i>Temperatura</div><div class="v">62 <small>°C</small></div><div style="font-size:11.5px;color:hsl(240 6% 30%);margin-top:2px">normal em operação</div></div>
+              <div class="tm-box"><div class="k"><i class="ic s14 i-gauge"></i>Vida restante</div><div class="v">~28k <small>km</small></div><div style="font-size:11.5px;color:hsl(240 6% 30%);margin-top:2px">no ritmo atual</div></div>
+            </div></div>
+          </div>
+          <div class="card" style="margin-top:16px">
+            <div class="card-h"><h3><i class="ic s16 i-money" style="color:hsl(var(--primary))"></i>Custo por vida &amp; CPK</h3></div>
+            <div class="pad"><ul class="cost-life">
+              <li><span class="life">R0</span><span class="track"><i style="width:100%"></i></span><span class="m">R$ 2.180 · 210k · <b>R$ 0,21</b></span></li>
+              <li><span class="life">R1</span><span class="track"><i style="width:64%"></i></span><span class="m">R$ 720 · 82k · <b style="color:hsl(var(--success-text))">R$ 0,18</b></span></li>
+              <li><span class="life" style="color:hsl(var(--muted-foreground))">R2</span><span class="track"><i style="width:0"></i></span><span class="m mut">projetado</span></li>
+            </ul></div>
+          </div>
+        </div>
+        <div>
+          <div class="card"><div class="card-h"><h3><i class="ic s16 i-pin" style="color:hsl(var(--primary))"></i>Onde está</h3></div>
+            <div class="pad">
+              <div class="rl"><span class="l">Veículo</span><span class="v"><span class="path">FRT-1234</span></span></div>
+              <div class="rl"><span class="l">Posição</span><span class="v"><span class="path">Carreta 1 · eixo 4 · dir. ext.</span></span></div>
+              <div class="rl"><span class="l">Montado</span><span class="v">há 11 meses · 82.400 km</span></div>
+              <div style="font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:hsl(var(--muted-foreground));font-weight:600;margin-top:10px">Vida do casco</div>
+              <div class="lifebar"><i class="done"></i><i class="now"></i><i></i><i></i></div>
+              <div class="lbls"><span>Novo</span><span>R1 atual</span><span>R2</span><span>R3</span></div>
+            </div>
+          </div>
+          <div class="card" style="margin-top:16px"><div class="card-h"><h3><i class="ic s16 i-shield" style="color:hsl(var(--success-text))"></i>Garantia &amp; origem</h3></div>
+            <div class="pad">
+              <div class="rl"><span class="l">Fornecedor</span><span class="v">Michelin · Distr. Sul</span></div>
+              <div class="rl"><span class="l">NF compra</span><span class="v"><span class="path">NF 6410</span> · 03/25</span></div>
+              <div class="rl"><span class="l">Garantia</span><span class="v" style="color:hsl(var(--warning-text))">vence em 30 d</span></div>
+              <button class="btn btn-outline btn-sm" style="width:100%;margin-top:10px"><i class="ic s16 i-shield-w"></i>Acionar garantia</button>
+            </div>
+          </div>
+          <div class="card" style="margin-top:16px"><div class="card-h"><h3><i class="ic s16 i-hist" style="color:hsl(var(--primary))"></i>Histórico</h3></div>
+            <div class="pad"><div class="tl">
+              <div class="ev now"><div class="t">há 3 dias · 82.400 km</div><div class="d">Sulco 6 mm — programar rodízio</div></div>
+              <div class="ev"><div class="t">há 2 meses</div><div class="d">Rodízio: eixo 5 → eixo 4</div></div>
+              <div class="ev recap"><div class="t">há 5 meses</div><div class="d"><b>Recapado R1</b> · Vipal · R$ 720</div></div>
+              <div class="ev"><div class="t">há 11 meses</div><div class="d">Montado no FRT-1234</div></div>
+              <div class="ev"><div class="t">origem · 03/25</div><div class="d">Comprado · NF 6410</div></div>
+            </div></div>
+          </div>
+        </div>
+      </div>
+      <div class="ficha-acts">
+        <button class="btn btn-primary"><i class="ic s16 i-cycle"></i>Rodízio</button>
+        <button class="btn btn-outline"><i class="ic s16 i-down-a"></i>Desmontar</button>
+        <button class="btn btn-outline"><i class="ic s16 i-recap"></i>Enviar recapar</button>
+        <button class="btn btn-outline"><i class="ic s16 i-shield-w"></i>Garantia</button>
+        <button class="btn btn-outline" style="color:hsl(var(--danger-text))"><i class="ic s16 i-trash"></i>Baixar</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 recapagem -->
+  <section class="sec" id="s5">
+    <div class="sec-label"><span class="sec-num">5</span><h2>Recapagem — o casco ganha vidas novas</h2></div>
+    <p class="sec-sub">O ativo é o casco (mesmo nº de fogo). No limite do sulco, sai do veículo, entra na fila, vai pro recapador (romaneio + custo) e volta como vida nova (R1/R2/R3). Cada etapa é um estado rastreável e o custo entra no CPK.</p>
+    <ol class="steps">
+      <li><span class="cnt">—</span><b>Em uso</b><span>Montado, rodando até o sulco atingir o limite.</span></li>
+      <li><span class="cnt">7</span><b>Fila</b><span>Desmontado, carcaça avaliada, aguardando envio.</span></li>
+      <li><span class="cnt">4</span><b>No recapador</b><span>Enviado por romaneio. Custo e prazo registrados.</span></li>
+      <li><span class="cnt">2</span><b>Recebido</b><span>Volta com vida nova, pronto pra montar.</span></li>
+      <li><span class="cnt">1</span><b>Baixa</b><span>Carcaça reprovada = sucata, com motivo.</span></li>
+    </ol>
+    <p class="tcap"><b>Recapar não cria peça nova</b> — é o mesmo casco ganhando vida; o histórico e o CPK acumulam. O comprador dispara "Enviar" e "Receber"; o borracheiro só monta o que voltou.</p>
+  </section>
+
+  <!-- 6 tablet -->
+  <section class="sec" id="s6">
+    <div class="sec-label"><span class="sec-num">6</span><h2>Tablet do borracheiro — a operação de campo</h2></div>
+    <p class="sec-sub">Montar, desmontar e rodízio no pátio. Toque grande, dois passos, sem teclado; o km entra do hodômetro. Tablet compartilhado com PIN, funciona offline. Mesmo chrome do tablet do mecânico.</p>
+    <p class="view-cap">Montar pneu · 980 × 640</p>
+    <div class="tabwrap"><div class="tab">
+      <div class="tab-top"><span class="osc"><i class="ic s18 i-tire"></i>Montar pneu</span><span class="svc">· FRT-1234 · rodotrem</span><span class="spacer"></span><span class="sync"><i class="ic s16 i-cloud-x"></i>Offline · 2 na fila</span><span class="me"><span class="avatar av-a">JB</span>João B.<span class="sw"><i class="ic s14 i-lock"></i>PIN</span></span></div>
+      <div class="tab-body">
+        <div class="tab-left">
+          <div class="tab-lbl"><span class="st">1</span>Toque a posição vazia</div>
+          <div class="posgrid">
+            <button class="postile"><div class="p">Eixo 2 · esq. ext.</div><div class="s">PN-0488 · ocupada</div></button>
+            <button class="postile on"><div class="p">Eixo 2 · dir. ext.</div><div class="s">vazia · selecionada</div></button>
+            <button class="postile empty"><div class="p">Eixo 2 · esq. int.</div><div class="s">vazia</div></button>
+            <button class="postile"><div class="p">Eixo 2 · dir. int.</div><div class="s">PN-0490 · ocupada</div></button>
+          </div>
+        </div>
+        <div class="tab-right">
+          <div class="tab-lbl"><span class="st">2</span>Bipe o número de fogo</div>
+          <div class="scanbox"><i class="ic i-scan"></i><b>Aponte a câmera</b><small>ou toque para digitar o nº de fogo</small></div>
+          <button class="btn btn-primary tbtn"><i class="ic s18 i-check"></i>Montar PN-0512</button>
+          <button class="btn btn-outline tbtn sm">Digitar número</button>
+        </div>
+      </div>
+    </div></div>
+
+    <p class="view-cap" style="margin-top:26px">Confirmação e rodízio</p>
+    <div class="tabwrap"><div class="tab" style="height:560px">
+      <div class="tab-top"><span class="osc" style="color:hsl(var(--success-text))"><i class="ic s18 i-check-c"></i>Montado</span><span class="svc">· FRT-1234</span><span class="spacer"></span><span class="me"><span class="avatar av-a">JB</span>João B.<span class="sw"><i class="ic s14 i-lock"></i>PIN</span></span></div>
+      <div class="tab-body" style="grid-template-columns:1fr 1fr">
+        <div class="tab-done">
+          <span class="big"><i class="ic s32 i-check"></i></span>
+          <h3>PN-0512 montado</h3>
+          <p>Eixo 2 · dir. externo · <b>km 412.300</b> registrado do hodômetro.</p>
+          <span class="tab-queue"><i class="ic s16 i-cloud-x"></i>Salvo no aparelho · sincroniza com sinal</span>
+        </div>
+        <div class="tab-left" style="border-left:1px solid hsl(var(--border));background:hsl(var(--toolbar))">
+          <div class="tab-lbl"><span class="st"><i class="ic s14 i-cycle"></i></span>Rodízio · mover PN-0512</div>
+          <div class="posgrid" style="grid-template-columns:1fr">
+            <button class="postile"><div class="p">Eixo 2 · dir. ext.</div><div class="s">de onde saiu</div></button>
+            <button class="postile empty"><div class="p">Eixo 4 · esq. ext.</div><div class="s">vazia · toque para mover</div></button>
+            <button class="postile"><div class="p">Trocar com outro pneu…</div><div class="s">escolher de outra posição</div></button>
+          </div>
+          <button class="btn btn-primary tbtn"><i class="ic s18 i-swap"></i>Confirmar rodízio</button>
+        </div>
+      </div>
+    </div></div>
+    <p class="tcap"><b>Por que tablet e não celular:</b> luva, sol, aparelho compartilhado com PIN. Alvo grande, contraste alto, o mínimo de passos. O mesmo fluxo serve para <b>desmontar</b> e <b>calibrar</b> (registra a pressão).</p>
+  </section>
+
+  <!-- 7 gestor -->
+  <section class="sec" id="s7">
+    <div class="sec-label"><span class="sec-num">7</span><h2>Painel do gestor — decidir com CPK</h2></div>
+    <p class="sec-sub">O que o pneu vende: informação pra decisão. CPK por marca (o que compensa), o que exige ação e a previsão de troca pro comprador se antecipar.</p>
+    <div class="gestor">
+      <div class="card"><div class="card-h"><h3><i class="ic s16 i-gauge" style="color:hsl(var(--primary))"></i>CPK por marca · R$/km (menor é melhor)</h3><span class="chip">12 meses</span></div>
+        <div class="pad">
+          <div class="cpk-row"><span class="nm">Recap Vipal XZ</span><span class="track"><i class="best" style="width:30%"></i></span><span class="m">R$ 0,11</span></div>
+          <div class="cpk-row"><span class="nm">Michelin X Multi</span><span class="track"><i style="width:42%"></i></span><span class="m">R$ 0,14</span></div>
+          <div class="cpk-row"><span class="nm">Bridgestone R</span><span class="track"><i style="width:50%"></i></span><span class="m">R$ 0,17</span></div>
+          <div class="cpk-row"><span class="nm">Pirelli FR</span><span class="track"><i class="bad" style="width:62%"></i></span><span class="m">R$ 0,21</span></div>
+          <div style="margin-top:12px;font-size:12.5px;color:hsl(240 6% 30%)"><i class="ic s14 i-info" style="color:hsl(var(--primary))"></i> Recapagem tem o melhor CPK — priorizar carcaças boas antes de perder.</div>
+        </div>
+      </div>
+      <div class="card"><div class="card-h"><h3><i class="ic s16 i-bell" style="color:hsl(var(--warning-text))"></i>Exige ação</h3></div>
+        <div class="pad alerts">
+          <div class="alert d"><span class="ai"><i class="ic s18 i-warn-f"></i></span><span><b>6 pneus</b> abaixo do sulco mínimo</span><span class="n">6</span></div>
+          <div class="alert w"><span class="ai"><i class="ic s18 i-cycle"></i></span><span><b>27 pneus</b> no limite — programar rodízio/recap</span><span class="n">27</span></div>
+          <div class="alert w"><span class="ai"><i class="ic s18 i-recap"></i></span><span><b>7 carcaças</b> na fila — enviar antes de vencer</span><span class="n">7</span></div>
+          <div class="alert i"><span class="ai"><i class="ic s18 i-shield-w"></i></span><span><b>4 garantias</b> vencem em 30 dias</span><span class="n">4</span></div>
+          <div class="alert i"><span class="ai"><i class="ic s18 i-truck"></i></span><span>Previsão: <b>~34 trocas</b> nos próximos 30 dias</span><span class="n">34</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 externos -->
+  <section class="sec" id="s8">
+    <div class="sec-label"><span class="sec-num">8</span><h2>Cenários externos — quando o pneu sai da base</h2></div>
+    <p class="sec-sub">A ficha cobre a vida real: nem todo pneu está montado ou no seu depósito. Cada caso é um estado com dono e responsável claros.</p>
+    <div class="cards3">
+      <div class="card ext-c"><div class="top"><span class="ei" style="background:hsl(var(--primary-soft));color:hsl(var(--primary))"><i class="ic s20 i-buildings"></i></span><h4>Em oficina terceira</h4><span class="badge b-info st">Ecossistema</span></div>
+        <p>Montado num veículo em manutenção na Vale das Carretas. A oficina enxerga a unidade sob <b>concessão</b> do dono do dado.</p>
+        <div class="kv"><span class="k">Responsável</span><span class="v">Vale das Carretas</span></div><div class="kv"><span class="k">Acesso</span><span class="v">leitura + apontar serviço</span></div></div>
+      <div class="card ext-c"><div class="top"><span class="ei" style="background:hsl(var(--warning-soft));color:hsl(var(--warning-text))"><i class="ic s20 i-trailer"></i></span><h4>Em trânsito entre bases</h4><span class="badge b-wait st">Movimentação</span></div>
+        <p>Casco recapado voltando de Ponta Grossa pra Mucuri. Aparece como transferência aberta, fora de qualquer depósito.</p>
+        <div class="kv"><span class="k">Origem → destino</span><span class="v">Ponta Grossa → Mucuri</span></div><div class="kv"><span class="k">Situação</span><span class="v">a receber · romaneio 88</span></div></div>
+      <div class="card ext-c"><div class="top"><span class="ei" style="background:hsl(var(--success-soft));color:hsl(var(--success-text))"><i class="ic s20 i-shield"></i></span><h4>Garantia acionada</h4><span class="badge b-ok st">Fornecedor</span></div>
+        <p>Defeito antes do fim da vida. Guarda NF, fornecedor e laudo; o custo não entra no CPK da frota.</p>
+        <div class="kv"><span class="k">Fornecedor</span><span class="v">Michelin · Distr. Sul</span></div><div class="kv"><span class="k">Situação</span><span class="v">em análise · protocolo 4471</span></div></div>
+      <div class="card ext-c"><div class="top"><span class="ei" style="background:hsl(var(--danger-soft));color:hsl(var(--danger-text))"><i class="ic s20 i-trash"></i></span><h4>Baixado</h4><span class="badge b-stop st">Fim do ciclo</span></div>
+        <p>Carcaça reprovada, dano irrecuperável ou perda/roubo. Sempre com <b>motivo</b>; o histórico permanece.</p>
+        <div class="kv"><span class="k">Motivo</span><span class="v">carcaça reprovada (3ª recapa)</span></div><div class="kv"><span class="k">Autor / data</span><span class="v">M. Gomes · 12/09/26</span></div></div>
+    </div>
+  </section>
+
+  <!-- 9 estados -->
+  <section class="sec" id="s9">
+    <div class="sec-label"><span class="sec-num">9</span><h2>Estados que a tela precisa desenhar</h2></div>
+    <p class="sec-sub">Toda tela entrega todos os estados de uma vez — não só o caminho feliz.</p>
+    <div class="states">
+      <div class="st-card"><div class="st-cap">Filtro sem resultado</div><div class="empty"><span class="ei"><i class="ic s20 i-mag"></i></span><h4>Nenhum pneu com esses filtros</h4><p>Nenhuma unidade "sulco no limite" na base Mucuri. Limpe um filtro ou troque a base.</p><button class="btn btn-outline btn-sm" style="margin-top:6px">Limpar filtros</button></div></div>
+      <div class="st-card"><div class="st-cap">Unidade sem etiqueta</div><div class="empty tag"><span class="ei"><i class="ic s20 i-qr"></i></span><h4>Pneu sem número de fogo</h4><p>Existe fisicamente mas nunca foi etiquetado. Gere o QR para rastrear a partir de agora.</p><button class="btn btn-primary btn-sm" style="margin-top:6px"><i class="ic s16 i-qr"></i>Gerar etiqueta</button></div></div>
+      <div class="st-card"><div class="st-cap">Sem permissão de custo</div><div class="empty"><span class="ei"><i class="ic s20 i-lock"></i></span><h4>Valor oculto</h4><p>Você vê a ficha e a operação, mas CPK, custo por vida e valor exigem <code>cost.view</code>. A API não devolve o campo.</p></div></div>
+      <div class="st-card"><div class="st-cap">Tablet offline</div><div class="empty" style="border-color:hsl(38 70% 72%);background:hsl(var(--warning-soft))"><span class="ei" style="background:hsl(var(--warning));color:#fff"><i class="ic s20 i-cloud-x"></i></span><h4>Sem sinal — 2 ações na fila</h4><p>Montar e rodízio funcionam offline; ficam salvos com pendência visível e sobem sozinhos ao voltar o sinal.</p><button class="btn btn-outline btn-sm" style="margin-top:6px"><i class="ic s16 i-cloud-up"></i>Ver pendências</button></div></div>
+    </div>
+  </section>
+
+  <!-- 10 fluxo -->
+  <section class="sec" id="s10">
+    <div class="sec-label"><span class="sec-num">10</span><h2>Fluxo de ponta a ponta — como se chega à movimentação</h2></div>
+    <p class="sec-sub">O caminho de uma unidade até esta tela e o ciclo que fecha o loop. Cada etapa já tem (ou vai ter) sua tela; a movimentação é onde o pneu entra e sai do veículo.</p>
+    <p class="view-cap">O caminho de uma unidade</p>
+    <div class="flow">
+      <div class="fstep"><span class="n">1</span><h4>Compra (NF)</h4><p>A entrada da nota gera as unidades já com nº de fogo.</p><span class="badge b-ok tag"><i class="ic s14 i-check"></i>tela existe</span><span class="arr"><i class="ic s16 i-right"></i></span></div>
+      <div class="fstep"><span class="n">2</span><h4>Etiquetagem</h4><p>Cada unidade recebe QR / nº de fogo pra virar rastreável.</p><span class="badge b-info tag">a desenhar</span><span class="arr"><i class="ic s16 i-right"></i></span></div>
+      <div class="fstep"><span class="n">3</span><h4>Estoque · disponível</h4><p>Entra em "Disponível para uso" — o pool desta tela.</p><span class="badge b-ok tag"><i class="ic s14 i-check"></i>tela existe</span><span class="arr"><i class="ic s16 i-right"></i></span></div>
+      <div class="fstep here"><span class="n">4</span><h4>Montagem</h4><p>Arrasta pro veículo; km entra do hodômetro. <b>Você está aqui.</b></p><span class="badge b-info tag">esta tela</span><span class="arr"><i class="ic s16 i-right"></i></span></div>
+      <div class="fstep"><span class="n">5</span><h4>Operação</h4><p>Roda; sulco e pressão monitorados na OS/telemetria.</p><span class="arr"><i class="ic s16 i-right"></i></span></div>
+      <div class="fstep"><span class="n">6</span><h4>Saída</h4><p>No limite: <b>reforma</b> (recapadora) ou <b>baixa</b> (sucata).</p><span class="arr"><i class="ic s16 i-right"></i></span></div>
+      <div class="fstep loop"><span class="n"><i class="ic s14 i-recap"></i></span><h4>Retorno</h4><p>Recapado volta como vida nova → estoque (volta ao passo 3).</p></div>
+    </div>
+    <p class="view-cap" style="margin-top:26px">Como abrir esta tela</p>
+    <div class="entry">
+      <div class="card entry-c"><span class="ei"><i class="ic s18 i-tire"></i></span><div><b>Menu Pneus → Planta</b><p>Escolhe o veículo e cai direto na movimentação.</p></div></div>
+      <div class="card entry-c"><span class="ei"><i class="ic s18 i-list"></i></span><div><b>Lista da frota → Ver no veículo</b><p>Pelo alternador Lista ⇄ Planta da seção 2.</p></div></div>
+      <div class="card entry-c"><span class="ei"><i class="ic s18 i-truck"></i></span><div><b>Detalhe do veículo → aba Pneus</b><p>A movimentação embutida na ficha do veículo.</p></div></div>
+    </div>
+    <div class="notes" style="margin-top:20px"><h4>O que falta desenhar pra fechar o fluxo</h4><ul>
+      <li><b>Etiquetagem</b> (passo 2): gerar QR/nº de fogo em lote na entrada da NF e para unidades legadas sem etiqueta.</li>
+      <li><b>Envio à recapadora</b> (passo 6→7): romaneio, custo e retorno com a nova vida — hoje é ação, falta a tela de envio/recebimento.</li>
+      <li>A montagem inicial de um veículo novo (encher todas as posições de uma vez) usa a mesma tela; só começa com tudo vazio.</li>
+    </ul></div>
+  </section>
+
+  <!-- 11 aprovação & concorrência -->
+  <section class="sec" id="s11">
+    <div class="sec-label"><span class="sec-num">11</span><h2>Aprovação e concorrência — quando mais de um mexe</h2></div>
+    <p class="sec-sub">Duas situações que a movimentação precisa tratar: quem executa pode não ser quem confirma (oficina), e duas pessoas não podem mexer no mesmo veículo ao mesmo tempo.</p>
+
+    <p class="view-cap">Papéis · aplicar direto × solicitar aprovação</p>
+    <div class="cards3">
+      <div class="card" style="padding:16px 18px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:38px;height:38px;border-radius:10px;background:hsl(var(--success-soft));color:hsl(var(--success-text));display:grid;place-items:center"><i class="ic s20 i-check-c"></i></span><div><h4 style="font:700 14.5px Sora">Aplica direto</h4><div style="font-size:12px;color:hsl(var(--muted-foreground))">permissão <code>tire.move</code></div></div></div>
+        <p style="font-size:13px;color:hsl(240 6% 26%);margin:10px 0">Gestor de frota, borracheiro-chefe e almoxarife salvam e a movimentação vale na hora.</p>
+        <div class="selbar stat"><div class="cnt"><span>3</span> alterações</div><button><i class="ic s16 i-return"></i>Descartar</button><button class="save"><i class="ic s16 i-check"></i>Salvar alterações</button></div>
+      </div>
+      <div class="card" style="padding:16px 18px">
+        <div style="display:flex;align-items:center;gap:10px"><span style="width:38px;height:38px;border-radius:10px;background:hsl(var(--warning-soft));color:hsl(var(--warning-text));display:grid;place-items:center"><i class="ic s20 i-hour"></i></span><div><h4 style="font:700 14.5px Sora">Solicita aprovação</h4><div style="font-size:12px;color:hsl(var(--muted-foreground))">permissão <code>tire.move.request</code></div></div></div>
+        <p style="font-size:13px;color:hsl(240 6% 26%);margin:10px 0">O mecânico (oficina própria ou terceira) faz a movimentação, mas o botão vira <b>Solicitar aprovação</b> — vai pra fila, não aplica ainda.</p>
+        <div class="selbar stat"><div class="cnt"><span>3</span> alterações</div><button><i class="ic s16 i-return"></i>Descartar</button><button class="save"><i class="ic s16 i-check"></i>Solicitar aprovação</button></div>
+      </div>
+    </div>
+
+    <p class="view-cap" style="margin-top:26px">Fila de aprovação · gestor</p>
+    <div class="card reqcard" style="margin-left:40px;max-width:620px">
+      <div class="rh"><span class="avatar av-b">JB</span><div style="flex:1"><div class="nm">João B. · mecânico</div><div class="mt">FRT-1234 · solicitado há 5 min</div></div><span class="badge b-wait"><i class="ic s14 i-hour"></i>aguardando</span></div>
+      <div class="reqrow"><span class="ri"><i class="ic s14 i-tire"></i></span><span><b>Montou</b> PN-0512 · eixo 4 · dir. ext.</span></div>
+      <div class="reqrow"><span class="ri"><i class="ic s14 i-cycle"></i></span><span><b>Rodízio</b> PN-0455 · eixo 5 esq → eixo 4 esq</span></div>
+      <div class="reqrow"><span class="ri"><i class="ic s14 i-recap"></i></span><span><b>Enviou p/ reforma</b> PN-0377</span></div>
+      <div class="reqfoot"><button class="btn btn-outline">Recusar</button><button class="btn btn-primary"><i class="ic s16 i-check"></i>Aprovar 3 movimentações</button></div>
+    </div>
+
+    <p class="view-cap" style="margin-top:26px">Concorrência · uma pessoa por veículo</p>
+    <div class="cards3">
+      <div style="display:flex;flex-direction:column;gap:12px">
+        <div class="banner warn"><span class="bi"><i class="ic s18 i-lock"></i></span><div><b>Ana G. está movimentando o FRT-1234</b> desde 14:32. Você está vendo em leitura.</div></div>
+        <div class="banner info"><span class="bi"><i class="ic s18 i-bell"></i></span><div>Precisa mexer agora?</div><button class="btn btn-outline btn-sm">Avisar a Ana</button></div>
+      </div>
+      <div class="banner danger" style="align-items:flex-start"><span class="bi"><i class="ic s18 i-warn-f"></i></span><div><b>As posições mudaram desde que você abriu.</b> Ana salvou 2 movimentações neste veículo. Recarregue pra continuar sem sobrescrever.<div style="margin-top:10px"><button class="btn btn-primary btn-sm"><i class="ic s16 i-cycle"></i>Recarregar veículo</button></div></div></div>
+    </div>
+
+    <div class="notes" style="margin-top:20px"><h4>Como o back garante isso</h4><ul>
+      <li><b>Trava por veículo:</b> abrir a movimentação registra que o veículo está sendo editado (por quem, desde quando); os outros entram em leitura. A trava expira sozinha se a pessoa sair sem salvar.</li>
+      <li><b>Salvar é otimista com versão:</b> cada movimentação carrega a <code>version</code> do veículo; se alguém salvou antes, o segundo salva com zero linhas e vira <b>409 (conflito)</b> — a tela recarrega em vez de sobrescrever. É o mesmo <i>check-then-act</i> do resto do sistema.</li>
+      <li><b>Aprovação é segregação de função:</b> quem solicita não aprova. A solicitação guarda autor, veículo e a lista de movimentações; aprovar aplica tudo numa transação só.</li>
+    </ul></div>
+  </section>
+
+  <!-- notes + questions -->
+  <section class="sec">
+    <div class="sec-label"><span class="sec-num">✻</span><h2>Notas &amp; perguntas em aberto</h2></div>
+    <div class="notes">
+      <h4>Como isso se liga ao resto</h4>
+      <ul>
+        <li><b>Instalado é o estado normal.</b> Os eventos saem da OS (montar/trocar), da NF (compra gera unidades) e do hodômetro (km via <code>meter_readings</code>). Ninguém registra movimento na mão.</li>
+        <li><b>Serializar é opt-in por peça</b> (<code>part.tracking = 'serialized'</code>). O que não compensa segue por quantidade. Este mockup é a régua para <b>eixo</b> e <b>fueiro/barrote</b>, que ganham telas próprias com os extras de cada um.</li>
+        <li>A planta é o componente <code>VehicleSchematic</code> do DS (SVG), reaproveitado por pneu, eixo e implemento. Sem 3D.</li>
+      </ul>
+    </div>
+    <div class="qs">
+      <div class="q"><div><h4>TPMS na fatia 1?</h4><p>Pressão/temperatura dependem de sensor. Desenhar a ficha já com o espaço; a leitura automática pode ser fatia posterior — enquanto isso, entrada manual na calibragem.</p></div></div>
+      <div class="q"><div><h4>Sulco: manual ou por sensor?</h4><p>No começo o borracheiro mede e digita. O alerta de "sulco no limite" depende disso — definir a periodicidade mínima.</p></div></div>
+      <div class="q"><div><h4>Teto de recapagens por casco</h4><p>R3 costuma ser o limite para carreta. Fixo, por marca, ou configurável por empresa? Afeta o alerta de "última vida".</p></div></div>
+    </div>
+  </section>
+</div>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+/* ---- lista: seleção + barra de ação em massa ---- */
+(function(){
+  const tb=document.getElementById('fleet'); if(!tb)return;
+  const selbar=document.getElementById('selbar'), count=document.getElementById('selcount');
+  const rows=[...tb.querySelectorAll('tbody tr')];
+  function refresh(){
+    const n=rows.filter(r=>r.classList.contains('sel')).length;
+    count.textContent=n; selbar.classList.toggle('hidden',n===0);
+    document.getElementById('cbAll').classList.toggle('on',n===rows.length);
+  }
+  rows.forEach(r=>{
+    const cb=r.querySelector('.cb');
+    r.addEventListener('click',e=>{
+      if(e.target.closest('.kb'))return;
+      const on=r.classList.toggle('sel');
+      cb.classList.toggle('on',on); cb.innerHTML=on?'<i class="ic s12 i-check"></i>':''; refresh();
+    });
+  });
+  document.getElementById('cbAll').addEventListener('click',e=>{
+    e.stopPropagation();
+    const all=rows.every(r=>r.classList.contains('sel'));
+    rows.forEach(r=>{r.classList.toggle('sel',!all);const cb=r.querySelector('.cb');cb.classList.toggle('on',!all);cb.innerHTML=!all?'<i class="ic s12 i-check"></i>':'';});
+    refresh();
+  });
+  document.getElementById('selclear').addEventListener('click',()=>{
+    rows.forEach(r=>{r.classList.remove('sel');const cb=r.querySelector('.cb');cb.classList.remove('on');cb.innerHTML='';});refresh();
+  });
+  refresh();
+})();
+
+/* ---- movimentação de pneus: pool arrastável + rodas realistas + drag-drop ---- */
+(function(){
+  const NS2='http://www.w3.org/2000/svg';
+  const svg=document.getElementById('svg'); if(!svg)return;
+  const poolEl=document.getElementById('pool'), poolCount=document.getElementById('poolCount');
+  const details=document.getElementById('details'), timeline=document.getElementById('timeline');
+  const dzReform=document.getElementById('dzReform'), dzScrap=document.getElementById('dzScrap');
+  const UNITS={
+    cavalo:{name:'Cavalo · 3 eixos',cab:true,h:480,axles:[{no:'1',type:'steer',y:180},{no:'2',type:'dual',y:310},{no:'3',type:'dual',y:420}]},
+    carreta1:{name:'Carreta 1 · 2 eixos',cab:false,h:360,axles:[{no:'4',type:'dual',y:150},{no:'5',type:'dual',y:260}]},
+    dolly:{name:'Dolly · 2 eixos',cab:false,h:360,axles:[{no:'6',type:'dual',y:150},{no:'7',type:'dual',y:260}]},
+    carreta2:{name:'Carreta 2 · 2 eixos',cab:false,h:360,axles:[{no:'8',type:'dual',y:150},{no:'9',type:'dual',y:260}]},
+  };
+  const SLOTX={steer:[{side:'esq.',slot:'',x:52},{side:'dir.',slot:'',x:308}],
+    dual:[{side:'esq.',slot:'ext.',x:40},{side:'esq.',slot:'int.',x:64},{side:'dir.',slot:'int.',x:296},{side:'dir.',slot:'ext.',x:320}]};
+  const BRANDS=['Michelin X Multi','Bridgestone R','Pirelli FR','Recap Vipal XZ'];
+  const STATES=['ok','ok','ok','atencao','rodizio','critico'];
+  const STL={ok:'Em uso',atencao:'Sulco no limite',critico:'Crítico',rodizio:'Pra rodízio'};
+  let pool=[]; for(let i=0;i<20;i++)pool.push({fire:'PN-07'+(10+i),brand:BRANDS[i%4],life:'R'+(i%3),sulco:7+(i%8)});
+  const mount={}; const reform=[], scrap=[];
+  let curUnit='cavalo', selKey=null, fireN=300;
+  const pending=new Set(); // slot keys em movimentação não salva
+  Object.keys(UNITS).forEach(uk=>{
+    UNITS[uk].axles.forEach((ax,ai)=>SLOTX[ax.type].forEach((w,wi)=>{
+      const key=uk+'|'+ax.no+'|'+w.side+w.slot;
+      if((uk==='cavalo'&&ax.no==='2'&&w.side==='dir.'&&w.slot==='int.')||(uk==='carreta1'&&ax.no==='5'&&wi===0)){mount[key]=null;return;}
+      const st=STATES[(ai*2+wi+uk.length)%STATES.length];
+      mount[key]={fire:'PN-0'+(++fireN),brand:BRANDS[(ai+wi)%4],life:'R'+((ai+wi)%3),sulco:st==='critico'?3:st==='atencao'?5:st==='rodizio'?7:9+(wi%3),state:st,pos:uk};
+    }));
+  });
+  const E=(t)=>document.createElementNS(NS2,t);
+  const A=(e,o)=>{for(const k in o)e.setAttribute(k,o[k]);return e;};
+  const planbox=document.querySelector('.planbox');
+  const tip=document.createElement('div'); tip.className='tip'; planbox.appendChild(tip);
+  function posTip(e){const r=planbox.getBoundingClientRect();tip.style.left=(e.clientX-r.left+planbox.scrollLeft)+'px';tip.style.top=(e.clientY-r.top+planbox.scrollTop)+'px';}
+
+  function miniWheel(size){return '<svg width="'+size+'" height="'+size+'" viewBox="0 0 64 64"><use href="#wheel" xlink:href="#wheel"/></svg>';}
+  function miniProfile(w){
+    let tread='';for(let tx=10.5;tx<=19.5;tx+=2.7)tread+='<line x1="'+tx+'" y1="6" x2="'+tx+'" y2="38" stroke="#000" stroke-width="1.2" opacity=".4"/>';
+    return '<svg width="'+w+'" height="'+Math.round(w*1.42)+'" viewBox="0 0 30 44"><rect x="8" y="3" width="14" height="38" rx="5" fill="url(#tireP)" stroke="#0b0c0f" stroke-width="1"/>'+tread+'</svg>';
+  }
+  function renderPool(){
+    poolCount.textContent=pool.length;
+    poolEl.innerHTML=pool.map(t=>'<div class="pooltile" draggable="true" data-fire="'+t.fire+'">'+miniProfile(42)+'<div class="txt"><div class="fn">'+t.fire+'</div><div class="vd">'+t.life+' · '+t.sulco+'mm</div></div></div>').join('');
+    poolEl.querySelectorAll('.pooltile').forEach(tile=>{
+      tile.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain','pool:'+tile.dataset.fire);tile.classList.add('dragging');});
+      tile.addEventListener('dragend',()=>tile.classList.remove('dragging'));
+      tile.addEventListener('click',()=>{const t=pool.find(x=>x.fire===tile.dataset.fire);openPool(t);});
+    });
+  }
+  function zoneList(list){
+    const MAX=2;
+    let html=list.slice(0,MAX).map(t=>'<span class="fn">'+miniProfile(34)+t.fire+'</span>').join('');
+    const rest=list.slice(MAX);
+    if(rest.length)html+='<span class="fn more" title="'+rest.map(t=>t.fire).join(', ')+'">+'+rest.length+'</span>';
+    return html;
+  }
+  function renderZones(){
+    document.getElementById('reformItems').innerHTML=zoneList(reform);
+    document.getElementById('scrapItems').innerHTML=zoneList(scrap);
+  }
+  const W=16,H=44; // perfil do pneu visto de cima
+  function pendMark(g,x,y){
+    const mk=E('g'); mk.setAttribute('class','pendmark');
+    mk.appendChild(A(E('circle'),{cx:x+W/2+5,cy:y-H/2-3,r:6.5,fill:'hsl(38 92% 48%)',stroke:'#fff','stroke-width':1.5}));
+    mk.appendChild(A(E('circle'),{cx:x+W/2+5,cy:y-H/2-3,r:2,fill:'#fff'}));
+    g.appendChild(mk);
+  }
+  function wheelNode(x,y,tire,key){
+    const g=E('g'); g.dataset.key=key; const pend=pending.has(key);
+    if(!tire){
+      g.setAttribute('class','wheel slot-empty'+(pend?' pend':''));
+      g.appendChild(A(E('rect'),{x:x-W/2-4,y:y-H/2-4,width:W+8,height:H+8,rx:7,class:'disc'}));
+      g.appendChild(A(E('path'),{d:'M'+(x-6)+' '+y+' h12 M'+x+' '+(y-6)+' v12',stroke:'#8a8f98','stroke-width':2.6,'stroke-linecap':'round',fill:'none'}));
+      if(pend)pendMark(g,x,y);
+      return g;
+    }
+    g.setAttribute('class','wheel '+tire.state+(key===selKey?' sel':'')+(pend?' pend':'')); g.setAttribute('draggable','true');
+    g.appendChild(A(E('rect'),{x:x-W/2-4,y:y-H/2-4,width:W+8,height:H+8,rx:7,class:'ring','stroke-width':3}));
+    g.appendChild(A(E('rect'),{x:x-W/2,y:y-H/2,width:W,height:H,rx:5,fill:'url(#tireP)',stroke:'#0b0c0f','stroke-width':1}));
+    for(let tx=-5.2;tx<=5.2;tx+=2.6){g.appendChild(A(E('line'),{x1:x+tx,y1:y-H/2+3,x2:x+tx,y2:y+H/2-3,stroke:'#000','stroke-width':1.4,opacity:.4}));}
+    if(pend)pendMark(g,x,y);
+    return g;
+  }
+  function render(){
+    const U=UNITS[curUnit];
+    svg.setAttribute('viewBox','0 0 360 '+U.h); svg.setAttribute('height',U.h);
+    [...svg.querySelectorAll('.scene')].forEach(n=>n.remove());
+    const scene=E('g'); scene.setAttribute('class','scene');
+    const railTop=U.cab?104:56, railBot=U.h-32;
+    // longarinas (frame rails)
+    scene.appendChild(A(E('rect'),{x:166,y:railTop,width:8,height:railBot-railTop,rx:4,fill:'url(#chassis)',stroke:'#9aa0aa','stroke-width':1}));
+    scene.appendChild(A(E('rect'),{x:186,y:railTop,width:8,height:railBot-railTop,rx:4,fill:'url(#chassis)',stroke:'#9aa0aa','stroke-width':1}));
+    if(U.cab){
+      // retrovisores
+      scene.appendChild(A(E('rect'),{x:126,y:42,width:13,height:5,rx:2,fill:'url(#chassis)',stroke:'#9aa0aa','stroke-width':1}));
+      scene.appendChild(A(E('rect'),{x:221,y:42,width:13,height:5,rx:2,fill:'url(#chassis)',stroke:'#9aa0aa','stroke-width':1}));
+      // cabine
+      scene.appendChild(A(E('rect'),{x:138,y:22,width:84,height:80,rx:15,fill:'url(#chassis)',stroke:'#9aa0aa','stroke-width':1.5}));
+      // para-brisa (frente)
+      scene.appendChild(A(E('path'),{d:'M146 44 q34 -14 68 0 v-8 q-34 -12 -68 0 z',fill:'#9aa6b2',opacity:.85}));
+      // teto
+      scene.appendChild(A(E('rect'),{x:150,y:52,width:60,height:44,rx:9,fill:'#fff',opacity:.13}));
+      // quinta roda (engate) entre os eixos de tração
+      const fy=(U.axles[1].y+U.axles[2].y)/2;
+      scene.appendChild(A(E('circle'),{cx:180,cy:fy,r:17,fill:'#c4cad2',stroke:'#9aa0aa','stroke-width':1.5}));
+      scene.appendChild(A(E('path'),{d:'M172 '+(fy+2)+' h16 M180 '+(fy-15)+' v17',stroke:'#9aa0aa','stroke-width':2,fill:'none'}));
+    }else{
+      // engate/pino-rei na frente da carreta/dolly
+      scene.appendChild(A(E('rect'),{x:170,y:railTop-16,width:20,height:16,rx:4,fill:'url(#chassis)',stroke:'#9aa0aa','stroke-width':1}));
+      scene.appendChild(A(E('circle'),{cx:180,cy:railTop-8,r:4,fill:'#9aa0aa'}));
+    }
+    U.axles.forEach(ax=>{
+      const barW=ax.type==='steer'?266:288;
+      scene.appendChild(A(E('rect'),{x:180-barW/2,y:ax.y-4,width:barW,height:8,rx:4,fill:'url(#chassis)',stroke:'#9aa0aa','stroke-width':1}));
+      const tag=A(E('text'),{x:180,y:ax.y+3.5,class:'axtag'});tag.textContent='E'+ax.no;scene.appendChild(tag);
+      SLOTX[ax.type].forEach(w=>{const key=curUnit+'|'+ax.no+'|'+w.side+w.slot;scene.appendChild(wheelNode(w.x,ax.y,mount[key],key));});
+    });
+    svg.appendChild(scene);
+    wireWheels();
+  }
+  function wireWheels(){
+    svg.querySelectorAll('.wheel').forEach(g=>{
+      const key=g.dataset.key;
+      g.addEventListener('click',()=>{selKey=key;render();openMounted(key);});
+      const mt=mount[key];
+      if(mt){
+        g.addEventListener('mouseenter',e=>{tip.innerHTML=mt.fire+' <span class="st">· '+STL[mt.state]+'</span>';tip.style.opacity='1';posTip(e);});
+        g.addEventListener('mousemove',posTip);
+        g.addEventListener('mouseleave',()=>tip.style.opacity='0');
+      }
+      if(g.classList.contains('slot-empty')){
+        g.addEventListener('dragover',e=>{e.preventDefault();g.classList.add('over');});
+        g.addEventListener('dragleave',()=>g.classList.remove('over'));
+        g.addEventListener('drop',e=>{e.preventDefault();g.classList.remove('over');drop(e.dataTransfer.getData('text/plain'),key);});
+      }else{
+        g.addEventListener('dragstart',e=>{e.dataTransfer.setData('text/plain','mount:'+key);});
+      }
+    });
+  }
+  function posLabel(key){const p=key.split('|');return 'eixo '+p[1]+' · '+p[2];}
+  function drop(data,targetKey){
+    if(!data)return; const [type,ref]=data.split(':');
+    if(type==='pool'){const i=pool.findIndex(t=>t.fire===ref);if(i<0)return;const t=pool.splice(i,1)[0];mount[targetKey]={...t,state:'ok',pos:curUnit};pending.add(targetKey);pushChange('Montou '+t.fire+' · '+posLabel(targetKey));}
+    else if(type==='mount'){const t=mount[ref];if(!t)return;mount[ref]=null;mount[targetKey]=t;pending.add(ref);pending.add(targetKey);pushChange('Rodízio de '+t.fire+' · '+posLabel(ref)+' → '+posLabel(targetKey));}
+    selKey=targetKey; renderPool(); render(); openMounted(targetKey);
+  }
+  function toZone(list,key){const t=mount[key];if(!t)return;mount[key]=null;list.push(t);pending.add(key);pushChange((list===reform?'Enviou p/ reforma: ':'Baixou: ')+t.fire);selKey=null;renderZones();renderPool();render();details.innerHTML=emptyDet();timeline.innerHTML='';}
+  function toPool(key){const t=mount[key];if(!t)return;mount[key]=null;pool.push({fire:t.fire,brand:t.brand,life:t.life,sulco:t.sulco});pending.add(key);pushChange('Desmontou '+t.fire+' · '+posLabel(key));selKey=null;renderPool();render();details.innerHTML=emptyDet();timeline.innerHTML='';}
+  [ [dzReform,reform],[dzScrap,scrap] ].forEach(([dz,list])=>{
+    dz.addEventListener('dragover',e=>{e.preventDefault();dz.classList.add('over');});
+    dz.addEventListener('dragleave',()=>dz.classList.remove('over'));
+    dz.addEventListener('drop',e=>{e.preventDefault();dz.classList.remove('over');const [type,ref]=(e.dataTransfer.getData('text/plain')||'').split(':');
+      if(type==='pool'){const i=pool.findIndex(t=>t.fire===ref);if(i>=0){list.push(pool.splice(i,1)[0]);pushChange((list===reform?'Enviou p/ reforma: ':'Baixou: ')+ref);}renderPool();}
+      else if(type==='mount'){toZone(list,ref);} renderZones();});
+  });
+
+  function badge(st){return st==='ok'?'<span class="badge b-ok"><i class="ic s14 i-check"></i>Em uso</span>':st==='atencao'?'<span class="badge b-wait"><i class="ic s14 i-warn-f"></i>Sulco no limite</span>':st==='critico'?'<span class="badge b-stop"><i class="ic s14 i-warn-f"></i>Crítico</span>':'<span class="badge b-info"><i class="ic s14 i-cycle"></i>Pra rodízio</span>';}
+  function emptyDet(){return '<div class="det-empty"><i class="ic i-hand"></i><div>Clique numa roda pra ver a ficha,<br>ou arraste um pneu do pool pra montar.</div></div>';}
+  function openMounted(key){
+    const t=mount[key]; if(!t){details.innerHTML=emptyDet();timeline.innerHTML='';return;}
+    const parts=key.split('|');
+    details.innerHTML=
+      '<div class="det-top">'+miniWheel(46)+'<div><div class="nm">'+t.fire+'</div><div class="br">'+t.brand+'</div></div></div>'
+      +'<div style="display:flex;gap:6px;margin:10px 0">'+badge(t.state)+'<span class="badge b-info">'+t.life+'</span></div>'
+      +'<div class="fact"><span class="k">Posição</span><span class="v"><span class="path">'+UNITS[parts[0]].name.split(' ·')[0]+' · eixo '+parts[1]+' · '+parts[2]+'</span></span></div>'
+      +'<div class="fact"><span class="k">Medida</span><span class="v">295/80 R22.5</span></div>'
+      +'<div class="fact"><span class="k">Sulco</span><span class="v"'+((t.state==='atencao'||t.state==='critico')?' style="color:hsl(var(--warning-text))"':'')+'>'+t.sulco+' mm</span></div>'
+      +'<div class="fact"><span class="k">CPK</span><span class="v">R$ 0,1'+(4+(t.fire.charCodeAt(4)%5))+'/km</span></div>'
+      +'<div class="fact"><span class="k">Km na vida</span><span class="v">'+(40+t.fire.charCodeAt(5)%50)+'.'+(100+t.fire.charCodeAt(4)%800)+' km</span></div>'
+      +'<div class="det-acts"><button class="pri" onclick="return false"><i class="ic s14 i-cycle"></i>Rodízio</button><button onclick="return false" data-act="pool"><i class="ic s14 i-down-a"></i>Desmontar</button><button onclick="return false" data-act="reform"><i class="ic s14 i-recap"></i>Reforma</button><button onclick="return false" data-act="scrap" style="color:hsl(var(--danger-text))"><i class="ic s14 i-trash"></i>Baixar</button></div>';
+    details.querySelector('[data-act="pool"]').onclick=()=>toPool(key);
+    details.querySelector('[data-act="reform"]').onclick=()=>toZone(reform,key);
+    details.querySelector('[data-act="scrap"]').onclick=()=>toZone(scrap,key);
+    timeline.innerHTML='<div class="tl">'
+      +'<div class="ev now"><div class="t">agora</div><div class="d">'+STL[t.state]+'</div></div>'
+      +'<div class="ev"><div class="t">há 2 meses</div><div class="d">Montado neste eixo · km do hodômetro</div></div>'
+      +'<div class="ev recap"><div class="t">há 5 meses</div><div class="d">Recapado '+t.life+' · Vipal</div></div>'
+      +'<div class="ev"><div class="t">origem</div><div class="d">Comprado · '+t.brand+'</div></div></div>';
+  }
+  function openPool(t){
+    if(!t)return; selKey=null; render();
+    details.innerHTML='<div class="det-top">'+miniWheel(46)+'<div><div class="nm">'+t.fire+'</div><div class="br">'+t.brand+'</div></div></div>'
+      +'<div style="display:flex;gap:6px;margin:10px 0"><span class="badge b-mute">Disponível</span><span class="badge b-info">'+t.life+'</span></div>'
+      +'<div class="fact"><span class="k">Medida</span><span class="v">295/80 R22.5</span></div>'
+      +'<div class="fact"><span class="k">Sulco</span><span class="v">'+t.sulco+' mm</span></div>'
+      +'<div class="det-empty" style="padding:14px 0 0"><i class="ic s16 i-hand"></i> Arraste pra uma posição vazia pra montar.</div>';
+    timeline.innerHTML='<div class="det-empty">Sem eventos de operação — em estoque.</div>';
+  }
+  document.getElementById('unitSeg').addEventListener('click',e=>{
+    const b=e.target.closest('button'); if(!b)return;
+    [...e.currentTarget.children].forEach(x=>x.setAttribute('aria-pressed',x===b));
+    curUnit=b.dataset.u; document.getElementById('unitName').textContent=UNITS[curUnit].name;
+    selKey=null; render(); details.innerHTML=emptyDet(); timeline.innerHTML='';
+  });
+  // barra de alterações pendentes — nada é aplicado sozinho; salva ou descarta
+  let changes=[], baseline=null;
+  function updateBar(){document.getElementById('movcount').textContent=changes.length;document.getElementById('movbar').classList.toggle('hidden',changes.length===0);}
+  function pushChange(txt){changes.push(txt);updateBar();}
+  function snap(){return JSON.parse(JSON.stringify({mount,pool,reform,scrap}));}
+  function restore(s){const o=JSON.parse(JSON.stringify(s));Object.keys(mount).forEach(k=>delete mount[k]);Object.keys(o.mount).forEach(k=>mount[k]=o.mount[k]);pool.length=0;o.pool.forEach(t=>pool.push(t));reform.length=0;o.reform.forEach(t=>reform.push(t));scrap.length=0;o.scrap.forEach(t=>scrap.push(t));}
+  document.getElementById('movsave').onclick=()=>{baseline=snap();changes=[];pending.clear();render();updateBar();};
+  document.getElementById('movundo').onclick=()=>{if(baseline)restore(baseline);changes=[];pending.clear();selKey=null;renderPool();renderZones();render();details.innerHTML=emptyDet();timeline.innerHTML='';updateBar();};
+  document.getElementById('movother').onclick=()=>{};
+  renderPool(); renderZones(); render(); details.innerHTML=emptyDet(); baseline=snap(); updateBar();
+})();
+</script>
+</body>
+</html>

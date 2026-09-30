@@ -106,6 +106,18 @@ Em revisão (30/09/2026). Protótipo **interativo** das peças serializadas (pne
 
 [Ver o mockup](/telas/truck/rastreabilidade)
 
+### Serializados · unidades
+
+Em revisão (30/09/2026). As telas da unidade rastreável (`serialized_items`, [ADR-017](../engenharia/adrs/adr-017-estoque-serializado)) e os fluxos que ela atravessa: a aba **Unidades** no Estoque (lista com os quatro estados, custo sob permissão, celular com FAB), a **ficha** em drawer com posição e histórico, o diálogo **Registrar unidade** (título lidera, sem contexto), o **mapa do ciclo de vida** (recebimento → estoque → manutenção ⇄ retorno → baixa, com transferência entre depósitos e o atalho do scan), onde a unidade aparece nos outros fluxos (NF, OS, planta, depósito) e os cenários externos (oficina terceira, trânsito, consignada, garantia, sem etiqueta).
+
+[Ver o mockup](/telas/truck/serializados)
+
+### Pneus — ciclo de vida
+
+Aprovado em 29/09/2026. Handoff completo da gestão de pneus como peça serializada, um dos três mockups por família (pneu, eixo, fueiro/barrote). Cobre **todos os cenários e fluxos**: quem usa (gestor/borracheiro/comprador), a **planta navegável** do veículo com os pneus montados → ficha, a **ficha completa** (nº de fogo, vidas R0–R3, sulco, pressão/TPMS, temperatura, CPK e custo por vida, garantia, histórico), a **recapagem** como ciclo do casco (fila → recapador → nova vida → baixa), o **tablet do borracheiro** em proporção real (montar/rodízio, offline), o **estoque** só dos desmontados, o **painel do gestor** (CPK por marca, alertas, previsão de troca), os **cenários externos** (oficina terceira, trânsito, garantia, baixa) e os **estados** (vazio, sem etiqueta, sem permissão de custo, offline), com notas e perguntas em aberto.
+
+[Ver o mockup](/telas/truck/pneus)
+
 ### Estoque
 
 Aprovado em 27/09/2026. **Peças** (SKU, categoria, unidade de estoque e de consumo com fator), **Requisições** vindas das OS, **Movimentações** como livro só-inserção (saldo é a soma, cada linha tem motivo, autor e referência) e **Depósitos** (dono + local, incluindo consignado). Traz os casos de borda com selects abertos e os **estados da lista nova** (skeleton, busca/filtro sem resultado, só inativas, sem permissão, erro e paginação por cursor). O custo por peça segue a [convenção aprovada](propostas/part-cost-convention) (custo na unidade de consumo). Task 2.5.
