@@ -1,0 +1,736 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fueiros e barrotes · ciclo de vida · mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --background:0 0% 98%;--foreground:240 10% 3.9%;--card:0 0% 100%;
+  --primary:233 65% 50%;--primary-foreground:0 0% 100%;
+  --muted:240 4.8% 94%;--muted-foreground:240 3.8% 40%;--border:240 5.9% 90%;
+  --success:160 60% 38%;--warning:38 92% 45%;--danger:0 84.2% 60.2%;
+  --success-text:160 70% 24%;--danger-text:0 72% 38%;--warning-text:28 85% 28%;
+  --primary-soft:233 85% 96.5%;--success-soft:160 55% 94%;--warning-soft:40 95% 93%;--danger-soft:0 90% 96%;
+  --note:285 55% 38%;--note-soft:285 60% 96%;
+  --canvas:225 14% 92%;--ring:233 65% 50%;--ink:240 10% 12%;--toolbar:240 5% 96%;
+}
+*{box-sizing:border-box}
+body{margin:0;background:hsl(var(--canvas));color:hsl(var(--foreground));font:14px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+code{font:600 12px ui-monospace,Menlo,monospace;color:hsl(233 65% 40%);background:hsl(var(--muted));padding:1px 6px;border-radius:5px}
+.ic{display:inline-block;width:18px;height:18px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;flex:none;vertical-align:-3px}
+.ic.s14{width:14px;height:14px}.ic.s16{width:16px;height:16px}.ic.s20{width:20px;height:20px}.ic.s24{width:24px;height:24px}.ic.s28{width:28px}.ic.s32{width:32px}
+.i-fueiro{--i:url(https://api.iconify.design/ph/columns.svg)}
+.i-tag{--i:url(https://api.iconify.design/ph/tag.svg)}
+.i-scan{--i:url(https://api.iconify.design/ph/scan.svg)}
+.i-cam{--i:url(https://api.iconify.design/ph/camera.svg)}
+.i-truck{--i:url(https://api.iconify.design/ph/truck.svg)}
+.i-trailer{--i:url(https://api.iconify.design/ph/truck-trailer.svg)}
+.i-box{--i:url(https://api.iconify.design/ph/package.svg)}
+.i-chart{--i:url(https://api.iconify.design/ph/chart-line-up.svg)}
+.i-gear{--i:url(https://api.iconify.design/ph/gear.svg)}
+.i-house{--i:url(https://api.iconify.design/ph/house.svg)}
+.i-mag{--i:url(https://api.iconify.design/ph/magnifying-glass.svg)}
+.i-down{--i:url(https://api.iconify.design/ph/caret-down.svg)}
+.i-right{--i:url(https://api.iconify.design/ph/caret-right.svg)}
+.i-check{--i:url(https://api.iconify.design/ph/check.svg)}
+.i-check-c{--i:url(https://api.iconify.design/ph/check-circle.svg)}
+.i-warn{--i:url(https://api.iconify.design/ph/warning.svg)}
+.i-warn-f{--i:url(https://api.iconify.design/ph/warning-fill.svg)}
+.i-inspect{--i:url(https://api.iconify.design/ph/magnifying-glass-plus.svg)}
+.i-swap{--i:url(https://api.iconify.design/ph/arrows-left-right.svg)}
+.i-down-a{--i:url(https://api.iconify.design/ph/arrow-line-down.svg)}
+.i-hist{--i:url(https://api.iconify.design/ph/clock-counter-clockwise.svg)}
+.i-pin{--i:url(https://api.iconify.design/ph/map-pin.svg)}
+.i-money{--i:url(https://api.iconify.design/ph/currency-circle-dollar.svg)}
+.i-shield{--i:url(https://api.iconify.design/ph/shield-check.svg)}
+.i-trash{--i:url(https://api.iconify.design/ph/trash.svg)}
+.i-buildings{--i:url(https://api.iconify.design/ph/buildings.svg)}
+.i-info{--i:url(https://api.iconify.design/ph/info.svg)}
+.i-bell{--i:url(https://api.iconify.design/ph/bell.svg)}
+.i-list{--i:url(https://api.iconify.design/ph/list-bullets.svg)}
+.i-hand{--i:url(https://api.iconify.design/ph/hand-tap.svg)}
+.i-plus{--i:url(https://api.iconify.design/ph/plus.svg)}
+.i-x{--i:url(https://api.iconify.design/ph/x.svg)}
+.i-crack{--i:url(https://api.iconify.design/ph/lightning.svg)}
+.i-tree{--i:url(https://api.iconify.design/ph/tree.svg)}
+
+/* presentation */
+.doc{max-width:1360px;margin:0 auto;padding:48px 24px 110px}
+.doc h1{font:800 32px/1.12 Sora,sans-serif;letter-spacing:-.02em}
+.doc .lead{color:hsl(240 6% 25%);max-width:820px;margin-top:12px;font-size:15px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.toc a{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:999px;background:hsl(var(--card));border:1px solid hsl(var(--border));font-size:13px;font-weight:500;color:hsl(var(--foreground));text-decoration:none}
+.toc a b{color:hsl(var(--primary));font-weight:800}
+.sec{margin-top:64px}
+.sec-label{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-num{font:800 14px Sora,sans-serif;color:hsl(var(--primary));background:hsl(var(--card));border-radius:999px;min-width:28px;height:28px;padding:0 8px;display:inline-grid;place-items:center;flex:none;border:1px solid hsl(var(--border))}
+.sec h2{font:700 21px/1.3 Sora,sans-serif;letter-spacing:-.01em}
+.sec-sub{color:hsl(240 6% 25%);margin:0 0 20px 40px;max-width:860px}
+.view-cap{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:600;margin:0 0 10px 40px;display:flex;align-items:center;gap:8px}
+.frame{margin-left:40px;background:hsl(var(--background));border:1px solid hsl(var(--border));border-radius:16px;box-shadow:0 1px 2px hsl(230 20% 20%/.06),0 18px 50px -24px hsl(230 30% 20%/.22);overflow:hidden}
+.dep{display:inline-flex;align-items:center;gap:4px;height:20px;padding:0 6px;border:1px dashed hsl(var(--note));border-radius:5px;background:hsl(var(--note-soft));color:hsl(var(--note));font:600 11px/1 Inter;white-space:nowrap;flex:none}
+@media(max-width:760px){.sec-sub,.view-cap,.frame{margin-left:0}}
+
+/* app shell */
+.app{display:grid;grid-template-columns:64px 1fr;grid-template-rows:60px 1fr}
+.topbar{grid-column:1/-1;display:flex;align-items:center;gap:14px;padding:0 18px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
+.brand{display:flex;align-items:center;gap:9px;font:800 16px Sora;letter-spacing:-.01em}
+.brand .lg{width:28px;height:28px;border-radius:8px;background:hsl(var(--primary));color:#fff;display:grid;place-items:center}
+.topbar .spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;width:300px;height:38px;padding:0 12px;border:1px solid hsl(var(--border));border-radius:9px;color:hsl(var(--muted-foreground));font-size:13px;background:hsl(var(--background))}
+.avatar{width:34px;height:34px;border-radius:999px;background:hsl(233 45% 88%);color:hsl(233 60% 30%);display:grid;place-items:center;font-weight:700;font-size:12px}
+.sidenav{background:hsl(var(--card));border-right:1px solid hsl(var(--border));padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.navitem{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;color:hsl(240 5% 40%);position:relative}
+.navitem.on{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.navitem.on::before{content:"";position:absolute;left:-12px;top:11px;bottom:11px;width:3px;border-radius:0 3px 3px 0;background:hsl(var(--primary))}
+.navsep{flex:1}
+.main{padding:22px 26px 26px;min-width:0}
+.pagehead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.pagehead h1{font:700 23px Sora;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.meta{font-size:12.5px;color:hsl(240 6% 30%);margin-top:4px}
+
+/* primitives */
+.card{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:13px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;padding:0 15px;border-radius:9px;border:1px solid transparent;font-weight:600;font-size:13.5px;white-space:nowrap}
+.btn-primary{background:hsl(var(--primary));color:#fff}
+.btn-outline{background:hsl(var(--card));border-color:hsl(240 6% 82%);color:hsl(var(--foreground))}
+.btn-sm{height:32px;padding:0 11px;font-size:12.5px}
+.iconbtn{width:38px;height:38px;border-radius:9px;border:1px solid hsl(240 6% 82%);background:hsl(var(--card));display:grid;place-items:center}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;height:22px;padding:0 8px;border-radius:6px;white-space:nowrap}
+.b-ok{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.b-warn{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.b-danger{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.b-info{background:hsl(var(--primary-soft));color:hsl(233 65% 40%)}
+.b-mute{background:hsl(var(--muted));color:hsl(240 6% 28%)}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:999px;background:hsl(var(--muted));color:hsl(240 6% 24%);font-size:12px;font-weight:500}
+.seg{display:inline-flex;background:hsl(var(--muted));border-radius:10px;padding:3px}
+.seg button{border:0;background:none;border-radius:8px;padding:6px 12px;font-size:12.5px;font-weight:600;color:hsl(var(--muted-foreground));display:inline-flex;align-items:center;gap:6px}
+.seg button.on{background:hsl(var(--card));color:hsl(var(--foreground));box-shadow:0 1px 2px hsl(230 20% 20%/.14)}
+
+/* personas */
+.personas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-left:40px}
+@media(max-width:900px){.personas{grid-template-columns:1fr;margin-left:0}}
+.persona{padding:18px 20px}
+.persona .top{display:flex;align-items:center;gap:12px}
+.persona .pic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center}
+.persona h3{font:700 15px Sora}.persona .role{font-size:12px;color:hsl(var(--muted-foreground))}
+.persona ul{margin:14px 0 0;padding:0;list-style:none;font-size:13px;color:hsl(240 6% 25%)}
+.persona li{display:flex;gap:8px;padding:5px 0}.persona li .ic{color:hsl(var(--success));margin-top:2px}
+
+/* strip + tabs + toolbar + table */
+.tabbar{display:flex;gap:2px;border-bottom:1px solid hsl(var(--border));margin-bottom:16px;flex-wrap:wrap}
+.tabbar a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;font-size:13.5px;font-weight:600;color:hsl(var(--muted-foreground));border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer}
+.tabbar a.on{color:hsl(var(--primary));border-color:hsl(var(--primary))}
+.tabbar .n{font-size:11px;font-weight:700;background:hsl(var(--muted));color:hsl(240 6% 30%);border-radius:99px;padding:1px 7px}
+.tabbar a.on .n{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.tabbar .n.warn{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.tabbar .n.dng{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.strip{display:grid;grid-template-columns:repeat(5,1fr);margin-bottom:16px;overflow:hidden}
+.strip .cell{padding:14px 18px;border-left:1px solid hsl(var(--border))}
+.strip .cell:first-child{border-left:0}
+.strip .k{font-size:12px;color:hsl(var(--muted-foreground));display:flex;align-items:center;gap:6px}
+.strip .v{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-top:2px;font-variant-numeric:tabular-nums}
+.strip .v.warnt{color:hsl(var(--warning-text))}.strip .v.dngt{color:hsl(var(--danger-text))}
+.strip .s{font-size:12px;color:hsl(240 6% 30%);margin-top:2px}
+.toolbar{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.chips-pick{display:flex;flex-wrap:wrap;gap:6px}
+.chips-pick button{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:999px;border:1px solid hsl(240 6% 82%);background:hsl(var(--card));font-size:12.5px;font-weight:500}
+.chips-pick button.on{border-color:hsl(var(--primary));background:hsl(var(--primary-soft));color:hsl(233 65% 36%);font-weight:600}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;font-weight:500;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:hsl(var(--muted-foreground));padding:9px 12px;background:hsl(var(--background));border-bottom:1px solid hsl(var(--border))}
+.tbl td{padding:11px 12px;border-bottom:1px solid hsl(var(--border));vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tbody tr.sel{background:hsl(var(--primary-soft))}
+.tbl tbody tr{cursor:pointer}
+.tbl .sn{font-weight:700;display:flex;align-items:center;gap:6px}
+.tbl .sn .ic{color:hsl(var(--primary))}
+.tbl .r{text-align:right;font-variant-numeric:tabular-nums}
+.tbl .mut{color:hsl(var(--muted-foreground))}
+.cb{width:16px;height:16px;border-radius:5px;border:1.6px solid hsl(240 6% 60%);display:inline-grid;place-items:center;color:#fff;cursor:pointer;vertical-align:-3px}
+.cb.on{background:hsl(var(--primary));border-color:hsl(var(--primary))}
+.list-foot{display:flex;align-items:center;justify-content:space-between;margin-top:14px;font-size:12.5px;color:hsl(240 6% 30%)}
+.selbar{position:absolute;left:50%;transform:translateX(-50%);bottom:22px;display:flex;align-items:center;gap:4px;padding:6px 6px 6px 16px;background:hsl(var(--ink));color:#fff;border-radius:14px;box-shadow:0 16px 40px -10px hsl(230 30% 10%/.5);z-index:6;white-space:nowrap}
+.selbar.hidden{display:none}
+.selbar .cnt{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:13.5px;padding-right:12px;margin-right:4px;border-right:1px solid hsl(240 6% 30%)}
+.selbar .cnt span{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:99px;background:hsl(var(--primary));font-size:12px}
+.selbar button{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 12px;border-radius:9px;border:0;background:none;color:#fff;font-size:13px;font-weight:600}
+.selbar button:hover{background:hsl(240 8% 22%)}
+.selbar .x{width:38px;padding:0;justify-content:center;color:hsl(240 6% 80%)}
+
+/* plan */
+.plan-wrap{display:grid;grid-template-columns:minmax(0,1fr) 360px}
+@media(max-width:900px){.plan-wrap{grid-template-columns:1fr}}
+.plan-bar{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid hsl(var(--border));background:hsl(var(--card));flex-wrap:wrap}
+.plan-bar .title{font-weight:700;font-size:14.5px}.plan-bar .sub{color:hsl(var(--muted-foreground));font-size:12px}
+.plan-bar .spacer{flex:1}
+.planbox{position:relative;background:radial-gradient(hsl(220 8% 86%) 1px,transparent 1.4px) 0 0/22px 22px,hsl(220 10% 92%);display:flex;justify-content:center;padding:22px 10px;min-height:470px}
+.planbox svg{display:block}
+svg .rail{fill:url(#chassis);stroke:#9aa0aa;stroke-width:1.2}
+svg .wheel{fill:#2b2f36;opacity:.5}
+svg .fueiro{cursor:pointer}
+svg .fueiro .post{stroke-width:1.6;paint-order:stroke}
+svg .fueiro.ok .post{stroke:hsl(var(--success))}
+svg .fueiro.inspecao .post{stroke:hsl(var(--warning));stroke-width:3}
+svg .fueiro.trinca .post{stroke:hsl(var(--danger));stroke-width:3;stroke-dasharray:4 2}
+svg .fueiro.critico .post{stroke:hsl(var(--danger));stroke-width:3.4}
+svg .fueiro:hover .post{stroke-width:3.6}
+svg .fueiro.sel .post{stroke:hsl(var(--primary));stroke-width:4.2;stroke-dasharray:none}
+.tip{position:absolute;pointer-events:none;background:hsl(240 10% 12%);color:#fff;font-size:11.5px;font-weight:600;padding:5px 9px;border-radius:8px;transform:translate(-50%,-160%);white-space:nowrap;opacity:0;transition:opacity .1s;z-index:5}
+.tip .st{opacity:.72;font-weight:500}
+.legend{display:flex;flex-wrap:wrap;gap:14px;padding:10px 16px;border-top:1px solid hsl(var(--border));background:hsl(var(--card));font-size:12px;color:hsl(var(--muted-foreground))}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:4px;border:1.5px solid;background:#a9814f}
+.dot.ok{border-color:hsl(var(--success))}.dot.inspecao{border-color:hsl(var(--warning))}.dot.trinca{border-color:hsl(var(--danger));border-style:dashed}.dot.critico{border-color:hsl(var(--danger))}
+.panel{border-left:1px solid hsl(var(--border));background:hsl(var(--card));display:flex;flex-direction:column}
+@media(max-width:900px){.panel{border-left:0;border-top:1px solid hsl(var(--border))}}
+.ph{padding:16px 18px 14px;border-bottom:1px solid hsl(var(--border))}
+.ph .kind{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:700}
+.ph .sn{font:800 20px Sora;letter-spacing:-.01em;margin-top:3px;display:flex;align-items:center;gap:8px}
+.ph .sn .ic{color:hsl(var(--primary))}
+.ph .name{color:hsl(var(--muted-foreground));font-size:12.5px;margin-top:2px}
+.ph .chips{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.pstats{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid hsl(var(--border))}
+.pstat{padding:11px 14px;border-left:1px solid hsl(var(--border))}
+.pstat:first-child{border-left:0}
+.pstat .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:hsl(var(--muted-foreground));font-weight:600}
+.pstat .v{font:700 16px Sora;margin-top:2px}
+.pbody{padding:14px 18px;overflow:auto;flex:1}
+.fact{display:flex;gap:9px;font-size:13px;padding:6px 0}
+.fact .k{color:hsl(var(--muted-foreground));width:96px;flex:none}
+.fact .v{font-weight:600}.fact .v .path{color:hsl(var(--primary))}
+.tl{margin-top:8px;border-left:2px solid hsl(var(--border));padding-left:14px}
+.ev{position:relative;padding:6px 0}
+.ev::before{content:"";position:absolute;left:-19px;top:11px;width:8px;height:8px;border-radius:999px;background:hsl(var(--muted-foreground)/.5);box-shadow:0 0 0 3px hsl(var(--card))}
+.ev.now::before{background:hsl(var(--primary))}.ev.insp::before{background:hsl(var(--warning))}
+.ev .t{font-size:11px;color:hsl(var(--muted-foreground))}.ev .d{font-size:12.5px}
+.acts{padding:12px 16px;border-top:1px solid hsl(var(--border));display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.acts button{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid hsl(var(--border));background:hsl(var(--card));border-radius:9px;padding:9px;font-size:12.5px;font-weight:600}
+.acts button.pri{grid-column:1/3;background:hsl(var(--primary));color:#fff;border-color:transparent}
+
+/* steps */
+.steps{list-style:none;margin:0 0 0 40px;padding:22px 24px;display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:14px}
+@media(max-width:760px){.steps{margin-left:0;grid-template-columns:1fr}}
+.steps li{position:relative;padding:26px 14px 0 0;font-size:12.5px;line-height:1.4}
+.steps li::before{content:"";position:absolute;top:8px;left:0;right:0;height:2px;background:hsl(var(--border))}
+.steps li::after{content:"";position:absolute;top:2px;left:0;width:14px;height:14px;border-radius:99px;background:hsl(var(--primary));box-shadow:0 0 0 3px hsl(var(--card))}
+.steps li:last-child::before{display:none}
+.steps li b{display:block;font:700 14px Sora;margin-bottom:3px}
+.steps li .cnt{position:absolute;top:16px;right:16px;font:800 20px Sora}
+.steps li span{color:hsl(240 6% 30%)}
+@media(max-width:760px){.steps li::before{display:none}.steps li{padding:8px 0 8px 24px}.steps li::after{top:12px}}
+
+/* tablet */
+.tabwrap{background:hsl(240 8% 14%);border-radius:20px;padding:26px;display:grid;place-items:center;margin-left:40px}
+@media(max-width:760px){.tabwrap{margin-left:0;padding:14px}}
+.tab{width:900px;max-width:100%;background:hsl(var(--background));border-radius:16px;overflow:hidden;box-shadow:0 22px 54px -20px hsl(0 0% 0%/.5)}
+.tab-top{display:flex;align-items:center;gap:12px;padding:14px 20px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
+.tab-top .tt{font:700 18px Sora;display:flex;align-items:center;gap:8px}.tab-top .tt .ic{color:hsl(var(--primary))}
+.tab-top .sub{font-size:13px;color:hsl(var(--muted-foreground))}
+.tab-top .spacer{flex:1}
+.tab-top .me{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 8px 0 6px;border-radius:12px;border:1px solid hsl(240 6% 84%);font-size:14px;font-weight:600}
+.tab-top .me .avatar{width:34px;height:34px;font-size:12px}
+.tab-body{padding:22px 24px}
+.tstep{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.tstep .n{width:24px;height:24px;border-radius:999px;background:hsl(var(--primary));color:#fff;display:grid;place-items:center;font-size:13px}
+.insp-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.insp-box{border:2px solid hsl(240 6% 84%);border-radius:16px;padding:18px;text-align:center;font:700 16px Sora}
+.insp-box small{display:block;font-weight:500;font-size:13px;color:hsl(var(--muted-foreground));margin-top:4px}
+.insp-box.on{border-color:hsl(var(--danger));background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.insp-box.ok.on{border-color:hsl(var(--success));background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.photo{margin-top:14px;border:2px dashed hsl(240 6% 78%);border-radius:14px;padding:24px;text-align:center;color:hsl(var(--muted-foreground));font-weight:600}
+.photo .ic{width:40px;height:40px;margin-bottom:6px}
+.tbtn{margin-top:16px;width:100%;height:64px;border:0;border-radius:16px;background:hsl(var(--primary));color:#fff;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px}
+
+/* gestor */
+.gestor{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;margin-left:40px}
+@media(max-width:900px){.gestor{grid-template-columns:1fr;margin-left:0}}
+.cpk-row{display:grid;grid-template-columns:150px 1fr 70px;gap:12px;align-items:center;padding:9px 0;border-top:1px solid hsl(var(--border));font-size:13px}
+.cpk-row:first-of-type{border-top:0}
+.cpk-row .nm{font-weight:600}
+.cpk-row .track{height:9px;border-radius:99px;background:hsl(var(--muted));overflow:hidden}
+.cpk-row .track i{display:block;height:100%;border-radius:99px;background:hsl(var(--primary))}
+.cpk-row .track i.best{background:hsl(var(--success))}
+.cpk-row .m{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;font-size:12.5px}
+.alert{display:flex;align-items:center;gap:11px;padding:11px 0;border-top:1px solid hsl(var(--border));font-size:13px}
+.alert:first-of-type{border-top:0}
+.alert .ai{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex:none}
+.alert.w .ai{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.alert.d .ai{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.alert.i .ai{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.alert .n{margin-left:auto;font-weight:800;font-size:16px}.alert b{font-weight:700}
+
+/* cards3 / states / notes */
+.cards3{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-left:40px}
+@media(max-width:900px){.cards3{grid-template-columns:1fr;margin-left:0}}
+.ext-c{padding:16px 18px}
+.ext-c .top{display:flex;align-items:center;gap:10px}
+.ext-c .ei{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:none}
+.ext-c h4{font:700 14.5px Sora}.ext-c .st{margin-left:auto}
+.ext-c p{font-size:13px;color:hsl(240 6% 26%);margin:10px 0}
+.ext-c .kv{display:flex;gap:8px;font-size:12.5px;padding:5px 0;border-top:1px solid hsl(var(--border))}
+.ext-c .kv .k{color:hsl(var(--muted-foreground));width:110px;flex:none}.ext-c .kv .v{font-weight:600}
+.states{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-left:40px}
+@media(max-width:900px){.states{grid-template-columns:1fr;margin-left:0}}
+.st-card{background:hsl(var(--background));border:1px solid hsl(var(--border));border-radius:13px;padding:16px}
+.st-cap{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));margin-bottom:12px}
+.empty{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:20px;border:1.5px dashed hsl(240 6% 84%);border-radius:11px;background:hsl(var(--card))}
+.empty .ei{width:40px;height:40px;border-radius:11px;background:hsl(var(--muted));color:hsl(240 5% 34%);display:grid;place-items:center;margin-bottom:4px}
+.empty h4{font:700 15px Sora}.empty p{font-size:13px;color:hsl(240 6% 28%);max-width:48ch}
+.notes{margin:0 0 24px 40px;max-width:960px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-left:3px solid hsl(var(--primary));border-radius:12px;padding:18px 22px}
+.notes h4{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--primary));margin-bottom:10px}
+.notes ul{margin:0;padding-left:18px;color:hsl(240 5% 28%);font-size:13.5px}.notes li{margin:7px 0}.notes b{color:hsl(var(--foreground))}
+@media(max-width:760px){.notes{margin-left:0}}
+
+/* operation dialogs */
+.ops{margin-left:40px;display:grid;grid-template-columns:230px 1fr;gap:16px;align-items:start}
+@media(max-width:820px){.ops{grid-template-columns:1fr;margin-left:0}}
+.ops-rail{display:flex;flex-direction:column;gap:6px}
+.ops-rail button{display:flex;align-items:center;gap:10px;padding:11px 13px;border:1px solid hsl(var(--border));background:hsl(var(--card));border-radius:11px;font-size:13px;font-weight:600;text-align:left}
+.ops-rail button .ic{color:hsl(var(--muted-foreground))}
+.ops-rail button.on{border-color:hsl(var(--primary));background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.ops-rail button.on .ic{color:hsl(var(--primary))}
+.dialog{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:16px;box-shadow:0 20px 50px -24px hsl(230 30% 20%/.3);overflow:hidden;max-width:560px}
+.dialog.wide{max-width:640px}
+.dlg-h{padding:18px 20px 6px}
+.dlg-h h3{font:800 19px Sora;letter-spacing:-.01em}
+.dlg-b{padding:8px 20px 18px}
+.dlg-step{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));font-weight:700;margin:12px 0 10px;display:flex;align-items:center;gap:8px}
+.dlg-step .n{width:22px;height:22px;border-radius:999px;background:hsl(var(--primary));color:#fff;display:grid;place-items:center;font-size:12px}
+.pickgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pick{border:1.5px solid hsl(240 6% 84%);border-radius:12px;padding:14px;text-align:left;background:hsl(var(--card))}
+.pick .t{font:700 14px Sora}.pick .s{font-size:12px;color:hsl(var(--muted-foreground));margin-top:2px}
+.pick.on{border-color:hsl(var(--primary));background:hsl(var(--primary-soft))}
+.pick.on .t,.pick.on .s{color:hsl(var(--primary))}
+.pick.danger.on{border-color:hsl(var(--danger));background:hsl(var(--danger-soft))}
+.pick.danger.on .t{color:hsl(var(--danger-text))}
+.pick.disabled{opacity:.5;border-style:dashed;cursor:not-allowed}
+.dlg-auto{display:flex;align-items:center;gap:8px;margin-top:12px;padding:10px 12px;border-radius:10px;background:hsl(var(--success-soft));color:hsl(var(--success-text));font-size:12.5px;font-weight:600}
+.dlg-f{display:flex;justify-content:flex-end;gap:8px;padding:14px 20px;border-top:1px solid hsl(var(--border));background:hsl(var(--toolbar))}
+.dlg-photo{border:2px dashed hsl(240 6% 78%);border-radius:12px;padding:20px;text-align:center;color:hsl(var(--muted-foreground));font-weight:600;font-size:13px;margin-top:4px}
+.dlg-photo .ic{width:34px;height:34px;margin-bottom:6px}
+.qr{width:120px;height:120px;border-radius:12px;background:repeating-conic-gradient(#111 0% 25%,#fff 0% 50%) 50%/14px 14px;margin:6px auto;border:6px solid #fff;box-shadow:0 0 0 1px hsl(var(--border))}
+</style>
+</head>
+<body>
+<div class="doc">
+  <h1>Fueiros e barrotes — o ciclo de vida</h1>
+  <p class="lead">Handoff da família <b>fueiro/barrote</b> (a estrutura da carreta florestal) como peça serializada, no mesmo esqueleto do pneu e do eixo. Cada fueiro é uma unidade com <b>etiqueta/gravação</b>, que mora instalado numa <b>posição da carreta</b> e é encontrado na planta ou pela busca. O que muda: identidade por etiqueta (não nº de fogo/série), <b>material</b> (madeira/aço), <b>posição na carreta</b> e o foco em <b>inspeção</b> (trincas/empeno) e <b>troca</b> — não recapa nem retifica. Contexto: frota florestal da Suzano. Dados de exemplo.</p>
+  <nav class="toc">
+    <a href="#s1"><b>1</b> Quem usa</a>
+    <a href="#s2"><b>2</b> Lista da frota</a>
+    <a href="#s3"><b>3</b> Planta na carreta</a>
+    <a href="#s4"><b>4</b> Ficha do fueiro</a>
+    <a href="#s5"><b>5</b> Inspeção/troca</a>
+    <a href="#s6"><b>6</b> Tablet do inspetor</a>
+    <a href="#s7"><b>7</b> Painel do gestor</a>
+    <a href="#s8"><b>8</b> Cenários externos</a>
+    <a href="#s9"><b>9</b> Estados</a>
+    <a href="#s10"><b>10</b> Operações</a>
+  </nav>
+
+  <!-- 1 personas -->
+  <section class="sec" id="s1">
+    <div class="sec-label"><span class="sec-num">1</span><h2>Quem usa, onde e pra quê</h2></div>
+    <p class="sec-sub">Gestão no notebook; inspeção e troca no tablet do pátio; suprimentos cuida da reposição das estruturas.</p>
+    <div class="personas">
+      <div class="card persona"><div class="top"><span class="pic" style="background:hsl(var(--primary-soft));color:hsl(var(--primary))"><i class="ic s24 i-chart"></i></span><div><h3>Gestor de frota</h3><div class="role">Notebook</div></div></div><ul><li><i class="ic s16 i-check"></i>Fueiros a inspecionar e com trinca</li><li><i class="ic s16 i-check"></i>Trocas e custo de estrutura</li><li><i class="ic s16 i-check"></i>Segurança da carga (integridade)</li></ul></div>
+      <div class="card persona"><div class="top"><span class="pic" style="background:hsl(var(--success-soft));color:hsl(var(--success-text))"><i class="ic s24 i-inspect"></i></span><div><h3>Inspetor / pátio</h3><div class="role">Tablet</div></div></div><ul><li><i class="ic s16 i-check"></i>Inspeciona a carreta em 2 toques</li><li><i class="ic s16 i-check"></i>Marca trinca/empeno com foto</li><li><i class="ic s16 i-check"></i>Troca o fueiro reprovado na hora</li></ul></div>
+      <div class="card persona"><div class="top"><span class="pic" style="background:hsl(var(--warning-soft));color:hsl(var(--warning-text))"><i class="ic s24 i-money"></i></span><div><h3>Comprador</h3><div class="role">Notebook</div></div></div><ul><li><i class="ic s16 i-check"></i>Repõe fueiros (madeira/aço)</li><li><i class="ic s16 i-check"></i>Acompanha fornecedor e lote</li><li><i class="ic s16 i-check"></i>Antecipa troca pela inspeção</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 2 lista -->
+  <section class="sec" id="s2">
+    <div class="sec-label"><span class="sec-num">2</span><h2>Lista da frota — gerir os fueiros</h2></div>
+    <p class="sec-sub">Todos os fueiros rastreados, com resumo, abas por situação e filtros por material/estado. Marque vários e aja em massa (agendar inspeção, trocar, transferir, baixar).</p>
+    <p class="view-cap">Notebook · 1.280 px</p>
+    <div class="frame">
+      <div class="app">
+        <header class="topbar"><div class="brand"><span class="lg"><i class="ic s18 i-truck"></i></span>Facter Truck</div><div class="spacer"></div><div class="search"><i class="ic s16 i-mag"></i>Buscar etiqueta, placa…</div><div class="avatar">MG</div></header>
+        <nav class="sidenav"><div class="navitem"><i class="ic s20 i-house"></i></div><div class="navitem"><i class="ic s20 i-truck"></i></div><div class="navitem on"><i class="ic s20 i-fueiro"></i></div><div class="navitem"><i class="ic s20 i-box"></i></div><div class="navitem"><i class="ic s20 i-chart"></i></div><div class="navsep"></div><div class="navitem"><i class="ic s20 i-gear"></i></div></nav>
+        <main class="main">
+          <div class="pagehead"><div><h1><i class="ic s24 i-fueiro" style="color:hsl(var(--primary))"></i>Fueiros e barrotes</h1><p class="meta">468 fueiros rastreados · Suzano · 3 bases</p></div><div style="display:flex;gap:8px"><button class="btn btn-outline btn-sm"><i class="ic s16 i-scan"></i>Ler código (RFID)</button><button class="btn btn-primary btn-sm"><i class="ic s16 i-plus"></i>Nova unidade</button></div></div>
+          <div class="tabbar"><a class="on"><i class="ic s16 i-list"></i>Todos <span class="n">468</span></a><a><i class="ic s16 i-truck"></i>Instalados <span class="n">420</span></a><a><i class="ic s16 i-box"></i>Em estoque <span class="n">48</span></a><a><i class="ic s16 i-crack"></i>Trincados <span class="n dng">7</span></a><a>Atenção <span class="n warn">23</span></a></div>
+          <div class="card strip">
+            <div class="cell"><div class="k"><i class="ic s14 i-fueiro"></i>Rastreados</div><div class="v">468</div><div class="s">3 bases</div></div>
+            <div class="cell"><div class="k"><i class="ic s14 i-truck"></i>Instalados</div><div class="v">420</div><div class="s">em 30 carretas</div></div>
+            <div class="cell"><div class="k"><i class="ic s14 i-box"></i>Em estoque</div><div class="v">48</div><div class="s">disponíveis</div></div>
+            <div class="cell"><div class="k"><i class="ic s14 i-inspect"></i>Inspeção vencida</div><div class="v warnt">23</div><div class="s">janela passou</div></div>
+            <div class="cell"><div class="k"><i class="ic s14 i-crack"></i>Com trinca</div><div class="v dngt">7</div><div class="s">trocar já</div></div>
+          </div>
+          <div class="toolbar">
+            <div class="search" style="width:240px;background:hsl(var(--card))"><i class="ic s16 i-mag"></i>Buscar etiqueta…</div>
+            <div class="chips-pick"><button>Material <i class="ic s14 i-down"></i></button><button>Estado <i class="ic s14 i-down"></i></button><button>Base <i class="ic s14 i-down"></i></button></div>
+            <span style="flex:1"></span>
+            <div class="seg"><button class="on"><i class="ic s14 i-list"></i>Lista</button><button><i class="ic s14 i-truck"></i>Planta</button></div>
+          </div>
+          <table class="tbl" id="fleet">
+            <thead><tr><th style="width:34px"><span class="cb" id="cbAll"></span></th><th>Etiqueta</th><th>Material</th><th>Posição na carreta</th><th>Última inspeção</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr class="sel"><td><span class="cb on"><i class="ic s14 i-check"></i></span></td><td><span class="sn"><i class="ic s14 i-tag"></i>FU-2303</span></td><td>Madeira</td><td>CRT-88 · esq. · pos. 2</td><td class="dngt" style="color:hsl(var(--danger-text));font-weight:600">com trinca</td><td><span class="badge b-danger"><i class="ic s14 i-warn-f"></i>Trinca</span></td></tr>
+              <tr class="sel"><td><span class="cb on"><i class="ic s14 i-check"></i></span></td><td><span class="sn"><i class="ic s14 i-tag"></i>FU-2302</span></td><td>Aço</td><td>CRT-88 · dir. · pos. 1</td><td class="warnt" style="color:hsl(var(--warning-text));font-weight:600">há 9 meses</td><td><span class="badge b-warn"><i class="ic s14 i-warn-f"></i>Inspeção</span></td></tr>
+              <tr><td><span class="cb"></span></td><td><span class="sn"><i class="ic s14 i-tag"></i>FU-2305</span></td><td>Aço</td><td>CRT-88 · esq. · pos. 3</td><td>há 1 mês</td><td><span class="badge b-ok"><i class="ic s14 i-check"></i>OK</span></td></tr>
+              <tr><td><span class="cb"></span></td><td><span class="sn"><i class="ic s14 i-tag"></i>FU-2307</span></td><td>Madeira</td><td>CRT-88 · esq. · pos. 4</td><td class="dngt" style="color:hsl(var(--danger-text));font-weight:600">empenado</td><td><span class="badge b-danger"><i class="ic s14 i-warn-f"></i>Crítico</span></td></tr>
+              <tr><td><span class="cb"></span></td><td><span class="sn"><i class="ic s14 i-tag"></i>FU-2410</span></td><td>Madeira</td><td class="mut">Estoque · Mucuri</td><td class="mut">—</td><td><span class="badge b-ok"><i class="ic s14 i-check"></i>OK</span></td></tr>
+              <tr><td><span class="cb"></span></td><td><span class="sn"><i class="ic s14 i-tag"></i>FU-2309</span></td><td>Madeira</td><td>CRT-88 · esq. · pos. 5</td><td>há 2 meses</td><td><span class="badge b-ok"><i class="ic s14 i-check"></i>OK</span></td></tr>
+            </tbody>
+          </table>
+          <div class="list-foot"><span>Mostrando 6 de 468</span><div><button class="btn btn-outline btn-sm">‹</button> <b>1</b> / 78 <button class="btn btn-outline btn-sm">›</button></div></div>
+        </main>
+      </div>
+      <div class="selbar" id="selbar"><div class="cnt"><span id="selcount">2</span> selecionados</div><button><i class="ic s16 i-inspect"></i>Agendar inspeção</button><button><i class="ic s16 i-swap"></i>Trocar</button><button><i class="ic s16 i-swap"></i>Transferir base</button><button><i class="ic s16 i-down-a"></i>Baixar</button><button class="x" id="selclear"><i class="ic s16 i-x"></i></button></div>
+    </div>
+    <div class="notes" style="margin-top:20px"><h4>O que muda em relação ao pneu/eixo</h4><ul>
+      <li>Identidade é a <b>etiqueta/gravação</b>; as colunas passam a ser <b>material, posição na carreta e última inspeção</b> (sem vida/sulco/CPK nem torque).</li>
+      <li>A faixa foca em <b>inspeção vencida</b> e <b>com trinca</b> — o que ameaça a segurança da carga.</li>
+      <li>Mesmo esqueleto: abas, filtros, seleção + barra, alternador Lista/Planta.</li>
+    </ul></div>
+  </section>
+
+  <!-- 3 planta -->
+  <section class="sec" id="s3">
+    <div class="sec-label"><span class="sec-num">3</span><h2>Planta na carreta — fueiros e barrotes da estrutura</h2></div>
+    <p class="sec-sub">A carreta florestal vista de cima. Os <b>fueiros</b> são os postes clicáveis ao longo das duas laterais; os <b>barrotes</b> são as travessas do estrado, também clicáveis e rastreáveis. Cor = estado (inspeção vencida, trinca, crítico). Clique numa peça → a ficha; ou leia o código (RFID/gravado). <span class="dep">componente <code>VehicleSchematic</code> do DS</span></p>
+    <div class="frame">
+      <div class="app">
+        <header class="topbar"><div class="brand"><span class="lg"><i class="ic s18 i-truck"></i></span>Facter Truck</div><div class="spacer"></div><div class="search"><i class="ic s16 i-mag"></i>Buscar…</div><div class="avatar">MG</div></header>
+        <nav class="sidenav"><div class="navitem"><i class="ic s20 i-house"></i></div><div class="navitem"><i class="ic s20 i-truck"></i></div><div class="navitem on"><i class="ic s20 i-fueiro"></i></div><div class="navitem"><i class="ic s20 i-box"></i></div><div class="navitem"><i class="ic s20 i-chart"></i></div><div class="navsep"></div><div class="navitem"><i class="ic s20 i-gear"></i></div></nav>
+        <main class="main" style="padding:0">
+          <div class="plan-bar"><div><div class="title">CRT-88 · fueiros e barrotes</div><div class="sub">carreta florestal · clique num fueiro (poste) ou barrote (travessa)</div></div><div class="spacer"></div><button class="btn btn-outline btn-sm"><i class="ic s16 i-scan"></i>Ler código (RFID)</button></div>
+          <div class="plan-wrap">
+            <div class="planbox">
+              <svg id="svg" width="360" viewBox="0 0 360 480" xmlns="http://www.w3.org/2000/svg"><defs>
+                <linearGradient id="steelg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#cbcfd6"/><stop offset=".5" stop-color="#9aa0aa"/><stop offset="1" stop-color="#767c86"/></linearGradient>
+                <linearGradient id="chassis" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b7bdc6"/><stop offset=".5" stop-color="#dce0e6"/><stop offset="1" stop-color="#b7bdc6"/></linearGradient>
+                <linearGradient id="wood" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b0803f"/><stop offset=".5" stop-color="#8a5f2c"/><stop offset="1" stop-color="#6d4820"/></linearGradient>
+              </defs></svg>
+              <div class="tip" id="tip"></div>
+            </div>
+            <div class="panel" id="panel"></div>
+          </div>
+          <div class="legend"><b style="color:hsl(var(--foreground))">Estado:</b><span><i class="dot ok"></i>OK</span><span><i class="dot inspecao"></i>Inspeção vencida</span><span><i class="dot trinca"></i>Com trinca</span><span><i class="dot critico"></i>Crítico</span><span style="margin-left:auto"><i class="ic s14 i-hand"></i>fueiro = poste · barrote = travessa</span></div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 ficha -->
+  <section class="sec" id="s4">
+    <div class="sec-label"><span class="sec-num">4</span><h2>Ficha do fueiro</h2></div>
+    <p class="sec-sub">Identidade, material, posição na carreta, inspeções (trinca/empeno), fornecedor/lote e histórico.</p>
+    <div class="cards3" style="grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)">
+      <div>
+        <div class="card" style="padding:20px 22px;background:linear-gradient(180deg,hsl(233 80% 98%),hsl(var(--card)) 70%)">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+            <div><div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:700">Fueiro · unidade serializada</div>
+              <div style="font:800 26px Sora;display:flex;align-items:center;gap:10px;margin-top:2px"><i class="ic s24 i-tag" style="color:hsl(var(--primary))"></i>FU-2303</div>
+              <div style="color:hsl(240 6% 30%);font-size:13.5px;margin-top:4px">Fueiro de carreta florestal · madeira · lote 2026-02</div></div>
+            <div style="text-align:right"><span class="badge b-danger"><i class="ic s14 i-warn-f"></i>Com trinca</span><div style="margin-top:8px"><span class="badge b-info">3ª inspeção</span></div></div>
+          </div>
+          <div class="pstats" style="margin-top:16px;border-top:1px solid hsl(var(--border));border-bottom:0">
+            <div class="pstat"><div class="k">Material</div><div class="v">Madeira</div></div>
+            <div class="pstat"><div class="k">Posição</div><div class="v" style="font-size:14px">Esq. · pos. 2</div></div>
+            <div class="pstat"><div class="k">Instalado</div><div class="v" style="font-size:14px">há 8 meses</div></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <div style="padding:13px 16px;border-bottom:1px solid hsl(var(--border));font:700 14px Sora;display:flex;align-items:center;gap:8px"><i class="ic s16 i-inspect" style="color:hsl(var(--primary))"></i>Inspeção &amp; integridade</div>
+          <div class="pbody" style="overflow:visible">
+            <div class="fact"><span class="k">Última inspeção</span><span class="v" style="color:hsl(var(--danger-text))">há 1 semana · trinca detectada</span></div>
+            <div class="fact"><span class="k">Achado</span><span class="v">trinca longitudinal na base</span></div>
+            <div class="fact"><span class="k">Recomendação</span><span class="v">trocar antes do próximo carregamento</span></div>
+            <div class="fact"><span class="k">Fornecedor</span><span class="v">fabricação própria · lote 2026-02</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card"><div style="padding:13px 16px;border-bottom:1px solid hsl(var(--border));font:700 14px Sora;display:flex;align-items:center;gap:8px"><i class="ic s16 i-pin" style="color:hsl(var(--primary))"></i>Onde está</div>
+          <div class="pbody" style="overflow:visible"><div class="fact"><span class="k">Carreta</span><span class="v"><span class="path">CRT-88</span></span></div><div class="fact"><span class="k">Posição</span><span class="v"><span class="path">Lateral esquerda · fueiro 2</span></span></div><div class="fact"><span class="k">Conjunto</span><span class="v">FRT-1234 · rodotrem</span></div></div>
+        </div>
+        <div class="card" style="margin-top:16px"><div style="padding:13px 16px;border-bottom:1px solid hsl(var(--border));font:700 14px Sora;display:flex;align-items:center;gap:8px"><i class="ic s16 i-hist" style="color:hsl(var(--primary))"></i>Histórico</div>
+          <div class="pbody" style="overflow:visible"><div class="tl">
+            <div class="ev now"><div class="t">há 1 semana</div><div class="d">Inspeção — <b>trinca</b> detectada (foto)</div></div>
+            <div class="ev insp"><div class="t">há 4 meses</div><div class="d">Inspeção — sem apontamento</div></div>
+            <div class="ev"><div class="t">há 8 meses</div><div class="d">Instalado na CRT-88 · pos. 2</div></div>
+            <div class="ev"><div class="t">origem</div><div class="d">Fabricação própria · lote 2026-02</div></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:16px 0 0 40px" class="ficha-acts">
+      <button class="btn btn-primary"><i class="ic s16 i-inspect"></i>Registrar inspeção</button>
+      <button class="btn btn-outline"><i class="ic s16 i-swap"></i>Trocar fueiro</button>
+      <button class="btn btn-outline"><i class="ic s16 i-down-a"></i>Desinstalar</button>
+      <button class="btn btn-outline" style="color:hsl(var(--danger-text))"><i class="ic s16 i-trash"></i>Baixar</button>
+    </div>
+  </section>
+
+  <!-- 5 inspecao/troca -->
+  <section class="sec" id="s5">
+    <div class="sec-label"><span class="sec-num">5</span><h2>Inspeção / troca — a estrutura confiável</h2></div>
+    <p class="sec-sub">Estruturais não recapam nem retificam: o ciclo é <b>inspecionar e trocar</b>. Na inspeção periódica (ou ao carregar), cada fueiro é avaliado; achou trinca/empeno, troca e baixa o antigo. Cada etapa é um estado rastreável.</p>
+    <ol class="steps">
+      <li><span class="cnt">—</span><b>Em uso</b><span>Instalado, segurando a carga.</span></li>
+      <li><span class="cnt">23</span><b>Inspeção</b><span>Trinca/empeno avaliados (com foto).</span></li>
+      <li><span class="cnt">7</span><b>Troca</b><span>Reprovado sai, entra um do estoque.</span></li>
+      <li><span class="cnt">7</span><b>Baixa</b><span>Trincado/irreparável = sucata, com motivo.</span></li>
+    </ol>
+  </section>
+
+  <!-- 6 tablet -->
+  <section class="sec" id="s6">
+    <div class="sec-label"><span class="sec-num">6</span><h2>Tablet do inspetor — registrar inspeção</h2></div>
+    <p class="sec-sub">No pátio, ao inspecionar a carreta. Marcar o achado (trinca/empeno) em toques grandes e anexar a <b>foto</b>; autor e data entram sozinhos. Funciona offline.</p>
+    <div class="tabwrap"><div class="tab">
+      <div class="tab-top"><span class="tt"><i class="ic s20 i-inspect"></i>Inspeção</span><span class="sub">· FU-2303 · CRT-88 · esq. pos. 2</span><span class="spacer"></span><span class="me"><span class="avatar">JS</span>Jonas S.</span></div>
+      <div class="tab-body">
+        <div class="tstep"><span class="n">1</span>Como está o fueiro?</div>
+        <div class="insp-grid">
+          <div class="insp-box ok">Sem apontamento<small>tudo íntegro</small></div>
+          <div class="insp-box on">Trinca<small>marcado</small></div>
+          <div class="insp-box">Empeno<small>entortado</small></div>
+          <div class="insp-box">Apodrecimento<small>madeira</small></div>
+        </div>
+        <div class="photo"><i class="ic i-cam"></i><div>Anexar foto da trinca</div></div>
+        <div class="dlg-auto" style="margin-top:14px"><i class="ic s16 i-check-c"></i>Jonas S. · 30/09 · CRT-88 entram sozinhos · recomenda trocar</div>
+        <button class="tbtn"><i class="ic s24 i-check"></i>Registrar inspeção</button>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 7 gestor -->
+  <section class="sec" id="s7">
+    <div class="sec-label"><span class="sec-num">7</span><h2>Painel do gestor</h2></div>
+    <p class="sec-sub">Durabilidade por material, o que exige ação e a previsão de troca — aqui o que está em jogo é a <b>segurança da carga</b>.</p>
+    <div class="gestor">
+      <div class="card"><div style="padding:13px 16px;border-bottom:1px solid hsl(var(--border));font:700 14px Sora;display:flex;align-items:center;gap:8px"><i class="ic s16 i-fueiro" style="color:hsl(var(--primary))"></i>Durabilidade por material (meses até troca)</div>
+        <div style="padding:14px 16px">
+          <div class="cpk-row"><span class="nm">Aço</span><span class="track"><i class="best" style="width:72%"></i></span><span class="m">~42 m</span></div>
+          <div class="cpk-row"><span class="nm">Madeira nobre</span><span class="track"><i style="width:44%"></i></span><span class="m">~26 m</span></div>
+          <div class="cpk-row"><span class="nm">Madeira comum</span><span class="track"><i style="width:30%"></i></span><span class="m">~18 m</span></div>
+          <div style="margin-top:12px;font-size:12.5px;color:hsl(240 6% 30%)"><i class="ic s14 i-info" style="color:hsl(var(--primary))"></i> Aço dura mais; madeira é mais barata mas troca mais — decisão de custo × frequência.</div>
+        </div>
+      </div>
+      <div class="card"><div style="padding:13px 16px;border-bottom:1px solid hsl(var(--border));font:700 14px Sora;display:flex;align-items:center;gap:8px"><i class="ic s16 i-bell" style="color:hsl(var(--warning-text))"></i>Exige ação</div>
+        <div style="padding:14px 16px">
+          <div class="alert d"><span class="ai"><i class="ic s18 i-crack"></i></span><span><b>7 fueiros</b> com trinca — trocar já</span><span class="n">7</span></div>
+          <div class="alert w"><span class="ai"><i class="ic s18 i-inspect"></i></span><span><b>23 fueiros</b> com inspeção vencida</span><span class="n">23</span></div>
+          <div class="alert i"><span class="ai"><i class="ic s18 i-box"></i></span><span><b>48 em estoque</b> — repor madeira comum</span><span class="n">48</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 externos -->
+  <section class="sec" id="s8">
+    <div class="sec-label"><span class="sec-num">8</span><h2>Cenários externos</h2></div>
+    <p class="sec-sub">Quando o fueiro sai da base. Cada caso é um estado com responsável claro.</p>
+    <div class="cards3">
+      <div class="card ext-c"><div class="top"><span class="ei" style="background:hsl(var(--primary-soft));color:hsl(var(--primary))"><i class="ic s20 i-buildings"></i></span><h4>Em oficina terceira</h4><span class="badge b-info st">Ecossistema</span></div><p>Carreta em manutenção na Vale das Carretas; os fueiros aparecem sob concessão do dono do dado.</p><div class="kv"><span class="k">Responsável</span><span class="v">Vale das Carretas</span></div></div>
+      <div class="card ext-c"><div class="top"><span class="ei" style="background:hsl(var(--warning-soft));color:hsl(var(--warning-text))"><i class="ic s20 i-trailer"></i></span><h4>Em trânsito</h4><span class="badge b-warn st">Movimentação</span></div><p>Lote de fueiros novos indo de Mucuri pra Ponta Grossa; transferência aberta.</p><div class="kv"><span class="k">Origem → destino</span><span class="v">Mucuri → Ponta Grossa</span></div></div>
+      <div class="card ext-c"><div class="top"><span class="ei" style="background:hsl(var(--success-soft));color:hsl(var(--success-text))"><i class="ic s20 i-tree"></i></span><h4>Fabricação própria</h4><span class="badge b-ok st">Lote</span></div><p>Fueiros de madeira feitos na serraria; entram por lote com a etiqueta gerada.</p><div class="kv"><span class="k">Lote</span><span class="v">2026-02 · 120 un</span></div></div>
+      <div class="card ext-c"><div class="top"><span class="ei" style="background:hsl(var(--danger-soft));color:hsl(var(--danger-text))"><i class="ic s20 i-trash"></i></span><h4>Baixado</h4><span class="badge b-danger st">Fim do ciclo</span></div><p>Trincado/apodrecido/perdido. Sempre com motivo; histórico permanece.</p><div class="kv"><span class="k">Motivo</span><span class="v">trinca estrutural</span></div></div>
+    </div>
+  </section>
+
+  <!-- 9 estados -->
+  <section class="sec" id="s9">
+    <div class="sec-label"><span class="sec-num">9</span><h2>Estados</h2></div>
+    <p class="sec-sub">Todos os estados de uma vez.</p>
+    <div class="states">
+      <div class="st-card"><div class="st-cap">Posição sem fueiro</div><div class="empty"><span class="ei"><i class="ic s20 i-plus"></i></span><h4>Sem fueiro nesta posição</h4><p>CRT-88 · esq. · pos. 2 está vazia. Instale um do estoque ou leia o código (RFID/gravado).</p><button class="btn btn-primary btn-sm" style="margin-top:6px"><i class="ic s16 i-fueiro"></i>Instalar fueiro</button></div></div>
+      <div class="st-card"><div class="st-cap">Sem identificação</div><div class="empty" style="border-color:hsl(38 70% 70%);background:hsl(var(--warning-soft))"><span class="ei" style="background:hsl(var(--warning));color:#fff"><i class="ic s20 i-scan"></i></span><h4>Fueiro sem identificação</h4><p>Existe na carreta mas nunca foi identificado. Grave/rebite (placa, gravação ou RFID) pra rastrear.</p><button class="btn btn-primary btn-sm" style="margin-top:6px"><i class="ic s16 i-scan"></i>Identificar peça</button></div></div>
+      <div class="st-card"><div class="st-cap">Sem permissão de custo</div><div class="empty"><span class="ei"><i class="ic s20 i-money"></i></span><h4>Custo oculto</h4><p>Ficha e operação visíveis; custo do fueiro exige <code>cost.view</code>.</p></div></div>
+      <div class="st-card"><div class="st-cap">Tablet offline</div><div class="empty" style="border-color:hsl(240 6% 78%)"><span class="ei" style="background:hsl(var(--warning-soft));color:hsl(var(--warning-text))"><i class="ic s20 i-inspect"></i></span><h4>Sem sinal — na fila</h4><p>Inspeção (com foto) e troca funcionam offline; sobem ao voltar o sinal.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 10 operacoes -->
+  <section class="sec" id="s10">
+    <div class="sec-label"><span class="sec-num">10</span><h2>Operações — diálogos interativos</h2></div>
+    <p class="sec-sub">Cada operação é um diálogo guiado (lidera pelo título, verbo do pátio, o que o sistema sabe não pergunta). Clique numa operação à esquerda.</p>
+    <div class="ops">
+      <div class="ops-rail" id="opsRail">
+        <button data-op="instalar" class="on"><i class="ic s16 i-fueiro"></i>Instalar fueiro</button>
+        <button data-op="inspecao"><i class="ic s16 i-inspect"></i>Registrar inspeção</button>
+        <button data-op="trocar"><i class="ic s16 i-swap"></i>Trocar fueiro</button>
+        <button data-op="baixar"><i class="ic s16 i-trash"></i>Baixar</button>
+        <button data-op="etiqueta"><i class="ic s16 i-scan"></i>Identificar peça</button>
+      </div>
+      <div id="opsStage"></div>
+    </div>
+  </section>
+
+  <div class="notes" style="margin-top:56px"><h4>Como se liga ao resto</h4><ul>
+    <li>Mesmo modelo serializado do pneu/eixo (<code>part.tracking = 'serialized'</code>); o fueiro é uma <b>extensão própria</b> (material, posição na carreta, inspeções) — serializar é opt-in por peça.</li>
+    <li>Inspeção e troca saem da rotina do pátio/OS; a foto vira anexo do evento. Nada registrado na mão duas vezes.</li>
+    <li>A planta é o mesmo <code>VehicleSchematic</code> do DS; aqui a carreta florestal e os fueiros são o protagonista.</li>
+  </ul></div>
+</div>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+/* lista: seleção + barra */
+(function(){
+  const tb=document.getElementById('fleet'); if(!tb)return;
+  const selbar=document.getElementById('selbar'),count=document.getElementById('selcount');
+  const rows=[...tb.querySelectorAll('tbody tr')];
+  function refresh(){const n=rows.filter(r=>r.classList.contains('sel')).length;count.textContent=n;selbar.classList.toggle('hidden',n===0);document.getElementById('cbAll').classList.toggle('on',n===rows.length);}
+  rows.forEach(r=>r.addEventListener('click',()=>{const on=r.classList.toggle('sel');const cb=r.querySelector('.cb');cb.classList.toggle('on',on);cb.innerHTML=on?'<i class="ic s14 i-check"></i>':'';refresh();}));
+  document.getElementById('cbAll').addEventListener('click',e=>{e.stopPropagation();const all=rows.every(r=>r.classList.contains('sel'));rows.forEach(r=>{r.classList.toggle('sel',!all);const cb=r.querySelector('.cb');cb.classList.toggle('on',!all);cb.innerHTML=!all?'<i class="ic s14 i-check"></i>':'';});refresh();});
+  document.getElementById('selclear').addEventListener('click',()=>{rows.forEach(r=>{r.classList.remove('sel');const cb=r.querySelector('.cb');cb.classList.remove('on');cb.innerHTML='';});refresh();});
+  refresh();
+})();
+
+/* planta: carreta florestal de cima, fueiros = postes clicáveis nas laterais */
+(function(){
+  const svg=document.getElementById('svg'); if(!svg)return;
+  const E=t=>document.createElementNS(NS,t), A=(e,o)=>{for(const k in o)e.setAttribute(k,o[k]);return e;};
+  const FUEIROS=[
+    {code:'FU-2301',side:'esq.',pos:1,mat:'Madeira',state:'ok',y:110,x:118},
+    {code:'FU-2302',side:'dir.',pos:1,mat:'Aço',state:'inspecao',y:110,x:242},
+    {code:'FU-2303',side:'esq.',pos:2,mat:'Madeira',state:'trinca',y:180,x:118},
+    {code:'FU-2304',side:'dir.',pos:2,mat:'Madeira',state:'ok',y:180,x:242},
+    {code:'FU-2305',side:'esq.',pos:3,mat:'Aço',state:'ok',y:250,x:118},
+    {code:'FU-2306',side:'dir.',pos:3,mat:'Madeira',state:'ok',y:250,x:242},
+    {code:'FU-2307',side:'esq.',pos:4,mat:'Madeira',state:'critico',y:320,x:118},
+    {code:'FU-2308',side:'dir.',pos:4,mat:'Aço',state:'ok',y:320,x:242},
+    {code:'FU-2309',side:'esq.',pos:5,mat:'Madeira',state:'ok',y:390,x:118},
+    {code:'FU-2310',side:'dir.',pos:5,mat:'Madeira',state:'inspecao',y:390,x:242},
+  ];
+  // barrotes = travessas do estrado (cross members), atravessam a carreta e também são rastreáveis
+  const BARROTES=[
+    {code:'BA-1201',pos:1,mat:'Aço',state:'ok',y:145},
+    {code:'BA-1202',pos:2,mat:'Aço',state:'inspecao',y:215},
+    {code:'BA-1203',pos:3,mat:'Aço',state:'trinca',y:285},
+    {code:'BA-1204',pos:4,mat:'Aço',state:'ok',y:355},
+  ];
+  const STL={ok:'OK',inspecao:'Inspeção vencida',trinca:'Com trinca',critico:'Crítico'};
+  const planbox=document.querySelector('.planbox'), tip=document.getElementById('tip');
+  function posTip(e){const r=planbox.getBoundingClientRect();tip.style.left=(e.clientX-r.left)+'px';tip.style.top=(e.clientY-r.top)+'px';}
+  const scene=E('g');
+  // pino-rei (engate) no topo
+  scene.appendChild(A(E('rect'),{x:170,y:30,width:20,height:16,rx:4,class:'rail'}));
+  scene.appendChild(A(E('circle'),{cx:180,cy:38,r:4,fill:'#9aa0aa'}));
+  // deck da carreta
+  scene.appendChild(A(E('rect'),{x:130,y:56,width:100,height:392,rx:12,fill:'url(#chassis)',stroke:'#9aa0aa','stroke-width':1.5,class:'rail'}));
+  // longarinas
+  scene.appendChild(A(E('rect'),{x:164,y:64,width:8,height:376,rx:4,class:'rail'}));
+  scene.appendChild(A(E('rect'),{x:188,y:64,width:8,height:376,rx:4,class:'rail'}));
+  // eixos + rodas (2 no fim da carreta)
+  [410,440].forEach(y=>{
+    scene.appendChild(A(E('rect'),{x:40,y:y-4,width:280,height:8,rx:4,class:'rail'}));
+    [44,72,288,316].forEach(x=>scene.appendChild(A(E('rect'),{x:x-8,y:y-18,width:16,height:36,rx:4,class:'wheel'})));
+  });
+  FUEIROS.forEach(f=>{
+    const g=E('g');g.setAttribute('class','fueiro '+f.state);g.dataset.code=f.code;
+    g.appendChild(A(E('rect'),{x:f.x-9,y:f.y-18,width:18,height:36,rx:3,class:'post',fill:f.mat==='Aço'?'url(#steelg)':'url(#wood)'}));
+    scene.appendChild(g);
+    g.addEventListener('mouseenter',e=>{tip.innerHTML=f.code+' <span class="st">· '+STL[f.state]+'</span>';tip.style.opacity='1';posTip(e);});
+    g.addEventListener('mousemove',posTip);
+    g.addEventListener('mouseleave',()=>tip.style.opacity='0');
+    g.addEventListener('click',()=>{[...svg.querySelectorAll('.fueiro')].forEach(a=>a.classList.toggle('sel',a.dataset.code===f.code));render(f);});
+  });
+  // barrotes: travessas horizontais atravessando o estrado, clicáveis como os fueiros
+  BARROTES.forEach(b=>{
+    const g=E('g');g.setAttribute('class','fueiro '+b.state);g.dataset.code=b.code;
+    g.appendChild(A(E('rect'),{x:134,y:b.y-5,width:92,height:10,rx:3,class:'post',fill:'url(#steelg)'}));
+    scene.appendChild(g);
+    g.addEventListener('mouseenter',e=>{tip.innerHTML=b.code+' <span class="st">· travessa · '+STL[b.state]+'</span>';tip.style.opacity='1';posTip(e);});
+    g.addEventListener('mousemove',posTip);
+    g.addEventListener('mouseleave',()=>tip.style.opacity='0');
+    g.addEventListener('click',()=>{[...svg.querySelectorAll('.fueiro')].forEach(a=>a.classList.toggle('sel',a.dataset.code===b.code));renderBarrote(b);});
+  });
+  svg.appendChild(scene);
+  function render(f){
+    const chip=f.state==='ok'?'<span class="badge b-ok"><i class="ic s14 i-check"></i>OK</span>':f.state==='inspecao'?'<span class="badge b-warn"><i class="ic s14 i-warn-f"></i>Inspeção vencida</span>':f.state==='trinca'?'<span class="badge b-danger"><i class="ic s14 i-warn-f"></i>Com trinca</span>':'<span class="badge b-danger"><i class="ic s14 i-warn-f"></i>Crítico</span>';
+    const achado=f.state==='trinca'?'trinca longitudinal':f.state==='critico'?'empeno acentuado':f.state==='inspecao'?'inspeção vencida':'sem apontamento';
+    document.getElementById('panel').innerHTML=
+      '<div class="ph"><div class="kind">Fueiro · unidade</div><div class="sn"><i class="ic s20 i-tag"></i>'+f.code+'</div><div class="name">Fueiro de carreta · '+f.mat.toLowerCase()+'</div><div class="chips">'+chip+'<span class="badge b-info">'+f.mat+'</span></div></div>'
+      +'<div class="pstats"><div class="pstat"><div class="k">Material</div><div class="v" style="font-size:14px">'+f.mat+'</div></div><div class="pstat"><div class="k">Posição</div><div class="v" style="font-size:14px">'+f.side+' '+f.pos+'</div></div><div class="pstat"><div class="k">Carreta</div><div class="v" style="font-size:14px">CRT-88</div></div></div>'
+      +'<div class="pbody"><div class="fact"><span class="k">Posição</span><span class="v"><span class="path">CRT-88 · lateral '+(f.side==='esq.'?'esquerda':'direita')+' · fueiro '+f.pos+'</span></span></div>'
+      +'<div class="fact"><span class="k">Achado</span><span class="v"'+(f.state==='trinca'||f.state==='critico'?' style="color:hsl(var(--danger-text))"':'')+'>'+achado+'</span></div>'
+      +'<div class="fact"><span class="k">Última inspeção</span><span class="v">'+(f.state==='inspecao'?'há 9 meses (vencida)':'há 1 mês')+'</span></div>'
+      +'<div class="fact"><span class="k">Lote</span><span class="v">2026-02</span></div>'
+      +'<div class="fact" style="display:block"><span class="k" style="display:block;margin-bottom:5px">Histórico</span><div class="tl"><div class="ev now"><div class="t">agora</div><div class="d">'+STL[f.state]+'</div></div><div class="ev insp"><div class="t">há 4 meses</div><div class="d">Inspeção — sem apontamento</div></div><div class="ev"><div class="t">origem</div><div class="d">Fabricação própria · lote 2026-02</div></div></div></div></div>'
+      +'<div class="acts"><button class="pri"><i class="ic s14 i-inspect"></i>Registrar inspeção</button><button><i class="ic s14 i-swap"></i>Trocar</button><button><i class="ic s14 i-down-a"></i>Desinstalar</button><button style="color:hsl(var(--danger-text))"><i class="ic s14 i-trash"></i>Baixar</button></div>';
+  }
+  function renderBarrote(b){
+    const chip=b.state==='ok'?'<span class="badge b-ok"><i class="ic s14 i-check"></i>OK</span>':b.state==='inspecao'?'<span class="badge b-warn"><i class="ic s14 i-warn-f"></i>Inspeção vencida</span>':b.state==='trinca'?'<span class="badge b-danger"><i class="ic s14 i-warn-f"></i>Com trinca</span>':'<span class="badge b-danger"><i class="ic s14 i-warn-f"></i>Crítico</span>';
+    const achado=b.state==='trinca'?'trinca na solda':b.state==='critico'?'empeno acentuado':b.state==='inspecao'?'inspeção vencida':'sem apontamento';
+    document.getElementById('panel').innerHTML=
+      '<div class="ph"><div class="kind">Barrote · travessa</div><div class="sn"><i class="ic s20 i-tag"></i>'+b.code+'</div><div class="name">Travessa do estrado · '+b.mat.toLowerCase()+'</div><div class="chips">'+chip+'<span class="badge b-info">'+b.mat+'</span></div></div>'
+      +'<div class="pstats"><div class="pstat"><div class="k">Material</div><div class="v" style="font-size:14px">'+b.mat+'</div></div><div class="pstat"><div class="k">Posição</div><div class="v" style="font-size:14px">Travessa '+b.pos+'</div></div><div class="pstat"><div class="k">Carreta</div><div class="v" style="font-size:14px">CRT-88</div></div></div>'
+      +'<div class="pbody"><div class="fact"><span class="k">Posição</span><span class="v"><span class="path">CRT-88 · travessa '+b.pos+' do estrado</span></span></div>'
+      +'<div class="fact"><span class="k">Achado</span><span class="v"'+(b.state==='trinca'||b.state==='critico'?' style="color:hsl(var(--danger-text))"':'')+'>'+achado+'</span></div>'
+      +'<div class="fact"><span class="k">Última inspeção</span><span class="v">'+(b.state==='inspecao'?'há 9 meses (vencida)':'há 1 mês')+'</span></div>'
+      +'<div class="fact"><span class="k">Lote</span><span class="v">2025-11</span></div>'
+      +'<div class="fact" style="display:block"><span class="k" style="display:block;margin-bottom:5px">Histórico</span><div class="tl"><div class="ev now"><div class="t">agora</div><div class="d">'+STL[b.state]+'</div></div><div class="ev insp"><div class="t">há 3 meses</div><div class="d">Inspeção — sem apontamento</div></div><div class="ev"><div class="t">origem</div><div class="d">Fornecedor · lote 2025-11</div></div></div></div></div>'
+      +'<div class="acts"><button class="pri"><i class="ic s14 i-inspect"></i>Registrar inspeção</button><button><i class="ic s14 i-swap"></i>Trocar</button><button><i class="ic s14 i-down-a"></i>Desinstalar</button><button style="color:hsl(var(--danger-text))"><i class="ic s14 i-trash"></i>Baixar</button></div>';
+  }
+  document.getElementById('panel').innerHTML='<div class="pbody" style="display:flex;align-items:center;justify-content:center;text-align:center;color:hsl(var(--muted-foreground))"><div><i class="ic s28 i-hand"></i><div style="margin-top:8px"><b style="color:hsl(var(--foreground))">Clique num fueiro ou barrote</b><br>ou leia o código (RFID/gravado).</div></div></div>';
+  render(FUEIROS[2]);[...svg.querySelectorAll('.fueiro')].forEach(a=>a.classList.toggle('sel',a.dataset.code==='FU-2303'));
+})();
+
+/* operações: diálogos interativos */
+(function(){
+  const stage=document.getElementById('opsStage'), rail=document.getElementById('opsRail');
+  function grid(items,name,extra){return '<div class="pickgrid">'+items.map(([t,s,on])=>'<button class="pick'+(extra?' '+extra:'')+(on?' on':'')+'" data-g="'+name+'"><div class="t">'+t+'</div>'+(s?'<div class="s">'+s+'</div>':'')+'</button>').join('')+'</div>';}
+  function dialog(title,body,cta,cls,tone){
+    return '<div class="dialog'+(cls==='wide'?' wide':'')+'"><div class="dlg-h"><h3>'+title+'</h3></div><div class="dlg-b">'+body+'</div><div class="dlg-f"><button class="btn btn-outline">Cancelar</button><button class="btn btn-primary"'+(tone==='danger'?' style="background:hsl(var(--danger))"':'')+'>'+cta+'</button></div></div>';
+  }
+  const DLG={
+    instalar(){return dialog('Instalar fueiro',
+      '<div class="dlg-step"><span class="n">1</span>Escolha a posição vazia na carreta</div>'
+      +grid([['CRT-88 · esq. · pos. 2','vazia',1],['CRT-88 · dir. · pos. 3','vazia',0],['CRT-88 · esq. · pos. 6','vazia',0],['CRT-88 · dir. · pos. 6','vazia',0]],'pos')
+      +'<div class="dlg-step"><span class="n">2</span>Leia o código (RFID/gravado) ou escolha do estoque</div>'
+      +grid([['FU-2410','Madeira · novo',0],['FU-2433','Aço · novo',0]],'un')
+      +'<div class="dlg-auto"><i class="ic s16 i-check-c"></i>Carreta, data e autor entram sozinhos</div>',
+      'Instalar fueiro');},
+    inspecao(){return dialog('Registrar inspeção',
+      '<div class="dlg-step"><span class="n">1</span>O que encontrou?</div>'
+      +grid([['Sem apontamento','íntegro',0],['Trinca','marcar troca',1],['Empeno','avaliar',0],['Apodrecimento','madeira',0]],'insp','danger')
+      +'<div class="dlg-step"><span class="n">2</span>Foto do achado</div>'
+      +'<div class="dlg-photo"><i class="ic i-cam"></i><div>Anexar foto da trinca (câmera)</div></div>'
+      +'<div class="dlg-auto"><i class="ic s16 i-check-c"></i>CRT-88 · pos. 2 · autor e data automáticos · vira evento com foto</div>',
+      'Registrar inspeção','wide');},
+    trocar(){return dialog('Trocar fueiro',
+      '<div class="dlg-step"><span class="n">1</span>Sai (reprovado)</div>'
+      +'<div class="pick on" style="margin-bottom:10px"><div class="t">FU-2303 · esq. pos. 2</div><div class="s">madeira · com trinca → baixa</div></div>'
+      +'<div class="dlg-step"><span class="n">2</span>Entra (do estoque)</div>'
+      +grid([['FU-2410','Madeira · novo',1],['FU-2433','Aço · novo',0]],'novo')
+      +'<div class="dlg-auto"><i class="ic s16 i-check-c"></i>O antigo baixa com motivo; o novo assume a posição</div>',
+      'Trocar fueiro','wide');},
+    baixar(){return dialog('Baixar fueiro',
+      '<div class="dlg-step"><span class="n">1</span>Motivo da baixa</div>'
+      +grid([['Trinca estrutural','',1],['Empeno irreparável','',0],['Apodrecimento','',0],['Perda / roubo','',0]],'mot','danger')
+      +'<div class="dlg-auto" style="background:hsl(var(--danger-soft));color:hsl(var(--danger-text))"><i class="ic s16 i-warn"></i>Autor e data registrados · histórico permanece</div>',
+      'Baixar','','danger');},
+    etiqueta(){return dialog('Identificar peça',
+      '<div class="dlg-step"><span class="n">1</span>Método durável (papel não sobrevive na carreta florestal)</div>'
+      +grid([['Placa metálica rebitada','QR a laser no metal · limpa e lê',1],['Gravação no aço','estampagem permanente',0],['RFID industrial','parafusado · lê enlameado, por aproximação',0],['Chapa parafusada (madeira)','pro barrote de madeira',0]],'metodo')
+      +'<div class="dlg-step"><span class="n">2</span>Identidade</div>'
+      +'<div class="qr"></div><div style="text-align:center;font:700 15px Sora">FU-2451</div><div style="text-align:center;font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:2px">gravado/rebitado na estrutura · leitura por RFID ou código gravado, nunca papel colado</div>',
+      'Identificar peça','wide');},
+  };
+  function open(op){
+    [...rail.children].forEach(b=>b.classList.toggle('on',b.dataset.op===op));
+    stage.innerHTML=DLG[op]();
+    stage.querySelectorAll('.pick:not(.disabled)').forEach(p=>p.addEventListener('click',()=>{
+      const g=p.dataset.g, group=[...stage.querySelectorAll('.pick[data-g="'+g+'"]')];
+      group.forEach(x=>x.classList.remove('on'));
+      p.classList.add('on');
+    }));
+  }
+  rail.addEventListener('click',e=>{const b=e.target.closest('button');if(b)open(b.dataset.op);});
+  open('instalar');
+})();
+</script>
+</body>
+</html>

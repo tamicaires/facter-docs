@@ -1,0 +1,443 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Operações do pneu · diálogos · mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --background:0 0% 98%;--foreground:240 10% 3.9%;--card:0 0% 100%;
+  --primary:233 65% 50%;--primary-foreground:0 0% 100%;
+  --muted:240 4.8% 94%;--muted-foreground:240 3.8% 40%;--border:240 5.9% 90%;
+  --success:160 60% 38%;--warning:38 92% 45%;--danger:0 84.2% 60.2%;
+  --success-ink:160 70% 24%;--warning-ink:28 85% 30%;--danger-ink:0 72% 38%;
+  --primary-soft:233 85% 96.5%;--success-soft:160 55% 94%;--warning-soft:40 95% 92%;--danger-soft:0 90% 96%;
+  --canvas:225 16% 91%;--ink:240 10% 12%;
+}
+*{box-sizing:border-box}
+body{margin:0;background:hsl(var(--canvas));color:hsl(var(--foreground));font:15px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4,p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+.ic{display:inline-block;width:18px;height:18px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;flex:none;vertical-align:-3px}
+.ic.s14{width:14px}.ic.s16{width:16px}.ic.s20{width:20px}.ic.s24{width:24px}.ic.s28{width:28px}.ic.s40{width:40px;height:40px}
+.i-tire{--i:url(https://api.iconify.design/ph/tire.svg)}
+.i-fire{--i:url(https://api.iconify.design/ph/flame-fill.svg)}
+.i-scan{--i:url(https://api.iconify.design/ph/scan.svg)}
+.i-qr{--i:url(https://api.iconify.design/ph/qr-code.svg)}
+.i-cycle{--i:url(https://api.iconify.design/ph/arrows-clockwise.svg)}
+.i-swap{--i:url(https://api.iconify.design/ph/arrows-left-right.svg)}
+.i-down{--i:url(https://api.iconify.design/ph/arrow-line-down.svg)}
+.i-recap{--i:url(https://api.iconify.design/ph/recycle.svg)}
+.i-trash{--i:url(https://api.iconify.design/ph/trash.svg)}
+.i-check{--i:url(https://api.iconify.design/ph/check.svg)}
+.i-check-c{--i:url(https://api.iconify.design/ph/check-circle-fill.svg)}
+.i-x{--i:url(https://api.iconify.design/ph/x.svg)}
+.i-box{--i:url(https://api.iconify.design/ph/package.svg)}
+.i-buildings{--i:url(https://api.iconify.design/ph/buildings.svg)}
+.i-tag{--i:url(https://api.iconify.design/ph/tag.svg)}
+.i-warn{--i:url(https://api.iconify.design/ph/warning-fill.svg)}
+.i-gauge{--i:url(https://api.iconify.design/ph/gauge.svg)}
+.i-truck{--i:url(https://api.iconify.design/ph/truck.svg)}
+.i-hand{--i:url(https://api.iconify.design/ph/hand-tap.svg)}
+.i-right{--i:url(https://api.iconify.design/ph/arrow-right.svg)}
+.i-prohibit{--i:url(https://api.iconify.design/ph/prohibit.svg)}
+.i-rfid{--i:url(https://api.iconify.design/ph/broadcast.svg)}
+.i-plate{--i:url(https://api.iconify.design/ph/identification-card.svg)}
+.i-info{--i:url(https://api.iconify.design/ph/info.svg)}
+.i-fire-brand{--i:url(https://api.iconify.design/ph/fire-simple.svg)}
+
+.doc{max-width:1200px;margin:0 auto;padding:44px 22px 80px}
+.doc h1{font:800 30px/1.15 Sora,sans-serif;letter-spacing:-.02em}
+.doc .lead{color:hsl(var(--muted-foreground));max-width:800px;margin-top:10px}
+.layout{display:grid;grid-template-columns:270px 1fr;gap:22px;margin-top:28px}
+@media(max-width:820px){.layout{grid-template-columns:1fr}}
+.rail{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:14px;padding:8px;height:max-content;position:sticky;top:20px}
+.rail .rh{font:700 11px Sora;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));padding:10px 12px 6px}
+.op{display:flex;align-items:center;gap:11px;width:100%;border:0;background:none;border-radius:10px;padding:11px 12px;text-align:left}
+.op .oi{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;background:hsl(var(--muted));color:hsl(240 6% 34%);flex:none}
+.op b{font:600 14px Inter}.op span{display:block;font-size:11.5px;color:hsl(var(--muted-foreground))}
+.op:hover{background:hsl(var(--muted)/.6)}
+.op.on{background:hsl(var(--primary-soft))}
+.op.on .oi{background:hsl(var(--primary));color:#fff}
+.op.on b{color:hsl(var(--primary))}
+
+/* stage + dialog */
+.stage{position:relative;background:
+  radial-gradient(hsl(220 8% 85%) 1px,transparent 1.4px) 0 0/22px 22px,hsl(220 10% 91%);
+  border:1px solid hsl(var(--border));border-radius:16px;min-height:560px;display:flex;align-items:flex-start;justify-content:center;padding:34px 20px}
+.dialog{width:520px;max-width:100%;background:hsl(var(--card));border-radius:18px;box-shadow:0 24px 70px -20px hsl(230 30% 20%/.45);overflow:hidden;animation:pop .18s ease-out}
+.dialog.lg{width:600px}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.98)}to{opacity:1;transform:none}}
+.dh{display:flex;align-items:flex-start;gap:12px;padding:20px 22px 12px}
+.dh h3{font:800 20px Sora;letter-spacing:-.01em;flex:1}
+.dh .x{width:34px;height:34px;border-radius:9px;border:0;background:hsl(var(--muted));color:hsl(240 6% 40%);display:grid;place-items:center;flex:none}
+.db{padding:6px 22px 8px}
+.df{display:flex;align-items:center;gap:10px;padding:16px 22px 20px;border-top:1px solid hsl(var(--border));margin-top:12px}
+.df .hint{font-size:12.5px;color:hsl(var(--muted-foreground));display:flex;align-items:center;gap:7px}
+.df .sp{flex:1}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;padding:0 18px;border-radius:11px;border:1px solid transparent;font:600 14.5px Inter;white-space:nowrap}
+.btn-pri{background:hsl(var(--primary));color:#fff}
+.btn-pri:disabled{background:hsl(var(--muted));color:hsl(240 6% 55%);cursor:not-allowed}
+.btn-pri.danger{background:hsl(var(--danger))}
+.btn-out{background:hsl(var(--card));border-color:hsl(240 6% 82%);color:hsl(var(--foreground))}
+.step{font:700 11px Sora;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));margin:10px 0 10px;display:flex;align-items:center;gap:8px}
+.step .n{width:22px;height:22px;border-radius:999px;background:hsl(var(--primary));color:#fff;display:grid;place-items:center;font-size:12px;font-weight:700}
+.step .n.done{background:hsl(var(--success))}
+.step .n.off{background:hsl(var(--muted));color:hsl(240 6% 45%)}
+
+/* wheel profile (visto de cima) */
+.wheel{display:inline-block}
+.wheel rect.tire{fill:url(#tireP);stroke:#0b0c0f;stroke-width:1}
+.wheel line{stroke:#000;stroke-width:1.3;opacity:.4}
+
+/* axle picker (montar) */
+.axle{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.pos{border:1.6px solid hsl(var(--border));border-radius:14px;padding:14px;text-align:center;background:hsl(var(--card))}
+.pos .p{font:700 15px Sora}
+.pos .s{font-size:12px;color:hsl(var(--muted-foreground));margin-top:3px}
+.pos.empty{border-style:dashed;color:hsl(var(--muted-foreground))}
+.pos.on{border-color:hsl(var(--primary));background:hsl(var(--primary-soft))}
+.pos.on .p,.pos.on .s{color:hsl(var(--primary))}
+.pos.busy{opacity:.85}
+
+/* scan + pool */
+.scan{border:1.6px dashed hsl(233 60% 62%);border-radius:14px;background:hsl(233 80% 98%);padding:26px;text-align:center;color:hsl(233 55% 44%);font-weight:600}
+.scan .ic{width:38px;height:38px;margin-bottom:8px}
+.pool{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
+.pill{display:flex;flex-direction:column;align-items:center;gap:4px;border:1.4px solid hsl(var(--border));border-radius:12px;padding:8px 12px;background:hsl(var(--card));font:700 11.5px Sora}
+.pill .vd{font-weight:500;font-size:10px;color:hsl(var(--muted-foreground))}
+.pill:hover{border-color:hsl(var(--primary))}
+.pill.on{border-color:hsl(var(--primary));background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+
+/* cards choice (desmontar / baixa / recapador) */
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.choices.three{grid-template-columns:repeat(3,1fr)}
+.choice{border:1.6px solid hsl(var(--border));border-radius:14px;padding:16px 14px;text-align:left;background:hsl(var(--card));display:flex;gap:12px;align-items:flex-start}
+.choice .ci{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;background:hsl(var(--muted));color:hsl(240 6% 34%);flex:none}
+.choice b{font:700 14.5px Sora;display:block}
+.choice small{font-size:12px;color:hsl(var(--muted-foreground))}
+.choice.on{border-color:hsl(var(--primary));background:hsl(var(--primary-soft))}
+.choice.on .ci{background:hsl(var(--primary));color:#fff}
+.choice.danger.on{border-color:hsl(var(--danger));background:hsl(var(--danger-soft))}
+.choice.danger.on .ci{background:hsl(var(--danger));color:#fff}
+
+/* unit header row inside dialog */
+.urow{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1px solid hsl(var(--border));border-radius:12px;background:hsl(var(--background))}
+.urow .fire{font:800 16px Sora;display:flex;align-items:center;gap:7px}.urow .fire .ic{color:hsl(var(--warning-ink))}
+.urow .br{font-size:12px;color:hsl(var(--muted-foreground))}
+.badge{display:inline-flex;align-items:center;gap:5px;font:700 11.5px Inter;padding:3px 9px;border-radius:999px}
+.b-info{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.b-warn{background:hsl(var(--warning-soft));color:hsl(var(--warning-ink))}
+.b-ok{background:hsl(var(--success-soft));color:hsl(var(--success-ink))}
+.b-danger{background:hsl(var(--danger-soft));color:hsl(var(--danger-ink))}
+
+/* rodízio mini-plan */
+.rod{display:flex;align-items:center;justify-content:center;gap:0;padding:8px 0}
+.slotwrap{display:flex;flex-direction:column;align-items:center;gap:6px}
+.slot{width:56px;height:70px;border-radius:12px;border:1.6px solid hsl(var(--border));display:grid;place-items:center;background:hsl(var(--card));cursor:pointer}
+.slot.empty{border-style:dashed}
+.slot.pick{border-color:hsl(var(--primary));box-shadow:0 0 0 3px hsl(var(--primary-soft))}
+.slot.dest{border-color:hsl(var(--success));background:hsl(var(--success-soft))}
+.slot .lb{font-size:10.5px;color:hsl(var(--muted-foreground));text-align:center}
+.axlebar{width:30px;height:6px;background:#c4cad2;border-radius:3px}
+.rodhint{text-align:center;font-size:12.5px;color:hsl(var(--muted-foreground));margin-top:6px}
+
+/* life bar (receber) */
+.lifebar{display:flex;gap:5px;margin-top:8px}
+.lifebar i{flex:1;height:10px;border-radius:4px;background:hsl(var(--muted))}
+.lifebar i.done{background:hsl(var(--success))}.lifebar i.new{background:hsl(var(--primary));animation:glow 1.2s ease-in-out infinite}
+@keyframes glow{0%,100%{opacity:1}50%{opacity:.55}}
+.lbls{display:flex;justify-content:space-between;font-size:10.5px;color:hsl(var(--muted-foreground));margin-top:4px}
+.kv{display:flex;gap:8px;font-size:13px;padding:6px 0}.kv .k{color:hsl(var(--muted-foreground));width:120px;flex:none}.kv .v{font-weight:600}
+
+/* qr */
+.qrbox{display:flex;gap:16px;align-items:center}
+.qr{width:120px;height:120px;border-radius:12px;border:1px solid hsl(var(--border));background:#fff;display:grid;place-items:center;flex:none}
+.input{display:flex;align-items:center;gap:8px;height:44px;padding:0 14px;border:1.4px solid hsl(240 6% 82%);border-radius:11px;font:600 14px Sora;color:hsl(var(--foreground));background:hsl(var(--card))}
+.note{font-size:12.5px;color:hsl(240 6% 30%);margin-top:12px;display:flex;gap:8px;align-items:flex-start}
+.note .ic{color:hsl(var(--primary));flex:none;margin-top:1px}
+.rules{margin:26px 0 0;background:hsl(var(--card));border:1px solid hsl(var(--border));border-left:3px solid hsl(var(--primary));border-radius:12px;padding:16px 20px;max-width:900px}
+/* inspeção / calibragem */
+.insp-row{display:grid;grid-template-columns:140px 1fr 96px;gap:14px;align-items:center;padding:13px 0;border-top:1px solid hsl(var(--border))}
+.insp-row:first-of-type{border-top:0}
+.insp-row .who{display:flex;align-items:center;gap:9px}
+.insp-row .who .fn{font:700 12.5px Sora}.insp-row .who .pl{font-size:10.5px;color:hsl(var(--muted-foreground))}
+.ruler{position:relative;height:36px;border-radius:9px;cursor:pointer;border:1px solid hsl(var(--border));
+  background:linear-gradient(90deg,hsl(var(--danger)/.28) 0 25%,hsl(var(--warning)/.28) 25% 31%,hsl(var(--success)/.22) 31%)}
+.ruler .cur{position:absolute;top:-2px;bottom:-2px;width:2px;background:hsl(240 6% 40%);opacity:.45}
+.ruler .mk{position:absolute;top:-4px;bottom:-4px;width:10px;border-radius:5px;background:hsl(var(--foreground));box-shadow:0 0 0 2px #fff;transform:translateX(-5px)}
+.ruler .vb{position:absolute;top:-26px;transform:translateX(-50%);background:hsl(var(--ink));color:#fff;font:800 11px Sora;padding:2px 7px;border-radius:7px;white-space:nowrap;pointer-events:none}
+.insp-c3{text-align:right}
+.insp-c3 .mm{font:800 15px Sora;font-variant-numeric:tabular-nums}
+.press{display:flex;align-items:center;gap:10px;margin-top:16px;padding:12px 14px;border:1px solid hsl(var(--border));border-radius:12px;background:hsl(var(--background))}
+.press .lbl{font-size:13px;color:hsl(240 6% 30%)}.press .lbl b{color:hsl(var(--foreground))}
+.stepper{display:inline-flex;align-items:center;border:1px solid hsl(240 6% 82%);border-radius:10px;overflow:hidden;background:hsl(var(--card));margin-left:auto}
+.stepper button{width:38px;height:38px;border:0;background:none;font:700 18px Sora;color:hsl(240 6% 40%)}
+.stepper .v{width:52px;text-align:center;font:700 14px Sora;border-left:1px solid hsl(240 6% 88%);border-right:1px solid hsl(240 6% 88%);line-height:38px}
+.stepper .u{padding:0 10px;font-size:12px;color:hsl(var(--muted-foreground))}
+.rules h4{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--primary));margin-bottom:8px}
+.rules ul{margin:0;padding-left:18px;color:hsl(240 5% 30%);font-size:13.5px}.rules li{margin:5px 0}.rules b{color:hsl(var(--foreground))}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <linearGradient id="tireP" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#34383f"/><stop offset=".5" stop-color="#1b1d21"/><stop offset="1" stop-color="#0e0f12"/></linearGradient>
+</defs></svg>
+<div class="doc">
+  <h1>Operações do pneu — diálogos interativos</h1>
+  <p class="lead">Os diálogos que a fatia de operações vai implementar. Cada um é um <b>fluxo guiado e visual</b>, não um formulário: escolher a posição no desenho, ler o pneu (RFID / nº de fogo), arrastar no rodízio, escolher o motivo por card. O diálogo lidera pelo título e o botão usa o verbo do pátio. Escolha uma operação à esquerda e interaja.</p>
+
+  <div class="layout">
+    <nav class="rail" id="rail">
+      <div class="rh">Operações</div>
+      <button class="op on" data-op="montar"><span class="oi"><i class="ic s20 i-tire"></i></span><div><b>Montar pneu</b><span>posição vazia → bipa o fogo</span></div></button>
+      <button class="op" data-op="rodizio"><span class="oi"><i class="ic s20 i-cycle"></i></span><div><b>Rodízio</b><span>mover de posição</span></div></button>
+      <button class="op" data-op="desmontar"><span class="oi"><i class="ic s20 i-down"></i></span><div><b>Desmontar</b><span>tirar do veículo</span></div></button>
+      <button class="op" data-op="reforma"><span class="oi"><i class="ic s20 i-recap"></i></span><div><b>Enviar para reforma</b><span>ao recapador</span></div></button>
+      <button class="op" data-op="receber"><span class="oi"><i class="ic s20 i-check-c"></i></span><div><b>Receber recapagem</b><span>volta com vida nova</span></div></button>
+      <button class="op" data-op="baixar"><span class="oi"><i class="ic s20 i-trash"></i></span><div><b>Baixar</b><span>sucata, com motivo</span></div></button>
+      <button class="op" data-op="inspecao"><span class="oi"><i class="ic s20 i-gauge"></i></span><div><b>Inspeção / calibragem</b><span>mede o sulco (origem do dado)</span></div></button>
+      <button class="op" data-op="identificar"><span class="oi"><i class="ic s20 i-fire"></i></span><div><b>Identificar pneu</b><span>método durável (fogo/RFID)</span></div></button>
+    </nav>
+    <div class="stage" id="stage"></div>
+  </div>
+
+  <div class="rules">
+    <h4>Regras destes diálogos</h4>
+    <ul>
+      <li><b>Interativo, não formulário:</b> escolha visual (posição, card, chip, arrastar), passos que reagem, pré-visualização do que vai acontecer.</li>
+      <li><b>Lidera pelo título</b>, sem subtítulo explicativo; botão com o verbo do pátio (Montar/Confirmar rodízio/Baixar…), nunca "Confirmar"; cancelar é outline.</li>
+      <li><b>O que o sistema sabe, não pergunta:</b> o km entra do hodômetro; a data e o autor são do servidor.</li>
+      <li>Baixa e reforma <b>sempre com motivo/romaneio</b>; nada aplica sozinho — o comando é explícito no botão.</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+const WHEEL = (w) => {
+  const h = Math.round(w*1.4); let tread='';
+  for(let x=10.5;x<=19.5;x+=2.7)tread+='<line x1="'+x+'" y1="6" x2="'+x+'" y2="38"/>';
+  return '<svg class="wheel" width="'+w+'" height="'+h+'" viewBox="0 0 30 44"><rect class="tire" x="8" y="3" width="14" height="38" rx="5"/>'+tread+'</svg>';
+};
+const stage = document.getElementById('stage');
+
+function dialog({title, body, footer, lg}){
+  return '<div class="dialog'+(lg?' lg':'')+'">'
+    +'<div class="dh"><h3>'+title+'</h3><button class="x" aria-label="Fechar"><i class="ic s20 i-x"></i></button></div>'
+    +'<div class="db">'+body+'</div>'
+    +'<div class="df">'+footer+'</div></div>';
+}
+function foot(primary, hint){
+  return (hint?'<span class="hint">'+hint+'</span>':'')+'<span class="sp"></span><button class="btn btn-out">Cancelar</button>'+primary;
+}
+
+/* ---------- 1. MONTAR ---------- */
+function montar(){
+  const POS=[{k:'ee',p:'Eixo 2 · esq. ext.',s:'PN-0488 · ocupada',busy:1},{k:'de',p:'Eixo 2 · dir. ext.',s:'vazia',empty:1},{k:'ei',p:'Eixo 2 · esq. int.',s:'vazia',empty:1},{k:'di',p:'Eixo 2 · dir. int.',s:'PN-0490 · ocupada',busy:1}];
+  const POOL=[{f:'PN-0512',v:'R1 · 8mm'},{f:'PN-0701',v:'Novo · 14mm'},{f:'PN-0733',v:'R1 · 9mm'}];
+  let pos=null, tire=null;
+  function render(){
+    const canMount = pos && tire;
+    const body=
+      '<div class="step"><span class="n">1</span>Toque a posição vazia</div>'
+      +'<div class="axle">'+POS.map(o=>'<button class="pos '+(o.empty?'empty':'busy')+(pos===o.k?' on':'')+'" data-pos="'+o.k+'" '+(o.busy?'disabled':'')+'><div class="p">'+o.p+'</div><div class="s">'+o.s+'</div></button>').join('')+'</div>'
+      +'<div class="step"><span class="n '+(pos?'':'off')+'">2</span>Leia o pneu (RFID ou nº de fogo)</div>'
+      +'<div class="scan"><i class="ic i-scan"></i>Aproxime o leitor RFID · ou escolha o pneu abaixo</div>'
+      +'<div class="pool">'+POOL.map(o=>'<button class="pill'+(tire===o.f?' on':'')+'" data-tire="'+o.f+'">'+WHEEL(22)+o.f+'<span class="vd">'+o.v+'</span></button>').join('')+'</div>';
+    const footer=foot('<button class="btn btn-pri" '+(canMount?'':'disabled')+'>'+(tire?'Montar '+tire:'Montar pneu')+'</button>',
+      canMount?'<i class="ic s16 i-gauge"></i>km do hodômetro: <b style="color:hsl(var(--foreground))">412.300</b> (automático)':'');
+    stage.innerHTML=dialog({title:'Montar pneu', body, footer});
+    stage.querySelectorAll('[data-pos]').forEach(b=>b.onclick=()=>{pos=b.dataset.pos;render();});
+    stage.querySelectorAll('[data-tire]').forEach(b=>b.onclick=()=>{tire=b.dataset.tire;render();});
+    wireClose();
+  }
+  render();
+}
+
+/* ---------- 2. RODÍZIO ---------- */
+function rodizio(){
+  const SLOTS=[{k:'a',lb:'Eixo 4 esq',fire:'PN-0455'},{k:'b',lb:'Eixo 4 dir',fire:'PN-0498'},{k:'c',lb:'Eixo 5 esq',empty:1},{k:'d',lb:'Eixo 5 dir',fire:'PN-0301'}];
+  let pick=null, dest=null;
+  function render(){
+    const canDo = pick && dest;
+    const cell=(o)=>{
+      const cls = o.empty?'slot empty':'slot';
+      const sel = pick===o.k?' pick':(dest===o.k?' dest':'');
+      return '<div class="slotwrap"><button class="'+cls+sel+'" data-slot="'+o.k+'">'+(o.empty?(dest===o.k?'<i class="ic s20 i-down" style="color:hsl(var(--success-ink))"></i>':'<span class="lb">vazia</span>'):WHEEL(26))+'</button><span class="lb">'+o.lb+(o.fire?'<br>'+o.fire:'')+'</span></div>';
+    };
+    const hint = !pick ? 'Toque no pneu que vai sair' : !dest ? 'Agora toque na posição de destino' : 'Pronto pra confirmar';
+    const body=
+      '<div class="step"><span class="n">→</span>Mover um pneu de posição</div>'
+      +'<div class="rod">'+cell(SLOTS[0])+'<span class="axlebar"></span>'+cell(SLOTS[1])+'</div>'
+      +'<div class="rod" style="margin-top:6px">'+cell(SLOTS[2])+'<span class="axlebar"></span>'+cell(SLOTS[3])+'</div>'
+      +'<div class="rodhint"><i class="ic s14 i-hand"></i> '+hint+(canDo?' — '+SLOTS.find(s=>s.k===pick).fire+' vai pra '+SLOTS.find(s=>s.k===dest).lb:'')+'</div>';
+    const footer=foot('<button class="btn btn-pri" '+(canDo?'':'disabled')+'><i class="ic s16 i-cycle"></i>Confirmar rodízio</button>','');
+    stage.innerHTML=dialog({title:'Rodízio', body, footer});
+    stage.querySelectorAll('[data-slot]').forEach(b=>b.onclick=()=>{
+      const o=SLOTS.find(s=>s.k===b.dataset.slot);
+      if(!pick){ if(!o.empty)pick=o.k; }
+      else if(o.k===pick){ pick=null; dest=null; }
+      else { dest=o.k; }
+      render();
+    });
+    wireClose();
+  }
+  render();
+}
+
+/* ---------- 3. DESMONTAR ---------- */
+function desmontar(){
+  const C=[{k:'estoque',ic:'i-box',b:'Voltar ao estoque',s:'fica disponível pra montar'},{k:'reforma',ic:'i-recap',b:'Fila de reforma',s:'vai recapar (nova vida)'},{k:'baixa',ic:'i-trash',b:'Baixar',s:'fim de vida / dano',danger:1}];
+  let sel=null;
+  function render(){
+    const body=
+      '<div class="urow"><span class="fire"><i class="ic s20 i-fire"></i>PN-0498</span><span class="br">Michelin X Multi · 295/80 R22.5</span><span style="margin-left:auto" class="badge b-warn"><i class="ic s14 i-warn"></i>sulco 6mm</span></div>'
+      +'<div class="step" style="margin-top:14px"><span class="n">→</span>Pra onde vai?</div>'
+      +'<div class="choices three">'+C.map(o=>'<button class="choice'+(o.danger?' danger':'')+(sel===o.k?' on':'')+'" data-c="'+o.k+'"><span class="ci"><i class="ic s20 '+o.ic+'"></i></span><div><b>'+o.b+'</b><small>'+o.s+'</small></div></button>').join('')+'</div>';
+    const footer=foot('<button class="btn btn-pri" '+(sel?'':'disabled')+'><i class="ic s16 i-down"></i>Desmontar</button>','<i class="ic s16 i-gauge"></i>km registrado do hodômetro');
+    stage.innerHTML=dialog({title:'Desmontar PN-0498', body, footer, lg:true});
+    stage.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{sel=b.dataset.c;render();});
+    wireClose();
+  }
+  render();
+}
+
+/* ---------- 4. ENVIAR REFORMA ---------- */
+function reforma(){
+  const CASCOS=[{f:'PN-0402',v:'R1→R2'},{f:'PN-0377',v:'R2→R3'},{f:'PN-0355',v:'R0→R1'},{f:'PN-0349',v:'R1→R2'}];
+  const REC=[{k:'vipal',n:'Vipal',s:'banda XZ · 7 dias'},{k:'bandag',n:'Bandag',s:'banda B710 · 10 dias'}];
+  const sel=new Set(['PN-0402','PN-0377']); let rec='vipal';
+  function render(){
+    const body=
+      '<div class="step"><span class="n">1</span>Quais carcaças vão recapar</div>'
+      +'<div class="pool">'+CASCOS.map(o=>'<button class="pill'+(sel.has(o.f)?' on':'')+'" data-c="'+o.f+'">'+WHEEL(22)+o.f+'<span class="vd">'+o.v+'</span></button>').join('')+'</div>'
+      +'<div class="step" style="margin-top:16px"><span class="n">2</span>Recapador</div>'
+      +'<div class="choices">'+REC.map(o=>'<button class="choice'+(rec===o.k?' on':'')+'" data-r="'+o.k+'"><span class="ci"><i class="ic s20 i-buildings"></i></span><div><b>'+o.n+'</b><small>'+o.s+'</small></div></button>').join('')+'</div>'
+      +'<div class="note"><i class="ic s16 i-recap"></i> Gera o <b>romaneio</b> com a lista e o custo estimado — <b>R$ '+(sel.size*720).toLocaleString('pt-BR')+',00</b> ('+sel.size+' × R$ 720).</div>';
+    const footer=foot('<button class="btn btn-pri" '+(sel.size?'':'disabled')+'><i class="ic s16 i-right"></i>Enviar ao recapador ('+sel.size+')</button>','');
+    stage.innerHTML=dialog({title:'Enviar para reforma', body, footer, lg:true});
+    stage.querySelectorAll('[data-c]').forEach(b=>b.onclick=()=>{const f=b.dataset.c;sel.has(f)?sel.delete(f):sel.add(f);render();});
+    stage.querySelectorAll('[data-r]').forEach(b=>b.onclick=()=>{rec=b.dataset.r;render();});
+    wireClose();
+  }
+  render();
+}
+
+/* ---------- 5. RECEBER RECAPAGEM ---------- */
+function receber(){
+  const body=
+    '<div class="urow"><span class="fire"><i class="ic s20 i-fire"></i>PN-0377</span><span class="br">Recap Vipal · romaneio 88</span><span style="margin-left:auto" class="badge b-ok"><i class="ic s14 i-check"></i>voltou</span></div>'
+    +'<div class="step" style="margin-top:14px"><span class="n">→</span>Confirmar a nova vida</div>'
+    +'<div style="border:1px solid hsl(var(--border));border-radius:12px;padding:14px 16px">'
+      +'<div style="font:600 12px Sora;text-transform:uppercase;letter-spacing:.04em;color:hsl(var(--muted-foreground))">Vida do casco</div>'
+      +'<div class="lifebar"><i class="done"></i><i class="done"></i><i class="new"></i><i></i></div>'
+      +'<div class="lbls"><span>Novo</span><span>R1</span><span>R2 (nova)</span><span>R3</span></div>'
+    +'</div>'
+    +'<div style="margin-top:12px">'
+      +'<div class="kv"><span class="k">Custo da recapagem</span><span class="v">R$ 720,00</span></div>'
+      +'<div class="kv"><span class="k">Volta para</span><span class="v">Estoque · Mucuri (disponível)</span></div>'
+      +'<div class="kv"><span class="k">CPK recalculado</span><span class="v" style="color:hsl(var(--success-ink))">R$ 0,11/km</span></div>'
+    +'</div>';
+  const footer=foot('<button class="btn btn-pri"><i class="ic s16 i-check"></i>Receber</button>','');
+  stage.innerHTML=dialog({title:'Receber do recapador', body, footer});
+  wireClose();
+}
+
+/* ---------- 6. BAIXAR ---------- */
+function baixar(){
+  const M=[{k:'fim',ic:'i-tire',b:'Fim de vida',s:'sulco/estrutura no limite'},{k:'dano',ic:'i-warn',b:'Dano irreparável',s:'corte, bolha, avaria'},{k:'carcaca',ic:'i-prohibit',b:'Carcaça reprovada',s:'não recapa mais'},{k:'perda',ic:'i-x',b:'Perda / roubo',s:'não retornou'}];
+  let sel=null;
+  function render(){
+    const body=
+      '<div class="urow"><span class="fire"><i class="ic s20 i-fire"></i>PN-0377</span><span class="br">Bridgestone R · 295/80 R22.5 · R2</span><span style="margin-left:auto" class="badge b-warn"><i class="ic s14 i-warn"></i>sulco 3mm</span></div>'
+      +'<div class="step" style="margin-top:14px"><span class="n">→</span>Motivo da baixa</div>'
+      +'<div class="choices">'+M.map(o=>'<button class="choice danger'+(sel===o.k?' on':'')+'" data-m="'+o.k+'"><span class="ci"><i class="ic s20 '+o.ic+'"></i></span><div><b>'+o.b+'</b><small>'+o.s+'</small></div></button>').join('')+'</div>';
+    const footer=foot('<button class="btn btn-pri danger" '+(sel?'':'disabled')+'><i class="ic s16 i-trash"></i>Baixar</button>','O histórico permanece; a baixa é definitiva.');
+    stage.innerHTML=dialog({title:'Baixar PN-0377', body, footer, lg:true});
+    stage.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{sel=b.dataset.m;render();});
+    wireClose();
+  }
+  render();
+}
+
+/* ---------- 7. IDENTIFICAR PNEU (identificação durável) ---------- */
+function identificar(){
+  const M=[
+    {k:'fogo',ic:'i-fire-brand',b:'Número de fogo',s:'brandado a quente na carcaça',tag:'Permanente · aguenta lama e sobrevive à recapagem',rec:1},
+    {k:'rfid',ic:'i-rfid',b:'RFID vulcanizado',s:'tag dentro do pneu · lê por aproximação',tag:'Permanente · dura a vida toda, sem câmera'},
+    {k:'laser',ic:'i-plate',b:'Placa / QR a laser',s:'gravado a laser no metal',tag:'Durável · precisa estar limpo pra ler'},
+  ];
+  const READ={
+    fogo:'No dia a dia, lê pelo nº de fogo gravado — não por foto de etiqueta.',
+    rfid:'No dia a dia, lê por aproximação do leitor RFID — não precisa de câmera limpa.',
+    laser:'No dia a dia, lê o QR/placa a laser quando a superfície está limpa.',
+  };
+  let sel='fogo';
+  function qrSvg(){let r='';for(let y=0;y<9;y++)for(let x=0;x<9;x++){if((x*7+y*3+(x^y))%3===0||(x<3&&y<3)||(x>5&&y<3)||(x<3&&y>5))r+='<rect x="'+(x*11)+'" y="'+(y*11)+'" width="10" height="10" fill="#111"/>';}return '<svg width="88" height="88" viewBox="0 0 99 99">'+r+'</svg>';}
+  function preview(){
+    if(sel==='rfid')return '<div class="qr" style="flex-direction:column;gap:4px"><i class="ic s40 i-rfid" style="color:hsl(var(--primary))"></i><span style="font:700 10px Sora;color:hsl(var(--muted-foreground))">tag RFID</span></div>';
+    if(sel==='laser')return '<div class="qr">'+qrSvg()+'</div>';
+    return '<div class="qr" style="background:#2a2d33;border-color:#14161a;flex-direction:column;gap:2px"><i class="ic s28 i-fire-brand" style="color:hsl(var(--warning))"></i><span style="font:800 13px Sora;color:#e8dcc8;letter-spacing:.02em">PN-0451</span><span style="font:600 8.5px Sora;color:#8a8f98;text-transform:uppercase;letter-spacing:.08em">brandado</span></div>';
+  }
+  function render(){
+    const body=
+      '<div class="urow"><span class="fire" style="color:hsl(var(--muted-foreground))"><i class="ic s20 i-tire"></i>Pneu ainda sem identidade</span><span class="br">Michelin X · 295/80 R22.5 · existe fisicamente</span></div>'
+      +'<div class="step" style="margin-top:14px"><span class="n">1</span>Como identificar (permanente)</div>'
+      +'<div class="choices three">'+M.map(o=>'<button class="choice'+(sel===o.k?' on':'')+'" data-m="'+o.k+'"><span class="ci"><i class="ic s20 '+o.ic+'"></i></span><div><b>'+o.b+(o.rec?' <span class="badge b-info" style="font-size:9px;padding:1px 6px;vertical-align:middle">recomendado</span>':'')+'</b><small>'+o.s+'</small><small style="display:block;color:hsl(var(--success-ink));margin-top:5px"><i class="ic s14 i-check"></i> '+o.tag+'</small></div></button>').join('')+'</div>'
+      +'<div class="step" style="margin-top:16px"><span class="n">2</span>Identidade do pneu</div>'
+      +'<div class="qrbox">'+preview()
+        +'<div style="flex:1"><div style="font-size:12px;color:hsl(var(--muted-foreground))">Número de fogo</div>'
+        +'<div class="input" style="margin-top:6px">PN-0451</div>'
+        +'<div class="note" style="margin-top:12px"><i class="ic s16 i-info"></i> '+READ[sel]+' <b>Adesivo de papel não é usado na carreta florestal</b> (lama, atrito — rasga).</div></div>'
+      +'</div>';
+    const footer=foot('<button class="btn btn-pri"><i class="ic s16 i-check"></i>Identificar pneu</button>','');
+    stage.innerHTML=dialog({title:'Identificar pneu', body, footer, lg:true});
+    stage.querySelectorAll('[data-m]').forEach(b=>b.onclick=()=>{sel=b.dataset.m;render();});
+    wireClose();
+  }
+  render();
+}
+
+/* ---------- 8. INSPEÇÃO / CALIBRAGEM ---------- */
+function inspecao(){
+  const MAX=16;
+  const POS=[{f:'PN-0498',lb:'esq. ext.',cur:6},{f:'PN-0455',lb:'esq. int.',cur:5},{f:'PN-0301',lb:'dir. int.',cur:9},{f:'PN-0512',lb:'dir. ext.',cur:6}];
+  const meas={}; POS.forEach(o=>meas[o.f]=o.cur);
+  let psi=118;
+  const chip=(v)=> v<4?'<span class="badge b-danger"><i class="ic s14 i-warn"></i>Crítico</span>':v<=5?'<span class="badge b-warn"><i class="ic s14 i-warn"></i>Atenção</span>':'<span class="badge b-ok"><i class="ic s14 i-check"></i>OK</span>';
+  function render(){
+    const rows=POS.map(o=>{
+      const v=meas[o.f], pct=(v/MAX)*100, cpct=(o.cur/MAX)*100;
+      return '<div class="insp-row"><div class="who">'+WHEEL(22)+'<div><div class="fn">'+o.f+'</div><div class="pl">Eixo 4 · '+o.lb+' · antes '+o.cur+'mm</div></div></div>'
+        +'<div class="ruler" data-f="'+o.f+'"><span class="cur" style="left:'+cpct+'%"></span><span class="mk" style="left:'+pct+'%"></span><span class="vb" style="left:'+pct+'%">'+v+' mm</span></div>'
+        +'<div class="insp-c3"><div class="mm">'+v+' mm</div>'+chip(v)+'</div></div>';
+    }).join('');
+    const body=
+      '<div class="step"><span class="n">→</span>Meça o sulco de cada posição (toque na régua)</div>'
+      +rows
+      +'<div class="press"><span class="lbl">Pressão <b>(opcional)</b></span><span class="stepper"><button data-psi="-1">−</button><span class="v">'+psi+'</span><button data-psi="1">+</button><span class="u">psi</span></span></div>';
+    const footer=foot('<button class="btn btn-pri"><i class="ic s16 i-check"></i>Registrar inspeção</button>','<i class="ic s16 i-gauge"></i>FRT-1234 · data e autor automáticos');
+    stage.innerHTML=dialog({title:'Registrar inspeção', body, footer, lg:true});
+    stage.querySelectorAll('.ruler').forEach(r=>{
+      r.onclick=(e)=>{const rect=r.getBoundingClientRect();const pct=Math.min(1,Math.max(0,(e.clientX-rect.left)/rect.width));meas[r.dataset.f]=Math.min(MAX,Math.max(1,Math.round(pct*MAX)));render();};
+    });
+    stage.querySelectorAll('[data-psi]').forEach(b=>b.onclick=()=>{psi=Math.min(140,Math.max(80,psi+Number(b.dataset.psi)*2));render();});
+    wireClose();
+  }
+  render();
+}
+
+const OPS={montar,rodizio,desmontar,reforma,receber,baixar,inspecao,identificar};
+function wireClose(){ const x=stage.querySelector('.x'); if(x)x.onclick=()=>{ const d=stage.querySelector('.dialog'); if(d){d.style.opacity='.4';d.style.pointerEvents='none';} }; }
+document.getElementById('rail').addEventListener('click',e=>{
+  const b=e.target.closest('.op'); if(!b)return;
+  document.querySelectorAll('.op').forEach(o=>o.classList.toggle('on',o===b));
+  OPS[b.dataset.op]();
+});
+montar();
+</script>
+</body>
+</html>

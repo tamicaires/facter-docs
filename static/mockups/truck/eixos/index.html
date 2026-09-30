@@ -1,0 +1,742 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eixos e cubos · ciclo de vida · mockups</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sora:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --background:0 0% 98%;--foreground:240 10% 3.9%;--card:0 0% 100%;
+  --primary:233 65% 50%;--primary-foreground:0 0% 100%;
+  --muted:240 4.8% 94%;--muted-foreground:240 3.8% 40%;--border:240 5.9% 90%;
+  --success:160 60% 38%;--warning:38 92% 45%;--danger:0 84.2% 60.2%;
+  --success-text:160 70% 24%;--danger-text:0 72% 38%;--warning-text:28 85% 28%;
+  --primary-soft:233 85% 96.5%;--success-soft:160 55% 94%;--warning-soft:40 95% 93%;--danger-soft:0 90% 96%;
+  --note:285 55% 38%;--note-soft:285 60% 96%;
+  --canvas:225 14% 92%;--ring:233 65% 50%;--ink:240 10% 12%;--toolbar:240 5% 96%;
+}
+*{box-sizing:border-box}
+body{margin:0;background:hsl(var(--canvas));color:hsl(var(--foreground));font:14px/1.5 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+h1,h2,h3,h4,p{margin:0}
+button{font:inherit;color:inherit;cursor:pointer}
+code{font:600 12px ui-monospace,Menlo,monospace;color:hsl(233 65% 40%);background:hsl(var(--muted));padding:1px 6px;border-radius:5px}
+.ic{display:inline-block;width:18px;height:18px;background:currentColor;-webkit-mask:var(--i) center/contain no-repeat;mask:var(--i) center/contain no-repeat;flex:none;vertical-align:-3px}
+.ic.s14{width:14px;height:14px}.ic.s16{width:16px;height:16px}.ic.s20{width:20px;height:20px}.ic.s24{width:24px;height:24px}.ic.s28{width:28px}.ic.s32{width:32px}
+.i-axle{--i:url(https://api.iconify.design/ph/gauge.svg)}
+.i-engine{--i:url(https://api.iconify.design/ph/engine.svg)}
+.i-truck{--i:url(https://api.iconify.design/ph/truck.svg)}
+.i-box{--i:url(https://api.iconify.design/ph/package.svg)}
+.i-chart{--i:url(https://api.iconify.design/ph/chart-line-up.svg)}
+.i-gear{--i:url(https://api.iconify.design/ph/gear.svg)}
+.i-house{--i:url(https://api.iconify.design/ph/house.svg)}
+.i-mag{--i:url(https://api.iconify.design/ph/magnifying-glass.svg)}
+.i-down{--i:url(https://api.iconify.design/ph/caret-down.svg)}
+.i-right{--i:url(https://api.iconify.design/ph/caret-right.svg)}
+.i-check{--i:url(https://api.iconify.design/ph/check.svg)}
+.i-check-c{--i:url(https://api.iconify.design/ph/check-circle.svg)}
+.i-warn{--i:url(https://api.iconify.design/ph/warning.svg)}
+.i-warn-f{--i:url(https://api.iconify.design/ph/warning-fill.svg)}
+.i-wrench{--i:url(https://api.iconify.design/ph/wrench.svg)}
+.i-recap{--i:url(https://api.iconify.design/ph/arrows-counter-clockwise.svg)}
+.i-torque{--i:url(https://api.iconify.design/ph/gauge.svg)}
+.i-down-a{--i:url(https://api.iconify.design/ph/arrow-line-down.svg)}
+.i-swap{--i:url(https://api.iconify.design/ph/arrows-left-right.svg)}
+.i-hist{--i:url(https://api.iconify.design/ph/clock-counter-clockwise.svg)}
+.i-pin{--i:url(https://api.iconify.design/ph/map-pin.svg)}
+.i-money{--i:url(https://api.iconify.design/ph/currency-circle-dollar.svg)}
+.i-shield{--i:url(https://api.iconify.design/ph/shield-check.svg)}
+.i-trash{--i:url(https://api.iconify.design/ph/trash.svg)}
+.i-buildings{--i:url(https://api.iconify.design/ph/buildings.svg)}
+.i-trailer{--i:url(https://api.iconify.design/ph/truck-trailer.svg)}
+.i-info{--i:url(https://api.iconify.design/ph/info.svg)}
+.i-bell{--i:url(https://api.iconify.design/ph/bell.svg)}
+.i-list{--i:url(https://api.iconify.design/ph/list-bullets.svg)}
+.i-hand{--i:url(https://api.iconify.design/ph/hand-tap.svg)}
+.i-plus{--i:url(https://api.iconify.design/ph/plus.svg)}
+.i-x{--i:url(https://api.iconify.design/ph/x.svg)}
+.i-gauge-f{--i:url(https://api.iconify.design/ph/gauge-fill.svg)}
+.i-weight{--i:url(https://api.iconify.design/ph/barbell.svg)}
+.i-scan{--i:url(https://api.iconify.design/ph/scan.svg)}
+.i-broadcast{--i:url(https://api.iconify.design/ph/broadcast.svg)}
+.i-tag{--i:url(https://api.iconify.design/ph/identification-badge.svg)}
+.i-stamp{--i:url(https://api.iconify.design/ph/seal.svg)}
+
+/* presentation */
+.doc{max-width:1360px;margin:0 auto;padding:48px 24px 110px}
+.doc h1{font:800 32px/1.12 Sora,sans-serif;letter-spacing:-.02em}
+.doc .lead{color:hsl(240 6% 25%);max-width:820px;margin-top:12px;font-size:15px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-top:26px}
+.toc a{display:inline-flex;align-items:center;gap:7px;height:34px;padding:0 13px;border-radius:999px;background:hsl(var(--card));border:1px solid hsl(var(--border));font-size:13px;font-weight:500;color:hsl(var(--foreground));text-decoration:none}
+.toc a b{color:hsl(var(--primary));font-weight:800}
+.sec{margin-top:64px}
+.sec-label{display:flex;align-items:baseline;gap:12px;margin-bottom:6px}
+.sec-num{font:800 14px Sora,sans-serif;color:hsl(var(--primary));background:hsl(var(--card));border-radius:999px;min-width:28px;height:28px;padding:0 8px;display:inline-grid;place-items:center;flex:none;border:1px solid hsl(var(--border))}
+.sec h2{font:700 21px/1.3 Sora,sans-serif;letter-spacing:-.01em}
+.sec-sub{color:hsl(240 6% 25%);margin:0 0 20px 40px;max-width:860px}
+.view-cap{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:600;margin:0 0 10px 40px;display:flex;align-items:center;gap:8px}
+.frame{margin-left:40px;background:hsl(var(--background));border:1px solid hsl(var(--border));border-radius:16px;box-shadow:0 1px 2px hsl(230 20% 20%/.06),0 18px 50px -24px hsl(230 30% 20%/.22);overflow:hidden}
+.dep{display:inline-flex;align-items:center;gap:4px;height:20px;padding:0 6px;border:1px dashed hsl(var(--note));border-radius:5px;background:hsl(var(--note-soft));color:hsl(var(--note));font:600 11px/1 Inter;white-space:nowrap;flex:none}
+@media(max-width:760px){.sec-sub,.view-cap,.frame{margin-left:0}}
+
+/* app shell */
+.app{display:grid;grid-template-columns:64px 1fr;grid-template-rows:60px 1fr}
+.topbar{grid-column:1/-1;display:flex;align-items:center;gap:14px;padding:0 18px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
+.brand{display:flex;align-items:center;gap:9px;font:800 16px Sora;letter-spacing:-.01em}
+.brand .lg{width:28px;height:28px;border-radius:8px;background:hsl(var(--primary));color:#fff;display:grid;place-items:center}
+.topbar .spacer{flex:1}
+.search{display:flex;align-items:center;gap:8px;width:300px;height:38px;padding:0 12px;border:1px solid hsl(var(--border));border-radius:9px;color:hsl(var(--muted-foreground));font-size:13px;background:hsl(var(--background))}
+.avatar{width:34px;height:34px;border-radius:999px;background:hsl(233 45% 88%);color:hsl(233 60% 30%);display:grid;place-items:center;font-weight:700;font-size:12px}
+.sidenav{background:hsl(var(--card));border-right:1px solid hsl(var(--border));padding:12px 0;display:flex;flex-direction:column;align-items:center;gap:4px}
+.navitem{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;color:hsl(240 5% 40%);position:relative}
+.navitem.on{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.navitem.on::before{content:"";position:absolute;left:-12px;top:11px;bottom:11px;width:3px;border-radius:0 3px 3px 0;background:hsl(var(--primary))}
+.navsep{flex:1}
+.main{padding:22px 26px 26px;min-width:0}
+.pagehead{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:16px}
+.pagehead h1{font:700 23px Sora;letter-spacing:-.01em;display:flex;align-items:center;gap:10px}
+.meta{font-size:12.5px;color:hsl(240 6% 30%);margin-top:4px}
+
+/* primitives */
+.card{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:13px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:38px;padding:0 15px;border-radius:9px;border:1px solid transparent;font-weight:600;font-size:13.5px;white-space:nowrap}
+.btn-primary{background:hsl(var(--primary));color:#fff}
+.btn-outline{background:hsl(var(--card));border-color:hsl(240 6% 82%);color:hsl(var(--foreground))}
+.btn-sm{height:32px;padding:0 11px;font-size:12.5px}
+.iconbtn{width:38px;height:38px;border-radius:9px;border:1px solid hsl(240 6% 82%);background:hsl(var(--card));display:grid;place-items:center}
+.badge{display:inline-flex;align-items:center;gap:5px;font-size:11.5px;font-weight:700;height:22px;padding:0 8px;border-radius:6px;white-space:nowrap}
+.b-ok{background:hsl(var(--success-soft));color:hsl(var(--success-text))}
+.b-warn{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.b-danger{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.b-info{background:hsl(var(--primary-soft));color:hsl(233 65% 40%)}
+.b-mute{background:hsl(var(--muted));color:hsl(240 6% 28%)}
+.chip{display:inline-flex;align-items:center;gap:6px;height:24px;padding:0 9px;border-radius:999px;background:hsl(var(--muted));color:hsl(240 6% 24%);font-size:12px;font-weight:500}
+.seg{display:inline-flex;background:hsl(var(--muted));border-radius:10px;padding:3px}
+.seg button{border:0;background:none;border-radius:8px;padding:6px 12px;font-size:12.5px;font-weight:600;color:hsl(var(--muted-foreground));display:inline-flex;align-items:center;gap:6px}
+.seg button.on{background:hsl(var(--card));color:hsl(var(--foreground));box-shadow:0 1px 2px hsl(230 20% 20%/.14)}
+
+/* personas */
+.personas{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-left:40px}
+@media(max-width:900px){.personas{grid-template-columns:1fr;margin-left:0}}
+.persona{padding:18px 20px}
+.persona .top{display:flex;align-items:center;gap:12px}
+.persona .pic{width:44px;height:44px;border-radius:12px;display:grid;place-items:center}
+.persona h3{font:700 15px Sora}.persona .role{font-size:12px;color:hsl(var(--muted-foreground))}
+.persona ul{margin:14px 0 0;padding:0;list-style:none;font-size:13px;color:hsl(240 6% 25%)}
+.persona li{display:flex;gap:8px;padding:5px 0}.persona li .ic{color:hsl(var(--success));margin-top:2px}
+
+/* strip + tabs + toolbar + table */
+.tabbar{display:flex;gap:2px;border-bottom:1px solid hsl(var(--border));margin-bottom:16px;flex-wrap:wrap}
+.tabbar a{display:inline-flex;align-items:center;gap:8px;padding:10px 14px;font-size:13.5px;font-weight:600;color:hsl(var(--muted-foreground));border-bottom:2px solid transparent;margin-bottom:-1px;cursor:pointer}
+.tabbar a.on{color:hsl(var(--primary));border-color:hsl(var(--primary))}
+.tabbar .n{font-size:11px;font-weight:700;background:hsl(var(--muted));color:hsl(240 6% 30%);border-radius:99px;padding:1px 7px}
+.tabbar a.on .n{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.tabbar .n.warn{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.strip{display:grid;grid-template-columns:repeat(5,1fr);margin-bottom:16px;overflow:hidden}
+.strip .cell{padding:14px 18px;border-left:1px solid hsl(var(--border))}
+.strip .cell:first-child{border-left:0}
+.strip .k{font-size:12px;color:hsl(var(--muted-foreground));display:flex;align-items:center;gap:6px}
+.strip .v{font-size:24px;font-weight:700;letter-spacing:-.02em;margin-top:2px;font-variant-numeric:tabular-nums}
+.strip .v.warnt{color:hsl(var(--warning-text))}.strip .v.dngt{color:hsl(var(--danger-text))}
+.strip .s{font-size:12px;color:hsl(240 6% 30%);margin-top:2px}
+.toolbar{display:flex;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.chips-pick{display:flex;flex-wrap:wrap;gap:6px}
+.chips-pick button{display:inline-flex;align-items:center;gap:6px;height:34px;padding:0 12px;border-radius:999px;border:1px solid hsl(240 6% 82%);background:hsl(var(--card));font-size:12.5px;font-weight:500}
+.chips-pick button.on{border-color:hsl(var(--primary));background:hsl(var(--primary-soft));color:hsl(233 65% 36%);font-weight:600}
+.tbl{width:100%;border-collapse:collapse;font-size:13px}
+.tbl th{text-align:left;font-weight:500;font-size:11.5px;text-transform:uppercase;letter-spacing:.04em;color:hsl(var(--muted-foreground));padding:9px 12px;background:hsl(var(--background));border-bottom:1px solid hsl(var(--border))}
+.tbl td{padding:11px 12px;border-bottom:1px solid hsl(var(--border));vertical-align:middle}
+.tbl tr:last-child td{border-bottom:0}
+.tbl tbody tr.sel{background:hsl(var(--primary-soft))}
+.tbl tbody tr{cursor:pointer}
+.tbl .sn{font-weight:700;display:flex;align-items:center;gap:6px}
+.tbl .sn .ic{color:hsl(var(--primary))}
+.tbl .r{text-align:right;font-variant-numeric:tabular-nums}
+.tbl .mut{color:hsl(var(--muted-foreground))}
+.cb{width:16px;height:16px;border-radius:5px;border:1.6px solid hsl(240 6% 60%);display:inline-grid;place-items:center;color:#fff;cursor:pointer;vertical-align:-3px}
+.cb.on{background:hsl(var(--primary));border-color:hsl(var(--primary))}
+.list-foot{display:flex;align-items:center;justify-content:space-between;margin-top:14px;font-size:12.5px;color:hsl(240 6% 30%)}
+.selbar{position:absolute;left:50%;transform:translateX(-50%);bottom:22px;display:flex;align-items:center;gap:4px;padding:6px 6px 6px 16px;background:hsl(var(--ink));color:#fff;border-radius:14px;box-shadow:0 16px 40px -10px hsl(230 30% 10%/.5);z-index:6;white-space:nowrap}
+.selbar.hidden{display:none}
+.selbar .cnt{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:13.5px;padding-right:12px;margin-right:4px;border-right:1px solid hsl(240 6% 30%)}
+.selbar .cnt span{display:inline-grid;place-items:center;min-width:22px;height:22px;padding:0 6px;border-radius:99px;background:hsl(var(--primary));font-size:12px}
+.selbar button{display:inline-flex;align-items:center;gap:7px;height:38px;padding:0 12px;border-radius:9px;border:0;background:none;color:#fff;font-size:13px;font-weight:600}
+.selbar button:hover{background:hsl(240 8% 22%)}
+.selbar .x{width:38px;padding:0;justify-content:center;color:hsl(240 6% 80%)}
+
+/* plan */
+.plan-wrap{display:grid;grid-template-columns:minmax(0,1fr) 360px}
+@media(max-width:900px){.plan-wrap{grid-template-columns:1fr}}
+.plan-bar{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid hsl(var(--border));background:hsl(var(--card));flex-wrap:wrap}
+.plan-bar .title{font-weight:700;font-size:14.5px}.plan-bar .sub{color:hsl(var(--muted-foreground));font-size:12px}
+.plan-bar .spacer{flex:1}
+.planbox{position:relative;background:radial-gradient(hsl(220 8% 86%) 1px,transparent 1.4px) 0 0/22px 22px,hsl(220 10% 92%);display:flex;justify-content:center;padding:22px 10px;min-height:470px}
+.planbox svg{display:block}
+svg .rail{fill:url(#chassis);stroke:#9aa0aa;stroke-width:1.2}
+svg .wheel{fill:#2b2f36;opacity:.55}
+svg .axle{cursor:pointer}
+svg .axle .bar{fill:url(#steel);stroke:#5b6068;stroke-width:1.5}
+svg .axle.ok .bar{stroke:hsl(var(--success))}
+svg .axle.torque .bar{stroke:hsl(var(--warning));stroke-width:3}
+svg .axle.reforma .bar{stroke:hsl(var(--primary));stroke-width:3;stroke-dasharray:5 3}
+svg .axle.critico .bar{stroke:hsl(var(--danger));stroke-width:3}
+svg .axle:hover .bar{stroke-width:3.4}
+svg .axle.sel .bar{stroke:hsl(var(--primary));stroke-width:4.2}
+svg .lbl{fill:#fff;font:700 10px Sora;text-anchor:middle}
+.tip{position:absolute;pointer-events:none;background:hsl(240 10% 12%);color:#fff;font-size:11.5px;font-weight:600;padding:5px 9px;border-radius:8px;transform:translate(-50%,-160%);white-space:nowrap;opacity:0;transition:opacity .1s;z-index:5}
+.tip .st{opacity:.72;font-weight:500}
+.legend{display:flex;flex-wrap:wrap;gap:14px;padding:10px 16px;border-top:1px solid hsl(var(--border));background:hsl(var(--card));font-size:12px;color:hsl(var(--muted-foreground))}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.dot{width:12px;height:12px;border-radius:4px;border:1.5px solid;background:#9aa0aa}
+.dot.ok{border-color:hsl(var(--success))}.dot.torque{border-color:hsl(var(--warning))}.dot.reforma{border-color:hsl(var(--primary));border-style:dashed}.dot.critico{border-color:hsl(var(--danger))}
+.panel{border-left:1px solid hsl(var(--border));background:hsl(var(--card));display:flex;flex-direction:column}
+@media(max-width:900px){.panel{border-left:0;border-top:1px solid hsl(var(--border))}}
+.ph{padding:16px 18px 14px;border-bottom:1px solid hsl(var(--border))}
+.ph .kind{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:700}
+.ph .sn{font:800 20px Sora;letter-spacing:-.01em;margin-top:3px;display:flex;align-items:center;gap:8px}
+.ph .sn .ic{color:hsl(var(--primary))}
+.ph .name{color:hsl(var(--muted-foreground));font-size:12.5px;margin-top:2px}
+.ph .chips{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.pstats{display:grid;grid-template-columns:1fr 1fr 1fr;border-bottom:1px solid hsl(var(--border))}
+.pstat{padding:11px 14px;border-left:1px solid hsl(var(--border))}
+.pstat:first-child{border-left:0}
+.pstat .k{font-size:10.5px;text-transform:uppercase;letter-spacing:.04em;color:hsl(var(--muted-foreground));font-weight:600}
+.pstat .v{font:700 16px Sora;margin-top:2px}
+.pbody{padding:14px 18px;overflow:auto;flex:1}
+.fact{display:flex;gap:9px;font-size:13px;padding:6px 0}
+.fact .k{color:hsl(var(--muted-foreground));width:88px;flex:none}
+.fact .v{font-weight:600}.fact .v .path{color:hsl(var(--primary))}
+.tl{margin-top:8px;border-left:2px solid hsl(var(--border));padding-left:14px}
+.ev{position:relative;padding:6px 0}
+.ev::before{content:"";position:absolute;left:-19px;top:11px;width:8px;height:8px;border-radius:999px;background:hsl(var(--muted-foreground)/.5);box-shadow:0 0 0 3px hsl(var(--card))}
+.ev.now::before{background:hsl(var(--primary))}.ev.reforma::before{background:hsl(var(--success))}
+.ev .t{font-size:11px;color:hsl(var(--muted-foreground))}.ev .d{font-size:12.5px}
+.acts{padding:12px 16px;border-top:1px solid hsl(var(--border));display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.acts button{display:inline-flex;align-items:center;justify-content:center;gap:6px;border:1px solid hsl(var(--border));background:hsl(var(--card));border-radius:9px;padding:9px;font-size:12.5px;font-weight:600}
+.acts button.pri{grid-column:1/3;background:hsl(var(--primary));color:#fff;border-color:transparent}
+
+/* steps */
+.steps{list-style:none;margin:0 0 0 40px;padding:22px 24px;display:grid;grid-template-columns:repeat(6,1fr);gap:0;background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:14px}
+@media(max-width:760px){.steps{margin-left:0;grid-template-columns:1fr}}
+.steps li{position:relative;padding:26px 14px 0 0;font-size:12.5px;line-height:1.4}
+.steps li::before{content:"";position:absolute;top:8px;left:0;right:0;height:2px;background:hsl(var(--border))}
+.steps li::after{content:"";position:absolute;top:2px;left:0;width:14px;height:14px;border-radius:99px;background:hsl(var(--primary));box-shadow:0 0 0 3px hsl(var(--card))}
+.steps li:last-child::before{display:none}
+.steps li b{display:block;font:700 14px Sora;margin-bottom:3px}
+.steps li .cnt{position:absolute;top:16px;right:16px;font:800 20px Sora}
+.steps li span{color:hsl(240 6% 30%)}
+@media(max-width:760px){.steps li::before{display:none}.steps li{padding:8px 0 8px 24px}.steps li::after{top:12px}}
+
+/* tablet */
+.tabwrap{background:hsl(240 8% 14%);border-radius:20px;padding:26px;display:grid;place-items:center;margin-left:40px}
+@media(max-width:760px){.tabwrap{margin-left:0;padding:14px}}
+.tab{width:900px;max-width:100%;background:hsl(var(--background));border-radius:16px;overflow:hidden;box-shadow:0 22px 54px -20px hsl(0 0% 0%/.5)}
+.tab-top{display:flex;align-items:center;gap:12px;padding:14px 20px;background:hsl(var(--card));border-bottom:1px solid hsl(var(--border))}
+.tab-top .tt{font:700 18px Sora;display:flex;align-items:center;gap:8px}.tab-top .tt .ic{color:hsl(var(--primary))}
+.tab-top .sub{font-size:13px;color:hsl(var(--muted-foreground))}
+.tab-top .spacer{flex:1}
+.tab-top .me{display:inline-flex;align-items:center;gap:8px;height:44px;padding:0 8px 0 6px;border-radius:12px;border:1px solid hsl(240 6% 84%);font-size:14px;font-weight:600}
+.tab-top .me .avatar{width:34px;height:34px;font-size:12px}
+.tab-body{padding:22px 24px}
+.tstep{font-size:13px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:700;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.tstep .n{width:24px;height:24px;border-radius:999px;background:hsl(var(--primary));color:#fff;display:grid;place-items:center;font-size:13px}
+.torque-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.torque-box{border:2px solid hsl(240 6% 84%);border-radius:16px;padding:18px;text-align:center}
+.torque-box .v{font:800 32px Sora;font-variant-numeric:tabular-nums}
+.torque-box .u{font-size:13px;color:hsl(var(--muted-foreground))}
+.torque-box.ok{border-color:hsl(var(--success));background:hsl(var(--success-soft))}
+.torque-box.ok .v{color:hsl(var(--success-text))}
+.tbtn{margin-top:16px;width:100%;height:64px;border:0;border-radius:16px;background:hsl(var(--primary));color:#fff;font-size:19px;font-weight:700;display:flex;align-items:center;justify-content:center;gap:10px}
+
+/* gestor */
+.gestor{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:16px;margin-left:40px}
+@media(max-width:900px){.gestor{grid-template-columns:1fr;margin-left:0}}
+.cpk-row{display:grid;grid-template-columns:150px 1fr 70px;gap:12px;align-items:center;padding:9px 0;border-top:1px solid hsl(var(--border));font-size:13px}
+.cpk-row:first-of-type{border-top:0}
+.cpk-row .nm{font-weight:600}
+.cpk-row .track{height:9px;border-radius:99px;background:hsl(var(--muted));overflow:hidden}
+.cpk-row .track i{display:block;height:100%;border-radius:99px;background:hsl(var(--primary))}
+.cpk-row .track i.best{background:hsl(var(--success))}
+.cpk-row .m{text-align:right;font-weight:700;font-variant-numeric:tabular-nums;font-size:12.5px}
+.alert{display:flex;align-items:center;gap:11px;padding:11px 0;border-top:1px solid hsl(var(--border));font-size:13px}
+.alert:first-of-type{border-top:0}
+.alert .ai{width:34px;height:34px;border-radius:9px;display:grid;place-items:center;flex:none}
+.alert.w .ai{background:hsl(var(--warning-soft));color:hsl(var(--warning-text))}
+.alert.d .ai{background:hsl(var(--danger-soft));color:hsl(var(--danger-text))}
+.alert.i .ai{background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.alert .n{margin-left:auto;font-weight:800;font-size:16px}.alert b{font-weight:700}
+
+/* cards3 / states / notes */
+.cards3{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-left:40px}
+@media(max-width:900px){.cards3{grid-template-columns:1fr;margin-left:0}}
+.ext-c{padding:16px 18px}
+.ext-c .top{display:flex;align-items:center;gap:10px}
+.ext-c .ei{width:38px;height:38px;border-radius:10px;display:grid;place-items:center;flex:none}
+.ext-c h4{font:700 14.5px Sora}.ext-c .st{margin-left:auto}
+.ext-c p{font-size:13px;color:hsl(240 6% 26%);margin:10px 0}
+.ext-c .kv{display:flex;gap:8px;font-size:12.5px;padding:5px 0;border-top:1px solid hsl(var(--border))}
+.ext-c .kv .k{color:hsl(var(--muted-foreground));width:110px;flex:none}.ext-c .kv .v{font-weight:600}
+.states{display:grid;grid-template-columns:repeat(2,1fr);gap:18px;margin-left:40px}
+@media(max-width:900px){.states{grid-template-columns:1fr;margin-left:0}}
+.st-card{background:hsl(var(--background));border:1px solid hsl(var(--border));border-radius:13px;padding:16px}
+.st-cap{font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));margin-bottom:12px}
+.empty{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:20px;border:1.5px dashed hsl(240 6% 84%);border-radius:11px;background:hsl(var(--card))}
+.empty .ei{width:40px;height:40px;border-radius:11px;background:hsl(var(--muted));color:hsl(240 5% 34%);display:grid;place-items:center;margin-bottom:4px}
+.empty h4{font:700 15px Sora}.empty p{font-size:13px;color:hsl(240 6% 28%);max-width:48ch}
+.notes{margin:0 0 24px 40px;max-width:960px;background:hsl(var(--card));border:1px solid hsl(var(--border));border-left:3px solid hsl(var(--primary));border-radius:12px;padding:18px 22px}
+.notes h4{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--primary));margin-bottom:10px}
+.notes ul{margin:0;padding-left:18px;color:hsl(240 5% 28%);font-size:13.5px}.notes li{margin:7px 0}.notes b{color:hsl(var(--foreground))}
+@media(max-width:760px){.notes{margin-left:0}}
+
+/* operation dialogs */
+.ops{margin-left:40px;display:grid;grid-template-columns:230px 1fr;gap:16px;align-items:start}
+@media(max-width:820px){.ops{grid-template-columns:1fr;margin-left:0}}
+.ops-rail{display:flex;flex-direction:column;gap:6px}
+.ops-rail button{display:flex;align-items:center;gap:10px;padding:11px 13px;border:1px solid hsl(var(--border));background:hsl(var(--card));border-radius:11px;font-size:13px;font-weight:600;text-align:left}
+.ops-rail button .ic{color:hsl(var(--muted-foreground))}
+.ops-rail button.on{border-color:hsl(var(--primary));background:hsl(var(--primary-soft));color:hsl(var(--primary))}
+.ops-rail button.on .ic{color:hsl(var(--primary))}
+.dialog{background:hsl(var(--card));border:1px solid hsl(var(--border));border-radius:16px;box-shadow:0 20px 50px -24px hsl(230 30% 20%/.3);overflow:hidden;max-width:560px}
+.dialog.wide{max-width:640px}
+.dlg-h{padding:18px 20px 6px}
+.dlg-h h3{font:800 19px Sora;letter-spacing:-.01em}
+.dlg-b{padding:8px 20px 18px}
+.dlg-step{font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:hsl(var(--muted-foreground));font-weight:700;margin:12px 0 10px;display:flex;align-items:center;gap:8px}
+.dlg-step .n{width:22px;height:22px;border-radius:999px;background:hsl(var(--primary));color:#fff;display:grid;place-items:center;font-size:12px}
+.pickgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pick{border:1.5px solid hsl(240 6% 84%);border-radius:12px;padding:14px;text-align:left;background:hsl(var(--card))}
+.pick .t{font:700 14px Sora}.pick .s{font-size:12px;color:hsl(var(--muted-foreground));margin-top:2px}
+.pick.on{border-color:hsl(var(--primary));background:hsl(var(--primary-soft))}
+.pick.on .t,.pick.on .s{color:hsl(var(--primary))}
+.pick.danger.on{border-color:hsl(var(--danger));background:hsl(var(--danger-soft))}
+.pick.danger.on .t{color:hsl(var(--danger-text))}
+.pick.disabled{opacity:.5;border-style:dashed;cursor:not-allowed}
+.dlg-auto{display:flex;align-items:center;gap:8px;margin-top:12px;padding:10px 12px;border-radius:10px;background:hsl(var(--success-soft));color:hsl(var(--success-text));font-size:12.5px;font-weight:600}
+.dlg-f{display:flex;justify-content:flex-end;gap:8px;padding:14px 20px;border-top:1px solid hsl(var(--border));background:hsl(var(--toolbar))}
+.lives{display:flex;gap:5px;margin:10px 0}
+.lives i{flex:1;height:10px;border-radius:4px;background:hsl(var(--muted))}
+.lives i.done{background:hsl(var(--success))}.lives i.now{background:hsl(var(--primary));animation:pulse 1.3s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.5}}
+.lives-l{display:flex;justify-content:space-between;font-size:10.5px;color:hsl(var(--muted-foreground))}
+.mini-axle{display:flex;flex-direction:column;gap:12px;padding:8px 0}
+.mini-axle .ax{display:flex;align-items:center;gap:8px;justify-content:center}
+.mini-axle .w{width:16px;height:40px;border-radius:4px;background:#2b2f36;opacity:.5}
+.mini-axle .bar2{height:10px;flex:1;max-width:150px;border-radius:5px;background:url(#) ,hsl(220 10% 78%);border:2px solid #5b6068;cursor:pointer}
+.mini-axle .bar2.empty{background:hsl(var(--muted));border-style:dashed}
+.mini-axle .bar2.from{border-color:hsl(var(--warning));background:hsl(var(--warning-soft))}
+.mini-axle .bar2.to{border-color:hsl(var(--primary));background:hsl(var(--primary-soft))}
+.qr{width:120px;height:120px;border-radius:12px;background:repeating-conic-gradient(#111 0% 25%,#fff 0% 50%) 50%/14px 14px;margin:6px auto;border:6px solid #fff;box-shadow:0 0 0 1px hsl(var(--border))}
+</style>
+</head>
+<body>
+<div class="doc">
+  <h1>Eixos e cubos — o ciclo de vida</h1>
+  <p class="lead">Handoff da família <b>eixo/cubo</b> como peça serializada, no mesmo esqueleto do pneu. Cada eixo é uma unidade com <b>número de série do fabricante</b>, que mora instalado num veículo (numa posição do chassi) e é encontrado na planta ou pela busca. O que muda em relação ao pneu: o eixo tem <b>tipo</b> (direcional/tração/livre/elevável), <b>capacidade</b>, <b>torque de aperto</b> e <b>rolamento/cubo</b>, e o ciclo é de <b>retífica/reforma</b> — não recapagem. Dados de exemplo.</p>
+  <nav class="toc">
+    <a href="#s1"><b>1</b> Quem usa</a>
+    <a href="#s2"><b>2</b> Lista da frota</a>
+    <a href="#s3"><b>3</b> Planta no veículo</a>
+    <a href="#s4"><b>4</b> Ficha do eixo</a>
+    <a href="#s5"><b>5</b> Retífica/reforma</a>
+    <a href="#s6"><b>6</b> Tablet do mecânico</a>
+    <a href="#s7"><b>7</b> Painel do gestor</a>
+    <a href="#s8"><b>8</b> Cenários externos</a>
+    <a href="#s9"><b>9</b> Estados</a>
+    <a href="#s10"><b>10</b> Operações</a>
+  </nav>
+
+  <!-- 1 personas -->
+  <section class="sec" id="s1">
+    <div class="sec-label"><span class="sec-num">1</span><h2>Quem usa, onde e pra quê</h2></div>
+    <p class="sec-sub">Gestão no notebook; instalação e verificação de torque no tablet do mecânico; suprimentos cuida de retífica e reposição.</p>
+    <div class="personas">
+      <div class="card persona"><div class="top"><span class="pic" style="background:hsl(var(--primary-soft));color:hsl(var(--primary))"><i class="ic s24 i-chart"></i></span><div><h3>Gestor de frota</h3><div class="role">Notebook</div></div></div><ul><li><i class="ic s16 i-check"></i>Custo por km do eixo</li><li><i class="ic s16 i-check"></i>Reformas pendentes e torque a verificar</li><li><i class="ic s16 i-check"></i>Previsão de troca</li></ul></div>
+      <div class="card persona"><div class="top"><span class="pic" style="background:hsl(var(--success-soft));color:hsl(var(--success-text))"><i class="ic s24 i-wrench"></i></span><div><h3>Mecânico</h3><div class="role">Tablet · box</div></div></div><ul><li><i class="ic s16 i-check"></i>Instala/troca eixo em 2 toques</li><li><i class="ic s16 i-check"></i>Registra torque de aperto e inspeção</li><li><i class="ic s16 i-check"></i>Km entra do hodômetro</li></ul></div>
+      <div class="card persona"><div class="top"><span class="pic" style="background:hsl(var(--warning-soft));color:hsl(var(--warning-text))"><i class="ic s24 i-money"></i></span><div><h3>Comprador</h3><div class="role">Notebook</div></div></div><ul><li><i class="ic s16 i-check"></i>Envia à retífica e recebe</li><li><i class="ic s16 i-check"></i>Aciona garantia</li><li><i class="ic s16 i-check"></i>Repõe pela previsão</li></ul></div>
+    </div>
+  </section>
+
+  <!-- 2 lista -->
+  <section class="sec" id="s2">
+    <div class="sec-label"><span class="sec-num">2</span><h2>Lista da frota — gerir os eixos</h2></div>
+    <p class="sec-sub">Todos os eixos rastreados, com resumo, abas por situação e filtros por tipo/estado. Marque vários e aja em massa (verificar torque, enviar à retífica, transferir, baixar).</p>
+    <p class="view-cap">Notebook · 1.280 px</p>
+    <div class="frame">
+      <div class="app">
+        <header class="topbar"><div class="brand"><span class="lg"><i class="ic s18 i-truck"></i></span>Facter Truck</div><div class="spacer"></div><div class="search"><i class="ic s16 i-mag"></i>Buscar nº de série, placa…</div><div class="avatar">MG</div></header>
+        <nav class="sidenav"><div class="navitem"><i class="ic s20 i-house"></i></div><div class="navitem"><i class="ic s20 i-truck"></i></div><div class="navitem on"><i class="ic s20 i-axle"></i></div><div class="navitem"><i class="ic s20 i-box"></i></div><div class="navitem"><i class="ic s20 i-chart"></i></div><div class="navsep"></div><div class="navitem"><i class="ic s20 i-gear"></i></div></nav>
+        <main class="main">
+          <div class="pagehead"><div><h1><i class="ic s24 i-axle" style="color:hsl(var(--primary))"></i>Eixos e cubos</h1><p class="meta">312 eixos rastreados · Suzano · 3 bases</p></div><div style="display:flex;gap:8px"><button class="btn btn-outline btn-sm"><i class="ic s16 i-scan"></i>Ler nº de série</button><button class="btn btn-primary btn-sm"><i class="ic s16 i-plus"></i>Nova unidade</button></div></div>
+          <div class="tabbar"><a class="on"><i class="ic s16 i-list"></i>Todos <span class="n">312</span></a><a><i class="ic s16 i-truck"></i>Montados <span class="n">268</span></a><a><i class="ic s16 i-box"></i>Em estoque <span class="n">32</span></a><a><i class="ic s16 i-recap"></i>Retífica <span class="n">12</span></a><a>Atenção <span class="n warn">9</span></a></div>
+          <div class="card strip">
+            <div class="cell"><div class="k"><i class="ic s14 i-axle"></i>Rastreados</div><div class="v">312</div><div class="s">3 bases</div></div>
+            <div class="cell"><div class="k"><i class="ic s14 i-truck"></i>Montados</div><div class="v">268</div><div class="s">em 74 veículos</div></div>
+            <div class="cell"><div class="k"><i class="ic s14 i-box"></i>Em estoque</div><div class="v">32</div><div class="s">disponíveis</div></div>
+            <div class="cell"><div class="k"><i class="ic s14 i-torque"></i>Torque a verificar</div><div class="v warnt">9</div><div class="s">janela vencendo</div></div>
+            <div class="cell"><div class="k"><i class="ic s14 i-recap"></i>Reforma pendente</div><div class="v dngt">4</div><div class="s">folga no rolamento</div></div>
+          </div>
+          <div class="toolbar">
+            <div class="search" style="width:240px;background:hsl(var(--card))"><i class="ic s16 i-mag"></i>Buscar nº de série…</div>
+            <div class="chips-pick"><button>Tipo <i class="ic s14 i-down"></i></button><button>Estado <i class="ic s14 i-down"></i></button><button>Base <i class="ic s14 i-down"></i></button></div>
+            <span style="flex:1"></span>
+            <div class="seg"><button class="on"><i class="ic s14 i-list"></i>Lista</button><button><i class="ic s14 i-truck"></i>Planta</button></div>
+          </div>
+          <table class="tbl" id="fleet">
+            <thead><tr><th style="width:34px"><span class="cb" id="cbAll"></span></th><th>Nº de série</th><th>Tipo</th><th>Capacidade</th><th class="r">Km</th><th>Torque</th><th>Onde está</th><th>Estado</th></tr></thead>
+            <tbody>
+              <tr class="sel"><td><span class="cb on"><i class="ic s14 i-check"></i></span></td><td><span class="sn"><i class="ic s14 i-axle"></i>SN-44821</span></td><td>Tração</td><td>13 t</td><td class="r">412.300</td><td class="warnt" style="color:hsl(var(--warning-text));font-weight:600">a verificar</td><td>FRT-1234 · eixo 2</td><td><span class="badge b-warn"><i class="ic s14 i-warn-f"></i>Torque</span></td></tr>
+              <tr class="sel"><td><span class="cb on"><i class="ic s14 i-check"></i></span></td><td><span class="sn"><i class="ic s14 i-axle"></i>SN-44790</span></td><td>Livre</td><td>10 t</td><td class="r">560.000</td><td>310 N·m</td><td>FRT-0987 · eixo 5</td><td><span class="badge b-danger"><i class="ic s14 i-warn-f"></i>Reforma</span></td></tr>
+              <tr><td><span class="cb"></span></td><td><span class="sn"><i class="ic s14 i-axle"></i>SN-45010</span></td><td>Direcional</td><td>7,5 t</td><td class="r">120.000</td><td>290 N·m</td><td>FRT-0771 · eixo 1</td><td><span class="badge b-ok"><i class="ic s14 i-check"></i>OK</span></td></tr>
+              <tr><td><span class="cb"></span></td><td><span class="sn"><i class="ic s14 i-axle"></i>SN-45120</span></td><td>Tração</td><td>13 t</td><td class="r">0</td><td class="mut">—</td><td class="mut">Estoque · Mucuri</td><td><span class="badge b-ok"><i class="ic s14 i-check"></i>OK</span></td></tr>
+              <tr><td><span class="cb"></span></td><td><span class="sn"><i class="ic s14 i-axle"></i>SN-44655</span></td><td>Livre</td><td>10 t</td><td class="r">245.000</td><td class="mut">—</td><td class="mut">Na retífica · romaneio 44</td><td><span class="badge b-warn">Em retífica</span></td></tr>
+              <tr><td><span class="cb"></span></td><td><span class="sn"><i class="ic s14 i-axle"></i>SN-45233</span></td><td>Elevável</td><td>9 t</td><td class="r">88.000</td><td>300 N·m</td><td>FRT-1102 · eixo 3</td><td><span class="badge b-ok"><i class="ic s14 i-check"></i>OK</span></td></tr>
+            </tbody>
+          </table>
+          <div class="list-foot"><span>Mostrando 6 de 312</span><div><button class="btn btn-outline btn-sm">‹</button> <b>1</b> / 52 <button class="btn btn-outline btn-sm">›</button></div></div>
+        </main>
+      </div>
+      <div class="selbar" id="selbar"><div class="cnt"><span id="selcount">2</span> selecionados</div><button><i class="ic s16 i-torque"></i>Verificar torque</button><button><i class="ic s16 i-recap"></i>Enviar à retífica</button><button><i class="ic s16 i-swap"></i>Transferir base</button><button><i class="ic s16 i-down-a"></i>Baixar</button><button class="x" id="selclear"><i class="ic s16 i-x"></i></button></div>
+    </div>
+    <div class="notes" style="margin-top:20px"><h4>O que muda em relação ao pneu</h4><ul>
+      <li>Identidade é o <b>nº de série do fabricante</b>; as colunas do pneu (vida/sulco/CPK) dão lugar a <b>tipo, capacidade, km e torque</b>.</li>
+      <li>A faixa troca "sulco/crítico" por <b>torque a verificar</b> e <b>reforma pendente</b>.</li>
+      <li>O mesmo esqueleto: abas por situação, filtros, seleção + barra, alternador Lista/Planta.</li>
+    </ul></div>
+  </section>
+
+  <!-- 3 planta -->
+  <section class="sec" id="s3">
+    <div class="sec-label"><span class="sec-num">3</span><h2>Planta no veículo — os eixos do chassi</h2></div>
+    <p class="sec-sub">A mesma planta do pneu, agora os <b>eixos</b> são as peças clicáveis (as barras entre as rodas). Cor = estado (torque a verificar, reforma, crítico). Clique num eixo → a ficha; ou bipe o nº de série. <span class="dep">componente <code>VehicleSchematic</code> do DS</span></p>
+    <div class="frame">
+      <div class="app">
+        <header class="topbar"><div class="brand"><span class="lg"><i class="ic s18 i-truck"></i></span>Facter Truck</div><div class="spacer"></div><div class="search"><i class="ic s16 i-mag"></i>Buscar…</div><div class="avatar">MG</div></header>
+        <nav class="sidenav"><div class="navitem"><i class="ic s20 i-house"></i></div><div class="navitem"><i class="ic s20 i-truck"></i></div><div class="navitem on"><i class="ic s20 i-axle"></i></div><div class="navitem"><i class="ic s20 i-box"></i></div><div class="navitem"><i class="ic s20 i-chart"></i></div><div class="navsep"></div><div class="navitem"><i class="ic s20 i-gear"></i></div></nav>
+        <main class="main" style="padding:0">
+          <div class="plan-bar"><div><div class="title">FRT-1234 · eixos</div><div class="sub">rodotrem florestal · clique num eixo pra abrir a ficha</div></div><div class="spacer"></div><button class="btn btn-outline btn-sm"><i class="ic s16 i-scan"></i>Ler nº de série</button></div>
+          <div class="plan-wrap">
+            <div class="planbox">
+              <svg id="svg" width="360" viewBox="0 0 360 480" xmlns="http://www.w3.org/2000/svg"><defs>
+                <linearGradient id="steel" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#cbcfd6"/><stop offset=".5" stop-color="#9aa0aa"/><stop offset="1" stop-color="#767c86"/></linearGradient>
+                <linearGradient id="chassis" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#b7bdc6"/><stop offset=".5" stop-color="#dce0e6"/><stop offset="1" stop-color="#b7bdc6"/></linearGradient>
+              </defs></svg>
+              <div class="tip" id="tip"></div>
+            </div>
+            <div class="panel" id="panel"></div>
+          </div>
+          <div class="legend"><b style="color:hsl(var(--foreground))">Estado:</b><span><i class="dot ok"></i>OK</span><span><i class="dot torque"></i>Torque a verificar</span><span><i class="dot reforma"></i>Reforma pendente</span><span><i class="dot critico"></i>Crítico</span><span style="margin-left:auto"><i class="ic s14 i-hand"></i>clique num eixo</span></div>
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4 ficha -->
+  <section class="sec" id="s4">
+    <div class="sec-label"><span class="sec-num">4</span><h2>Ficha do eixo</h2></div>
+    <p class="sec-sub">Identidade, tipo/capacidade, torque, rolamento/cubo, reformas, custo por km, posição e histórico.</p>
+    <div class="cards3" style="grid-template-columns:minmax(0,1.4fr) minmax(0,1fr)">
+      <div>
+        <div class="card" style="padding:20px 22px;background:linear-gradient(180deg,hsl(233 80% 98%),hsl(var(--card)) 70%)">
+          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:12px">
+            <div><div style="font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:hsl(var(--muted-foreground));font-weight:700">Eixo · unidade serializada</div>
+              <div style="font:800 26px Sora;display:flex;align-items:center;gap:10px;margin-top:2px"><i class="ic s24 i-axle" style="color:hsl(var(--primary))"></i>SN-44821</div>
+              <div style="color:hsl(240 6% 30%);font-size:13.5px;margin-top:4px">Eixo de tração · Randon · rodagem dupla</div></div>
+            <div style="text-align:right"><span class="badge b-warn"><i class="ic s14 i-warn-f"></i>Torque a verificar</span><div style="margin-top:8px"><span class="badge b-info">2ª reforma</span></div></div>
+          </div>
+          <div class="pstats" style="margin-top:16px;border-top:1px solid hsl(var(--border));border-bottom:0">
+            <div class="pstat"><div class="k">Capacidade</div><div class="v">13 t</div></div>
+            <div class="pstat"><div class="k">Km rodado</div><div class="v">412.300</div></div>
+            <div class="pstat"><div class="k">Custo/km</div><div class="v">R$ 0,03</div></div>
+          </div>
+        </div>
+        <div class="card" style="margin-top:16px">
+          <div style="padding:13px 16px;border-bottom:1px solid hsl(var(--border));font:700 14px Sora;display:flex;align-items:center;gap:8px"><i class="ic s16 i-torque" style="color:hsl(var(--primary))"></i>Torque &amp; rolamento</div>
+          <div class="pbody" style="overflow:visible">
+            <div class="fact"><span class="k">Torque aperto</span><span class="v" style="color:hsl(var(--warning-text))">última há 9 meses · reverificar</span></div>
+            <div class="fact"><span class="k">Rolamento</span><span class="v">folga leve — inspecionar</span></div>
+            <div class="fact"><span class="k">Reformas</span><span class="v">2 (R1, R2) · retífica Randon</span></div>
+            <div class="fact"><span class="k">Garantia</span><span class="v">até 06/2027</span></div>
+          </div>
+        </div>
+      </div>
+      <div>
+        <div class="card"><div style="padding:13px 16px;border-bottom:1px solid hsl(var(--border));font:700 14px Sora;display:flex;align-items:center;gap:8px"><i class="ic s16 i-pin" style="color:hsl(var(--primary))"></i>Onde está</div>
+          <div class="pbody" style="overflow:visible"><div class="fact"><span class="k">Veículo</span><span class="v"><span class="path">FRT-1234</span></span></div><div class="fact"><span class="k">Posição</span><span class="v"><span class="path">Cavalo · eixo 2 (tração)</span></span></div><div class="fact"><span class="k">Instalado</span><span class="v">há 1 ano · 412.300 km</span></div></div>
+        </div>
+        <div class="card" style="margin-top:16px"><div style="padding:13px 16px;border-bottom:1px solid hsl(var(--border));font:700 14px Sora;display:flex;align-items:center;gap:8px"><i class="ic s16 i-hist" style="color:hsl(var(--primary))"></i>Histórico</div>
+          <div class="pbody" style="overflow:visible"><div class="tl">
+            <div class="ev now"><div class="t">há 9 meses</div><div class="d">Torque verificado — reverificar em breve</div></div>
+            <div class="ev reforma"><div class="t">há 1 ano e 2 meses</div><div class="d"><b>Retífica R2</b> · Randon · R$ 8.400</div></div>
+            <div class="ev"><div class="t">há 1 ano e 3 meses</div><div class="d">Instalado no FRT-1234</div></div>
+            <div class="ev"><div class="t">origem</div><div class="d">Comprado · NF 7812 · Randon</div></div>
+          </div></div>
+        </div>
+      </div>
+    </div>
+    <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:16px 0 0 40px" class="ficha-acts">
+      <button class="btn btn-primary"><i class="ic s16 i-torque"></i>Registrar torque</button>
+      <button class="btn btn-outline"><i class="ic s16 i-down-a"></i>Desinstalar</button>
+      <button class="btn btn-outline"><i class="ic s16 i-recap"></i>Enviar à retífica</button>
+      <button class="btn btn-outline"><i class="ic s16 i-shield"></i>Garantia</button>
+      <button class="btn btn-outline" style="color:hsl(var(--danger-text))"><i class="ic s16 i-trash"></i>Baixar</button>
+    </div>
+  </section>
+
+  <!-- 5 retifica -->
+  <section class="sec" id="s5">
+    <div class="sec-label"><span class="sec-num">5</span><h2>Retífica / reforma — o eixo volta a rodar</h2></div>
+    <p class="sec-sub">No limite (folga no rolamento, desgaste), o eixo sai do veículo, é avaliado, vai à retífica (romaneio + custo) e volta reformado. Cada etapa é um estado rastreável; o custo entra no custo/km.</p>
+    <ol class="steps">
+      <li><span class="cnt">—</span><b>Em uso</b><span>Instalado, rodando.</span></li>
+      <li><span class="cnt">3</span><b>Inspeção</b><span>Folga/ruído avaliados.</span></li>
+      <li><span class="cnt">2</span><b>Fila</b><span>Desinstalado, aguardando envio.</span></li>
+      <li><span class="cnt">4</span><b>Na retífica</b><span>Enviado por romaneio. Custo/prazo.</span></li>
+      <li><span class="cnt">2</span><b>Recebido</b><span>Reformado, pronto pra montar.</span></li>
+      <li><span class="cnt">1</span><b>Baixa</b><span>Irreparável = sucata, com motivo.</span></li>
+    </ol>
+  </section>
+
+  <!-- 6 tablet -->
+  <section class="sec" id="s6">
+    <div class="sec-label"><span class="sec-num">6</span><h2>Tablet do mecânico — instalar e registrar torque</h2></div>
+    <p class="sec-sub">No box. Instalar/trocar eixo e <b>registrar o torque de aperto</b> em toques grandes; o km entra do hodômetro. Tablet compartilhado com PIN.</p>
+    <div class="tabwrap"><div class="tab">
+      <div class="tab-top"><span class="tt"><i class="ic s20 i-torque"></i>Registrar torque</span><span class="sub">· SN-44821 · FRT-1234 · eixo 2</span><span class="spacer"></span><span class="me"><span class="avatar">CM</span>Carlos M.</span></div>
+      <div class="tab-body">
+        <div class="tstep"><span class="n">1</span>Aperte e leia o torquímetro</div>
+        <div class="torque-grid">
+          <div class="torque-box ok"><div class="v">305</div><div class="u">N·m medido</div></div>
+          <div class="torque-box"><div class="v">300</div><div class="u">N·m especificado</div></div>
+        </div>
+        <div class="dlg-auto" style="margin-top:14px"><i class="ic s16 i-check-c"></i>Dentro da faixa (295–310 N·m) · km 412.300 do hodômetro registrado</div>
+        <button class="tbtn"><i class="ic s24 i-check"></i>Registrar torque</button>
+      </div>
+    </div></div>
+  </section>
+
+  <!-- 7 gestor -->
+  <section class="sec" id="s7">
+    <div class="sec-label"><span class="sec-num">7</span><h2>Painel do gestor</h2></div>
+    <p class="sec-sub">Custo por km por marca de eixo, o que exige ação e a previsão de reforma/troca.</p>
+    <div class="gestor">
+      <div class="card"><div style="padding:13px 16px;border-bottom:1px solid hsl(var(--border));font:700 14px Sora;display:flex;align-items:center;gap:8px"><i class="ic s16 i-torque" style="color:hsl(var(--primary))"></i>Custo/km por marca (menor é melhor)</div>
+        <div style="padding:14px 16px">
+          <div class="cpk-row"><span class="nm">Randon</span><span class="track"><i class="best" style="width:34%"></i></span><span class="m">R$ 0,03</span></div>
+          <div class="cpk-row"><span class="nm">Suspensys</span><span class="track"><i style="width:46%"></i></span><span class="m">R$ 0,04</span></div>
+          <div class="cpk-row"><span class="nm">Meritor</span><span class="track"><i style="width:58%"></i></span><span class="m">R$ 0,05</span></div>
+        </div>
+      </div>
+      <div class="card"><div style="padding:13px 16px;border-bottom:1px solid hsl(var(--border));font:700 14px Sora;display:flex;align-items:center;gap:8px"><i class="ic s16 i-bell" style="color:hsl(var(--warning-text))"></i>Exige ação</div>
+        <div style="padding:14px 16px">
+          <div class="alert w"><span class="ai"><i class="ic s18 i-torque"></i></span><span><b>9 eixos</b> com torque a verificar</span><span class="n">9</span></div>
+          <div class="alert d"><span class="ai"><i class="ic s18 i-recap"></i></span><span><b>4 eixos</b> com folga — reforma pendente</span><span class="n">4</span></div>
+          <div class="alert i"><span class="ai"><i class="ic s18 i-shield"></i></span><span><b>2 garantias</b> vencem em 30 dias</span><span class="n">2</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8 externos -->
+  <section class="sec" id="s8">
+    <div class="sec-label"><span class="sec-num">8</span><h2>Cenários externos</h2></div>
+    <p class="sec-sub">Quando o eixo sai da base. Cada caso é um estado com responsável claro.</p>
+    <div class="cards3">
+      <div class="card ext-c"><div class="top"><span class="ei" style="background:hsl(var(--primary-soft));color:hsl(var(--primary))"><i class="ic s20 i-buildings"></i></span><h4>Em oficina terceira</h4><span class="badge b-info st">Ecossistema</span></div><p>Montado num veículo em manutenção na Vale das Carretas, sob concessão do dono do dado.</p><div class="kv"><span class="k">Responsável</span><span class="v">Vale das Carretas</span></div></div>
+      <div class="card ext-c"><div class="top"><span class="ei" style="background:hsl(var(--warning-soft));color:hsl(var(--warning-text))"><i class="ic s20 i-trailer"></i></span><h4>Na retífica</h4><span class="badge b-warn st">Fornecedor</span></div><p>Enviado por romaneio; volta reformado com custo lançado.</p><div class="kv"><span class="k">Situação</span><span class="v">romaneio 44 · a receber</span></div></div>
+      <div class="card ext-c"><div class="top"><span class="ei" style="background:hsl(var(--success-soft));color:hsl(var(--success-text))"><i class="ic s20 i-shield"></i></span><h4>Garantia</h4><span class="badge b-ok st">Fornecedor</span></div><p>Falha antes do previsto; guarda NF e laudo; custo fora do custo/km.</p><div class="kv"><span class="k">Fornecedor</span><span class="v">Randon</span></div></div>
+      <div class="card ext-c"><div class="top"><span class="ei" style="background:hsl(var(--danger-soft));color:hsl(var(--danger-text))"><i class="ic s20 i-trash"></i></span><h4>Baixado</h4><span class="badge b-danger st">Fim do ciclo</span></div><p>Trincado/irreparável ou perda. Sempre com motivo; histórico permanece.</p><div class="kv"><span class="k">Motivo</span><span class="v">carcaça trincada</span></div></div>
+    </div>
+  </section>
+
+  <!-- 9 estados -->
+  <section class="sec" id="s9">
+    <div class="sec-label"><span class="sec-num">9</span><h2>Estados</h2></div>
+    <p class="sec-sub">Todos os estados de uma vez.</p>
+    <div class="states">
+      <div class="st-card"><div class="st-cap">Posição sem eixo</div><div class="empty"><span class="ei"><i class="ic s20 i-plus"></i></span><h4>Sem eixo nesta posição</h4><p>Cavalo · eixo 2 está vazio. Instale um do estoque ou bipe o nº de série.</p><button class="btn btn-primary btn-sm" style="margin-top:6px"><i class="ic s16 i-axle"></i>Instalar eixo</button></div></div>
+      <div class="st-card"><div class="st-cap">Sem identificação</div><div class="empty" style="border-color:hsl(38 70% 70%);background:hsl(var(--warning-soft))"><span class="ei" style="background:hsl(var(--warning));color:#fff"><i class="ic s20 i-broadcast"></i></span><h4>Eixo não identificado</h4><p>Existe mas ainda não foi identificado. Escolha um método durável (nº estampado, gravação, placa a laser ou RFID) — nada de etiqueta de papel.</p><button class="btn btn-primary btn-sm" style="margin-top:6px"><i class="ic s16 i-broadcast"></i>Identificar eixo</button></div></div>
+      <div class="st-card"><div class="st-cap">Sem permissão de custo</div><div class="empty"><span class="ei"><i class="ic s20 i-money"></i></span><h4>Custo oculto</h4><p>Ficha e operação visíveis; custo/km exige <code>cost.view</code>.</p></div></div>
+      <div class="st-card"><div class="st-cap">Tablet offline</div><div class="empty"><span class="ei" style="background:hsl(var(--warning-soft));color:hsl(var(--warning-text))"><i class="ic s20 i-torque"></i></span><h4>Sem sinal — na fila</h4><p>Instalar e registrar torque funcionam offline; sobem ao voltar o sinal.</p></div></div>
+    </div>
+  </section>
+
+  <!-- 10 operacoes -->
+  <section class="sec" id="s10">
+    <div class="sec-label"><span class="sec-num">10</span><h2>Operações — diálogos interativos</h2></div>
+    <p class="sec-sub">Cada operação é um diálogo guiado (lidera pelo título, verbo do pátio, o que o sistema sabe não pergunta). Clique numa operação à esquerda.</p>
+    <div class="ops">
+      <div class="ops-rail" id="opsRail">
+        <button data-op="instalar" class="on"><i class="ic s16 i-axle"></i>Instalar eixo</button>
+        <button data-op="torque"><i class="ic s16 i-torque"></i>Registrar torque</button>
+        <button data-op="inspecao"><i class="ic s16 i-wrench"></i>Inspeção</button>
+        <button data-op="retifica"><i class="ic s16 i-recap"></i>Enviar à retífica</button>
+        <button data-op="receber"><i class="ic s16 i-check-c"></i>Receber retífica</button>
+        <button data-op="baixar"><i class="ic s16 i-trash"></i>Baixar</button>
+        <button data-op="identificar"><i class="ic s16 i-broadcast"></i>Identificar eixo</button>
+      </div>
+      <div id="opsStage"></div>
+    </div>
+  </section>
+
+  <div class="notes" style="margin-top:56px"><h4>Como se liga ao resto</h4><ul>
+    <li>Mesmo modelo serializado do pneu (<code>part.tracking = 'serialized'</code>); o eixo é uma <b>extensão própria</b> (tipo, capacidade, torque, rolamento, reformas) — como o pneu tem a dele.</li>
+    <li>Instalação/torque saem da OS; km vem do hodômetro (<code>meter_readings</code>); retífica gera romaneio e custo. Nada registrado na mão.</li>
+    <li>A planta é o mesmo <code>VehicleSchematic</code> do DS; aqui os eixos são as peças clicáveis.</li>
+  </ul></div>
+</div>
+
+<script>
+const NS='http://www.w3.org/2000/svg';
+/* lista: seleção + barra */
+(function(){
+  const tb=document.getElementById('fleet'); if(!tb)return;
+  const selbar=document.getElementById('selbar'),count=document.getElementById('selcount');
+  const rows=[...tb.querySelectorAll('tbody tr')];
+  function refresh(){const n=rows.filter(r=>r.classList.contains('sel')).length;count.textContent=n;selbar.classList.toggle('hidden',n===0);document.getElementById('cbAll').classList.toggle('on',n===rows.length);}
+  rows.forEach(r=>r.addEventListener('click',()=>{const on=r.classList.toggle('sel');const cb=r.querySelector('.cb');cb.classList.toggle('on',on);cb.innerHTML=on?'<i class="ic s14 i-check"></i>':'';refresh();}));
+  document.getElementById('cbAll').addEventListener('click',e=>{e.stopPropagation();const all=rows.every(r=>r.classList.contains('sel'));rows.forEach(r=>{r.classList.toggle('sel',!all);const cb=r.querySelector('.cb');cb.classList.toggle('on',!all);cb.innerHTML=!all?'<i class="ic s14 i-check"></i>':'';});refresh();});
+  document.getElementById('selclear').addEventListener('click',()=>{rows.forEach(r=>{r.classList.remove('sel');const cb=r.querySelector('.cb');cb.classList.remove('on');cb.innerHTML='';});refresh();});
+  refresh();
+})();
+
+/* planta: eixos clicáveis (chassi de cima, eixos = barras entre rodas) */
+(function(){
+  const svg=document.getElementById('svg'); if(!svg)return;
+  const E=t=>document.createElementNS(NS,t), A=(e,o)=>{for(const k in o)e.setAttribute(k,o[k]);return e;};
+  const AXLES=[
+    {no:'1',y:120,type:'Direcional',state:'ok',sn:'SN-45010',cap:'7,5 t',km:'120.000',dual:false},
+    {no:'2',y:230,type:'Tração',state:'torque',sn:'SN-44821',cap:'13 t',km:'412.300',dual:true},
+    {no:'3',y:330,type:'Tração',state:'reforma',sn:'SN-44902',cap:'13 t',km:'505.000',dual:true},
+    {no:'4',y:430,type:'Livre',state:'critico',sn:'SN-44790',cap:'10 t',km:'560.000',dual:true},
+  ];
+  const STL={ok:'OK',torque:'Torque a verificar',reforma:'Reforma pendente',critico:'Crítico'};
+  const planbox=document.querySelector('.planbox');
+  const tip=document.getElementById('tip');
+  function posTip(e){const r=planbox.getBoundingClientRect();tip.style.left=(e.clientX-r.left)+'px';tip.style.top=(e.clientY-r.top)+'px';}
+  // chassis
+  const scene=E('g');
+  scene.appendChild(A(E('rect'),{x:118,y:22,width:124,height:80,rx:15,fill:'url(#chassis)',stroke:'#9aa0aa','stroke-width':1.5,class:'rail'}));
+  scene.appendChild(A(E('rect'),{x:132,y:32,width:96,height:28,rx:7,fill:'#cfd5dc',opacity:.75}));
+  scene.appendChild(A(E('rect'),{x:166,y:104,width:8,height:350,rx:4,class:'rail'}));
+  scene.appendChild(A(E('rect'),{x:186,y:104,width:8,height:350,rx:4,class:'rail'}));
+  let sel=null;
+  AXLES.forEach(ax=>{
+    // wheels (muted)
+    const xs=ax.dual?[44,72,288,316]:[52,308];
+    xs.forEach(x=>scene.appendChild(A(E('rect'),{x:x-8,y:ax.y-20,width:16,height:40,rx:4,class:'wheel'})));
+    const g=E('g');g.setAttribute('class','axle '+ax.state);g.dataset.no=ax.no;
+    g.appendChild(A(E('rect'),{x:40,y:ax.y-5,width:280,height:10,rx:5,class:'bar'}));
+    const lbl=A(E('text'),{x:180,y:ax.y+3.5,class:'lbl'});lbl.textContent='E'+ax.no;g.appendChild(lbl);
+    scene.appendChild(g);
+    g.addEventListener('mouseenter',e=>{tip.innerHTML=ax.sn+' <span class="st">· '+STL[ax.state]+'</span>';tip.style.opacity='1';posTip(e);});
+    g.addEventListener('mousemove',posTip);
+    g.addEventListener('mouseleave',()=>tip.style.opacity='0');
+    g.addEventListener('click',()=>{sel=ax;[...svg.querySelectorAll('.axle')].forEach(a=>a.classList.toggle('sel',a.dataset.no===ax.no));render(ax);});
+  });
+  svg.appendChild(scene);
+  function render(ax){
+    const chip=ax.state==='ok'?'<span class="badge b-ok"><i class="ic s14 i-check"></i>OK</span>':ax.state==='torque'?'<span class="badge b-warn"><i class="ic s14 i-warn-f"></i>Torque a verificar</span>':ax.state==='reforma'?'<span class="badge b-danger"><i class="ic s14 i-recap"></i>Reforma pendente</span>':'<span class="badge b-danger"><i class="ic s14 i-warn-f"></i>Crítico</span>';
+    document.getElementById('panel').innerHTML=
+      '<div class="ph"><div class="kind">Eixo · unidade</div><div class="sn"><i class="ic s20 i-axle"></i>'+ax.sn+'</div><div class="name">Eixo '+ax.type.toLowerCase()+' · Randon</div><div class="chips">'+chip+'<span class="badge b-info">'+ax.cap+'</span></div></div>'
+      +'<div class="pstats"><div class="pstat"><div class="k">Tipo</div><div class="v" style="font-size:14px">'+ax.type+'</div></div><div class="pstat"><div class="k">Km</div><div class="v">'+ax.km+'</div></div><div class="pstat"><div class="k">Custo/km</div><div class="v">R$ 0,0'+(3+(ax.no%3))+'</div></div></div>'
+      +'<div class="pbody"><div class="fact"><span class="k">Posição</span><span class="v"><span class="path">Cavalo · eixo '+ax.no+' ('+ax.type.toLowerCase()+')</span></span></div>'
+      +'<div class="fact"><span class="k">Torque</span><span class="v"'+(ax.state==='torque'?' style="color:hsl(var(--warning-text))"':'')+'>'+(ax.state==='torque'?'reverificar':'300 N·m')+'</span></div>'
+      +'<div class="fact"><span class="k">Rolamento</span><span class="v">'+(ax.state==='reforma'||ax.state==='critico'?'folga — reformar':'ok')+'</span></div>'
+      +'<div class="fact"><span class="k">Reformas</span><span class="v">'+(ax.no%3)+'</span></div>'
+      +'<div class="fact" style="display:block"><span class="k" style="display:block;margin-bottom:5px">Histórico</span><div class="tl"><div class="ev now"><div class="t">agora</div><div class="d">'+STL[ax.state]+'</div></div><div class="ev reforma"><div class="t">há 1 ano</div><div class="d">Retífica · Randon</div></div><div class="ev"><div class="t">origem</div><div class="d">NF 7812 · Randon</div></div></div></div></div>'
+      +'<div class="acts"><button class="pri"><i class="ic s14 i-torque"></i>Registrar torque</button><button><i class="ic s14 i-down-a"></i>Desinstalar</button><button><i class="ic s14 i-recap"></i>Retífica</button><button style="color:hsl(var(--danger-text))"><i class="ic s14 i-trash"></i>Baixar</button></div>';
+  }
+  document.getElementById('panel').innerHTML='<div class="pbody" style="display:flex;align-items:center;justify-content:center;text-align:center;color:hsl(var(--muted-foreground))"><div><i class="ic s28 i-hand"></i><div style="margin-top:8px"><b style="color:hsl(var(--foreground))">Clique num eixo</b><br>ou bipe o nº de série.</div></div></div>';
+  render(AXLES[1]);[...svg.querySelectorAll('.axle')].forEach(a=>a.classList.toggle('sel',a.dataset.no==='2'));
+})();
+
+/* operações: diálogos interativos */
+(function(){
+  const stage=document.getElementById('opsStage'), rail=document.getElementById('opsRail');
+  const DLG={
+    instalar(){return dialog('Instalar eixo',
+      '<div class="dlg-step"><span class="n">1</span>Escolha a posição vazia</div>'
+      +grid([['Cavalo · eixo 2','tração · vazia',1],['Carreta 1 · eixo 4','livre · SN-44655',0],['Cavalo · eixo 3','tração · vazia',0],['Dolly · eixo 6','livre · vazia',0]],'pos')
+      +'<div class="dlg-step"><span class="n">2</span>Bipe o nº de série ou escolha do estoque</div>'
+      +grid([['SN-45120','Tração · 13 t · novo',0],['SN-44655','Livre · 10 t · R1',0]],'un')
+      +'<div class="dlg-auto"><i class="ic s16 i-check-c"></i>km 412.300 do hodômetro entra sozinho</div>',
+      'Instalar eixo');},
+    torque(){return dialog('Registrar torque',
+      '<div class="dlg-step"><span class="n">1</span>Leia o torquímetro</div>'
+      +'<div class="torque-grid"><div class="pick on"><div class="t" style="font-size:26px">305 N·m</div><div class="s">medido</div></div><div class="pick"><div class="t" style="font-size:26px">300 N·m</div><div class="s">especificado</div></div></div>'
+      +'<div class="dlg-auto"><i class="ic s16 i-check-c"></i>Dentro da faixa (295–310) · autor e data automáticos</div>',
+      'Registrar torque');},
+    inspecao(){return dialog('Inspeção do eixo',
+      '<div class="dlg-step"><span class="n">1</span>O que encontrou?</div>'
+      +grid([['Sem apontamento','tudo ok',1],['Folga no rolamento','marcar reforma',0],['Ruído','avaliar',0],['Vazamento','avaliar',0]],'insp'),
+      'Salvar inspeção');},
+    retifica(){return dialog('Enviar à retífica',
+      '<div class="dlg-step"><span class="n">1</span>Eixos a enviar</div>'
+      +'<div class="pickgrid"><div class="pick on"><div class="t">SN-44790</div><div class="s">Livre · folga</div></div><div class="pick on"><div class="t">SN-44902</div><div class="s">Tração · reforma</div></div></div>'
+      +'<div class="dlg-step"><span class="n">2</span>Recapador/retífica</div>'
+      +grid([['Randon','custo/km melhor',1],['Suspensys','',0]],'ret')
+      +'<div class="dlg-auto"><i class="ic s16 i-info"></i>Romaneio gerado · custo estimado R$ 16.800</div>',
+      'Enviar ao retificador (2)','wide');},
+    receber(){return dialog('Receber retífica',
+      '<div class="dlg-step"><span class="n">1</span>Confirme a reforma</div>'
+      +'<div style="font:700 15px Sora;margin-bottom:4px">SN-44790 volta reformado</div>'
+      +'<div class="lives"><i class="done"></i><i class="done"></i><i class="now"></i><i></i></div>'
+      +'<div class="lives-l"><span>Novo</span><span>R1</span><span>R2 (novo)</span><span>R3</span></div>'
+      +'<div class="dlg-auto" style="margin-top:12px"><i class="ic s16 i-check-c"></i>Custo R$ 8.400 lançado · volta ao estoque Mucuri</div>',
+      'Receber');},
+    baixar(){return dialog('Baixar eixo',
+      '<div class="dlg-step"><span class="n">1</span>Motivo da baixa</div>'
+      +grid([['Fim de vida útil','',0],['Dano / trinca','',1],['Carcaça reprovada','',0],['Perda / roubo','',0]],'mot','danger')
+      +'<div class="dlg-auto" style="background:hsl(var(--danger-soft));color:hsl(var(--danger-text))"><i class="ic s16 i-warn"></i>Autor e data registrados · histórico permanece</div>',
+      'Baixar','','danger');},
+    identificar(){return dialog('Identificar eixo',
+      '<div class="dlg-step"><span class="n">1</span>Método de identificação durável</div>'
+      +'<div class="pickgrid">'
+      + methodCard('estampado','Nº de série estampado','já vem gravado de fábrica · permanente',true,'recomendado')
+      + methodCard('gravacao','Gravação no aço','estampagem própria permanente',false)
+      + methodCard('placa','Placa metálica (QR a laser)','rebitada · precisa estar limpa pra ler',false)
+      + methodCard('rfid','RFID industrial','parafusado/embutido · lê enlameado, sem linha de visão',false)
+      +'</div>'
+      +'<div class="dlg-step"><span class="n">2</span>Como fica a identidade</div>'
+      +'<div id="idPreview">'+idPreview('estampado')+'</div>'
+      +'<div class="dlg-auto"><i class="ic s16 i-info"></i>No dia a dia a leitura é por RFID / nº gravado — nunca foto de etiqueta de papel (não sobrevive à lama e ao atrito)</div>',
+      'Identificar eixo');},
+  };
+  function methodCard(id,t,s,on,badge){return '<button class="pick'+(on?' on':'')+'" data-method="'+id+'"><div class="t">'+t+(badge?' <span class="badge b-info" style="vertical-align:1px">'+badge+'</span>':'')+'</div><div class="s">'+s+'</div></button>';}
+  function prev(inner,cap){return '<div style="border:1px solid hsl(var(--border));border-radius:12px;padding:20px;text-align:center;background:hsl(var(--toolbar))">'+inner+'<div style="font-size:12px;color:hsl(var(--muted-foreground));margin-top:8px">'+cap+'</div></div>';}
+  function idPreview(m){
+    if(m==='estampado')return prev('<div style="font:800 30px Sora;letter-spacing:.02em">SN-45410</div>','Nº de série estampado de fábrica · permanente, sem colar nada');
+    if(m==='gravacao')return prev('<div style="font:800 26px ui-monospace,Menlo,monospace;letter-spacing:.08em;color:#3a3f47">SN-45410</div>','Gravação/estampagem no aço · marcação própria permanente');
+    if(m==='placa')return prev('<div class="qr" style="margin:0 auto 8px"></div><div style="font:700 14px Sora">SN-45410</div>','Placa metálica rebitada · QR a laser (precisa estar limpa pra ler)');
+    return prev('<i class="ic i-broadcast" style="width:44px;height:44px;color:hsl(var(--primary))"></i><div style="font:700 14px Sora;margin-top:6px">SN-45410 · tag RFID</div>','RFID industrial · lê por aproximação, enlameado e sem linha de visão');
+  }
+  function grid(items,name,extra){return '<div class="pickgrid">'+items.map(([t,s,on])=>'<button class="pick'+(extra?' '+extra:'')+(on?' on':'')+(s&&s.includes('SN-')&&!on&&name==='pos'?' disabled':'')+'" data-g="'+name+'"><div class="t">'+t+'</div>'+(s?'<div class="s">'+s+'</div>':'')+'</button>').join('')+'</div>';}
+  function dialog(title,body,cta,cls,tone){
+    return '<div class="dialog'+(cls==='wide'?' wide':'')+'"><div class="dlg-h"><h3>'+title+'</h3></div><div class="dlg-b">'+body+'</div><div class="dlg-f"><button class="btn btn-outline">Cancelar</button><button class="btn '+(tone==='danger'?'btn-primary" style="background:hsl(var(--danger))':'btn-primary')+'">'+cta+'</button></div></div>';
+  }
+  function open(op){
+    [...rail.children].forEach(b=>b.classList.toggle('on',b.dataset.op===op));
+    stage.innerHTML=DLG[op]();
+    // pick toggles (single-select per group, multi where already multiple .on)
+    stage.querySelectorAll('.pick[data-g]:not(.disabled)').forEach(p=>p.addEventListener('click',()=>{
+      const g=p.dataset.g, group=[...stage.querySelectorAll('.pick[data-g="'+g+'"]')];
+      const multi=(op==='retifica'); if(!multi)group.forEach(x=>x.classList.remove('on'));
+      p.classList.toggle('on');
+    }));
+    // "Identificar eixo": single method, preview reacts to the choice.
+    if(op==='identificar'){
+      stage.querySelectorAll('.pick[data-method]').forEach(p=>p.addEventListener('click',()=>{
+        stage.querySelectorAll('.pick[data-method]').forEach(x=>x.classList.remove('on'));
+        p.classList.add('on');
+        document.getElementById('idPreview').innerHTML=idPreview(p.dataset.method);
+      }));
+    }
+  }
+  rail.addEventListener('click',e=>{const b=e.target.closest('button');if(b)open(b.dataset.op);});
+  open('instalar');
+})();
+</script>
+</body>
+</html>

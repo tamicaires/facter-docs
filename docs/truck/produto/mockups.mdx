@@ -118,6 +118,24 @@ Aprovado em 29/09/2026. Handoff completo da gestão de pneus como peça serializ
 
 [Ver o mockup](/telas/truck/pneus)
 
+### Operações do pneu — diálogos
+
+Aprovado em 30/09/2026. Os diálogos da fatia de operações, cada um como **fluxo guiado e interativo** (não formulário): **Montar** (escolhe a posição no eixo → bipa o nº de fogo → km do hodômetro automático), **Rodízio** (toca no pneu que sai e na posição de destino, com antes/depois), **Desmontar** (pra onde vai por card: estoque/reforma/baixa), **Enviar para reforma** (seleciona carcaças + recapador + romaneio/custo), **Receber recapagem** (nova vida R1→R2 visual + CPK recalculado), **Baixar** (motivo por card, sempre com motivo), **Inspeção/calibragem** (mede o sulco de cada posição numa régua visual — origem do dado; o chip recalcula OK/Atenção/Crítico na hora, pressão opcional) e **Identificar pneu** (escolha do método **durável**: nº de fogo brandado a quente, RFID vulcanizado ou placa/QR a laser — nada de adesivo de papel, que não dura na carreta florestal). Diálogo lidera pelo título; botão com o verbo do pátio. Interaja escolhendo a operação à esquerda.
+
+[Ver o mockup](/telas/truck/pneus-operacoes)
+
+### Eixos e cubos — ciclo de vida
+
+Aprovado em 30/09/2026. A família **eixo/cubo** como peça serializada, no mesmo esqueleto do pneu, com o que muda: identidade por **nº de série do fabricante**, extras de **tipo** (direcional/tração/livre/elevável), **capacidade**, **torque de aperto**, **rolamento/cubo** e **km**; ciclo de **retífica/reforma** no lugar da recapagem. Traz a lista da frota (colunas próprias + faixa com "torque a verificar"/"reforma pendente" + seleção e barra), a **planta** com os eixos clicáveis, a ficha, o pipeline de retífica, o tablet do mecânico (registrar torque), o painel do gestor, cenários externos, estados e o bloco de **operações** com diálogos interativos (instalar, registrar torque, inspeção, enviar/receber retífica, baixar, **identificar eixo** por método durável — nº estampado/gravação/placa a laser/RFID, sem etiqueta de papel).
+
+[Ver o mockup](/telas/truck/eixos)
+
+### Fueiros e barrotes — ciclo de vida
+
+Aprovado em 30/09/2026. A família **fueiro/barrote** (a estrutura da carreta florestal da Suzano) como peça serializada, no mesmo esqueleto do pneu/eixo, com o que muda: identidade **durável na peça** (placa metálica rebitada / gravação / RFID / chapa parafusada na madeira — nunca papel), **material** (madeira/aço), **posição na carreta**, e o foco em **inspeção** (trinca/empeno) e **troca** — não recapa nem retifica. Traz a lista da frota (colunas próprias + faixa com "inspeção vencida"/"com trinca" + seleção e barra), a **planta da carreta vista de cima com os fueiros (postes) e os barrotes (travessas) clicáveis**, a ficha, o ciclo inspeção/troca, o tablet do inspetor (registrar inspeção com foto), o painel do gestor (durabilidade por material), cenários externos, estados e o bloco de **operações** com diálogos interativos (instalar, registrar inspeção, trocar, baixar, **identificar peça** por método durável).
+
+[Ver o mockup](/telas/truck/fueiros)
+
 ### Estoque
 
 Aprovado em 27/09/2026. **Peças** (SKU, categoria, unidade de estoque e de consumo com fator), **Requisições** vindas das OS, **Movimentações** como livro só-inserção (saldo é a soma, cada linha tem motivo, autor e referência) e **Depósitos** (dono + local, incluindo consignado). Traz os casos de borda com selects abertos e os **estados da lista nova** (skeleton, busca/filtro sem resultado, só inativas, sem permissão, erro e paginação por cursor). O custo por peça segue a [convenção aprovada](propostas/part-cost-convention) (custo na unidade de consumo). Task 2.5.
